@@ -248,6 +248,13 @@ def main() -> None:
         row["source_record_key"] for row in sources
         if any(key.lower() in BLOCKED_FIELDS for key in json.loads(row["properties_json"]))
     ]
+    raw_privacy_leaks = []
+    for source in ENDPOINTS:
+        collection = json.loads((RAW / f"{source}.geojson").read_text(encoding="utf-8"))
+        for feature in collection.get("features", []):
+            for key in (feature.get("properties") or {}):
+                if key.lower() in BLOCKED_FIELDS:
+                    raw_privacy_leaks.append(f"{source}:{key}")
     broken_links = [row for row in links if row["activity_id"] not in activities_by_id or row["source_record_key"] not in source_by_key]
 
     amount_errors = []
@@ -270,6 +277,7 @@ def main() -> None:
         "activity_dates_are_iso_dates": not invalid_dates,
         "coordinates_are_finite_pairs": not invalid_coordinates,
         "configured_private_contact_fields_are_absent": not privacy_leaks,
+        "raw_snapshots_are_privacy_minimized": not raw_privacy_leaks,
         "investment_amount_rows_match_activity_fields": not amount_errors,
     }
 
@@ -312,6 +320,7 @@ def main() -> None:
         "invalid_dates": invalid_dates[:100],
         "invalid_coordinate_ids": invalid_coordinates[:100],
         "privacy_leak_record_keys": privacy_leaks[:100],
+        "raw_privacy_leak_fields": raw_privacy_leaks[:100],
         "broken_link_count": len(broken_links),
         "amount_error_ids": amount_errors[:100],
         "live_source_comparison": live,

@@ -1,7 +1,7 @@
 # Tampa Published Development Records
 
 This repository contains a snapshot of eight development-related GIS layers
-published by the City of Tampa. Version 0.6.0 includes all 4,469 features
+published by the City of Tampa. Version 0.6.1 includes all 4,469 features
 returned by those layers when they were downloaded on August 23, 2026.
 
 The dataset is complete for the named layer snapshots. It is not a complete
@@ -218,7 +218,7 @@ Download the current City layers and build a new release:
 python build_release.py
 ```
 
-Rebuild version 0.6.0 from the archived source files:
+Rebuild version 0.6.1 from the archived source files:
 
 ```bash
 python build_release.py --use-existing-raw
@@ -232,8 +232,10 @@ python verify_data_accuracy.py
 ```
 
 The build retrieves every page returned by each ArcGIS service, preserves the
-raw GeoJSON, generates the relational tables and data dictionary, checks row
-counts and keys, and packages the public release.
+source-derived GeoJSON after removing configured contact and source-user
+fields, generates the relational tables and data dictionary, checks row counts
+and keys, and packages the public release. `snapshot_metadata.json` lists every
+suppressed field and the scope of the privacy-minimized snapshot.
 
 `verify_data_accuracy.py` traces every census row back to the bundled raw
 GeoJSON and checks source attributes, geometries, identifiers, counts, dates,
@@ -273,7 +275,7 @@ developments citywide.
 ## Citation
 
 > Lenga, Jack. *Tampa Published Development Records: Source-Bounded Census*,
-> version 0.6.0, 2026.
+> version 0.6.1, 2026.
 
 The code and original documentation are licensed under MIT. City records
 remain subject to their source terms; see `DATA_LICENSE.md`.

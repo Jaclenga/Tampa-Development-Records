@@ -2,10 +2,13 @@
 
 ## Public release scope
 
-Version 0.6.0's public archive is a **City-only, source-bounded edition**. It contains source
-records and derived outputs from City of Tampa-hosted GIS services. It does
-not contain the HCPA bulk-download archive, extracted DBF, or HCPA
-nearest-centroid fallback matches.
+Version 0.6.1's public archive is a **City-only, source-bounded edition**. It
+contains privacy-minimized source snapshots and derived outputs from City of
+Tampa-hosted GIS services. Before packaging, the build removes project-contact
+name, phone, and email fields and configured source-user/editor fields from the
+GeoJSON snapshots and processed properties. It does not contain the HCPA
+bulk-download archive, extracted DBF, or HCPA nearest-centroid fallback
+matches.
 
 The MIT license in `LICENSE` applies to Jack Lenga's original code and
 documentation only. It does not relicense government source records.

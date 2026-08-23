@@ -12,6 +12,11 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 P = ROOT / "data" / "processed"
+RAW = ROOT / "data" / "raw"
+PRIVACY_BLOCKED_FIELDS = {
+    "pocname", "pocphone", "pocemail", "creator", "editor", "lasteditor",
+    "created", "last_edited_user", "created_user",
+}
 
 
 def read(name: str) -> list[dict[str, str]]:
@@ -60,6 +65,13 @@ def main() -> None:
     master_ids = {x["master_project_id"] for x in projects}
     truth_values = {"yes", "no", "unknown", "not_applicable"}
     universe_ids = {x["universe_id"] for x in universes}
+    raw_privacy_fields = []
+    for path in RAW.glob("*.geojson"):
+        collection = json.loads(path.read_text(encoding="utf-8"))
+        for feature in collection.get("features", []):
+            for field in (feature.get("properties") or {}):
+                if field.lower() in PRIVACY_BLOCKED_FIELDS:
+                    raw_privacy_fields.append(f"{path.name}:{field}")
     checks = {
         "activity_ids_unique": len(activity_ids) == len(activities),
         "source_record_keys_unique": len(source_keys) == len(sources),
@@ -91,6 +103,7 @@ def main() -> None:
             not any(token in x["properties_json"].lower() for token in ('"pocname"', '"pocphone"', '"pocemail"'))
             for x in sources
         ),
+        "raw_geojson_privacy_fields_suppressed": not raw_privacy_fields,
         "public_edition_excludes_hcpa_fallback": args.allow_hcpa or all(
             "hcpa" not in x["match_method"].lower() and "hcpafl.org" not in x["building_source_endpoint"].lower()
             for x in matches
@@ -187,7 +200,7 @@ def main() -> None:
         ),
     }
     report = {
-        "release": "0.6.0", "edition": "city_plus_optional_hcpa" if args.allow_hcpa else "source_bounded_city_arcgis_snapshot",
+        "release": "0.6.1", "edition": "city_plus_optional_hcpa" if args.allow_hcpa else "source_bounded_city_arcgis_snapshot",
         "passed": all(checks.values()), "checks": checks,
         "row_counts": {
             "activities": len(activities), "source_records": len(sources), "locations": len(locations),

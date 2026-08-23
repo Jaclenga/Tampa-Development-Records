@@ -1,6 +1,6 @@
 {
   "title": "Tampa Published Development Records: Source-Bounded Census",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "edition": "source_bounded_city_arcgis_snapshot",
   "retrieved_at_utc": "2026-08-23T02:06:02+00:00",
   "geography": "City of Tampa-published layers, Florida",
@@ -45,34 +45,49 @@
   "bounded_census_nonclaim": "This is not a census of all Tampa permits, projects, construction, completions, or investment.",
   "manual_validation_status": "pending_human_review",
   "external_verification_status": "12_row_pilot_completed_all_stated_claims_supported",
+  "privacy_minimization": {
+    "scope": "raw GeoJSON and processed source properties",
+    "suppressed_fields": [
+      "created",
+      "created_user",
+      "creator",
+      "editor",
+      "last_edited_user",
+      "lasteditor",
+      "pocemail",
+      "pocname",
+      "pocphone"
+    ],
+    "note": "Contact and source-user fields are removed before public packaging."
+  },
   "bundled_source_files": [
     {
       "path": "data/raw/capital_improvements.geojson",
-      "sha256": "5589cd53f01d586dd30b5083e813df262b1ff3d5205cc03ac0655bc3f08aad3c"
+      "sha256": "b13b4b8c48ef9d0bb228c791786d4890287e12877e5f7a8b4a99e78cb34c8b2c"
     },
     {
       "path": "data/raw/capital_locations_line.geojson",
-      "sha256": "4a86898b4b2f95330b36294c3ddce6c63903e1832a1f0dc34a5166bd193d6d36"
+      "sha256": "d74a762b3f832fd9d2bbfe71b718c250585d813934f9288a2aeee9c089d53c57"
     },
     {
       "path": "data/raw/capital_locations_point.geojson",
-      "sha256": "7c6d65dba322bd071ccff0bc6084715ffed0172db5446c5b3d5120c21771714f"
+      "sha256": "1bb39a06542032343f65b38f84c91fce0f5d08721c7c56836f924a6a97edce46"
     },
     {
       "path": "data/raw/capital_locations_polygon.geojson",
-      "sha256": "ed08d74bc005d437230b52355ae96bc92927c8d610f08bc1d6c3d5ba4ce0e4b4"
+      "sha256": "87cc0d7e4629491546abd7df0cceca795e0152f5feeb38c615a1ac21875ad9da"
     },
     {
       "path": "data/raw/construction_inspections.geojson",
-      "sha256": "6ea5e9ef87117f8542d03d12489a983b246cdf198b8fa40ab902cdbc97069c53"
+      "sha256": "bcd5ff1969731a3d0ef98051db277833acf92c953f683ad17ba29e94a8d137a7"
     },
     {
       "path": "data/raw/development_coordination.geojson",
-      "sha256": "273527c337a17712706a2ac0e13b41eca056e1284c0aaff28915fa1601798814"
+      "sha256": "a77f420422505dad2f4d0c1f09e49efabf563b89ebf626429ae7963f66c86035"
     },
     {
       "path": "data/raw/historic_preservation.geojson",
-      "sha256": "32c273ca54af3cd2b552ce196fca4409b2962f2b01908f4bcb16bf4f638fd936"
+      "sha256": "102cebcc171188a244499cfd5b261fe1f827a636247bce9ed5487e355a3605a6"
     },
     {
       "path": "data/raw/matched_building_footprints.geojson",
@@ -80,7 +95,7 @@
     },
     {
       "path": "data/raw/single_family_permits.geojson",
-      "sha256": "e450fabb5e85989d36c32e1df7239198174bdb9146964057258370a0578edb90"
+      "sha256": "6a0f2ad15253eb71fd76a343ad01538e5883d516f699be148b5bc167edba0a57"
     }
   ]
 }

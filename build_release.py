@@ -34,9 +34,14 @@ RAW = DATA / "raw"
 PROCESSED = DATA / "processed"
 DOCS = ROOT / "docs"
 CACHE = ROOT / "source_cache"
-RELEASE_VERSION = "0.6.0"
+RELEASE_VERSION = "0.6.1"
 DATASET_TITLE = "Tampa Published Development Records: Source-Bounded Census"
 PUBLIC_ARCHIVE = ROOT / f"tampa_source_bounded_census_v{RELEASE_VERSION}.zip"
+
+PRIVACY_BLOCKED_FIELDS = {
+    "pocname", "pocphone", "pocemail", "creator", "editor", "lasteditor",
+    "created", "last_edited_user", "created_user",
+}
 
 INVALID_IDS = {"", "N/A", "NA", "NONE", "NULL", "UNKNOWN", "0000000", "0", "-"}
 BUILDING_SOURCE = "https://arcgis.tampagov.net/arcgis/rest/services/OpenData/Location/MapServer/0"
@@ -197,8 +202,26 @@ def source_record_key(source: str, props: dict, native: str) -> str:
 
 
 def scrub_properties(props: dict) -> dict:
-    blocked = {"pocname", "pocphone", "pocemail", "creator", "editor", "lasteditor", "created", "last_edited_user", "created_user"}
-    return {k: v for k, v in props.items() if k.lower() not in blocked}
+    return {k: v for k, v in props.items() if k.lower() not in PRIVACY_BLOCKED_FIELDS}
+
+
+def sanitize_raw_snapshots() -> dict[str, int]:
+    """Remove contact and source-user fields before raw snapshots are redistributed."""
+    removed: Counter[str] = Counter()
+    for path in sorted(RAW.glob("*.geojson")):
+        collection = json.loads(path.read_text(encoding="utf-8"))
+        changed = False
+        for feature in collection.get("features", []):
+            properties = feature.get("properties") or {}
+            for key in list(properties):
+                if key.lower() in PRIVACY_BLOCKED_FIELDS:
+                    if properties[key] not in (None, ""):
+                        removed[key.lower()] += 1
+                    del properties[key]
+                    changed = True
+        if changed:
+            path.write_text(json.dumps(collection, ensure_ascii=False), encoding="utf-8")
+    return dict(sorted(removed.items()))
 
 
 def write_csv(path: Path, rows: list[dict], columns: list[str] | None = None) -> None:
@@ -1001,6 +1024,18 @@ def main() -> None:
         if not snapshot_metadata.exists():
             raise RuntimeError("Bundled raw snapshot is missing data/raw/snapshot_metadata.json")
         retrieved = json.loads(snapshot_metadata.read_text(encoding="utf-8"))["snapshot_retrieved_at_utc"]
+    removed_privacy_values = sanitize_raw_snapshots()
+    snapshot_metadata_path = RAW / "snapshot_metadata.json"
+    snapshot_metadata = json.loads(snapshot_metadata_path.read_text(encoding="utf-8"))
+    previous_removed = snapshot_metadata.get("privacy_suppressed_nonblank_value_counts", {})
+    snapshot_metadata.update({
+        "redistribution_scope": "privacy-minimized City GeoJSON snapshot",
+        "privacy_suppressed_fields": sorted(PRIVACY_BLOCKED_FIELDS),
+        "privacy_suppressed_nonblank_value_counts": removed_privacy_values or previous_removed,
+        "privacy_note": "The listed contact and source-user fields were removed before public redistribution; feature attributes, identifiers, and geometries otherwise remain source-derived.",
+    })
+    snapshot_metadata_path.write_text(json.dumps(snapshot_metadata, indent=2), encoding="utf-8")
+
     legacy = load_legacy_module()
     normalized, source_rows, locations, counts = normalize_source_rows(legacy, retrieved)
     aliases = cluster_capital_activities(normalized, source_rows, locations)
@@ -1070,6 +1105,11 @@ def main() -> None:
         "bounded_census_nonclaim": "This is not a census of all Tampa permits, projects, construction, completions, or investment.",
         "manual_validation_status": "pending_human_review",
         "external_verification_status": "12_row_pilot_completed_all_stated_claims_supported",
+        "privacy_minimization": {
+            "scope": "raw GeoJSON and processed source properties",
+            "suppressed_fields": sorted(PRIVACY_BLOCKED_FIELDS),
+            "note": "Contact and source-user fields are removed before public packaging.",
+        },
         "bundled_source_files": [
             {"path": str(path.relative_to(ROOT)), "sha256": file_sha256(path)}
             for path in sorted(RAW.glob("*.geojson"))
