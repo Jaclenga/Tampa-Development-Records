@@ -1,281 +1,203 @@
 # Tampa Published Development Records
 
-This repository contains a snapshot of eight development-related GIS layers
-published by the City of Tampa. Version 0.6.1 includes all 4,469 features
-returned by those layers when they were downloaded on August 23, 2026.
+This repository collects development-related records published by the City of Tampa and puts them into a format that's easier to explore, map, and analyze.
 
-The dataset is complete for the named layer snapshots. It is not a complete
-export of Tampa's permitting system or an inventory of every development in
-the city.
+The current release (`v0.6.1`) contains **4,469 records from eight City GIS layers**, downloaded on August 23, 2026.
 
-## Contents
+This is **not a database of every development in Tampa**. It's a snapshot of the records available through these eight public layers at the time of download.
 
-The main files are:
+## What's in the dataset?
 
-- `source_universes.csv` — layer names, endpoints, download time, record
-  counts, and coverage notes.
-- `bounded_census_records.csv` — one row per feature returned by the eight
-  layers, including geometry and selected source attributes.
-- `bounded_census_summary.csv` — release-level counts and scope.
-- `source_records.csv` — source attributes in relational form.
-- `activity_locations.csv` — one row per source geometry.
+The repository starts with eight City of Tampa datasets covering building permits, planning applications, historic-preservation applications, and public capital projects.
 
-The repository also includes derived tables for normalized activities,
-possible project relationships, building-footprint matches, reported costs,
-and evidence status. These are analytical outputs rather than source-census
-units.
+| Source | Records | What a record generally represents |
+| --- | ---: | --- |
+| Construction Inspections | 2,619 | Published building-permit record |
+| Single-Family Permits | 1,023 | Single-family permit record |
+| Development Coordination | 271 | Planning/development application |
+| Historic Preservation | 169 | Historic-preservation application |
+| Capital Improvements | 192 | City capital project |
+| Citywide Capital Projects — points | 57 | Point location for a capital project |
+| Citywide Capital Projects — lines | 101 | Linear capital project |
+| Citywide Capital Projects — polygons | 37 | Project area |
+| **Total** | **4,469** | **Published source records** |
+
+These records overlap. For example, the same permit can appear in both the Construction Inspections and Single-Family Permits layers.
+
+Where there is a strong identifier connecting records, the build links them together. The 4,469 source records currently resolve to **3,323 normalized activities**, 1,113 of which are represented in more than one source.
+
+Even 3,323 should **not** be interpreted as "3,323 developments." A large development can generate several permits, applications, or projects.
+
+## Why I made this
+
+Tampa publishes useful development information, but it is spread across several GIS services with different schemas and different definitions of what a record represents.
+
+This project brings those sources together while keeping enough provenance to trace records back to where they came from.
+
+The goal is to make it easier to:
+
+- map publicly available development records;
+- compare activity across neighborhoods and record types;
+- study how Tampa's different development datasets overlap;
+- track changes between future snapshots; and
+- build better methods for connecting permits, projects, and physical buildings.
+
+The repository deliberately avoids turning uncertain information into facts. A permit does not necessarily mean construction happened, an application does not necessarily mean a project was approved or built, and an estimated project cost is not the same thing as money actually spent.
 
 ## Source layers
 
-The release contains eight City layers. A feature is one row returned by a
-layer, not necessarily one development. The layers contain 4,469 features but
-produce 3,323 normalized activities after documented cross-layer connections.
-
-| Layer | Features | Unit represented by one feature |
-|---|---:|---|
-| Construction Inspections | 2,619 | Published building-permit record |
-| Single-Family Permits | 1,023 | Published single-family permit record |
-| Development Coordination | 271 | Planning or development-review application |
-| Historic Preservation | 169 | Historic-preservation application |
-| Capital Improvements | 192 | City capital project represented by a point |
-| Citywide Capital Projects — points | 57 | Point-shaped capital-project location |
-| Citywide Capital Projects — lines | 101 | Line-shaped capital-project location |
-| Citywide Capital Projects — polygons | 37 | Area-shaped capital-project location |
-| **Total** | **4,469** | **Published features, not unique developments** |
-
 ### Construction Inspections
 
-This point layer contains selected building-permit records. Despite the layer
-name, its features are not individual inspection results. The snapshot has
-1,813 records with an `Issued` status and 806 with a `Revision` status.
+Despite the name, this layer mainly contains **building-permit records**, not individual inspection results.
 
-Available fields include permit number, record type, project name and
-description, address, reported new-construction square footage, reported
-units, neighborhood, CRA, council district, status dates, and an Accela URL.
-The layer covers residential and commercial new construction, additions,
-alterations, and demolitions.
+The snapshot contains 2,619 records: 1,813 with an `Issued` status and 806 with a `Revision` status. Fields include permit number, project name and description, address, square footage, reported units, neighborhood, status dates, and an Accela link.
 
-A feature establishes that the City published the permit record and its
-reported status. It does not establish that an inspection passed, construction
-started, or construction finished. It is also not a complete historical export
-of every Tampa permit.
+A record tells us that the City published a permit with that information. It does not, by itself, prove that construction started or finished.
 
 Source: [City of Tampa Construction Inspections layer](https://arcgis.tampagov.net/arcgis/rest/services/OpenData/Planning/MapServer/30)
 
 ### Single-Family Permits
 
-This point layer contains residential new-construction and addition permits for
-one- and two-family properties. It includes application status, workflow task
-fields, opened and task dates, address, neighborhood, CRA, council district,
-and Accela identifier components.
+This layer contains permits for new construction and additions involving one- and two-family properties.
 
-The layer substantially overlaps Construction Inspections: 999 of its 1,023
-features connect to records in that layer, while 24 normalized activities come
-only from this layer. These features must not be added to the Construction
-Inspections count as if they were independent developments. The record type
-also combines new construction and additions, so a feature does not necessarily
-represent a new house or a net new housing unit.
+It overlaps heavily with Construction Inspections: **999 of its 1,023 records** connect to records in that layer. The remaining 24 currently appear only here.
+
+Because of that overlap, simply adding the two layer counts together would double-count many records.
 
 Source: [City of Tampa Single-Family Permits layer](https://arcgis.tampagov.net/arcgis/rest/services/OpenData/Planning/MapServer/32)
 
 ### Development Coordination
 
-This point layer contains active planning and land-development applications.
-The snapshot has 206 `In Process`, 51 `Awaiting Client Reply`, and 14 `Open`
-records. Available fields include the planning record identifier, application
-type, address, tentative hearing information, neighborhood, CRA, council
-district, status, and source URL.
+This layer contains 271 active planning and land-development applications.
 
-These records describe regulatory review rather than construction. An
-application can be revised, withdrawn, denied, approved but never built, or
-followed by separate permits. The layer should not be counted as completed
-development or investment without additional evidence.
+These are records of the **review process**, not necessarily construction. A project can be revised, withdrawn, denied, approved but never built, or eventually appear under separate building permits.
 
 Source: [City of Tampa Development Coordination layer](https://arcgis.tampagov.net/arcgis/rest/services/OpenData/Planning/MapServer/31)
 
 ### Historic Preservation
 
-This point layer contains applications handled through Tampa's
-historic-preservation process. The snapshot has 110 `Awaiting Client Reply`,
-51 `In Process`, and 8 `Open` records. Fields include the record identifier,
-application type, address, tentative hearing information, neighborhood, CRA,
-council district, status, and source URL.
+This layer contains 169 applications handled through Tampa's historic-preservation process.
 
-These features are evidence of regulatory activity affecting a historic
-resource. They are not evidence that alteration, demolition, or other physical
-work occurred, and they may be followed by separate building permits.
+Like Development Coordination, these records show regulatory activity. They do not necessarily mean that demolition, alteration, or other physical work actually occurred.
 
 Source: [City of Tampa Historic Preservation layer](https://arcgis.tampagov.net/arcgis/rest/services/OpenData/Planning/MapServer/33)
 
 ### Capital Improvements
 
-This point layer contains 192 public-facing City capital projects. Project
-types include transportation, water, wastewater, stormwater, parks, facilities,
-and contract administration. Status and phase fields distinguish planning,
-design, procurement, construction, and closeout.
+This layer contains 192 City capital projects covering areas such as transportation, water, wastewater, stormwater, parks, and public facilities.
 
-Available fields include project identifier, name, description, rationale,
-type, funding source, planned dates, estimated cost, reported actual cost,
-status, phase, neighborhood, council district, contract number, and project
-website. This is the release's main source for public-project cost estimates.
+It is particularly useful because it includes fields such as project descriptions, funding sources, planned dates, estimated costs, reported actual costs, project phases, and contract numbers.
 
-The layer is not a complete adopted capital program. Estimated cost is not
-expenditure, contract value, or final cost, and `Closeout` is an administrative
-status rather than proof of physical completion. Its points may be map markers
-rather than complete project footprints.
+Estimated cost should not be treated as actual spending or final project cost.
 
 Source: [City of Tampa Capital Projects layer](https://arcgis.tampagov.net/arcgis/rest/services/CapitalProjects/CapitalProjects/FeatureServer/0)
 
-### Citywide Capital Projects — points
+### Citywide Capital Projects
 
-This layer contains 57 point-shaped project locations, including discrete
-facilities, intersections, utility sites, and similar projects. It repeats many
-attributes from the main Capital Improvements layer. Twenty-eight normalized
-activities connect to that layer, one also connects to the polygon layer, and
-28 remain represented only by the point layer.
+The City also publishes capital projects using separate point, line, and polygon layers.
 
-An unmatched feature is not necessarily a different project; inconsistent
-identifiers and names can prevent an automatic connection.
+Those geometries are useful because different projects have different shapes: an intersection improvement might make sense as a point, a road or pipeline as a line, and a park or stormwater project as a polygon.
 
-Source: [Citywide Projects Public service](https://arcgis.tampagov.net/arcgis/rest/services/CapitalProjects/CityWideProjectsPublic/FeatureServer/0)
+Some of these records connect to projects in the main Capital Improvements layer, while others currently stand on their own. An unmatched record does not necessarily represent a completely different project—it may simply lack a reliable identifier or matching name.
 
-### Citywide Capital Projects — lines
+Sources:
 
-This layer contains 101 line or multiline geometries. Linear projects include
-transportation corridors, water and sewer lines, and similar infrastructure.
-Sixty-three normalized activities connect to the main Capital Improvements
-layer and 38 remain represented only by the line layer.
+- [Citywide Capital Projects — points](https://arcgis.tampagov.net/arcgis/rest/services/CapitalProjects/CityWideProjectsPublic/FeatureServer/0)
+- [Citywide Capital Projects — lines](https://arcgis.tampagov.net/arcgis/rest/services/CapitalProjects/CityWideProjectsPublic/FeatureServer/1)
+- [Citywide Capital Projects — polygons](https://arcgis.tampagov.net/arcgis/rest/services/CapitalProjects/CityWideProjectsPublic/FeatureServer/2)
 
-The original geometry should be used for mapping and spatial analysis. The
-derived latitude and longitude are representative coordinates calculated from
-the geometry's vertices, not an authoritative project address or a true
-length-weighted geographic centroid.
+## Main files
 
-Source: [Citywide Projects Public line layer](https://arcgis.tampagov.net/arcgis/rest/services/CapitalProjects/CityWideProjectsPublic/FeatureServer/1)
+If you just want to work with the data, these are the most useful places to start:
 
-### Citywide Capital Projects — polygons
+- `bounded_census_records.csv` — one row for every record downloaded from the eight source layers.
+- `tampa_development_activity.csv` — consolidated activity-level view after strong cross-source matches are applied.
+- `source_universes.csv` — source layers, endpoints, download times, record counts, and coverage notes.
+- `source_records.csv` — retained source attributes and provenance.
+- `activity_locations.csv` — source geometries and representative coordinates.
+- `investment_amounts.csv` — estimated and reported actual amounts available for City capital projects.
+- `master_project_candidates.csv` — possible relationships between activities that have **not** been automatically merged.
 
-This layer contains 37 polygon or multipolygon geometries, primarily stormwater
-and parks projects. Twenty-two normalized activities connect to the main
-Capital Improvements layer, one also connects to the point layer, and 14 remain
-represented only by the polygon layer.
+There are additional audit and validation tables for building matches, evidence status, manual review, and identifier consolidation.
 
-The polygon describes a published project area. The derived latitude and
-longitude are representative vertex averages, not area-weighted centroids.
-Use the retained GeoJSON geometry for spatial analysis.
+## Rebuilding the dataset
 
-Source: [Citywide Projects Public polygon layer](https://arcgis.tampagov.net/arcgis/rest/services/CapitalProjects/CityWideProjectsPublic/FeatureServer/2)
-
-### Overlap and interpretation
-
-Across the eight layers, 1,113 normalized activities have records from more
-than one source. The build connects exact shared permit identifiers and some
-capital records with exact normalized project names. These connections reduce
-4,469 source features to 3,323 normalized activities.
-
-That activity count is still not a count of real-world developments. One large
-development can require several permits, while two unrelated projects can
-share an address or parcel. Capital projects can also appear in more than one
-geometry layer. Candidate project connections that lack a sufficiently strong
-rule remain unmerged for later review.
-
-## Derived tables
-
-The remaining tables are created from the eight source layers; they are not
-additional City datasets.
-
-- `bounded_census_records.csv` preserves one row per published source feature.
-- `source_records.csv` stores retained source attributes and provenance.
-- `activity_locations.csv` stores source geometry and representative
-  coordinates.
-- `activity_source_links.csv` connects source features to normalized
-  activities.
-- `tampa_development_activity.csv` is the consolidated activity-level view.
-- `activity_id_aliases.csv` records identifiers replaced during documented
-  capital-project consolidation.
-- `master_projects.csv` and `master_project_activity_links.csv` provide a
-  provisional project layer that currently treats each activity as a
-  singleton unless a reviewed relationship is available.
-- `master_project_candidates.csv` contains possible project connections that
-  have not been applied automatically.
-- `development_events.csv` represents application, permit, status, and project
-  events derivable from the available records.
-- `activity_truth_status.csv` stores conservative construction and completion
-  evidence fields; unknown is not converted to no.
-- `investment_amounts.csv` separates estimated and reported actual City
-  capital-project amounts. It does not contain broad private permit valuation.
-- `parcel_building_matches.csv`, `building_match_audit.csv`, and
-  `building_match_diagnostics.csv` contain proposed City-building-footprint
-  connections and their pending review fields.
-- The verification queue, manual samples, pilot, and second-review tables are
-  research-audit materials rather than verified development observations.
-
-## Build
-
-Download the current City layers and build a new release:
+Download the current City data and create a new release:
 
 ```bash
 python build_release.py
 ```
 
-Rebuild version 0.6.1 from the archived source files:
+Rebuild `v0.6.1` using the archived raw files:
 
 ```bash
 python build_release.py --use-existing-raw
 ```
 
-Run the checks separately:
+Run the validation tools separately:
 
 ```bash
 python validate_release.py
 python verify_data_accuracy.py
 ```
 
-The build retrieves every page returned by each ArcGIS service, preserves the
-source-derived GeoJSON after removing configured contact and source-user
-fields, generates the relational tables and data dictionary, checks row counts
-and keys, and packages the public release. `snapshot_metadata.json` lists every
-suppressed field and the scope of the privacy-minimized snapshot.
+The build downloads every page returned by the configured ArcGIS services, preserves the source geometry, removes configured contact/source-user fields, creates the derived tables, validates keys and counts, and packages the release.
 
-`verify_data_accuracy.py` traces every census row back to the bundled raw
-GeoJSON and checks source attributes, geometries, identifiers, counts, dates,
-amount extraction, and file hashes. Add `--live` to compare the archived
-OBJECTIDs with the City layers as they exist when the check is run. A live
-change means the published layer changed after the snapshot; it does not make
-the archived snapshot inaccurate.
+`verify_data_accuracy.py` goes a step further by tracing census rows back to the archived GeoJSON and checking attributes, geometry, identifiers, dates, extracted amounts, counts, and hashes.
 
-These checks establish source fidelity, not real-world completion. Completion,
-project grouping, and building matches still require independent review.
+Running it with `--live` also compares the archived record IDs with what the City publishes now:
 
-## Uses
+```bash
+python verify_data_accuracy.py --live
+```
 
-The dataset supports:
+A difference in the live check doesn't necessarily mean the archived dataset is wrong. It can simply mean the City's public layer has changed since the snapshot was downloaded.
 
-- Maps of records published through the selected City layers.
-- Comparisons of record types, statuses, dates, and locations within a layer.
-- Analysis of overlap and field availability across City data products.
-- Sampling frames for permit and building-match validation.
-- Comparison of future snapshots to track additions, removals, and status
-  changes.
+These checks answer:
 
-The current release does not support estimates of total Tampa investment,
-permit recall, construction completion rates, or the number of unique
-developments citywide.
+> **Did this repository accurately preserve what the source published?**
 
-## Methods and limitations
+They do not answer:
 
-- [Source scope](docs/BOUNDED_CENSUS_SCOPE.md)
-- [Known limitations](docs/KNOWN_LIMITATIONS.md)
-- [Evidence fields](docs/GROUND_TRUTH_METHODOLOGY.md)
-- [Manual validation protocol](docs/MANUAL_VALIDATION_PROTOCOL.md)
-- [Data dictionary](docs/data_dictionary.csv)
-- [Validation results](docs/validation_report.json)
-- [Source-fidelity verification](docs/accuracy_verification_report.json)
+> **Did this development actually happen?**
+
+That requires independent evidence.
+
+## What you can use it for
+
+Good uses include:
+
+- mapping the records contained in these City datasets;
+- comparing permits or applications by type, status, date, or location;
+- studying overlap between Tampa's public development datasets;
+- creating samples for manual validation;
+- analyzing City capital-project information; and
+- comparing releases over time to see what was added, removed, or changed.
+
+You should **not** use the current dataset to claim:
+
+- the total amount of development investment in Tampa;
+- the total number of developments in Tampa;
+- that every issued permit resulted in construction;
+- that every project marked `Closeout` is physically complete; or
+- that these eight layers contain every relevant City permit or project.
+
+Those questions require additional data and verification.
+
+## Documentation
+
+More detailed methodology is available in `docs/`:
+
+- [Source scope](docs/BOUNDED_CENSUS_SCOPE.md) — exactly what is and isn't included.
+- [Known limitations](docs/KNOWN_LIMITATIONS.md) — known weaknesses and interpretation issues.
+- [Evidence fields](docs/GROUND_TRUTH_METHODOLOGY.md) — how evidence fields are defined.
+- [Manual validation protocol](docs/MANUAL_VALIDATION_PROTOCOL.md) — process for reviewing uncertain records.
+- [Data dictionary](docs/data_dictionary.csv) — field definitions.
+- [Validation results](docs/validation_report.json) — automated validation results.
+- [Source-fidelity verification](docs/accuracy_verification_report.json) — detailed verification results.
 
 ## Citation
 
-> Lenga, Jack. *Tampa Published Development Records: Source-Bounded Census*,
-> version 0.6.1, 2026.
+> Lenga, Jack. *Tampa Published Development Records: Source-Bounded Census*, version 0.6.1, 2026.
 
-The code and original documentation are licensed under MIT. City records
-remain subject to their source terms; see `DATA_LICENSE.md`.
+The code and original documentation are licensed under MIT. City records remain subject to their source terms; see [`DATA_LICENSE.md`](DATA_LICENSE.md).
