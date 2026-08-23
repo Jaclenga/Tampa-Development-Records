@@ -1,0 +1,4 @@
+match_method,match_confidence,match_count,exact_address_agreement_count,multiple_building_activity_count,human_reviewed_count,empirical_precision
+exact_address_nearby_footprint,high,57,57,17,0,
+nearest_footprint_within_35m,medium,636,0,0,0,
+point_in_building_footprint,high,372,333,0,0,
