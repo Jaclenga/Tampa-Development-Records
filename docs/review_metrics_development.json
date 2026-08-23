@@ -1,0 +1,15 @@
+{
+  "status": "not_estimable",
+  "analysis_type": "development_debugging",
+  "protocol_version": "1.0.0",
+  "phase": "development",
+  "generated_at_utc": "2026-08-23T05:11:40+00:00",
+  "completion": {
+    "first_reviews_complete": 0,
+    "first_reviews_required": 100,
+    "second_reviews_complete": 0,
+    "second_reviews_required": 34,
+    "invalid_protocol_rows": []
+  },
+  "interpretation": "No population estimate is reported until all assigned reviews in this phase pass the frozen protocol checks."
+}

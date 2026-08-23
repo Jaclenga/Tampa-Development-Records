@@ -1,6 +1,6 @@
 {
   "title": "Tampa Published Development Records: Source-Bounded Census",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "edition": "source_bounded_city_arcgis_snapshot",
   "retrieved_at_utc": "2026-08-23T02:06:02+00:00",
   "geography": "City of Tampa-published layers, Florida",
@@ -18,6 +18,8 @@
     "data/processed/development_events.csv",
     "data/processed/external_verification_pilot.csv",
     "data/processed/investment_amounts.csv",
+    "data/processed/manual_validation_development_sample.csv",
+    "data/processed/manual_validation_holdout_sample.csv",
     "data/processed/manual_validation_sample.csv",
     "data/processed/manual_validation_second_review.csv",
     "data/processed/master_project_activity_links.csv",
@@ -38,13 +40,39 @@
     "docs/accuracy_verification_report.json",
     "docs/data_dictionary.csv",
     "docs/qa_report.json",
-    "docs/validation_report.json"
+    "docs/review_metrics_development.json",
+    "docs/review_metrics_holdout.json",
+    "docs/validation_report.json",
+    "docs/validation_study_design.json"
   ],
   "license_note": "The public archive contains City-hosted source snapshots only. Code is MIT-licensed; source data remain subject to City terms described in DATA_LICENSE.md.",
   "bounded_census_claim": "All features returned by eight named City ArcGIS layers at the recorded snapshot retrieval time are included.",
   "bounded_census_nonclaim": "This is not a census of all Tampa permits, projects, construction, completions, or investment.",
-  "manual_validation_status": "pending_human_review",
-  "external_verification_status": "12_row_pilot_completed_all_stated_claims_supported",
+  "manual_validation_status": "protocol_1.0.0_frozen_150_rows_pending_human_review",
+  "validation_study": {
+    "protocol_version": "1.0.0",
+    "random_seed": 20260823,
+    "development": {
+      "first_reviews_complete": 0,
+      "first_reviews_required": 100,
+      "second_reviews_complete": 0,
+      "second_reviews_required": 34,
+      "ready_for_metrics": false
+    },
+    "holdout": {
+      "first_reviews_complete": 0,
+      "first_reviews_required": 50,
+      "second_reviews_complete": 0,
+      "second_reviews_required": 16,
+      "ready_for_metrics": false
+    },
+    "status": "pending_human_review",
+    "development_rows": 100,
+    "holdout_rows": 50,
+    "independent_second_reviews": 50,
+    "final_inference_phase": "holdout"
+  },
+  "external_verification_status": "historical_12_row_pilot_retained_not_used_as_population_estimate",
   "privacy_minimization": {
     "scope": "raw GeoJSON and processed source properties",
     "suppressed_fields": [

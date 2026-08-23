@@ -2,7 +2,7 @@
 
 This repository collects development-related records published by the City of Tampa and puts them into a format that's easier to explore, map, and analyze.
 
-The current release (`v0.6.1`) contains **4,469 records from eight City GIS layers**, downloaded on August 23, 2026.
+The current release (`v0.7.0`) contains **4,469 records from eight City GIS layers**, downloaded on August 23, 2026.
 
 This is **not a database of every development in Tampa**. It's a snapshot of the records available through these eight public layers at the time of download.
 
@@ -128,7 +128,7 @@ Download the current City data and create a new release:
 python build_release.py
 ```
 
-Rebuild `v0.6.1` using the archived raw files:
+Rebuild `v0.7.0` using the archived raw files:
 
 ```bash
 python build_release.py --use-existing-raw
@@ -139,6 +139,7 @@ Run the validation tools separately:
 ```bash
 python validate_release.py
 python verify_data_accuracy.py
+python validation_study.py
 ```
 
 The build downloads every page returned by the configured ArcGIS services, preserves the source geometry, removes configured contact/source-user fields, creates the derived tables, validates keys and counts, and packages the release.
@@ -162,6 +163,35 @@ They do not answer:
 > **Did this development actually happen?**
 
 That requires independent evidence.
+
+## Designed external-validation study
+
+Version 0.7.0 replaces the demonstration-style validation sample with a
+frozen, reproducible study design. Seed `20260823` draws 150 unique activities:
+50 permit records, 20 planning records, 10 historic-preservation records, 50
+capital projects, and 20 records involved in cross-source merges. One hundred
+rows form the development/debugging phase and 50 separately randomized rows
+form an untouched final holdout. Fifty assignments are independently reviewed
+from a blinded second-review file.
+
+The new review fields test source identity, activity classification,
+cross-source linkage, status interpretation, physical-work evidence, and
+building-footprint matching separately. Every completed label requires a cited
+URL or document and manual confirmation; AI may only help locate candidate
+sources.
+
+Human review is still pending, so the repository does not yet report an error
+rate. After reviews are entered, development diagnostics and final holdout
+metrics are generated separately:
+
+```bash
+python review_metrics.py --phase development
+python review_metrics.py --phase holdout
+```
+
+The reports include claim-specific confidence intervals, confusion matrices,
+percent agreement, and Cohen's kappa. See the frozen
+[manual validation protocol](docs/MANUAL_VALIDATION_PROTOCOL.md).
 
 ## What you can use it for
 
@@ -198,6 +228,6 @@ More detailed methodology is available in `docs/`:
 
 ## Citation
 
-> Lenga, Jack. *Tampa Published Development Records: Source-Bounded Census*, version 0.6.1, 2026.
+> Lenga, Jack. *Tampa Published Development Records: Source-Bounded Census*, version 0.7.0, 2026.
 
 The code and original documentation are licensed under MIT. City records remain subject to their source terms; see [`DATA_LICENSE.md`](DATA_LICENSE.md).

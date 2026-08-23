@@ -13,13 +13,14 @@ compares every source record, retained property, geometry, centroid, universe
 count, date, amount row, and recorded SHA-256 hash with the release tables. Its
 machine-readable output is `accuracy_verification_report.json`.
 
-For version 0.6.1, all automated checks passed for 4,469 source features. This
+For version 0.7.0, all automated checks passed for 4,469 source features. This
 result establishes fidelity to the archived City layer snapshots. It does not
 establish construction, completion, project uniqueness, building-match
 accuracy, or citywide coverage.
 
 This file documents a 12-record pilot conducted for version 0.4.0 and retained
-with version 0.6.1. The sources were reviewed on August 23, 2026.
+as historical evidence in version 0.7.0. The sources were reviewed on August
+23, 2026. The pilot is not forced into or analyzed as part of the new study.
 
 ## Checks performed
 
@@ -77,3 +78,12 @@ second reviewer repeated the work.
 The pilot therefore supports source traceability and documents two corrected
 logic errors. It does not support citywide completion rates or investment
 rankings.
+
+## Version 0.7.0 designed study
+
+The current external-validation workflow uses a frozen, seeded stratified
+sample of 150 activities, with a 100-row development phase, a separately drawn
+50-row holdout, and 50 blinded second-review assignments. Claim-specific
+criteria and acceptable sources were fixed before review in
+`MANUAL_VALIDATION_PROTOCOL.md`. Human coding is pending; no error rate or
+agreement statistic is claimed yet.

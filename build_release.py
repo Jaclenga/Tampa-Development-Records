@@ -34,7 +34,7 @@ RAW = DATA / "raw"
 PROCESSED = DATA / "processed"
 DOCS = ROOT / "docs"
 CACHE = ROOT / "source_cache"
-RELEASE_VERSION = "0.6.1"
+RELEASE_VERSION = "0.7.0"
 DATASET_TITLE = "Tampa Published Development Records: Source-Bounded Census"
 PUBLIC_ARCHIVE = ROOT / f"tampa_source_bounded_census_v{RELEASE_VERSION}.zip"
 
@@ -224,14 +224,53 @@ def sanitize_raw_snapshots() -> dict[str, int]:
     return dict(sorted(removed.items()))
 
 
-def write_csv(path: Path, rows: list[dict], columns: list[str] | None = None) -> None:
+def write_csv(
+    path: Path, rows: list[dict], columns: list[str] | None = None, *, lineterminator: str | None = None
+) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     if columns is None:
         columns = list(rows[0]) if rows else []
     with path.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=columns, extrasaction="ignore")
+        options = {"fieldnames": columns, "extrasaction": "ignore"}
+        if lineterminator is not None:
+            options["lineterminator"] = lineterminator
+        writer = csv.DictWriter(handle, **options)
         writer.writeheader()
         writer.writerows(rows)
+
+
+def validation_review_status() -> dict:
+    """Summarize protocol-gated review completion without producing estimates."""
+    import review_metrics
+
+    result = {"protocol_version": "1.0.0", "random_seed": 20260823}
+    all_ready = True
+    for phase in ("development", "holdout"):
+        first_path = PROCESSED / f"manual_validation_{phase}_sample.csv"
+        second_path = PROCESSED / "manual_validation_second_review.csv"
+        first = read_csv_path(first_path) if first_path.exists() else []
+        second_all = read_csv_path(second_path) if second_path.exists() else []
+        second = [row for row in second_all if row.get("sample_phase") == phase]
+        first_complete = sum(review_metrics.is_complete(row) for row in first)
+        second_complete = sum(review_metrics.is_complete(row) for row in second)
+        ready = bool(first) and first_complete == len(first) and bool(second) and second_complete == len(second)
+        all_ready = all_ready and ready
+        result[phase] = {
+            "first_reviews_complete": first_complete, "first_reviews_required": len(first),
+            "second_reviews_complete": second_complete, "second_reviews_required": len(second),
+            "ready_for_metrics": ready,
+        }
+    result["status"] = (
+        "complete" if all_ready else
+        "development_complete_holdout_pending" if result["development"]["ready_for_metrics"] else
+        "pending_human_review"
+    )
+    return result
+
+
+def read_csv_path(path: Path) -> list[dict[str, str]]:
+    with path.open(encoding="utf-8", newline="") as handle:
+        return list(csv.DictReader(handle))
 
 
 def normalize_source_rows(legacy, retrieved: str) -> tuple[list[dict], list[dict], list[dict], dict[str, int]]:
@@ -670,107 +709,12 @@ def apply_matches_and_evidence(activities: list[dict], matches: list[dict]) -> N
 
 
 def create_manual_validation_sample(activities: list[dict], matches: list[dict], target: int = 150) -> list[dict]:
-    """Create a deterministic, evidence-stratified sample for human review.
+    """Create the frozen, seeded study sample and blinded review assignment."""
+    if target != 150:
+        raise ValueError("Protocol 1.0.0 fixes the validation sample at 150 rows")
+    import validation_study
 
-    Reviewer columns are blank. The accompanying protocol defines how they are
-    completed and reported.
-    """
-    quotas = {"C": 20, "D": 70, "P": 27, "X": 3, "U": 30}
-    by_activity: dict[str, list[dict]] = defaultdict(list)
-    for match in matches:
-        by_activity[match["activity_id"]].append(match)
-
-    # Preserve activities cited by the published v0.4 pilot so its provenance
-    # remains referentially intact when evidence rules or sampling seeds change.
-    by_id = {a["activity_id"]: a for a in activities}
-    selected: list[dict] = []
-    pilot_path = PROCESSED / "external_verification_pilot.csv"
-    if pilot_path.exists():
-        with pilot_path.open(encoding="utf-8", newline="") as handle:
-            for pilot in csv.DictReader(handle):
-                activity = by_id.get(pilot.get("activity_id", ""))
-                if activity and activity not in selected:
-                    selected.append(activity)
-    for grade, quota in quotas.items():
-        candidates = [a for a in activities if a.get("realization_evidence_grade") == grade]
-        buckets: dict[tuple[str, str, str, str], list[dict]] = defaultdict(list)
-        for activity in candidates:
-            primary_source = str(activity.get("source_memberships", "")).split(";")[0]
-            geography = clean(activity.get("neighborhood")) or clean(activity.get("council_district")) or "unknown"
-            key = (
-                primary_source,
-                clean(activity.get("activity_class")) or "unknown",
-                geography,
-                clean(activity.get("parcel_match_confidence")) or "none",
-            )
-            buckets[key].append(activity)
-        for rows in buckets.values():
-            rows.sort(key=lambda a: sha(f"audit-v{RELEASE_VERSION}|{a['activity_id']}", 40))
-        bucket_keys = sorted(buckets, key=lambda k: sha("|".join(k), 40))
-        while len([a for a in selected if a.get("realization_evidence_grade") == grade]) < min(quota, len(candidates)):
-            progressed = False
-            for key in bucket_keys:
-                if buckets[key]:
-                    selected.append(buckets[key].pop(0))
-                    progressed = True
-                    if len([a for a in selected if a.get("realization_evidence_grade") == grade]) >= min(quota, len(candidates)):
-                        break
-            if not progressed:
-                break
-
-    # De-duplicate pilot-preserved rows that can also be selected by a stratum,
-    # then deterministically fill back to the target.
-    selected = list({a["activity_id"]: a for a in selected}.values())
-    selected_ids = {a["activity_id"] for a in selected}
-    remainder = sorted(
-        (a for a in activities if a["activity_id"] not in selected_ids),
-        key=lambda a: sha(f"audit-fill-v{RELEASE_VERSION}|{a['activity_id']}", 40),
-    )
-    selected.extend(remainder[: max(0, target - len(selected))])
-
-    rows = []
-    for index, activity in enumerate(selected[:target], start=1):
-        item_matches = by_activity.get(activity["activity_id"], [])
-        rows.append({
-            "audit_sample_id": f"audit-{index:03d}",
-            "sampling_stratum": "|".join([
-                clean(activity.get("realization_evidence_grade")) or "none",
-                str(activity.get("source_memberships", "")).split(";")[0] or "none",
-                clean(activity.get("activity_class")) or "none",
-                clean(activity.get("parcel_match_confidence")) or "no_match",
-            ]),
-            "activity_id": activity["activity_id"],
-            "source_record_id": activity.get("source_record_id", ""),
-            "source_memberships": activity.get("source_memberships", ""),
-            "activity_class": activity.get("activity_class", ""),
-            "activity_stage": activity.get("activity_stage", ""),
-            "status": activity.get("status", ""),
-            "realization_evidence_grade": activity.get("realization_evidence_grade", ""),
-            "likely_realized": activity.get("likely_realized", ""),
-            "realization_basis": activity.get("realization_basis", ""),
-            "parcel_match_confidence": activity.get("parcel_match_confidence", ""),
-            "match_methods": ";".join(sorted({m["match_method"] for m in item_matches})),
-            "match_distances_m": ";".join(str(m["match_distance_m"]) for m in item_matches),
-            "address": activity.get("address", ""),
-            "neighborhood": activity.get("neighborhood", ""),
-            "council_district": activity.get("council_district", ""),
-            "latitude": activity.get("latitude", ""),
-            "longitude": activity.get("longitude", ""),
-            "record_type": activity.get("record_type", ""),
-            "project_name": activity.get("project_name", ""),
-            "description": activity.get("description", ""),
-            "source_url": activity.get("source_url", ""),
-            "one_activity_one_development": "",
-            "building_match_correct": "",
-            "likely_realized_classification_correct": "",
-            "activity_scope": "",
-            "suspected_master_project_id": "",
-            "independent_evidence_url": "",
-            "review_notes": "",
-            "reviewer_id": "",
-            "reviewed_at_utc": "",
-        })
-    write_csv(PROCESSED / "manual_validation_sample.csv", rows)
+    rows, _ = validation_study.write_study_files(activities, matches)
     return rows
 
 
@@ -879,13 +823,52 @@ def metadata_for(field: str) -> tuple[str, str, str, str, str, str, str, str]:
         return ground_truth_metadata
     if field.startswith("audit_"):
         return ("Identifier or metadata for the manual-validation audit row.", "text", "", "Blank until human review where applicable.", "audit workflow", "See MANUAL_VALIDATION_PROTOCOL.md.", "Protocol-defined.", "Not a validation result until completed by a reviewer.")
+    if field == "protocol_version":
+        return ("Frozen validation-protocol version governing the row.", "text", "", "Never blank.", "validation study design", "validation_study.PROTOCOL_VERSION.", "Semantic version.", "Do not combine results governed by different protocol versions.")
+    if field == "random_seed":
+        return ("Integer seed used for the reproducible pseudo-random draw.", "integer", "", "Never blank.", "validation study design", "validation_study.RANDOM_SEED.", "20260823 for protocol 1.0.0.", "Changing the seed changes the sample.")
+    if field == "sample_phase":
+        return ("Role of the row in rule development or final evaluation.", "categorical text", "", "Never blank.", "validation study design", "Separate seeded draws.", "development; holdout", "Do not tune rules using holdout results.")
+    if field == "stratum_population":
+        return ("Number of eligible activities in the row's mutually exclusive stratum.", "integer", "activities", "Never blank.", "derived sampling frame", "Count after validation-study stratum assignment.", "Positive integer.", "Applies to the current release snapshot.")
+    if field == "phase_sample_size":
+        return ("Number drawn from this stratum for the row's phase.", "integer", "activities", "Never blank.", "validation study design", "Frozen phase-stratum quota.", "Positive integer.", "Use with stratum_population to recover inclusion probability.")
+    if field == "selection_probability":
+        return ("Phase-specific probability of selection within the stratum.", "decimal", "proportion", "Never blank.", "derived sampling design", "phase_sample_size / stratum_population.", "Greater than 0 and at most 1.", "Use phase-specific probabilities; do not combine phases for final inference.")
+    if field == "sampling_weight":
+        return ("Inverse phase-specific selection probability.", "decimal", "activities represented", "Never blank.", "derived sampling design", "stratum_population / phase_sample_size.", "At least 1.", "Needed for estimates across disproportionate strata.")
+    if field == "sample_order":
+        return ("Stable display order within the sample phase.", "integer", "", "Never blank.", "validation workflow", "Sequential order after the seeded draw.", "Positive integer.", "Not a random score and not an analysis weight.")
+    if field == "physical_work_started_dataset":
+        return ("Dataset's pre-review claim about whether physical work started.", "categorical text", "", "Never blank.", "derived", "Same rules as activity_truth_status.physical_work_started.", "yes; no; unknown; not_applicable", "This is the claim under review, not reviewer evidence.")
     if field in {"sampling_stratum", "match_methods", "match_distances_m"}:
         return ("Sampling or match context included to support manual review.", "text", "", "Blank when not applicable.", "derived audit context", "Created by create_manual_validation_sample().", "Protocol-defined.", "Context is not a human judgment.")
-    if field in {"one_activity_one_development", "building_match_correct", "likely_realized_classification_correct"}:
-        return ("Human-review judgment defined in the validation protocol.", "categorical text", "", "Blank means not yet reviewed.", "reviewer-entered", "See MANUAL_VALIDATION_PROTOCOL.md.", "yes; no; unclear; not_applicable", "Do not populate automatically.")
-    if field == "activity_scope":
-        return ("Reviewer classification of the observed activity scope.", "categorical text", "", "Blank means not yet reviewed.", "reviewer-entered", "See MANUAL_VALIDATION_PROTOCOL.md.", "new_construction; addition; alteration; demolition; administrative_or_revision; infrastructure; planning_only; other; unclear", "Requires cited evidence.")
-    if field in {"suspected_master_project_id", "independent_evidence_url", "review_notes", "reviewer_id", "reviewed_at_utc"}:
+    if field == "review_status":
+        return ("Reviewer workflow state for the row.", "categorical text", "", "Blank means not started.", "reviewer-entered", "See MANUAL_VALIDATION_PROTOCOL.md.", "in_progress; complete", "Metrics require complete plus all evidence gates.")
+    if field.endswith("_result") and field in {
+        "source_identity_result", "activity_classification_result", "cross_source_linkage_result",
+        "status_interpretation_result", "building_footprint_match_result",
+    }:
+        return ("Human-review outcome for the named dataset claim.", "categorical text", "", "Blank means not yet reviewed.", "reviewer-entered", "Frozen field-level rules in MANUAL_VALIDATION_PROTOCOL.md.", "supported; contradicted; inconclusive; not_applicable", "An unsuccessful evidence search is inconclusive, not contradicted.")
+    if field == "reviewed_activity_class":
+        return ("Evidence-based activity class assigned by the reviewer.", "categorical text", "", "Blank when classification is inconclusive or not applicable.", "reviewer-entered", "Frozen activity-classification rule.", "Dataset activity_class vocabulary.", "Requires cited, manually confirmed evidence.")
+    if field == "reviewed_activity_stage":
+        return ("Evidence-based procedural stage assigned by the reviewer.", "categorical text", "", "Blank when status is inconclusive or not applicable.", "reviewer-entered", "Frozen status-interpretation rule.", "Dataset activity_stage vocabulary.", "Must describe the status at the relevant snapshot date.")
+    if field == "physical_work_evidence":
+        return ("Reviewer's finding about affirmative evidence of physical work.", "categorical text", "", "Blank means not yet reviewed.", "reviewer-entered", "Frozen physical-evidence rule.", "present; absent; unknown; not_applicable", "Failure to find evidence must be coded unknown, not absent.")
+    if field == "evidence_source_types":
+        return ("Semicolon-delimited categories of sources manually reviewed.", "text", "", "Blank means not yet reviewed.", "reviewer-entered", "Acceptable-source list in MANUAL_VALIDATION_PROTOCOL.md.", "Protocol-defined source categories.", "AI output alone is not an evidence source.")
+    if field in {"primary_evidence_url", "secondary_evidence_url"}:
+        return ("Public URL for evidence used in the review.", "URL", "", "Blank when unavailable; a stable document reference is required if the primary URL is blank.", "reviewer-entered", "Manually opened evidence source.", "HTTP(S) URL.", "Links can change; record access time and document reference when possible.")
+    if field == "evidence_document_reference":
+        return ("Stable document title, identifier, archive reference, or local citation for reviewed evidence.", "text", "", "Blank when the primary evidence URL is sufficient.", "reviewer-entered", "Recorded during evidence review.", "Free text.", "Must be specific enough to relocate the evidence.")
+    if field in {"evidence_accessed_at_utc", "reviewed_at_utc"}:
+        return ("UTC timestamp for evidence access or review completion.", "datetime", "UTC", "Blank means not yet reviewed.", "reviewer-entered", "ISO 8601 UTC timestamp.", "ISO 8601 timestamp.", "Evidence can change after access.")
+    if field == "ai_assistance_used":
+        return ("Whether AI assisted in locating candidate evidence.", "categorical text", "", "Blank means not yet reviewed.", "reviewer-entered", "Disclosure required by the protocol.", "yes; no", "AI assistance does not replace human confirmation.")
+    if field == "manual_evidence_confirmed":
+        return ("Whether a human opened and confirmed the cited evidence.", "categorical text", "", "Blank means not yet reviewed.", "reviewer-entered", "Completion gate in review_metrics.py.", "yes; no", "Only yes is accepted for a completed review.")
+    if field in {"review_notes", "reviewer_id"}:
         return ("Reviewer-entered audit evidence or provenance.", "text", "", "Blank means not yet reviewed or not applicable.", "reviewer-entered", "See MANUAL_VALIDATION_PROTOCOL.md.", "Protocol-defined.", "Independent evidence URLs and reviewer provenance are required for completed judgments where specified.")
     if field in {"review_status", "match_count", "source"}:
         return ("Workflow status, stratum count, or cited source for the table row.", "text", "", "Blank means unavailable or pending.", "derived/source metadata", "See the table-specific methodology documentation.", "Table-defined.", "Interpret only in the context of its table.")
@@ -906,7 +889,7 @@ def write_data_dictionary() -> None:
                 "source_field_or_derivation": derivation, "valid_values": valid_values,
                 "interpretation_warning": warning,
             })
-    write_csv(DOCS / "data_dictionary.csv", dictionary)
+    write_csv(DOCS / "data_dictionary.csv", dictionary, lineterminator="\n")
 
 
 def write_documentation(counts: dict[str, int], activities: list[dict], matches: list[dict], retrieved: str) -> None:
@@ -935,6 +918,7 @@ def write_documentation(counts: dict[str, int], activities: list[dict], matches:
         pilot_rows = list(csv.DictReader(handle))
     with (PROCESSED / "activity_id_aliases.csv").open(encoding="utf-8", newline="") as handle:
         alias_rows = list(csv.DictReader(handle))
+    review_status = validation_review_status()
     qa = {
         "release": RELEASE_VERSION, "edition": "source_bounded_city_arcgis_snapshot", "retrieved_at_utc": retrieved, "raw_feature_counts": counts,
         "raw_feature_total": sum(counts.values()), "central_activity_rows": len(activities),
@@ -949,6 +933,7 @@ def write_documentation(counts: dict[str, int], activities: list[dict], matches:
         "external_verification_pilot_rows": len(pilot_rows),
         "external_pilot_supported_claims": sum(row["evidence_result"] == "supported" for row in pilot_rows),
         "external_pilot_physical_realization_yes": sum(row["physical_realization_verified"] == "yes" for row in pilot_rows),
+        "validation_study": review_status,
         "publication_assessment": {
             "official_source_provenance": "pass", "identifier_uniqueness": "pass",
             "multi_location_preservation": "pass", "complete_permit_census": "fail",
@@ -962,6 +947,7 @@ def write_documentation(counts: dict[str, int], activities: list[dict], matches:
             "CIP viewer data covers active projects for some City departments rather than the complete adopted capital program.",
             "Blank numeric fields mean unknown, not zero.",
             "The 12-row external verification pilot is purposive and is not a population accuracy estimate.",
+            "The frozen 150-row study reports no accuracy estimate until human review and the phase-specific completion gates are satisfied.",
         ],
     }
     (DOCS / "qa_report.json").write_text(json.dumps(qa, indent=2), encoding="utf-8")
@@ -974,7 +960,8 @@ def create_public_archive() -> None:
         ROOT / ".gitignore", ROOT / "README.md", ROOT / "LICENSE", ROOT / "DATA_LICENSE.md",
         ROOT / "CITATION.cff", ROOT / "build_release.py", ROOT / "build_tampa_development.py", ROOT / "bounded_census.py",
         ROOT / "download_hcpa.py", ROOT / "validate_release.py", ROOT / "verify_data_accuracy.py", ROOT / "ground_truth.py",
-        ROOT / "calculate_recall.py", ROOT / "import_accela_export.py", ROOT / "review_metrics.py", ROOT / "manifest.json",
+        ROOT / "calculate_recall.py", ROOT / "import_accela_export.py", ROOT / "review_metrics.py", ROOT / "validation_study.py",
+        ROOT / "manifest.json", *sorted((ROOT / "tests").glob("*.py")),
         *sorted((ROOT / ".github").rglob("*")), *sorted((DATA / "templates").glob("*.csv")),
         RAW / "snapshot_metadata.json",
         *sorted(RAW.glob("*.geojson")), *sorted(PROCESSED.glob("*.csv")), *sorted(DOCS.glob("*")),
@@ -989,8 +976,16 @@ def create_public_archive() -> None:
         forbidden = [name for name in names if "source_cache/" in name.lower() or name.lower().endswith(".dbf")]
         if forbidden:
             raise RuntimeError(f"Public archive contains forbidden HCPA/cache files: {forbidden}")
-        if not any(name.endswith("data/processed/manual_validation_sample.csv") for name in names):
-            raise RuntimeError("Public archive is missing the manual validation sample")
+        required_study_files = (
+            "data/processed/manual_validation_sample.csv",
+            "data/processed/manual_validation_development_sample.csv",
+            "data/processed/manual_validation_holdout_sample.csv",
+            "data/processed/manual_validation_second_review.csv",
+            "validation_study.py",
+        )
+        missing_study_files = [item for item in required_study_files if not any(name.endswith(item) for name in names)]
+        if missing_study_files:
+            raise RuntimeError(f"Public archive is missing validation-study files: {missing_study_files}")
 
 
 def main() -> None:
@@ -1076,17 +1071,20 @@ def main() -> None:
         validation_command.append("--allow-hcpa")
     subprocess.run(validation_command, check=True, stdout=subprocess.DEVNULL)
 
+    review_status = validation_review_status()
     manifest = {
         "title": DATASET_TITLE, "version": RELEASE_VERSION,
         "edition": "city_plus_optional_hcpa" if args.include_hcpa else "source_bounded_city_arcgis_snapshot", "retrieved_at_utc": retrieved,
         "geography": "City of Tampa-published layers, Florida", "unit_of_observation": "published ArcGIS feature; activity/project tables are secondary derived views",
-        "outputs": sorted(str(p.relative_to(ROOT)) for p in [
+        "outputs": sorted(p.relative_to(ROOT).as_posix() for p in [
             PROCESSED / "tampa_development_activity.csv", PROCESSED / "tampa_development_verification_queue.csv",
             PROCESSED / "source_records.csv", PROCESSED / "activity_locations.csv",
             PROCESSED / "activity_source_links.csv", PROCESSED / "activity_id_aliases.csv",
             PROCESSED / "parcel_building_matches.csv",
             PROCESSED / "external_verification_pilot.csv",
             PROCESSED / "manual_validation_sample.csv",
+            PROCESSED / "manual_validation_development_sample.csv",
+            PROCESSED / "manual_validation_holdout_sample.csv",
             PROCESSED / "manual_validation_second_review.csv",
             PROCESSED / "activity_truth_status.csv", PROCESSED / "master_projects.csv",
             PROCESSED / "master_project_activity_links.csv", PROCESSED / "master_project_candidates.csv",
@@ -1097,21 +1095,27 @@ def main() -> None:
             PROCESSED / "completeness_benchmarks.csv", DOCS / "data_dictionary.csv", DOCS / "qa_report.json",
             DOCS / "validation_report.json", DOCS / "KNOWN_LIMITATIONS.md",
             DOCS / "accuracy_verification_report.json",
+            DOCS / "validation_study_design.json",
+            DOCS / "review_metrics_development.json", DOCS / "review_metrics_holdout.json",
             DOCS / "LICENSE_NOTES.md", DOCS / "PUBLIC_RECORDS_REQUEST.md", DOCS / "MANUAL_VALIDATION_PROTOCOL.md",
             DOCS / "VERIFICATION_REPORT.md", DOCS / "GROUND_TRUTH_METHODOLOGY.md", DOCS / "BOUNDED_CENSUS_SCOPE.md",
         ]),
         "license_note": "The public archive contains City-hosted source snapshots only. Code is MIT-licensed; source data remain subject to City terms described in DATA_LICENSE.md.",
         "bounded_census_claim": "All features returned by eight named City ArcGIS layers at the recorded snapshot retrieval time are included.",
         "bounded_census_nonclaim": "This is not a census of all Tampa permits, projects, construction, completions, or investment.",
-        "manual_validation_status": "pending_human_review",
-        "external_verification_status": "12_row_pilot_completed_all_stated_claims_supported",
+        "manual_validation_status": f"protocol_1.0.0_frozen_150_rows_{review_status['status']}",
+        "validation_study": {
+            **review_status, "development_rows": 100, "holdout_rows": 50,
+            "independent_second_reviews": 50, "final_inference_phase": "holdout",
+        },
+        "external_verification_status": "historical_12_row_pilot_retained_not_used_as_population_estimate",
         "privacy_minimization": {
             "scope": "raw GeoJSON and processed source properties",
             "suppressed_fields": sorted(PRIVACY_BLOCKED_FIELDS),
             "note": "Contact and source-user fields are removed before public packaging.",
         },
         "bundled_source_files": [
-            {"path": str(path.relative_to(ROOT)), "sha256": file_sha256(path)}
+            {"path": path.relative_to(ROOT).as_posix(), "sha256": file_sha256(path)}
             for path in sorted(RAW.glob("*.geojson"))
         ],
     }
@@ -1123,6 +1127,10 @@ def main() -> None:
         }
     (ROOT / "manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
     subprocess.run([sys.executable, str(ROOT / "verify_data_accuracy.py")], check=True, stdout=subprocess.DEVNULL)
+    for phase in ("development", "holdout"):
+        subprocess.run([
+            sys.executable, str(ROOT / "review_metrics.py"), "--phase", phase, "--allow-partial"
+        ], check=True, stdout=subprocess.DEVNULL)
     for deprecated in (
         PROCESSED / "tampa_neighborhood_summary.csv",
         PROCESSED / "tampa_physical_development_candidates.csv",

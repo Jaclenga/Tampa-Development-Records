@@ -53,10 +53,13 @@ as a physical completion event.
 
 ## Pending validation
 
-`manual_validation_sample.csv` contains 150 records selected for review.
-`manual_validation_second_review.csv` assigns 30 of them for independent
-review. Accuracy, agreement, and match-precision statistics remain blank until
-those reviews are completed.
+`manual_validation_sample.csv` contains a seeded, stratified 150-record study:
+100 development/debugging rows and a separately randomized 50-row final
+holdout. Permit, planning, historic-preservation, capital-project, and
+cross-source-merge strata have frozen quotas and explicit selection weights.
+`manual_validation_second_review.csv` assigns 50 rows for blinded independent
+review. Accuracy, agreement, and match-precision statistics remain pending
+until humans complete the cited-evidence reviews under protocol 1.0.0.
 
 `calculate_recall.py` compares the dataset with a sampled official permit
 list. It reports results by permit category and period rather than combining

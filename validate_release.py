@@ -9,6 +9,11 @@ import json
 import sys
 from pathlib import Path
 
+from validation_study import (
+    CLAIM_RESULT_FIELDS, PHASE_QUOTAS, PROTOCOL_VERSION, RANDOM_SEED, REVIEW_FIELDS,
+    SECOND_REVIEW_QUOTAS,
+)
+
 
 ROOT = Path(__file__).resolve().parent
 P = ROOT / "data" / "processed"
@@ -25,6 +30,17 @@ def read(name: str) -> list[dict[str, str]]:
         return list(csv.DictReader(handle))
 
 
+def review_values_valid(row: dict[str, str]) -> bool:
+    return (
+        row.get("review_status", "") in {"", "in_progress", "complete"}
+        and all(row.get(field, "") in {"", "supported", "contradicted", "inconclusive", "not_applicable"}
+                for field in CLAIM_RESULT_FIELDS)
+        and row.get("physical_work_evidence", "") in {"", "present", "absent", "unknown", "not_applicable"}
+        and row.get("ai_assistance_used", "") in {"", "yes", "no"}
+        and row.get("manual_evidence_confirmed", "") in {"", "yes", "no"}
+    )
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--allow-hcpa", action="store_true", help="Allow optional HCPA fallback rows in a non-public local build.")
@@ -37,6 +53,8 @@ def main() -> None:
     matches = read("parcel_building_matches.csv")
     queue = read("tampa_development_verification_queue.csv")
     audit = read("manual_validation_sample.csv")
+    audit_development = read("manual_validation_development_sample.csv")
+    audit_holdout = read("manual_validation_holdout_sample.csv")
     pilot = read("external_verification_pilot.csv")
     truth = read("activity_truth_status.csv")
     projects = read("master_projects.csv")
@@ -65,6 +83,18 @@ def main() -> None:
     master_ids = {x["master_project_id"] for x in projects}
     truth_values = {"yes", "no", "unknown", "not_applicable"}
     universe_ids = {x["universe_id"] for x in universes}
+    audit_by_id = {x["audit_sample_id"]: x for x in audit}
+    expected_phase_strata = {
+        (phase, stratum): quota
+        for phase, quotas in PHASE_QUOTAS.items()
+        for stratum, quota in quotas.items()
+    }
+    actual_phase_strata = {
+        (phase, stratum): sum(
+            x["sample_phase"] == phase and x["sampling_stratum"] == stratum for x in audit
+        )
+        for phase, stratum in expected_phase_strata
+    }
     raw_privacy_fields = []
     for path in RAW.glob("*.geojson"):
         collection = json.loads(path.read_text(encoding="utf-8"))
@@ -108,19 +138,42 @@ def main() -> None:
             "hcpa" not in x["match_method"].lower() and "hcpafl.org" not in x["building_source_endpoint"].lower()
             for x in matches
         ),
-        "manual_audit_sample_has_150_unique_activities": len(audit) == 150 and len({x["activity_id"] for x in audit}) == 150,
+        "manual_audit_sample_has_150_unique_activities": (
+            len(audit) == 150 and len({x["activity_id"] for x in audit}) == 150
+            and len(audit_by_id) == 150
+        ),
         "manual_audit_sample_references_activities": all(x["activity_id"] in activity_ids for x in audit),
-        "manual_audit_results_blank": all(
-            not any(x[field] for field in (
-                "one_activity_one_development", "building_match_correct",
-                "likely_realized_classification_correct", "activity_scope", "reviewer_id", "reviewed_at_utc",
-            )) for x in audit
+        "manual_audit_uses_frozen_seeded_protocol": all(
+            x["protocol_version"] == PROTOCOL_VERSION and x["random_seed"] == str(RANDOM_SEED)
+            for x in audit
+        ),
+        "manual_audit_phase_stratum_quotas_match_design": actual_phase_strata == expected_phase_strata,
+        "manual_audit_selection_weights_reconcile": all(
+            abs(float(x["selection_probability"]) - int(x["phase_sample_size"]) / int(x["stratum_population"])) < 1e-9
+            and abs(float(x["sampling_weight"]) - int(x["stratum_population"]) / int(x["phase_sample_size"])) < 1e-8
+            for x in audit
+        ),
+        "development_and_holdout_files_partition_sample": (
+            len(audit_development) == 100 and len(audit_holdout) == 50
+            and {x["audit_sample_id"] for x in audit_development}.isdisjoint(
+                {x["audit_sample_id"] for x in audit_holdout}
+            )
+            and {x["audit_sample_id"] for x in audit_development + audit_holdout} == set(audit_by_id)
+            and all(x["sample_phase"] == "development" for x in audit_development)
+            and all(x["sample_phase"] == "holdout" for x in audit_holdout)
+        ),
+        "phase_file_context_matches_combined_sample": all(
+            all(
+                row.get(field, "") == audit_by_id[row["audit_sample_id"]].get(field, "")
+                for field in row if field not in REVIEW_FIELDS
+            )
+            for row in audit_development + audit_holdout
+        ),
+        "manual_audit_review_values_use_protocol_vocabularies": all(
+            review_values_valid(x) for x in audit + audit_development + audit_holdout
         ),
         "external_pilot_has_12_unique_checks": len(pilot) == 12 and len({x["verification_id"] for x in pilot}) == 12,
-        "external_pilot_references_sampled_activities": all(
-            x["activity_id"] in activity_ids and x["audit_sample_id"] in {a["audit_sample_id"] for a in audit}
-            for x in pilot
-        ),
+        "external_pilot_references_release_activities": all(x["activity_id"] in activity_ids for x in pilot),
         "external_pilot_has_cited_results": all(
             x["evidence_result"] in {"supported", "contradicted", "inconclusive"}
             and x["evidence_url"].startswith("https://") and x["verification_notes"].strip()
@@ -170,10 +223,27 @@ def main() -> None:
         "amounts_are_positive_and_typed": all(float(x["amount_usd"]) > 0 and x["amount_type"] and x["is_final"] == "unknown" for x in amounts),
         "building_audit_covers_all_matches": len(match_audit) == len(matches),
         "building_precision_pending_review": all(not x["empirical_precision"] and x["human_reviewed_count"] == "0" for x in match_diagnostics),
-        "second_review_assignment_has_30_blank_reviews": len(review2) == 30 and all(
-            not any(x[field] for field in ("reviewer_2_id", "reviewer_2_one_activity_one_development",
-                "reviewer_2_building_match_correct", "reviewer_2_completion_classification", "reviewer_2_reviewed_at_utc"))
-            for x in review2),
+        "second_review_assignment_has_50_blinded_rows": (
+            len(review2) == 50
+            and len({x["audit_sample_id"] for x in review2}) == 50
+            and all(x["audit_sample_id"] in audit_by_id for x in review2)
+            and all(review_values_valid(x) for x in review2)
+            and all(
+                sum(
+                    x["sample_phase"] == phase and x["sampling_stratum"] == stratum for x in review2
+                ) == quota
+                for phase, quotas in SECOND_REVIEW_QUOTAS.items()
+                for stratum, quota in quotas.items()
+            )
+        ),
+        "second_review_context_matches_first_review": all(
+            all(
+                row.get(field, "") == audit_by_id[row["audit_sample_id"]].get(field, "")
+                for field in row if field not in REVIEW_FIELDS
+            )
+            for row in review2
+        ),
+        "validation_study_design_is_published": (ROOT / "docs" / "validation_study_design.json").exists(),
         "bounded_census_has_eight_named_universes": len(universes) == 8 and len(universe_ids) == 8,
         "bounded_census_contains_every_source_feature_once": (
             len(census_records) == len(sources)
@@ -200,13 +270,16 @@ def main() -> None:
         ),
     }
     report = {
-        "release": "0.6.1", "edition": "city_plus_optional_hcpa" if args.allow_hcpa else "source_bounded_city_arcgis_snapshot",
+        "release": "0.7.0", "edition": "city_plus_optional_hcpa" if args.allow_hcpa else "source_bounded_city_arcgis_snapshot",
         "passed": all(checks.values()), "checks": checks,
         "row_counts": {
             "activities": len(activities), "source_records": len(sources), "locations": len(locations),
             "links": len(links), "activity_id_aliases": len(aliases),
             "parcel_building_matches": len(matches), "verification_queue": len(queue),
             "manual_validation_sample": len(audit),
+            "manual_validation_development_sample": len(audit_development),
+            "manual_validation_holdout_sample": len(audit_holdout),
+            "manual_validation_second_review": len(review2),
             "external_verification_pilot": len(pilot),
             "activity_truth_status": len(truth), "master_projects": len(projects),
             "master_project_candidates": len(candidates), "development_events": len(events),

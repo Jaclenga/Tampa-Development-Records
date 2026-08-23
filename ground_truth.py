@@ -295,23 +295,12 @@ def build_match_audit(activities: list[dict], matches: list[dict]) -> tuple[list
     return audit, diagnostics
 
 
-def build_review2(sample: list[dict], target: int = 30) -> list[dict]:
-    chosen = sorted(sample, key=lambda r: token("second-review|" + r["activity_id"], 40))[:target]
-    return [{
-        "audit_sample_id": r["audit_sample_id"], "activity_id": r["activity_id"],
-        "reviewer_2_id": "", "reviewer_2_one_activity_one_development": "",
-        "reviewer_2_building_match_correct": "", "reviewer_2_completion_classification": "",
-        "reviewer_2_notes": "", "reviewer_2_reviewed_at_utc": "",
-    } for r in chosen]
-
-
 def build_all(processed: Path, activities: list[dict], matches: list[dict], sample: list[dict]) -> dict[str, int]:
     truth = build_truth(activities)
     projects, links, candidates = build_projects(activities)
     events = build_events(activities, links)
     amounts = build_amounts(activities)
     audit, diagnostics = build_match_audit(activities, matches)
-    review2 = build_review2(sample)
     tables = {
         "activity_truth_status.csv": (truth, list(truth[0])),
         "master_projects.csv": (projects, list(projects[0])),
@@ -321,7 +310,6 @@ def build_all(processed: Path, activities: list[dict], matches: list[dict], samp
         "investment_amounts.csv": (amounts, ["amount_id", "activity_id", "amount_usd", "amount_type", "price_year", "public_or_private", "source", "is_estimate", "is_final"]),
         "building_match_audit.csv": (audit, list(audit[0]) if audit else []),
         "building_match_diagnostics.csv": (diagnostics, list(diagnostics[0]) if diagnostics else []),
-        "manual_validation_second_review.csv": (review2, list(review2[0])),
     }
     for name, (rows, columns) in tables.items():
         write_csv(processed / name, rows, columns)

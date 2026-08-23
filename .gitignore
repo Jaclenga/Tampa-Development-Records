@@ -3,6 +3,7 @@ __pycache__/
 .venv/
 source_cache/
 tampa_development_dataset_v*.zip
+tampa_source_bounded_census_v*.zip
 .DS_Store
 Thumbs.db
 

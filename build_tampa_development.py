@@ -107,7 +107,14 @@ def iso_date(value: object) -> str:
     if value in (None, ""):
         return ""
     if isinstance(value, (int, float)):
-        return dt.datetime.fromtimestamp(value / 1000, tz=dt.timezone.utc).date().isoformat()
+        # ArcGIS layers can contain pre-1970 sentinel milliseconds. Construct
+        # from the UTC epoch so parsing is consistent on Windows, where
+        # fromtimestamp() rejects some otherwise representable dates.
+        try:
+            parsed = dt.datetime(1970, 1, 1, tzinfo=dt.timezone.utc) + dt.timedelta(milliseconds=value)
+            return parsed.date().isoformat()
+        except (OverflowError, TypeError, ValueError):
+            return ""
     text = str(value).strip()
     if re.fullmatch(r"\d{2}/\d{2}/\d{4}", text):
         return dt.datetime.strptime(text, "%m/%d/%Y").date().isoformat()

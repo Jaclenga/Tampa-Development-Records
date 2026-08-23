@@ -67,7 +67,7 @@ def build(processed: Path, raw: Path, source_rows: list[dict], locations: list[d
             "source_name": source_name,
             "source_label": SOURCE_LABELS[source_name],
             "source_endpoint": endpoint,
-            "snapshot_file": str(raw_path.relative_to(raw.parent)),
+            "snapshot_file": raw_path.relative_to(raw.parent).as_posix(),
             "snapshot_retrieved_at_utc": retrieved,
             "raw_feature_count": raw_count,
             "included_record_count": included,

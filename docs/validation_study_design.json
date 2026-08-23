@@ -1,0 +1,47 @@
+{
+  "protocol_version": "1.0.0",
+  "frozen_on": "2026-08-23",
+  "random_seed": 20260823,
+  "unit_of_sampling": "normalized activity",
+  "selection_method": "SHA-256 pseudo-random ranking keyed by seed, protocol, phase, stratum, and activity_id",
+  "phase_order": [
+    "development",
+    "holdout"
+  ],
+  "phase_sizes": {
+    "development": 100,
+    "holdout": 50
+  },
+  "stratum_total_quotas": {
+    "permit": 50,
+    "planning": 20,
+    "historic_preservation": 10,
+    "capital_project": 50,
+    "cross_source_merge": 20
+  },
+  "independent_second_reviews": 50,
+  "claim_result_values": [
+    "supported",
+    "contradicted",
+    "inconclusive",
+    "not_applicable"
+  ],
+  "claim_types": [
+    "source_identity",
+    "activity_classification",
+    "cross_source_linkage",
+    "status_interpretation",
+    "physical_work_evidence",
+    "building_footprint_match"
+  ],
+  "physical_work_evidence_values": [
+    "present",
+    "absent",
+    "unknown",
+    "not_applicable"
+  ],
+  "final_analysis_phase": "holdout",
+  "human_confirmation_required": true,
+  "ai_policy": "AI may locate candidate sources; every label requires a manually confirmed cited URL or stable document reference.",
+  "protocol_document": "docs/MANUAL_VALIDATION_PROTOCOL.md"
+}

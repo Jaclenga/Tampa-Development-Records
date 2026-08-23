@@ -10,7 +10,7 @@ Source: https://www.tampa.gov/about-us/tampagov/conditions-and-use
 City seals, copyrighted artwork, and unrelated protected material are not
 included. City of Tampa and Tampa GIS attribution should be retained.
 
-The v0.6.1 public archive is City-only, source-bounded, and privacy-minimized.
+The v0.7.0 public archive is City-only, source-bounded, and privacy-minimized.
 Configured contact and source-user/editor fields are removed from the bundled
 GeoJSON and processed source properties. It excludes the HCPA archive,
 extracted DBF, and HCPA nearest-centroid fallback rows. An optional local
