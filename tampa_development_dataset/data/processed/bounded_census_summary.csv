@@ -1,2 +1,0 @@
-bounded_census_id,source_universe_count,published_feature_count,included_feature_count,excluded_feature_count,record_coverage_status,primary_unit,valid_claim,invalid_claim
-tampa_published_arcgis_layers_snapshot,8,4469,4469,0,complete,published ArcGIS feature,Census of features returned by eight named City of Tampa ArcGIS layers at the recorded snapshot time.,"Not a census of all Tampa permits, projects, construction, completed development, or investment."
