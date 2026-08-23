@@ -1,0 +1,3 @@
+period,official_building_permits_issued_or_approved,gis_construction_records_created_in_calendar_year,diagnostic_ratio_not_coverage_rate,comparability,conclusion,official_source
+FY24,24062,317,0.0132,Not directly comparable: fiscal-year all-building-permit total versus calendar-year selected GIS display records.,GIS extract is not a complete permit census.,https://www.tampa.gov/construction-services/permit-utilization-report/fy24
+FY25,29835,950,0.0318,Not directly comparable: fiscal-year all-building-permit total versus calendar-year selected GIS display records.,GIS extract is not a complete permit census.,https://www.tampa.gov/construction-services/permit-utilization-report
