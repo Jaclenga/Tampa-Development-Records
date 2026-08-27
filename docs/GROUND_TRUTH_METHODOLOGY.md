@@ -61,7 +61,7 @@ cross-source-merge strata have frozen quotas and explicit selection weights.
 review. Accuracy, agreement, and match-precision statistics remain pending
 until humans complete the cited-evidence reviews under protocol 1.0.0.
 
-`calculate_recall.py` compares the dataset with a sampled official permit
+`scripts/calculate_recall.py` compares the dataset with a sampled official permit
 list. It reports results by permit category and period rather than combining
 unlike permit types into one rate.
 

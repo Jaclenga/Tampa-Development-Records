@@ -5,7 +5,7 @@
 Run:
 
 ```bash
-python verify_data_accuracy.py
+python scripts/verify_data_accuracy.py
 ```
 
 The script reconstructs source identifiers from the bundled GeoJSON and
@@ -24,7 +24,7 @@ as historical evidence in version 0.7.0. The sources were reviewed on August
 
 ## Checks performed
 
-- `validate_release.py` checked table keys, relationships, counts, geometries,
+- `scripts/validate_release.py` checked table keys, relationships, counts, geometries,
   aliases, and data-dictionary coverage.
 - Classification rules and capital-project identifiers were checked for
   internal contradictions.

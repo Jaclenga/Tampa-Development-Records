@@ -17,7 +17,7 @@ from collections import defaultdict
 from pathlib import Path
 
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parent.parent
 PROCESSED = ROOT / "data" / "processed"
 PROTOCOL_VERSION = "1.0.0"
 RANDOM_SEED = 20260823
@@ -196,7 +196,10 @@ def draw_sample(activities: list[dict], matches: list[dict]) -> tuple[list[dict]
 
     # Derive the dataset's pre-review physical-work claim from the same build
     # rules used for activity_truth_status.csv; do not depend on a stale file.
-    import ground_truth
+    try:
+        from . import ground_truth
+    except ImportError:  # Support direct execution from the scripts directory.
+        import ground_truth
 
     truth_by_id = {row["activity_id"]: row for row in ground_truth.build_truth(activities)}
 

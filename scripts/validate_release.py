@@ -9,13 +9,19 @@ import json
 import sys
 from pathlib import Path
 
-from validation_study import (
-    CLAIM_RESULT_FIELDS, PHASE_QUOTAS, PROTOCOL_VERSION, RANDOM_SEED, REVIEW_FIELDS,
-    SECOND_REVIEW_QUOTAS,
-)
+try:
+    from .validation_study import (
+        CLAIM_RESULT_FIELDS, PHASE_QUOTAS, PROTOCOL_VERSION, RANDOM_SEED, REVIEW_FIELDS,
+        SECOND_REVIEW_QUOTAS,
+    )
+except ImportError:  # Support direct execution: python scripts/validate_release.py
+    from validation_study import (
+        CLAIM_RESULT_FIELDS, PHASE_QUOTAS, PROTOCOL_VERSION, RANDOM_SEED, REVIEW_FIELDS,
+        SECOND_REVIEW_QUOTAS,
+    )
 
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parent.parent
 P = ROOT / "data" / "processed"
 RAW = ROOT / "data" / "raw"
 PRIVACY_BLOCKED_FIELDS = {

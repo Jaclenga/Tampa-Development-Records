@@ -16,10 +16,13 @@ import math
 from collections import Counter, defaultdict
 from pathlib import Path
 
-from validation_study import CLAIM_RESULT_FIELDS, PROTOCOL_VERSION
+try:
+    from .validation_study import CLAIM_RESULT_FIELDS, PROTOCOL_VERSION
+except ImportError:  # Support direct execution: python scripts/review_metrics.py
+    from validation_study import CLAIM_RESULT_FIELDS, PROTOCOL_VERSION
 
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parent.parent
 P = ROOT / "data" / "processed"
 ALLOWED_RESULTS = {"supported", "contradicted", "inconclusive", "not_applicable"}
 ALLOWED_PHYSICAL = {"present", "absent", "unknown", "not_applicable"}

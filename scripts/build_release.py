@@ -28,15 +28,16 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parent.parent
+SCRIPTS = ROOT / "scripts"
 DATA = ROOT / "data"
 RAW = DATA / "raw"
 PROCESSED = DATA / "processed"
 DOCS = ROOT / "docs"
-CACHE = ROOT / "source_cache"
+CACHE = ROOT / ".cache" / "source_cache"
 RELEASE_VERSION = "0.7.0"
 DATASET_TITLE = "Tampa Published Development Records: Source-Bounded Census"
-PUBLIC_ARCHIVE = ROOT / f"tampa_source_bounded_census_v{RELEASE_VERSION}.zip"
+PUBLIC_ARCHIVE = ROOT / "dist" / f"tampa_source_bounded_census_v{RELEASE_VERSION}.zip"
 
 PRIVACY_BLOCKED_FIELDS = {
     "pocname", "pocphone", "pocemail", "creator", "editor", "lasteditor",
@@ -55,7 +56,7 @@ EXTRA_CIP = {
 
 
 def load_legacy_module():
-    spec = importlib.util.spec_from_file_location("tampa_legacy", ROOT / "build_tampa_development.py")
+    spec = importlib.util.spec_from_file_location("tampa_legacy", SCRIPTS / "build_tampa_development.py")
     assert spec and spec.loader
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
@@ -79,7 +80,7 @@ def ensure_hcpa_latlon() -> None:
     table = CACHE / "hcpa_tables" / "latlon.dbf"
     if not archive.exists():
         subprocess.run([
-            sys.executable, str(ROOT / "download_hcpa.py"), r"^LatLon_Table_.*\.zip", str(archive)
+            sys.executable, str(SCRIPTS / "download_hcpa.py"), r"^LatLon_Table_.*\.zip", str(archive)
         ], check=True)
     if not table.exists():
         table.parent.mkdir(parents=True, exist_ok=True)
@@ -241,7 +242,10 @@ def write_csv(
 
 def validation_review_status() -> dict:
     """Summarize protocol-gated review completion without producing estimates."""
-    import review_metrics
+    try:
+        from . import review_metrics
+    except ImportError:  # Support direct execution from the scripts directory.
+        import review_metrics
 
     result = {"protocol_version": "1.0.0", "random_seed": 20260823}
     all_ready = True
@@ -712,7 +716,10 @@ def create_manual_validation_sample(activities: list[dict], matches: list[dict],
     """Create the frozen, seeded study sample and blinded review assignment."""
     if target != 150:
         raise ValueError("Protocol 1.0.0 fixes the validation sample at 150 rows")
-    import validation_study
+    try:
+        from . import validation_study
+    except ImportError:  # Support direct execution from the scripts directory.
+        import validation_study
 
     rows, _ = validation_study.write_study_files(activities, matches)
     return rows
@@ -748,7 +755,7 @@ FIELD_METADATA = {
     "properties_json": ("Source attributes serialized as JSON after configured contact/editor fields are removed.", "JSON text", "", "Blank only if a feature had no attributes.", "source snapshot", "All allowed source properties serialized without geometry.", "Valid JSON object.", "May contain other public attributes; inspect before person-level publication."),
     "project_name": ("Project or application name as reported by the source.", "text", "", "Blank means unavailable.", "source", "Source-specific project-name field.", "Source-defined.", "Names are not standardized across layers."),
     "description": ("Free-text project description reported by the source.", "text", "", "Blank means unavailable.", "source", "Source-specific description field.", "Source-defined.", "May be incomplete or use administrative language."),
-    "activity_class": ("Normalized broad category assigned from source layer, record type, description, and reported square footage.", "categorical text", "", "Never blank.", "derived", "Rules in build_tampa_development.py.", "building_construction; demolition; other_permitted_work; planning_application; historic_preservation_application; public_capital:*; single_family_new_construction_or_addition", "Classification has not yet been manually accuracy-tested."),
+    "activity_class": ("Normalized broad category assigned from source layer, record type, description, and reported square footage.", "categorical text", "", "Never blank.", "derived", "Rules in scripts/build_tampa_development.py.", "building_construction; demolition; other_permitted_work; planning_application; historic_preservation_application; public_capital:*; single_family_new_construction_or_addition", "Classification has not yet been manually accuracy-tested."),
     "activity_stage": ("Normalized procedural stage inferred from official status text and source type.", "categorical text", "", "Never blank.", "derived", "Status keyword rules in classify_stage().", "preconstruction_or_unknown; planning_review; permit_or_funding_approved; construction_or_inspection; completed_or_closeout; inactive", "A procedural stage does not prove physical completion."),
     "status": ("Status text reported by the source at retrieval.", "text", "", "Blank means unavailable.", "source", "Source-specific status field.", "Source-defined.", "Status semantics differ across sources."),
     "record_type": ("Permit, application, capital-project, or preservation record type reported by the source.", "text", "", "Blank means unavailable.", "source", "Source-specific record-type field.", "Source-defined.", "Not harmonized across source systems."),
@@ -813,11 +820,17 @@ FIELD_METADATA = {
 def metadata_for(field: str) -> tuple[str, str, str, str, str, str, str, str]:
     if field in FIELD_METADATA:
         return FIELD_METADATA[field]
-    import bounded_census
+    try:
+        from . import bounded_census
+    except ImportError:  # Support direct execution from the scripts directory.
+        import bounded_census
     bounded_metadata = bounded_census.metadata_for(field)
     if bounded_metadata:
         return bounded_metadata
-    import ground_truth
+    try:
+        from . import ground_truth
+    except ImportError:  # Support direct execution from the scripts directory.
+        import ground_truth
     ground_truth_metadata = ground_truth.metadata_for(field)
     if ground_truth_metadata:
         return ground_truth_metadata
@@ -867,7 +880,7 @@ def metadata_for(field: str) -> tuple[str, str, str, str, str, str, str, str]:
     if field == "ai_assistance_used":
         return ("Whether AI assisted in locating candidate evidence.", "categorical text", "", "Blank means not yet reviewed.", "reviewer-entered", "Disclosure required by the protocol.", "yes; no", "AI assistance does not replace human confirmation.")
     if field == "manual_evidence_confirmed":
-        return ("Whether a human opened and confirmed the cited evidence.", "categorical text", "", "Blank means not yet reviewed.", "reviewer-entered", "Completion gate in review_metrics.py.", "yes; no", "Only yes is accepted for a completed review.")
+        return ("Whether a human opened and confirmed the cited evidence.", "categorical text", "", "Blank means not yet reviewed.", "reviewer-entered", "Completion gate in scripts/review_metrics.py.", "yes; no", "Only yes is accepted for a completed review.")
     if field in {"review_notes", "reviewer_id"}:
         return ("Reviewer-entered audit evidence or provenance.", "text", "", "Blank means not yet reviewed or not applicable.", "reviewer-entered", "See MANUAL_VALIDATION_PROTOCOL.md.", "Protocol-defined.", "Independent evidence URLs and reviewer provenance are required for completed judgments where specified.")
     if field in {"review_status", "match_count", "source"}:
@@ -955,12 +968,11 @@ def write_documentation(counts: dict[str, int], activities: list[dict], matches:
     write_data_dictionary()
 
 def create_public_archive() -> None:
+    PUBLIC_ARCHIVE.parent.mkdir(parents=True, exist_ok=True)
     PUBLIC_ARCHIVE.unlink(missing_ok=True)
     files = [
         ROOT / ".gitignore", ROOT / "README.md", ROOT / "LICENSE", ROOT / "DATA_LICENSE.md",
-        ROOT / "CITATION.cff", ROOT / "build_release.py", ROOT / "build_tampa_development.py", ROOT / "bounded_census.py",
-        ROOT / "download_hcpa.py", ROOT / "validate_release.py", ROOT / "verify_data_accuracy.py", ROOT / "ground_truth.py",
-        ROOT / "calculate_recall.py", ROOT / "import_accela_export.py", ROOT / "review_metrics.py", ROOT / "validation_study.py",
+        ROOT / "CITATION.cff", SCRIPTS / "README.md", *sorted(SCRIPTS.glob("*.py")),
         ROOT / "manifest.json", *sorted((ROOT / "tests").glob("*.py")),
         *sorted((ROOT / ".github").rglob("*")), *sorted((DATA / "templates").glob("*.csv")),
         RAW / "snapshot_metadata.json",
@@ -981,7 +993,7 @@ def create_public_archive() -> None:
             "data/processed/manual_validation_development_sample.csv",
             "data/processed/manual_validation_holdout_sample.csv",
             "data/processed/manual_validation_second_review.csv",
-            "validation_study.py",
+            "scripts/validation_study.py",
         )
         missing_study_files = [item for item in required_study_files if not any(name.endswith(item) for name in names)]
         if missing_study_files:
@@ -1004,7 +1016,7 @@ def main() -> None:
     if args.include_hcpa:
         ensure_hcpa_latlon()
     if not args.use_existing_raw:
-        subprocess.run([sys.executable, str(ROOT / "build_tampa_development.py")], check=True, stdout=subprocess.DEVNULL)
+        subprocess.run([sys.executable, str(SCRIPTS / "build_tampa_development.py")], check=True, stdout=subprocess.DEVNULL)
         for name, (url, _) in EXTRA_CIP.items():
             collection = fetch_arcgis_layer(url)
             (RAW / f"{name}.geojson").write_text(json.dumps(collection, ensure_ascii=False), encoding="utf-8")
@@ -1061,12 +1073,18 @@ def main() -> None:
     write_csv(PROCESSED / "activity_id_aliases.csv", aliases, ["old_activity_id", "new_activity_id", "cluster_basis", "cluster_key"])
     write_csv(PROCESSED / "parcel_building_matches.csv", matches)
     sample = create_manual_validation_sample(activities, matches)
-    import ground_truth
+    try:
+        from . import ground_truth
+    except ImportError:  # Support direct execution from the scripts directory.
+        import ground_truth
     ground_truth.build_all(PROCESSED, activities, matches, sample)
-    import bounded_census
+    try:
+        from . import bounded_census
+    except ImportError:  # Support direct execution from the scripts directory.
+        import bounded_census
     bounded_census.build(PROCESSED, RAW, source_rows, locations, counts)
     write_documentation(counts, activities, matches, retrieved)
-    validation_command = [sys.executable, str(ROOT / "validate_release.py")]
+    validation_command = [sys.executable, str(SCRIPTS / "validate_release.py")]
     if args.include_hcpa:
         validation_command.append("--allow-hcpa")
     subprocess.run(validation_command, check=True, stdout=subprocess.DEVNULL)
@@ -1122,14 +1140,14 @@ def main() -> None:
     if args.include_hcpa:
         manifest["license_note"] += " This local build also contains optional HCPA-derived fallback matches and must not be published as the City-only edition."
         manifest["optional_external_source"] = {
-            "path": "source_cache/hcpa_latlon.zip", "sha256": file_sha256(CACHE / "hcpa_latlon.zip"),
+            "path": ".cache/source_cache/hcpa_latlon.zip", "sha256": file_sha256(CACHE / "hcpa_latlon.zip"),
             "source": "https://downloads.hcpafl.org/Default.aspx",
         }
     (ROOT / "manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
-    subprocess.run([sys.executable, str(ROOT / "verify_data_accuracy.py")], check=True, stdout=subprocess.DEVNULL)
+    subprocess.run([sys.executable, str(SCRIPTS / "verify_data_accuracy.py")], check=True, stdout=subprocess.DEVNULL)
     for phase in ("development", "holdout"):
         subprocess.run([
-            sys.executable, str(ROOT / "review_metrics.py"), "--phase", phase, "--allow-partial"
+            sys.executable, str(SCRIPTS / "review_metrics.py"), "--phase", phase, "--allow-partial"
         ], check=True, stdout=subprocess.DEVNULL)
     for deprecated in (
         PROCESSED / "tampa_neighborhood_summary.csv",

@@ -21,6 +21,9 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 
+ROOT = Path(__file__).resolve().parent.parent
+
+
 SOURCES = {
     "construction_inspections": {
         "url": "https://arcgis.tampagov.net/arcgis/rest/services/OpenData/Planning/MapServer/30",
@@ -338,7 +341,7 @@ def summarize(rows: list[dict[str, object]]) -> list[dict[str, object]]:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--output-dir", default=str(Path(__file__).with_name("data")))
+    parser.add_argument("--output-dir", default=str(ROOT / "data"))
     args = parser.parse_args()
     root = Path(args.output_dir)
     raw_dir, processed_dir, docs_dir = root / "raw", root / "processed", root.parent / "docs"

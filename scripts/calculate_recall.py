@@ -9,7 +9,7 @@ import math
 from collections import defaultdict
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parent.parent
 
 
 def wilson(found: int, total: int) -> tuple[float, float]:

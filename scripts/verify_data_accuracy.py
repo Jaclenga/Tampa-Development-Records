@@ -21,7 +21,7 @@ from collections import Counter
 from pathlib import Path
 
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parent.parent
 RAW = ROOT / "data" / "raw"
 PROCESSED = ROOT / "data" / "processed"
 REPORT = ROOT / "docs" / "accuracy_verification_report.json"

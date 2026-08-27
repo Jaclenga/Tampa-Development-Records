@@ -110,46 +110,62 @@ Sources:
 
 If you just want to work with the data, these are the most useful places to start:
 
-- `bounded_census_records.csv` — one row for every record downloaded from the eight source layers.
-- `tampa_development_activity.csv` — consolidated activity-level view after strong cross-source matches are applied.
-- `source_universes.csv` — source layers, endpoints, download times, record counts, and coverage notes.
-- `source_records.csv` — retained source attributes and provenance.
-- `activity_locations.csv` — source geometries and representative coordinates.
-- `investment_amounts.csv` — estimated and reported actual amounts available for City capital projects.
-- `master_project_candidates.csv` — possible relationships between activities that have **not** been automatically merged.
+- `data/processed/bounded_census_records.csv` — one row for every record downloaded from the eight source layers.
+- `data/processed/tampa_development_activity.csv` — consolidated activity-level view after strong cross-source matches are applied.
+- `data/processed/source_universes.csv` — source layers, endpoints, download times, record counts, and coverage notes.
+- `data/processed/source_records.csv` — retained source attributes and provenance.
+- `data/processed/activity_locations.csv` — source geometries and representative coordinates.
+- `data/processed/investment_amounts.csv` — estimated and reported actual amounts available for City capital projects.
+- `data/processed/master_project_candidates.csv` — possible relationships between activities that have **not** been automatically merged.
 
 There are additional audit and validation tables for building matches, evidence status, manual review, and identifier consolidation.
+
+## Repository layout
+
+```text
+data/
+  raw/          Archived, privacy-minimized source snapshots
+  processed/    Analysis-ready tables and validation samples
+  templates/    Input templates for external validation
+docs/           Methodology, limitations, dictionaries, and reports
+scripts/        Build, import, validation, and analysis commands
+tests/          Automated tests for the validation workflow
+.cache/         Ignored local download cache (created as needed)
+dist/           Ignored release archives (created by the release build)
+```
+
+See [`scripts/README.md`](scripts/README.md) for a command-by-command index.
 
 ## Rebuilding the dataset
 
 Download the current City data and create a new release:
 
 ```bash
-python build_release.py
+python scripts/build_release.py
 ```
 
 Rebuild `v0.7.0` using the archived raw files:
 
 ```bash
-python build_release.py --use-existing-raw
+python scripts/build_release.py --use-existing-raw
 ```
 
 Run the validation tools separately:
 
 ```bash
-python validate_release.py
-python verify_data_accuracy.py
-python validation_study.py
+python scripts/validate_release.py
+python scripts/verify_data_accuracy.py
+python scripts/validation_study.py
 ```
 
 The build downloads every page returned by the configured ArcGIS services, preserves the source geometry, removes configured contact/source-user fields, creates the derived tables, validates keys and counts, and packages the release.
 
-`verify_data_accuracy.py` goes a step further by tracing census rows back to the archived GeoJSON and checking attributes, geometry, identifiers, dates, extracted amounts, counts, and hashes.
+`scripts/verify_data_accuracy.py` goes a step further by tracing census rows back to the archived GeoJSON and checking attributes, geometry, identifiers, dates, extracted amounts, counts, and hashes.
 
 Running it with `--live` also compares the archived record IDs with what the City publishes now:
 
 ```bash
-python verify_data_accuracy.py --live
+python scripts/verify_data_accuracy.py --live
 ```
 
 A difference in the live check doesn't necessarily mean the archived dataset is wrong. It can simply mean the City's public layer has changed since the snapshot was downloaded.
@@ -185,8 +201,8 @@ rate. After reviews are entered, development diagnostics and final holdout
 metrics are generated separately:
 
 ```bash
-python review_metrics.py --phase development
-python review_metrics.py --phase holdout
+python scripts/review_metrics.py --phase development
+python scripts/review_metrics.py --phase holdout
 ```
 
 The reports include claim-specific confidence intervals, confusion matrices,

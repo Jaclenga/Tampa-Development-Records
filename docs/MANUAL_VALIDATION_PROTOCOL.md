@@ -35,7 +35,7 @@ family that generated them.
 | **Total** | **100** | **50** | **150** | **50** |
 
 Each row records its stratum population, phase sample size, inclusion
-probability, and inverse-probability weight. `validation_study.py` creates the
+probability, and inverse-probability weight. `scripts/validation_study.py` creates the
 sample. Rebuilding with unchanged sampling context preserves populated reviewer
 fields; it refuses to remap them if the activity or context changed. `--force`
 explicitly discards reviews for a deliberately new versioned study.
@@ -53,7 +53,7 @@ explicitly discards reviews for a deliberately new versioned study.
 4. Preserve both original judgments when resolving disagreements. Resolution
    may be reported separately but must not replace agreement calculations.
 5. Do not combine development and holdout performance into a final accuracy
-   claim. `review_metrics.py` defaults to the holdout phase.
+   claim. `scripts/review_metrics.py` defaults to the holdout phase.
 
 ## Review preparation
 
@@ -159,7 +159,7 @@ when multi-building parcels or missing historical context prevent a decision.
 A row is `complete` only when all claim outcomes, physical-evidence category,
 reviewer ID, timestamps, evidence-source types, notes, AI-use disclosure, and
 manual confirmation are populated, and at least one evidence URL or stable
-document reference is recorded. `review_metrics.py` enforces these gates.
+document reference is recorded. `scripts/review_metrics.py` enforces these gates.
 
 Use ISO 8601 UTC timestamps. Do not put personal contact information in notes.
 
@@ -168,13 +168,13 @@ Use ISO 8601 UTC timestamps. Do not put personal contact information in notes.
 Run development diagnostics only while rules may still change:
 
 ```bash
-python review_metrics.py --phase development
+python scripts/review_metrics.py --phase development
 ```
 
 After rules are frozen and holdout review is complete, run final validation:
 
 ```bash
-python review_metrics.py --phase holdout
+python scripts/review_metrics.py --phase holdout
 ```
 
 The report keeps source identity, activity classification, cross-source

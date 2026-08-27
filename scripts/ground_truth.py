@@ -93,7 +93,7 @@ def metadata_for(field: str):
     if field == "merge_applied": valid = "yes; no"
     null = "Blank means unavailable or not yet reviewed; unknown is represented explicitly where required."
     return (FIELD_DEFINITIONS[field], "categorical text" if truth or reviewer else "text", "", null,
-            "reviewer-entered" if reviewer else "derived/source evidence", "See GROUND_TRUTH_METHODOLOGY.md and ground_truth.py.", valid,
+            "reviewer-entered" if reviewer else "derived/source evidence", "See GROUND_TRUTH_METHODOLOGY.md and scripts/ground_truth.py.", valid,
             "Do not interpret absence or unknown as no; this field is not proof beyond its cited evidence.")
 
 

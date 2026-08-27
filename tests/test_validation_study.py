@@ -3,8 +3,7 @@ from __future__ import annotations
 import unittest
 from collections import Counter
 
-import review_metrics
-import validation_study
+from scripts import review_metrics, validation_study
 
 
 class ValidationStudyTests(unittest.TestCase):
