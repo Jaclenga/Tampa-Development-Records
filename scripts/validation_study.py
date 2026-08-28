@@ -130,10 +130,12 @@ def read_csv(path: Path) -> list[dict[str, str]]:
 
 def write_csv(path: Path, rows: list[dict], columns: tuple[str, ...]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8", newline="") as handle:
+    temporary = path.with_name(f".{path.name}.tmp")
+    with temporary.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=columns, extrasaction="ignore", lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
+    temporary.replace(path)
 
 
 def random_rank(activity_id: str, phase: str, stratum: str, purpose: str) -> str:

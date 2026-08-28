@@ -1,6 +1,6 @@
 {
-  "dataset_version": "0.7.0",
-  "verified_at_utc": "2026-08-23T05:12:12+00:00",
+  "dataset_version": "0.8.0",
+  "verified_at_utc": "2026-08-28T06:24:54+00:00",
   "machine_verification_passed": true,
   "source_snapshot_fidelity": "verified",
   "ground_truth_status": "not_established",
@@ -11,12 +11,14 @@
     "all_raw_features_have_bounded_rows": true,
     "raw_to_processed_fields_match": true,
     "manifest_source_hashes_match": true,
+    "manifest_context_hashes_match": true,
     "source_universe_counts_reconcile": true,
     "activity_and_source_links_resolve": true,
     "activity_dates_are_iso_dates": true,
     "coordinates_are_finite_pairs": true,
     "configured_private_contact_fields_are_absent": true,
     "raw_snapshots_are_privacy_minimized": true,
+    "context_snapshots_are_privacy_minimized": true,
     "investment_amount_rows_match_activity_fields": true
   },
   "counts": {
@@ -41,11 +43,13 @@
   },
   "mismatch_counts": {},
   "manifest_hash_failures": [],
+  "context_manifest_hash_failures": [],
   "universe_count_errors": {},
   "invalid_dates": [],
   "invalid_coordinate_ids": [],
   "privacy_leak_record_keys": [],
   "raw_privacy_leak_fields": [],
+  "context_privacy_leak_fields": [],
   "broken_link_count": 0,
   "amount_error_ids": [],
   "live_source_comparison": {

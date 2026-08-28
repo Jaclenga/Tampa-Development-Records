@@ -19,10 +19,14 @@ Coverage passes when:
 3. Each layer's retained count matches its downloaded count.
 4. No downloaded feature is excluded.
 
-All four checks pass for version 0.7.0. Contact and source-user/editor fields
+All four checks pass for version 0.8.0. Contact and source-user/editor fields
 are removed from both the bundled GeoJSON and the processed properties, but no
 source rows are removed. `snapshot_metadata.json` records the suppression
 scope.
+
+The Budget Book and linked-parcel modules added in version 0.8.0 are context
+sources. They are separately dated and excluded from the eight-layer bounded-
+census feature count and completeness claim.
 
 ## Boundary of the dataset
 

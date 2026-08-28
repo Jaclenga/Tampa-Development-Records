@@ -2,16 +2,18 @@ cff-version: 1.2.0
 message: "If you use this dataset or its build pipeline, please cite it as follows."
 title: "Tampa Published Development Records: Source-Bounded Census"
 type: dataset
-version: 0.7.0
-date-released: 2026-08-22
+version: 0.8.0
+date-released: 2026-08-28
 authors:
   - family-names: Lenga
     given-names: Jack
 abstract: >-
   A reproducible census of every feature returned by eight named City of Tampa
   ArcGIS layers at a recorded snapshot time, with explicit source-universe
-  definitions and count reconciliation. Completeness applies to the published
-  layer snapshots, not to all permits, real-world development, or investment.
+  definitions and count reconciliation, plus separately scoped event, capital-
+  budget, and privacy-minimized linked-parcel context tables. Completeness
+  applies to the eight published core-layer snapshots, not to all permits,
+  real-world development, parcels, or investment.
 keywords:
   - Tampa
   - urban development

@@ -1,6 +1,6 @@
 {
   "title": "Tampa Published Development Records: Source-Bounded Census",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "edition": "source_bounded_city_arcgis_snapshot",
   "retrieved_at_utc": "2026-08-23T02:06:02+00:00",
   "geography": "City of Tampa-published layers, Florida",
@@ -14,6 +14,8 @@
     "data/processed/bounded_census_summary.csv",
     "data/processed/building_match_audit.csv",
     "data/processed/building_match_diagnostics.csv",
+    "data/processed/capital_budget_book_comparison.csv",
+    "data/processed/capital_budget_book_projects.csv",
     "data/processed/completeness_benchmarks.csv",
     "data/processed/development_events.csv",
     "data/processed/external_verification_pilot.csv",
@@ -25,15 +27,21 @@
     "data/processed/master_project_activity_links.csv",
     "data/processed/master_project_candidates.csv",
     "data/processed/master_projects.csv",
+    "data/processed/parcel_activity_links.csv",
     "data/processed/parcel_building_matches.csv",
+    "data/processed/parcel_context.csv",
+    "data/processed/public_finance_events.csv",
     "data/processed/source_records.csv",
     "data/processed/source_universes.csv",
     "data/processed/tampa_development_activity.csv",
     "data/processed/tampa_development_verification_queue.csv",
+    "docs/AI_USE_STATEMENT.md",
     "docs/BOUNDED_CENSUS_SCOPE.md",
+    "docs/CONTEXT_MODULES.md",
     "docs/GROUND_TRUTH_METHODOLOGY.md",
     "docs/KNOWN_LIMITATIONS.md",
     "docs/LICENSE_NOTES.md",
+    "docs/MANUAL_VALIDATION_GUIDE.md",
     "docs/MANUAL_VALIDATION_PROTOCOL.md",
     "docs/PUBLIC_RECORDS_REQUEST.md",
     "docs/VERIFICATION_REPORT.md",
@@ -45,7 +53,7 @@
     "docs/validation_report.json",
     "docs/validation_study_design.json"
   ],
-  "license_note": "The public archive contains City-hosted source snapshots only. Code is MIT-licensed; source data remain subject to City terms described in DATA_LICENSE.md.",
+  "license_note": "The public archive contains privacy-minimized City-hosted core and context source snapshots only. Code is MIT-licensed; source data remain subject to City terms described in DATA_LICENSE.md.",
   "bounded_census_claim": "All features returned by eight named City ArcGIS layers at the recorded snapshot retrieval time are included.",
   "bounded_census_nonclaim": "This is not a census of all Tampa permits, projects, construction, completions, or investment.",
   "manual_validation_status": "protocol_1.0.0_frozen_150_rows_pending_human_review",
@@ -73,8 +81,19 @@
     "final_inference_phase": "holdout"
   },
   "external_verification_status": "historical_12_row_pilot_retained_not_used_as_population_estimate",
+  "context_modules": {
+    "observed_at_utc": "2026-08-28T04:55:51+00:00",
+    "capital_budget_book_projects": 228,
+    "capital_budget_book_comparison": 471,
+    "public_finance_events": 312,
+    "parcel_context": 932,
+    "parcel_activity_links": 1054,
+    "scope": "separate contextual sources; excluded from the eight-layer bounded-census record count",
+    "capital_budget_book_endpoint": "https://arcgis.tampagov.net/arcgis/rest/services/CapitalProjects/CapitalProjectsBudgetBook/FeatureServer/0",
+    "linked_parcel_endpoint": "https://arcgis.tampagov.net/arcgis/rest/services/Parcels/TaxParcel/FeatureServer/0"
+  },
   "privacy_minimization": {
-    "scope": "raw GeoJSON and processed source properties",
+    "scope": "core raw GeoJSON, whitelisted context snapshots, and processed source properties",
     "suppressed_fields": [
       "created",
       "created_user",
@@ -124,6 +143,20 @@
     {
       "path": "data/raw/single_family_permits.geojson",
       "sha256": "6a0f2ad15253eb71fd76a343ad01538e5883d516f699be148b5bc167edba0a57"
+    }
+  ],
+  "bundled_context_files": [
+    {
+      "path": "data/context/raw/capital_budget_book.geojson",
+      "sha256": "f259aca52fc76f6a58028d707d66cd56372ef3315982eea9141a42c81b30b768"
+    },
+    {
+      "path": "data/context/raw/context_snapshot_metadata.json",
+      "sha256": "7294a99a193ab78c64d8fa1f67e691fb8debf0c1e5ac5c7fe7972d196033b088"
+    },
+    {
+      "path": "data/context/raw/linked_tax_parcels.geojson",
+      "sha256": "85eb23ea0a4893364bdaf2def273f260ff002079c133f11a740d8ba344979bd6"
     }
   ]
 }

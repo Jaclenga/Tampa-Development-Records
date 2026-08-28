@@ -1,0 +1,70 @@
+{
+  "observed_at_utc": "2026-08-28T04:55:51+00:00",
+  "scope_note": "Context sources are separate from the eight-layer bounded census.",
+  "privacy_note": "Only whitelisted analytical fields were retained in public snapshots; owner, mailing, contact, editor, legal-description, and free-text funding-comment fields were excluded before writing.",
+  "sources": {
+    "capital_budget_book": {
+      "endpoint": "https://arcgis.tampagov.net/arcgis/rest/services/CapitalProjects/CapitalProjectsBudgetBook/FeatureServer/0",
+      "record_count": 228,
+      "fields": [
+        "OBJECTID",
+        "GlobalID",
+        "projid",
+        "projname",
+        "projdesc",
+        "rationale",
+        "projtype",
+        "fiscalyr",
+        "fundsource",
+        "planstart",
+        "planend",
+        "estcost",
+        "funded",
+        "projphase",
+        "actstart",
+        "actend",
+        "actcost",
+        "status",
+        "docpath",
+        "EditDate",
+        "Neighborhood",
+        "Council",
+        "ContractNumber",
+        "ActivityStatus",
+        "ProjectSiteURL",
+        "DepPrjNum",
+        "BudgetBook",
+        "BudgetYear",
+        "CRA"
+      ],
+      "sha256": "f259aca52fc76f6a58028d707d66cd56372ef3315982eea9141a42c81b30b768"
+    },
+    "linked_tax_parcels": {
+      "endpoint": "https://arcgis.tampagov.net/arcgis/rest/services/Parcels/TaxParcel/FeatureServer/0",
+      "requested_folio_count": 936,
+      "record_count": 932,
+      "fields": [
+        "OBJECTID",
+        "FOLIO",
+        "PIN",
+        "TYPE",
+        "SITE_ADDR",
+        "SITE_CITY",
+        "SITE_ZIP",
+        "DOR_C",
+        "ACT",
+        "EFF",
+        "HEAT_AR",
+        "ACREAGE",
+        "JUST",
+        "BLDG",
+        "S_DATE",
+        "AMT",
+        "VI",
+        "STORIES",
+        "Shape__Area"
+      ],
+      "sha256": "85eb23ea0a4893364bdaf2def273f260ff002079c133f11a740d8ba344979bd6"
+    }
+  }
+}

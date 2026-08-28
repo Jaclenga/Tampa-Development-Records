@@ -2,7 +2,7 @@
 
 This repository collects development-related records published by the City of Tampa and puts them into a format that's easier to explore, map, and analyze.
 
-The current release (`v0.7.0`) contains **4,469 records from eight City GIS layers**, downloaded on August 23, 2026.
+The current release (`v0.8.0`) contains **4,469 records from eight City GIS layers**, downloaded on August 23, 2026. Separately dated capital-budget and linked-parcel context modules are excluded from that core count.
 
 This is **not a database of every development in Tampa**. It's a snapshot of the records available through these eight public layers at the time of download.
 
@@ -116,6 +116,12 @@ If you just want to work with the data, these are the most useful places to star
 - `data/processed/source_records.csv` — retained source attributes and provenance.
 - `data/processed/activity_locations.csv` — source geometries and representative coordinates.
 - `data/processed/investment_amounts.csv` — estimated and reported actual amounts available for City capital projects.
+- `data/processed/development_events.csv` — source observations and explicitly dated lifecycle events, with evidence strength and inference flags.
+- `data/processed/capital_budget_book_projects.csv` — separately scoped Budget Book capital-project context.
+- `data/processed/capital_budget_book_comparison.csv` — exact project-ID comparison between Budget Book and core capital sources.
+- `data/processed/public_finance_events.csv` — typed estimate, actual-cost, and funded-status observations; not an expenditure ledger.
+- `data/processed/parcel_activity_links.csv` — proposed activity-to-folio links pending human review.
+- `data/processed/parcel_context.csv` — privacy-minimized attributes for linked parcels only.
 - `data/processed/master_project_candidates.csv` — possible relationships between activities that have **not** been automatically merged.
 
 There are additional audit and validation tables for building matches, evidence status, manual review, and identifier consolidation.
@@ -125,6 +131,7 @@ There are additional audit and validation tables for building matches, evidence 
 ```text
 data/
   raw/          Archived, privacy-minimized source snapshots
+  context/raw/  Separately dated, whitelisted context snapshots
   processed/    Analysis-ready tables and validation samples
   templates/    Input templates for external validation
 docs/           Methodology, limitations, dictionaries, and reports
@@ -144,7 +151,7 @@ Download the current City data and create a new release:
 python scripts/build_release.py
 ```
 
-Rebuild `v0.7.0` using the archived raw files:
+Rebuild `v0.8.0` using the archived raw files:
 
 ```bash
 python scripts/build_release.py --use-existing-raw
@@ -180,10 +187,36 @@ They do not answer:
 
 That requires independent evidence.
 
+## Event and context model
+
+Version 0.8.0 makes `development_events.csv` the central longitudinal table.
+Every source feature contributes a `source_record_observed` event, and explicit
+source fields can contribute filing, hearing, issuance, planning, capital-phase,
+planned-date, and reported actual-date events. The table preserves
+`activity_id`, source-record lineage, the raw status, normalized stage,
+observation time, evidence strength, and whether an interpretation was inferred.
+
+The build does not create final-inspection, occupancy, or construction-
+completion events from permits, footprints, planned dates, or capital
+`Closeout` labels. Those event types remain reserved for stronger official
+lifecycle data.
+
+Two separately scoped context modules add:
+
+- a privacy-minimized Capital Projects Budget Book snapshot and exact-ID
+  comparison with core capital records; and
+- privacy-minimized parcel attributes for folios already exposed through
+  proposed City building-footprint matches.
+
+They do not increase the eight-layer census count. Owner, mailing, contact,
+editor, legal-description, and unnecessary free-text fields are excluded. See
+[Context modules](docs/CONTEXT_MODULES.md).
+
 ## Designed external-validation study
 
-Version 0.7.0 replaces the demonstration-style validation sample with a
-frozen, reproducible study design. Seed `20260823` draws 150 unique activities:
+Version 0.8.0 preserves the frozen validation design introduced in the previous
+release while extending the event and context tables. Seed `20260823` draws
+150 unique activities:
 50 permit records, 20 planning records, 10 historic-preservation records, 50
 capital projects, and 20 records involved in cross-source merges. One hundred
 rows form the development/debugging phase and 50 separately randomized rows
@@ -206,8 +239,19 @@ python scripts/review_metrics.py --phase holdout
 ```
 
 The reports include claim-specific confidence intervals, confusion matrices,
-percent agreement, and Cohen's kappa. See the frozen
-[manual validation protocol](docs/MANUAL_VALIDATION_PROTOCOL.md).
+percent agreement, and Cohen's kappa. Start with the
+[step-by-step manual validation guide](docs/MANUAL_VALIDATION_GUIDE.md); the
+[frozen protocol](docs/MANUAL_VALIDATION_PROTOCOL.md) controls definitions and
+statistical design.
+
+## AI use
+
+OpenAI ChatGPT and Codex assisted with code, tests, data profiling, debugging,
+and documentation. They did not create the City source records and are not
+called by the release build. AI-assisted review is not treated as independent
+ground-truth evidence; completed manual-validation rows require a human to open
+and confirm the cited evidence. See the full
+[AI use statement](docs/AI_USE_STATEMENT.md).
 
 ## What you can use it for
 
@@ -237,6 +281,9 @@ More detailed methodology is available in `docs/`:
 - [Source scope](docs/BOUNDED_CENSUS_SCOPE.md) — exactly what is and isn't included.
 - [Known limitations](docs/KNOWN_LIMITATIONS.md) — known weaknesses and interpretation issues.
 - [Evidence fields](docs/GROUND_TRUTH_METHODOLOGY.md) — how evidence fields are defined.
+- [Context modules](docs/CONTEXT_MODULES.md) — Budget Book and linked-parcel scope, privacy, and interpretation.
+- [AI use statement](docs/AI_USE_STATEMENT.md) — scope, limits, validation policy, and accountability for AI assistance.
+- [Manual validation guide](docs/MANUAL_VALIDATION_GUIDE.md) — exact review order, data-entry steps, and use of results.
 - [Manual validation protocol](docs/MANUAL_VALIDATION_PROTOCOL.md) — process for reviewing uncertain records.
 - [Data dictionary](docs/data_dictionary.csv) — field definitions.
 - [Validation results](docs/validation_report.json) — automated validation results.
@@ -244,6 +291,6 @@ More detailed methodology is available in `docs/`:
 
 ## Citation
 
-> Lenga, Jack. *Tampa Published Development Records: Source-Bounded Census*, version 0.7.0, 2026.
+> Lenga, Jack. *Tampa Published Development Records: Source-Bounded Census*, version 0.8.0, 2026.
 
 The code and original documentation are licensed under MIT. City records remain subject to their source terms; see [`DATA_LICENSE.md`](DATA_LICENSE.md).

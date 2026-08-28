@@ -9,12 +9,17 @@ standard library.
 - `build_tampa_development.py` downloads and normalizes the core City layers.
 - `download_hcpa.py` downloads optional HCPA source archives.
 - `import_accela_export.py` imports an official Accela CSV export when one is
-  available.
+  available and stages only explicitly delivered lifecycle events.
+- `context_modules.py` downloads privacy-whitelisted Budget Book and linked-
+  parcel context snapshots, then builds comparison, finance-event, parcel-
+  context, and parcel-link tables. Run with `--use-existing-raw` to avoid a
+  live refresh.
 
 ## Transformation
 
 - `bounded_census.py` creates source-universe and coverage tables.
-- `ground_truth.py` creates evidence and entity-resolution tables.
+- `ground_truth.py` creates evidence, entity-resolution, and source-observation
+  event tables without inferring completion.
 
 ## Validation and analysis
 

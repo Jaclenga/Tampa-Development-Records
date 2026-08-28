@@ -34,3 +34,16 @@ Suggested request text:
 Record the request number, fulfillment date, correspondence, file checksums,
 and any excluded fields or tables. Review delivered files for personal contact
 information before adding them to the repository.
+
+Stage a delivered machine-readable export with:
+
+```bash
+python scripts/import_accela_export.py path/to/export.csv
+```
+
+The importer maps explicit record, relationship, inspection, final, TCO, and
+CO fields when present and writes a separate lifecycle-event staging table. It
+does not infer missing events or completion from a general status field. Review
+the field mapping and every lifecycle category before promoting staged rows
+into `development_events.csv`. The expected long-format fields are also shown
+in `data/templates/official_lifecycle_events_template.csv`.

@@ -1,5 +1,5 @@
 {
-  "release": "0.7.0",
+  "release": "0.8.0",
   "edition": "source_bounded_city_arcgis_snapshot",
   "retrieved_at_utc": "2026-08-23T02:06:02+00:00",
   "raw_feature_counts": {
@@ -52,6 +52,17 @@
     },
     "status": "pending_human_review"
   },
+  "context_modules": {
+    "observed_at_utc": "2026-08-28T04:55:51+00:00",
+    "row_counts": {
+      "capital_budget_book_projects.csv": 228,
+      "capital_budget_book_comparison.csv": 471,
+      "public_finance_events.csv": 312,
+      "parcel_context.csv": 932,
+      "parcel_activity_links.csv": 1054
+    },
+    "included_in_bounded_census_count": false
+  },
   "publication_assessment": {
     "official_source_provenance": "pass",
     "identifier_uniqueness": "pass",
@@ -69,6 +80,9 @@
     "CIP viewer data covers active projects for some City departments rather than the complete adopted capital program.",
     "Blank numeric fields mean unknown, not zero.",
     "The 12-row external verification pilot is purposive and is not a population accuracy estimate.",
-    "The frozen 150-row study reports no accuracy estimate until human review and the phase-specific completion gates are satisfied."
+    "The frozen 150-row study reports no accuracy estimate until human review and the phase-specific completion gates are satisfied.",
+    "Budget Book and linked-parcel context sources are separately dated and excluded from the eight-layer bounded-census count.",
+    "Budget Book amounts are reported levels, not a budget-amendment or expenditure history.",
+    "Parcel links remain proposed analytical links pending human review and are not legal parcel determinations."
   ]
 }

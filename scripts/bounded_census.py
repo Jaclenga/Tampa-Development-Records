@@ -23,10 +23,12 @@ SOURCE_LABELS = {
 
 def write_csv(path: Path, rows: list[dict], fields: list[str]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8", newline="") as handle:
+    temporary = path.with_name(f".{path.name}.tmp")
+    with temporary.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=fields, extrasaction="ignore")
         writer.writeheader()
         writer.writerows(rows)
+    temporary.replace(path)
 
 
 def build(processed: Path, raw: Path, source_rows: list[dict], locations: list[dict], counts: dict[str, int]) -> dict:

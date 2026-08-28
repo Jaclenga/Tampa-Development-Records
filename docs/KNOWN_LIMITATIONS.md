@@ -32,3 +32,19 @@
 14. Exact normalized project names are used to merge matching capital records
     across distinct City layers. Title variants can still remain fragmented,
     while unusually reused exact titles could require manual separation.
+15. The Capital Projects Budget Book module is a separately dated snapshot,
+    not a complete history of appropriations or budget amendments. Its amount
+    fields are reported levels, not proof of expenditures or final costs.
+16. Budget Book-to-core capital matching uses exact City project identifiers.
+    This avoids name-based false matches but can leave related records
+    unmatched when the City changes or omits an identifier.
+17. The parcel context module covers only folios exposed through proposed City
+    building-footprint matches. It is not a citywide parcel census, and every
+    activity-to-parcel link remains pending human review.
+18. Parcel values, sale records, years built, and remodel years are contextual
+    assessment fields. They do not prove that a development activity started
+    or finished and cannot be summed as development investment.
+19. The current event table reconstructs only events and observations exposed
+    by the archived source fields. Inspection, permit-closure, TCO, CO, and
+    final-completion coverage remains unavailable until stronger official
+    lifecycle data are obtained.

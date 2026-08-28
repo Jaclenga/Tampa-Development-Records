@@ -23,6 +23,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 RAW = ROOT / "data" / "raw"
+CONTEXT_RAW = ROOT / "data" / "context" / "raw"
 PROCESSED = ROOT / "data" / "processed"
 REPORT = ROOT / "docs" / "accuracy_verification_report.json"
 
@@ -219,6 +220,14 @@ def main() -> None:
         actual = sha256_file(path) if path.exists() else None
         if actual != item["sha256"]:
             manifest_hash_failures.append({"path": item["path"], "expected": item["sha256"], "actual": actual})
+    context_manifest_hash_failures = []
+    for item in manifest.get("bundled_context_files", []):
+        path = ROOT / item["path"]
+        actual = sha256_file(path) if path.exists() else None
+        if actual != item["sha256"]:
+            context_manifest_hash_failures.append({
+                "path": item["path"], "expected": item["sha256"], "actual": actual,
+            })
 
     universe_by_source = {row["source_name"]: row for row in universes}
     universe_count_errors = {
@@ -255,6 +264,18 @@ def main() -> None:
             for key in (feature.get("properties") or {}):
                 if key.lower() in BLOCKED_FIELDS:
                     raw_privacy_leaks.append(f"{source}:{key}")
+    context_blocked_fields = {
+        "owner", "addr_1", "addr_2", "city", "state", "zip", "country",
+        "legal1", "legal2", "legal3", "legal4", "dba", "pocname", "pocphone",
+        "pocemail", "creator", "editor", "created_user", "last_edited_user", "fundcomm",
+    }
+    context_privacy_leaks = []
+    for path in CONTEXT_RAW.glob("*.geojson"):
+        collection = json.loads(path.read_text(encoding="utf-8"))
+        for feature in collection.get("features", []):
+            for key in (feature.get("properties") or {}):
+                if key.lower() in context_blocked_fields:
+                    context_privacy_leaks.append(f"{path.name}:{key}")
     broken_links = [row for row in links if row["activity_id"] not in activities_by_id or row["source_record_key"] not in source_by_key]
 
     amount_errors = []
@@ -272,12 +293,14 @@ def main() -> None:
         "all_raw_features_have_bounded_rows": raw_keys == set(bounded_by_key),
         "raw_to_processed_fields_match": not mismatches,
         "manifest_source_hashes_match": not manifest_hash_failures,
+        "manifest_context_hashes_match": not context_manifest_hash_failures,
         "source_universe_counts_reconcile": not universe_count_errors,
         "activity_and_source_links_resolve": not broken_links and len(links) == len(sources),
         "activity_dates_are_iso_dates": not invalid_dates,
         "coordinates_are_finite_pairs": not invalid_coordinates,
         "configured_private_contact_fields_are_absent": not privacy_leaks,
         "raw_snapshots_are_privacy_minimized": not raw_privacy_leaks,
+        "context_snapshots_are_privacy_minimized": not context_privacy_leaks,
         "investment_amount_rows_match_activity_fields": not amount_errors,
     }
 
@@ -316,11 +339,13 @@ def main() -> None:
         "raw_feature_counts": dict(raw_counts),
         "mismatch_counts": dict(mismatches),
         "manifest_hash_failures": manifest_hash_failures,
+        "context_manifest_hash_failures": context_manifest_hash_failures,
         "universe_count_errors": universe_count_errors,
         "invalid_dates": invalid_dates[:100],
         "invalid_coordinate_ids": invalid_coordinates[:100],
         "privacy_leak_record_keys": privacy_leaks[:100],
         "raw_privacy_leak_fields": raw_privacy_leaks[:100],
+        "context_privacy_leak_fields": context_privacy_leaks[:100],
         "broken_link_count": len(broken_links),
         "amount_error_ids": amount_errors[:100],
         "live_source_comparison": live,

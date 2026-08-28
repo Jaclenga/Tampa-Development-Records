@@ -17,6 +17,7 @@ import hashlib
 import importlib.util
 import json
 import math
+import os
 import re
 import struct
 import subprocess
@@ -35,7 +36,7 @@ RAW = DATA / "raw"
 PROCESSED = DATA / "processed"
 DOCS = ROOT / "docs"
 CACHE = ROOT / ".cache" / "source_cache"
-RELEASE_VERSION = "0.7.0"
+RELEASE_VERSION = "0.8.0"
 DATASET_TITLE = "Tampa Published Development Records: Source-Bounded Census"
 PUBLIC_ARCHIVE = ROOT / "dist" / f"tampa_source_bounded_census_v{RELEASE_VERSION}.zip"
 
@@ -231,13 +232,17 @@ def write_csv(
     path.parent.mkdir(parents=True, exist_ok=True)
     if columns is None:
         columns = list(rows[0]) if rows else []
-    with path.open("w", newline="", encoding="utf-8") as handle:
+    temporary = path.with_name(f".{path.name}.tmp")
+    with temporary.open("w", newline="", encoding="utf-8") as handle:
         options = {"fieldnames": columns, "extrasaction": "ignore"}
         if lineterminator is not None:
             options["lineterminator"] = lineterminator
         writer = csv.DictWriter(handle, **options)
         writer.writeheader()
         writer.writerows(rows)
+        handle.flush()
+        os.fsync(handle.fileno())
+    temporary.replace(path)
 
 
 def validation_review_status() -> dict:
@@ -273,6 +278,7 @@ def validation_review_status() -> dict:
 
 
 def read_csv_path(path: Path) -> list[dict[str, str]]:
+    csv.field_size_limit(sys.maxsize)
     with path.open(encoding="utf-8", newline="") as handle:
         return list(csv.DictReader(handle))
 
@@ -817,7 +823,20 @@ FIELD_METADATA = {
 }
 
 
-def metadata_for(field: str) -> tuple[str, str, str, str, str, str, str, str]:
+def metadata_for(
+    field: str, table: str | None = None,
+) -> tuple[str, str, str, str, str, str, str, str]:
+    if table in {
+        "capital_budget_book_projects.csv", "capital_budget_book_comparison.csv",
+        "public_finance_events.csv", "parcel_context.csv", "parcel_activity_links.csv",
+    }:
+        try:
+            from . import context_modules
+        except ImportError:  # Support direct execution from the scripts directory.
+            import context_modules
+        context_metadata = context_modules.metadata_for(field)
+        if context_metadata:
+            return context_metadata
     if field in FIELD_METADATA:
         return FIELD_METADATA[field]
     try:
@@ -834,6 +853,13 @@ def metadata_for(field: str) -> tuple[str, str, str, str, str, str, str, str]:
     ground_truth_metadata = ground_truth.metadata_for(field)
     if ground_truth_metadata:
         return ground_truth_metadata
+    try:
+        from . import context_modules
+    except ImportError:  # Support direct execution from the scripts directory.
+        import context_modules
+    context_metadata = context_modules.metadata_for(field)
+    if context_metadata:
+        return context_metadata
     if field.startswith("audit_"):
         return ("Identifier or metadata for the manual-validation audit row.", "text", "", "Blank until human review where applicable.", "audit workflow", "See MANUAL_VALIDATION_PROTOCOL.md.", "Protocol-defined.", "Not a validation result until completed by a reviewer.")
     if field == "protocol_version":
@@ -894,7 +920,9 @@ def write_data_dictionary() -> None:
         with path.open(encoding="utf-8", newline="") as handle:
             fields = next(csv.reader(handle))
         for field in fields:
-            definition, dtype, unit, null_meaning, origin, derivation, valid_values, warning = metadata_for(field)
+            definition, dtype, unit, null_meaning, origin, derivation, valid_values, warning = metadata_for(
+                field, path.name
+            )
             dictionary.append({
                 "table": path.name, "field": field, "definition": definition, "data_type": dtype,
                 "unit": unit, "nullable": "no" if "Never blank" in null_meaning else "yes",
@@ -932,6 +960,15 @@ def write_documentation(counts: dict[str, int], activities: list[dict], matches:
     with (PROCESSED / "activity_id_aliases.csv").open(encoding="utf-8", newline="") as handle:
         alias_rows = list(csv.DictReader(handle))
     review_status = validation_review_status()
+    context_metadata_path = DATA / "context" / "raw" / "context_snapshot_metadata.json"
+    context_metadata = json.loads(context_metadata_path.read_text(encoding="utf-8"))
+    context_counts = {
+        name: sum(1 for _ in read_csv_path(PROCESSED / name))
+        for name in (
+            "capital_budget_book_projects.csv", "capital_budget_book_comparison.csv",
+            "public_finance_events.csv", "parcel_context.csv", "parcel_activity_links.csv",
+        )
+    }
     qa = {
         "release": RELEASE_VERSION, "edition": "source_bounded_city_arcgis_snapshot", "retrieved_at_utc": retrieved, "raw_feature_counts": counts,
         "raw_feature_total": sum(counts.values()), "central_activity_rows": len(activities),
@@ -947,6 +984,11 @@ def write_documentation(counts: dict[str, int], activities: list[dict], matches:
         "external_pilot_supported_claims": sum(row["evidence_result"] == "supported" for row in pilot_rows),
         "external_pilot_physical_realization_yes": sum(row["physical_realization_verified"] == "yes" for row in pilot_rows),
         "validation_study": review_status,
+        "context_modules": {
+            "observed_at_utc": context_metadata["observed_at_utc"],
+            "row_counts": context_counts,
+            "included_in_bounded_census_count": False,
+        },
         "publication_assessment": {
             "official_source_provenance": "pass", "identifier_uniqueness": "pass",
             "multi_location_preservation": "pass", "complete_permit_census": "fail",
@@ -961,6 +1003,9 @@ def write_documentation(counts: dict[str, int], activities: list[dict], matches:
             "Blank numeric fields mean unknown, not zero.",
             "The 12-row external verification pilot is purposive and is not a population accuracy estimate.",
             "The frozen 150-row study reports no accuracy estimate until human review and the phase-specific completion gates are satisfied.",
+            "Budget Book and linked-parcel context sources are separately dated and excluded from the eight-layer bounded-census count.",
+            "Budget Book amounts are reported levels, not a budget-amendment or expenditure history.",
+            "Parcel links remain proposed analytical links pending human review and are not legal parcel determinations.",
         ],
     }
     (DOCS / "qa_report.json").write_text(json.dumps(qa, indent=2), encoding="utf-8")
@@ -969,35 +1014,44 @@ def write_documentation(counts: dict[str, int], activities: list[dict], matches:
 
 def create_public_archive() -> None:
     PUBLIC_ARCHIVE.parent.mkdir(parents=True, exist_ok=True)
-    PUBLIC_ARCHIVE.unlink(missing_ok=True)
+    temporary_archive = PUBLIC_ARCHIVE.with_name(f".{PUBLIC_ARCHIVE.name}.tmp")
+    temporary_archive.unlink(missing_ok=True)
     files = [
-        ROOT / ".gitignore", ROOT / "README.md", ROOT / "LICENSE", ROOT / "DATA_LICENSE.md",
+        ROOT / ".gitignore", ROOT / "pytest.ini", ROOT / "README.md", ROOT / "LICENSE", ROOT / "DATA_LICENSE.md",
         ROOT / "CITATION.cff", SCRIPTS / "README.md", *sorted(SCRIPTS.glob("*.py")),
         ROOT / "manifest.json", *sorted((ROOT / "tests").glob("*.py")),
         *sorted((ROOT / ".github").rglob("*")), *sorted((DATA / "templates").glob("*.csv")),
         RAW / "snapshot_metadata.json",
-        *sorted(RAW.glob("*.geojson")), *sorted(PROCESSED.glob("*.csv")), *sorted(DOCS.glob("*")),
+        *sorted(RAW.glob("*.geojson")),
+        *sorted((DATA / "context" / "raw").glob("*")),
+        *sorted(PROCESSED.glob("*.csv")), *sorted(DOCS.glob("*")),
     ]
-    with zipfile.ZipFile(PUBLIC_ARCHIVE, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as bundle:
+    with zipfile.ZipFile(temporary_archive, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as bundle:
         for path in files:
             if path.is_file():
                 relative = Path("tampa_development_dataset") / path.relative_to(ROOT)
                 bundle.write(path, relative.as_posix())
-    with zipfile.ZipFile(PUBLIC_ARCHIVE) as bundle:
+    with zipfile.ZipFile(temporary_archive) as bundle:
         names = bundle.namelist()
+        if bundle.testzip() is not None:
+            raise RuntimeError("Temporary public archive failed ZIP integrity testing")
         forbidden = [name for name in names if "source_cache/" in name.lower() or name.lower().endswith(".dbf")]
         if forbidden:
             raise RuntimeError(f"Public archive contains forbidden HCPA/cache files: {forbidden}")
-        required_study_files = (
+        required_release_files = (
+            "pytest.ini",
             "data/processed/manual_validation_sample.csv",
             "data/processed/manual_validation_development_sample.csv",
             "data/processed/manual_validation_holdout_sample.csv",
             "data/processed/manual_validation_second_review.csv",
             "scripts/validation_study.py",
         )
-        missing_study_files = [item for item in required_study_files if not any(name.endswith(item) for name in names)]
-        if missing_study_files:
-            raise RuntimeError(f"Public archive is missing validation-study files: {missing_study_files}")
+        missing_release_files = [
+            item for item in required_release_files if not any(name.endswith(item) for name in names)
+        ]
+        if missing_release_files:
+            raise RuntimeError(f"Public archive is missing required files: {missing_release_files}")
+    temporary_archive.replace(PUBLIC_ARCHIVE)
 
 
 def main() -> None:
@@ -1069,6 +1123,12 @@ def main() -> None:
     write_csv(PROCESSED / "tampa_development_verification_queue.csv", queue, list(activities[0]))
     write_csv(PROCESSED / "source_records.csv", source_rows)
     write_csv(PROCESSED / "activity_locations.csv", locations)
+    written_location_count = len(read_csv_path(PROCESSED / "activity_locations.csv"))
+    if written_location_count != len(locations):
+        raise RuntimeError(
+            "Atomic location-table write failed: "
+            f"expected {len(locations)} rows, read back {written_location_count}"
+        )
     write_csv(PROCESSED / "activity_source_links.csv", [{"activity_id": r["activity_id"], "source_record_key": r["source_record_key"], "source_name": r["source_name"]} for r in source_rows])
     write_csv(PROCESSED / "activity_id_aliases.csv", aliases, ["old_activity_id", "new_activity_id", "cluster_basis", "cluster_key"])
     write_csv(PROCESSED / "parcel_building_matches.csv", matches)
@@ -1077,7 +1137,18 @@ def main() -> None:
         from . import ground_truth
     except ImportError:  # Support direct execution from the scripts directory.
         import ground_truth
-    ground_truth.build_all(PROCESSED, activities, matches, sample)
+    ground_truth.build_all(PROCESSED, activities, matches, sample, source_rows)
+    try:
+        from . import context_modules
+    except ImportError:  # Support direct execution from the scripts directory.
+        import context_modules
+    if not args.use_existing_raw:
+        context_observed = dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat()
+        context_modules.refresh_context_sources(matches, context_observed)
+    context_summary = context_modules.build(
+        activities, matches, source_rows,
+        read_csv_path(PROCESSED / "master_project_activity_links.csv"),
+    )
     try:
         from . import bounded_census
     except ImportError:  # Support direct execution from the scripts directory.
@@ -1107,6 +1178,10 @@ def main() -> None:
             PROCESSED / "activity_truth_status.csv", PROCESSED / "master_projects.csv",
             PROCESSED / "master_project_activity_links.csv", PROCESSED / "master_project_candidates.csv",
             PROCESSED / "development_events.csv", PROCESSED / "investment_amounts.csv",
+            PROCESSED / "capital_budget_book_projects.csv",
+            PROCESSED / "capital_budget_book_comparison.csv",
+            PROCESSED / "public_finance_events.csv",
+            PROCESSED / "parcel_context.csv", PROCESSED / "parcel_activity_links.csv",
             PROCESSED / "building_match_audit.csv", PROCESSED / "building_match_diagnostics.csv",
             PROCESSED / "bounded_census_records.csv", PROCESSED / "source_universes.csv",
             PROCESSED / "bounded_census_summary.csv",
@@ -1115,10 +1190,13 @@ def main() -> None:
             DOCS / "accuracy_verification_report.json",
             DOCS / "validation_study_design.json",
             DOCS / "review_metrics_development.json", DOCS / "review_metrics_holdout.json",
-            DOCS / "LICENSE_NOTES.md", DOCS / "PUBLIC_RECORDS_REQUEST.md", DOCS / "MANUAL_VALIDATION_PROTOCOL.md",
+            DOCS / "LICENSE_NOTES.md", DOCS / "PUBLIC_RECORDS_REQUEST.md",
+            DOCS / "AI_USE_STATEMENT.md",
+            DOCS / "MANUAL_VALIDATION_GUIDE.md", DOCS / "MANUAL_VALIDATION_PROTOCOL.md",
             DOCS / "VERIFICATION_REPORT.md", DOCS / "GROUND_TRUTH_METHODOLOGY.md", DOCS / "BOUNDED_CENSUS_SCOPE.md",
+            DOCS / "CONTEXT_MODULES.md",
         ]),
-        "license_note": "The public archive contains City-hosted source snapshots only. Code is MIT-licensed; source data remain subject to City terms described in DATA_LICENSE.md.",
+        "license_note": "The public archive contains privacy-minimized City-hosted core and context source snapshots only. Code is MIT-licensed; source data remain subject to City terms described in DATA_LICENSE.md.",
         "bounded_census_claim": "All features returned by eight named City ArcGIS layers at the recorded snapshot retrieval time are included.",
         "bounded_census_nonclaim": "This is not a census of all Tampa permits, projects, construction, completions, or investment.",
         "manual_validation_status": f"protocol_1.0.0_frozen_150_rows_{review_status['status']}",
@@ -1127,14 +1205,24 @@ def main() -> None:
             "independent_second_reviews": 50, "final_inference_phase": "holdout",
         },
         "external_verification_status": "historical_12_row_pilot_retained_not_used_as_population_estimate",
+        "context_modules": {
+            **context_summary,
+            "scope": "separate contextual sources; excluded from the eight-layer bounded-census record count",
+            "capital_budget_book_endpoint": context_modules.BUDGET_BOOK_ENDPOINT,
+            "linked_parcel_endpoint": context_modules.PARCEL_ENDPOINT,
+        },
         "privacy_minimization": {
-            "scope": "raw GeoJSON and processed source properties",
+            "scope": "core raw GeoJSON, whitelisted context snapshots, and processed source properties",
             "suppressed_fields": sorted(PRIVACY_BLOCKED_FIELDS),
             "note": "Contact and source-user fields are removed before public packaging.",
         },
         "bundled_source_files": [
             {"path": path.relative_to(ROOT).as_posix(), "sha256": file_sha256(path)}
             for path in sorted(RAW.glob("*.geojson"))
+        ],
+        "bundled_context_files": [
+            {"path": path.relative_to(ROOT).as_posix(), "sha256": file_sha256(path)}
+            for path in sorted((DATA / "context" / "raw").glob("*")) if path.is_file()
         ],
     }
     if args.include_hcpa:

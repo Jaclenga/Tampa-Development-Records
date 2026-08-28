@@ -1,0 +1,472 @@
+city_project_id,budget_book_context_record_ids,budget_book_record_count,activity_id,master_project_id,comparison_status,match_method,budget_book_status,core_status,budget_book_project_name,core_project_name,observed_at_utc
+0,,0,tpa-5ab0e5aba72288,mp-58f1e03548254768,core_capital_only,no_exact_identifier_match,,Closeout,,O'Brien St - Segment 1 (Cypress St. to Spruce St.),2026-08-28T04:55:51+00:00
+0000000,,0,tpa-574607026a01c5;tpa-5a1b25a7e88ea2;tpa-5b2d9339506c9f;tpa-8f56c0e5fdf2b4;tpa-97eda886278a0b,mp-0bedff311df10a42;mp-1dcdc8c5eb46da59;mp-64e4aa1fedc4acb2;mp-805eb4815b13ce8e;mp-bfd693e778622912,core_capital_only,no_exact_identifier_match,,,,,2026-08-28T04:55:51+00:00
+0000006,bbp-bb76fb6a0b337d3a,1,,,budget_book_only,no_exact_identifier_match,Cancelled,,Spruce St Corridor (Hesperides St to Himes Ave),,2026-08-28T04:55:51+00:00
+0000082,bbp-07f63d61356cd208,1,,,budget_book_only,no_exact_identifier_match,,,Laurel Street Bridge Rehabilitation,,2026-08-28T04:55:51+00:00
+0000088,bbp-46f4c3022c95d617,1,,,budget_book_only,no_exact_identifier_match,Closeout,,West Shore Boulevard and Gandy Boulevard,,2026-08-28T04:55:51+00:00
+0000289,bbp-5fec847ea4de8db2,1,,,budget_book_only,no_exact_identifier_match,,,North O'Brien Street Improvements,,2026-08-28T04:55:51+00:00
+0000294,bbp-6e1a0dd956de099f,1,,,budget_book_only,no_exact_identifier_match,,,Kennedy Boulevard & Dale Mabry Highway Intersection Improvements,,2026-08-28T04:55:51+00:00
+0000374,bbp-2a6557bc0e19f33a,1,,,budget_book_only,no_exact_identifier_match,Closeout,,Louisiana Avenue Pumping Station Rehabilitation,,2026-08-28T04:55:51+00:00
+1000145,bbp-b92c60dd1f49c517,1,,,budget_book_only,no_exact_identifier_match,Closeout,,McKay Bay Transfer Station Renovation/Expansion Phase I,,2026-08-28T04:55:51+00:00
+1000147,bbp-4078d431257e502e,1,,,budget_book_only,no_exact_identifier_match,,,Wayne C. Papy Recreation Center Renovations,,2026-08-28T04:55:51+00:00
+1000151,bbp-9ae9e9f87bae955f,1,,,budget_book_only,no_exact_identifier_match,Closeout,,43rd Street Outfall Regional Drainage Improvements,,2026-08-28T04:55:51+00:00
+1000178,bbp-08dd0f280183b639,1,,,budget_book_only,no_exact_identifier_match,,,"Upper Peninsula Flooding Relief, Phase II - Vasconia Outfall",,2026-08-28T04:55:51+00:00
+1000248,bbp-2bb21d73e253a87c,1,tpa-71346c0bba0c2c,mp-2823ebae0582ecf1,matched_core_activity,exact_city_project_id,90% Design Completion,90% Design Completion,Brorein St Bridge (#105501) Phase 1 Structural Rehabilitation,Brorein St Bridge (#105501) Phase 1 Structural Rehabilitation,2026-08-28T04:55:51+00:00
+1000254,bbp-e7268f5dc633592b,1,,,budget_book_only,no_exact_identifier_match,Closeout,,"Green Spine Cycle Track, Segment 2B",,2026-08-28T04:55:51+00:00
+1000260,bbp-45f5e05c55a4a3b1,1,,,budget_book_only,no_exact_identifier_match,,,Complete Streets - Willow Avenue,,2026-08-28T04:55:51+00:00
+1000386,bbp-4a2e02fe88667221,1,,,budget_book_only,no_exact_identifier_match,,,Watrous Ditch Rehabilitation,,2026-08-28T04:55:51+00:00
+1000433,bbp-8c4d66def3b4841d,1,,,budget_book_only,no_exact_identifier_match,Closeout,,University Pumping Station Replacement,,2026-08-28T04:55:51+00:00
+1000446,bbp-107732c6d6e12ed3,1,tpa-2ed8da642d70ff,mp-4ca9962761cd97bd,matched_core_activity,exact_city_project_id,90% Design Completion,90% Design Completion,Cass St Bridge (#105502) Electrical/Mechanical Rehabilitation,Cass St Bridge (#105502) Electrical/Mechanical Rehabilitation,2026-08-28T04:55:51+00:00
+1000490,bbp-b1fd81afaea80f62,1,,,budget_book_only,no_exact_identifier_match,,,Solid Waste CNG Station,,2026-08-28T04:55:51+00:00
+1000498,bbp-2b972b2d6dc39607,1,,,budget_book_only,no_exact_identifier_match,,,"Cass Street/North A Street CIAC, Phase 4",,2026-08-28T04:55:51+00:00
+1000575,bbp-534ae4c4d24ea0f0,1,,,budget_book_only,no_exact_identifier_match,,,Streetcar Infrastructure,,2026-08-28T04:55:51+00:00
+1000577,bbp-00f980752875d8cc,1,,,budget_book_only,no_exact_identifier_match,,,"Bayshore Boulevard Enhancements, Phase III",,2026-08-28T04:55:51+00:00
+1000719,bbp-057acf210b929939,1,,,budget_book_only,no_exact_identifier_match,,,Fleet Maintenance Facility Compressed Natural Gas (CNG) Retrofit,,2026-08-28T04:55:51+00:00
+1000738,bbp-46a2a8b068c9bbfd,1,,,budget_book_only,no_exact_identifier_match,Closeout,,San Carlos Street Pumping Station Rehabilitation,,2026-08-28T04:55:51+00:00
+1000749,bbp-17f4fb006c7568b9,1,,,budget_book_only,no_exact_identifier_match,,,Howard Avenue Flooding Relief Swann to Morrison,,2026-08-28T04:55:51+00:00
+1000750,bbp-40a59fc9440aa947,1,tpa-d05a3db30262e4,mp-f2694c4bb1744eab,matched_core_activity,exact_city_project_id,Closeout,Construction in Progress,Lower Peninsula Watershed Plan - Southeast Region,Lower Peninsula Watershed Plan - Southeast Region,2026-08-28T04:55:51+00:00
+1000751,,0,tpa-040b3c67421719;tpa-637a549e7d9e93,mp-28de73d4b657c446;mp-98293f21bb9d90e4,core_capital_only,no_exact_identifier_match,,,,,2026-08-28T04:55:51+00:00
+1000753,bbp-023cd1ddcff5766c,1,,,budget_book_only,no_exact_identifier_match,,,Robles Park Pumping Station Replacement,,2026-08-28T04:55:51+00:00
+1000769,bbp-5b29ad8a699dfe74,1,,,budget_book_only,no_exact_identifier_match,,,Adamo & 50th Street Red Light Camera,,2026-08-28T04:55:51+00:00
+1000770,bbp-3e80c79dbabfe6e9,1,,,budget_book_only,no_exact_identifier_match,,,New Tampa Congestion Mitigation,,2026-08-28T04:55:51+00:00
+1000773,bbp-c41d91f27ff2cc4c,1,,,budget_book_only,no_exact_identifier_match,,,Southeast Seminole Heights Flood Relief,,2026-08-28T04:55:51+00:00
+1000786,bbp-4a237960f59e70ee,1,,,budget_book_only,no_exact_identifier_match,Closeout,,Forest Hills Park Renovation Improvements,,2026-08-28T04:55:51+00:00
+1000931,bbp-5cd86ac5f4a39ee8,1,,,budget_book_only,no_exact_identifier_match,,,Hyde Park/Plant Avenue Safety,,2026-08-28T04:55:51+00:00
+1000948,bbp-7ad0792a519b089c,1,,,budget_book_only,no_exact_identifier_match,,,Solid Waste Truck Wash Facility Renovations,,2026-08-28T04:55:51+00:00
+1000951,bbp-4026c450076d5268,1,,,budget_book_only,no_exact_identifier_match,Closeout,,Hanna Avenue Pumping Station Odor Control Replacement,,2026-08-28T04:55:51+00:00
+1000960,bbp-548a8c2d637c3988,1,,,budget_book_only,no_exact_identifier_match,Closeout,,"Westshore Water Main Replacement, Phase 2",,2026-08-28T04:55:51+00:00
+1000962,bbp-49997fac3c180c4b,1,,,budget_book_only,no_exact_identifier_match,Closeout,,Fair Oaks Water Main Replacement,,2026-08-28T04:55:51+00:00
+1000969,bbp-d0a7b1d2553eb645,1,,,budget_book_only,no_exact_identifier_match,,,Rogers Park Golf Course,,2026-08-28T04:55:51+00:00
+1000970,bbp-cb28154c6ca926a9,1,,,budget_book_only,no_exact_identifier_match,,,Rocky Point Golf Course,,2026-08-28T04:55:51+00:00
+1000971,bbp-80b54865467c4049,1,,,budget_book_only,no_exact_identifier_match,,,Babe Zaharias Golf Course,,2026-08-28T04:55:51+00:00
+1000978,bbp-28741f5bc100a271,1,,,budget_book_only,no_exact_identifier_match,,,Fire Station No. 23,,2026-08-28T04:55:51+00:00
+1000979,bbp-846f8bc090f22580,1,,,budget_book_only,no_exact_identifier_match,,,Willow Avenue at Kennedy Boulevard Intersection Improvements,,2026-08-28T04:55:51+00:00
+1000980,bbp-649f13dadae11683,1,,,budget_book_only,no_exact_identifier_match,Cancelled,,Manhattan Ave (Richardson Ave to Interbay Blvd),,2026-08-28T04:55:51+00:00
+1000986,bbp-86240a68f901269a,1,,,budget_book_only,no_exact_identifier_match,,,TFR Fire Station No. 24,,2026-08-28T04:55:51+00:00
+1001010,bbp-4644dd7aaf32d4d6,1,,,budget_book_only,no_exact_identifier_match,,,2nd Street: Interbay Boulevard to West Bay Avenue,,2026-08-28T04:55:51+00:00
+1001017,bbp-60f1ecb53591e039,1,,,budget_book_only,no_exact_identifier_match,,,Upper Peninsula Watershed Drainage Imprv - Dale Mabry/Henderson Trunkline,,2026-08-28T04:55:51+00:00
+1001018,bbp-2e4dac20fccd31b8,1,,,budget_book_only,no_exact_identifier_match,Closeout,,Cypress Street Outfall Regional Stormwater Improvements,,2026-08-28T04:55:51+00:00
+1001066,bbp-50e20cfc3e97d977,1,,,budget_book_only,no_exact_identifier_match,,,Wyoming Flooding Relief Phase II,,2026-08-28T04:55:51+00:00
+1001069,bbp-3985c694ccae1d2e,1,,,budget_book_only,no_exact_identifier_match,,,Concordia Pond,,2026-08-28T04:55:51+00:00
+1001110,bbp-b435b577a0058153,1,,,budget_book_only,no_exact_identifier_match,Closeout,,Centro Ybor Garage Restoration,,2026-08-28T04:55:51+00:00
+1001111,bbp-f5a0586aa92e7aaa,1,,,budget_book_only,no_exact_identifier_match,Closeout,,Fort Brooke Garage Restoration,,2026-08-28T04:55:51+00:00
+1001112,bbp-e3a4c91e3815a9d6,1,,,budget_book_only,no_exact_identifier_match,Closeout,,Rivergate Garage Restoration,,2026-08-28T04:55:51+00:00
+1001113,bbp-04aeeee15488154a,1,,,budget_book_only,no_exact_identifier_match,,,Palm Avenue Garage Restoration,,2026-08-28T04:55:51+00:00
+1001114,bbp-7223b395eed3cca1,1,,,budget_book_only,no_exact_identifier_match,,,William F. Poe Garage Restoration,,2026-08-28T04:55:51+00:00
+1001131,bbp-b812f456f92a0a59,1,,,budget_book_only,no_exact_identifier_match,Closeout,,Davis Islands Seaplane Basin Park Dock Improvements,,2026-08-28T04:55:51+00:00
+1001132,bbp-9b8415e7eda74559,1,,,budget_book_only,no_exact_identifier_match,,,Lowry Park Dock Improvements,,2026-08-28T04:55:51+00:00
+1001134,bbp-9da569894874ded3,1,,,budget_book_only,no_exact_identifier_match,Closeout,,Morgan and Whiting Signal Upgrade,,2026-08-28T04:55:51+00:00
+1001137,bbp-3f2fd815734449be,1,,,budget_book_only,no_exact_identifier_match,Closeout,,Convention Center Renovations,,2026-08-28T04:55:51+00:00
+1001151,,0,tpa-661a6c7d7b0de0,mp-310d42b322718d0d,core_capital_only,no_exact_identifier_match,,Construction in Progress,,S.E. Seminole Heights Flooding Relief (GMP 1),2026-08-28T04:55:51+00:00
+1001162,,0,tpa-493189ec1964dd,mp-15b066a282e5cb4d,core_capital_only,no_exact_identifier_match,,Closeout,,Glen Ave Sidewalk and Safety Improvements (Green St to Beach St),2026-08-28T04:55:51+00:00
+1001167,bbp-6337e40a57889f5c,1,,,budget_book_only,no_exact_identifier_match,,,Eastridge Pumping Station Rehabilitation,,2026-08-28T04:55:51+00:00
+1001169,bbp-b44efdf6c1093be5,1,tpa-cde54daf8d60d7,mp-d454a1f29b183480,matched_core_activity,exact_city_project_id,Cancelled,90% Design Completion,Hamilton Creek Water Quality Improvements,Hamilton Creek Water Quality Improvements,2026-08-28T04:55:51+00:00
+1001170,bbp-5e2d557cbed4ff5d,1,,,budget_book_only,no_exact_identifier_match,,,Rogers Park Drainage Improvements,,2026-08-28T04:55:51+00:00
+1001171,bbp-6b715f24c05850c4,1,tpa-5a2f97b3a412d4,mp-5db1f3cd4dba79f8,matched_core_activity,exact_city_project_id,Planning,Planning,Lamb Canal Rehabilitation & Flood Relief,Lamb Canal Rehabilitation & Flood Relief,2026-08-28T04:55:51+00:00
+1001172,bbp-f8445649ba028e78,1,,,budget_book_only,no_exact_identifier_match,,,Poinsettia Pumping Station Rehabilitation,,2026-08-28T04:55:51+00:00
+1001176,,0,tpa-72d6b971262a80,mp-ee839b40ff289133,core_capital_only,no_exact_identifier_match,,90% Design Completion,,Conover and 13th,2026-08-28T04:55:51+00:00
+1001186,bbp-49ca384eb4e8602b,1,,,budget_book_only,no_exact_identifier_match,Closeout,,Harbour Island Force Main Replacement,,2026-08-28T04:55:51+00:00
+1001192,,0,tpa-1ac7e670f05956,mp-ca9ff7551fb43a0e,core_capital_only,no_exact_identifier_match,,Closeout,,Howard F. Curren AWTP Sludge Treatment Switchgear replacement,2026-08-28T04:55:51+00:00
+1001212,bbp-98e15cd92be16fd3,1,,,budget_book_only,no_exact_identifier_match,,,Tampa Police Department Headquarters Improvements,,2026-08-28T04:55:51+00:00
+1001220,bbp-c5faf6c43642ecf4,1,,,budget_book_only,no_exact_identifier_match,Closeout,,46th Street From Busch Boulevard to Fowler Avenue,,2026-08-28T04:55:51+00:00
+1001221,bbp-c2296c605b0eb8f7,1,,,budget_book_only,no_exact_identifier_match,Closeout,,Columbus Dr (Nebraska Avenue to 14th St),,2026-08-28T04:55:51+00:00
+1001225,bbp-2ea7c449c1a17e3d,1,,,budget_book_only,no_exact_identifier_match,,,Himes Avenue From West Kennedy Boulevard to West Columbus Drive,,2026-08-28T04:55:51+00:00
+1001226,bbp-70bb2f5b0a3565e4,1,,,budget_book_only,no_exact_identifier_match,Closeout,,34th Street North From Columbus Drive to US92/East Hillsborough Avenue,,2026-08-28T04:55:51+00:00
+1001234,bbp-5633f3c901e70488,1,,,budget_book_only,no_exact_identifier_match,,,New Tampa Community Park Center Improvements,,2026-08-28T04:55:51+00:00
+1001235,bbp-f913edfba2164f90,1,,,budget_book_only,no_exact_identifier_match,,,Williams Park Improvements,,2026-08-28T04:55:51+00:00
+1001237,bbp-5ca86f41f4685341,1,,,budget_book_only,no_exact_identifier_match,Closeout,,South Regional Garage Damage Repairs,,2026-08-28T04:55:51+00:00
+1001303,bbp-865a42f1c62af936,1,tpa-9cb920953f4186,mp-df0fc6b847a57e5f,matched_core_activity,exact_city_project_id,Closeout,Closeout,Krause Pumping Station Standby Generator,Krause Pumping Station Standby Generator,2026-08-28T04:55:51+00:00
+1001311,bbp-93bb98f2cde1ba5e,1,,,budget_book_only,no_exact_identifier_match,Closeout,,22nd St and Palm Ave - Signal Upgrade,,2026-08-28T04:55:51+00:00
+1001312,bbp-582b35e3ca95f487,1,,,budget_book_only,no_exact_identifier_match,Closeout,,Main Street and Rome Avenue Signal Upgrade,,2026-08-28T04:55:51+00:00
+1001354,bbp-6749408ab4fee68b,1,,,budget_book_only,no_exact_identifier_match,,,Marjorie Park Yacht Basin - LED Pole Lighting Upgrade,,2026-08-28T04:55:51+00:00
+1001355,bbp-4e0a53024989def3,1,,,budget_book_only,no_exact_identifier_match,,,Sandra Freedman Tennis Club - HVAC Replacement,,2026-08-28T04:55:51+00:00
+1001365,,0,tpa-98cce022ad94b0,mp-f05db0172ecd5bbf,core_capital_only,no_exact_identifier_match,,Construction in Progress,,Herman Massey Park Rehabilitation,2026-08-28T04:55:51+00:00
+1001366,bbp-6901ac0a13fb141a,1,,,budget_book_only,no_exact_identifier_match,,,TSS Work Order Managment System,,2026-08-28T04:55:51+00:00
+1001370,bbp-040524b64e9ac0aa,1,tpa-42dcf7268b88bc,mp-553fc659c7a3e367,matched_core_activity,exact_city_project_id,30% Design Completion,Construction in Progress,Copeland Park Flooding Relief,Copeland Park Pump Station,2026-08-28T04:55:51+00:00
+1001371,bbp-159c28bde9c4ca53,1,,,budget_book_only,no_exact_identifier_match,,,Anita Subdivision Flooding Phase II,,2026-08-28T04:55:51+00:00
+1001373.1,bbp-1229dc6e2b15af89,1,,,budget_book_only,no_exact_identifier_match,Closeout,,Ballast Point Pumping Station Rehabilitation,,2026-08-28T04:55:51+00:00
+1001376,bbp-f03dbedee12bffc1,1,tpa-5f55eb57724be4,mp-77192490275c7d13,matched_core_activity,exact_city_project_id,Closeout,Closeout,Ybor Pumping Station Standby Generator,Ybor Pumping Station Standby Generator,2026-08-28T04:55:51+00:00
+1001400,bbp-f5c655f26e71fa10,1,,,budget_book_only,no_exact_identifier_match,Construction in Progress,,Solid Waste Relocation Plan,,2026-08-28T04:55:51+00:00
+1001406,bbp-95e157444bf4d8e7,1,,,budget_book_only,no_exact_identifier_match,,,In House Flooding Relief - 45th Street North of Hillsborough,,2026-08-28T04:55:51+00:00
+1001415,bbp-2cbaef419dcc92ee,1,,,budget_book_only,no_exact_identifier_match,,,William F. Poe Garage Elevator Replacement & Modernization,,2026-08-28T04:55:51+00:00
+1001417,bbp-0adcaaf038fa8eeb,1,,,budget_book_only,no_exact_identifier_match,Closeout,,Freedom Park Build Out At MacFarlane Park,,2026-08-28T04:55:51+00:00
+1001418,bbp-fe182660b04395b4,1,,,budget_book_only,no_exact_identifier_match,,,Sulphur Springs Pool Deck Replacement,,2026-08-28T04:55:51+00:00
+1001420,bbp-de4fdb5118a0bc38,1,,,budget_book_only,no_exact_identifier_match,Cancelled,,56th Street & Broadway Avenue Flooding Relief,,2026-08-28T04:55:51+00:00
+1001426,,0,tpa-4ef4bb4c206a34,mp-721d70d7330e949c,core_capital_only,no_exact_identifier_match,,Permitting/Submittals Approval,,Citywide Dock & Boardwalk Replacement - Davis Islands Seaplane Basin Mooring Field,2026-08-28T04:55:51+00:00
+1001428,bbp-904a0bd9f593e8e3,1,,,budget_book_only,no_exact_identifier_match,,,In House Flooding Relief - Rambla Street,,2026-08-28T04:55:51+00:00
+1001437,bbp-9fad73651408fcb0,1,,,budget_book_only,no_exact_identifier_match,,,West Saint Isabel from Gomez to Habana Flooding Relief,,2026-08-28T04:55:51+00:00
+1001440,bbp-c0ced50a57e5c0a8,1,,,budget_book_only,no_exact_identifier_match,,,Krental from Kennedy to Cleveland Flooding Relief,,2026-08-28T04:55:51+00:00
+1001509,bbp-a3b1f830e795625d,1,,,budget_book_only,no_exact_identifier_match,Cancelled,,Jefferson St and Twiggs St - Traffic Signal Upgrade,,2026-08-28T04:55:51+00:00
+1001512,bbp-8863a3f7d64a31fe,1,,,budget_book_only,no_exact_identifier_match,,,Tyson Avenue Improvements,,2026-08-28T04:55:51+00:00
+1001516,bbp-9150e03238218b1c,1,tpa-fad81e27486de4,mp-0f771ace7d974ddf,matched_core_activity,exact_city_project_id,Closeout,Closeout,Green ARTery - Segment D,Green ARTery - Segment D,2026-08-28T04:55:51+00:00
+1001517,bbp-8b6cc9c7f84ea72c,1,tpa-7878b137016fca,mp-7ccf0e6c3039d506,matched_core_activity,exact_city_project_id,Closeout,Closeout,Green ARTery - Segment E,Green ARTery - Segment E,2026-08-28T04:55:51+00:00
+1001518,bbp-674a6980cb243272,1,tpa-d59bbab0602365,mp-668e03991ca3e9df,matched_core_activity,exact_city_project_id,Permitting/Submittals Approval,Construction in Progress,CRA-Tampa Union Station Building Improvements,CRA- DT Union Station Renovations,2026-08-28T04:55:51+00:00
+1001519,bbp-d6381e79407c75e7,1,,,budget_book_only,no_exact_identifier_match,,,Old City Hall Building Improvements,,2026-08-28T04:55:51+00:00
+1001527,bbp-f52e99b7710fde76,1,tpa-55828ee72706f4,mp-de15e43fa74c3463,matched_core_activity,exact_city_project_id,90% Design Completion,90% Design Completion,Lantana-Poinsettia Pump Station,Lantana-Poinsettia Pump Station,2026-08-28T04:55:51+00:00
+1001530,bbp-ef95343a3cdead49,1,,,budget_book_only,no_exact_identifier_match,Cancelled,,30th Street (Yukon St to Fowler Ave),,2026-08-28T04:55:51+00:00
+1001531,,0,tpa-86ee52822415f1,mp-cd580417038f78a5,core_capital_only,no_exact_identifier_match,,Closeout,,Floribraska Ave (Tampa St to 9th St),2026-08-28T04:55:51+00:00
+1001538,bbp-3cb358a6d9a489a4,1,,,budget_book_only,no_exact_identifier_match,,,"Gandy/Sun Bay South Neighborhood Resurfacing, Phase I",,2026-08-28T04:55:51+00:00
+1001539,bbp-944dd891eb5aa990,1,,,budget_book_only,no_exact_identifier_match,,,Hampton Terrace Neighborhood Resurfacing and Traffic Calming,,2026-08-28T04:55:51+00:00
+1001540,bbp-638f5a4f8d2c8b9e,1,,,budget_book_only,no_exact_identifier_match,Closeout,,Historic Hyde Park Neighborhood Resurfacing,,2026-08-28T04:55:51+00:00
+1001541,bbp-2f7a4570782eca2d,1,tpa-613081471e1d62;tpa-d60b774d24d302,mp-7b479705c969adb9;mp-95d84d187aef7d2f,ambiguous_multiple_core_activities,exact_city_project_id,Closeout,,Downtown Core Complete Streets (Brorein St from Ashley Dr to Morgan St),,2026-08-28T04:55:51+00:00
+1001542,bbp-73f39c23e5b370d1,1,,,budget_book_only,no_exact_identifier_match,Cancelled,,Neighborhood Improvements- East Tampa,,2026-08-28T04:55:51+00:00
+1001545,bbp-83851d5ef78e592d,1,,,budget_book_only,no_exact_identifier_match,,,Himes Avenue Resurfacing and Complete Streets Improvements,,2026-08-28T04:55:51+00:00
+1001546,bbp-2d140902996b33a7,1,,,budget_book_only,no_exact_identifier_match,Closeout,,Ridgewood Park Neighborhood Resurfacing and Traffic Calming,,2026-08-28T04:55:51+00:00
+1001548,bbp-76f52d29b2e99fb9,1,,,budget_book_only,no_exact_identifier_match,Closeout,,Southeast Seminole Heights Neighborhood Resurfacing,,2026-08-28T04:55:51+00:00
+1001562,bbp-bbfe698e30f1a2a3,1,,,budget_book_only,no_exact_identifier_match,Closeout,,North Central Avenue and East Osborne Avenue Traffic Signal Upgrade,,2026-08-28T04:55:51+00:00
+1001564,,0,tpa-ec41bac2a6959e,mp-468d915c0deb4373,core_capital_only,no_exact_identifier_match,,Closeout,,Adalee Pumping Station Rehabilitation,2026-08-28T04:55:51+00:00
+1001565,bbp-4a26ca2d19b489cb,1,tpa-9c191dfc408eda,mp-a581e41a7ced59bb,matched_core_activity,exact_city_project_id,Closeout,Closeout,Bayshore Pumping Station Rehabilitation,Bayshore Pumping Station Rehabilitation,2026-08-28T04:55:51+00:00
+1001566,bbp-bf50265f9fda017e,1,tpa-024c352566fd89,mp-b444c5d6f324da27,matched_core_activity,exact_city_project_id,Closeout,Closeout,Dayflower Pumping Station Rehabilitation,Dayflower Pumping Station Rehabilitation,2026-08-28T04:55:51+00:00
+1001574,bbp-e02971df8413dd6d,1,,,budget_book_only,no_exact_identifier_match,Closeout,,Virginia Pumping Station Rehabilitation,,2026-08-28T04:55:51+00:00
+1001577,bbp-323b9f506433ea1a,1,,,budget_book_only,no_exact_identifier_match,Closeout,,South Himes Avenue and West Euclid Avenue Signal Upgrade,,2026-08-28T04:55:51+00:00
+1001578,bbp-f4fdf6e70b2a872a,1,,,budget_book_only,no_exact_identifier_match,Closeout,,North Florida Avenue and West Wilder Avenue Traffic Signal Upgrade,,2026-08-28T04:55:51+00:00
+1001582,bbp-da9449ef908908ad,1,,,budget_book_only,no_exact_identifier_match,,,Parking Administration Office Roof and HVAC Replacement,,2026-08-28T04:55:51+00:00
+1001585,bbp-2b6f0c26fcf89385,1,tpa-7657433ed52a64,mp-d5b2b73c2cdcebe0,matched_core_activity,exact_city_project_id,Construction in Progress,Construction in Progress,Manhattan: Vasconia to Obispo Flooding Relief-Phase 1,Manhattan: Vasconia to Obispo Flooding Relief-Phase 1,2026-08-28T04:55:51+00:00
+1001586,bbp-dbc6e8f92ac18862,1,,,budget_book_only,no_exact_identifier_match,,,Everina Street from Carrington Avenue to Coachman Avenue Flooding Relief,,2026-08-28T04:55:51+00:00
+1001587,bbp-74882d1e9155aa50,1,,,budget_book_only,no_exact_identifier_match,Closeout,,Beach Park Drainage Improvements,,2026-08-28T04:55:51+00:00
+1001588,bbp-a7c6928f52282153,1,tpa-a852e71c9df8b3,mp-3d4fbd1e5b7cf7e9,matched_core_activity,exact_city_project_id,Closeout,Closeout,"Hyde Park Groundwater Diversion Ph 2 (New Port, Willow, Orleans, and Watrous Groundwater Diversions)","Hyde Park Groundwater Diversion Ph 2 (New Port, Willow, Orleans, and Watrous Groundwater Diversions)",2026-08-28T04:55:51+00:00
+1001589,bbp-fe99b7c27f2752ff,1,,,budget_book_only,no_exact_identifier_match,,,Lake Roberta Sediment Trap Upgrade,,2026-08-28T04:55:51+00:00
+1001593,bbp-57be9c44d48470b9,1,,,budget_book_only,no_exact_identifier_match,,,West Davis Boulevard Bridge Replacement,,2026-08-28T04:55:51+00:00
+1001594,,0,tpa-e9b7d55940a116,mp-576be9adc88f319e,core_capital_only,no_exact_identifier_match,,Closeout,,Sidewalks- Hubert St (W Cypress to W Main St),2026-08-28T04:55:51+00:00
+1001597,bbp-6854255479bb6552,1,tpa-4ada1f6c3013a6,mp-e5d954226eb4cddd,matched_core_activity,exact_city_project_id,Closeout,Closeout,Virginia Avenue Pumping Station Drainage Improvements,Virginia Avenue Pumping Station Drainage Improvements,2026-08-28T04:55:51+00:00
+1001598,bbp-1de780148e4f81f8,1,,,budget_book_only,no_exact_identifier_match,,,West Green Street Parking Lot Improvements (JBL),,2026-08-28T04:55:51+00:00
+1001600,bbp-8825f271ab17f374,1,,,budget_book_only,no_exact_identifier_match,,,Police Department Communications Center Workstation Upgrade,,2026-08-28T04:55:51+00:00
+1001615,bbp-6ac64fe0cab98236,1,,,budget_book_only,no_exact_identifier_match,Closeout,,Forest Hills Park Recreational Trail Improvements,,2026-08-28T04:55:51+00:00
+1001618,bbp-158a8581ad7f9c59,1,tpa-d2e578d5a8c434,mp-ae32b0e9efba3deb,matched_core_activity,exact_city_project_id,90% Design Completion,90% Design Completion,"Greenways, Trail & Gateway Sign - New Tampa Nature Park","Greenways, Trail & Gateway Sign - New Tampa Nature Park",2026-08-28T04:55:51+00:00
+1001674,bbp-cea4a3797463e52b,1,tpa-98a17eb54517ba,mp-4ba7bc24f95c8f99,matched_core_activity,exact_city_project_id,30% Design Completion,30% Design Completion,Lois Ave (Cleveland St to Boy Scout Blvd),Lois Ave (Cleveland St to Boy Scout Blvd),2026-08-28T04:55:51+00:00
+1001681,bbp-513086515935c77c;bbp-92c53e30268af7bd,2,,,budget_book_only,no_exact_identifier_match,,,Tampa Police District 1 Wind Mitigation,,2026-08-28T04:55:51+00:00
+1001683,bbp-c7dab17c266ad09f,1,,,budget_book_only,no_exact_identifier_match,,,Tampa Police District 3 Wind Mitigation,,2026-08-28T04:55:51+00:00
+1001684,bbp-88aed5a7cc7a7d7c,1,,,budget_book_only,no_exact_identifier_match,,,Tampa Fire Station No.14 Wind Mitigation,,2026-08-28T04:55:51+00:00
+1001685,bbp-a6fde54d645d8a02,1,,,budget_book_only,no_exact_identifier_match,,,Tampa Fire Station No.1 Wind Mitigation,,2026-08-28T04:55:51+00:00
+1001739,bbp-1601fa53faa5b4be,1,,,budget_book_only,no_exact_identifier_match,,,Al Barnes Park Cultural Enrichment Center,,2026-08-28T04:55:51+00:00
+1001809,bbp-5045573ace54bb9e,1,tpa-446b264792bc1b;tpa-634ca4ba0d397a;tpa-ba388df23956a8,mp-d93154563339afcf;mp-f29e75b78f05c142;mp-fc6a9a5f5c9b86a6,ambiguous_multiple_core_activities,exact_city_project_id,30% Design Completion,,Sulphur Springs Pumping Station Design Build,,2026-08-28T04:55:51+00:00
+1001810.10,,0,tpa-6136a0a53ba2c2,mp-35ef22b922b7e73c,core_capital_only,no_exact_identifier_match,,Planning,,Hunters Green II Pumping Station Rehabilitation,2026-08-28T04:55:51+00:00
+1001810.11,,0,tpa-8b2aad4d0c7226,mp-dd394e16a3f41b5a,core_capital_only,no_exact_identifier_match,,Planning,,Longwater Run Pumping Station Rehabilitation,2026-08-28T04:55:51+00:00
+1001810.12,,0,tpa-4fd434413182cc,mp-dca17ecafdda106f,core_capital_only,no_exact_identifier_match,,Cancelled,,Meadow Pine Pumping Station Rehabilitation,2026-08-28T04:55:51+00:00
+1001810.13,,0,tpa-82b9a79b60113f,mp-3e6794295e8799a2,core_capital_only,no_exact_identifier_match,,Planning,,Oak Haven Pumping Station Rehabilitation,2026-08-28T04:55:51+00:00
+1001810.14,,0,tpa-aa75cdf7422756,mp-139c442d095fc518,core_capital_only,no_exact_identifier_match,,Planning,,Palm Springs Pumping Station Rehabilitation,2026-08-28T04:55:51+00:00
+1001810.15,,0,tpa-b3441febb19f80,mp-e810a131fba50160,core_capital_only,no_exact_identifier_match,,30% Design Completion,,Sheridan Pumping Station Rehabilitation (Year 3),2026-08-28T04:55:51+00:00
+1001810.16,,0,tpa-7113f1875895d2,mp-875273619e2ffb44,core_capital_only,no_exact_identifier_match,,Construction in Progress,,Rome Ave Pump Station Force Main Replacement,2026-08-28T04:55:51+00:00
+1001810.19,,0,tpa-cf1ef08b74d9bf,mp-876776fc9539f7fc,core_capital_only,no_exact_identifier_match,,Closeout,,122nd Ave Pumping Station Rehabilitation,2026-08-28T04:55:51+00:00
+1001810.20,,0,tpa-2d2d1c36584495,mp-3b883907a1ce4780,core_capital_only,no_exact_identifier_match,,Closeout,,Lake Forest #1 Pumping Station Rehabilitation (Year 2),2026-08-28T04:55:51+00:00
+1001810.21,,0,tpa-06228d1f4d0792,mp-6d55d77fc7408ac3,core_capital_only,no_exact_identifier_match,,Construction in Progress,,Parkedge Pumping Station Rehabilitation (Year 2),2026-08-28T04:55:51+00:00
+1001810.22,,0,tpa-cd135e5d912828,mp-aaf4bfdc44b457cc,core_capital_only,no_exact_identifier_match,,Closeout,,Riveredge Pumping Station Rehabilitation (Year 2),2026-08-28T04:55:51+00:00
+1001810.23,,0,tpa-5b6b366122c269,mp-c941719e9dac942e,core_capital_only,no_exact_identifier_match,,Construction in Progress,,Oregon Pumping Station Rehabilitation (Year 2),2026-08-28T04:55:51+00:00
+1001810.24,,0,tpa-c9ddc7b04853de,mp-989f828b42394275,core_capital_only,no_exact_identifier_match,,Construction in Progress,,Ralston Beach Pumping Station Rehabilitation (Year 2),2026-08-28T04:55:51+00:00
+1001810.6,,0,tpa-eda1b7ede907aa,mp-eef707d6a817e1a8,core_capital_only,no_exact_identifier_match,,Construction in Progress,,Rome Ave Pump Station Rehabilitation (Year 2),2026-08-28T04:55:51+00:00
+1001810.7,,0,tpa-d86cfc8d539121,mp-95d96d06b4c2bde1,core_capital_only,no_exact_identifier_match,,30% Design Completion,,Church Pumping Station Rehabilitation (Year 3),2026-08-28T04:55:51+00:00
+1001810.8,,0,tpa-c44a24d11ff57d,mp-7ea32d80a64ac06f,core_capital_only,no_exact_identifier_match,,Planning,,Cory Lakes III Pumping Station Rehabilitation,2026-08-28T04:55:51+00:00
+1001810.9,,0,tpa-4357f4b097eefd,mp-fe7b8b952981e1ac,core_capital_only,no_exact_identifier_match,,Planning,,Humphrey Pumping Station Rehabilitation,2026-08-28T04:55:51+00:00
+1001830,bbp-0241b18c8cdea428,1,,,budget_book_only,no_exact_identifier_match,Closeout,,North 26th Street and East Dr. Martin Luther King Jr. Boulevard Traffic Signal,,2026-08-28T04:55:51+00:00
+1001831,bbp-80267c0665a175cf,1,,,budget_book_only,no_exact_identifier_match,,,East Twiggs Street and North Marion Street Traffic Signal Replacement,,2026-08-28T04:55:51+00:00
+1001832,bbp-9d486565707f2259,1,tpa-ef5b25d2cd2b58,mp-ba15f7c8558faff7,matched_core_activity,exact_city_project_id,Construction in Progress,Construction in Progress,21st St and Palm Ave - Traffic Signal Replacement,21st St and Palm Ave - Traffic Signal Replacement,2026-08-28T04:55:51+00:00
+1001842,bbp-ff343923f0ec854c,1,tpa-fcd1f5f70bf6dd,mp-1b6b7b76f7e85cf5,matched_core_activity,exact_city_project_id,Closeout,Closeout,"Palma Ceia Water Main Replacement, Phase 3",Palma Ceia Area 2 (AKA Phase III),2026-08-28T04:55:51+00:00
+1001845,bbp-6345131b204ceb09,1,,,budget_book_only,no_exact_identifier_match,Closeout,,North Himes Avenue Complete Streets and Safety Improvements,,2026-08-28T04:55:51+00:00
+1001848,bbp-fd58084e3fcc8973,1,tpa-7dac0bb1eab9db,mp-20350cb84db6c46e,matched_core_activity,exact_city_project_id,Closeout,Construction in Progress,Platt St and Fremont Ave - Traffic Signal,Platt St and Fremont Ave - Traffic Signal,2026-08-28T04:55:51+00:00
+1001849,bbp-d7a3e7dc5ecd4712,1,tpa-e3d74ebeda0a07,mp-5832cd9a2ac6514c,matched_core_activity,exact_city_project_id,Construction in Progress,Construction in Progress,Cleveland St and Rome Ave - Traffic Signal,Cleveland St and Rome Ave - Traffic Signal,2026-08-28T04:55:51+00:00
+1001865,,0,tpa-9e8aacbaee1dd4,mp-33805af68006624b,core_capital_only,no_exact_identifier_match,,Closeout,,"Howard F. Curren AWTP Master Plan Improvements, Phase 1, Design-build GMP No. 1",2026-08-28T04:55:51+00:00
+1001865.2,,0,tpa-ea72c3fa51da76,mp-bf22f8e1500560b4,core_capital_only,no_exact_identifier_match,,Construction in Progress,,"Howard F. Curren AWTP Master Plan Improvements, Phase 1, Design-build GMP No. 2",2026-08-28T04:55:51+00:00
+1001865.4,,0,tpa-a4b6540c53b52d,mp-cb4f99406e238127,core_capital_only,no_exact_identifier_match,,Construction in Progress,,"Howard F. Curren AWTP Master Plan Improvements, Phase 1, Design-build GMP No. 4",2026-08-28T04:55:51+00:00
+1001865.4A,,0,tpa-4e0ddf4111d797,mp-e8b1ab7c05bb0617,core_capital_only,no_exact_identifier_match,,Consultant/Contractor Selection Process,,"Howard F. Curren AWTP Master Plan Improvements, Phase 2, Design-build GMP No. 1",2026-08-28T04:55:51+00:00
+1001865.4B,,0,tpa-5094836b257f3e,mp-80b1a51f980bbc52,core_capital_only,no_exact_identifier_match,,Cancelled,,"Howard F. Curren AWTP Master Plan Improvements, Phase 2, Design-build Amendment No. 1",2026-08-28T04:55:51+00:00
+1001874,bbp-cd8e7ae4c46cb9c5,1,,,budget_book_only,no_exact_identifier_match,Closeout,,TPD Garage Restoration,,2026-08-28T04:55:51+00:00
+1001929,bbp-eb99dd6f6b61a8d6,1,,,budget_book_only,no_exact_identifier_match,Cancelled,,Interbay Blvd (Manhattan Ave to Tanker Way),,2026-08-28T04:55:51+00:00
+1001931,bbp-1974c00272a3bff1,1,tpa-37222f224d7341,mp-1699bf0f3b6906fc,matched_core_activity,exact_city_project_id,Construction in Progress,Construction in Progress,El Prado Blvd. Complete Streets & Sidewalks (Omar Ave to Lois Ave; Lois Ave to Bayshore Blvd),El Prado Blvd. Complete Streets & Sidewalks (Omar Ave to Lois Ave; Lois Ave to Bayshore Blvd),2026-08-28T04:55:51+00:00
+1001933,bbp-dd37e47e4da053b0,1,,,budget_book_only,no_exact_identifier_match,Closeout,,Training Burn Simulator and Skills Tower,,2026-08-28T04:55:51+00:00
+1001934,bbp-96fa461356a4b0f5,1,tpa-60fa1e9349c074,mp-34f011fe38d212ef,matched_core_activity,exact_city_project_id,30% Design Completion,30% Design Completion,Doyle Carlton Dr & Laurel St Intersection Improvements,Doyle Carlton Dr & Laurel St Intersection Improvements,2026-08-28T04:55:51+00:00
+1001935,bbp-4649f4415996c232,1,,,budget_book_only,no_exact_identifier_match,Closeout,,Tampa St and 7th Ave - Traffic Signal,,2026-08-28T04:55:51+00:00
+1001936,bbp-3ea026a276e36f0a,1,tpa-6ee9a2e188bdf2,mp-5b3236551618ebf4,matched_core_activity,exact_city_project_id,Permitting/Submittals Approval,Permitting/Submittals Approval,Rivercrest Park Boardwalk Renovation,Rivercrest Park Boardwalk Renovation,2026-08-28T04:55:51+00:00
+1001937,bbp-ea137a13ad733f2a,1,tpa-8401b9481d33dc,mp-78db75e110922b51,matched_core_activity,exact_city_project_id,Construction in Progress,Construction in Progress,East Tampa Recreational Complex,East Tampa Recreational Complex,2026-08-28T04:55:51+00:00
+1001938,bbp-cb4f518927332a72,1,,,budget_book_only,no_exact_identifier_match,Closeout,,New Tampa Inclusive Playground,,2026-08-28T04:55:51+00:00
+1001943,bbp-7ae193cfbbe15b72,1,,,budget_book_only,no_exact_identifier_match,,,Electronics Building Renovation,,2026-08-28T04:55:51+00:00
+1001948,bbp-82ea753e9d60698f,1,,,budget_book_only,no_exact_identifier_match,,,"Delaware, Oregon, and Dakota Groundwater Diversion",,2026-08-28T04:55:51+00:00
+1001949,bbp-cc15bc053caf5535,1,,,budget_book_only,no_exact_identifier_match,30% Design Completion,,4801 Neptune Way,,2026-08-28T04:55:51+00:00
+1001950,bbp-79806e27e7f8d0a4,1,,,budget_book_only,no_exact_identifier_match,Cancelled,,Donut Pond Pumping Station Bar Screen Upgrade,,2026-08-28T04:55:51+00:00
+1001951,bbp-5df2a10381be7d08,1,,,budget_book_only,no_exact_identifier_match,Closeout,,El Portal and Newport Avenue Pumping Station,,2026-08-28T04:55:51+00:00
+1001953,bbp-1b0dfcf88bd531b2,1,,,budget_book_only,no_exact_identifier_match,,,Forest Hills Park Pumping Station,,2026-08-28T04:55:51+00:00
+1001955,,0,tpa-0b19c44bee2529;tpa-abe97955acb085;tpa-cd81628c7943f6,mp-6adca0715afa9f71;mp-bcd6fc6d59b32413;mp-e0b433b4d68d81ed,core_capital_only,no_exact_identifier_match,,,,,2026-08-28T04:55:51+00:00
+1001969,bbp-659bae28b0a711f2,1,,,budget_book_only,no_exact_identifier_match,,,Electronics Building Renovation,,2026-08-28T04:55:51+00:00
+1001984,bbp-263319eb7c18bd61,1,,,budget_book_only,no_exact_identifier_match,Closeout,,TCC Renovations Phase II,,2026-08-28T04:55:51+00:00
+1002016.2,,0,tpa-353afe88aec810,mp-7505305e4c1a5543,core_capital_only,no_exact_identifier_match,,90% Design Completion,,Sherwood Heights PS FM Relocation,2026-08-28T04:55:51+00:00
+1002058,bbp-08b7c831d9862530;bbp-7f7788ab9acaf011,2,,,budget_book_only,no_exact_identifier_match,Closeout,,Ridgewood Collection System CIPP Lining,,2026-08-28T04:55:51+00:00
+1002091,bbp-6124e90865429309,1,tpa-2dc74558e17f91,mp-36bcf34199e877eb,matched_core_activity,exact_city_project_id,Closeout,Closeout,"Green Spine Cycle Track, Segment 3B","Green Spine Cycle Track, Segment 3B",2026-08-28T04:55:51+00:00
+1002092,bbp-d965c975a81c6211,1,tpa-a2a4fd28b3d102,mp-10d31fc06c3d06e1,matched_core_activity,exact_city_project_id,Closeout,Closeout,"Green Spine Cycle Track, Segment 3C","Green Spine Cycle Track, Segment 3C",2026-08-28T04:55:51+00:00
+1002096,,0,tpa-a1b0cac407d6e5,mp-be1ab01fc577d0a7,core_capital_only,no_exact_identifier_match,,Construction in Progress,,West River District Multi-Modal Network and Safety Improvements BUILD Segments 1 - 6,2026-08-28T04:55:51+00:00
+1002113,bbp-f5ae95030c58c930,1,,,budget_book_only,no_exact_identifier_match,Closeout,,Clark Street and 30th Street Pipe Relocation,,2026-08-28T04:55:51+00:00
+1002114,bbp-78c79fa624be242a,1,,,budget_book_only,no_exact_identifier_match,,,Public Safety Training Facilities,,2026-08-28T04:55:51+00:00
+1002120,bbp-56d7cdcc18eeaee5,1,,,budget_book_only,no_exact_identifier_match,,,Public Safety Administration Building,,2026-08-28T04:55:51+00:00
+1002123,bbp-f881625aa59d6670,1,,,budget_book_only,no_exact_identifier_match,,,Police District 3 Roof Replacement,,2026-08-28T04:55:51+00:00
+1002124,bbp-3b79b3c0298ad89e,1,,,budget_book_only,no_exact_identifier_match,,,911 Call Center Roof Replacement,,2026-08-28T04:55:51+00:00
+1002125,bbp-d91838383f2cdb0e,1,,,budget_book_only,no_exact_identifier_match,,,Fire Station No 21 Building Upgrades,,2026-08-28T04:55:51+00:00
+1002127,bbp-63d4625918c9be2a,1,,,budget_book_only,no_exact_identifier_match,,,Howard Avenue Tampa Police Department Offices,,2026-08-28T04:55:51+00:00
+1002128,bbp-1c93ba1f1bbd82e9,1,,,budget_book_only,no_exact_identifier_match,,,CMOB Elevator Upgrade,,2026-08-28T04:55:51+00:00
+1002130,bbp-db0e4a91dc4077b9,1,,,budget_book_only,no_exact_identifier_match,,,Police District 3 Exterior Paint and Stucco Repairs,,2026-08-28T04:55:51+00:00
+1002141,bbp-ff27b5cf0b20c126,1,,,budget_book_only,no_exact_identifier_match,,,Transportation Wash Rack,,2026-08-28T04:55:51+00:00
+1002142,bbp-8bdce671dbdcbb57,1,,,budget_book_only,no_exact_identifier_match,,,Lake Avenue Building Renovations,,2026-08-28T04:55:51+00:00
+1002143,bbp-2bdad5f35750459a,1,,,budget_book_only,no_exact_identifier_match,,,TSS Facility Improvements,,2026-08-28T04:55:51+00:00
+1002148,bbp-30d0f958e38759d7;bbp-7c8ee7b2e934e399,2,tpa-88a3da2a1a529f;tpa-a230454c33a207;tpa-a6334c218e962f;tpa-bc4fffa94f61da,mp-55e885983673b34c;mp-9a6a43256bf764b7;mp-b87bf1e5cc90f563;mp-f51a4f48c29d0aa3,ambiguous_multiple_core_activities,exact_city_project_id,,,Fleet Maintenance Decentralization - 40th Street,,2026-08-28T04:55:51+00:00
+1002158,bbp-e61e75fbdd8ec5fc,1,,,budget_book_only,no_exact_identifier_match,Closeout,,Ignacio Haya Park PH II,,2026-08-28T04:55:51+00:00
+1002160,,0,tpa-6f824c575084b5,mp-642b94a0dd3c22cf,core_capital_only,no_exact_identifier_match,,90% Design Completion,,CRA-DP Neighborhood Park at Hubert Ave,2026-08-28T04:55:51+00:00
+1002163,,0,tpa-55970080e03fd1;tpa-d7ddd1defd6013,mp-0441f5e904278d00;mp-2bab05a0c5e2bac7,core_capital_only,no_exact_identifier_match,,,,,2026-08-28T04:55:51+00:00
+1002164,,0,tpa-ae07f4ea146cd3,mp-19452288ef782e1d,core_capital_only,no_exact_identifier_match,,90% Design Completion,,"CRA-DP Landscape, Streetscape, and Safety Audit Improvement",2026-08-28T04:55:51+00:00
+1002178,bbp-0555fe8b7c4b2207;bbp-93b25a4985bd992c,2,tpa-d04d7a186f9070,mp-56265785c1518a24,matched_core_activity,exact_city_project_id,90% Design Completion,Contract Negotiations,Golf View Estates Flooding Relief,Golf View Estates Flooding Relief,2026-08-28T04:55:51+00:00
+1002179,bbp-bdb58265b41fb280,1,tpa-8b45dcb5c28c83,mp-bf56856019c64435,matched_core_activity,exact_city_project_id,60% Design Completion,Planning,South Howard Flood Relief Project,South Howard Flood Relief Project,2026-08-28T04:55:51+00:00
+1002270,bbp-5c062c7db2ae3b87,1,,,budget_book_only,no_exact_identifier_match,Planning,,Cal Dickson Greenspace Improvements,,2026-08-28T04:55:51+00:00
+1002292,bbp-0f06235deb876bac,1,,,budget_book_only,no_exact_identifier_match,Closeout,,Floribraska Gravity Sewer CIPP Lining,,2026-08-28T04:55:51+00:00
+1002293,bbp-5e8ba99a126287b0,1,tpa-f05d147a1350ac,mp-afdd63ce998db22d,matched_core_activity,exact_city_project_id,,Planning,Gandy Park South and A. J. Palonis Park Improvements,Gandy Park South and A. J. Palonis Park Improvements,2026-08-28T04:55:51+00:00
+1002316,,0,tpa-7ee12fe4519bd8,mp-7eb3d3a44d0c66ac,core_capital_only,no_exact_identifier_match,,90% Design Completion,,Purity Springs Restoration and Living Shoreline,2026-08-28T04:55:51+00:00
+1002318,,0,tpa-66231479024c2c,mp-f5d851eb38932906,core_capital_only,no_exact_identifier_match,,Closeout,,Downtown Phase II Collection System Rehabilitation,2026-08-28T04:55:51+00:00
+1002329,,0,tpa-7d1dc09d430e76,mp-dea1d623072b9fbf,core_capital_only,no_exact_identifier_match,,Construction in Progress,,Waters Ave Gravity Sewer Rehabilitation,2026-08-28T04:55:51+00:00
+1002350,,0,tpa-9e533d5d2e7928,mp-807349d6c8102cac,core_capital_only,no_exact_identifier_match,,60% Design Completion,,30th St (E Bougainvillea Ave to E Fowler Ave) Segment 2 (Resurfacing),2026-08-28T04:55:51+00:00
+1002351,,0,tpa-b238c6fabfa6dc,mp-41b54a4ea265dcc4,core_capital_only,no_exact_identifier_match,,Construction in Progress,,Rey Park Improvements,2026-08-28T04:55:51+00:00
+1002352,,0,tpa-c5b3d6f07b2f6d,mp-6c9f0ac6cf58db07,core_capital_only,no_exact_identifier_match,,Construction in Progress,,Salcines Park Improvements,2026-08-28T04:55:51+00:00
+1002359,bbp-ad01cd79c52d6692,1,,,budget_book_only,no_exact_identifier_match,,,North B St/Himes Ave CIAC Phase 5,,2026-08-28T04:55:51+00:00
+1002380,,0,tpa-50626600fc391a,mp-b1783ebefcaa0756,core_capital_only,no_exact_identifier_match,,Permitting/Submittals Approval,,Nebraska and Busch Blvd,2026-08-28T04:55:51+00:00
+1002386,,0,tpa-a0292bfa993641,mp-8bec584852d821ae,core_capital_only,no_exact_identifier_match,,Planning,,CRA- Property 3623 N 22nd Street AKA Gator Building,2026-08-28T04:55:51+00:00
+1002388,bbp-cc5a0f6b2959e630,1,,,budget_book_only,no_exact_identifier_match,Closeout,,Executive Park Gravity Sewer Replacement,,2026-08-28T04:55:51+00:00
+1002394,bbp-2b6e3b7ad4092d68,1,,,budget_book_only,no_exact_identifier_match,,,Sulphur Springs Pool Improvements,,2026-08-28T04:55:51+00:00
+1002396,bbp-0df7d0aafd08b61d,1,,,budget_book_only,no_exact_identifier_match,,,Sulphur Springs Tower Improvements,,2026-08-28T04:55:51+00:00
+1002401,,0,tpa-03560edf9915fa;tpa-3ec4cea3916f0f;tpa-69474d33a67c4d,mp-08d096e902b3cd57;mp-1eb120b451c0e2bc;mp-99c39171b75a871c,core_capital_only,no_exact_identifier_match,,,,,2026-08-28T04:55:51+00:00
+1002402,bbp-8fd21a171fc01b9b,1,,,budget_book_only,no_exact_identifier_match,,,Softball Dugout Renovations,,2026-08-28T04:55:51+00:00
+1002403,bbp-eca654f1b9ca4883,1,,,budget_book_only,no_exact_identifier_match,,,Pool Blanket & Heater Replacements,,2026-08-28T04:55:51+00:00
+1002404,bbp-4d94c0a6120aa5d2,1,,,budget_book_only,no_exact_identifier_match,,,Hyde Park Improvements,,2026-08-28T04:55:51+00:00
+1002405,bbp-d7c0bdadd0f778e6,1,,,budget_book_only,no_exact_identifier_match,,,Fire Station No 8 Parking Lot Permeable Block Replacement,,2026-08-28T04:55:51+00:00
+1002407,bbp-23c9eaba320cb4f7;bbp-6cfa1dd6d2ca0811;bbp-e905decbadc330a4,3,,,budget_book_only,no_exact_identifier_match,,,Sulphur Springs Park Site Improvements,,2026-08-28T04:55:51+00:00
+1002408,bbp-328075cff25a620c;bbp-bda622ff6f79aaaf,2,,,budget_book_only,no_exact_identifier_match,,,Wellswood Church,,2026-08-28T04:55:51+00:00
+1002409,bbp-77d78194e8d80600,1,,,budget_book_only,no_exact_identifier_match,,,Replacement Windows for Recreation Centers,,2026-08-28T04:55:51+00:00
+1002412,bbp-5d5153f4eecb06e7,1,,,budget_book_only,no_exact_identifier_match,,,Cuscaden Pool Deck Underlayment and Coping,,2026-08-28T04:55:51+00:00
+1002414,bbp-7bd190b3f99d0373,1,,,budget_book_only,no_exact_identifier_match,,,Tampa Theatre Fire Alarm Replacement,,2026-08-28T04:55:51+00:00
+1002420,bbp-bab902f5472f482c,1,,,budget_book_only,no_exact_identifier_match,,,TMOB Electrical Upgrades,,2026-08-28T04:55:51+00:00
+1002421,bbp-8b5751d428f290fd,1,,,budget_book_only,no_exact_identifier_match,,,Ballast Point Infrastructure Upgrades,,2026-08-28T04:55:51+00:00
+1002445,bbp-434ad3cceb8c6989,1,tpa-287723afdc6d7a,mp-6830ae56975ff4bc,matched_core_activity,exact_city_project_id,30% Design Completion,30% Design Completion,Twiggs St (Ashley Dr to Nebraska Ave),Twiggs St (Ashley Dr to Nebraska Ave),2026-08-28T04:55:51+00:00
+1002448,bbp-b35952d360cbac15,1,,,budget_book_only,no_exact_identifier_match,,,South Howard Flood Relief and Streetscape,,2026-08-28T04:55:51+00:00
+1002449,,0,tpa-77c2f61e91c09c,mp-f23e4814960b07c9,core_capital_only,no_exact_identifier_match,,Closeout,,Sligh Ave & 30th St (Signal),2026-08-28T04:55:51+00:00
+1002465,,0,tpa-08c3d9bfa91b42,mp-ca15e299046608e8,core_capital_only,no_exact_identifier_match,,Closeout,,Downtown Interchange Wastewater Collection System Rehabilitation by CIPP Lining,2026-08-28T04:55:51+00:00
+1002466,,0,tpa-2d56f56a338d90,mp-dc09e99d0dae662e,core_capital_only,no_exact_identifier_match,,Permitting/Submittals Approval,,Wastewater Pumping Station Rehabilitation 109th St. PS,2026-08-28T04:55:51+00:00
+1002467,,0,tpa-171058db0c4c5c,mp-3a9a65ddeafe8c6d,core_capital_only,no_exact_identifier_match,,Permitting/Submittals Approval,,Wastewater Pumping Station Rehabilitation Prescott PS,2026-08-28T04:55:51+00:00
+1002477,,0,tpa-3c9b63cd8b2149,mp-37820add83017626,core_capital_only,no_exact_identifier_match,,60% Design Completion,,JPA- FDOT Height Multimodal Improvements,2026-08-28T04:55:51+00:00
+1002495,,0,tpa-86241ed55967c4;tpa-d92cfb89eb2d56,mp-84957eeb62d97645;mp-c0d8ba258c988cae,core_capital_only,no_exact_identifier_match,,,,,2026-08-28T04:55:51+00:00
+1002495A,,0,tpa-86241ed55967c4,mp-c0d8ba258c988cae,core_capital_only,no_exact_identifier_match,,Closeout,,Wastewater Pumping Station Rehabilitation Parke East PS,2026-08-28T04:55:51+00:00
+1002495B,,0,tpa-39b93d46a11269,mp-4e185005a01595ad,core_capital_only,no_exact_identifier_match,,Construction,,Wastewater Pumping Station Rehabilitation Idlewild PS,2026-08-28T04:55:51+00:00
+1002526,bbp-fca857ed2896cea2,1,,,budget_book_only,no_exact_identifier_match,,,Fire Station No 6 Expansion and Property Acquisition,,2026-08-28T04:55:51+00:00
+1002528,bbp-2e4c30a180aba1f6,1,,,budget_book_only,no_exact_identifier_match,,,Fire Station No 9 Renovations,,2026-08-28T04:55:51+00:00
+1002529,bbp-429964a9c0964245,1,,,budget_book_only,no_exact_identifier_match,,,Electrical Upgrades,,2026-08-28T04:55:51+00:00
+1002530,bbp-4f954ad56ff93faf,1,,,budget_book_only,no_exact_identifier_match,,,Fire Suppression Repairs and Upgrades,,2026-08-28T04:55:51+00:00
+1002531,bbp-0f6331690cde8efa,1,,,budget_book_only,no_exact_identifier_match,,,HVAC Repairs and Upgrades,,2026-08-28T04:55:51+00:00
+1002533,bbp-5586bbe63d9ac93c,1,,,budget_book_only,no_exact_identifier_match,,,Facility Lighting Upgrades,,2026-08-28T04:55:51+00:00
+1002534,bbp-a4a1fea7b4411ed2,1,,,budget_book_only,no_exact_identifier_match,,,Structural Repairs and Improvements,,2026-08-28T04:55:51+00:00
+1002536,bbp-d1dcb7ab84eed40a,1,,,budget_book_only,no_exact_identifier_match,,,Pam Iorio Garage Elevators and Fire Alarm Modernization,,2026-08-28T04:55:51+00:00
+1002543,bbp-d52193f1c0535e62,1,,,budget_book_only,no_exact_identifier_match,,,FS No 15 Generator Infrastructure Upgrade,,2026-08-28T04:55:51+00:00
+1002545,bbp-a9f1f05d3e083bed,1,,,budget_book_only,no_exact_identifier_match,,,FS No 10 Generator Infrastructure Upgrade,,2026-08-28T04:55:51+00:00
+1002546,bbp-6800e3013cd0811d,1,,,budget_book_only,no_exact_identifier_match,,,FS No 5 Generator Infrastructure Upgrade,,2026-08-28T04:55:51+00:00
+1002548,bbp-19516b6bac8cbb4c,1,,,budget_book_only,no_exact_identifier_match,,,FS No 13 Generator Infrastructure Upgrade,,2026-08-28T04:55:51+00:00
+1002549,bbp-8748f98bc70ad87b,1,,,budget_book_only,no_exact_identifier_match,,,FS No 12 Generator Infrastructure Upgrade,,2026-08-28T04:55:51+00:00
+1002551,bbp-9664a9f5df7d4de0,1,,,budget_book_only,no_exact_identifier_match,,,FS No 3 Generator Infrastructure Upgrade,,2026-08-28T04:55:51+00:00
+1002552,bbp-6bfd8360c564670c,1,,,budget_book_only,no_exact_identifier_match,,,FS No 18 Generator Infrastructure Upgrade,,2026-08-28T04:55:51+00:00
+1002555,bbp-ad3b7f7943f1d75d,1,,,budget_book_only,no_exact_identifier_match,,,FS No 6 Exterior Brick Upgrade & Waterproofing,,2026-08-28T04:55:51+00:00
+1002562,bbp-cafe91a2c2f60e9d,1,,,budget_book_only,no_exact_identifier_match,,,Tampa Municipal Office Bldg Lobby Upgrades,,2026-08-28T04:55:51+00:00
+1002566,,0,tpa-6b6a6e319bc8a7,mp-376d0a4e4be09e74,core_capital_only,no_exact_identifier_match,,Construction in Progress,,Gunlock PS Generator Addition,2026-08-28T04:55:51+00:00
+1002569,,0,tpa-d1d7711eb2fdf9,mp-d3de8b33b31c911d,core_capital_only,no_exact_identifier_match,,Permitting/Submittals Approval,,Swann Pumping Station Generator Installation,2026-08-28T04:55:51+00:00
+1002581,,0,tpa-294e58872d51d2,mp-0e44ec660dc8e956,core_capital_only,no_exact_identifier_match,,Planning,,Main Street Park,2026-08-28T04:55:51+00:00
+1002583,bbp-bb1df4b2c4617ed3,1,,,budget_book_only,no_exact_identifier_match,,,Port Tampa Community Center Air Conditioning Upgrade,,2026-08-28T04:55:51+00:00
+1002584,,0,tpa-9409ac3893adef,mp-73c7b5180cae1b07,core_capital_only,no_exact_identifier_match,,Planning,,Bermuda Blvd Complete Streets and Seawall (Design),2026-08-28T04:55:51+00:00
+1002587,,0,tpa-ee4ec0506c52e7,mp-0bb4d12a5bfcc75b,core_capital_only,no_exact_identifier_match,,Construction in Progress,,"Green Spine Cycle Track, Phase 2A",2026-08-28T04:55:51+00:00
+1002588.1,,0,tpa-010abcff64992e;tpa-f4bf3749f0bc89,mp-45550024a786d471;mp-77b0a772ff6e05a2,core_capital_only,no_exact_identifier_match,,,,,2026-08-28T04:55:51+00:00
+1002588.2,,0,tpa-0e542856d02973;tpa-1d4651d0b0d880;tpa-aa89455ae92488;tpa-ab88120e4e2cf5;tpa-b2ff57e165748b;tpa-c9f2fb736272f6;tpa-de3734e9f296af;tpa-e8eb05f64083fb,mp-060f36ab83f938ac;mp-39619efb1fc0ac0a;mp-6b45eee6a856d47a;mp-9c8f740d0b4263ce;mp-cfc71f330604b3b0;mp-d9ecfe5a934e5b71;mp-de1498aa7a9d5c89;mp-fef6b5142643587d,core_capital_only,no_exact_identifier_match,,,,,2026-08-28T04:55:51+00:00
+1002630,,0,tpa-a78f4c57d3248a,mp-6a1f7b0ff1c2af8d,core_capital_only,no_exact_identifier_match,,30% Design Completion,,MacDill Air Force Base Access Improvements (Interbay Blvd between West Shore Blvd and S. Bayshore Blvd),2026-08-28T04:55:51+00:00
+1002651,,0,tpa-c6802e639e44db,mp-4e9b058278970aeb,core_capital_only,no_exact_identifier_match,,Consultant/Contractor Selection Process,,Forest Hills Park Pump Station,2026-08-28T04:55:51+00:00
+1002652,,0,tpa-039a75ed644bd4,mp-dc115e78b633c4c2,core_capital_only,no_exact_identifier_match,,Planning,,University Pumping Station Rehabilitation,2026-08-28T04:55:51+00:00
+1002661,,0,tpa-a8886e3a8ac0a2,mp-978665d9cb6b3e8e,core_capital_only,no_exact_identifier_match,,30% Design Completion,,Lakeshore PS Force Main Replacement,2026-08-28T04:55:51+00:00
+1002695,,0,tpa-664cf8ba630bcc,mp-0f0d5dffb38d08a4,core_capital_only,no_exact_identifier_match,,Construction in Progress,,30th St and Fowler - USF FM Extension,2026-08-28T04:55:51+00:00
+1002702,bbp-ab9440a68f0912be,1,,,budget_book_only,no_exact_identifier_match,,,TMOB Elevator Upgrade,,2026-08-28T04:55:51+00:00
+1002780,bbp-6291bd5e6472ade8,1,,,budget_book_only,no_exact_identifier_match,,,Coachman Avenue Wastewater Improvements,,2026-08-28T04:55:51+00:00
+1002797,,0,tpa-7d5a8bdb159610,mp-bc5f38e5b36b7e64,core_capital_only,no_exact_identifier_match,,Contract Negotiations,,Picnic Island Nature Based Solutions Design,2026-08-28T04:55:51+00:00
+1002808,,0,tpa-f8b080678d224d,mp-1ec2d1f574a3b46f,core_capital_only,no_exact_identifier_match,,30% Design Completion,,W Cypress Street Resurfacing (Zone 1) From N Obrien St to N Himes Ave,2026-08-28T04:55:51+00:00
+1002809,,0,tpa-52fa8446b8a3cd,mp-d95dc9e6f0da3d35,core_capital_only,no_exact_identifier_match,,30% Design Completion,,N Boulevard Resurfacing from W Green St to W Dr MLK Blvd,2026-08-28T04:55:51+00:00
+1002810,,0,tpa-1b756144998eca,mp-ce7e6364460480bc,core_capital_only,no_exact_identifier_match,,30% Design Completion,,W Cypress Street Resurfacing (Zone 2) from N Himes Ave to North Blvd,2026-08-28T04:55:51+00:00
+1002811,,0,tpa-0cb5c8fa34eba7;tpa-f51432f4534560,mp-184ff40a4985d20a;mp-92a712fc00addee9,core_capital_only,no_exact_identifier_match,,,,,2026-08-28T04:55:51+00:00
+1002812,,0,tpa-3721380cc923a7,mp-3d3e5ba593cbec57,core_capital_only,no_exact_identifier_match,,Permitting/Submittals Approval,,E Yukon Street Resurfacing from N Florida Ave to Nebraska Ave,2026-08-28T04:55:51+00:00
+1002814,,0,tpa-057423477d6ecf,mp-99e2b9dbeb0025d9,core_capital_only,no_exact_identifier_match,,30% Design Completion,,N 34th Street ADA Improvements from 29th Ave to 33rd Ave,2026-08-28T04:55:51+00:00
+1002815,bbp-16507f9f6c403ce4,1,,,budget_book_only,no_exact_identifier_match,,,MacDill Ave from Kennedy to Main Street,,2026-08-28T04:55:51+00:00
+1002816,bbp-a4da3763d05015eb,1,,,budget_book_only,no_exact_identifier_match,,,Lois Ave from W Cleveland St to SR616/Boy Scout Blvd,,2026-08-28T04:55:51+00:00
+1002827,bbp-6f463dd6b933a176,1,,,budget_book_only,no_exact_identifier_match,,,Trilby Pumping Station Rehabilitation,,2026-08-28T04:55:51+00:00
+1002829,bbp-1d99fee190bd0c4d,1,,,budget_book_only,no_exact_identifier_match,,,Knights Pumping Station Rehabilitation,,2026-08-28T04:55:51+00:00
+1002832,bbp-f51a63781619d2f9,1,,,budget_book_only,no_exact_identifier_match,,,Severn Pumping Station Rehabilitation,,2026-08-28T04:55:51+00:00
+1002862,bbp-e6f7d2b554e40550,1,,,budget_book_only,no_exact_identifier_match,,,Yellow Jacket Improvements,,2026-08-28T04:55:51+00:00
+1002903,,0,tpa-9df29b136b10b2,mp-d0b7417db607c786,core_capital_only,no_exact_identifier_match,,Construction in Progress,,MLK Resurfacing from Air Cargo to Dale Mabry,2026-08-28T04:55:51+00:00
+1002914,,0,tpa-808aa21dd5c136,mp-d79cf880c7c462e6,core_capital_only,no_exact_identifier_match,,Permitting/Submittals Approval,,New Tampa Blvd Corridor Improvements From Meadow Pine Dr. to Bruce B. Downs Blvd. (Resurfacing),2026-08-28T04:55:51+00:00
+1002935,,0,tpa-d3ca81ecd3bf22,mp-6693b798ceab2adb,core_capital_only,no_exact_identifier_match,,Construction in Progress,,Belmont Heights Gravity Sewer CIPP Lining,2026-08-28T04:55:51+00:00
+1002941,,0,tpa-89828e522644fb,mp-01acd6a2a2d5d0df,core_capital_only,no_exact_identifier_match,,30% Design Completion,,Ybor PS FM Rehabilitation,2026-08-28T04:55:51+00:00
+1002971,,0,tpa-224cc398cbea00,mp-41b310b9a53ffd04,core_capital_only,no_exact_identifier_match,,30% Design Completion,,Busch Blvd Trunk Sewer Rehabilitation by CIPP Lining,2026-08-28T04:55:51+00:00
+1003003,bbp-45cc8b83eae92b33;bbp-f325e0da7d037697,2,,,budget_book_only,no_exact_identifier_match,,,Standby Generators for Gomez and Laurel Pumping Stations,,2026-08-28T04:55:51+00:00
+1003004,,0,tpa-cfa1d97c9d1567,mp-717eb8548a5de273,core_capital_only,no_exact_identifier_match,,Permitting/Submittals Approval,,Neighborhood Improvements- West Riverside Heights,2026-08-28T04:55:51+00:00
+102575,,0,tpa-b4ab7c66d00b4a,mp-ca99448769b9053b,core_capital_only,no_exact_identifier_match,,Closeout,,Commerce Palms Dr and Compton Dr,2026-08-28T04:55:51+00:00
+496,,0,tpa-158a54490ff1e1;tpa-a77071105ef227,mp-87cb7e623827d062;mp-8fb51e1bfc25d775,core_capital_only,no_exact_identifier_match,,,,,2026-08-28T04:55:51+00:00
+534007,,0,tpa-b84ad11a207254,mp-17ea3d4511e304c1,core_capital_only,no_exact_identifier_match,,Closeout,,CRA- ET Memorial Park Cemetery Fencing,2026-08-28T04:55:51+00:00
+N/A,,0,tpa-d19a0df1935586;tpa-d8a0505020d69d;tpa-df2cde3408e1cf;tpa-e3870c38d407de;tpa-f56607de0ed61e;tpa-fcb5e1c46a52dc,mp-05c9b79a4230c8cf;mp-467d9cef47044bf7;mp-7e993e67da65a2bf;mp-81e6cf7fec08acc9;mp-dbcb0b9613578761;mp-f396ee701b735147,core_capital_only,no_exact_identifier_match,,,,,2026-08-28T04:55:51+00:00
+P&R20002,,0,tpa-7ee12fe4519bd8,mp-7eb3d3a44d0c66ac,core_capital_only,no_exact_identifier_match,,90% Design Completion,,Purity Springs Restoration and Living Shoreline,2026-08-28T04:55:51+00:00
+P&R22009,,0,tpa-b238c6fabfa6dc,mp-41b54a4ea265dcc4,core_capital_only,no_exact_identifier_match,,Construction in Progress,,Rey Park Improvements,2026-08-28T04:55:51+00:00
+P&R22010,,0,tpa-c5b3d6f07b2f6d,mp-6c9f0ac6cf58db07,core_capital_only,no_exact_identifier_match,,Construction in Progress,,Salcines Park Improvements,2026-08-28T04:55:51+00:00
+P&R22013,,0,tpa-f05d147a1350ac,mp-afdd63ce998db22d,core_capital_only,no_exact_identifier_match,,Planning,,Gandy Park South and A. J. Palonis Park Improvements,2026-08-28T04:55:51+00:00
+P&R22018,,0,tpa-d2e578d5a8c434,mp-ae32b0e9efba3deb,core_capital_only,no_exact_identifier_match,,90% Design Completion,,"Greenways, Trail & Gateway Sign - New Tampa Nature Park",2026-08-28T04:55:51+00:00
+P&R22021,,0,tpa-6ee9a2e188bdf2,mp-5b3236551618ebf4,core_capital_only,no_exact_identifier_match,,Permitting/Submittals Approval,,Rivercrest Park Boardwalk Renovation,2026-08-28T04:55:51+00:00
+P&R22022,,0,tpa-8401b9481d33dc,mp-78db75e110922b51,core_capital_only,no_exact_identifier_match,,Construction in Progress,,East Tampa Recreational Complex,2026-08-28T04:55:51+00:00
+PR-19003,,0,tpa-a01bee6279cad3,mp-b1f4d6ee2093319e,core_capital_only,no_exact_identifier_match,,Construction in Progress,,Kid Mason Community Center Renovations,2026-08-28T04:55:51+00:00
+PR-21017,,0,tpa-4ef4bb4c206a34,mp-721d70d7330e949c,core_capital_only,no_exact_identifier_match,,Permitting/Submittals Approval,,Citywide Dock & Boardwalk Replacement - Davis Islands Seaplane Basin Mooring Field,2026-08-28T04:55:51+00:00
+PR-22017,,0,tpa-98cce022ad94b0,mp-f05db0172ecd5bbf,core_capital_only,no_exact_identifier_match,,Construction in Progress,,Herman Massey Park Rehabilitation,2026-08-28T04:55:51+00:00
+SW250001,,0,tpa-7cc26674fff57a,mp-233d6daac7d83ca9,core_capital_only,no_exact_identifier_match,,,,43rd St Drainage Improvements,2026-08-28T04:55:51+00:00
+SW250002,,0,tpa-36cfe6334670c3,mp-6ddc07a1066723e6,core_capital_only,no_exact_identifier_match,,P3: Procurement,,Grady Ave Drainage Improvements,2026-08-28T04:55:51+00:00
+SW250003,,0,tpa-c6802e639e44db,mp-4e9b058278970aeb,core_capital_only,no_exact_identifier_match,,Consultant/Contractor Selection Process,,Forest Hills Park Pump Station,2026-08-28T04:55:51+00:00
+SW40003,,0,tpa-c06a1f03447b23,mp-801feb9b4e211548,core_capital_only,no_exact_identifier_match,,Construction in Progress,,S.E. Seminole Heights Floodings Relief,2026-08-28T04:55:51+00:00
+SW40004,,0,tpa-230fc3f6aaf221,mp-f4dbe376cd4b7e0a,core_capital_only,no_exact_identifier_match,,Construction in Progress,,"Lower Peninsula, S.E. Region Flooding Relief",2026-08-28T04:55:51+00:00
+SW40006,,0,tpa-323fcf4dc86010,mp-d318a5a401466b53,core_capital_only,no_exact_identifier_match,,P2: Design,,Golfview Flooding Relief,2026-08-28T04:55:51+00:00
+SW40007,,0,tpa-8b45dcb5c28c83,mp-bf56856019c64435,core_capital_only,no_exact_identifier_match,,Planning,,South Howard Flood Relief Project,2026-08-28T04:55:51+00:00
+SW50003,,0,tpa-88e454a00b7117,mp-bb23e247f9db6f4c,core_capital_only,no_exact_identifier_match,,Closeout,,Hyde Park Groundwater Diversion,2026-08-28T04:55:51+00:00
+SW50004,,0,tpa-7657433ed52a64,mp-d5b2b73c2cdcebe0,core_capital_only,no_exact_identifier_match,,Construction in Progress,,Manhattan: Vasconia to Obispo Flooding Relief-Phase 1,2026-08-28T04:55:51+00:00
+SW50006,,0,tpa-5a2f97b3a412d4,mp-5db1f3cd4dba79f8,core_capital_only,no_exact_identifier_match,,Planning,,Lamb Canal Rehabilitation & Flood Relief,2026-08-28T04:55:51+00:00
+SW50007,,0,tpa-55828ee72706f4,mp-de15e43fa74c3463,core_capital_only,no_exact_identifier_match,,90% Design Completion,,Lantana-Poinsettia Pump Station,2026-08-28T04:55:51+00:00
+SW50009,,0,tpa-42dcf7268b88bc,mp-553fc659c7a3e367,core_capital_only,no_exact_identifier_match,,Construction in Progress,,Copeland Park Pump Station,2026-08-28T04:55:51+00:00
+SW50011,,0,tpa-1e43ec28385c2b,mp-a8136ee75f8d08de,core_capital_only,no_exact_identifier_match,,Closeout,,Okara & 26th St-Force Main,2026-08-28T04:55:51+00:00
+SW50019,,0,tpa-ea21c7053f823c;tpa-fb92843026f301,mp-2f4b27b5cf65ffe9;mp-e0b6799a21df9849,core_capital_only,no_exact_identifier_match,,,,,2026-08-28T04:55:51+00:00
+SW50020,,0,tpa-a68014619dcb8d,mp-28c36caec176d72c,core_capital_only,no_exact_identifier_match,,Closeout,,NTCB 99TH Ave-Pond Expansion,2026-08-28T04:55:51+00:00
+SW50021,,0,tpa-8eb82bbd192298,mp-df30d9feab4fdcd4,core_capital_only,no_exact_identifier_match,,30% Design Completion,,NTCB Elmer Pond Expansion,2026-08-28T04:55:51+00:00
+SW60000,,0,tpa-a9721ae8eb3ffb,mp-876eb7a3833290e6,core_capital_only,no_exact_identifier_match,,Construction in Progress,,Clark & 30th St Pipe Relocation,2026-08-28T04:55:51+00:00
+SW60001,,0,tpa-0cd62d9174a7bf;tpa-f65d4372ded97d,mp-1af1db86251fb8b4;mp-a72d7d990072bc34,core_capital_only,no_exact_identifier_match,,,,,2026-08-28T04:55:51+00:00
+SW60004,,0,tpa-cd81628c7943f6,mp-e0b433b4d68d81ed,core_capital_only,no_exact_identifier_match,,Project Startup,,North Ashley Pond Expansion,2026-08-28T04:55:51+00:00
+SW60006,,0,tpa-0b19c44bee2529,mp-6adca0715afa9f71,core_capital_only,no_exact_identifier_match,,Construction in Progress,,Mabel North of Henry,2026-08-28T04:55:51+00:00
+SW60007,,0,tpa-abe97955acb085,mp-bcd6fc6d59b32413,core_capital_only,no_exact_identifier_match,,90% Design Completion,,Woodmere & Lois,2026-08-28T04:55:51+00:00
+SW60008,,0,tpa-3bc05d25e4572c,mp-afeb0589bc33a70b,core_capital_only,no_exact_identifier_match,,Cancelled,,2504 Gardner Ct,2026-08-28T04:55:51+00:00
+SW60009,,0,tpa-72d6b971262a80,mp-ee839b40ff289133,core_capital_only,no_exact_identifier_match,,90% Design Completion,,Conover and 13th,2026-08-28T04:55:51+00:00
+SW60011,,0,tpa-4ada1f6c3013a6,mp-e5d954226eb4cddd,core_capital_only,no_exact_identifier_match,,Closeout,,Virginia Avenue Pumping Station Drainage Improvements,2026-08-28T04:55:51+00:00
+SW60012,,0,tpa-0ab058157c6fd5,mp-9069ecd2cec1fccf,core_capital_only,no_exact_identifier_match,,Planning,,Manhattan : Obispo to Bay to Bay Flooding Relief-Phase 2,2026-08-28T04:55:51+00:00
+SW60013,,0,tpa-fe99d021a307df,mp-d2c8607cb349a348,core_capital_only,no_exact_identifier_match,,30% Design Completion,,NTCB 99th Ave -West Pond Expansion,2026-08-28T04:55:51+00:00
+TBD,,0,tpa-8a98b00f6eebee;tpa-c16d6435499fba,mp-4bd2f7eb10777841;mp-e1dbf8eac36866aa,core_capital_only,no_exact_identifier_match,,,,,2026-08-28T04:55:51+00:00
+TRANS10001,,0,tpa-129823eaeec944,mp-76406d6bba4e6d29,core_capital_only,no_exact_identifier_match,,Construction In Progress,,21st St and Palm Ave - Traffic Signal Upgrade,2026-08-28T04:55:51+00:00
+TRANS10020,,0,tpa-60a5c6d9e777d0,mp-ea0f65fb3845ce9b,core_capital_only,no_exact_identifier_match,,Closeout,,Main Street and Rome Avenue Signal Upgrade,2026-08-28T04:55:51+00:00
+TRANS10022,,0,tpa-e3d74ebeda0a07,mp-5832cd9a2ac6514c,core_capital_only,no_exact_identifier_match,,Construction in Progress,,Cleveland St and Rome Ave - Traffic Signal,2026-08-28T04:55:51+00:00
+TRANS10023,,0,tpa-7dac0bb1eab9db,mp-20350cb84db6c46e,core_capital_only,no_exact_identifier_match,,Construction in Progress,,Platt St and Fremont Ave - Traffic Signal,2026-08-28T04:55:51+00:00
+TRANS10027,,0,tpa-ce80fa4571c44b,mp-6ac80baeea03ddd1,core_capital_only,no_exact_identifier_match,,Closeout,,Sligh Ave and 30th St,2026-08-28T04:55:51+00:00
+TRANS10032,,0,tpa-b4ab7c66d00b4a,mp-ca99448769b9053b,core_capital_only,no_exact_identifier_match,,Closeout,,Commerce Palms Dr and Compton Dr,2026-08-28T04:55:51+00:00
+TRANS10033,,0,tpa-fcb5e1c46a52dc,mp-dbcb0b9613578761,core_capital_only,no_exact_identifier_match,,30% Design Completion,,Columbus Dr & Rome Ave - New Traffic Signal,2026-08-28T04:55:51+00:00
+TRANS10034,,0,tpa-d3f118a3b1c724,mp-f00fb7686c9ce551,core_capital_only,no_exact_identifier_match,,30% Design Completion,,S West Shore Blvd and W Tyson Ave Traffic Signal,2026-08-28T04:55:51+00:00
+TRANS10035,,0,tpa-d19a0df1935586,mp-467d9cef47044bf7,core_capital_only,no_exact_identifier_match,,Closeout,,14th St (Av Republica De Cuba) & 21st Ave,2026-08-28T04:55:51+00:00
+TRANS10038,,0,tpa-86d3ed603df1e9,mp-74cbf44a710c1699,core_capital_only,no_exact_identifier_match,,Closeout,,Ashley and Madison - Signals (SMD),2026-08-28T04:55:51+00:00
+TRANS10039,,0,tpa-f56607de0ed61e,mp-7e993e67da65a2bf,core_capital_only,no_exact_identifier_match,,60% Design Completion,,Himes Ave & Gandy Blvd - Traffic Signal Upgrade,2026-08-28T04:55:51+00:00
+TRANS10040,,0,tpa-e3870c38d407de,mp-81e6cf7fec08acc9,core_capital_only,no_exact_identifier_match,,Planning,,Bayshore Blvd & Swann Ave - New Traffic Signal,2026-08-28T04:55:51+00:00
+TRANS10041,,0,tpa-df2cde3408e1cf,mp-05c9b79a4230c8cf,core_capital_only,no_exact_identifier_match,,60% Design Completion,,MacDill Ave & Gandy Blvd - Traffic Signal Upgrade,2026-08-28T04:55:51+00:00
+TRANS10042,,0,tpa-d8a0505020d69d,mp-f396ee701b735147,core_capital_only,no_exact_identifier_match,,30% Design Completion,,Manhattan Ave & Bay to Bay Blvd - Traffic Signal Upgrade,2026-08-28T04:55:51+00:00
+TRANS20009,,0,tpa-14c09ed66d91b5,mp-82caae22266a93a9,core_capital_only,no_exact_identifier_match,,Closeout,,Sidewalks- 9th St (Bougainvillea Ave to Linebaugh Ave),2026-08-28T04:55:51+00:00
+TRANS20014,,0,tpa-2ed8da642d70ff,mp-4ca9962761cd97bd,core_capital_only,no_exact_identifier_match,,90% Design Completion,,Cass St Bridge (#105502) Electrical/Mechanical Rehabilitation,2026-08-28T04:55:51+00:00
+TRANS20023,,0,tpa-37222f224d7341,mp-1699bf0f3b6906fc,core_capital_only,no_exact_identifier_match,,Construction in Progress,,El Prado Blvd. Complete Streets & Sidewalks (Omar Ave to Lois Ave; Lois Ave to Bayshore Blvd),2026-08-28T04:55:51+00:00
+TRANS20026,,0,tpa-86ee52822415f1,mp-cd580417038f78a5,core_capital_only,no_exact_identifier_match,,Closeout,,Floribraska Ave (Tampa St to 9th St),2026-08-28T04:55:51+00:00
+TRANS20030,,0,tpa-a5f28570fd23b1,mp-ac20d1ed6d23f2bd,core_capital_only,no_exact_identifier_match,,Closeout,,Gray St Bike Blvd. (West Shore Blvd to Rome Ave),2026-08-28T04:55:51+00:00
+TRANS20031,,0,tpa-fad81e27486de4,mp-0f771ace7d974ddf,core_capital_only,no_exact_identifier_match,,Closeout,,Green ARTery - Segment D,2026-08-28T04:55:51+00:00
+TRANS20032,,0,tpa-7878b137016fca,mp-7ccf0e6c3039d506,core_capital_only,no_exact_identifier_match,,Closeout,,Green ARTery - Segment E,2026-08-28T04:55:51+00:00
+TRANS20033,,0,tpa-ee4ec0506c52e7,mp-0bb4d12a5bfcc75b,core_capital_only,no_exact_identifier_match,,Construction in Progress,,"Green Spine Cycle Track, Phase 2A",2026-08-28T04:55:51+00:00
+TRANS20035,,0,tpa-2c6a5402a237c7,mp-46bbebf75623e182,core_capital_only,no_exact_identifier_match,,Closeout,,"Green Spine Cycle Track, Segment 2B",2026-08-28T04:55:51+00:00
+TRANS20038,,0,tpa-f9767a9e60742a,mp-86a712d622196023,core_capital_only,no_exact_identifier_match,,Closeout,,"Green Spine Cycle Track, Phase 3B",2026-08-28T04:55:51+00:00
+TRANS20039,,0,tpa-6c7fad2193a1ef,mp-f0c72b9ffcfe34ed,core_capital_only,no_exact_identifier_match,,Closeout,,"Green Spine Cycle Track, Phase 3C",2026-08-28T04:55:51+00:00
+TRANS20044,,0,tpa-e9b7d55940a116,mp-576be9adc88f319e,core_capital_only,no_exact_identifier_match,,Closeout,,Sidewalks- Hubert St (W Cypress to W Main St),2026-08-28T04:55:51+00:00
+TRANS20048,,0,tpa-c794ce8bbe5cd2,mp-18b87d98c42d7d35,core_capital_only,no_exact_identifier_match,,30% Design Completion,,InVision Streetcar (Design Only),2026-08-28T04:55:51+00:00
+TRANS20050,,0,tpa-60fa1e9349c074,mp-34f011fe38d212ef,core_capital_only,no_exact_identifier_match,,30% Design Completion,,Doyle Carlton Dr & Laurel St Intersection Improvements,2026-08-28T04:55:51+00:00
+TRANS20079,,0,tpa-a1b0cac407d6e5,mp-be1ab01fc577d0a7,core_capital_only,no_exact_identifier_match,,Construction in Progress,,West River District Multi-Modal Network and Safety Improvements BUILD Segments 1 - 6,2026-08-28T04:55:51+00:00
+TRANS20091,,0,tpa-287723afdc6d7a,mp-6830ae56975ff4bc,core_capital_only,no_exact_identifier_match,,30% Design Completion,,Twiggs St (Ashley Dr to Nebraska Ave),2026-08-28T04:55:51+00:00
+TRANS20119.1,,0,tpa-0006d945e2fdb6,mp-eb1497156de231fa,core_capital_only,no_exact_identifier_match,,Closeout,,Downtown Core Complete Streets (Brorein St from Ashley Dr to Morgan St),2026-08-28T04:55:51+00:00
+TRANS20119.2,,0,tpa-d60b774d24d302,mp-95d84d187aef7d2f,core_capital_only,no_exact_identifier_match,,60% Design Completion,,Downtown Core Complete Streets (Florida Ave from Channelside Dr to Jackson St),2026-08-28T04:55:51+00:00
+TRANS20119.3,,0,tpa-613081471e1d62,mp-7b479705c969adb9,core_capital_only,no_exact_identifier_match,,60% Design Completion,,Downtown Core Complete Streets (Tampa St from Brorein St to Jackson St),2026-08-28T04:55:51+00:00
+TRANS20120,,0,tpa-cfa1d97c9d1567,mp-717eb8548a5de273,core_capital_only,no_exact_identifier_match,,Permitting/Submittals Approval,,Neighborhood Improvements- West Riverside Heights,2026-08-28T04:55:51+00:00
+TRANS20122,,0,tpa-bf4daf624fdbb7,mp-4dae1974d5e5c802,core_capital_only,no_exact_identifier_match,,Closeout,,Tampa Palms Blvd Segment 1 (Bruce B. Downs to Bruce B. Downs)- SPM Design,2026-08-28T04:55:51+00:00
+TRANS20130,,0,tpa-5bb15542bb9d82,mp-3124fe647e8c246c,core_capital_only,no_exact_identifier_match,,Closeout,,Neighborhood Improvements- Belmar Shores,2026-08-28T04:55:51+00:00
+TRANS20133,,0,tpa-276e29cc0bfd56,mp-1ac35603f4693c03,core_capital_only,no_exact_identifier_match,,90% Design Completion,,Brorein St Bridge (#105501) Phase 2 Mechanical/ Electrical Rehabilitation,2026-08-28T04:55:51+00:00
+TRANS20134,,0,tpa-71346c0bba0c2c,mp-2823ebae0582ecf1,core_capital_only,no_exact_identifier_match,,90% Design Completion,,Brorein St Bridge (#105501) Phase 1 Structural Rehabilitation,2026-08-28T04:55:51+00:00
+TRANS20135,,0,tpa-98a17eb54517ba,mp-4ba7bc24f95c8f99,core_capital_only,no_exact_identifier_match,,30% Design Completion,,Lois Ave (Cleveland St to Boy Scout Blvd),2026-08-28T04:55:51+00:00
+TRANS20136,,0,tpa-493189ec1964dd,mp-15b066a282e5cb4d,core_capital_only,no_exact_identifier_match,,Closeout,,Glen Ave Sidewalk and Safety Improvements (Green St to Beach St),2026-08-28T04:55:51+00:00
+TRANS20140,,0,tpa-a230454c33a207,mp-55e885983673b34c,core_capital_only,no_exact_identifier_match,,90% Design Completion,,Hanna Avenue Phase II (22nd St to 30th St),2026-08-28T04:55:51+00:00
+TRANS20141,,0,tpa-9409ac3893adef,mp-73c7b5180cae1b07,core_capital_only,no_exact_identifier_match,,Planning,,Bermuda Blvd Complete Streets and Seawall (Design),2026-08-28T04:55:51+00:00
+TRANS20147,,0,tpa-a6334c218e962f,mp-9a6a43256bf764b7,core_capital_only,no_exact_identifier_match,,60% Design Completion,,N 24th Street (Hanna Ave to Sligh Ave),2026-08-28T04:55:51+00:00
+TRANS20148,,0,tpa-503e397e74a47a,mp-54773ec2ed266c53,core_capital_only,no_exact_identifier_match,,90% Design Completion,,30th and Sligh Intersection Improvements,2026-08-28T04:55:51+00:00
+TRANS20168.2,,0,tpa-6eb50cb55787ac,mp-468e9328484c35e4,core_capital_only,no_exact_identifier_match,,Planning,,MacDill Ave (Kennedy Blvd to Main St),2026-08-28T04:55:51+00:00
+TRANS20168.3,,0,tpa-59e6809d0f658f,mp-6f7b684c1c2dada7,core_capital_only,no_exact_identifier_match,,Planning,,MacDill Ave (Main St to Columbus Dr),2026-08-28T04:55:51+00:00
+TRANS20171,,0,tpa-f51432f4534560,mp-92a712fc00addee9,core_capital_only,no_exact_identifier_match,,Project Startup,,N 15th Street ADA Improvements from E 109th Ave to E Fowler Ave,2026-08-28T04:55:51+00:00
+TRANS20176,,0,tpa-a78f4c57d3248a,mp-6a1f7b0ff1c2af8d,core_capital_only,no_exact_identifier_match,,30% Design Completion,,MacDill Air Force Base Access Improvements (Interbay Blvd between West Shore Blvd and S. Bayshore Blvd),2026-08-28T04:55:51+00:00
+TRANS20177.1,,0,tpa-90a5446f3cdb57,mp-d7e0817eca744a1c,core_capital_only,no_exact_identifier_match,,Closeout,,30th St (E Busch Blvd to E Bougainvillea Ave) Segment 1 (Resurfacing),2026-08-28T04:55:51+00:00
+TRANS20177.2,,0,tpa-9e533d5d2e7928,mp-807349d6c8102cac,core_capital_only,no_exact_identifier_match,,60% Design Completion,,30th St (E Bougainvillea Ave to E Fowler Ave) Segment 2 (Resurfacing),2026-08-28T04:55:51+00:00
+TRANS20178,,0,tpa-5ab0e5aba72288,mp-58f1e03548254768,core_capital_only,no_exact_identifier_match,,Closeout,,O'Brien St - Segment 1 (Cypress St. to Spruce St.),2026-08-28T04:55:51+00:00
+TRANS20186,,0,tpa-10719fa88c8a1d,mp-b3c1ca3340def645,core_capital_only,no_exact_identifier_match,,90% Design Completion,,Franklin St and Fort Brooke Garage - Blank Out Signs,2026-08-28T04:55:51+00:00
+TRANS20187,,0,tpa-2695ad6313af38,mp-5dbb51491acf6003,core_capital_only,no_exact_identifier_match,,60% Design Completion,,Cass St Drawbridge Improvements,2026-08-28T04:55:51+00:00
+TRANS20188,,0,tpa-808aa21dd5c136,mp-d79cf880c7c462e6,core_capital_only,no_exact_identifier_match,,Permitting/Submittals Approval,,New Tampa Blvd Corridor Improvements From Meadow Pine Dr. to Bruce B. Downs Blvd. (Resurfacing),2026-08-28T04:55:51+00:00
+TRANS20189,,0,tpa-06cb3a9a352b94,mp-297b2266fad2d6cd,core_capital_only,no_exact_identifier_match,,30% Design Completion,,Hanna Avenue Phase I (24th St to CSX RR),2026-08-28T04:55:51+00:00
+TRANS20190,,0,tpa-9df29b136b10b2,mp-d0b7417db607c786,core_capital_only,no_exact_identifier_match,,Construction in Progress,,MLK Resurfacing from Air Cargo to Dale Mabry,2026-08-28T04:55:51+00:00
+TRANS20191,,0,tpa-55970080e03fd1,mp-0441f5e904278d00,core_capital_only,no_exact_identifier_match,,60% Design Completion,,"Drew Park CRA - Mobility, Connectivity, and Safety Improvements",2026-08-28T04:55:51+00:00
+TRANS20192,,0,tpa-0cb5c8fa34eba7,mp-184ff40a4985d20a,core_capital_only,no_exact_identifier_match,,60% Design Completion,,S Macdill Ave Resurfacing from W Gandy Blvd to W Bay to Bay Blvd,2026-08-28T04:55:51+00:00
+TRANS20196,,0,tpa-64dee70099c8c5,mp-4b74c0944386d0d7,core_capital_only,no_exact_identifier_match,,30% Design Completion,,N Boulevard from W Green St to W Dr MLK Blvd,2026-08-28T04:55:51+00:00
+TRANS20197,,0,tpa-28a7af3a4fd198,mp-8d910a9c8d816635,core_capital_only,no_exact_identifier_match,,Planning,,Pathways to Palmetto (Design-Build),2026-08-28T04:55:51+00:00
+TRANS20198,,0,tpa-7cd06363a5db6f,mp-4914733672868198,core_capital_only,no_exact_identifier_match,,Planning,,N Jefferson St - Channelside Dr to E Cass St,2026-08-28T04:55:51+00:00
+TRANS20201,,0,tpa-f8b080678d224d,mp-1ec2d1f574a3b46f,core_capital_only,no_exact_identifier_match,,30% Design Completion,,W Cypress Street Resurfacing (Zone 1) From N Obrien St to N Himes Ave,2026-08-28T04:55:51+00:00
+TRANS20202,,0,tpa-96076613355650,mp-d7643a26e985263e,core_capital_only,no_exact_identifier_match,,30% Design Completion,,W Cypress Street Resurfacing (Zone 2) from N Himes Ave to North Boulevard,2026-08-28T04:55:51+00:00
+TRANS20203,,0,tpa-5f7dc2b0ca5dc5,mp-c0aef85a2c9f148f,core_capital_only,no_exact_identifier_match,,Permitting/Submittals Approval,,E Yukon Street Resurfacing from N Florida Ave to N Nebraska Ave,2026-08-28T04:55:51+00:00
+TRANS20204,,0,tpa-057423477d6ecf,mp-99e2b9dbeb0025d9,core_capital_only,no_exact_identifier_match,,30% Design Completion,,N 34th Street ADA Improvements from 29th Ave to 33rd Ave,2026-08-28T04:55:51+00:00
+W70001,,0,tpa-9a365e0ded7d49,mp-1da2ead5e3e75b8c,core_capital_only,no_exact_identifier_match,,90% Design Completion,,Lykes Lane,2026-08-28T04:55:51+00:00
+W70005,,0,tpa-2b64f75f74fca0,mp-84731470e9ec4ba4,core_capital_only,no_exact_identifier_match,,60% Design Completion,,S. Himes WM R&R,2026-08-28T04:55:51+00:00
+W70020,,0,tpa-c658a3cc1fc9b2,mp-5647005e3afb125f,core_capital_only,no_exact_identifier_match,,Planning,,Broad Street WM Replacement,2026-08-28T04:55:51+00:00
+W70026,,0,tpa-2ebcfc1e77ead8,mp-ea9fc6c6c4b60949,core_capital_only,no_exact_identifier_match,,Planning,,Davis Island_2 WM Replacement,2026-08-28T04:55:51+00:00
+W70031,,0,tpa-7948b0b2ec74d1,mp-6667918782515c85,core_capital_only,no_exact_identifier_match,,Planning,,East 7th Ave WM Replacement_East,2026-08-28T04:55:51+00:00
+W70033,,0,tpa-7864f9b3d1cf9b,mp-09ad526a4a42681f,core_capital_only,no_exact_identifier_match,,Planning,,E Henry Ave WM Replacement,2026-08-28T04:55:51+00:00
+W70039,,0,tpa-0db9b0ea2daa64,mp-b9ace799226c3aed,core_capital_only,no_exact_identifier_match,,90% Design Completion,,Lois Ave,2026-08-28T04:55:51+00:00
+W70062,,0,tpa-76fb4f536f6530,mp-260a2eefcfb31c75,core_capital_only,no_exact_identifier_match,,Planning,,West River WM Replacement,2026-08-28T04:55:51+00:00
+WTR-18-0008,,0,tpa-bebd114ca3a098,mp-7621ed21efe7bebf,core_capital_only,no_exact_identifier_match,,Construction in Progress,,D. L. Tippin Chemical System Improvements,2026-08-28T04:55:51+00:00
+WTR-19-0002.1,,0,tpa-de7c2c537cb666,mp-de9b74e19a7f83e3,core_capital_only,no_exact_identifier_match,,Closeout,,High Service Pump Station (GMP 1),2026-08-28T04:55:51+00:00
+WTR-19-0002.2,,0,tpa-0519a7643e6f57,mp-ffaf6551b80f1f71,core_capital_only,no_exact_identifier_match,,Closeout,,High Service Pump Station (GMP 2),2026-08-28T04:55:51+00:00
+WTR-19-0004,,0,tpa-602f4535586997,mp-ed9dfb9c43a898bf,core_capital_only,no_exact_identifier_match,,Closeout,,Southeast Seminole Heights,2026-08-28T04:55:51+00:00
+WTR-19-0006,,0,tpa-ac008776d34431,mp-c3bc1086a6f5773c,core_capital_only,no_exact_identifier_match,,Final Inspection and Testing,,Morris Bridge East Ground Storage Tank Rehab,2026-08-28T04:55:51+00:00
+WTR-20-0001.10,,0,tpa-3637a9cfa2287a,mp-592d8e1a766306a6,core_capital_only,no_exact_identifier_match,,90% Design Completion,,DLT Master Plan DB Task Order 010 Ozone Improvements,2026-08-28T04:55:51+00:00
+WTR-20-0001.11,,0,tpa-3ec359f44a049e;tpa-9fdfcf578c4f85,mp-795bf8d8a7fb1471;mp-e96fe26336ec2aad,core_capital_only,no_exact_identifier_match,,,,,2026-08-28T04:55:51+00:00
+WTR-20-0001.13,,0,tpa-b58c22dbdb5b41,mp-98c9fc262e13b69c,core_capital_only,no_exact_identifier_match,,Construction in Progress,,DLTWTF Master Plan Task Order 013 Filter Improvements,2026-08-28T04:55:51+00:00
+WTR-20-0001.7,,0,tpa-d235d27a93974b,mp-4b232dbd379e17b5,core_capital_only,no_exact_identifier_match,,60% Design Completion,,DLTWTF MP Task Order 007 Deep Well Injection,2026-08-28T04:55:51+00:00
+WTR-20-0001.8,,0,tpa-758c4530ef19a7,mp-084eceedfaa8ccfa,core_capital_only,no_exact_identifier_match,,90% Design Completion,,DLTWTF MP Task Order 008 Raw Water Pump Station,2026-08-28T04:55:51+00:00
+WTR-20-0002.1,,0,tpa-31ac882cfd51ab,mp-3faef8e99cbd31bf,core_capital_only,no_exact_identifier_match,,Construction in Progress,,Foundation for Tampa's Neighborhoods Project_Forest Hills Area,2026-08-28T04:55:51+00:00
+WTR-20-0002.2,,0,tpa-e67b1d76ad5ab1,mp-d11f36c56861804a,core_capital_only,no_exact_identifier_match,,Construction in Progress,,Foundation for Tampa’s Neighborhoods Project_Virginia Park Area,2026-08-28T04:55:51+00:00
+WTR-20-0002.3,,0,tpa-0757d2714b69f8;tpa-c5747c295728cb,mp-498e97e7e6e7e435;mp-672262aa1c7a082a,core_capital_only,no_exact_identifier_match,,,,,2026-08-28T04:55:51+00:00
+WTR-20-0002.4,,0,tpa-ea487783c2cd04,mp-7999eba7d10df8c8,core_capital_only,no_exact_identifier_match,,Closeout,,Foundation for Tampa’s Neighborhoods Project_MacFarlane Park Area,2026-08-28T04:55:51+00:00
+WTR-20-0005.2-JFK Blvd,,0,tpa-5edb74c5732c81,mp-ea00733bf2c07e17,core_capital_only,no_exact_identifier_match,,Closeout,,JFK Blvd,2026-08-28T04:55:51+00:00
+WTR-20-0005.3-12th St,,0,tpa-18140cc0c8929a;tpa-5fef9ad1d2fa7a,mp-bf7ef0ccec866667;mp-c32be8968e35e32f,core_capital_only,no_exact_identifier_match,,,,,2026-08-28T04:55:51+00:00
+WTR-20-0005.3-W Chelsea St Transmission,bbp-f755579938378e88,1,tpa-9ca0598cb43d43;tpa-a16226972256e9,mp-6838019dd707edc0;mp-a25fca6d21af598e,ambiguous_multiple_core_activities,exact_city_project_id,Construction in Progress,,FY20 CIP Water Main Improvements Design-Build_W Chelsea St Transmission – GMP 5,,2026-08-28T04:55:51+00:00
+WTR-20-0005.3-W Riverside Heights,,0,tpa-2b1064aff1ae34;tpa-4c3987bb085709,mp-0bccbd347bf645aa;mp-31522aae86385744,core_capital_only,no_exact_identifier_match,,,,,2026-08-28T04:55:51+00:00
+WTR-20-0005.5-15th St,,0,tpa-72ec8daae55334,mp-5aa5751e654cafd5,core_capital_only,no_exact_identifier_match,,Planning,,FY20 CIP Water Main Improvements Design-Build_15th St – GMP5,2026-08-28T04:55:51+00:00
+WTR-20-0011,,0,tpa-30d21feab70465,mp-9e8cc066fb73a737,core_capital_only,no_exact_identifier_match,,60% Design Completion,,Ola Ave,2026-08-28T04:55:51+00:00
+WTR-20-0012,,0,tpa-098cbcedd446c3,mp-bd3c59f0de8c9eb0,core_capital_only,no_exact_identifier_match,,Closeout,,Yorkshire,2026-08-28T04:55:51+00:00
+WTR-20-0017,,0,tpa-530b9cd940a340,mp-5fcad53bdcf1abb9,core_capital_only,no_exact_identifier_match,,Closeout,,Morris Bridge Filter Roof Retro – COOP Site,2026-08-28T04:55:51+00:00
+WTR-21-0014,,0,tpa-77d281688e839d,mp-a83fec6c1cfa2b6c,core_capital_only,no_exact_identifier_match,,Project Startup,,Armory Gardens,2026-08-28T04:55:51+00:00
+WTR-21-0015,,0,tpa-d1773208bf209c,mp-cc4dd6d4f1822823,core_capital_only,no_exact_identifier_match,,Project Startup,,Jefferson,2026-08-28T04:55:51+00:00
+WTR-22-0004,,0,tpa-c2d811955a60f6,mp-fc9ca6498df84cdc,core_capital_only,no_exact_identifier_match,,60% Design Completion,,7th Ave WM Replacement,2026-08-28T04:55:51+00:00
+WTR-22-0005,,0,tpa-99347a82db3efc,mp-69764cbafd2db04a,core_capital_only,no_exact_identifier_match,,90% Design Completion,,Gray Gables,2026-08-28T04:55:51+00:00
+WTR-23-0001,,0,tpa-863274665dec07,mp-85cf5b83de585227,core_capital_only,no_exact_identifier_match,,30% Design Completion,,Palmetto Beach,2026-08-28T04:55:51+00:00
+WTR-23-0002,,0,tpa-0db9b0ea2daa64,mp-b9ace799226c3aed,core_capital_only,no_exact_identifier_match,,90% Design Completion,,Lois Ave,2026-08-28T04:55:51+00:00
+WTR-24-0001.2_North Ybor Phase I,,0,tpa-06cf2dffdb4440,mp-e760705c2c40e9f4,core_capital_only,no_exact_identifier_match,,60% Design Completion,,North Ybor Phase I,2026-08-28T04:55:51+00:00
+WTR-24-0001.2_Oakford Park Phase I,,0,tpa-b337e9926098ab,mp-d5c564c8a9750eae,core_capital_only,no_exact_identifier_match,,60% Design Completion,,Oakford Park Phase I,2026-08-28T04:55:51+00:00
+WTR-24-0001.3_E Arbor Heights_East Phase I,,0,tpa-bd13932492bdfe,mp-3bfd046808e1ca98,core_capital_only,no_exact_identifier_match,,60% Design Completion,,East Arbor Heights_East Phase I,2026-08-28T04:55:51+00:00
+WTR-24-0001.3_E Arbor Heights_West Phase I,,0,tpa-0ad909da2ce40b,mp-2ca438d94cc8b9d1,core_capital_only,no_exact_identifier_match,,60% Design Completion,,East Arbor Heights_West Phase I,2026-08-28T04:55:51+00:00
+WTR-24-0001.4_Hampton Terrace A,,0,tpa-377970771c9316,mp-8b80751cb1d3d03f,core_capital_only,no_exact_identifier_match,,90% Design Completion,,Hampton Terrace Project A,2026-08-28T04:55:51+00:00
+WTR-24-0001.4_Hampton Terrace B,,0,tpa-4b41720cf754c6,mp-cd84b4a520bce7b1,core_capital_only,no_exact_identifier_match,,60% Design Completion,,Hampton Terrace Project B,2026-08-28T04:55:51+00:00
+WTR-24-0009,,0,tpa-4334e855629a9e;tpa-baacbee6eacaf0,mp-3effa5c8d8265d7f;mp-42787e2e1d98f74f,core_capital_only,no_exact_identifier_match,,,,,2026-08-28T04:55:51+00:00
+WTR-24-0010,,0,tpa-72f4a0c1feefc0,mp-2a99f2a3835a5c8f,core_capital_only,no_exact_identifier_match,,Consultant/Contractor Selection Process,,Peter O Knight Project,2026-08-28T04:55:51+00:00
+WTR-24-0011,,0,tpa-1ea3e05b83e7c2,mp-605980ac0e97ada0,core_capital_only,no_exact_identifier_match,,30% Design Completion,,Coachman Ave,2026-08-28T04:55:51+00:00
+WTR-24-0018,,0,tpa-9d34844c6ba829,mp-5a2a3ae3d4495a8b,core_capital_only,no_exact_identifier_match,,Permitting/Submittals Approval,,Empedrado St,2026-08-28T04:55:51+00:00
+WTR-25-0002,,0,tpa-939fdc9d884da6,mp-91a92d1350504053,core_capital_only,no_exact_identifier_match,,30% Design Completion,,SE Lake Carroll WM Replacement,2026-08-28T04:55:51+00:00
+WTR-25-0003,,0,tpa-67961e1f4e58b9;tpa-afd81dcef4c512,mp-758a35aad6a2697a;mp-bb2f2f78c46fe575,core_capital_only,no_exact_identifier_match,,,,,2026-08-28T04:55:51+00:00
+WTR-25-0004,,0,tpa-ea50201a8b064c,mp-70de023036835fee,core_capital_only,no_exact_identifier_match,,30% Design Completion,,South Howard Water Improvement Project,2026-08-28T04:55:51+00:00
+WTR-25-0006,,0,tpa-37c22d5ebd6c37,mp-fdf47a94069373c5,core_capital_only,no_exact_identifier_match,,60% Design Completion,,Louisiana Ave Water Pipe Replacement,2026-08-28T04:55:51+00:00
+WTR-26-0005,,0,tpa-417fef4016218d,mp-863e7191d3b50138,core_capital_only,no_exact_identifier_match,,30% Design Completion,,Swann Ave WM Replacement,2026-08-28T04:55:51+00:00
+WTR-26-0006_Tampa Heights Phase I,,0,tpa-0b02b71e5595b6,mp-9f484a79f3025868,core_capital_only,no_exact_identifier_match,,30% Design Completion,,Tampa Heights WM Replacement Phase I,2026-08-28T04:55:51+00:00
+WTR-26-0006_Tampa Heights Phase II,,0,tpa-2048c8f04ec947,mp-759d113bfcbcbce7,core_capital_only,no_exact_identifier_match,,30% Design Completion,,Tampa Heights WM Replacement Phase II,2026-08-28T04:55:51+00:00
+WTR-26-0006_Tampa Heights Phase III,,0,tpa-1ba7d9bdab9565,mp-ec0cb34359442d95,core_capital_only,no_exact_identifier_match,,30% Design Completion,,Tampa Heights WM Replacement Phase III,2026-08-28T04:55:51+00:00
+WTR20001,,0,tpa-cd9ff596671203,mp-b1d4ab795bbb5322,core_capital_only,no_exact_identifier_match,,Planning,,DLT Master Plan,2026-08-28T04:55:51+00:00
+WTR20004,,0,tpa-271c511449f1e3,mp-8c26233768afda94,core_capital_only,no_exact_identifier_match,,Closeout,,DLT WTF Building Improvements,2026-08-28T04:55:51+00:00
+WTR20006,,0,tpa-e70b04f43c4362,mp-dea710fa90c62716,core_capital_only,no_exact_identifier_match,,Closeout,,North Embankment Remediation,2026-08-28T04:55:51+00:00
+WUR-19-0036,,0,tpa-ec09b5aee38fe0,mp-b359d9c8cc2f94a1,core_capital_only,no_exact_identifier_match,,Construction in Progress,,The Heights WM Improvement Project Along Florida Ave from Scott St to Palm Ave (Phase I),2026-08-28T04:55:51+00:00
+WUR-20-0009,,0,tpa-6b2e8e6ea29282,mp-ea045907e703ab2f,core_capital_only,no_exact_identifier_match,,Contract Negotiations,,COT S Manhattan Ave,2026-08-28T04:55:51+00:00
+WUR-20-0019,,0,tpa-48ce4f012a0d8e,mp-3db5c68b903d9bec,core_capital_only,no_exact_identifier_match,,90% Design Completion,,Brorein_Tampa St WM Abandonment,2026-08-28T04:55:51+00:00
+WUR-20-0035,,0,tpa-0bbca492f94243,mp-9f9d9eebddb807ab,core_capital_only,no_exact_identifier_match,,Closeout,,Lower Peninsula,2026-08-28T04:55:51+00:00
+WUR-22-0032,,0,tpa-2b64f75f74fca0,mp-84731470e9ec4ba4,core_capital_only,no_exact_identifier_match,,60% Design Completion,,S. Himes WM R&R,2026-08-28T04:55:51+00:00
+WUR-24-0009,,0,tpa-78ebc0296d7aaa,mp-c06012648361ea7a,core_capital_only,no_exact_identifier_match,,Project Startup,,The Heights WM Improvement Project Along Florida Ave from Palm Ave to Dr MLK JR Blvd (Phase II),2026-08-28T04:55:51+00:00
+WUR-25-0031,,0,tpa-bf4c16d65ebd7d,mp-1ede18ee97a86076,core_capital_only,no_exact_identifier_match,,30% Design Completion,,Warren Ave WM Replacement,2026-08-28T04:55:51+00:00

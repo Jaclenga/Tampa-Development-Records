@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Cross-table and semantic validation for the v0.2 release."""
+"""Cross-table and semantic validation for the current release."""
 
 from __future__ import annotations
 
@@ -19,6 +19,12 @@ except ImportError:  # Support direct execution: python scripts/validate_release
         CLAIM_RESULT_FIELDS, PHASE_QUOTAS, PROTOCOL_VERSION, RANDOM_SEED, REVIEW_FIELDS,
         SECOND_REVIEW_QUOTAS,
     )
+
+try:
+    from . import context_modules, ground_truth
+except ImportError:  # Support direct execution: python scripts/validate_release.py
+    import context_modules
+    import ground_truth
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -70,6 +76,11 @@ def main() -> None:
     amounts = read("investment_amounts.csv")
     match_audit = read("building_match_audit.csv")
     match_diagnostics = read("building_match_diagnostics.csv")
+    capital_budget = read("capital_budget_book_projects.csv")
+    capital_comparison = read("capital_budget_book_comparison.csv")
+    finance_events = read("public_finance_events.csv")
+    parcel_context = read("parcel_context.csv")
+    parcel_links = read("parcel_activity_links.csv")
     review2 = read("manual_validation_second_review.csv")
     census_records = read("bounded_census_records.csv")
     universes = read("source_universes.csv")
@@ -108,6 +119,23 @@ def main() -> None:
             for field in (feature.get("properties") or {}):
                 if field.lower() in PRIVACY_BLOCKED_FIELDS:
                     raw_privacy_fields.append(f"{path.name}:{field}")
+    context_privacy_fields = []
+    context_raw = ROOT / "data" / "context" / "raw"
+    for path in context_raw.glob("*.geojson"):
+        collection = json.loads(path.read_text(encoding="utf-8"))
+        for feature in collection.get("features", []):
+            for field in (feature.get("properties") or {}):
+                if field.lower() in context_modules.PRIVACY_BLOCKED_FIELDS:
+                    context_privacy_fields.append(f"{path.name}:{field}")
+    context_metadata_path = context_raw / "context_snapshot_metadata.json"
+    context_metadata = (
+        json.loads(context_metadata_path.read_text(encoding="utf-8"))
+        if context_metadata_path.exists() else {}
+    )
+    event_ids = {x["event_id"] for x in events}
+    event_source_keys = {x["source_record_key"] for x in events if x["event_type"] == "source_record_observed"}
+    parcel_folios = {x["folio"] for x in parcel_context}
+    context_project_ids = {x["city_project_id"] for x in capital_budget}
     checks = {
         "activity_ids_unique": len(activity_ids) == len(activities),
         "source_record_keys_unique": len(source_keys) == len(sources),
@@ -220,13 +248,68 @@ def main() -> None:
         "project_links_cover_every_activity_once": len(project_links) == len(activities) and {x["activity_id"] for x in project_links} == activity_ids,
         "project_links_reference_projects": all(x["master_project_id"] in master_ids for x in project_links),
         "candidate_merges_are_only_proposals": all(x["merge_applied"] == "no" and x["review_status"] == "pending_human_review" for x in candidates),
+        "event_ids_unique": len(event_ids) == len(events),
+        "events_reference_activities": all(x["activity_id"] in activity_ids for x in events),
         "events_reference_projects": all(x["master_project_id"] in master_ids for x in events),
-        "events_use_allowed_types": all(x["event_type"] in {
-            "permit_applied", "permit_issued", "inspection_passed", "inspection_failed", "final_inspection_passed",
-            "certificate_of_occupancy_issued", "construction_started", "substantial_completion", "project_closeout",
-            "permit_expired", "permit_cancelled", "planning_application"} for x in events),
-        "no_false_completion_events": not any(x["event_type"] in {"final_inspection_passed", "certificate_of_occupancy_issued", "substantial_completion"} for x in events),
+        "events_reference_source_records": all(x["source_record_key"] in source_keys for x in events),
+        "events_use_allowed_types": all(x["event_type"] in ground_truth.EVENT_TYPES for x in events),
+        "events_have_one_observation_per_source_feature": event_source_keys == source_keys and sum(
+            x["event_type"] == "source_record_observed" for x in events
+        ) == len(sources),
+        "events_expose_evidence_and_inference": all(
+            x["evidence_strength"] in {
+                "official_source_observation", "official_reported_date", "official_lifecycle_record"
+            } and x["is_inferred"] in {"yes", "no"} and x["interpretation_note"].strip()
+            for x in events
+        ),
+        "no_false_completion_events": not any(x["event_type"] in {
+            "final_inspection_passed", "temporary_co_issued",
+            "certificate_of_occupancy_issued", "construction_completion_reported",
+        } for x in events),
         "amounts_are_positive_and_typed": all(float(x["amount_usd"]) > 0 and x["amount_type"] and x["is_final"] == "unknown" for x in amounts),
+        "context_raw_snapshots_are_privacy_minimized": not context_privacy_fields,
+        "context_metadata_declares_separate_scope": (
+            bool(context_metadata)
+            and "separate from the eight-layer bounded census" in context_metadata.get("scope_note", "")
+        ),
+        "capital_budget_context_record_ids_unique": (
+            len({x["context_record_id"] for x in capital_budget}) == len(capital_budget)
+        ),
+        "capital_comparison_preserves_repeated_source_ids": all(
+            int(x["budget_book_record_count"]) == len(
+                [value for value in x["budget_book_context_record_ids"].split(";") if value]
+            )
+            for x in capital_comparison
+        ),
+        "capital_comparison_project_ids_unique": len({x["city_project_id"] for x in capital_comparison}) == len(capital_comparison),
+        "capital_comparison_uses_exact_ids_only": all(
+            x["comparison_status"] in {
+                "matched_core_activity", "budget_book_only", "core_capital_only",
+                "ambiguous_multiple_core_activities",
+            }
+            and x["match_method"] in {"exact_city_project_id", "no_exact_identifier_match"}
+            for x in capital_comparison
+        ),
+        "finance_events_are_observations_not_spending_claims": all(
+            x["event_type"] in {
+                "capital_estimate_reported", "capital_actual_cost_reported", "funded_status_reported"
+            }
+            and x["evidence_strength"] == "official_source_observation"
+            and x["is_inferred"] == "no"
+            and x["interpretation_warning"].strip()
+            for x in finance_events
+        ),
+        "parcel_context_folios_unique": len(parcel_folios) == len(parcel_context),
+        "parcel_links_unique_and_resolve": (
+            len({x["parcel_activity_link_id"] for x in parcel_links}) == len(parcel_links)
+            and all(x["activity_id"] in activity_ids for x in parcel_links)
+            and all(x["master_project_id"] in master_ids for x in parcel_links)
+            and all(x["review_status"] == "pending_human_review" for x in parcel_links)
+        ),
+        "parcel_context_excludes_owner_and_mailing_columns": not (
+            {field.lower() for field in (parcel_context[0] if parcel_context else {})}
+            & context_modules.PRIVACY_BLOCKED_FIELDS
+        ),
         "building_audit_covers_all_matches": len(match_audit) == len(matches),
         "building_precision_pending_review": all(not x["empirical_precision"] and x["human_reviewed_count"] == "0" for x in match_diagnostics),
         "second_review_assignment_has_50_blinded_rows": (
@@ -276,7 +359,7 @@ def main() -> None:
         ),
     }
     report = {
-        "release": "0.7.0", "edition": "city_plus_optional_hcpa" if args.allow_hcpa else "source_bounded_city_arcgis_snapshot",
+        "release": "0.8.0", "edition": "city_plus_optional_hcpa" if args.allow_hcpa else "source_bounded_city_arcgis_snapshot",
         "passed": all(checks.values()), "checks": checks,
         "row_counts": {
             "activities": len(activities), "source_records": len(sources), "locations": len(locations),
@@ -290,6 +373,10 @@ def main() -> None:
             "activity_truth_status": len(truth), "master_projects": len(projects),
             "master_project_candidates": len(candidates), "development_events": len(events),
             "investment_amounts": len(amounts), "building_match_audit": len(match_audit),
+            "capital_budget_book_projects": len(capital_budget),
+            "capital_budget_book_comparison": len(capital_comparison),
+            "public_finance_events": len(finance_events),
+            "parcel_context": len(parcel_context), "parcel_activity_links": len(parcel_links),
             "bounded_census_records": len(census_records), "source_universes": len(universes),
         },
     }

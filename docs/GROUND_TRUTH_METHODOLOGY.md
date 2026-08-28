@@ -47,9 +47,24 @@ activity. `master_project_candidates.csv` lists pairs that share a normalized
 address or City building folio. Candidate pairs remain separate until they are
 reviewed; a shared address alone is not sufficient to merge them.
 
-`development_events.csv` stores permit, status, and progress events. A
-`project_closeout` event records an administrative status and is not treated
-as a physical completion event.
+`development_events.csv` stores long-format source observations and explicitly
+dated lifecycle events. Every source feature contributes one
+`source_record_observed` row. Additional rows are created only when a source
+exposes an applicable filing, hearing, issuance, planned-date, reported actual-
+date, phase, or status field.
+
+Each event retains `activity_id`, `master_project_id`, source-record lineage,
+raw source status, normalized stage, evidence URL, source name, observation
+time, evidence strength, source field, and an `is_inferred` flag. Historical
+event identifiers do not depend on observation time; snapshot-observation event
+identifiers do, so later monthly observations can coexist.
+
+`construction_started_reported` is an explicit phase/status interpretation and
+is marked inferred when an exact start date is unavailable.
+`project_closeout_reported` records an administrative label. Neither is treated
+as physical completion. Final-inspection, TCO, CO, and construction-completion
+event types are reserved for stronger official lifecycle sources and are not
+created from the current GIS layers.
 
 ## Pending validation
 
@@ -71,3 +86,8 @@ unlike permit types into one rate.
 type, sector, price year, estimate flag, and final flag. Permit valuation,
 capital estimates, contract awards, expenditures, assessment changes, and
 modeled construction costs are separate measures.
+
+`public_finance_events.csv` extends that separation for the Budget Book context
+module. It stores reported estimate levels, reported actual-cost levels, and
+funded-status observations as distinct event types. It does not infer
+appropriations, amendments, transfers, payments, or final cost.
