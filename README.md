@@ -2,7 +2,7 @@
 
 This repository collects development-related records published by the City of Tampa and puts them into a format that's easier to explore, map, and analyze.
 
-The current release (`v0.8.0`) contains **4,469 records from eight City GIS layers**, downloaded on August 23, 2026. Separately dated capital-budget and linked-parcel context modules are excluded from that core count.
+The current release (`v0.8.0`) contains **4,469 records from eight City GIS layers**, downloaded on August 23, 2026. Capital-budget and linked-parcel context modules observed on August 28, 2026 are excluded from that core count.
 
 This is **not a database of every development in Tampa**. It's a snapshot of the records available through these eight public layers at the time of download.
 
@@ -123,6 +123,7 @@ If you just want to work with the data, these are the most useful places to star
 - `data/processed/parcel_activity_links.csv` — proposed activity-to-folio links pending human review.
 - `data/processed/parcel_context.csv` — privacy-minimized attributes for linked parcels only.
 - `data/processed/master_project_candidates.csv` — possible relationships between activities that have **not** been automatically merged.
+- `data/templates/official_lifecycle_events_template.csv` — input template for stronger official lifecycle records obtained outside the eight core GIS layers.
 
 There are additional audit and validation tables for building matches, evidence status, manual review, and identifier consolidation.
 
@@ -163,6 +164,7 @@ Run the validation tools separately:
 python scripts/validate_release.py
 python scripts/verify_data_accuracy.py
 python scripts/validation_study.py
+pytest -q
 ```
 
 The build downloads every page returned by the configured ArcGIS services, preserves the source geometry, removes configured contact/source-user fields, creates the derived tables, validates keys and counts, and packages the release.
@@ -176,6 +178,14 @@ python scripts/verify_data_accuracy.py --live
 ```
 
 A difference in the live check doesn't necessarily mean the archived dataset is wrong. It can simply mean the City's public layer has changed since the snapshot was downloaded.
+
+The public release excludes the optional HCPA parcel-centroid fallback. For local research only, that enrichment can be requested with:
+
+```bash
+python scripts/build_release.py --include-hcpa
+```
+
+Do not redistribute an HCPA-enriched build as the City-only edition unless the applicable HCPA terms have been confirmed. See [`DATA_LICENSE.md`](DATA_LICENSE.md) for the data-source licensing boundaries.
 
 These checks answer:
 
@@ -203,14 +213,34 @@ lifecycle data.
 
 Two separately scoped context modules add:
 
-- a privacy-minimized Capital Projects Budget Book snapshot and exact-ID
-  comparison with core capital records; and
-- privacy-minimized parcel attributes for folios already exposed through
-  proposed City building-footprint matches.
+- a privacy-minimized Capital Projects Budget Book snapshot containing 228
+  projects and an exact-ID comparison with core capital records; and
+- privacy-minimized attributes for 932 parcels whose folios were already
+  exposed through proposed City building-footprint matches.
 
-They do not increase the eight-layer census count. Owner, mailing, contact,
-editor, legal-description, and unnecessary free-text fields are excluded. See
+Both context snapshots were observed on August 28, 2026. They do not increase
+the eight-layer census count. Owner, mailing, contact, editor,
+legal-description, and unnecessary free-text fields are excluded. See
 [Context modules](docs/CONTEXT_MODULES.md).
+
+### Adding stronger official lifecycle records
+
+Final-inspection, occupancy, and construction-completion candidates can be
+staged only from stronger official lifecycle data, such as an official Accela
+export. After obtaining an export, stage its explicitly delivered lifecycle
+events with:
+
+```bash
+python scripts/import_accela_export.py path/to/export.csv
+```
+
+The importer writes `data/staging/accela_records.csv` by default. The
+[public-records request and import guide](docs/PUBLIC_RECORDS_REQUEST.md)
+describes the requested fields, import rules, and the
+[`official_lifecycle_events_template.csv`](data/templates/official_lifecycle_events_template.csv)
+fallback template. Imported events are kept separate from inferred permit or
+project statuses and must be reviewed before promotion into
+`development_events.csv`.
 
 ## Designed external-validation study
 
@@ -285,6 +315,7 @@ More detailed methodology is available in `docs/`:
 - [AI use statement](docs/AI_USE_STATEMENT.md) — scope, limits, validation policy, and accountability for AI assistance.
 - [Manual validation guide](docs/MANUAL_VALIDATION_GUIDE.md) — exact review order, data-entry steps, and use of results.
 - [Manual validation protocol](docs/MANUAL_VALIDATION_PROTOCOL.md) — process for reviewing uncertain records.
+- [Official lifecycle-data request](docs/PUBLIC_RECORDS_REQUEST.md) — requested fields and import workflow for stronger official lifecycle evidence.
 - [Data dictionary](docs/data_dictionary.csv) — field definitions.
 - [Validation results](docs/validation_report.json) — automated validation results.
 - [Source-fidelity verification](docs/accuracy_verification_report.json) — detailed verification results.
