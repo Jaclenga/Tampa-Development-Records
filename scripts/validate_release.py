@@ -163,7 +163,6 @@ def main() -> None:
     event_ids = {x["event_id"] for x in events}
     event_source_keys = {x["source_record_key"] for x in events if x["event_type"] == "source_record_observed"}
     parcel_folios = {x["folio"] for x in parcel_context}
-    context_project_ids = {x["city_project_id"] for x in capital_budget}
     current_snapshot_rows = snapshot_tracker.canonical_snapshot_rows(sources)
     current_snapshot_hash = snapshot_tracker.rows_sha256(current_snapshot_rows)
     tracker_matches_current_release = any(
