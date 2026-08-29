@@ -10,6 +10,23 @@ each service returns no additional full page.
 and retained count for each layer. `bounded_census_records.csv` contains one
 row per returned feature.
 
+| Source | Records | Typical source row |
+| --- | ---: | --- |
+| [Construction Inspections](https://arcgis.tampagov.net/arcgis/rest/services/OpenData/Planning/MapServer/30) | 2,619 | Published building-permit record, not an inspection result |
+| [Single-Family Permits](https://arcgis.tampagov.net/arcgis/rest/services/OpenData/Planning/MapServer/32) | 1,023 | Single-family construction or addition permit |
+| [Development Coordination](https://arcgis.tampagov.net/arcgis/rest/services/OpenData/Planning/MapServer/31) | 271 | Active planning or land-development application |
+| [Historic Preservation](https://arcgis.tampagov.net/arcgis/rest/services/OpenData/Planning/MapServer/33) | 169 | Historic-preservation application |
+| [Capital Improvements](https://arcgis.tampagov.net/arcgis/rest/services/CapitalProjects/CapitalProjects/FeatureServer/0) | 192 | City capital-project record |
+| [Citywide Capital Projects: points](https://arcgis.tampagov.net/arcgis/rest/services/CapitalProjects/CityWideProjectsPublic/FeatureServer/0) | 57 | Point representation of a capital project |
+| [Citywide Capital Projects: lines](https://arcgis.tampagov.net/arcgis/rest/services/CapitalProjects/CityWideProjectsPublic/FeatureServer/1) | 101 | Linear representation of a capital project |
+| [Citywide Capital Projects: polygons](https://arcgis.tampagov.net/arcgis/rest/services/CapitalProjects/CityWideProjectsPublic/FeatureServer/2) | 37 | Area representation of a capital project |
+| **Total** | **4,469** | **Published source records** |
+
+The permit layers overlap heavily: 999 of 1,023 Single-Family records link to
+Construction Inspections records. The build preserves every source row while
+resolving strong identifier matches into 3,323 normalized activities. An
+activity is still not necessarily a unique real-world development.
+
 ## Coverage check
 
 Coverage passes when:
@@ -48,6 +65,20 @@ The release therefore should not be described as a census of:
 - construction starts or completions;
 - certificates of occupancy or final inspections; or
 - public and private investment.
+
+## Priority coverage gaps
+
+The highest-priority additions are a fuller building-permit export,
+certificates of occupancy, inspection-level records with explicit final
+results, complete demolition permits and planning decisions, and repeated
+annual capital-budget records.
+
+No verified public bulk endpoint for the first three was located in the
+official interfaces checked on August 28, 2026. The
+[`source_gap_registry.csv`](../data/coverage/source_gap_registry.csv) records
+the desired universes, analytical value, current evidence, and next action.
+The [public-records request](PUBLIC_RECORDS_REQUEST.md) provides a reproducible
+path to the missing official records without scraping address-level pages.
 
 ## Dates
 

@@ -16,7 +16,8 @@ standard library.
   live refresh.
 - `snapshot_tracker.py` writes immutable compact source-record snapshots and,
   once two snapshots exist, publishes deterministic monthly change CSVs,
-  summary JSON, and readable Markdown updates.
+  summary JSON, and readable Markdown updates. See the detailed
+  [tracker methodology](../docs/LONGITUDINAL_TRACKER.md).
 
 ## Transformation
 

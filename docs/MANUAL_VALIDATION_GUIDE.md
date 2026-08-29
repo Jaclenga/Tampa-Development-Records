@@ -4,6 +4,20 @@ This guide explains what to do with the frozen manual-validation CSV files.
 The controlling definitions and statistical design remain in
 [`MANUAL_VALIDATION_PROTOCOL.md`](MANUAL_VALIDATION_PROTOCOL.md).
 
+## Current progress and release gate
+
+| Review phase | Required | Completed |
+| --- | ---: | ---: |
+| Development first review | 100 | 0 |
+| Holdout first review | 50 | 0 |
+| Blind second review | 50 | 0 |
+
+The repository does not yet have an empirical error baseline. A public release
+may describe the sample as designed, but it must not claim measured accuracy,
+precision, or reviewer agreement until the applicable rows are complete and
+the metrics are published. The recommended v0.9.0 publication sequence is in
+the [release checklist](RELEASE_CHECKLIST.md).
+
 ## What the review data are for
 
 The review rows measure separate questions rather than producing one vague
