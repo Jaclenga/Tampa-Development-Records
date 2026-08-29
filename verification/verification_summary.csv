@@ -1,0 +1,7 @@
+snapshot_date,verification_type,eligible_records,evaluated_records,passed_supported,failed_conflicting,unknown,not_applicable,partial_support,awaiting_review,second_review_count,checks_evaluated,checks_passed,checks_flagged,coverage_percentage,status,notes
+2026-08-23,automated_qa,4469,4469,,,0,0,0,0,,14,14,0,100.0,passed,Record coverage is the bounded source census; results are check-level because some checks are release-wide.
+2026-08-23,source_traceability,4469,4469,4469,0,0,0,0,0,,,,,100.0,passed,"Reconciles bundled City source features to retained source rows; establishes source fidelity, not real-world truth."
+2026-08-23,automated_evidence,,,,,,,,,,,,,,not_measured,No distinct reproducible software check of external supporting evidence exists.
+2026-08-23,manual_validation,150,0,,,,,,150,0,,,,0.0,in_progress,"Frozen seeded stratified probability sample; results are claim-specific, so no universal supported count is produced."
+2026-08-23,external_outcome_verification,12,12,1,0,7,1,3,0,,,,,100.0,historical_pilot,Historical evidence-selected pilot; physical-realization outcomes are not a population estimate.
+2026-08-23,double_review,50,0,,,,,,50,0,,,,0.0,in_progress,Independent blinded second-review assignments only; automated checks are excluded.

@@ -1030,6 +1030,7 @@ def create_public_archive() -> None:
         *sorted((DATA / "monthly_changes").rglob("*")),
         *(sorted(REPORTS.rglob("*")) if REPORTS.exists() else []),
         *sorted(PROCESSED.glob("*.csv")), *sorted(DOCS.glob("*")),
+        *sorted((ROOT / "verification").glob("*")),
     ]
     with zipfile.ZipFile(temporary_archive, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as bundle:
         for path in files:
@@ -1050,6 +1051,7 @@ def create_public_archive() -> None:
             "data/processed/manual_validation_holdout_sample.csv",
             "data/processed/manual_validation_second_review.csv",
             "scripts/validation_study.py",
+            "verification/verification_summary.csv",
         )
         missing_release_files = [
             item for item in required_release_files if not any(name.endswith(item) for name in names)
@@ -1207,6 +1209,7 @@ def main() -> None:
             PROCESSED / "bounded_census_records.csv", PROCESSED / "source_universes.csv",
             PROCESSED / "bounded_census_summary.csv",
             PROCESSED / "completeness_benchmarks.csv", DOCS / "data_dictionary.csv", DOCS / "qa_report.json",
+            ROOT / "verification" / "verification_summary.csv",
             DOCS / "validation_report.json", DOCS / "KNOWN_LIMITATIONS.md",
             DOCS / "accuracy_verification_report.json",
             DOCS / "validation_study_design.json",
@@ -1261,6 +1264,7 @@ def main() -> None:
         }
     (ROOT / "manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
     subprocess.run([sys.executable, str(SCRIPTS / "verify_data_accuracy.py")], check=True, stdout=subprocess.DEVNULL)
+    subprocess.run([sys.executable, str(SCRIPTS / "build_verification_summary.py")], check=True, stdout=subprocess.DEVNULL)
     for phase in ("development", "holdout"):
         subprocess.run([
             sys.executable, str(SCRIPTS / "review_metrics.py"), "--phase", phase, "--allow-partial"

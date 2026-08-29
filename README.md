@@ -22,6 +22,75 @@ The dataset is complete only with respect to the records returned by the eight
 named layers at the recorded retrieval time. It is not a complete inventory of
 Tampa permits, developments, construction outcomes, or investment.
 
+## Verification Status — 2026-08-23 snapshot
+
+<!-- verification-scorecard:start -->
+Coverage says how many eligible records were evaluated. Results describe only
+those evaluated records; they are not a dataset-wide accuracy percentage.
+
+| Verification layer | Coverage / progress | Result among evaluated | What it establishes |
+| --- | ---: | --- | --- |
+| Automated QA | 4,469 / 4,469 (100.0%) | 14 checks passed; 0 checks flagged | Structural, relationship, range, consistency, privacy, and release-integrity checks |
+| Source traceability | 4,469 / 4,469 (100.0%) | 4,469 reconciled; 0 conflicting | Fidelity to the eight archived City source layers, not necessarily real-world truth |
+| Automated evidence checks | Not measured | Not measured | No separate software system currently checks external supporting evidence |
+| Manual validation sample | 0 / 150 (0.0%) | No claim outcomes yet | Human application of the frozen, documented validation protocol |
+| External outcome verification | 12 / 12 historical pilot rows | 1 work documented; 3 partial; 7 not established; 1 not applicable | Limited cited evidence about physical realization; not a representative estimate |
+| Double review | 0 / 50 (0.0%) | No agreement result yet | Independent, blinded second-review coverage |
+
+**Release-level status:** Automated QA 4,469 / 4,469; source traceability
+4,469 / 4,469; automated evidence `Not measured`; manual validation 0 / 150;
+external outcome pilot 12 / 12; double-reviewed 0 / 50; validation study
+`IN PROGRESS`.
+
+```text
+Manual validation sample
+150 selected
+|
++-- Reviewed ............... 0
+|   `-- Claim outcomes ..... Not measured
+|
+`-- Awaiting review ....... 150
+```
+<!-- verification-scorecard:end -->
+
+The manual study is a frozen, seeded stratified probability sample of normalized
+activities: 100 development rows and a separately drawn 50-row holdout. It was
+not selected based on evidence availability. However, no reviews are complete,
+so it currently supports no accuracy estimate. The older 12-row pilot was
+selected partly because evidence was available. Its coverage and outcomes are
+verification progress only and must not be interpreted as dataset-wide
+accuracy. Even after partial review, outcomes must not be generalized until the
+documented sampling design and completion rules support that inference.
+
+Definitions and reproducible counts are in
+[`verification/verification_summary.csv`](verification/verification_summary.csv)
+and [`verification/README.md`](verification/README.md). Record-level assignments,
+outcomes, evidence URLs or document references, methods, timestamps, reviewer
+codes, and second-review status remain in the
+[`data/processed/manual_validation_*.csv`](data/processed/) files.
+
+### What each layer means
+
+- **Automated QA** tests machine-checkable schema, identifiers, relationships,
+  dates, coordinates, counts, transformations, hashes, and privacy rules. A pass
+  does not prove a project exists physically, started, finished, or is factually
+  correct in every source field.
+- **Source traceability / reconciliation** connects a retained TDR row to its
+  identified published source and checks snapshot fidelity. It establishes
+  fidelity to that source, not real-world truth.
+- **Automated evidence verification** would reproducibly test claims against
+  supporting evidence. The repository has no distinct check of this kind, and
+  automated QA passes are not called external verification.
+- **Manual review** means a human completed the documented protocol, cited
+  evidence, and recorded claim-specific outcomes. Empty assignments are not
+  reviewed records.
+- **External outcome verification** examines real-world claims such as work
+  started or completed, certificates of occupancy, final inspections,
+  cancellation, and completion dates. `unknown` and `not_applicable` remain
+  valid outcomes rather than being forced to yes/no.
+- **Double review** means an independent second reviewer completed the same
+  blinded protocol. Ordinary automated checks never count as a second review.
+
 ## Start here
 
 | Goal | File |

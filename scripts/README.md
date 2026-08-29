@@ -31,6 +31,8 @@ standard library.
 - `verify_data_accuracy.py` checks fidelity to the archived source records.
 - `validation_study.py` creates the reproducible manual-review sample.
 - `review_metrics.py` calculates phase-specific validation metrics.
+- `build_verification_summary.py` regenerates the README scorecard and
+  `verification/verification_summary.csv` from release and record-level data.
 - `calculate_recall.py` compares the release with sampled official permits.
 
 ## Longitudinal tracking
