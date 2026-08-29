@@ -1,11 +1,13 @@
 {
-  "title": "Tampa Published Development Records: Source-Bounded Census",
-  "version": "0.8.0",
+  "title": "Tampa Published Development Records: Source-Bounded Longitudinal Tracker",
+  "version": "0.9.0",
   "edition": "source_bounded_city_arcgis_snapshot",
   "retrieved_at_utc": "2026-08-23T02:06:02+00:00",
   "geography": "City of Tampa-published layers, Florida",
   "unit_of_observation": "published ArcGIS feature; activity/project tables are secondary derived views",
   "outputs": [
+    "data/coverage/source_gap_registry.csv",
+    "data/monthly_changes/index.json",
     "data/processed/activity_id_aliases.csv",
     "data/processed/activity_locations.csv",
     "data/processed/activity_source_links.csv",
@@ -35,6 +37,8 @@
     "data/processed/source_universes.csv",
     "data/processed/tampa_development_activity.csv",
     "data/processed/tampa_development_verification_queue.csv",
+    "data/snapshots/2026-08-23/metadata.json",
+    "data/snapshots/2026-08-23/source_records.csv.gz",
     "docs/AI_USE_STATEMENT.md",
     "docs/BOUNDED_CENSUS_SCOPE.md",
     "docs/CONTEXT_MODULES.md",
@@ -81,6 +85,13 @@
     "final_inference_phase": "holdout"
   },
   "external_verification_status": "historical_12_row_pilot_retained_not_used_as_population_estimate",
+  "longitudinal_tracker": {
+    "status": "baseline_only",
+    "snapshot_count": 1,
+    "comparison_count": 0,
+    "latest_snapshot_date": "2026-08-23",
+    "scope": "Differences between repeated observations of the configured public layers; not confirmed real-world development outcomes."
+  },
   "context_modules": {
     "observed_at_utc": "2026-08-28T04:55:51+00:00",
     "capital_budget_book_projects": 228,

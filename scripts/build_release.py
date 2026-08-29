@@ -35,9 +35,10 @@ DATA = ROOT / "data"
 RAW = DATA / "raw"
 PROCESSED = DATA / "processed"
 DOCS = ROOT / "docs"
+REPORTS = ROOT / "reports"
 CACHE = ROOT / ".cache" / "source_cache"
-RELEASE_VERSION = "0.8.0"
-DATASET_TITLE = "Tampa Published Development Records: Source-Bounded Census"
+RELEASE_VERSION = "0.9.0"
+DATASET_TITLE = "Tampa Published Development Records: Source-Bounded Longitudinal Tracker"
 PUBLIC_ARCHIVE = ROOT / "dist" / f"tampa_source_bounded_census_v{RELEASE_VERSION}.zip"
 
 PRIVACY_BLOCKED_FIELDS = {
@@ -1024,6 +1025,10 @@ def create_public_archive() -> None:
         RAW / "snapshot_metadata.json",
         *sorted(RAW.glob("*.geojson")),
         *sorted((DATA / "context" / "raw").glob("*")),
+        *sorted((DATA / "coverage").rglob("*")),
+        *sorted((DATA / "snapshots").rglob("*")),
+        *sorted((DATA / "monthly_changes").rglob("*")),
+        *(sorted(REPORTS.rglob("*")) if REPORTS.exists() else []),
         *sorted(PROCESSED.glob("*.csv")), *sorted(DOCS.glob("*")),
     ]
     with zipfile.ZipFile(temporary_archive, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as bundle:
@@ -1160,6 +1165,22 @@ def main() -> None:
         validation_command.append("--allow-hcpa")
     subprocess.run(validation_command, check=True, stdout=subprocess.DEVNULL)
 
+    # Preserve the source state before a future refresh can overwrite the
+    # working release. With two or more snapshots this also publishes the
+    # latest deterministic CSV/JSON/Markdown comparison.
+    try:
+        from . import snapshot_tracker
+    except ImportError:  # Support direct execution from the scripts directory.
+        import snapshot_tracker
+    longitudinal = snapshot_tracker.update_tracker(PROCESSED / "source_records.csv")
+    longitudinal_files = [
+        path
+        for directory in (DATA / "coverage", DATA / "snapshots", DATA / "monthly_changes", REPORTS)
+        if directory.exists()
+        for path in directory.rglob("*")
+        if path.is_file()
+    ]
+
     review_status = validation_review_status()
     manifest = {
         "title": DATASET_TITLE, "version": RELEASE_VERSION,
@@ -1194,7 +1215,7 @@ def main() -> None:
             DOCS / "AI_USE_STATEMENT.md",
             DOCS / "MANUAL_VALIDATION_GUIDE.md", DOCS / "MANUAL_VALIDATION_PROTOCOL.md",
             DOCS / "VERIFICATION_REPORT.md", DOCS / "GROUND_TRUTH_METHODOLOGY.md", DOCS / "BOUNDED_CENSUS_SCOPE.md",
-            DOCS / "CONTEXT_MODULES.md",
+            DOCS / "CONTEXT_MODULES.md", *longitudinal_files,
         ]),
         "license_note": "The public archive contains privacy-minimized City-hosted core and context source snapshots only. Code is MIT-licensed; source data remain subject to City terms described in DATA_LICENSE.md.",
         "bounded_census_claim": "All features returned by eight named City ArcGIS layers at the recorded snapshot retrieval time are included.",
@@ -1205,6 +1226,13 @@ def main() -> None:
             "independent_second_reviews": 50, "final_inference_phase": "holdout",
         },
         "external_verification_status": "historical_12_row_pilot_retained_not_used_as_population_estimate",
+        "longitudinal_tracker": {
+            "status": longitudinal["index"]["status"],
+            "snapshot_count": longitudinal["index"]["snapshot_count"],
+            "comparison_count": longitudinal["index"]["comparison_count"],
+            "latest_snapshot_date": longitudinal["archived_snapshot"]["snapshot_date"],
+            "scope": "Differences between repeated observations of the configured public layers; not confirmed real-world development outcomes.",
+        },
         "context_modules": {
             **context_summary,
             "scope": "separate contextual sources; excluded from the eight-layer bounded-census record count",

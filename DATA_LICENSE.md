@@ -2,7 +2,7 @@
 
 ## Public release scope
 
-Version 0.8.0's public archive is a **City-only, source-bounded edition**. It
+Version 0.9.0's public archive is a **City-only, source-bounded edition**. It
 contains privacy-minimized source snapshots and derived outputs from City of
 Tampa-hosted GIS services. Before packaging, the build removes project-contact
 name, phone, and email fields and configured source-user/editor fields from the

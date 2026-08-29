@@ -1,5 +1,5 @@
 {
-  "release": "0.8.0",
+  "release": "0.9.0",
   "edition": "source_bounded_city_arcgis_snapshot",
   "passed": true,
   "checks": {
@@ -36,6 +36,11 @@
     "data_dictionary_covers_all_processed_fields": true,
     "data_dictionary_has_required_metadata": true,
     "publication_metadata_present": true,
+    "longitudinal_index_counts_reconcile": true,
+    "longitudinal_snapshots_are_complete_and_unique": true,
+    "longitudinal_archive_contains_current_release": true,
+    "longitudinal_snapshots_are_privacy_minimized": true,
+    "longitudinal_comparison_outputs_are_complete": true,
     "demolition_titles_are_semantically_consistent": true,
     "truth_has_one_row_per_activity": true,
     "truth_outcomes_use_closed_vocabulary": true,
@@ -101,6 +106,8 @@
     "parcel_context": 932,
     "parcel_activity_links": 1054,
     "bounded_census_records": 4469,
-    "source_universes": 8
+    "source_universes": 8,
+    "longitudinal_snapshots": 1,
+    "longitudinal_comparisons": 0
   }
 }

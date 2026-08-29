@@ -14,6 +14,9 @@ standard library.
   parcel context snapshots, then builds comparison, finance-event, parcel-
   context, and parcel-link tables. Run with `--use-existing-raw` to avoid a
   live refresh.
+- `snapshot_tracker.py` writes immutable compact source-record snapshots and,
+  once two snapshots exist, publishes deterministic monthly change CSVs,
+  summary JSON, and readable Markdown updates.
 
 ## Transformation
 
@@ -28,3 +31,20 @@ standard library.
 - `validation_study.py` creates the reproducible manual-review sample.
 - `review_metrics.py` calculates phase-specific validation metrics.
 - `calculate_recall.py` compares the release with sampled official permits.
+
+## Longitudinal tracking
+
+The release build calls the tracker automatically after validation. It is also
+safe to run directly; an existing dated snapshot is reused only when its
+content hash matches exactly.
+
+```bash
+python scripts/snapshot_tracker.py collect-live
+python scripts/snapshot_tracker.py update
+python scripts/snapshot_tracker.py compare --from-date 2026-08-23 --to-date 2026-09-01
+```
+
+Use `collect-live` for the scheduled monthly tracker. It collects the eight
+core layers without regenerating the release-specific manual-validation sample.
+Use the full release build only when deliberately publishing a new processed
+release and validation frame.

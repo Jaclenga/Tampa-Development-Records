@@ -48,3 +48,16 @@
     by the archived source fields. Inspection, permit-closure, TCO, CO, and
     final-completion coverage remains unavailable until stronger official
     lifecycle data are obtained.
+20. Version 0.9.0 contains one archived core snapshot and therefore no observed
+    month-to-month change results yet. The longitudinal contribution begins
+    only after a second comparable snapshot is collected.
+21. Snapshot differences describe changes in public-layer publication. A new
+    row can be an older record newly exposed by a layer, and a disappeared row
+    can reflect a filter or service change rather than deletion or cancellation.
+22. Native source identifiers are preferred for longitudinal matching. Global
+    IDs and OBJECTIDs are fallbacks; a source republish that changes every
+    available identifier can appear as paired disappearance/new-record events.
+23. No verified official bulk endpoint for the full permit, certificate-of-
+    occupancy, or inspection populations was located in the public interfaces
+    checked on August 28, 2026. Address-level Accela access is not equivalent to
+    a reproducible bulk source.

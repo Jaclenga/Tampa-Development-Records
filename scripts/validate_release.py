@@ -7,6 +7,7 @@ import argparse
 import csv
 import json
 import sys
+from collections import Counter
 from pathlib import Path
 
 try:
@@ -21,10 +22,11 @@ except ImportError:  # Support direct execution: python scripts/validate_release
     )
 
 try:
-    from . import context_modules, ground_truth
+    from . import context_modules, ground_truth, snapshot_tracker
 except ImportError:  # Support direct execution: python scripts/validate_release.py
     import context_modules
     import ground_truth
+    import snapshot_tracker
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -85,6 +87,32 @@ def main() -> None:
     census_records = read("bounded_census_records.csv")
     universes = read("source_universes.csv")
     census_summary = read("bounded_census_summary.csv")
+    tracker_index_path = ROOT / "data" / "monthly_changes" / "index.json"
+    tracker_index = (
+        json.loads(tracker_index_path.read_text(encoding="utf-8"))
+        if tracker_index_path.exists() else {}
+    )
+    tracker_snapshots = []
+    tracker_integrity = []
+    tracker_privacy_fields = []
+    for item in tracker_index.get("snapshots", []):
+        snapshot_dir = ROOT / item["path"]
+        metadata = json.loads((snapshot_dir / "metadata.json").read_text(encoding="utf-8"))
+        snapshot_rows = snapshot_tracker.read_csv(snapshot_dir / "source_records.csv.gz")
+        tracker_snapshots.append((metadata, snapshot_rows))
+        tracker_integrity.append(
+            metadata["record_count"] == len(snapshot_rows)
+            and metadata["source_records_content_sha256"] == snapshot_tracker.rows_sha256(snapshot_rows)
+            and metadata["source_state_sha256"] == snapshot_tracker.source_state_sha256(snapshot_rows)
+            and metadata["source_counts"] == dict(sorted(
+                Counter(row["source_name"] for row in snapshot_rows).items()
+            ))
+            and len(snapshot_tracker.index_records(snapshot_rows)) == len(snapshot_rows)
+        )
+        for row in snapshot_rows:
+            for field in json.loads(row["properties_json"]):
+                if field.lower() in PRIVACY_BLOCKED_FIELDS:
+                    tracker_privacy_fields.append(f"{metadata['snapshot_date']}:{field}")
     with (ROOT / "docs" / "data_dictionary.csv").open(encoding="utf-8", newline="") as handle:
         dictionary = list(csv.DictReader(handle))
     documented_fields = {(x["table"], x["field"]) for x in dictionary}
@@ -136,6 +164,18 @@ def main() -> None:
     event_source_keys = {x["source_record_key"] for x in events if x["event_type"] == "source_record_observed"}
     parcel_folios = {x["folio"] for x in parcel_context}
     context_project_ids = {x["city_project_id"] for x in capital_budget}
+    current_snapshot_rows = snapshot_tracker.canonical_snapshot_rows(sources)
+    current_snapshot_hash = snapshot_tracker.rows_sha256(current_snapshot_rows)
+    tracker_matches_current_release = any(
+        metadata["source_records_content_sha256"] == current_snapshot_hash
+        for metadata, _ in tracker_snapshots
+    )
+    tracker_comparison_outputs_complete = all(
+        (ROOT / comparison["csv"]).exists()
+        and (ROOT / comparison["summary"]).exists()
+        and (ROOT / comparison["report"]).exists()
+        for comparison in tracker_index.get("comparisons", [])
+    )
     checks = {
         "activity_ids_unique": len(activity_ids) == len(activities),
         "source_record_keys_unique": len(source_keys) == len(sources),
@@ -223,6 +263,19 @@ def main() -> None:
         "publication_metadata_present": all(
             (ROOT / name).exists() for name in ("LICENSE", "DATA_LICENSE.md", "CITATION.cff", "README.md")
         ),
+        "longitudinal_index_counts_reconcile": (
+            bool(tracker_index)
+            and tracker_index["snapshot_count"] == len(tracker_index.get("snapshots", []))
+            and tracker_index["comparison_count"] == len(tracker_index.get("comparisons", []))
+            and tracker_index["status"] == (
+                "baseline_only" if len(tracker_snapshots) == 1 else
+                "longitudinal" if len(tracker_snapshots) > 1 else "empty"
+            )
+        ),
+        "longitudinal_snapshots_are_complete_and_unique": bool(tracker_integrity) and all(tracker_integrity),
+        "longitudinal_archive_contains_current_release": tracker_matches_current_release,
+        "longitudinal_snapshots_are_privacy_minimized": not tracker_privacy_fields,
+        "longitudinal_comparison_outputs_are_complete": tracker_comparison_outputs_complete,
         "demolition_titles_are_semantically_consistent": all(
             x["activity_class"] != "demolition"
             or (
@@ -359,7 +412,7 @@ def main() -> None:
         ),
     }
     report = {
-        "release": "0.8.0", "edition": "city_plus_optional_hcpa" if args.allow_hcpa else "source_bounded_city_arcgis_snapshot",
+        "release": "0.9.0", "edition": "city_plus_optional_hcpa" if args.allow_hcpa else "source_bounded_city_arcgis_snapshot",
         "passed": all(checks.values()), "checks": checks,
         "row_counts": {
             "activities": len(activities), "source_records": len(sources), "locations": len(locations),
@@ -378,6 +431,8 @@ def main() -> None:
             "public_finance_events": len(finance_events),
             "parcel_context": len(parcel_context), "parcel_activity_links": len(parcel_links),
             "bounded_census_records": len(census_records), "source_universes": len(universes),
+            "longitudinal_snapshots": len(tracker_snapshots),
+            "longitudinal_comparisons": len(tracker_index.get("comparisons", [])),
         },
     }
     (ROOT / "docs" / "validation_report.json").write_text(json.dumps(report, indent=2), encoding="utf-8")

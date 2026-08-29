@@ -1,0 +1,26 @@
+{
+  "format_version": "1.0.0",
+  "status": "baseline_only",
+  "snapshot_count": 1,
+  "comparison_count": 0,
+  "snapshots": [
+    {
+      "snapshot_date": "2026-08-23",
+      "retrieved_at_utc": "2026-08-23T02:06:02+00:00",
+      "record_count": 4469,
+      "source_counts": {
+        "capital_improvements": 192,
+        "capital_locations_line": 101,
+        "capital_locations_point": 57,
+        "capital_locations_polygon": 37,
+        "construction_inspections": 2619,
+        "development_coordination": 271,
+        "historic_preservation": 169,
+        "single_family_permits": 1023
+      },
+      "path": "data/snapshots/2026-08-23"
+    }
+  ],
+  "comparisons": [],
+  "scope_note": "Snapshots and comparisons cover the configured public source layers, not all Tampa development."
+}

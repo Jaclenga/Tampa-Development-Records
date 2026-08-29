@@ -19,7 +19,7 @@ Coverage passes when:
 3. Each layer's retained count matches its downloaded count.
 4. No downloaded feature is excluded.
 
-All four checks pass for version 0.8.0. Contact and source-user/editor fields
+All four checks pass for version 0.9.0. Contact and source-user/editor fields
 are removed from both the bundled GeoJSON and the processed properties, but no
 source rows are removed. `snapshot_metadata.json` records the suppression
 scope.
@@ -30,8 +30,10 @@ census feature count and completeness claim.
 
 ## Boundary of the dataset
 
-The dataset describes the contents of the eight layers at one point in time.
-It does not establish that the layers contain every record held by the City.
+Each snapshot describes the contents of the eight layers at one point in time.
+The first archived observation is August 23, 2026. Repeated snapshots can show
+publication changes between observations, but they do not establish that the
+layers contain every record held by the City.
 For example, a layer may show only active projects, selected permit types, or
 records that meet an unpublished display rule.
 
@@ -54,5 +56,6 @@ schedule, or source edit. They do not define a common observation period for
 all eight layers.
 
 The archived, privacy-minimized GeoJSON and `snapshot_metadata.json` preserve
-the released snapshot. Running the downloader again may produce different
-counts as the City updates its services.
+the current full release snapshot. `data/snapshots/` preserves compact
+source-record states for comparison without duplicating geometry. Running the
+downloader again may produce different counts as the City updates its services.

@@ -1,6 +1,6 @@
 {
-  "dataset_version": "0.8.0",
-  "verified_at_utc": "2026-08-28T06:24:54+00:00",
+  "dataset_version": "0.9.0",
+  "verified_at_utc": "2026-08-28T09:25:51+00:00",
   "machine_verification_passed": true,
   "source_snapshot_fidelity": "verified",
   "ground_truth_status": "not_established",

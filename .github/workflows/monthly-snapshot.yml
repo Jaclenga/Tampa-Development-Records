@@ -1,0 +1,51 @@
+name: Monthly Tampa snapshot
+
+on:
+  schedule:
+    - cron: "17 6 1 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: monthly-tampa-snapshot
+  cancel-in-progress: false
+
+jobs:
+  collect-compare-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Collect and compare the bounded source snapshot
+        run: python scripts/snapshot_tracker.py collect-live
+
+      - name: Run the complete test suite
+        run: python -m unittest discover -s tests -v
+
+      - name: Reject malformed diffs
+        run: git diff --check
+
+      - name: Commit the new snapshot and comparison
+        shell: bash
+        run: |
+          if git diff --quiet && [ -z "$(git ls-files --others --exclude-standard)" ]; then
+            echo "No published source changes to commit."
+            exit 0
+          fi
+          snapshot_date="$(python -c 'import json; print(json.load(open("data/monthly_changes/index.json"))["snapshots"][-1]["snapshot_date"])')"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "data: add Tampa snapshot ${snapshot_date}"
+          git push
