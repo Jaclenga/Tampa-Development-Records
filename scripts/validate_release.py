@@ -87,6 +87,17 @@ def main() -> None:
     census_records = read("bounded_census_records.csv")
     universes = read("source_universes.csv")
     census_summary = read("bounded_census_summary.csv")
+    monthly_cohorts = read("activity_by_month.csv")
+    monthly_records_dir = ROOT / "data" / "monthly_records"
+    monthly_records_index_path = monthly_records_dir / "index.json"
+    monthly_records_index = (
+        json.loads(monthly_records_index_path.read_text(encoding="utf-8"))
+        if monthly_records_index_path.exists() else {}
+    )
+    monthly_extracts = []
+    for path in sorted(monthly_records_dir.glob("????-??.csv")):
+        with path.open(encoding="utf-8", newline="") as handle:
+            monthly_extracts.extend(csv.DictReader(handle))
     tracker_index_path = ROOT / "data" / "monthly_changes" / "index.json"
     tracker_index = (
         json.loads(tracker_index_path.read_text(encoding="utf-8"))
@@ -275,6 +286,62 @@ def main() -> None:
         "longitudinal_archive_contains_current_release": tracker_matches_current_release,
         "longitudinal_snapshots_are_privacy_minimized": not tracker_privacy_fields,
         "longitudinal_comparison_outputs_are_complete": tracker_comparison_outputs_complete,
+        "monthly_cohort_record_ids_are_unique": (
+            len(monthly_cohorts) == len({x["record_id"] for x in monthly_cohorts})
+            and len(monthly_cohorts) == len({x["record_identity"] for x in monthly_cohorts})
+        ),
+        "monthly_cohort_temporal_fields_reconcile": all(
+            (not x["event_date"] or x["event_month"] == x["event_date"][:7])
+            and x["first_observed_month"] == x["first_observed_date"][:7]
+            and x["last_observed_month"] == x["last_observed_date"][:7]
+            and x["snapshot_month"] == x["snapshot_date"][:7]
+            and x["first_observed_date"] <= x["last_observed_date"] == x["snapshot_date"]
+            and int(x["observation_count"]) >= 1
+            and x["event_date_is_planned"] in {"0", "1"}
+            and x["event_date_is_after_snapshot"]
+            == ("1" if x["event_date"] and x["event_date"] > x["snapshot_date"] else "0")
+            and x["event_date_is_planned"]
+            == ("1" if x["event_date_basis"] == "source_reported_plan" else "0")
+            and x["currently_observed"] in {"0", "1"}
+            for x in monthly_cohorts
+        ),
+        "monthly_cohort_date_semantics_are_explicit": all(
+            (not x["event_date"] and not x["event_month"] and not x["event_date_type"]
+             and not x["event_date_source_field"] and not x["event_date_basis"])
+            or (
+                bool(x["event_month"])
+                and bool(x["event_date_type"])
+                and bool(x["event_date_source_field"])
+                and x["event_date_basis"] in {
+                    "source_reported_event", "source_reported_plan", "source_record_metadata"
+                }
+            )
+            for x in monthly_cohorts
+        ),
+        "monthly_cohort_current_observations_match_latest_snapshot": (
+            bool(tracker_snapshots)
+            and {
+                x["record_identity"] for x in monthly_cohorts if x["currently_observed"] == "1"
+            } == set(snapshot_tracker.index_records(
+                tracker_snapshots[-1][1],
+                set().union(*(snapshot_tracker.duplicate_bases(rows) for _, rows in tracker_snapshots)),
+            ))
+        ),
+        "monthly_record_extracts_partition_dated_cohorts": (
+            {x["record_id"] for x in monthly_extracts}
+            == {x["record_id"] for x in monthly_cohorts if x["event_month"]}
+            and len(monthly_extracts) == sum(bool(x["event_month"]) for x in monthly_cohorts)
+            and all(x["event_month"] for x in monthly_extracts)
+        ),
+        "monthly_record_index_reconciles": (
+            bool(monthly_records_index)
+            and monthly_records_index.get("row_count") == len(monthly_cohorts)
+            and monthly_records_index.get("records_with_event_month") == len(monthly_extracts)
+            and monthly_records_index.get("records_without_event_month")
+            == sum(not x["event_month"] for x in monthly_cohorts)
+            and monthly_records_index.get("month_count")
+            == len(list(monthly_records_dir.glob("????-??.csv")))
+        ),
         "demolition_titles_are_semantically_consistent": all(
             x["activity_class"] != "demolition"
             or (
@@ -430,6 +497,8 @@ def main() -> None:
             "public_finance_events": len(finance_events),
             "parcel_context": len(parcel_context), "parcel_activity_links": len(parcel_links),
             "bounded_census_records": len(census_records), "source_universes": len(universes),
+            "activity_by_month": len(monthly_cohorts),
+            "monthly_record_extract_rows": len(monthly_extracts),
             "longitudinal_snapshots": len(tracker_snapshots),
             "longitudinal_comparisons": len(tracker_index.get("comparisons", [])),
         },

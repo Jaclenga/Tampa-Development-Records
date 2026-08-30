@@ -278,7 +278,7 @@ def write_summary(rows: list[dict]) -> Path:
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     output = OUTPUT_DIR / "verification_summary.csv"
     with output.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=SUMMARY_COLUMNS)
+        writer = csv.DictWriter(handle, fieldnames=SUMMARY_COLUMNS, lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
     return output

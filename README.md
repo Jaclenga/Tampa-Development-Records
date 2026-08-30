@@ -12,6 +12,7 @@ This is a strong baseline, not yet a validated longitudinal result.
 | Core snapshot | August 23, 2026 |
 | Published records | 4,469 records from eight City GIS layers |
 | Normalized activities | 3,323 |
+| Source-date cohort view | 4,469 source records; 4,468 with a selected event month |
 | Archived snapshots | 1 |
 | Monthly comparisons | 0; requires a second snapshot |
 | Manual validation | 0 of 150 first reviews completed |
@@ -97,6 +98,7 @@ codes, and second-review status remain in the
 | --- | --- |
 | Analyze every published source record | [`data/processed/bounded_census_records.csv`](data/processed/bounded_census_records.csv) |
 | Use the consolidated activity view | [`data/processed/tampa_development_activity.csv`](data/processed/tampa_development_activity.csv) |
+| Analyze source-reported monthly cohorts | [`data/processed/activity_by_month.csv`](data/processed/activity_by_month.csv) |
 | Inspect source coverage | [`data/processed/source_universes.csv`](data/processed/source_universes.csv) |
 | Review the immutable snapshot | [`data/snapshots/2026-08-23/`](data/snapshots/2026-08-23/) |
 | Complete manual validation | [`docs/MANUAL_VALIDATION_GUIDE.md`](docs/MANUAL_VALIDATION_GUIDE.md) |
@@ -109,6 +111,8 @@ codes, and second-review status remain in the
 - Studying overlap among permit, planning, preservation, and capital-project
   layers.
 - Tracing normalized activities back to source records and attributes.
+- Analyzing source-reported event months separately from TDR observation
+  months, with explicit date-type and planned-date flags.
 - After a second snapshot, identifying records and source fields that changed
   between observations.
 
@@ -134,7 +138,8 @@ python scripts/snapshot_tracker.py collect-live
 
 See [`scripts/README.md`](scripts/README.md) for the complete command index and
 [`docs/LONGITUDINAL_TRACKER.md`](docs/LONGITUDINAL_TRACKER.md) for snapshot and
-comparison semantics.
+comparison semantics. See [`docs/TEMPORAL_COHORTS.md`](docs/TEMPORAL_COHORTS.md)
+before combining monthly records across sources or date types.
 
 ## Before treating v0.9.0 as a public release
 
@@ -158,6 +163,7 @@ data/raw/             archived privacy-minimized source files
 data/processed/       analysis-ready tables and review queues
 data/snapshots/       compact immutable observations by date
 data/monthly_changes/ machine-readable comparisons and index
+data/monthly_records/ source-date cohort extracts and index
 docs/                 scope, methods, validation, and release guidance
 scripts/              acquisition, transformation, tracking, and QA
 tests/                deterministic workflow tests

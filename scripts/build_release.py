@@ -827,6 +827,14 @@ FIELD_METADATA = {
 def metadata_for(
     field: str, table: str | None = None,
 ) -> tuple[str, str, str, str, str, str, str, str]:
+    if table == "activity_by_month.csv":
+        try:
+            from . import monthly_cohorts
+        except ImportError:  # Support direct execution from the scripts directory.
+            import monthly_cohorts
+        cohort_metadata = monthly_cohorts.metadata_for(field)
+        if cohort_metadata:
+            return cohort_metadata
     if table in {
         "capital_budget_book_projects.csv", "capital_budget_book_comparison.csv",
         "public_finance_events.csv", "parcel_context.csv", "parcel_activity_links.csv",
@@ -1028,6 +1036,7 @@ def create_public_archive() -> None:
         *sorted((DATA / "coverage").rglob("*")),
         *sorted((DATA / "snapshots").rglob("*")),
         *sorted((DATA / "monthly_changes").rglob("*")),
+        *sorted((DATA / "monthly_records").rglob("*")),
         *(sorted(REPORTS.rglob("*")) if REPORTS.exists() else []),
         *sorted(PROCESSED.glob("*.csv")), *sorted(DOCS.glob("*")),
         *sorted((ROOT / "verification").glob("*")),
@@ -1050,7 +1059,11 @@ def create_public_archive() -> None:
             "data/processed/manual_validation_development_sample.csv",
             "data/processed/manual_validation_holdout_sample.csv",
             "data/processed/manual_validation_second_review.csv",
+            "data/processed/activity_by_month.csv",
+            "data/monthly_records/index.json",
             "scripts/validation_study.py",
+            "scripts/monthly_cohorts.py",
+            "docs/TEMPORAL_COHORTS.md",
             "verification/verification_summary.csv",
         )
         missing_release_files = [
@@ -1161,6 +1174,11 @@ def main() -> None:
     except ImportError:  # Support direct execution from the scripts directory.
         import bounded_census
     bounded_census.build(PROCESSED, RAW, source_rows, locations, counts)
+    try:
+        from . import monthly_cohorts
+    except ImportError:  # Support direct execution from the scripts directory.
+        import monthly_cohorts
+    cohort_summary = monthly_cohorts.build(current_source_path=PROCESSED / "source_records.csv")
     write_documentation(counts, activities, matches, retrieved)
     validation_command = [sys.executable, str(SCRIPTS / "validate_release.py")]
     if args.include_hcpa:
@@ -1177,7 +1195,10 @@ def main() -> None:
     longitudinal = snapshot_tracker.update_tracker(PROCESSED / "source_records.csv")
     longitudinal_files = [
         path
-        for directory in (DATA / "coverage", DATA / "snapshots", DATA / "monthly_changes", REPORTS)
+        for directory in (
+            DATA / "coverage", DATA / "snapshots", DATA / "monthly_changes",
+            DATA / "monthly_records", REPORTS,
+        )
         if directory.exists()
         for path in directory.rglob("*")
         if path.is_file()
@@ -1208,6 +1229,7 @@ def main() -> None:
             PROCESSED / "building_match_audit.csv", PROCESSED / "building_match_diagnostics.csv",
             PROCESSED / "bounded_census_records.csv", PROCESSED / "source_universes.csv",
             PROCESSED / "bounded_census_summary.csv",
+            PROCESSED / "activity_by_month.csv",
             PROCESSED / "completeness_benchmarks.csv", DOCS / "data_dictionary.csv", DOCS / "qa_report.json",
             ROOT / "verification" / "verification_summary.csv",
             DOCS / "validation_report.json", DOCS / "KNOWN_LIMITATIONS.md",
@@ -1218,7 +1240,7 @@ def main() -> None:
             DOCS / "AI_USE_STATEMENT.md",
             DOCS / "MANUAL_VALIDATION_GUIDE.md", DOCS / "MANUAL_VALIDATION_PROTOCOL.md",
             DOCS / "VERIFICATION_REPORT.md", DOCS / "GROUND_TRUTH_METHODOLOGY.md", DOCS / "BOUNDED_CENSUS_SCOPE.md",
-            DOCS / "CONTEXT_MODULES.md", *longitudinal_files,
+            DOCS / "CONTEXT_MODULES.md", DOCS / "TEMPORAL_COHORTS.md", *longitudinal_files,
         ]),
         "license_note": "The public archive contains privacy-minimized City-hosted core and context source snapshots only. Code is MIT-licensed; source data remain subject to City terms described in DATA_LICENSE.md.",
         "bounded_census_claim": "All features returned by eight named City ArcGIS layers at the recorded snapshot retrieval time are included.",
@@ -1235,6 +1257,15 @@ def main() -> None:
             "comparison_count": longitudinal["index"]["comparison_count"],
             "latest_snapshot_date": longitudinal["archived_snapshot"]["snapshot_date"],
             "scope": "Differences between repeated observations of the configured public layers; not confirmed real-world development outcomes.",
+        },
+        "source_date_cohorts": {
+            "row_count": cohort_summary["row_count"],
+            "records_with_event_month": cohort_summary["records_with_event_month"],
+            "records_without_event_month": cohort_summary["records_without_event_month"],
+            "first_event_month": cohort_summary["first_event_month"],
+            "last_event_month": cohort_summary["last_event_month"],
+            "month_count": cohort_summary["month_count"],
+            "scope": "Source-reported dates for records retained by TDR; not reconstructed City publication dates or a census of all development.",
         },
         "context_modules": {
             **context_summary,

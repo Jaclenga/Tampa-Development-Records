@@ -27,6 +27,9 @@ review with AI-generated judgments.
   publication changes rather than real-world outcomes.
 - Confirm that snapshot and comparison counts reconcile in
   `data/monthly_changes/index.json` and `manifest.json`.
+- Confirm that `event_month`, `first_observed_month`, and `snapshot_month`
+  remain distinct and that `data/monthly_records/index.json` reconciles with
+  `data/processed/activity_by_month.csv`.
 
 ## 3. Run the release checks
 

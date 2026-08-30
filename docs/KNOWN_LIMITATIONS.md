@@ -61,3 +61,10 @@
     occupancy, or inspection populations was located in the public interfaces
     checked on August 28, 2026. Address-level Accela access is not equivalent to
     a reproducible bulk source.
+24. Monthly cohorts combine several explicitly labeled date concepts across
+    source systems. Application creation, permit record creation, permit
+    issuance, actual capital starts, and planned capital starts are not
+    interchangeable measures of development activity.
+25. Source-date cohorts can reach years before TDR began collecting snapshots.
+    They describe dates reported by records that TDR later observed; they do
+    not reconstruct when those records entered or left the City's public layer.

@@ -798,13 +798,28 @@ def sync_manifest(index: dict[str, object]) -> None:
         "scope": "Differences between repeated observations of the configured public layers; not confirmed real-world development outcomes.",
     })
     manifest["longitudinal_tracker"] = tracker
+    cohort_index_path = DATA / "monthly_records" / "index.json"
+    if cohort_index_path.exists():
+        cohort_index = json.loads(cohort_index_path.read_text(encoding="utf-8"))
+        manifest["source_date_cohorts"] = {
+            "row_count": cohort_index["row_count"],
+            "records_with_event_month": cohort_index["records_with_event_month"],
+            "records_without_event_month": cohort_index["records_without_event_month"],
+            "first_event_month": cohort_index["first_event_month"],
+            "last_event_month": cohort_index["last_event_month"],
+            "month_count": cohort_index["month_count"],
+            "scope": "Source-reported dates for records retained by TDR; not reconstructed City publication dates or a census of all development.",
+        }
     tracked_outputs = {
         path.relative_to(ROOT).as_posix()
-        for directory in (DATA / "coverage", SNAPSHOTS, CHANGES, REPORTS)
+        for directory in (DATA / "coverage", SNAPSHOTS, CHANGES, DATA / "monthly_records", REPORTS)
         if directory.exists()
         for path in directory.rglob("*")
         if path.is_file()
     }
+    cohort_table = DATA / "processed" / "activity_by_month.csv"
+    if cohort_table.exists():
+        tracked_outputs.add(cohort_table.relative_to(ROOT).as_posix())
     manifest["outputs"] = sorted(set(manifest.get("outputs", [])) | tracked_outputs)
     atomic_json(manifest_path, manifest)
 
@@ -827,6 +842,12 @@ def update_tracker(
             changes_dir=changes_dir,
             reports_dir=reports_dir,
         )
+    if snapshots_dir == SNAPSHOTS and changes_dir == CHANGES and reports_dir == REPORTS:
+        try:
+            from . import monthly_cohorts
+        except ImportError:  # Support direct execution from the scripts directory.
+            import monthly_cohorts
+        monthly_cohorts.build(current_source_path=source_path)
     index = tracker_index(snapshots_dir, changes_dir)
     index_path = INDEX if changes_dir == CHANGES else changes_dir / "index.json"
     atomic_json(index_path, index)
@@ -842,6 +863,11 @@ def collect_live_and_update() -> dict[str, object]:
     comparison = None
     if len(dates) >= 2 and archived["snapshot_date"] == dates[-1]:
         comparison = compare_snapshots(dates[-2], dates[-1])
+    try:
+        from . import monthly_cohorts
+    except ImportError:  # Support direct execution from the scripts directory.
+        import monthly_cohorts
+    monthly_cohorts.build()
     index = tracker_index()
     atomic_json(INDEX, index)
     sync_manifest(index)

@@ -364,7 +364,7 @@ def main() -> None:
         },
     }
     args.report.parent.mkdir(parents=True, exist_ok=True)
-    args.report.write_text(json.dumps(report, indent=2), encoding="utf-8")
+    args.report.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(report, indent=2))
     if not report["machine_verification_passed"]:
         raise SystemExit(1)

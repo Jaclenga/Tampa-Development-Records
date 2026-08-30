@@ -3,8 +3,20 @@
 ## Current state
 
 The tracker contains one immutable observation dated August 23, 2026. It is a
-baseline only: there are no month-to-month comparisons or longitudinal results
-yet.
+baseline only: there are no month-to-month comparisons or observed
+longitudinal results yet. A separate source-date cohort view provides
+retrospective monthly organization without claiming earlier TDR observations.
+
+## Two complementary temporal views
+
+| View | Time basis | Main question |
+| --- | --- | --- |
+| Source-date cohorts | Dates reported within retained source records | What dates do the currently or previously published records describe? |
+| Snapshot comparisons | Repeated TDR retrievals | How did the configured public layers change between observations? |
+
+The cohort view is documented in [TEMPORAL_COHORTS.md](TEMPORAL_COHORTS.md).
+Its `event_month`, `first_observed_month`, and `snapshot_month` fields are kept
+separate. Historical source dates do not backfill TDR publication history.
 
 ## What the tracker does
 
@@ -80,4 +92,7 @@ data/monthly_changes/index.json  snapshot and comparison inventory
 data/monthly_changes/YYYY-MM.csv record-level changes
 data/monthly_changes/YYYY-MM.json comparison summary
 reports/YYYY-MM.md               readable monthly update
+data/processed/activity_by_month.csv source-record cohort table
+data/monthly_records/YYYY-MM.csv source-date cohort extracts
+data/monthly_records/index.json  cohort inventory and counts
 ```

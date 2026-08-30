@@ -18,6 +18,10 @@ standard library.
   once two snapshots exist, publishes deterministic monthly change CSVs,
   summary JSON, and readable Markdown updates. See the detailed
   [tracker methodology](../docs/LONGITUDINAL_TRACKER.md).
+- `monthly_cohorts.py` builds the cross-snapshot source-record cohort table and
+  source-date monthly extracts while keeping event, first-observed, and
+  snapshot months distinct. See
+  [the cohort methodology](../docs/TEMPORAL_COHORTS.md).
 
 ## Transformation
 
@@ -45,6 +49,7 @@ content hash matches exactly.
 python scripts/snapshot_tracker.py collect-live
 python scripts/snapshot_tracker.py update
 python scripts/snapshot_tracker.py compare --from-date 2026-08-23 --to-date 2026-09-01
+python scripts/monthly_cohorts.py
 ```
 
 Use `collect-live` for the scheduled monthly tracker. It collects the eight

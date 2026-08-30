@@ -41,6 +41,12 @@
     "longitudinal_archive_contains_current_release": true,
     "longitudinal_snapshots_are_privacy_minimized": true,
     "longitudinal_comparison_outputs_are_complete": true,
+    "monthly_cohort_record_ids_are_unique": true,
+    "monthly_cohort_temporal_fields_reconcile": true,
+    "monthly_cohort_date_semantics_are_explicit": true,
+    "monthly_cohort_current_observations_match_latest_snapshot": true,
+    "monthly_record_extracts_partition_dated_cohorts": true,
+    "monthly_record_index_reconciles": true,
     "demolition_titles_are_semantically_consistent": true,
     "truth_has_one_row_per_activity": true,
     "truth_outcomes_use_closed_vocabulary": true,
@@ -107,6 +113,8 @@
     "parcel_activity_links": 1054,
     "bounded_census_records": 4469,
     "source_universes": 8,
+    "activity_by_month": 4469,
+    "monthly_record_extract_rows": 4468,
     "longitudinal_snapshots": 1,
     "longitudinal_comparisons": 0
   }

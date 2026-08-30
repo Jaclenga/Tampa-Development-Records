@@ -252,7 +252,7 @@ def main() -> None:
 
     output = args.output or ROOT / "docs" / f"review_metrics_{args.phase}.json"
     output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(json.dumps(report, indent=2), encoding="utf-8")
+    output.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(report, indent=2))
     if not ready and not args.allow_partial:
         raise SystemExit(2)
