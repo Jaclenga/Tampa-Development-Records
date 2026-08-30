@@ -62,7 +62,8 @@ class MonthlyCohortTests(unittest.TestCase):
             root = Path(temporary)
             snapshots = root / "snapshots"
             processed = root / "processed"
-            monthly = root / "monthly"
+            monthly_events = root / "monthly_events"
+            planned_events = root / "planned_events"
             current_path = root / "source_records.csv"
 
             permit_august = record(
@@ -119,12 +120,41 @@ class MonthlyCohortTests(unittest.TestCase):
             self.assertEqual(by_native["CIP-NEW"]["event_date_is_planned"], "1")
             self.assertEqual(by_native["CIP-NEW"]["event_date_is_after_snapshot"], "1")
 
-            index = monthly_cohorts.write_outputs(rows, processed / "activity_by_month.csv", monthly)
-            self.assertEqual(index["row_count"], 3)
-            self.assertEqual(index["month_count"], 3)
-            self.assertTrue((monthly / "2025-04.csv").exists())
-            self.assertTrue((monthly / "2022-02.csv").exists())
-            self.assertTrue((monthly / "2026-10.csv").exists())
+            summary = monthly_cohorts.write_outputs(
+                rows,
+                processed / "activity_by_month.csv",
+                monthly_events,
+                planned_events,
+            )
+            self.assertEqual(summary["row_count"], 3)
+            self.assertEqual(summary["monthly_event_record_count"], 2)
+            self.assertEqual(summary["planned_event_record_count"], 1)
+            self.assertEqual(summary["monthly_events"]["month_count"], 2)
+            self.assertEqual(summary["planned_events"]["month_count"], 1)
+            self.assertTrue((monthly_events / "2025-04.csv").exists())
+            self.assertTrue((monthly_events / "2022-02.csv").exists())
+            self.assertFalse((monthly_events / "2026-10.csv").exists())
+            self.assertTrue((planned_events / "2026-10.csv").exists())
+
+    def test_future_non_plan_is_rejected_from_researcher_extracts(self) -> None:
+        row = {field: "" for field in monthly_cohorts.COHORT_FIELDS}
+        row.update({
+            "record_id": "rec-future",
+            "event_date": "2026-09-01",
+            "event_month": "2026-09",
+            "event_date_is_planned": "0",
+            "event_date_is_after_snapshot": "1",
+            "snapshot_date": "2026-08-23",
+        })
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            with self.assertRaisesRegex(ValueError, "must be explicit plans"):
+                monthly_cohorts.write_outputs(
+                    [row],
+                    root / "activity_by_month.csv",
+                    root / "monthly_events",
+                    root / "planned_events",
+                )
 
 
 if __name__ == "__main__":

@@ -28,8 +28,9 @@ review with AI-generated judgments.
 - Confirm that snapshot and comparison counts reconcile in
   `data/monthly_changes/index.json` and `manifest.json`.
 - Confirm that `event_month`, `first_observed_month`, and `snapshot_month`
-  remain distinct and that `data/monthly_records/index.json` reconciles with
-  `data/processed/activity_by_month.csv`.
+  remain distinct. Confirm that `data/monthly_events/` contains no dates after
+  their source snapshot, `data/planned_events/` contains only explicit future
+  plans, and both indexes reconcile with `data/processed/activity_by_month.csv`.
 
 ## 3. Run the release checks
 

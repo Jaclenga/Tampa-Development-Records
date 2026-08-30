@@ -1,4 +1,4 @@
-# Source-date monthly cohorts
+# Source-date monthly events and plans
 
 ## Purpose
 
@@ -6,11 +6,19 @@ The cohort view adds retrospective time structure to records already retained
 by TDR. It complements the prospective snapshot tracker; it does not replace
 or backfill the observation history.
 
-The main table is `data/processed/activity_by_month.csv`. It contains one row
-per source-record identity ever retained in an immutable TDR snapshot. Nonempty
-event months are also partitioned into `data/monthly_records/YYYY-MM.csv` for
-convenient analysis. `data/monthly_records/index.json` reports counts by month,
-source, and date type.
+The canonical table is `data/processed/activity_by_month.csv`. It contains one
+row per source-record identity ever retained in an immutable TDR snapshot and
+preserves both past and forward-looking source dates with explicit flags.
+
+Researcher-facing extracts separate those meanings:
+
+- `data/monthly_events/YYYY-MM.csv` contains source-described dates on or
+  before the snapshot supplying each row.
+- `data/planned_events/YYYY-MM.csv` contains only explicit source-reported plan
+  dates after the snapshot supplying each row.
+
+Each directory has an `index.json` reporting counts by month, source, and date
+type. The former `data/monthly_records/` mixed extract is intentionally removed.
 
 ## Three different month concepts
 
@@ -51,16 +59,33 @@ analytically useful, but `event_date_is_planned=1` and
 
 Dates before 2000 and after 2100 are treated as invalid rather than preserving
 known ArcGIS sentinel values. `event_date_is_after_snapshot=1` identifies a
-future-dated value relative to the snapshot supplying the row. This can be
-expected for a plan but should be reviewed for event or record-metadata dates.
+future-dated value relative to the snapshot supplying the row. Publication
+fails if such a value is not also an explicit source-reported plan. Valid
+future plans are routed only to `data/planned_events/` and cannot appear in
+`data/monthly_events/`.
+
+## Extract routing
+
+| Output | Rule | Meaning |
+| --- | --- | --- |
+| `activity_by_month.csv` | All retained record identities | Canonical table; inspect flags before analysis |
+| `monthly_events/YYYY-MM.csv` | `event_date <= snapshot_date` | Source-described dates that are not forward-looking relative to collection |
+| `planned_events/YYYY-MM.csv` | `event_date > snapshot_date` and `event_date_is_planned=1` | Forward-looking intentions reported by the source |
+| `snapshots/YYYY-MM-DD/` | TDR retrieval date | What the City source layers published when collected |
+
+For example, `monthly_events/2026-08.csv` is not a September-or-later forecast,
+while `planned_events/2027-09.csv` is explicitly forward-looking. Neither file
+shows when a record first appeared in the City's own system; use the snapshot
+fields and immutable snapshot archive for TDR observation history.
 
 ## Appropriate analysis
 
-Researchers can count records by event month, compare year-over-year patterns
-within the same source and date type, examine neighborhood composition, or
-measure how long identities remain observable across TDR snapshots. Analyses
-should group or filter by both `source_name` and `event_date_type` unless the
-research design justifies combining them.
+Researchers can count records in `monthly_events` by source-described month,
+compare year-over-year patterns within the same source and date type, examine
+neighborhood composition, or measure how long identities remain observable
+across TDR snapshots. Analyze `planned_events` separately as a schedule or
+pipeline of intentions. Analyses should group or filter by both `source_name`
+and `event_date_type` unless the research design justifies combining them.
 
 Do not interpret the cohort table as:
 
@@ -71,10 +96,11 @@ Do not interpret the cohort table as:
   issuance, actual starts, and planned starts; or
 - an immutable monthly publication history.
 
-Monthly cohort files are regenerated from the latest value observed for each
-record identity. If a source corrects an event date, the record can move to a
-different cohort. The immutable snapshots preserve the observed source states
-needed to audit that change.
+Monthly event and planned-event files are regenerated from the latest value
+observed for each record identity. If a source corrects a date—or a planned
+date becomes non-future relative to a later snapshot—the record can move to a
+different extract or cohort. The immutable snapshots preserve the observed
+source states needed to audit that change.
 
 ## Rebuild
 
@@ -84,4 +110,3 @@ view automatically. It can also be run directly:
 ```bash
 python scripts/monthly_cohorts.py
 ```
-

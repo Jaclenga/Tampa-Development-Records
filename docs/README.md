@@ -31,8 +31,9 @@ scope, methodology, validation, and release material.
 
 - [Longitudinal tracker](LONGITUDINAL_TRACKER.md) — snapshot identity,
   comparison semantics, outputs, and operating commands.
-- [Source-date monthly cohorts](TEMPORAL_COHORTS.md) — retrospective event
-  months, observation months, source-specific date rules, and valid uses.
+- [Source-date monthly events and plans](TEMPORAL_COHORTS.md) — canonical dates,
+  non-future monthly extracts, forward-looking plans, observation months,
+  source-specific date rules, and valid uses.
 - [Ground-truth methodology](GROUND_TRUTH_METHODOLOGY.md) — evidence grades and
   restrictions on inferred outcomes.
 - [Context modules](CONTEXT_MODULES.md) — capital-budget, parcel, and building

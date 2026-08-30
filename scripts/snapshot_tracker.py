@@ -798,21 +798,38 @@ def sync_manifest(index: dict[str, object]) -> None:
         "scope": "Differences between repeated observations of the configured public layers; not confirmed real-world development outcomes.",
     })
     manifest["longitudinal_tracker"] = tracker
-    cohort_index_path = DATA / "monthly_records" / "index.json"
-    if cohort_index_path.exists():
-        cohort_index = json.loads(cohort_index_path.read_text(encoding="utf-8"))
+    monthly_index_path = DATA / "monthly_events" / "index.json"
+    planned_index_path = DATA / "planned_events" / "index.json"
+    if monthly_index_path.exists() and planned_index_path.exists():
+        monthly_index = json.loads(monthly_index_path.read_text(encoding="utf-8"))
+        planned_index = json.loads(planned_index_path.read_text(encoding="utf-8"))
+        cohort_table = DATA / "processed" / "activity_by_month.csv"
+        cohort_rows = read_csv(cohort_table) if cohort_table.exists() else []
         manifest["source_date_cohorts"] = {
-            "row_count": cohort_index["row_count"],
-            "records_with_event_month": cohort_index["records_with_event_month"],
-            "records_without_event_month": cohort_index["records_without_event_month"],
-            "first_event_month": cohort_index["first_event_month"],
-            "last_event_month": cohort_index["last_event_month"],
-            "month_count": cohort_index["month_count"],
-            "scope": "Source-reported dates for records retained by TDR; not reconstructed City publication dates or a census of all development.",
+            "row_count": len(cohort_rows),
+            "records_with_event_month": sum(bool(row["event_month"]) for row in cohort_rows),
+            "records_without_event_month": sum(not row["event_month"] for row in cohort_rows),
+            "monthly_event_record_count": monthly_index["record_count"],
+            "planned_event_record_count": planned_index["record_count"],
+            "unexpected_future_event_count": sum(
+                row["event_date_is_after_snapshot"] == "1"
+                and row["event_date_is_planned"] != "1"
+                for row in cohort_rows
+            ),
+            "first_monthly_event_month": monthly_index["first_event_month"],
+            "last_monthly_event_month": monthly_index["last_event_month"],
+            "monthly_event_month_count": monthly_index["month_count"],
+            "first_planned_event_month": planned_index["first_event_month"],
+            "last_planned_event_month": planned_index["last_event_month"],
+            "planned_event_month_count": planned_index["month_count"],
+            "scope": "The canonical table retains all selected source dates. Researcher-facing monthly_events exclude dates after their snapshot; planned_events contains only explicit forward-looking source plans.",
         }
     tracked_outputs = {
         path.relative_to(ROOT).as_posix()
-        for directory in (DATA / "coverage", SNAPSHOTS, CHANGES, DATA / "monthly_records", REPORTS)
+        for directory in (
+            DATA / "coverage", SNAPSHOTS, CHANGES,
+            DATA / "monthly_events", DATA / "planned_events", REPORTS,
+        )
         if directory.exists()
         for path in directory.rglob("*")
         if path.is_file()
@@ -820,7 +837,12 @@ def sync_manifest(index: dict[str, object]) -> None:
     cohort_table = DATA / "processed" / "activity_by_month.csv"
     if cohort_table.exists():
         tracked_outputs.add(cohort_table.relative_to(ROOT).as_posix())
-    manifest["outputs"] = sorted(set(manifest.get("outputs", [])) | tracked_outputs)
+    replaced_prefixes = ("data/monthly_records/", "data/monthly_events/", "data/planned_events/")
+    existing_outputs = {
+        path for path in manifest.get("outputs", [])
+        if not path.startswith(replaced_prefixes)
+    }
+    manifest["outputs"] = sorted(existing_outputs | tracked_outputs)
     atomic_json(manifest_path, manifest)
 
 

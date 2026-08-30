@@ -68,3 +68,8 @@
 25. Source-date cohorts can reach years before TDR began collecting snapshots.
     They describe dates reported by records that TDR later observed; they do
     not reconstruct when those records entered or left the City's public layer.
+26. The canonical source-date table retains forward-looking capital planned
+    starts. Researcher-facing extracts isolate those rows under
+    `data/planned_events/`; `data/monthly_events/` contains no event date later
+    than the snapshot supplying that row. Planned dates remain intentions, not
+    observations or proof that work occurred.

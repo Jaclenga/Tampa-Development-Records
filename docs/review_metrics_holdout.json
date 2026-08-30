@@ -3,7 +3,7 @@
   "analysis_type": "final_holdout",
   "protocol_version": "1.0.0",
   "phase": "holdout",
-  "generated_at_utc": "2026-08-28T09:25:51+00:00",
+  "generated_at_utc": "2026-08-30T22:18:52+00:00",
   "completion": {
     "first_reviews_complete": 0,
     "first_reviews_required": 50,

@@ -1036,7 +1036,8 @@ def create_public_archive() -> None:
         *sorted((DATA / "coverage").rglob("*")),
         *sorted((DATA / "snapshots").rglob("*")),
         *sorted((DATA / "monthly_changes").rglob("*")),
-        *sorted((DATA / "monthly_records").rglob("*")),
+        *sorted((DATA / "monthly_events").rglob("*")),
+        *sorted((DATA / "planned_events").rglob("*")),
         *(sorted(REPORTS.rglob("*")) if REPORTS.exists() else []),
         *sorted(PROCESSED.glob("*.csv")), *sorted(DOCS.glob("*")),
         *sorted((ROOT / "verification").glob("*")),
@@ -1060,7 +1061,8 @@ def create_public_archive() -> None:
             "data/processed/manual_validation_holdout_sample.csv",
             "data/processed/manual_validation_second_review.csv",
             "data/processed/activity_by_month.csv",
-            "data/monthly_records/index.json",
+            "data/monthly_events/index.json",
+            "data/planned_events/index.json",
             "scripts/validation_study.py",
             "scripts/monthly_cohorts.py",
             "docs/TEMPORAL_COHORTS.md",
@@ -1197,7 +1199,7 @@ def main() -> None:
         path
         for directory in (
             DATA / "coverage", DATA / "snapshots", DATA / "monthly_changes",
-            DATA / "monthly_records", REPORTS,
+            DATA / "monthly_events", DATA / "planned_events", REPORTS,
         )
         if directory.exists()
         for path in directory.rglob("*")
@@ -1262,10 +1264,16 @@ def main() -> None:
             "row_count": cohort_summary["row_count"],
             "records_with_event_month": cohort_summary["records_with_event_month"],
             "records_without_event_month": cohort_summary["records_without_event_month"],
-            "first_event_month": cohort_summary["first_event_month"],
-            "last_event_month": cohort_summary["last_event_month"],
-            "month_count": cohort_summary["month_count"],
-            "scope": "Source-reported dates for records retained by TDR; not reconstructed City publication dates or a census of all development.",
+            "monthly_event_record_count": cohort_summary["monthly_event_record_count"],
+            "planned_event_record_count": cohort_summary["planned_event_record_count"],
+            "unexpected_future_event_count": cohort_summary["unexpected_future_event_count"],
+            "first_monthly_event_month": cohort_summary["first_monthly_event_month"],
+            "last_monthly_event_month": cohort_summary["last_monthly_event_month"],
+            "monthly_event_month_count": cohort_summary["monthly_event_month_count"],
+            "first_planned_event_month": cohort_summary["first_planned_event_month"],
+            "last_planned_event_month": cohort_summary["last_planned_event_month"],
+            "planned_event_month_count": cohort_summary["planned_event_month_count"],
+            "scope": "The canonical table retains all selected source dates. Researcher-facing monthly_events exclude dates after their snapshot; planned_events contains only explicit forward-looking source plans.",
         },
         "context_modules": {
             **context_summary,

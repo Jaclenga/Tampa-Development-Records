@@ -92,7 +92,9 @@ data/monthly_changes/index.json  snapshot and comparison inventory
 data/monthly_changes/YYYY-MM.csv record-level changes
 data/monthly_changes/YYYY-MM.json comparison summary
 reports/YYYY-MM.md               readable monthly update
-data/processed/activity_by_month.csv source-record cohort table
-data/monthly_records/YYYY-MM.csv source-date cohort extracts
-data/monthly_records/index.json  cohort inventory and counts
+data/processed/activity_by_month.csv canonical source-date table
+data/monthly_events/YYYY-MM.csv  non-future source-date extracts
+data/monthly_events/index.json   non-future extract inventory
+data/planned_events/YYYY-MM.csv  forward-looking source plans
+data/planned_events/index.json   planned extract inventory
 ```

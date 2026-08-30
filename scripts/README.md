@@ -18,9 +18,9 @@ standard library.
   once two snapshots exist, publishes deterministic monthly change CSVs,
   summary JSON, and readable Markdown updates. See the detailed
   [tracker methodology](../docs/LONGITUDINAL_TRACKER.md).
-- `monthly_cohorts.py` builds the cross-snapshot source-record cohort table and
-  source-date monthly extracts while keeping event, first-observed, and
-  snapshot months distinct. See
+- `monthly_cohorts.py` builds the cross-snapshot canonical source-date table,
+  non-future `monthly_events` extracts, and forward-looking `planned_events`
+  extracts while keeping event, first-observed, and snapshot months distinct. See
   [the cohort methodology](../docs/TEMPORAL_COHORTS.md).
 
 ## Transformation

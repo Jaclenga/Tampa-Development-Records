@@ -28,10 +28,10 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
 PROCESSED = DATA / "processed"
 SNAPSHOTS = DATA / "snapshots"
-MONTHLY_RECORDS = DATA / "monthly_records"
+MONTHLY_EVENTS = DATA / "monthly_events"
+PLANNED_EVENTS = DATA / "planned_events"
 OUTPUT = PROCESSED / "activity_by_month.csv"
-INDEX = MONTHLY_RECORDS / "index.json"
-FORMAT_VERSION = "1.0.0"
+FORMAT_VERSION = "2.0.0"
 
 COHORT_FIELDS = [
     "record_id",
@@ -291,47 +291,118 @@ def build_rows(
 def write_outputs(
     rows: list[dict[str, str]],
     output_path: Path = OUTPUT,
-    monthly_dir: Path = MONTHLY_RECORDS,
+    monthly_events_dir: Path = MONTHLY_EVENTS,
+    planned_events_dir: Path = PLANNED_EVENTS,
 ) -> dict[str, object]:
+    future_non_plans = [
+        row for row in rows
+        if row["event_month"]
+        and row["event_date_is_after_snapshot"] == "1"
+        and row["event_date_is_planned"] != "1"
+    ]
+    if future_non_plans:
+        ids = ", ".join(row["record_id"] for row in future_non_plans[:5])
+        raise ValueError(
+            "Future-dated source events must be explicit plans before publication; "
+            f"found {len(future_non_plans)} non-plan rows (examples: {ids})"
+        )
+
+    monthly_rows = [
+        row for row in rows
+        if row["event_month"] and row["event_date_is_after_snapshot"] == "0"
+    ]
+    planned_rows = [
+        row for row in rows
+        if row["event_month"] and row["event_date_is_after_snapshot"] == "1"
+    ]
+
     snapshot_tracker.atomic_csv(output_path, rows, COHORT_FIELDS)
+    monthly_index = write_partition(
+        monthly_rows,
+        monthly_events_dir,
+        extract_type="monthly_events",
+        selection_rule="event_date is on or before the source row's snapshot_date",
+        scope_note=(
+            "Source-described dates that are not forward-looking relative to the TDR "
+            "snapshot supplying the row. These are not TDR observation months, and "
+            "different event_date_type values must not be pooled without qualification."
+        ),
+    )
+    planned_index = write_partition(
+        planned_rows,
+        planned_events_dir,
+        extract_type="planned_events",
+        selection_rule=(
+            "event_date is after snapshot_date and event_date_is_planned equals 1"
+        ),
+        scope_note=(
+            "Forward-looking dates explicitly reported by the source as plans. They are "
+            "not historical observations, actual starts, or proof that work occurred."
+        ),
+    )
+
+    dated_count = sum(bool(row["event_month"]) for row in rows)
+    return {
+        "format_version": FORMAT_VERSION,
+        "row_count": len(rows),
+        "records_with_event_month": dated_count,
+        "records_without_event_month": len(rows) - dated_count,
+        "monthly_event_record_count": len(monthly_rows),
+        "planned_event_record_count": len(planned_rows),
+        "unexpected_future_event_count": len(future_non_plans),
+        "first_monthly_event_month": monthly_index["first_event_month"],
+        "last_monthly_event_month": monthly_index["last_event_month"],
+        "monthly_event_month_count": monthly_index["month_count"],
+        "first_planned_event_month": planned_index["first_event_month"],
+        "last_planned_event_month": planned_index["last_event_month"],
+        "planned_event_month_count": planned_index["month_count"],
+        "monthly_events": monthly_index,
+        "planned_events": planned_index,
+    }
+
+
+def write_partition(
+    rows: list[dict[str, str]],
+    directory: Path,
+    *,
+    extract_type: str,
+    selection_rule: str,
+    scope_note: str,
+) -> dict[str, object]:
     by_month: dict[str, list[dict[str, str]]] = defaultdict(list)
     for row in rows:
-        if row["event_month"]:
-            by_month[row["event_month"]].append(row)
+        by_month[row["event_month"]].append(row)
 
-    monthly_dir.mkdir(parents=True, exist_ok=True)
-    expected = {monthly_dir / f"{month}.csv" for month in by_month}
-    for stale in monthly_dir.glob("????-??.csv"):
+    directory.mkdir(parents=True, exist_ok=True)
+    expected = {directory / f"{month}.csv" for month in by_month}
+    for stale in directory.glob("????-??.csv"):
         if stale not in expected:
             stale.unlink()
     month_summaries = []
     for month, month_rows in sorted(by_month.items()):
         month_rows.sort(key=lambda row: (row["source_name"], row["record_id"]))
-        path = monthly_dir / f"{month}.csv"
+        path = directory / f"{month}.csv"
         snapshot_tracker.atomic_csv(path, month_rows, COHORT_FIELDS)
         month_summaries.append({
             "event_month": month,
             "record_count": len(month_rows),
             "source_counts": dict(sorted(Counter(row["source_name"] for row in month_rows).items())),
             "event_date_type_counts": dict(sorted(Counter(row["event_date_type"] for row in month_rows).items())),
-            "path": f"data/monthly_records/{month}.csv",
+            "path": f"data/{directory.name}/{month}.csv",
         })
 
     index = {
         "format_version": FORMAT_VERSION,
-        "row_count": len(rows),
-        "records_with_event_month": sum(bool(row["event_month"]) for row in rows),
-        "records_without_event_month": sum(not row["event_month"] for row in rows),
+        "extract_type": extract_type,
+        "record_count": len(rows),
         "first_event_month": month_summaries[0]["event_month"] if month_summaries else None,
         "last_event_month": month_summaries[-1]["event_month"] if month_summaries else None,
         "month_count": len(month_summaries),
         "months": month_summaries,
-        "scope_note": (
-            "event_month is selected from a documented source field and is distinct from "
-            "first_observed_month and snapshot_month; date types must not be pooled without qualification."
-        ),
+        "selection_rule": selection_rule,
+        "scope_note": scope_note,
     }
-    snapshot_tracker.atomic_json(monthly_dir / "index.json", index)
+    snapshot_tracker.atomic_json(directory / "index.json", index)
     return index
 
 
@@ -339,9 +410,15 @@ def build(
     snapshots_dir: Path = SNAPSHOTS,
     current_source_path: Path | None = PROCESSED / "source_records.csv",
     output_path: Path = OUTPUT,
-    monthly_dir: Path = MONTHLY_RECORDS,
+    monthly_events_dir: Path = MONTHLY_EVENTS,
+    planned_events_dir: Path = PLANNED_EVENTS,
 ) -> dict[str, object]:
-    return write_outputs(build_rows(snapshots_dir, current_source_path), output_path, monthly_dir)
+    return write_outputs(
+        build_rows(snapshots_dir, current_source_path),
+        output_path,
+        monthly_events_dir,
+        planned_events_dir,
+    )
 
 
 def main() -> None:
@@ -349,9 +426,16 @@ def main() -> None:
     parser.add_argument("--source", type=Path, default=PROCESSED / "source_records.csv")
     parser.add_argument("--snapshots-dir", type=Path, default=SNAPSHOTS)
     parser.add_argument("--output", type=Path, default=OUTPUT)
-    parser.add_argument("--monthly-dir", type=Path, default=MONTHLY_RECORDS)
+    parser.add_argument("--monthly-events-dir", type=Path, default=MONTHLY_EVENTS)
+    parser.add_argument("--planned-events-dir", type=Path, default=PLANNED_EVENTS)
     args = parser.parse_args()
-    result = build(args.snapshots_dir, args.source, args.output, args.monthly_dir)
+    result = build(
+        args.snapshots_dir,
+        args.source,
+        args.output,
+        args.monthly_events_dir,
+        args.planned_events_dir,
+    )
     json.dump(result, sys.stdout, indent=2)
     sys.stdout.write("\n")
 

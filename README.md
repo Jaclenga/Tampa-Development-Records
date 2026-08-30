@@ -12,7 +12,7 @@ This is a strong baseline, not yet a validated longitudinal result.
 | Core snapshot | August 23, 2026 |
 | Published records | 4,469 records from eight City GIS layers |
 | Normalized activities | 3,323 |
-| Source-date cohort view | 4,469 source records; 4,468 with a selected event month |
+| Source-date cohort view | 4,469 source records; 4,387 non-future monthly events; 81 forward-looking plans |
 | Archived snapshots | 1 |
 | Monthly comparisons | 0; requires a second snapshot |
 | Manual validation | 0 of 150 first reviews completed |
@@ -98,7 +98,9 @@ codes, and second-review status remain in the
 | --- | --- |
 | Analyze every published source record | [`data/processed/bounded_census_records.csv`](data/processed/bounded_census_records.csv) |
 | Use the consolidated activity view | [`data/processed/tampa_development_activity.csv`](data/processed/tampa_development_activity.csv) |
-| Analyze source-reported monthly cohorts | [`data/processed/activity_by_month.csv`](data/processed/activity_by_month.csv) |
+| Analyze the canonical source-date table | [`data/processed/activity_by_month.csv`](data/processed/activity_by_month.csv) |
+| Analyze non-future monthly events | [`data/monthly_events/`](data/monthly_events/) |
+| Analyze forward-looking source plans | [`data/planned_events/`](data/planned_events/) |
 | Inspect source coverage | [`data/processed/source_universes.csv`](data/processed/source_universes.csv) |
 | Review the immutable snapshot | [`data/snapshots/2026-08-23/`](data/snapshots/2026-08-23/) |
 | Complete manual validation | [`docs/MANUAL_VALIDATION_GUIDE.md`](docs/MANUAL_VALIDATION_GUIDE.md) |
@@ -163,7 +165,8 @@ data/raw/             archived privacy-minimized source files
 data/processed/       analysis-ready tables and review queues
 data/snapshots/       compact immutable observations by date
 data/monthly_changes/ machine-readable comparisons and index
-data/monthly_records/ source-date cohort extracts and index
+data/monthly_events/ non-future source-date extracts and index
+data/planned_events/ forward-looking source-plan extracts and index
 docs/                 scope, methods, validation, and release guidance
 scripts/              acquisition, transformation, tracking, and QA
 tests/                deterministic workflow tests
