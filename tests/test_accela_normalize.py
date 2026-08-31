@@ -93,6 +93,27 @@ class AccelaNormalizeTests(unittest.TestCase):
         )
         self.assertTrue(item.inspection_id.startswith("ins-"))
         self.assertEqual(item.result_date, "2026-08-20")
+        self.assertIsNone(item.source_inspection_id)
+        temporal = item.as_row()
+        self.assertEqual(temporal["event_date"], "2026-08-20")
+        self.assertEqual(temporal["event_date_type"], "inspection_result")
+        self.assertEqual(temporal["first_observed_date"], "2026-08-30")
+        self.assertEqual(temporal["temporal_evidence"], "prospective_snapshot")
+
+    def test_inspection_id_is_namespaced_to_record_and_history_is_labeled(self):
+        row = {"Inspection ID": "42", "Inspection Type": "Final", "Date": "07/20/2026", "Result": "Pass"}
+        first = normalize_inspection_row(
+            row, record=NormalizedRecord(record_id="acc-1", record_number="A"),
+            retrieved_at="2026-08-31T00:00:00Z", raw_source_file="one.html",
+        )
+        second = normalize_inspection_row(
+            row, record=NormalizedRecord(record_id="acc-2", record_number="B"),
+            retrieved_at="2026-08-31T00:00:00Z", raw_source_file="two.html",
+        )
+        self.assertNotEqual(first.inspection_id, second.inspection_id)
+        self.assertEqual(first.source_inspection_id, "42")
+        self.assertEqual(first.as_row()["historical_reconstruction"], "1")
+        self.assertEqual(first.as_row()["temporal_evidence"], "retrospective_event_history")
 
 
 if __name__ == "__main__":

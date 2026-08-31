@@ -8,8 +8,13 @@ import csv
 import hashlib
 import json
 from pathlib import Path
+import sys
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "src"))
+
+from tampa_accela.csv_safety import restore_csv_row, safe_csv_row
+
 ALIASES = {
     "permit_id": ["permit_id", "record_id", "recordid", "alt_id", "cap_id"],
     "record_type": ["record_type", "type", "permit_type"],
@@ -28,7 +33,7 @@ ALIASES = {
     "certificate_of_occupancy_date": ["certificate_of_occupancy_date", "co_date", "occupancy_date"],
     "inspection_id": ["inspection_id", "inspection_number"],
     "inspection_type": ["inspection_type", "inspection_name"],
-    "inspection_date": ["inspection_date", "inspection_completed_date"],
+    "inspection_date": ["inspection_date", "inspection_completed_date", "result_date", "completed_date"],
     "inspection_result": ["inspection_result", "inspection_status", "result"],
     "final_inspection_indicator": ["final_inspection_indicator", "is_final_inspection", "final_indicator"],
 }
@@ -96,7 +101,7 @@ def staged_events(rows: list[dict]) -> list[dict]:
 def read_rows(path: Path) -> list[dict]:
     if path.suffix.lower() == ".csv":
         with path.open(encoding="utf-8-sig", newline="") as handle:
-            return list(csv.DictReader(handle))
+            return [restore_csv_row(row) for row in csv.DictReader(handle)]
     if path.suffix.lower() in {".ndjson", ".jsonl"}:
         return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
     data = json.loads(path.read_text(encoding="utf-8"))
@@ -121,12 +126,12 @@ def main() -> None:
     args.output.parent.mkdir(parents=True, exist_ok=True)
     with args.output.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=list(ALIASES))
-        writer.writeheader(); writer.writerows(normalized)
+        writer.writeheader(); writer.writerows(safe_csv_row(row) for row in normalized)
     events = staged_events(normalized)
     events_path = args.output.with_name(args.output.stem + "_lifecycle_events.csv")
     with events_path.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=EVENT_COLUMNS, lineterminator="\n")
-        writer.writeheader(); writer.writerows(events)
+        writer.writeheader(); writer.writerows(safe_csv_row(row) for row in events)
     report = {"input_rows": len(rows), "staged_lifecycle_events": len(events),
               "field_mapping": mapping, "lifecycle_events_output": str(events_path),
               "warning": "Only explicit delivered lifecycle fields are staged. Absent inspections, certificates, relationships, or dates are never inferred."}

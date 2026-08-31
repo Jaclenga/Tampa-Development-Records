@@ -17,3 +17,7 @@ data/processed/accela_inspections.csv
 data/processed/accela_gis_crosswalk.csv
 data/processed/accela_checkpoints/
 data/processed/accela_snapshots/
+data/processed/accela_inspection_backfill*.log
+data/processed/accela_inspection_finalizer*.log
+data/processed/accela_inspection_validation.json
+data/processed/accela_inspection_backfill_status.json

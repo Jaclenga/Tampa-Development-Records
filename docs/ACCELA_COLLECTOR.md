@@ -51,6 +51,10 @@ python scripts/collect_accela.py --module Building --from-date 2026-08-01 --to-d
 python scripts/backfill_accela.py --from-month 2025-08 --to-month 2026-07
 python scripts/validate_accela_backfill.py
 
+# Resumable Planning-then-Building inspection history (gzip raw archive)
+python scripts/backfill_accela_inspections.py --from-month 2025-08 --to-month 2026-08
+python scripts/validate_accela_inspections.py --require-complete
+
 # Exact public record lookup
 python scripts/collect_accela.py --module Building --record-number BDE-26-0445754
 
@@ -71,6 +75,12 @@ review them before redistribution. An exact record-number search can redirect
 straight to its detail page, so its raw response needs the same review even
 without enrichment flags.
 
+Inspection-only collection does not copy owner/applicant/contractor fields into
+the normalized record row. The full postback HTML can still contain public
+detail data, so the inspection backfill stores token-redacted HTML with gzip
+compression and the same adjacent provenance metadata. Completed and upcoming
+inspection grids are paginated independently; every visible page is traversed.
+
 `--use-export` invokes the public result grid's user-facing `Download results`
 control. It validates the returned CSV schema and every row's opened date,
 saves the raw CSV with hash/provenance metadata, and normalizes it through the
@@ -82,6 +92,13 @@ download.
 ## Network and recovery behavior
 
 - One request per second by default and never more than one per second.
+- Every request and redirect must use HTTPS, the configured Accela hostname and
+  port, and the configured agency path. Cross-origin, cross-port, downgraded,
+  and out-of-agency redirects are rejected before they are requested; no more
+  than five redirects are followed.
+- A response is rejected before buffering when its declared wire size exceeds
+  25 MiB. Streaming also enforces a 25 MiB wire limit and a 50 MiB decoded-body
+  limit, protecting against oversized and highly compressed responses.
 - Connect/read timeouts, exponential backoff, and retries for 429, 500, 502,
   503, and 504 responses; numeric or HTTP-date `Retry-After` is respected.
 - Stable IDs are derived from Tampa module and public `capID1/2/3`; the public
@@ -109,6 +126,19 @@ engine:
 - `data/processed/accela_inspections.csv`: optional inspection observations.
 - `data/processed/accela_snapshots/<run>-<module>.csv`: run snapshot.
 - adjacent `-summary.json` and `-gaps.json`: counts and completeness flags.
+
+All source-derived strings are serialized as literal CSV text. Values that
+could be interpreted as spreadsheet formulas (including values beginning with
+`=`, `+`, `-`, `@`, tab, carriage return, or line feed after leading spaces)
+are prefixed with an apostrophe on disk. Plain signed numeric literals remain
+numeric. Project readers remove only the protective prefix when loading the
+files for deterministic processing. This reduces spreadsheet formula-injection
+risk, but users should still keep external-content prompts disabled for
+untrusted files.
+
+Runtime dependencies in `requirements.txt` are pinned to exact versions and
+verified with SHA-256 hashes. Update versions and hashes together after
+reviewing upstream security advisories.
 
 The normalized schema keeps lifecycle dates distinct (`opened_date`,
 `issued_date`, `completed_date`, `closed_date`, and `updated_date`). A null means

@@ -79,6 +79,43 @@ def temporalize_row(values: Mapping[str, object]) -> dict[str, Any]:
     return result
 
 
+def temporalize_inspection_row(values: Mapping[str, object]) -> dict[str, Any]:
+    """Add event/observation semantics to one dated inspection observation."""
+    result = dict(values)
+    candidates = (
+        ("result_date", "inspection_result"),
+        ("completed_date", "inspection_completed"),
+        ("scheduled_date", "inspection_scheduled"),
+    )
+    event_date = None
+    event_type = None
+    for field_name, candidate_type in candidates:
+        if candidate := _calendar_date(result.get(field_name)):
+            event_date = candidate
+            event_type = candidate_type
+            break
+    snapshot_date = _calendar_date(result.get("snapshot_date") or result.get("retrieved_at"))
+    first_observed = _calendar_date(result.get("first_observed_date")) or snapshot_date
+    last_observed = _calendar_date(result.get("last_observed_date")) or snapshot_date
+    result.update({
+        "event_date": event_date,
+        "event_date_type": event_type,
+        "first_observed_date": first_observed,
+        "snapshot_date": snapshot_date,
+        "last_observed_date": last_observed,
+    })
+    if event_date is None:
+        result["historical_reconstruction"] = ""
+        result["temporal_evidence"] = "unknown"
+    elif date.fromisoformat(event_date) < PROSPECTIVE_MONITORING_START:
+        result["historical_reconstruction"] = "1"
+        result["temporal_evidence"] = "retrospective_event_history"
+    else:
+        result["historical_reconstruction"] = "0"
+        result["temporal_evidence"] = "prospective_snapshot"
+    return result
+
+
 @dataclass(frozen=True)
 class SearchQuery:
     module: str
@@ -209,12 +246,20 @@ INSPECTION_FIELDS = [
     "record_id",
     "record_number",
     "inspection_id",
+    "source_inspection_id",
     "inspection_type",
     "inspection_status",
     "scheduled_date",
     "completed_date",
     "result",
     "result_date",
+    "event_date",
+    "event_date_type",
+    "first_observed_date",
+    "snapshot_date",
+    "last_observed_date",
+    "historical_reconstruction",
+    "temporal_evidence",
     "inspector_name",
     "source_url",
     "retrieved_at",
@@ -227,19 +272,27 @@ class Inspection:
     record_id: str | None = None
     record_number: str | None = None
     inspection_id: str | None = None
+    source_inspection_id: str | None = None
     inspection_type: str | None = None
     inspection_status: str | None = None
     scheduled_date: str | None = None
     completed_date: str | None = None
     result: str | None = None
     result_date: str | None = None
+    event_date: str | None = None
+    event_date_type: str | None = None
+    first_observed_date: str | None = None
+    snapshot_date: str | None = None
+    last_observed_date: str | None = None
+    historical_reconstruction: str | None = None
+    temporal_evidence: str | None = None
     inspector_name: str | None = None
     source_url: str | None = None
     retrieved_at: str | None = None
     raw_source_file: str | None = None
 
     def as_row(self) -> dict[str, Any]:
-        values = asdict(self)
+        values = temporalize_inspection_row(asdict(self))
         return {name: values.get(name) for name in INSPECTION_FIELDS}
 
 

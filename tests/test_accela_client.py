@@ -15,6 +15,7 @@ def response(status=200, text="ok", url="https://example.test"):
     item = requests.Response()
     item.status_code = status
     item._content = text.encode()
+    item._content_consumed = True
     item.url = url
     item.headers = {}
     item.request = requests.Request("GET", url).prepare()
@@ -63,7 +64,7 @@ class AccelaClientTests(unittest.TestCase):
         first, second, third = response(429), response(500), response(200)
         first.headers["Retry-After"] = "2"
         client = AccelaClient(
-            CollectorConfig(max_retries=2, requests_per_second=1),
+            CollectorConfig(base_url="https://example.test/", max_retries=2, requests_per_second=1),
             session=FakeSession([first, second, third]), sleep=sleeps.append, clock=lambda: 0,
         )
         self.assertEqual(client.request("GET", "https://example.test").status_code, 200)
@@ -71,14 +72,66 @@ class AccelaClientTests(unittest.TestCase):
 
     def test_stops_on_access_restriction_and_captcha(self):
         with self.assertRaises(AccessRestricted):
-            AccelaClient(session=FakeSession([response(403)]), sleep=lambda _: None).request("GET", "https://example.test")
+            AccelaClient(
+                CollectorConfig(base_url="https://example.test/"),
+                session=FakeSession([response(403)]), sleep=lambda _: None,
+            ).request("GET", "https://example.test/")
         captcha = '<div class="g-recaptcha"></div>'
         with self.assertRaises(AccessRestricted):
-            AccelaClient(session=FakeSession([response(200, captcha)]), sleep=lambda _: None).request("GET", "https://example.test")
+            AccelaClient(
+                CollectorConfig(base_url="https://example.test/"),
+                session=FakeSession([response(200, captcha)]), sleep=lambda _: None,
+            ).request("GET", "https://example.test/")
 
     def test_non_retry_http_error_is_wrapped(self):
         with self.assertRaises(CollectionError):
-            AccelaClient(session=FakeSession([response(404)]), sleep=lambda _: None).request("GET", "https://example.test")
+            AccelaClient(
+                CollectorConfig(base_url="https://example.test/"),
+                session=FakeSession([response(404)]), sleep=lambda _: None,
+            ).request("GET", "https://example.test/")
+
+    def test_rejects_cross_origin_links_and_redirects(self):
+        config = CollectorConfig(base_url="https://example.test/TAMPA/")
+        with self.assertRaises(AccessRestricted):
+            AccelaClient(config, session=FakeSession([]), sleep=lambda _: None).request(
+                "GET", "https://evil.test/TAMPA/detail"
+            )
+        redirect = response(302, url="https://example.test/TAMPA/start")
+        redirect.headers["Location"] = "https://evil.test/TAMPA/detail"
+        with self.assertRaises(AccessRestricted):
+            AccelaClient(config, session=FakeSession([redirect]), sleep=lambda _: None).request(
+                "GET", "https://example.test/TAMPA/start"
+            )
+
+    def test_follows_only_bounded_same_origin_redirects(self):
+        config = CollectorConfig(base_url="https://example.test/TAMPA/")
+        redirect = response(302, url="https://example.test/TAMPA/start")
+        redirect.headers["Location"] = "/TAMPA/detail"
+        final = response(200, "safe", "https://example.test/TAMPA/detail")
+        client = AccelaClient(config, session=FakeSession([redirect, final]), sleep=lambda _: None)
+        self.assertEqual(client.request("GET", "https://example.test/TAMPA/start").text, "safe")
+        self.assertEqual(client.request_count, 2)
+
+    def test_rejects_oversized_response_before_buffering(self):
+        config = CollectorConfig(
+            base_url="https://example.test/", max_wire_bytes=100, max_decoded_bytes=200
+        )
+        oversized = response(200, "small", "https://example.test/")
+        oversized.headers["Content-Length"] = "101"
+        with self.assertRaises(CollectionError):
+            AccelaClient(config, session=FakeSession([oversized]), sleep=lambda _: None).request(
+                "GET", "https://example.test/"
+            )
+
+    def test_rejects_response_that_exceeds_decoded_limit(self):
+        config = CollectorConfig(
+            base_url="https://example.test/", max_wire_bytes=100, max_decoded_bytes=100
+        )
+        oversized = response(200, "x" * 101, "https://example.test/")
+        with self.assertRaises(CollectionError):
+            AccelaClient(config, session=FakeSession([oversized]), sleep=lambda _: None).request(
+                "GET", "https://example.test/"
+            )
 
     def test_raw_redaction_and_checkpoint_resume(self):
         html = '<input name="ACA_CS_FIELD" value="secret"><input name="__VIEWSTATE" value="state">'

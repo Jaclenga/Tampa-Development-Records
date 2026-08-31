@@ -8,6 +8,16 @@ collections. The current Accela aggregate covers records opened from
 This is a local expanded edition, not a replacement for the source-bounded
 ArcGIS census. It must not be described as a complete census of Tampa permits,
 projects, inspections, certificates, construction, or investment.
+See the detailed [Accela limitations](../../docs/ACCELA_LIMITATIONS.md) before
+using the expanded edition for trends or outcome claims.
+
+The expanded activity CSV remains one row per activity. Public Accela
+inspections are stored separately in
+`data/processed/accela_inspections.csv` because one permit can have many
+inspection events. Join on `record_id`; do not duplicate activity rows to put
+multiple inspections into the activity table. The linked table uses a
+permit-namespaced `inspection_id`, retains Accela's displayed
+`source_inspection_id`, and upserts repeat observations without duplicates.
 
 ## Duplicate prevention
 
@@ -54,9 +64,9 @@ time:
 The 2025-08-01 through 2026-07-31 cohort is labeled
 `retrospective_source_record`. It is administrative history retrieved in 2026,
 not a set of contemporaneous 2025/2026 snapshots. The 2026-08-01 boundary
-starts `prospective_snapshot` evidence. No row is labeled
-`retrospective_event_history` because the list-only collection did not capture
-a dated status-history feed.
+starts `prospective_snapshot` evidence. Activity rows are not labeled
+`retrospective_event_history`; that classification is reserved for explicit
+dated rows in the separate inspection history table.
 
 ## Current build
 

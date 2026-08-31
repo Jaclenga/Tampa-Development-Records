@@ -17,6 +17,10 @@ scope, methodology, validation, and release material.
 
 ## Dataset scope
 
+- [Accela limitations](ACCELA_LIMITATIONS.md) - retrospective timing,
+  coverage comparability, module imbalance, administrative outcomes, census
+  boundaries, and unfinished manual validation.
+
 - [Source scope](BOUNDED_CENSUS_SCOPE.md) — included layers, record counts,
   completeness boundary, and priority coverage gaps.
 - [Data dictionary](data_dictionary.csv) — field-level definitions for the

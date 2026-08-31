@@ -41,8 +41,16 @@ def parser() -> argparse.ArgumentParser:
     value.add_argument("--include-inspections", action="store_true")
     value.add_argument("--max-records", type=int)
     value.add_argument("--max-pages", type=int, default=500)
+    value.add_argument(
+        "--checkpoint-every", type=int, default=1,
+        help="Checkpoint after this many completed records (larger values reduce long-run disk I/O)",
+    )
     value.add_argument("--requests-per-second", type=float, default=1.0)
     value.add_argument("--raw-root", type=Path, default=ROOT / "data" / "raw" / "accela")
+    value.add_argument(
+        "--compress-raw", action="store_true",
+        help="Store redacted raw HTML as gzip (recommended for inspection backfills)",
+    )
     value.add_argument("--output-dir", type=Path, default=ROOT / "data" / "processed")
     value.add_argument("--checkpoint", type=Path)
     value.add_argument("--resume", action="store_true", help="Reuse a matching checkpoint; pages replay safely")
@@ -64,6 +72,8 @@ def main(argv: list[str] | None = None) -> int:
         parser().error("--max-records must be positive")
     if args.max_pages < 1:
         parser().error("--max-pages must be positive")
+    if args.checkpoint_every < 1:
+        parser().error("--checkpoint-every must be positive")
     query = SearchQuery(
         module=args.module,
         from_date=args.from_date,
@@ -86,6 +96,7 @@ def main(argv: list[str] | None = None) -> int:
         "to_date": args.to_date.isoformat() if args.to_date else None,
         "record_number": args.record_number,
         "raw_root": str(raw_root),
+        "compress_raw": args.compress_raw,
         "output_dir": str(args.output_dir),
         "checkpoint": str(checkpoint),
         "resume": args.resume,
@@ -94,6 +105,7 @@ def main(argv: list[str] | None = None) -> int:
         "include_parcels": args.include_parcels,
         "include_inspections": args.include_inspections,
         "max_records": args.max_records,
+        "checkpoint_every": args.checkpoint_every,
         "use_export": args.use_export,
     }
     if args.dry_run:
@@ -101,7 +113,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0
     if checkpoint.exists() and not args.resume:
         parser().error(f"checkpoint already exists; pass --resume or choose a new --run-id: {checkpoint}")
-    raw_store = RawStore(raw_root, args.module, run_id)
+    raw_store = RawStore(raw_root, args.module, run_id, compress_html=args.compress_raw)
     try:
         with AccelaClient(config) as client:
             result = client.collect(
@@ -113,6 +125,7 @@ def main(argv: list[str] | None = None) -> int:
                 include_inspections=args.include_inspections,
                 max_records=args.max_records,
                 use_export=args.use_export,
+                checkpoint_every=args.checkpoint_every,
             )
     except (CollectionError, OSError, ValueError) as exc:
         logging.error("collection stopped safely: %s", exc)
@@ -128,6 +141,8 @@ def main(argv: list[str] | None = None) -> int:
         paths["crosswalk"] = str(args.output_dir / "accela_gis_crosswalk.csv")
         match_gis_file(result.records, args.match_gis, Path(paths["crosswalk"]))
     failed = any(gap.get("type") == "collection_failed" for gap in result.gaps)
+    if args.include_inspections and result.gaps:
+        failed = True
     print(json.dumps({
         "records": len(result.records), "inspections": len(result.inspections),
         "incomplete": bool(result.gaps), "paths": paths,

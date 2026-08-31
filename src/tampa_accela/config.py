@@ -32,6 +32,9 @@ class CollectorConfig:
     max_retries: int = 4
     backoff_seconds: float = 1.0
     max_pages: int = 500
+    max_redirects: int = 5
+    max_wire_bytes: int = 25 * 1024 * 1024
+    max_decoded_bytes: int = 50 * 1024 * 1024
 
     def __post_init__(self) -> None:
         if self.requests_per_second <= 0 or self.requests_per_second > 1.0:
@@ -40,6 +43,12 @@ class CollectorConfig:
             raise ValueError("timeouts must be positive")
         if self.max_retries < 0 or self.max_pages < 1:
             raise ValueError("max_retries and max_pages must be non-negative/positive")
+        if self.max_redirects < 0:
+            raise ValueError("max_redirects must be non-negative")
+        if self.max_wire_bytes < 1 or self.max_decoded_bytes < 1:
+            raise ValueError("response byte limits must be positive")
+        if self.max_wire_bytes > self.max_decoded_bytes:
+            raise ValueError("max_wire_bytes cannot exceed max_decoded_bytes")
 
 
 def module_url(module: str, base_url: str = BASE_URL) -> str:

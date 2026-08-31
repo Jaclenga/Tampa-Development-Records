@@ -101,6 +101,7 @@ codes, and second-review status remain in the
 | Analyze every published source record | [`data/processed/bounded_census_records.csv`](data/processed/bounded_census_records.csv) |
 | Use the consolidated activity view | [`data/processed/tampa_development_activity.csv`](data/processed/tampa_development_activity.csv) |
 | Use the expanded activity view with Accela data | [`data/integrated/tampa_development_activity_with_accela.csv`](data/integrated/tampa_development_activity_with_accela.csv) |
+| Use linked Accela inspection events | `data/processed/accela_inspections.csv` (generated one-to-many table) |
 | Analyze the canonical source-date table | [`data/processed/activity_by_month.csv`](data/processed/activity_by_month.csv) |
 | Analyze non-future monthly events | [`data/monthly_events/`](data/monthly_events/) |
 | Analyze forward-looking source plans | [`data/planned_events/`](data/planned_events/) |
@@ -108,6 +109,7 @@ codes, and second-review status remain in the
 | Review the immutable snapshot | [`data/snapshots/2026-08-23/`](data/snapshots/2026-08-23/) |
 | Complete manual validation | [`docs/MANUAL_VALIDATION_GUIDE.md`](docs/MANUAL_VALIDATION_GUIDE.md) |
 | Collect bounded public Accela records | [`docs/ACCELA_COLLECTOR.md`](docs/ACCELA_COLLECTOR.md) |
+| Understand Accela analytical limitations | [`docs/ACCELA_LIMITATIONS.md`](docs/ACCELA_LIMITATIONS.md) |
 | Navigate all documentation | [`docs/README.md`](docs/README.md) |
 
 ## What the dataset supports
@@ -147,6 +149,13 @@ python scripts/collect_accela.py --module Building --from-date 2026-08-01 --to-d
 python scripts/backfill_accela.py --from-month 2025-08 --to-month 2026-07
 python scripts/validate_accela_backfill.py
 ```
+
+Collect the linked inspection history for the August 2025–August 2026 cohorts
+with `python scripts/backfill_accela_inspections.py --from-month 2025-08
+--to-month 2026-08`. The job is monthly, resumable, rate-limited, and stores
+raw HTML with gzip compression. Validate identity, parent links, duplicates,
+and checkpoint coverage with `python scripts/validate_accela_inspections.py
+--require-complete`.
 
 Integrate the collected Accela snapshot without duplicating exact public record
 numbers:

@@ -18,10 +18,15 @@ from pathlib import Path
 import re
 import tempfile
 import time
+import sys
 from typing import Iterable, Mapping
 
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+
+from tampa_accela.csv_safety import restore_csv_row, safe_csv_row
+
 CORE_ACTIVITY = ROOT / "data" / "processed" / "tampa_development_activity.csv"
 CORE_SOURCES = ROOT / "data" / "processed" / "source_records.csv"
 ACCELA_RECORDS = ROOT / "data" / "processed" / "accela_records.csv"
@@ -44,7 +49,7 @@ TEMPORAL_FIELDS = [
 def read_csv(path: Path) -> list[dict[str, str]]:
     csv.field_size_limit(2**31 - 1)
     with path.open(encoding="utf-8-sig", newline="") as handle:
-        return list(csv.DictReader(handle))
+        return [restore_csv_row(row) for row in csv.DictReader(handle)]
 
 
 def atomic_write(path: Path, render) -> None:
@@ -75,7 +80,7 @@ def write_csv(path: Path, rows: Iterable[Mapping[str, object]], fields: list[str
     def render(handle) -> None:
         writer = csv.DictWriter(handle, fieldnames=fields, extrasaction="ignore", lineterminator="\n")
         writer.writeheader()
-        writer.writerows({field: row.get(field, "") for field in fields} for row in materialized)
+        writer.writerows(safe_csv_row({field: row.get(field, "") for field in fields}) for row in materialized)
 
     atomic_write(path, render)
 

@@ -10,14 +10,17 @@ import tempfile
 import time
 from typing import Iterable, Mapping, Sequence
 
+from .csv_safety import restore_csv_row, safe_csv_row
 from .models import (
     INSPECTION_FIELDS,
     NORMALIZED_FIELDS,
     CollectionResult,
     Inspection,
     NormalizedRecord,
+    temporalize_inspection_row,
     temporalize_row,
 )
+from .normalize import stable_inspection_id
 
 
 def _atomic_write(path: Path, writer) -> None:
@@ -46,7 +49,7 @@ def write_csv(path: Path, rows: Iterable[Mapping[str, object]], fields: Sequence
     def render(handle) -> None:
         output = csv.DictWriter(handle, fieldnames=list(fields), extrasaction="ignore", lineterminator="\n")
         output.writeheader()
-        output.writerows({key: "" if value is None else value for key, value in row.items()} for row in materialized)
+        output.writerows(safe_csv_row(row) for row in materialized)
 
     _atomic_write(path, render)
 
@@ -59,7 +62,7 @@ def _read_csv(path: Path) -> list[dict[str, str]]:
     if not path.exists():
         return []
     with path.open(encoding="utf-8-sig", newline="") as handle:
-        return list(csv.DictReader(handle))
+        return [restore_csv_row(row) for row in csv.DictReader(handle)]
 
 
 def _public_number_key(row: Mapping[str, object]) -> tuple[str, str] | None:
@@ -107,13 +110,60 @@ def upsert_records(path: Path, records: Iterable[NormalizedRecord]) -> list[dict
     return rows
 
 
-def upsert_inspections(path: Path, inspections: Iterable[Inspection]) -> list[dict[str, object]]:
+def _number_key(value: object) -> str:
+    return "".join(character for character in str(value or "").upper() if character.isalnum())
+
+
+def _canonicalize_inspection(
+    row: Mapping[str, object], record_id_by_number: Mapping[str, str]
+) -> dict[str, object]:
+    result = dict(row)
+    canonical = record_id_by_number.get(_number_key(result.get("record_number")))
+    if canonical:
+        result["record_id"] = canonical
+        result["inspection_id"] = stable_inspection_id(
+            canonical,
+            source_identifier=result.get("source_inspection_id"),
+            inspection_type=result.get("inspection_type"),
+            scheduled_date=result.get("scheduled_date"),
+            completed_date=result.get("completed_date"),
+            result_date=result.get("result_date"),
+        )
+    return result
+
+
+def upsert_inspections(
+    path: Path,
+    inspections: Iterable[Inspection],
+    *,
+    record_id_by_number: Mapping[str, str] | None = None,
+) -> list[dict[str, object]]:
+    canonical_ids = record_id_by_number or {}
     by_id: dict[str, dict[str, object]] = {
-        row["inspection_id"]: dict(row) for row in _read_csv(path) if row.get("inspection_id")
+        canonical["inspection_id"]: temporalize_inspection_row(canonical)
+        for row in _read_csv(path)
+        if (
+            canonical := _canonicalize_inspection(row, canonical_ids)
+        ).get("inspection_id")
+        and canonical.get("record_id")
+        and (canonical.get("source_inspection_id") or canonical.get("inspection_type"))
     }
     for inspection in inspections:
         if inspection.inspection_id:
-            by_id[inspection.inspection_id] = inspection.as_row()
+            row = _canonicalize_inspection(inspection.as_row(), canonical_ids)
+            inspection_id = str(row["inspection_id"])
+            old = by_id.get(inspection_id, {})
+            merged = {
+                field: row.get(field) if row.get(field) not in {None, ""} else old.get(field)
+                for field in INSPECTION_FIELDS
+            }
+            first = [str(value) for value in (old.get("first_observed_date"), row.get("first_observed_date")) if value]
+            last = [str(value) for value in (old.get("last_observed_date"), row.get("last_observed_date")) if value]
+            if first:
+                merged["first_observed_date"] = min(first)
+            if last:
+                merged["last_observed_date"] = max(last)
+            by_id[inspection_id] = temporalize_inspection_row(merged)
     rows = [by_id[key] for key in sorted(by_id)]
     write_csv(path, rows, INSPECTION_FIELDS)
     return rows
@@ -136,7 +186,15 @@ def write_collection_outputs(
     write_csv(module_path, (row for row in all_rows if row.get("source_module") == module), NORMALIZED_FIELDS)
     inspection_path = output_dir / "accela_inspections.csv"
     if result.inspections or inspection_path.exists():
-        upsert_inspections(inspection_path, result.inspections)
+        ids_by_number = {
+            _number_key(row.get("record_number")): str(row["record_id"])
+            for row in all_rows if row.get("record_number") and row.get("record_id")
+        }
+        upsert_inspections(
+            inspection_path,
+            result.inspections,
+            record_id_by_number=ids_by_number,
+        )
     gaps_path = snapshots / f"{run_id}-{module.lower()}-gaps.json"
     summary_path = snapshots / f"{run_id}-{module.lower()}-summary.json"
     write_json(gaps_path, result.gaps)

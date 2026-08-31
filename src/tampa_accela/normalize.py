@@ -235,25 +235,51 @@ def normalize_inspection_row(
     inspection_type = clean(values.get("inspection type") or values.get("type"))
     status = clean(values.get("status") or values.get("inspection status"))
     result = clean(values.get("result") or values.get("result status"))
-    identifier = clean(values.get("inspection id") or values.get("id") or values.get("inspection number"))
-    if identifier is None:
-        seed = "|".join(
-            clean(value) or ""
-            for value in (record.record_id, inspection_type, status, values.get("date"), result)
-        )
-        identifier = "ins-" + hashlib.sha256(seed.encode("utf-8")).hexdigest()[:20]
+    source_identifier = clean(values.get("inspection id") or values.get("id") or values.get("inspection number"))
+    scheduled_date = iso_date(values.get("scheduled date") or values.get("schedule date"))
+    completed_date = iso_date(values.get("completed date") or values.get("completion date"))
+    result_date = iso_date(values.get("result date") or values.get("date"))
+    # Namespace even source-provided numbers to the parent record. Accela does
+    # not document that the displayed inspection number is agency-global.
+    identifier = stable_inspection_id(
+        record.record_id,
+        source_identifier=source_identifier,
+        inspection_type=inspection_type,
+        scheduled_date=scheduled_date,
+        completed_date=completed_date,
+        result_date=result_date,
+    )
     return Inspection(
         record_id=record.record_id,
         record_number=record.record_number,
         inspection_id=identifier,
+        source_inspection_id=source_identifier,
         inspection_type=inspection_type,
         inspection_status=status,
-        scheduled_date=iso_date(values.get("scheduled date") or values.get("schedule date")),
-        completed_date=iso_date(values.get("completed date") or values.get("completion date")),
+        scheduled_date=scheduled_date,
+        completed_date=completed_date,
         result=result,
-        result_date=iso_date(values.get("result date") or values.get("date")),
+        result_date=result_date,
         inspector_name=clean(values.get("inspector") or values.get("inspector name")),
         source_url=record.source_url,
         retrieved_at=retrieved_at,
         raw_source_file=raw_source_file,
     )
+
+
+def stable_inspection_id(
+    record_id: object,
+    *,
+    source_identifier: object = None,
+    inspection_type: object = None,
+    scheduled_date: object = None,
+    completed_date: object = None,
+    result_date: object = None,
+) -> str:
+    """Namespace an inspection identity to its canonical Accela parent row."""
+    identity = clean(source_identifier) or "|".join(
+        clean(value) or ""
+        for value in (inspection_type, scheduled_date, completed_date, result_date)
+    )
+    seed = "|".join((clean(record_id) or "", identity))
+    return "ins-" + hashlib.sha256(seed.encode("utf-8")).hexdigest()[:20]

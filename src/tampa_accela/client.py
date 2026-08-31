@@ -5,6 +5,7 @@ from __future__ import annotations
 import datetime as dt
 import csv
 from email.utils import parsedate_to_datetime
+import gzip
 import hashlib
 import html as html_lib
 from html.parser import HTMLParser
@@ -265,6 +266,21 @@ def next_page_target(source: str) -> str | None:
     return candidates[0] if candidates else None
 
 
+def next_inspection_page_target(source: str, section: str) -> str | None:
+    """Return the public pager target for completed or upcoming inspections."""
+    if section not in {"completed", "upcoming"}:
+        raise ValueError("inspection section must be completed or upcoming")
+    parser = PostbackParser()
+    parser.feed(source)
+    marker = f"InspectionList$gvList{section.title()}"
+    candidates = [
+        target
+        for target, _argument, label in parser.links
+        if marker in target and html_lib.unescape(label).strip().lower().startswith("next")
+    ]
+    return candidates[0] if candidates else None
+
+
 def _element_text(source: str, element_id: str) -> str | None:
     pattern = re.compile(
         rf"(?is)<(?P<tag>span|div|td|table)[^>]+id=['\"]{re.escape(element_id)}['\"][^>]*>"
@@ -369,21 +385,51 @@ def parse_detail(source: str) -> dict[str, object]:
     return {key: value for key, value in details.items() if clean(value)}
 
 
-def parse_inspection_rows(source: str) -> list[dict[str, str]]:
-    parser = TableParser(lambda table_id: "InspectionList_gvList" in table_id)
-    parser.feed(source)
+def parse_inspection_rows(source: str, section: str | None = None) -> list[dict[str, str]]:
+    """Parse ACA's headerless, nested presentation-style inspection rows."""
+    if section not in {None, "completed", "upcoming"}:
+        raise ValueError("inspection section must be completed, upcoming, or None")
     output: list[dict[str, str]] = []
-    for table in parser.tables:
-        if len(table) < 2:
+    starts = list(re.finditer(r"(?is)<tr[^>]+class=['\"][^'\"]*\bInspectionListRow\b[^'\"]*['\"][^>]*>", source))
+    for index, start in enumerate(starts):
+        prior = source[: start.start()]
+        completed_at = prior.rfind("InspectionList_gvListCompleted")
+        upcoming_at = prior.rfind("InspectionList_gvListUpcoming")
+        row_section = "completed" if completed_at > upcoming_at else "upcoming"
+        if section is not None and row_section != section:
             continue
-        headers = [clean(value) or f"column_{index}" for index, value in enumerate(table[0])]
-        for cells in table[1:]:
-            if len(cells) != len(headers):
-                continue
-            row = dict(zip(headers, cells))
-            text = " ".join(cells).lower()
-            if "no completed inspections" in text or "not added any inspections" in text:
-                continue
+        end = starts[index + 1].start() if index + 1 < len(starts) else len(source)
+        fragment = source[start.start() : end]
+        spans = [
+            clean(_plain_text(value))
+            for value in re.findall(r"(?is)<span\b[^>]*>(.*?)</span>", fragment)
+        ]
+        spans = [value for value in spans if value and value.lower() != "view details"]
+        if len(spans) < 2:
+            continue
+        details_match = re.search(r"(?is)InspectionDetails\.aspx\?([^'\"]+)", html_lib.unescape(fragment))
+        source_id = None
+        if details_match:
+            source_id = (parse_qs(details_match.group(1)).get("ID") or [None])[0]
+        descriptor = next(
+            (value for value in spans[2:] if re.search(r"(?i)\b(?:result by|scheduled|requested)\b", value)),
+            "",
+        )
+        row: dict[str, str] = {"Inspection Type": spans[1], "Status": spans[0]}
+        if source_id:
+            row["Inspection ID"] = source_id
+        completed = re.search(r"(?i)^Result by:\s*(.*?)\s+on\s+(\d{1,2}/\d{1,2}/\d{4})\s*$", descriptor)
+        if completed:
+            row.update({
+                "Result": spans[0],
+                "Inspector": clean(completed.group(1)) or "",
+                "Result Date": completed.group(2),
+            })
+        else:
+            scheduled = re.search(r"(?i)(\d{1,2}/\d{1,2}/\d{4})", descriptor)
+            if scheduled:
+                row["Scheduled Date"] = scheduled.group(1)
+        if source_id or row.get("Inspection Type"):
             output.append(row)
     return output
 
@@ -436,6 +482,26 @@ def _atomic_text(path: Path, value: str) -> None:
         raise
 
 
+def _atomic_bytes(path: Path, value: bytes) -> None:
+    path = path.resolve()
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fd, temporary = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
+    try:
+        with os.fdopen(fd, "wb") as handle:
+            handle.write(value)
+        for attempt in range(6):
+            try:
+                os.replace(temporary, path)
+                break
+            except PermissionError:
+                if attempt == 5:
+                    raise
+                time.sleep(0.1 * (2**attempt))
+    except Exception:
+        Path(temporary).unlink(missing_ok=True)
+        raise
+
+
 def _atomic_json(path: Path, value: object) -> None:
     _atomic_text(path, json.dumps(value, indent=2, ensure_ascii=False, sort_keys=True) + "\n")
 
@@ -443,9 +509,10 @@ def _atomic_json(path: Path, value: object) -> None:
 class RawStore:
     """Write immutable, token-redacted public payloads and safe provenance."""
 
-    def __init__(self, root: Path, module: str, run_id: str) -> None:
+    def __init__(self, root: Path, module: str, run_id: str, *, compress_html: bool = False) -> None:
         self.root = root / module.lower() / run_id
         self.root.mkdir(parents=True, exist_ok=True)
+        self.compress_html = compress_html
 
     def write(
         self,
@@ -462,10 +529,14 @@ class RawStore:
         stem = f"{sequence:05d}-{kind}-{digest[:12]}"
         if extension not in {".html", ".csv"}:
             raise ValueError("raw payload extension must be .html or .csv")
-        payload = self.root / f"{stem}{extension}"
+        stored_extension = ".html.gz" if extension == ".html" and self.compress_html else extension
+        payload = self.root / f"{stem}{stored_extension}"
         metadata = self.root / f"{stem}.metadata.json"
         if not payload.exists():
-            _atomic_text(payload, redacted)
+            if stored_extension == ".html.gz":
+                _atomic_bytes(payload, gzip.compress(redacted.encode("utf-8"), compresslevel=6))
+            else:
+                _atomic_text(payload, redacted)
         provenance = {
             "collector_version": COLLECTOR_VERSION,
             "retrieved_at": dt.datetime.now(dt.timezone.utc).isoformat(),
@@ -477,6 +548,7 @@ class RawStore:
             "page": semantic_request.get("page"),
             "record_count": record_count,
             "response_sha256": digest,
+            "stored_content_encoding": "gzip" if stored_extension == ".html.gz" else "identity",
             "redactions": sorted(SESSION_FIELD_NAMES),
             "note": "Cookies, request headers, WebForms view state, and anti-CSRF values are not retained.",
         }
@@ -519,15 +591,115 @@ class AccelaClient:
             if remaining > 0:
                 self._sleep(remaining)
 
+    def _validate_request_url(self, url: str) -> None:
+        """Fail closed unless a request stays on the configured HTTPS ACA origin."""
+        expected = urlparse(self.config.base_url)
+        candidate = urlparse(url)
+        try:
+            candidate_port = candidate.port
+            expected_port = expected.port or 443
+        except ValueError as exc:
+            raise AccessRestricted(f"Refusing malformed request URL: {url!r}") from exc
+        expected_path = expected.path.rstrip("/") + "/"
+        if (
+            candidate.scheme.lower() != "https"
+            or candidate.hostname != expected.hostname
+            or (candidate_port or 443) != expected_port
+            or candidate.username is not None
+            or candidate.password is not None
+            or not (candidate.path or "/").startswith(expected_path)
+        ):
+            raise AccessRestricted(
+                f"Refusing request outside configured ACA HTTPS origin/path: {url!r}"
+            )
+
+    def _consume_bounded_response(self, response: requests.Response) -> None:
+        """Buffer a response while enforcing wire and decoded byte ceilings."""
+        declared = response.headers.get("Content-Length")
+        if declared:
+            try:
+                if int(declared) > self.config.max_wire_bytes:
+                    raise CollectionError(
+                        f"Response Content-Length exceeds {self.config.max_wire_bytes} bytes: "
+                        f"{response.url}"
+                    )
+            except ValueError:
+                raise CollectionError(f"Response has invalid Content-Length: {response.url}")
+        chunks: list[bytes] = []
+        decoded = 0
+        try:
+            for chunk in response.iter_content(chunk_size=64 * 1024):
+                if not chunk:
+                    continue
+                decoded += len(chunk)
+                if decoded > self.config.max_decoded_bytes:
+                    raise CollectionError(
+                        f"Decoded response exceeds {self.config.max_decoded_bytes} bytes: "
+                        f"{response.url}"
+                    )
+                chunks.append(chunk)
+                raw = getattr(response, "raw", None)
+                try:
+                    wire = raw.tell() if raw is not None else decoded
+                except (AttributeError, OSError, ValueError):
+                    wire = decoded
+                if wire > self.config.max_wire_bytes:
+                    raise CollectionError(
+                        f"Wire response exceeds {self.config.max_wire_bytes} bytes: {response.url}"
+                    )
+        except Exception:
+            response.close()
+            raise
+        response._content = b"".join(chunks)
+        response._content_consumed = True
+
     def request(self, method: str, url: str, **kwargs: Any) -> requests.Response:
         timeout = kwargs.pop("timeout", (self.config.connect_timeout, self.config.read_timeout))
+        follow_redirects = bool(kwargs.pop("allow_redirects", True))
         error: Exception | None = None
         for attempt in range(self.config.max_retries + 1):
-            self._rate_limit()
+            request_method = method.upper()
+            request_url = url
+            request_kwargs = dict(kwargs)
             try:
-                response = self.session.request(method, url, timeout=timeout, **kwargs)
-                self.request_count += 1
-                self._last_request_at = self._clock()
+                redirects = 0
+                while True:
+                    self._validate_request_url(request_url)
+                    self._rate_limit()
+                    response = self.session.request(
+                        request_method,
+                        request_url,
+                        timeout=timeout,
+                        allow_redirects=False,
+                        stream=True,
+                        **request_kwargs,
+                    )
+                    self.request_count += 1
+                    self._last_request_at = self._clock()
+                    is_redirect = response.status_code in {301, 302, 303, 307, 308}
+                    if is_redirect and follow_redirects:
+                        location = response.headers.get("Location")
+                        if not location:
+                            response.close()
+                            raise CollectionError(f"Redirect response omitted Location: {response.url}")
+                        redirects += 1
+                        if redirects > self.config.max_redirects:
+                            response.close()
+                            raise CollectionError(
+                                f"Redirects exceeded safeguard of {self.config.max_redirects}: {url}"
+                            )
+                        target = urljoin(response.url, location)
+                        self._validate_request_url(target)
+                        status = response.status_code
+                        response.close()
+                        if status == 303 or status in {301, 302} and request_method not in {"GET", "HEAD"}:
+                            request_method = "GET"
+                            request_kwargs.pop("data", None)
+                            request_kwargs.pop("json", None)
+                        request_url = target
+                        continue
+                    self._consume_bounded_response(response)
+                    break
             except requests.RequestException as exc:
                 error = exc
                 LOG.warning("request failure method=%s url=%s attempt=%s error=%s", method, url, attempt + 1, exc)
@@ -677,6 +849,7 @@ class AccelaClient:
         include_inspections: bool = False,
         max_records: int | None = None,
         use_export: bool = False,
+        checkpoint_every: int = 1,
     ) -> CollectionResult:
         query.validate()
         checkpoint = self._read_checkpoint(checkpoint_path, query)
@@ -733,6 +906,7 @@ class AccelaClient:
                 sequence = self._collect_paginated(
                     query, raw_store, checkpoint_path, result, completed_records, sequence,
                     retrieved_at, include_addresses, include_parcels, include_inspections, max_records,
+                    checkpoint_every,
                 )
         except CollectionError as exc:
             result.gaps.append({"type": "collection_failed", "message": str(exc)})
@@ -767,6 +941,7 @@ class AccelaClient:
         include_parcels: bool,
         include_inspections: bool,
         max_records: int | None,
+        checkpoint_every: int,
     ) -> int:
         """Run the original page-wise path, including optional detail enrichment."""
         try:
@@ -812,8 +987,11 @@ class AccelaClient:
                     )
                     detail_response: requests.Response | None = None
                     detail_html = row.get("_detail_html")
-                    if detail_html:
+                    enrichment_complete = True
+                    if detail_html and record.record_id not in completed_records:
                         detail_response = response
+                    elif record.record_id in completed_records:
+                        detail_html = None
                     if include_addresses or include_parcels or include_inspections:
                         if record.record_id not in completed_records and detail_response is None:
                             if not record.source_url:
@@ -829,6 +1007,7 @@ class AccelaClient:
                                 detail_response = self.request("GET", record.source_url)
                                 detail_html = detail_response.text
                             except CollectionError as exc:
+                                enrichment_complete = False
                                 LOG.error("detail gap record=%s error=%s", record.record_number, exc)
                                 result.gaps.append({
                                     "type": "detail_request_failed",
@@ -837,23 +1016,24 @@ class AccelaClient:
                                     "message": str(exc),
                                 })
                         if detail_response is not None and detail_html:
-                            sequence += 1
-                            detail_path = raw_store.write(
-                                kind=f"record-{record.record_id}",
-                                sequence=sequence,
-                                response=detail_response,
-                                semantic_request={"module": query.module, "record_number": record.record_number, "page": page},
-                                record_count=1,
-                            )
-                            record.raw_source_file = detail_path.as_posix()
-                            record = apply_detail(record, parse_detail(detail_html))
+                            if include_addresses or include_parcels:
+                                sequence += 1
+                                detail_path = raw_store.write(
+                                    kind=f"record-{record.record_id}",
+                                    sequence=sequence,
+                                    response=detail_response,
+                                    semantic_request={"module": query.module, "record_number": record.record_number, "page": page},
+                                    record_count=1,
+                                )
+                                record.raw_source_file = detail_path.as_posix()
+                                record = apply_detail(record, parse_detail(detail_html))
                             if include_inspections:
                                 try:
                                     inspection_response = self._postback(record.source_url, detail_html, INSPECTION_TARGET)
                                     sequence += 1
                                     inspection_rows = parse_inspection_rows(inspection_response.text)
                                     inspection_path = raw_store.write(
-                                        kind=f"inspections-{record.record_id}",
+                                        kind=f"inspections-{record.record_id}-p1",
                                         sequence=sequence,
                                         response=inspection_response,
                                         semantic_request={
@@ -872,7 +1052,71 @@ class AccelaClient:
                                         )
                                         for item in inspection_rows
                                     )
+                                    current_inspection_response = inspection_response
+                                    for section in ("completed", "upcoming"):
+                                        inspection_page = 1
+                                        initial_section_rows = parse_inspection_rows(
+                                            current_inspection_response.text, section=section
+                                        )
+                                        seen_signatures = {
+                                            hashlib.sha256(
+                                                json.dumps(initial_section_rows, sort_keys=True).encode("utf-8")
+                                            ).hexdigest()
+                                        }
+                                        while target := next_inspection_page_target(
+                                            current_inspection_response.text, section
+                                        ):
+                                            inspection_page += 1
+                                            if inspection_page > self.config.max_pages:
+                                                raise CollectionError(
+                                                    f"Inspection pagination exceeded {self.config.max_pages} pages "
+                                                    f"for {record.record_number}"
+                                                )
+                                            current_inspection_response = self._postback(
+                                                record.source_url,
+                                                current_inspection_response.text,
+                                                target,
+                                            )
+                                            sequence += 1
+                                            page_rows = parse_inspection_rows(
+                                                current_inspection_response.text, section=section
+                                            )
+                                            signature = hashlib.sha256(
+                                                json.dumps(page_rows, sort_keys=True).encode("utf-8")
+                                            ).hexdigest()
+                                            if signature in seen_signatures:
+                                                raise CollectionError(
+                                                    f"Inspection pagination repeated {section} content for "
+                                                    f"{record.record_number}"
+                                                )
+                                            seen_signatures.add(signature)
+                                            page_path = raw_store.write(
+                                                kind=(
+                                                    f"inspections-{record.record_id}-{section}-"
+                                                    f"p{inspection_page}"
+                                                ),
+                                                sequence=sequence,
+                                                response=current_inspection_response,
+                                                semantic_request={
+                                                    "module": query.module,
+                                                    "record_number": record.record_number,
+                                                    "enrichment": "inspections",
+                                                    "inspection_section": section,
+                                                    "inspection_page": inspection_page,
+                                                },
+                                                record_count=len(page_rows),
+                                            )
+                                            result.inspections.extend(
+                                                normalize_inspection_row(
+                                                    item,
+                                                    record=record,
+                                                    retrieved_at=retrieved_at,
+                                                    raw_source_file=page_path.as_posix(),
+                                                )
+                                                for item in page_rows
+                                            )
                                 except CollectionError as exc:
+                                    enrichment_complete = False
                                     result.gaps.append({
                                         "type": "inspection_request_failed",
                                         "record_id": record.record_id,
@@ -880,17 +1124,19 @@ class AccelaClient:
                                         "message": str(exc),
                                     })
                     result.records.append(record)
-                    completed_records.add(record.record_id)
-                    self._write_checkpoint(
-                        checkpoint_path,
-                        query,
-                        completed_records,
-                        result.records,
-                        result.inspections,
-                        page,
-                        sequence,
-                        complete=False,
-                    )
+                    if enrichment_complete:
+                        completed_records.add(record.record_id)
+                    if len(completed_records) % checkpoint_every == 0:
+                        self._write_checkpoint(
+                            checkpoint_path,
+                            query,
+                            completed_records,
+                            result.records,
+                            result.inspections,
+                            page,
+                            sequence,
+                            complete=False,
+                        )
                 if result.truncated:
                     result.gaps.append({
                         "type": "intentional_limit",
