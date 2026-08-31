@@ -1,7 +1,8 @@
 # Repository scripts
 
-Run these commands from the repository root. All scripts use only Python's
-standard library.
+Run these commands from the repository root. Core release scripts use only
+Python's standard library. The optional Accela collector uses `requests` from
+`requirements.txt`.
 
 ## Build and acquisition
 
@@ -10,6 +11,13 @@ standard library.
 - `download_hcpa.py` downloads optional HCPA source archives.
 - `import_accela_export.py` imports an official Accela CSV export when one is
   available and stages only explicitly delivered lifecycle events.
+- `collect_accela.py` makes respectful, bounded anonymous searches of Tampa's
+  public ACA portal, preserves token-redacted raw provenance, and writes
+  normalized snapshots. See the [collector guide](../docs/ACCELA_COLLECTOR.md).
+- `integrate_accela.py` rebuilds the expanded activity dataset from the core
+  activity table and collected Accela rows. Exact public record-number matches
+  merge once; unmatched rows receive deterministic IDs; ambiguous matches are
+  held for review. See the [integrated dataset notes](../data/integrated/README.md).
 - `context_modules.py` downloads privacy-whitelisted Budget Book and linked-
   parcel context snapshots, then builds comparison, finance-event, parcel-
   context, and parcel-link tables. Run with `--use-existing-raw` to avoid a

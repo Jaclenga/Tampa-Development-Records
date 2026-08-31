@@ -137,6 +137,10 @@ def main() -> None:
     documented_fields = {(x["table"], x["field"]) for x in dictionary}
     processed_fields = set()
     for path in P.glob("*.csv"):
+        # Optional live Accela working outputs are Git-ignored inputs to the
+        # separately documented integrated edition, not v0.9.0 release tables.
+        if path.name.startswith("accela_"):
+            continue
         with path.open(encoding="utf-8", newline="") as handle:
             for field in next(csv.reader(handle)):
                 processed_fields.add((path.name, field))

@@ -98,12 +98,14 @@ codes, and second-review status remain in the
 | --- | --- |
 | Analyze every published source record | [`data/processed/bounded_census_records.csv`](data/processed/bounded_census_records.csv) |
 | Use the consolidated activity view | [`data/processed/tampa_development_activity.csv`](data/processed/tampa_development_activity.csv) |
+| Use the expanded activity view with August Accela data | [`data/integrated/tampa_development_activity_with_accela.csv`](data/integrated/tampa_development_activity_with_accela.csv) |
 | Analyze the canonical source-date table | [`data/processed/activity_by_month.csv`](data/processed/activity_by_month.csv) |
 | Analyze non-future monthly events | [`data/monthly_events/`](data/monthly_events/) |
 | Analyze forward-looking source plans | [`data/planned_events/`](data/planned_events/) |
 | Inspect source coverage | [`data/processed/source_universes.csv`](data/processed/source_universes.csv) |
 | Review the immutable snapshot | [`data/snapshots/2026-08-23/`](data/snapshots/2026-08-23/) |
 | Complete manual validation | [`docs/MANUAL_VALIDATION_GUIDE.md`](docs/MANUAL_VALIDATION_GUIDE.md) |
+| Collect bounded public Accela records | [`docs/ACCELA_COLLECTOR.md`](docs/ACCELA_COLLECTOR.md) |
 | Navigate all documentation | [`docs/README.md`](docs/README.md) |
 
 ## What the dataset supports
@@ -124,13 +126,32 @@ was cancelled, or a record was deleted.
 
 ## Reproduce and validate
 
-The pipeline uses Python's standard library.
+The core release pipeline uses Python's standard library. The optional Accela
+collector requires `requests` from `requirements.txt`.
 
 ```bash
 python scripts/build_release.py --use-existing-raw
 python -m unittest discover -s tests -v
 python scripts/validate_release.py
 ```
+
+Plan or run a bounded anonymous Accela collection with:
+
+```bash
+python -m pip install -r requirements.txt
+python scripts/collect_accela.py --module Building --from-date 2026-08-13 --to-date 2026-08-13 --dry-run
+python scripts/collect_accela.py --module Building --from-date 2026-08-13 --to-date 2026-08-13 --max-records 25
+```
+
+Integrate the collected Accela snapshot without duplicating exact public record
+numbers:
+
+```bash
+python scripts/integrate_accela.py
+```
+
+See [`data/integrated/README.md`](data/integrated/README.md) for duplicate rules
+and the boundary between the expanded view and the eight-layer bounded census.
 
 Collect the next live snapshot with:
 
@@ -163,12 +184,14 @@ not describe the project as having observed longitudinal results.
 ```text
 data/raw/             archived privacy-minimized source files
 data/processed/       analysis-ready tables and review queues
+data/integrated/      optional duplicate-safe expanded activity editions
 data/snapshots/       compact immutable observations by date
 data/monthly_changes/ machine-readable comparisons and index
 data/monthly_events/ non-future source-date extracts and index
 data/planned_events/ forward-looking source-plan extracts and index
 docs/                 scope, methods, validation, and release guidance
 scripts/              acquisition, transformation, tracking, and QA
+src/tampa_accela/     optional public ACA collector package
 tests/                deterministic workflow tests
 ```
 

@@ -57,10 +57,10 @@
 22. Native source identifiers are preferred for longitudinal matching. Global
     IDs and OBJECTIDs are fallbacks; a source republish that changes every
     available identifier can appear as paired disappearance/new-record events.
-23. No verified official bulk endpoint for the full permit, certificate-of-
-    occupancy, or inspection populations was located in the public interfaces
-    checked on August 28, 2026. Address-level Accela access is not equivalent to
-    a reproducible bulk source.
+23. A bounded anonymous ACA search flow was verified on August 30, 2026, but it
+    is an HTML interface rather than a guaranteed bulk feed. Accela v4 rejected
+    Tampa requests without an app ID. ACA results therefore do not establish a
+    complete permit, certificate-of-occupancy, or inspection population.
 24. Monthly cohorts combine several explicitly labeled date concepts across
     source systems. Application creation, permit record creation, permit
     issuance, actual capital starts, and planned capital starts are not

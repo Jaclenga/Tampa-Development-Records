@@ -29,6 +29,9 @@ scope, methodology, validation, and release material.
 
 ## Methods
 
+- [Tampa Accela collector](ACCELA_COLLECTOR.md) — verified anonymous search
+  flow, safe operating commands, provenance, limitations, and GIS crosswalk.
+
 - [Longitudinal tracker](LONGITUDINAL_TRACKER.md) — snapshot identity,
   comparison semantics, outputs, and operating commands.
 - [Source-date monthly events and plans](TEMPORAL_COHORTS.md) — canonical dates,

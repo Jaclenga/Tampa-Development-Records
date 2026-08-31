@@ -2,9 +2,18 @@ __pycache__/
 *.py[cod]
 .venv/
 .cache/
+tests/.tmp_*/
 dist/
 tampa_development_dataset_v*.zip
 tampa_source_bounded_census_v*.zip
 .DS_Store
 Thumbs.db
 
+# Live Accela responses and generated working outputs may contain public detail data.
+data/raw/accela/
+data/processed/accela_records.csv
+data/processed/accela_*_records.csv
+data/processed/accela_inspections.csv
+data/processed/accela_gis_crosswalk.csv
+data/processed/accela_checkpoints/
+data/processed/accela_snapshots/

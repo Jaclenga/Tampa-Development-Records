@@ -926,6 +926,10 @@ def metadata_for(
 def write_data_dictionary() -> None:
     dictionary = []
     for path in sorted(PROCESSED.glob("*.csv")):
+        # Live Accela collection outputs are optional local working files and
+        # are documented with the integrated edition, not the core release.
+        if path.name.startswith("accela_"):
+            continue
         with path.open(encoding="utf-8", newline="") as handle:
             fields = next(csv.reader(handle))
         for field in fields:

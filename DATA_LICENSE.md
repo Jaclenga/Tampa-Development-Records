@@ -45,3 +45,14 @@ HCPA-enriched edition.
 
 This file records the release's source and attribution policy; it is not legal
 advice.
+
+## Optional Accela working data
+
+The Accela collector's raw responses and `data/processed/accela_*` working
+outputs are ignored by Git and are not part of the v0.9.0 public archive. The
+derived, list-field-only expanded edition under `data/integrated/` is retained
+in the repository but remains outside the v0.9.0 source-bounded release. Public detail pages can include owner,
+applicant, contractor, contact, and mailing information. Although normalized
+outputs omit phone, email, and mailing fields, review both raw and processed
+working files for necessity, privacy, current source terms, and redistribution
+fitness before publishing them.
