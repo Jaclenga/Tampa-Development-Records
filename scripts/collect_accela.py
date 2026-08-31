@@ -46,6 +46,10 @@ def parser() -> argparse.ArgumentParser:
     value.add_argument("--output-dir", type=Path, default=ROOT / "data" / "processed")
     value.add_argument("--checkpoint", type=Path)
     value.add_argument("--resume", action="store_true", help="Reuse a matching checkpoint; pages replay safely")
+    value.add_argument(
+        "--use-export", action="store_true",
+        help="Use ACA's public Download results CSV for a bounded list-only collection",
+    )
     value.add_argument("--run-id")
     value.add_argument("--match-gis", type=Path, help="Write a conservative crosswalk to this GIS source_records CSV")
     value.add_argument("--dry-run", action="store_true")
@@ -90,6 +94,7 @@ def main(argv: list[str] | None = None) -> int:
         "include_parcels": args.include_parcels,
         "include_inspections": args.include_inspections,
         "max_records": args.max_records,
+        "use_export": args.use_export,
     }
     if args.dry_run:
         print(json.dumps(plan, indent=2))
@@ -107,6 +112,7 @@ def main(argv: list[str] | None = None) -> int:
                 include_parcels=args.include_parcels,
                 include_inspections=args.include_inspections,
                 max_records=args.max_records,
+                use_export=args.use_export,
             )
     except (CollectionError, OSError, ValueError) as exc:
         logging.error("collection stopped safely: %s", exc)

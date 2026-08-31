@@ -3,11 +3,13 @@
 from __future__ import annotations
 
 import datetime as dt
+import csv
 from email.utils import parsedate_to_datetime
 import hashlib
 import html as html_lib
 from html.parser import HTMLParser
 import json
+import io
 import logging
 import os
 from pathlib import Path
@@ -25,6 +27,7 @@ from .normalize import (
     apply_detail,
     clean,
     deduplicate_records,
+    deduplicate_public_records,
     normalize_inspection_row,
     normalize_search_row,
     stable_record_id,
@@ -34,9 +37,12 @@ from .normalize import (
 LOG = logging.getLogger("tampa_accela")
 SEARCH_TARGET = "ctl00$PlaceHolderMain$btnNewSearch"
 INSPECTION_TARGET = "ctl00$PlaceHolderMain$InspectionList$btnRefreshGridView"
+EXPORT_TARGET = "ctl00$PlaceHolderMain$dgvPermitList$gdvPermitList$gdvPermitListtop4btnExport"
+EXPORT_PATH = "Export2CSV.ashx?flag=collector"
 GRID_ID_SUFFIX = "_dgvPermitList_gdvPermitList"
 RETRY_STATUSES = {429, 500, 502, 503, 504}
 SESSION_FIELD_NAMES = {"ACA_CS_FIELD", "__VIEWSTATE", "__VIEWSTATEGENERATOR", "__VIEWSTATEENCRYPTED"}
+EXPORT_REQUIRED_FIELDS = {"Date", "Record Number", "Record Type", "Address", "Status"}
 
 
 class CollectionError(RuntimeError):
@@ -382,6 +388,24 @@ def parse_inspection_rows(source: str) -> list[dict[str, str]]:
     return output
 
 
+def parse_export_rows(source: str) -> list[dict[str, str]]:
+    """Parse the portal's official Download results CSV with strict headers."""
+    reader = csv.DictReader(io.StringIO(source.lstrip("\ufeff")))
+    headers = {clean(value) or "" for value in (reader.fieldnames or [])}
+    missing = EXPORT_REQUIRED_FIELDS - headers
+    if missing:
+        raise CollectionError(f"Accela export is missing required columns: {sorted(missing)}")
+    rows: list[dict[str, str]] = []
+    for raw in reader:
+        row = {clean(key) or "": clean(value) or "" for key, value in raw.items() if key is not None}
+        if not row.get("Record Number"):
+            if any(row.values()):
+                raise CollectionError("Accela export contained a populated row without a record number")
+            continue
+        rows.append(row)
+    return rows
+
+
 def _redact_session_fields(source: str) -> str:
     for name in SESSION_FIELD_NAMES:
         source = re.sub(
@@ -417,7 +441,7 @@ def _atomic_json(path: Path, value: object) -> None:
 
 
 class RawStore:
-    """Write immutable, token-redacted HTML and separate safe provenance."""
+    """Write immutable, token-redacted public payloads and safe provenance."""
 
     def __init__(self, root: Path, module: str, run_id: str) -> None:
         self.root = root / module.lower() / run_id
@@ -431,11 +455,14 @@ class RawStore:
         response: requests.Response,
         semantic_request: dict[str, object],
         record_count: int | None = None,
+        extension: str = ".html",
     ) -> Path:
         redacted = _redact_session_fields(response.text)
         digest = hashlib.sha256(redacted.encode("utf-8")).hexdigest()
         stem = f"{sequence:05d}-{kind}-{digest[:12]}"
-        payload = self.root / f"{stem}.html"
+        if extension not in {".html", ".csv"}:
+            raise ValueError("raw payload extension must be .html or .csv")
+        payload = self.root / f"{stem}{extension}"
         metadata = self.root / f"{stem}.metadata.json"
         if not payload.exists():
             _atomic_text(payload, redacted)
@@ -609,6 +636,36 @@ class AccelaClient:
             response = self._postback(url, response.text, target)
         raise CollectionError(f"Pagination exceeded the configured safeguard of {self.config.max_pages} pages")
 
+    def export_search(self, query: SearchQuery) -> tuple[list[dict[str, str]], list[requests.Response]]:
+        """Download all rows for one bounded query through ACA's public export control."""
+        search = self.search(query)
+        try:
+            _page, result_page, visible_rows = next(iter(search))
+        except StopIteration:
+            raise CollectionError("Accela search ended without returning a result page")
+        responses = [response for response in (self.last_initial_response, result_page) if response is not None]
+        if not visible_rows:
+            return [], responses
+        if "CapDetail.aspx" in result_page.url:
+            raise CollectionError("Download results is unavailable for an exact-record redirect")
+        prepared = self._postback(result_page.url, result_page.text, EXPORT_TARGET)
+        download = self.request(
+            "GET",
+            urljoin(self.config.base_url, EXPORT_PATH),
+            headers={"Accept": "text/csv,*/*"},
+        )
+        content_type = (download.headers.get("Content-Type") or "").lower()
+        if "text/csv" not in content_type:
+            raise CollectionError(f"Accela export returned unexpected Content-Type {content_type!r}")
+        rows = parse_export_rows(download.content.decode("utf-8-sig", "replace"))
+        for row in rows:
+            event_date = dt.datetime.strptime(row["Date"], "%m/%d/%Y").date()
+            if query.from_date and event_date < query.from_date or query.to_date and event_date > query.to_date:
+                raise CollectionError(
+                    f"Accela export row {row['Record Number']} falls outside the bounded opened-date query"
+                )
+        return rows, [*responses, prepared, download]
+
     def collect(
         self,
         query: SearchQuery,
@@ -619,6 +676,7 @@ class AccelaClient:
         include_parcels: bool = False,
         include_inspections: bool = False,
         max_records: int | None = None,
+        use_export: bool = False,
     ) -> CollectionResult:
         query.validate()
         checkpoint = self._read_checkpoint(checkpoint_path, query)
@@ -630,6 +688,87 @@ class AccelaClient:
         completed_records = set(checkpoint.get("completed_record_ids", []))
         sequence = int(checkpoint.get("raw_sequence", 0))
         retrieved_at = dt.datetime.now(dt.timezone.utc).isoformat()
+        try:
+            if use_export:
+                if include_addresses or include_parcels or include_inspections:
+                    raise CollectionError("--use-export is list-only and cannot be combined with detail enrichment")
+                if max_records is not None:
+                    raise CollectionError("--use-export cannot be combined with --max-records")
+                exported_rows, responses = self.export_search(query)
+                for response_index, response in enumerate(responses, start=1):
+                    sequence += 1
+                    is_csv = "text/csv" in (response.headers.get("Content-Type") or "").lower()
+                    raw_path = raw_store.write(
+                        kind="search-export" if is_csv else "search-export-handshake",
+                        sequence=sequence,
+                        response=response,
+                        semantic_request={
+                            "module": query.module,
+                            "operation": "download_results" if is_csv else "prepare_download_results",
+                            "from_date": query.from_date.isoformat() if query.from_date else None,
+                            "to_date": query.to_date.isoformat() if query.to_date else None,
+                            "response_index": response_index,
+                        },
+                        record_count=len(exported_rows) if is_csv else None,
+                        extension=".csv" if is_csv else ".html",
+                    )
+                    if is_csv:
+                        export_path = raw_path
+                result.records.extend(
+                    normalize_search_row(
+                        row,
+                        module=query.module,
+                        retrieved_at=retrieved_at,
+                        raw_source_file=export_path.as_posix(),
+                    )
+                    for row in exported_rows
+                )
+                result.pages = 1
+                completed_records.update(record.record_id for record in result.records if record.record_id)
+                self._write_checkpoint(
+                    checkpoint_path, query, completed_records, result.records, result.inspections,
+                    result.pages, sequence, complete=True,
+                )
+            else:
+                sequence = self._collect_paginated(
+                    query, raw_store, checkpoint_path, result, completed_records, sequence,
+                    retrieved_at, include_addresses, include_parcels, include_inspections, max_records,
+                )
+        except CollectionError as exc:
+            result.gaps.append({"type": "collection_failed", "message": str(exc)})
+            self._write_checkpoint(
+                checkpoint_path, query, completed_records, result.records, result.inspections,
+                result.pages, sequence, complete=False,
+            )
+        result.records = deduplicate_public_records(deduplicate_records(result.records))
+        result.requests = self.request_count
+        self._write_checkpoint(
+            checkpoint_path,
+            query,
+            completed_records,
+            result.records,
+            result.inspections,
+            result.pages,
+            sequence,
+            complete=not result.gaps,
+        )
+        return result
+
+    def _collect_paginated(
+        self,
+        query: SearchQuery,
+        raw_store: RawStore,
+        checkpoint_path: Path,
+        result: CollectionResult,
+        completed_records: set[str],
+        sequence: int,
+        retrieved_at: str,
+        include_addresses: bool,
+        include_parcels: bool,
+        include_inspections: bool,
+        max_records: int | None,
+    ) -> int:
+        """Run the original page-wise path, including optional detail enrichment."""
         try:
             for page, response, rows in self.search(query):
                 if page == 1 and self.last_initial_response is not None:
@@ -765,19 +904,7 @@ class AccelaClient:
                 checkpoint_path, query, completed_records, result.records, result.inspections,
                 result.pages, sequence, complete=False,
             )
-        result.records = deduplicate_records(result.records)
-        result.requests = self.request_count
-        self._write_checkpoint(
-            checkpoint_path,
-            query,
-            completed_records,
-            result.records,
-            result.inspections,
-            result.pages,
-            sequence,
-            complete=not result.gaps,
-        )
-        return result
+        return sequence
 
     @staticmethod
     def _query_dict(query: SearchQuery) -> dict[str, object]:

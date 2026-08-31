@@ -12,6 +12,8 @@ This is a strong baseline, not yet a validated longitudinal result.
 | Core snapshot | August 23, 2026 |
 | Published records | 4,469 records from eight City GIS layers |
 | Normalized activities | 3,323 |
+| Accela records | 56,245 unique Building/Planning records; 52,264 retrospective and 3,981 prospective |
+| Expanded activities | 57,677; core bounded-census files remain unchanged |
 | Source-date cohort view | 4,469 source records; 4,387 non-future monthly events; 81 forward-looking plans |
 | Archived snapshots | 1 |
 | Monthly comparisons | 0; requires a second snapshot |
@@ -98,7 +100,7 @@ codes, and second-review status remain in the
 | --- | --- |
 | Analyze every published source record | [`data/processed/bounded_census_records.csv`](data/processed/bounded_census_records.csv) |
 | Use the consolidated activity view | [`data/processed/tampa_development_activity.csv`](data/processed/tampa_development_activity.csv) |
-| Use the expanded activity view with August Accela data | [`data/integrated/tampa_development_activity_with_accela.csv`](data/integrated/tampa_development_activity_with_accela.csv) |
+| Use the expanded activity view with Accela data | [`data/integrated/tampa_development_activity_with_accela.csv`](data/integrated/tampa_development_activity_with_accela.csv) |
 | Analyze the canonical source-date table | [`data/processed/activity_by_month.csv`](data/processed/activity_by_month.csv) |
 | Analyze non-future monthly events | [`data/monthly_events/`](data/monthly_events/) |
 | Analyze forward-looking source plans | [`data/planned_events/`](data/planned_events/) |
@@ -141,6 +143,9 @@ Plan or run a bounded anonymous Accela collection with:
 python -m pip install -r requirements.txt
 python scripts/collect_accela.py --module Building --from-date 2026-08-13 --to-date 2026-08-13 --dry-run
 python scripts/collect_accela.py --module Building --from-date 2026-08-13 --to-date 2026-08-13 --max-records 25
+python scripts/collect_accela.py --module Building --from-date 2026-08-01 --to-date 2026-08-31 --use-export
+python scripts/backfill_accela.py --from-month 2025-08 --to-month 2026-07
+python scripts/validate_accela_backfill.py
 ```
 
 Integrate the collected Accela snapshot without duplicating exact public record
@@ -149,6 +154,10 @@ numbers:
 ```bash
 python scripts/integrate_accela.py
 ```
+
+The August 2025 through July 2026 backfill is retrospective: Tampa currently
+reports those older event dates, but TDR did not take contemporaneous snapshots
+in those months. Prospective Accela observation begins in August 2026.
 
 See [`data/integrated/README.md`](data/integrated/README.md) for duplicate rules
 and the boundary between the expanded view and the eight-layer bounded census.

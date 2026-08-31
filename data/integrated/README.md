@@ -1,8 +1,9 @@
 # Integrated activity dataset
 
 `tampa_development_activity_with_accela.csv` combines the unchanged v0.9.0
-eight-layer ArcGIS activity view with the bounded Tampa ACA Building and
-Planning collection for records opened from 2026-08-01 through 2026-08-30.
+eight-layer ArcGIS activity view with bounded Tampa ACA Building and Planning
+collections. The current Accela aggregate covers records opened from
+2025-08-01 through 2026-08-30.
 
 This is a local expanded edition, not a replacement for the source-bounded
 ArcGIS census. It must not be described as a complete census of Tampa permits,
@@ -36,14 +37,37 @@ Rules are applied in this order:
 every Accela input. `accela_integration_report.json` records input, merge,
 append, ambiguity, and uniqueness counts.
 
+## Temporal evidence
+
+The expanded CSV keeps source event time separate from collector observation
+time:
+
+| Field | Meaning |
+| --- | --- |
+| `event_date` | Selected Tampa/Accela lifecycle date; inspect `event_date_type` before comparison |
+| `first_observed_date` | First UTC date TDR collected the record |
+| `snapshot_date` | UTC date of the observation supplying the current Accela row |
+| `last_observed_date` | Latest UTC date TDR collected the record |
+| `historical_reconstruction` | `1` when the selected event predates 2026-08-01 |
+| `temporal_evidence` | Controlled classification of the observation |
+
+The 2025-08-01 through 2026-07-31 cohort is labeled
+`retrospective_source_record`. It is administrative history retrieved in 2026,
+not a set of contemporaneous 2025/2026 snapshots. The 2026-08-01 boundary
+starts `prospective_snapshot` evidence. No row is labeled
+`retrospective_event_history` because the list-only collection did not capture
+a dated status-history feed.
+
 ## Current build
 
 - Core activities: 3,323
-- Accela input rows: 3,981
-- Exact public-number matches merged into core: 78
-- New Accela activities appended: 3,903
+- Accela input rows: 56,245
+- Retrospective Accela source records: 52,264
+- Prospective Accela snapshot records: 3,981
+- Exact public-number matches merged into core: 1,891
+- New Accela activities appended: 54,354
 - Ambiguous exact matches held: 0
-- Integrated activities: 7,226
+- Integrated activities: 57,677
 - Duplicate final activity IDs: 0
 - Duplicate integrated Accela record numbers: 0
 
@@ -55,3 +79,7 @@ are deliberately not collapsed without stronger entity evidence.
 Administrative ACA status text is retained without treating `Complete` as
 proof of physical completion. Newly appended records receive evidence grade
 `U` and `accela_administrative_record_only` as the realization basis.
+
+`accela_backfill_report.json` validates all 24 requested module-months, their
+date boundaries, gap/truncation status, aggregate reconciliation, temporal
+classifications, and identifier uniqueness.

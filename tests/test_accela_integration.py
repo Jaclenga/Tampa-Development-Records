@@ -28,6 +28,10 @@ def accela(record_id="acc-1", number="BLD-1", module="Building"):
         "record_type": "Building Permit", "record_status": "Complete", "opened_date": "2026-08-01",
         "retrieved_at": "2026-08-31T00:00:00Z", "address": "1 MAIN ST", "postal_code": "33602",
         "source_url": "https://example.test/record",
+        "event_date": "2026-08-01", "event_date_type": "application_opened",
+        "first_observed_date": "2026-08-31", "snapshot_date": "2026-08-31",
+        "last_observed_date": "2026-08-31", "historical_reconstruction": "0",
+        "temporal_evidence": "prospective_snapshot",
     }
 
 
@@ -51,6 +55,7 @@ class AccelaIntegrationTests(unittest.TestCase):
         new = next(row for row in activities if row["source_record_id"] == "NEW-1")
         self.assertEqual(new["activity_id"], activity_id_for(record))
         self.assertEqual(new["realization_evidence_grade"], "U")
+        self.assertEqual(new["temporal_evidence"], "prospective_snapshot")
         self.assertEqual(report["new_accela_activities_appended"], 1)
 
     def test_duplicate_accela_number_is_kept_once(self):

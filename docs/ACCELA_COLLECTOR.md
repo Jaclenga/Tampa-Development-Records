@@ -44,6 +44,13 @@ python scripts/collect_accela.py --module Building --from-date 2026-08-13 --to-d
 # Planning collection
 python scripts/collect_accela.py --module Planning --from-date 2026-08-01 --to-date 2026-08-07
 
+# Official list-only CSV export for a bounded month
+python scripts/collect_accela.py --module Building --from-date 2026-08-01 --to-date 2026-08-31 --use-export
+
+# Resumable monthly historical backfill and validation
+python scripts/backfill_accela.py --from-month 2025-08 --to-month 2026-07
+python scripts/validate_accela_backfill.py
+
 # Exact public record lookup
 python scripts/collect_accela.py --module Building --record-number BDE-26-0445754
 
@@ -63,6 +70,14 @@ email, and mailing fields. Treat opt-in raw files as sensitive working data and
 review them before redistribution. An exact record-number search can redirect
 straight to its detail page, so its raw response needs the same review even
 without enrichment flags.
+
+`--use-export` invokes the public result grid's user-facing `Download results`
+control. It validates the returned CSV schema and every row's opened date,
+saves the raw CSV with hash/provenance metadata, and normalizes it through the
+same pipeline. Export mode is list-only and rejects detail, parcel, inspection,
+and `--max-records` options. It reduces a monthly backfill from hundreds of
+pagination requests to one bounded search, one export postback, and one
+download.
 
 ## Network and recovery behavior
 
@@ -102,6 +117,13 @@ does not infer one lifecycle event from another. A record disappearing from a
 later query is not treated as deletion or cancellation. Clearly labeled public
 parent/related record numbers are retained; no relationship is inferred when a
 detail page does not expose one.
+
+Record outputs also distinguish source event time from observation time.
+`first_observed_date`, `snapshot_date`, and `last_observed_date` use the UTC
+calendar date encoded by `retrieved_at`. Events before 2026-08-01 are labeled
+`retrospective_source_record`; events on or after the boundary are labeled
+`prospective_snapshot`; missing event dates are `unknown`. A current retrieval
+of an older record is never labeled as a contemporaneous historical snapshot.
 
 ## Conservative GIS matching
 

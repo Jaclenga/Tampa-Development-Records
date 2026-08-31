@@ -10,7 +10,14 @@ import tempfile
 import time
 from typing import Iterable, Mapping, Sequence
 
-from .models import INSPECTION_FIELDS, NORMALIZED_FIELDS, CollectionResult, Inspection, NormalizedRecord
+from .models import (
+    INSPECTION_FIELDS,
+    NORMALIZED_FIELDS,
+    CollectionResult,
+    Inspection,
+    NormalizedRecord,
+    temporalize_row,
+)
 
 
 def _atomic_write(path: Path, writer) -> None:
@@ -55,20 +62,46 @@ def _read_csv(path: Path) -> list[dict[str, str]]:
         return list(csv.DictReader(handle))
 
 
+def _public_number_key(row: Mapping[str, object]) -> tuple[str, str] | None:
+    module = str(row.get("source_module") or "").strip().upper()
+    number = "".join(character for character in str(row.get("record_number") or "").upper() if character.isalnum())
+    return (module, number) if module and number else None
+
+
 def upsert_records(path: Path, records: Iterable[NormalizedRecord]) -> list[dict[str, object]]:
     """Upsert the latest observation by stable ID without deleting older IDs."""
-    by_id: dict[str, dict[str, object]] = {
-        row["record_id"]: dict(row) for row in _read_csv(path) if row.get("record_id")
+    existing_rows = [temporalize_row(row) for row in _read_csv(path) if row.get("record_id")]
+    by_id: dict[str, dict[str, object]] = {str(row["record_id"]): row for row in existing_rows}
+    id_by_number = {
+        key: str(row["record_id"])
+        for row in existing_rows
+        if (key := _public_number_key(row)) is not None
     }
     for record in records:
         if not record.record_id:
             continue
-        old = by_id.get(record.record_id, {})
-        row = record.as_row()
-        by_id[record.record_id] = {
+        key = _public_number_key(record.as_row())
+        target_id = id_by_number.get(key, record.record_id) if key else record.record_id
+        old = by_id.get(target_id, {})
+        row = temporalize_row(record.as_row())
+        row["record_id"] = target_id
+        merged = {
             field: row.get(field) if row.get(field) not in {None, ""} else old.get(field)
             for field in NORMALIZED_FIELDS
         }
+        observed = [
+            str(value) for value in (old.get("first_observed_date"), row.get("first_observed_date")) if value
+        ]
+        if observed:
+            merged["first_observed_date"] = min(observed)
+        observed = [
+            str(value) for value in (old.get("last_observed_date"), row.get("last_observed_date")) if value
+        ]
+        if observed:
+            merged["last_observed_date"] = max(observed)
+        by_id[target_id] = temporalize_row(merged)
+        if key:
+            id_by_number[key] = target_id
     rows = [by_id[key] for key in sorted(by_id)]
     write_csv(path, rows, NORMALIZED_FIELDS)
     return rows

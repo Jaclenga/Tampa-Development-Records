@@ -14,6 +14,11 @@ Python's standard library. The optional Accela collector uses `requests` from
 - `collect_accela.py` makes respectful, bounded anonymous searches of Tampa's
   public ACA portal, preserves token-redacted raw provenance, and writes
   normalized snapshots. See the [collector guide](../docs/ACCELA_COLLECTOR.md).
+- `backfill_accela.py` runs resumable, non-overlapping monthly Building and
+  Planning collections through ACA's public Download results control.
+- `validate_accela_backfill.py` reconciles monthly snapshots to the aggregate,
+  checks gaps, date bounds, temporal labels, and duplicate identifiers, and
+  writes `data/integrated/accela_backfill_report.json`.
 - `integrate_accela.py` rebuilds the expanded activity dataset from the core
   activity table and collected Accela rows. Exact public record-number matches
   merge once; unmatched rows receive deterministic IDs; ambiguous matches are

@@ -1,0 +1,202 @@
+{
+  "aggregate_public_record_numbers_unique": true,
+  "aggregate_records": 56245,
+  "aggregate_stable_ids_unique": true,
+  "backfill_records": 52264,
+  "backfill_records_by_module": {
+    "Building": 48960,
+    "Planning": 3304
+  },
+  "backfill_window": {
+    "from": "2025-08-01",
+    "to": "2026-07-31"
+  },
+  "errors": [],
+  "format_version": "1.0.0",
+  "gap_runs": 0,
+  "interpretation": "Pre-boundary rows are retrospective source records retrieved during current collection, not contemporaneous historical snapshots.",
+  "modules": [
+    "Building",
+    "Planning"
+  ],
+  "month_counts": [
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2025-08",
+      "records": 4618,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2025-09",
+      "records": 4573,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2025-10",
+      "records": 4340,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2025-11",
+      "records": 3560,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2025-12",
+      "records": 3782,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2026-01",
+      "records": 3627,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2026-02",
+      "records": 3776,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2026-03",
+      "records": 4189,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2026-04",
+      "records": 4074,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2026-05",
+      "records": 3860,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2026-06",
+      "records": 4283,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2026-07",
+      "records": 4278,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2025-08",
+      "records": 302,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2025-09",
+      "records": 334,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2025-10",
+      "records": 278,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2025-11",
+      "records": 213,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2025-12",
+      "records": 252,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2026-01",
+      "records": 258,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2026-02",
+      "records": 256,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2026-03",
+      "records": 311,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2026-04",
+      "records": 282,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2026-05",
+      "records": 235,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2026-06",
+      "records": 288,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2026-07",
+      "records": 295,
+      "truncated": false
+    }
+  ],
+  "monthly_runs": 24,
+  "passed": true,
+  "temporal_boundary": "2026-08-01",
+  "temporal_evidence_counts": {
+    "prospective_snapshot": 3981,
+    "retrospective_event_history": 0,
+    "retrospective_source_record": 52264,
+    "unknown": 0
+  },
+  "truncated_runs": 0
+}

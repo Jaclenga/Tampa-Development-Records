@@ -35,6 +35,10 @@ AUDIT_FIELDS = [
     "match_method", "matched_activity_id", "integrated_activity_id",
     "duplicate_key", "review_required",
 ]
+TEMPORAL_FIELDS = [
+    "event_date", "event_date_type", "first_observed_date", "snapshot_date",
+    "last_observed_date", "historical_reconstruction", "temporal_evidence",
+]
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
@@ -118,6 +122,15 @@ def merge_nonblank(rows: list[dict[str, str]]) -> dict[str, str]:
                 result[key] = value
             elif key not in result:
                 result[key] = ""
+    first_observed = [clean(row.get("first_observed_date")) for row in rows if clean(row.get("first_observed_date"))]
+    last_observed = [clean(row.get("last_observed_date")) for row in rows if clean(row.get("last_observed_date"))]
+    snapshot_dates = [clean(row.get("snapshot_date")) for row in rows if clean(row.get("snapshot_date"))]
+    if first_observed:
+        result["first_observed_date"] = min(first_observed)
+    if last_observed:
+        result["last_observed_date"] = max(last_observed)
+    if snapshot_dates:
+        result["snapshot_date"] = max(snapshot_dates)
     return result
 
 
@@ -232,6 +245,7 @@ def new_activity(record: Mapping[str, str], fields: list[str]) -> dict[str, obje
         "realization_evidence_grade": "U",
         "likely_realized": "",
         "realization_basis": "accela_administrative_record_only",
+        **{field: clean(record.get(field)) for field in TEMPORAL_FIELDS},
     })
     return row
 
@@ -258,6 +272,7 @@ def enrich_existing(activity: dict[str, str], record: Mapping[str, str]) -> dict
         "last_updated": record.get("updated_date"),
         "estimated_cost_usd": record.get("valuation") or record.get("estimated_cost"),
         "source_url": record.get("source_url"),
+        **{field: record.get(field) for field in TEMPORAL_FIELDS},
     }
     for field, value in candidates.items():
         if not clean(output.get(field)) and clean(value):
@@ -268,7 +283,7 @@ def enrich_existing(activity: dict[str, str], record: Mapping[str, str]) -> dict
 def integrate(
     core: list[dict[str, str]], source_rows: list[dict[str, str]], accela: list[dict[str, str]]
 ) -> tuple[list[dict[str, object]], list[dict[str, str]], dict[str, object]]:
-    fields = list(core[0])
+    fields = list(core[0]) + [field for field in TEMPORAL_FIELDS if field not in core[0]]
     unique_accela, audit, dedup = deduplicate_accela(accela)
     activity_by_id = {row["activity_id"]: dict(row) for row in core}
     number_to_activities: dict[str, set[str]] = {}
@@ -363,6 +378,11 @@ def integrate(
         "integrated_accela_record_numbers_unique": True,
         "inherited_cross_namespace_primary_id_reuse_groups": len(reused_primary_ids),
         "deduplication": dedup,
+        "temporal_evidence_counts": {
+            label: sum(clean(row.get("temporal_evidence")) == label for row in unique_accela)
+            for label in ("prospective_snapshot", "retrospective_source_record", "retrospective_event_history", "unknown")
+        },
+        "temporal_boundary": "2026-08-01",
         "policy": [
             "Deduplicate Accela stable IDs, then canonical public record numbers.",
             "Merge only a single exact public record-number match into a core activity.",
@@ -393,7 +413,8 @@ def main(argv: list[str] | None = None) -> int:
     if not core or not accela:
         parser.error("core activity and Accela inputs must both contain rows")
     integrated, audit, report = integrate(core, sources, accela)
-    write_csv(args.output, integrated, list(core[0]))
+    output_fields = list(core[0]) + [field for field in TEMPORAL_FIELDS if field not in core[0]]
+    write_csv(args.output, integrated, output_fields)
     write_csv(args.audit, audit, AUDIT_FIELDS)
     write_json(args.report, report)
     print(json.dumps({**report, "output": str(args.output), "audit": str(args.audit), "report": str(args.report)}, indent=2))

@@ -4,7 +4,9 @@ from pathlib import Path
 
 import requests
 
-from tampa_accela.client import AccessRestricted, AccelaClient, CollectionError, RawStore, _redact_session_fields
+from tampa_accela.client import (
+    AccessRestricted, AccelaClient, CollectionError, RawStore, _redact_session_fields, parse_export_rows,
+)
 from tampa_accela.config import CollectorConfig
 from tampa_accela.models import SearchQuery
 
@@ -47,6 +49,15 @@ class FailingClient(ScriptedClient):
 
 
 class AccelaClientTests(unittest.TestCase):
+    def test_parses_official_export_and_rejects_schema_drift(self):
+        rows = parse_export_rows(
+            "Date,Record Number,Record Type,Address,Status,Expiration Date,Short Notes,\n"
+            "08/13/2026,BLD-1,Building Permit,1 MAIN ST,Open,,,\n"
+        )
+        self.assertEqual(rows[0]["Record Number"], "BLD-1")
+        with self.assertRaises(CollectionError):
+            parse_export_rows("Date,Record Number\n08/13/2026,BLD-1\n")
+
     def test_retries_429_and_500(self):
         sleeps = []
         first, second, third = response(429), response(500), response(200)

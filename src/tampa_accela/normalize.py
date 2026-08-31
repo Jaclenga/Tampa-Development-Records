@@ -170,8 +170,58 @@ def deduplicate_records(records: list[NormalizedRecord]) -> list[NormalizedRecor
             field.name: getattr(record, field.name) or getattr(previous, field.name)
             for field in dataclasses.fields(record)
         }
+        first_observed = [
+            value for value in (record.as_row().get("first_observed_date"), previous.as_row().get("first_observed_date"))
+            if value
+        ]
+        last_observed = [
+            value for value in (record.as_row().get("last_observed_date"), previous.as_row().get("last_observed_date"))
+            if value
+        ]
+        if first_observed:
+            updates["first_observed_date"] = min(first_observed)
+        if last_observed:
+            updates["last_observed_date"] = max(last_observed)
         merged[record.record_id] = NormalizedRecord(**updates)
     return [merged[key] for key in sorted(merged)]
+
+
+def deduplicate_public_records(records: list[NormalizedRecord]) -> list[NormalizedRecord]:
+    """Collapse stable-ID variants that share one module/public record number."""
+    groups: dict[tuple[str, str], list[NormalizedRecord]] = {}
+    unkeyed: list[NormalizedRecord] = []
+    for record in records:
+        module = clean(record.source_module)
+        number = re.sub(r"[^A-Z0-9]", "", (clean(record.record_number) or "").upper())
+        if not module or not number:
+            unkeyed.append(record)
+            continue
+        groups.setdefault((module.upper(), number), []).append(record)
+    output = list(unkeyed)
+    for key in sorted(groups):
+        group = groups[key]
+        preferred = max(
+            group,
+            key=lambda item: (
+                bool(clean(item.source_url)),
+                sum(bool(clean(getattr(item, field.name))) for field in dataclasses.fields(item)),
+                clean(item.retrieved_at) or "",
+                clean(item.record_id) or "",
+            ),
+        )
+        updates = {field.name: getattr(preferred, field.name) for field in dataclasses.fields(preferred)}
+        for record in sorted(group, key=lambda item: clean(item.retrieved_at) or ""):
+            for field in dataclasses.fields(record):
+                value = getattr(record, field.name)
+                if value and not updates.get(field.name):
+                    updates[field.name] = value
+        first = [record.as_row().get("first_observed_date") for record in group]
+        last = [record.as_row().get("last_observed_date") for record in group]
+        updates["first_observed_date"] = min(value for value in first if value)
+        updates["last_observed_date"] = max(value for value in last if value)
+        updates["record_id"] = preferred.record_id
+        output.append(NormalizedRecord(**updates))
+    return sorted(output, key=lambda item: (clean(item.source_module) or "", clean(item.record_number) or ""))
 
 
 def normalize_inspection_row(

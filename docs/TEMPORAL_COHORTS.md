@@ -110,3 +110,18 @@ view automatically. It can also be run directly:
 ```bash
 python scripts/monthly_cohorts.py
 ```
+
+## Accela expanded-edition timing
+
+The optional integrated Accela edition uses the same conceptual separation but
+does not alter the core cohort table. Its fields are `event_date`,
+`event_date_type`, `first_observed_date`, `snapshot_date`,
+`last_observed_date`, `historical_reconstruction`, and `temporal_evidence`.
+
+Records opened from 2025-08-01 through 2026-07-31 were retrieved in August
+2026 and are classified as `retrospective_source_record`. They support analysis
+of dates currently reported by Tampa, subject to coverage discontinuities, but
+they are not historical snapshots. Records from 2026-08-01 onward are
+classified as `prospective_snapshot` when collected by TDR. The collector does
+not emit `retrospective_event_history` without an actual dated event-history
+source.
