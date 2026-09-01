@@ -13,6 +13,20 @@ month-end-to-month-end comparison will therefore be September 30 to October
 31. The separate source-date cohort view provides retrospective monthly
 organization without claiming earlier TDR observations.
 
+## Archived core observations
+
+| Snapshot date | Retrieved at UTC | Records | Role | Artifacts |
+| --- | --- | ---: | --- | --- |
+| `2026-08-23` | `2026-08-23T02:06:02+00:00` | 4,469 | Original baseline | [Snapshot](../data/snapshots/2026-08-23/) |
+| `2026-09-01` | `2026-09-01T04:34:12+00:00` | 3,701 | First follow-up | [Snapshot](../data/snapshots/2026-09-01/) |
+
+The September 1 observation was retrieved at 12:34 a.m. Tampa time. The
+[machine-readable comparison](../data/monthly_changes/2026-09.json) and
+[September update](../reports/2026-09.md) compare it with the August 23
+baseline. The separate [August 31 Accela freeze](../data/frozen/accela/2026-08-31/)
+contains records returned for that Accela query date and is not a third core
+observation.
+
 ## Two complementary temporal views
 
 | View | Time basis | Main question |

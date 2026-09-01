@@ -28,6 +28,18 @@ The dataset is complete only with respect to the records returned by the eight
 named layers at the recorded retrieval time. It is not a complete inventory of
 Tampa permits, developments, construction outcomes, or investment.
 
+### Archived core observations
+
+| Snapshot | Retrieved (UTC) | Records | Role | Documentation |
+| --- | --- | ---: | --- | --- |
+| [`2026-08-23`](data/snapshots/2026-08-23/) | 2026-08-23 02:06:02 | 4,469 | Original baseline | [Metadata](data/snapshots/2026-08-23/metadata.json) |
+| [`2026-09-01`](data/snapshots/2026-09-01/) | 2026-09-01 04:34:12 | 3,701 | First follow-up | [Metadata](data/snapshots/2026-09-01/metadata.json) |
+
+The first observed comparison covers August 23 to September 1 and is a
+nine-day initial interval, not a full monthly interval. Its
+[`change summary`](data/monthly_changes/2026-09.json) and
+[`readable report`](reports/2026-09.md) are archived with the snapshots.
+
 ## Verification Status — 2026-08-23 snapshot
 
 <!-- verification-scorecard:start -->
@@ -109,7 +121,8 @@ codes, and second-review status remain in the
 | Analyze non-future monthly events | [`data/monthly_events/`](data/monthly_events/) |
 | Analyze forward-looking source plans | [`data/planned_events/`](data/planned_events/) |
 | Inspect source coverage | [`data/processed/source_universes.csv`](data/processed/source_universes.csv) |
-| Review the immutable core snapshots | [`data/snapshots/`](data/snapshots/) |
+| Review the latest core snapshot | [`data/snapshots/2026-09-01/`](data/snapshots/2026-09-01/) |
+| Review the initial observed comparison | [`reports/2026-09.md`](reports/2026-09.md) |
 | Complete manual validation | [`docs/MANUAL_VALIDATION_GUIDE.md`](docs/MANUAL_VALIDATION_GUIDE.md) |
 | Collect bounded public Accela records | [`docs/ACCELA_COLLECTOR.md`](docs/ACCELA_COLLECTOR.md) |
 | Understand Accela analytical limitations | [`docs/ACCELA_LIMITATIONS.md`](docs/ACCELA_LIMITATIONS.md) |
