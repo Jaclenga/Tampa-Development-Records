@@ -38,6 +38,8 @@ scope, methodology, validation, and release material.
 
 - [Longitudinal tracker](LONGITUDINAL_TRACKER.md) — snapshot identity,
   comparison semantics, outputs, and operating commands.
+- [Snapshot-change dashboard](CHANGE_DASHBOARD.md) — metrics, alert thresholds,
+  interval classification, trend eligibility, static outputs, and limitations.
 - [Source-date monthly events and plans](TEMPORAL_COHORTS.md) — canonical dates,
   non-future monthly extracts, forward-looking plans, observation months,
   source-specific date rules, and valid uses.

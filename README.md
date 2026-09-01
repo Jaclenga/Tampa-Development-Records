@@ -15,9 +15,9 @@ validated full-month longitudinal result.
 | Normalized activities | 3,323 |
 | Accela records | 56,245 unique Building/Planning records; 52,264 retrospective and 3,981 prospective |
 | Expanded activities | 57,677; core bounded-census files remain unchanged |
-| Source-date cohort view | 4,469 source records; 4,387 non-future monthly events; 81 forward-looking plans |
+| Source-date cohort view | 4,549 canonical records; 4,464 non-future monthly events; 84 forward-looking plans |
 | Longitudinal snapshots | August 23 baseline; September 1 first follow-up |
-| Latest observed records | 3,701 records from eight City GIS layers |
+| Latest observed records | 4,408 records from eight City GIS layers |
 | Observed comparisons | 1; August 23 to September 1 (nine-day initial interval) |
 | Regular month-end series | Begins September 30, 2026 |
 | Manual validation | 0 of 150 first reviews completed |
@@ -33,12 +33,21 @@ Tampa permits, developments, construction outcomes, or investment.
 | Snapshot | Retrieved (UTC) | Records | Role | Documentation |
 | --- | --- | ---: | --- | --- |
 | [`2026-08-23`](data/snapshots/2026-08-23/) | 2026-08-23 02:06:02 | 4,469 | Original baseline | [Metadata](data/snapshots/2026-08-23/metadata.json) |
-| [`2026-09-01`](data/snapshots/2026-09-01/) | 2026-09-01 04:34:12 | 3,701 | First follow-up | [Metadata](data/snapshots/2026-09-01/metadata.json) |
+| [`2026-09-01`](data/snapshots/2026-09-01/) | 2026-09-01 07:15:12 | 4,408 | Reconciled first follow-up | [Metadata](data/snapshots/2026-09-01/metadata.json) |
 
 The first observed comparison covers August 23 to September 1 and is a
 nine-day initial interval, not a full monthly interval. Its
 [`change summary`](data/monthly_changes/2026-09.json) and
-[`readable report`](reports/2026-09.md) are archived with the snapshots.
+[`readable report`](reports/2026-09.md) are archived with the snapshots. The
+[`change dashboard`](docs/dashboard/index.html) and
+[`analysis documentation`](docs/CHANGE_DASHBOARD.md) flag unusually large
+source shifts before they are interpreted substantively.
+
+The accepted September 1 observation passed repeated count-only, ID-only,
+chunked-feature, and final-count reconciliation for all eight sources. It
+supersedes an incomplete same-day capture containing only 280 permit records;
+the replacement provenance and prior content hash remain documented in the
+snapshot metadata.
 
 ## Verification Status — 2026-08-23 snapshot
 
@@ -123,6 +132,8 @@ codes, and second-review status remain in the
 | Inspect source coverage | [`data/processed/source_universes.csv`](data/processed/source_universes.csv) |
 | Review the latest core snapshot | [`data/snapshots/2026-09-01/`](data/snapshots/2026-09-01/) |
 | Review the initial observed comparison | [`reports/2026-09.md`](reports/2026-09.md) |
+| Explore snapshot differences | [`docs/dashboard/index.html`](docs/dashboard/index.html) |
+| Understand change metrics and alerts | [`docs/CHANGE_DASHBOARD.md`](docs/CHANGE_DASHBOARD.md) |
 | Complete manual validation | [`docs/MANUAL_VALIDATION_GUIDE.md`](docs/MANUAL_VALIDATION_GUIDE.md) |
 | Collect bounded public Accela records | [`docs/ACCELA_COLLECTOR.md`](docs/ACCELA_COLLECTOR.md) |
 | Understand Accela analytical limitations | [`docs/ACCELA_LIMITATIONS.md`](docs/ACCELA_LIMITATIONS.md) |
@@ -139,9 +150,9 @@ codes, and second-review status remain in the
 - Analyzing source-reported event months separately from TDR observation
   months, with explicit date-type and planned-date flags.
 - Identifying records and source fields that changed between archived
-  observations. Prospective longitudinal tracking began August 23, 2026; the
-  first observed comparison is August 23 to September 1. Regular month-end
-  observations begin September 30, 2026.
+  observations. The first comparison spans August 23 through September 1,
+  2026 and is treated as a short baseline follow-up rather than a full monthly
+  interval. Regular month-end observations begin September 30, 2026.
 
 Snapshot differences describe changes in public-layer publication. They do not
 by themselves prove that construction started, a project finished, a permit
@@ -193,7 +204,8 @@ The August 2025 through July 2026 backfill is retrospective: Tampa currently
 reports those older event dates, but TDR did not take contemporaneous snapshots
 in those months. Prospective Accela observation begins in August 2026. The
 August 31 Accela day-freeze is preserved separately from the core GIS
-observation retrieved just after midnight on September 1; neither is relabeled.
+observation retrieved at 3:15 a.m. Tampa time on September 1; neither is
+relabeled.
 
 See [`data/integrated/README.md`](data/integrated/README.md) for duplicate rules
 and the boundary between the expanded view and the eight-layer bounded census.

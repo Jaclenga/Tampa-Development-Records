@@ -126,16 +126,67 @@ def get_json(url: str, params: dict[str, object] | None = None, post: bool = Fal
         return json.load(response)
 
 
+def _raise_arcgis_error(payload: dict, query_method: str) -> None:
+    error = payload.get("error")
+    if error:
+        message = error.get("message", "ArcGIS query failed") if isinstance(error, dict) else str(error)
+        raise RuntimeError(f"ArcGIS {query_method} query failed: {message}")
+
+
+def _object_id(properties: dict, field: str) -> str:
+    value = properties.get(field)
+    if value is None:
+        lowered = {str(key).lower(): value for key, value in properties.items()}
+        value = lowered.get(field.lower())
+    return str(value) if value is not None else ""
+
+
 def fetch_arcgis_layer(url: str, *, return_geometry: bool = True) -> dict:
+    """Fetch and reconcile one complete ArcGIS layer.
+
+    ArcGIS may return a nonempty but truncated page without making that fact
+    obvious to a caller. Inventory-first retrieval makes completeness an
+    explicit invariant: two count queries, the ID-only inventory, every
+    fetched feature ID, and a final count query must agree.
+    """
+    count_params = {"where": "1=1", "returnCountOnly": "true", "f": "json"}
+    first_count_payload = get_json(f"{url}/query", count_params)
+    _raise_arcgis_error(first_count_payload, "count-only")
+    second_count_payload = get_json(f"{url}/query", count_params)
+    _raise_arcgis_error(second_count_payload, "repeated count-only")
+    first_count = int(first_count_payload.get("count", -1))
+    second_count = int(second_count_payload.get("count", -1))
+    if first_count < 0 or first_count != second_count:
+        raise RuntimeError(
+            f"ArcGIS collection integrity failure: repeated counts disagree ({first_count} != {second_count})"
+        )
+
+    inventory_payload = get_json(f"{url}/query", {
+        "where": "1=1", "returnIdsOnly": "true", "f": "json",
+    })
+    _raise_arcgis_error(inventory_payload, "ID-only")
+    object_id_field = str(inventory_payload.get("objectIdFieldName") or "OBJECTID")
+    object_ids = inventory_payload.get("objectIds") or []
+    normalized_inventory = [str(value) for value in object_ids]
+    if len(normalized_inventory) != len(set(normalized_inventory)):
+        raise RuntimeError("ArcGIS collection integrity failure: duplicate object IDs in ID-only inventory")
+    if len(normalized_inventory) != first_count:
+        raise RuntimeError(
+            "ArcGIS collection integrity failure: "
+            f"count-only={first_count}, ID-only={len(normalized_inventory)}"
+        )
+
     features: list[dict] = []
-    offset = 0
-    while True:
+    page_size = 200
+    ordered_ids = sorted(object_ids, key=lambda value: (str(type(value)), str(value)))
+    for start in range(0, len(ordered_ids), page_size):
+        requested_ids = ordered_ids[start:start + page_size]
         page = get_json(f"{url}/query", {
-            "where": "1=1", "outFields": "*",
+            "objectIds": ",".join(str(value) for value in requested_ids), "outFields": "*",
             "returnGeometry": "true" if return_geometry else "false", "outSR": 4326,
-            "resultOffset": offset, "resultRecordCount": 2000, "orderByFields": "OBJECTID",
             "f": "geojson" if return_geometry else "json",
         })
+        _raise_arcgis_error(page, "feature-page")
         batch = page.get("features", [])
         if not return_geometry:
             batch = [
@@ -143,10 +194,42 @@ def fetch_arcgis_layer(url: str, *, return_geometry: bool = True) -> dict:
                 for feature in batch
             ]
         features.extend(batch)
-        if len(batch) < 2000:
-            break
-        offset += len(batch)
-    return {"type": "FeatureCollection", "features": features}
+
+    fetched_ids = [_object_id(feature.get("properties") or {}, object_id_field) for feature in features]
+    if any(not value for value in fetched_ids):
+        raise RuntimeError(
+            f"ArcGIS collection integrity failure: fetched feature lacks {object_id_field}"
+        )
+    if len(fetched_ids) != len(set(fetched_ids)):
+        raise RuntimeError("ArcGIS collection integrity failure: duplicate object IDs across feature pages")
+    if set(fetched_ids) != set(normalized_inventory):
+        raise RuntimeError(
+            "ArcGIS collection integrity failure: fetched feature inventory differs from ID-only inventory "
+            f"(features={len(fetched_ids)}, IDs={len(normalized_inventory)})"
+        )
+
+    final_count_payload = get_json(f"{url}/query", count_params)
+    _raise_arcgis_error(final_count_payload, "final count-only")
+    final_count = int(final_count_payload.get("count", -1))
+    if final_count != first_count or len(features) != first_count:
+        raise RuntimeError(
+            "ArcGIS collection integrity failure: source count changed or pagination was partial "
+            f"(initial={first_count}, final={final_count}, features={len(features)})"
+        )
+    features.sort(key=lambda feature: _object_id(feature.get("properties") or {}, object_id_field))
+    return {
+        "type": "FeatureCollection",
+        "features": features,
+        "collection_integrity": {
+            "passed": True,
+            "count_only": first_count,
+            "id_only": len(normalized_inventory),
+            "paginated_feature_count": len(features),
+            "final_count_only": final_count,
+            "object_id_field": object_id_field,
+            "page_size": page_size,
+        },
+    }
 
 
 def geometry_points(geometry: dict | None) -> list[tuple[float, float]]:

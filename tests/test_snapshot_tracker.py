@@ -81,15 +81,55 @@ class SnapshotTrackerTests(unittest.TestCase):
         self.assertTrue(all("POCEMAIL" not in json.loads(row["properties_json"]) for row in rows))
 
     def test_attribute_only_arcgis_fetch_normalizes_json_attributes(self) -> None:
-        page = {"features": [{"attributes": {"OBJECTID": 1, "NAME": "Project"}}]}
-        with mock.patch("scripts.build_release.get_json", return_value=page) as get_json:
+        responses = [
+            {"count": 1},
+            {"count": 1},
+            {"objectIdFieldName": "OBJECTID", "objectIds": [1]},
+            {"features": [{"attributes": {"OBJECTID": 1, "NAME": "Project"}}]},
+            {"count": 1},
+        ]
+        with mock.patch("scripts.build_release.get_json", side_effect=responses) as get_json:
             collection = build_release.fetch_arcgis_layer(
                 "https://example.test/FeatureServer/0", return_geometry=False,
             )
         self.assertEqual(collection["features"][0]["properties"]["NAME"], "Project")
-        params = get_json.call_args.args[1]
+        params = get_json.call_args_list[3].args[1]
         self.assertEqual(params["returnGeometry"], "false")
         self.assertEqual(params["f"], "json")
+        self.assertEqual(collection["collection_integrity"]["count_only"], 1)
+
+    def test_arcgis_fetch_rejects_count_inventory_mismatch(self) -> None:
+        responses = [
+            {"count": 2},
+            {"count": 2},
+            {"objectIdFieldName": "OBJECTID", "objectIds": [1]},
+        ]
+        with mock.patch("scripts.build_release.get_json", side_effect=responses):
+            with self.assertRaisesRegex(RuntimeError, "count-only=2, ID-only=1"):
+                build_release.fetch_arcgis_layer("https://example.test/FeatureServer/0")
+
+    def test_arcgis_fetch_rejects_nonempty_partial_feature_page(self) -> None:
+        responses = [
+            {"count": 2},
+            {"count": 2},
+            {"objectIdFieldName": "OBJECTID", "objectIds": [1, 2]},
+            {"features": [{"attributes": {"OBJECTID": 1, "NAME": "Only one"}}]},
+        ]
+        with mock.patch("scripts.build_release.get_json", side_effect=responses):
+            with self.assertRaisesRegex(RuntimeError, "fetched feature inventory differs"):
+                build_release.fetch_arcgis_layer(
+                    "https://example.test/FeatureServer/0", return_geometry=False,
+                )
+
+    def test_arcgis_fetch_rejects_duplicate_inventory_ids(self) -> None:
+        responses = [
+            {"count": 2},
+            {"count": 2},
+            {"objectIdFieldName": "OBJECTID", "objectIds": [1, 1]},
+        ]
+        with mock.patch("scripts.build_release.get_json", side_effect=responses):
+            with self.assertRaisesRegex(RuntimeError, "duplicate object IDs"):
+                build_release.fetch_arcgis_layer("https://example.test/FeatureServer/0")
 
     def test_live_collection_retries_empty_source_response(self) -> None:
         core = {

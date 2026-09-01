@@ -1,0 +1,64 @@
+transition_type,source_id,old_value,new_value,unique_record_count
+phase,capital_improvements,P2: Design,P3: Procurement,2
+phase,capital_improvements,P2: Design,P4: Construction,2
+phase,capital_improvements,P2: Design,P5: Closeout,2
+phase,capital_improvements,P3: Procurement,P4: Construction,2
+phase,capital_improvements,P4: Construction,P2: Design,2
+phase,capital_improvements,P4: Construction,P5: Closeout,10
+phase,capital_locations_line,P1: Planning,P2: Design,1
+phase,capital_locations_line,P2: Design,P4: Construction,1
+phase,capital_locations_line,P2: Design,P5: Closeout,2
+phase,capital_locations_line,P4: Construction,P2: Design,1
+phase,capital_locations_point,P4: Construction,P5: Closeout,1
+phase,capital_locations_polygon,(blank),P1: Planning,1
+phase,capital_locations_polygon,(blank),P3: Procurement,1
+phase,capital_locations_polygon,(blank),P5: Closeout,1
+phase,capital_locations_polygon,P2: Design,P3: Procurement,1
+phase,capital_locations_polygon,P2: Design,P4: Construction,2
+phase,capital_locations_polygon,P3: Procurement,P5: Closeout,1
+phase,capital_locations_polygon,P4: Construction,P2: Design,1
+phase,capital_locations_polygon,P4: Construction,P5: Closeout,2
+status,capital_improvements,30% Design Completion,60% Design Completion,1
+status,capital_improvements,30% Design Completion,90% Design Completion,2
+status,capital_improvements,60% Design Completion,Construction in Progress,1
+status,capital_improvements,90% Design Completion,Closeout,1
+status,capital_improvements,90% Design Completion,Construction in Progress,1
+status,capital_improvements,90% Design Completion,Permitting/Submittals Approval,1
+status,capital_improvements,90% Design Completion,Project Startup,1
+status,capital_improvements,Construction in Progress,30% Design Completion,1
+status,capital_improvements,Construction in Progress,Closeout,9
+status,capital_improvements,Consultant/Contractor Selection Process,Closeout,1
+status,capital_improvements,Contract Negotiations,90% Design Completion,1
+status,capital_improvements,Final Contract Review & Approval,Closeout,1
+status,capital_improvements,Permitting/Submittals Approval,Construction in Progress,2
+status,capital_improvements,Planning,60% Design Completion,1
+status,capital_improvements,Project Startup,60% Design Completion,1
+status,capital_locations_line,60% Design Completion,Construction in Progress,1
+status,capital_locations_line,90% Design Completion,Closeout,2
+status,capital_locations_line,Construction in Progress,30% Design Completion,1
+status,capital_locations_line,Planning,30% Design Completion,1
+status,capital_locations_point,Construction in Progress,Closeout,1
+status,capital_locations_polygon,(blank),90% Design Completion,1
+status,capital_locations_polygon,(blank),Closeout,2
+status,capital_locations_polygon,(blank),Consultant/Contractor Selection Process,1
+status,capital_locations_polygon,(blank),Planning,1
+status,capital_locations_polygon,30% Design Completion,90% Design Completion,1
+status,capital_locations_polygon,60% Design Completion,Contract Negotiations,1
+status,capital_locations_polygon,60% Design Completion,Permitting/Submittals Approval,1
+status,capital_locations_polygon,90% Design Completion,Project Startup,1
+status,capital_locations_polygon,Construction in Progress,Closeout,1
+status,capital_locations_polygon,Planning,60% Design Completion,1
+status,capital_locations_polygon,Project Startup,60% Design Completion,1
+status,capital_locations_polygon,Project Startup,Closeout,1
+status,construction_inspections,Issued,Revision,37
+status,construction_inspections,Revision,Issued,2
+status,development_coordination,Awaiting Client Reply,In Process,15
+status,development_coordination,Awaiting Client Reply,Open,2
+status,development_coordination,In Process,Awaiting Client Reply,14
+status,development_coordination,Open,Awaiting Client Reply,6
+status,development_coordination,Open,In Process,4
+status,historic_preservation,Awaiting Client Reply,In Process,1
+status,historic_preservation,Awaiting Client Reply,Open,1
+status,historic_preservation,In Process,Awaiting Client Reply,4
+status,single_family_permits,Issued | Issued,Revision | Issued,19
+status,single_family_permits,Revision | Issued,Issued | Issued,2

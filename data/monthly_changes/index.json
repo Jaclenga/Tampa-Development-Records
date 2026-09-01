@@ -22,19 +22,21 @@
     },
     {
       "snapshot_date": "2026-09-01",
-      "retrieved_at_utc": "2026-09-01T04:34:12+00:00",
-      "record_count": 3701,
+      "retrieved_at_utc": "2026-09-01T07:15:12+00:00",
+      "record_count": 4408,
       "source_counts": {
         "capital_improvements": 190,
         "capital_locations_line": 101,
         "capital_locations_point": 57,
         "capital_locations_polygon": 34,
-        "construction_inspections": 2595,
-        "development_coordination": 274,
-        "historic_preservation": 170,
-        "single_family_permits": 280
+        "construction_inspections": 2573,
+        "development_coordination": 273,
+        "historic_preservation": 164,
+        "single_family_permits": 1016
       },
-      "path": "data/snapshots/2026-09-01"
+      "path": "data/snapshots/2026-09-01",
+      "audit_status": "collection_integrity_passed",
+      "collection_integrity_passed": true
     }
   ],
   "comparisons": [
@@ -42,10 +44,17 @@
       "comparison_month": "2026-09",
       "before_snapshot_date": "2026-08-23",
       "after_snapshot_date": "2026-09-01",
-      "records_with_any_published_change": 2040,
+      "records_with_any_published_change": 2103,
       "csv": "data/monthly_changes/2026-09.csv",
       "summary": "data/monthly_changes/2026-09.json",
-      "report": "reports/2026-09.md"
+      "report": "reports/2026-09.md",
+      "analysis_json": "data/monthly_changes/analysis/2026-09.json",
+      "analysis_status": "review",
+      "critical_alert_count": 0,
+      "warning_alert_count": 12,
+      "canonical_monthly_comparison": false,
+      "usable_for_global_aggregate_trend": false,
+      "dashboard_page": "docs/dashboard/comparisons/2026-09.html"
     }
   ],
   "scope_note": "Snapshots and comparisons cover the configured public source layers, not all Tampa development."

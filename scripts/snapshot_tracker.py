@@ -293,7 +293,7 @@ def collect_live_rows() -> list[dict[str, str]]:
                     "error_type": "EmptyResponse",
                 }), flush=True)
                 time.sleep(15 * attempt)
-            except OSError as exc:
+            except (OSError, RuntimeError) as exc:
                 if attempt == 4:
                     raise
                 print(json.dumps({
@@ -767,6 +767,27 @@ def compare_snapshots(
     atomic_json(json_path, summary)
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(report_markdown(summary, changes), encoding="utf-8", newline="\n")
+    try:
+        from . import analyze_snapshot_changes, build_change_dashboard, change_analysis
+    except ImportError:
+        import analyze_snapshot_changes
+        import build_change_dashboard
+        import change_analysis
+    analysis, analysis_changes = change_analysis.analyze_paths(
+        before_date,
+        after_date,
+        snapshots_dir=snapshots_dir,
+        changes_dir=changes_dir,
+    )
+    analysis_dir = changes_dir / "analysis"
+    change_analysis.write_analysis_artifacts(analysis, analysis_dir=analysis_dir)
+    change_analysis.atomic_text(report_path, analyze_snapshot_changes.render_report(analysis, analysis_changes))
+    dashboard_dir = ROOT / "docs" / "dashboard" if changes_dir == CHANGES else reports_dir.parent / "docs" / "dashboard"
+    build_change_dashboard.build_dashboard(
+        analysis_dir=analysis_dir,
+        changes_dir=changes_dir,
+        output_dir=dashboard_dir,
+    )
     return summary
 
 
@@ -778,18 +799,25 @@ def tracker_index(
     if snapshots_dir.exists():
         for path in sorted(snapshots_dir.glob("*/metadata.json")):
             metadata = json.loads(path.read_text(encoding="utf-8"))
-            snapshots.append({
+            snapshot_entry = {
                 "snapshot_date": metadata["snapshot_date"],
                 "retrieved_at_utc": metadata["retrieved_at_utc"],
                 "record_count": metadata["record_count"],
                 "source_counts": metadata["source_counts"],
                 "path": path.parent.relative_to(ROOT).as_posix() if snapshots_dir == SNAPSHOTS else path.parent.as_posix(),
-            })
+            }
+            for optional_field in (
+                "audit_status", "collection_integrity_passed", "trend_eligible",
+                "source_audit_status", "retrospective_clean_retrieval",
+            ):
+                if optional_field in metadata:
+                    snapshot_entry[optional_field] = metadata[optional_field]
+            snapshots.append(snapshot_entry)
     comparisons = []
     if changes_dir.exists():
         for path in sorted(changes_dir.glob("????-??.json")):
             summary = json.loads(path.read_text(encoding="utf-8"))
-            comparisons.append({
+            comparison = {
                 "comparison_month": summary["comparison_month"],
                 "before_snapshot_date": summary["before_snapshot_date"],
                 "after_snapshot_date": summary["after_snapshot_date"],
@@ -797,7 +825,21 @@ def tracker_index(
                 "csv": f"data/monthly_changes/{summary['comparison_month']}.csv",
                 "summary": f"data/monthly_changes/{summary['comparison_month']}.json",
                 "report": f"reports/{summary['comparison_month']}.md",
-            })
+            }
+            analysis_path = changes_dir / "analysis" / f"{summary['comparison_month']}.json"
+            if analysis_path.exists():
+                analysis = json.loads(analysis_path.read_text(encoding="utf-8"))
+                severities = Counter(item["severity"] for item in analysis["alerts"])
+                comparison.update({
+                    "analysis_json": f"data/monthly_changes/analysis/{summary['comparison_month']}.json",
+                    "analysis_status": analysis["overall_status"],
+                    "critical_alert_count": severities["critical"],
+                    "warning_alert_count": severities["warning"],
+                    "canonical_monthly_comparison": analysis["comparison"]["canonical_monthly_comparison"],
+                    "usable_for_global_aggregate_trend": analysis["trend_eligibility"]["usable_for_global_aggregate_trend"],
+                    "dashboard_page": f"docs/dashboard/comparisons/{summary['comparison_month']}.html",
+                })
+            comparisons.append(comparison)
     return {
         "format_version": FORMAT_VERSION,
         "status": "baseline_only" if len(snapshots) == 1 else "longitudinal" if len(snapshots) > 1 else "empty",

@@ -119,9 +119,9 @@
     "parcel_activity_links": 1054,
     "bounded_census_records": 4469,
     "source_universes": 8,
-    "activity_by_month": 4524,
-    "monthly_event_extract_rows": 4441,
-    "planned_event_extract_rows": 82,
+    "activity_by_month": 4549,
+    "monthly_event_extract_rows": 4464,
+    "planned_event_extract_rows": 84,
     "longitudinal_snapshots": 2,
     "longitudinal_comparisons": 1
   }

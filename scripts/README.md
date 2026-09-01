@@ -41,6 +41,15 @@ Python's standard library. The optional Accela collector uses `requests` from
   once two snapshots exist, publishes deterministic monthly change CSVs,
   summary JSON, and readable Markdown updates. See the detailed
   [tracker methodology](../docs/LONGITUDINAL_TRACKER.md).
+  Live collection reconciles repeated count-only results, the ID-only
+  inventory, chunked feature pages, and a final count before archiving; partial
+  nonzero layers are rejected.
+- `change_analysis.py` contains the deterministic comparison metrics, exact-
+  field analysis, transition parsing, identity checks, and configured alerts.
+- `analyze_snapshot_changes.py` writes the backward-compatible analysis JSON
+  and CSVs and enriches the existing monthly Markdown report.
+- `build_change_dashboard.py` generates the static dashboard index and
+  identity-safe comparison detail pages without external dependencies.
 - `monthly_cohorts.py` builds the cross-snapshot canonical source-date table,
   non-future `monthly_events` extracts, and forward-looking `planned_events`
   extracts while keeping event, first-observed, and snapshot months distinct. See
@@ -72,6 +81,9 @@ content hash matches exactly.
 python scripts/snapshot_tracker.py collect-live
 python scripts/snapshot_tracker.py update
 python scripts/snapshot_tracker.py compare --from-date 2026-08-23 --to-date 2026-09-01
+python scripts/analyze_snapshot_changes.py --from-date 2026-08-23 --to-date 2026-09-01
+python scripts/analyze_snapshot_changes.py --all
+python scripts/build_change_dashboard.py
 python scripts/monthly_cohorts.py
 ```
 

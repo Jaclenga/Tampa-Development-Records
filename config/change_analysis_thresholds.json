@@ -1,0 +1,23 @@
+{
+  "critical": {
+    "source_drop_pct": 0.5,
+    "source_drop_min_records": 100,
+    "disappearance_rate": 0.5,
+    "disappearance_min_records": 100
+  },
+  "warning": {
+    "source_net_change_pct": 0.2,
+    "source_net_change_min_records": 25,
+    "publication_churn_rate": 0.3,
+    "mass_field_refresh_rate": 0.75,
+    "mass_field_refresh_min_records": 25,
+    "flag_noncanonical_interval": true
+  },
+  "informational": {
+    "source_net_change_pct": 0.05
+  },
+  "interval_semantics": {
+    "baseline_snapshot": "2026-08-23",
+    "canonical_month_end_start": "2026-09-30"
+  }
+}

@@ -3,7 +3,7 @@
   "extract_type": "monthly_events",
   "dataset_start_date": "2020-01-01",
   "records_excluded_before_dataset_start": 128,
-  "record_count": 4441,
+  "record_count": 4464,
   "first_event_month": "2020-01",
   "last_event_month": "2026-09",
   "month_count": 81,
@@ -982,17 +982,17 @@
     },
     {
       "event_month": "2025-06",
-      "record_count": 96,
+      "record_count": 97,
       "source_counts": {
         "capital_improvements": 5,
         "capital_locations_line": 4,
-        "construction_inspections": 61,
+        "construction_inspections": 62,
         "single_family_permits": 26
       },
       "event_date_type_counts": {
         "capital_planned_start": 2,
         "permit_issued": 26,
-        "permit_record_created": 61,
+        "permit_record_created": 62,
         "source_record_created": 7
       },
       "path": "data/monthly_events/2025-06.csv"
@@ -1079,11 +1079,11 @@
     },
     {
       "event_month": "2025-11",
-      "record_count": 229,
+      "record_count": 230,
       "source_counts": {
         "capital_improvements": 1,
         "capital_locations_line": 1,
-        "construction_inspections": 170,
+        "construction_inspections": 171,
         "development_coordination": 6,
         "single_family_permits": 51
       },
@@ -1091,24 +1091,23 @@
         "capital_actual_start": 1,
         "capital_planned_start": 1,
         "permit_issued": 51,
-        "permit_record_created": 170,
+        "permit_record_created": 171,
         "planning_application_created": 6
       },
       "path": "data/monthly_events/2025-11.csv"
     },
     {
       "event_month": "2025-12",
-      "record_count": 226,
+      "record_count": 223,
       "source_counts": {
-        "capital_improvements": 2,
-        "capital_locations_line": 2,
+        "capital_locations_line": 1,
         "capital_locations_point": 1,
         "construction_inspections": 165,
         "development_coordination": 9,
         "single_family_permits": 47
       },
       "event_date_type_counts": {
-        "capital_planned_start": 5,
+        "capital_planned_start": 2,
         "permit_issued": 47,
         "permit_record_created": 165,
         "planning_application_created": 9
@@ -1117,19 +1116,19 @@
     },
     {
       "event_month": "2026-01",
-      "record_count": 206,
+      "record_count": 207,
       "source_counts": {
         "capital_improvements": 3,
         "capital_locations_line": 1,
         "capital_locations_polygon": 1,
-        "construction_inspections": 132,
+        "construction_inspections": 133,
         "development_coordination": 6,
         "single_family_permits": 63
       },
       "event_date_type_counts": {
         "capital_planned_start": 5,
         "permit_issued": 63,
-        "permit_record_created": 132,
+        "permit_record_created": 133,
         "planning_application_created": 6
       },
       "path": "data/monthly_events/2026-01.csv"
@@ -1156,19 +1155,19 @@
     },
     {
       "event_month": "2026-03",
-      "record_count": 288,
+      "record_count": 286,
       "source_counts": {
-        "capital_improvements": 8,
+        "capital_improvements": 9,
         "capital_locations_line": 1,
         "capital_locations_point": 6,
-        "construction_inspections": 184,
+        "construction_inspections": 181,
         "development_coordination": 13,
         "single_family_permits": 76
       },
       "event_date_type_counts": {
-        "capital_planned_start": 7,
+        "capital_planned_start": 8,
         "permit_issued": 76,
-        "permit_record_created": 184,
+        "permit_record_created": 181,
         "planning_application_created": 13,
         "source_record_created": 8
       },
@@ -1176,17 +1175,17 @@
     },
     {
       "event_month": "2026-04",
-      "record_count": 280,
+      "record_count": 281,
       "source_counts": {
         "capital_improvements": 5,
-        "capital_locations_line": 16,
+        "capital_locations_line": 17,
         "capital_locations_point": 1,
         "construction_inspections": 147,
         "development_coordination": 27,
         "single_family_permits": 84
       },
       "event_date_type_counts": {
-        "capital_planned_start": 8,
+        "capital_planned_start": 9,
         "permit_issued": 84,
         "permit_record_created": 147,
         "planning_application_created": 27,
@@ -1196,19 +1195,19 @@
     },
     {
       "event_month": "2026-05",
-      "record_count": 259,
+      "record_count": 260,
       "source_counts": {
         "capital_improvements": 13,
         "capital_locations_line": 1,
         "capital_locations_point": 1,
-        "construction_inspections": 152,
+        "construction_inspections": 154,
         "development_coordination": 26,
-        "single_family_permits": 66
+        "single_family_permits": 65
       },
       "event_date_type_counts": {
         "capital_planned_start": 2,
-        "permit_issued": 66,
-        "permit_record_created": 152,
+        "permit_issued": 65,
+        "permit_record_created": 154,
         "planning_application_created": 26,
         "source_record_created": 13
       },
@@ -1216,37 +1215,37 @@
     },
     {
       "event_month": "2026-06",
-      "record_count": 233,
+      "record_count": 234,
       "source_counts": {
         "capital_improvements": 2,
         "capital_locations_line": 1,
-        "construction_inspections": 110,
+        "construction_inspections": 111,
         "development_coordination": 39,
         "single_family_permits": 81
       },
       "event_date_type_counts": {
         "capital_planned_start": 3,
         "permit_issued": 81,
-        "permit_record_created": 110,
+        "permit_record_created": 111,
         "planning_application_created": 39
       },
       "path": "data/monthly_events/2026-06.csv"
     },
     {
       "event_month": "2026-07",
-      "record_count": 205,
+      "record_count": 203,
       "source_counts": {
-        "capital_improvements": 5,
-        "capital_locations_line": 3,
+        "capital_improvements": 3,
+        "capital_locations_line": 1,
         "capital_locations_point": 1,
-        "construction_inspections": 52,
+        "construction_inspections": 54,
         "development_coordination": 59,
         "single_family_permits": 85
       },
       "event_date_type_counts": {
-        "capital_planned_start": 8,
+        "capital_planned_start": 4,
         "permit_issued": 85,
-        "permit_record_created": 52,
+        "permit_record_created": 54,
         "planning_application_created": 59,
         "source_record_created": 1
       },
@@ -1254,34 +1253,37 @@
     },
     {
       "event_month": "2026-08",
-      "record_count": 311,
+      "record_count": 170,
       "source_counts": {
-        "capital_improvements": 2,
-        "capital_locations_line": 1,
-        "construction_inspections": 15,
-        "development_coordination": 71,
-        "historic_preservation": 178,
-        "single_family_permits": 44
+        "capital_improvements": 3,
+        "capital_locations_line": 2,
+        "construction_inspections": 17,
+        "development_coordination": 70,
+        "historic_preservation": 13,
+        "single_family_permits": 65
       },
       "event_date_type_counts": {
-        "capital_planned_start": 2,
-        "permit_issued": 44,
-        "permit_record_created": 15,
-        "planning_application_created": 71,
-        "preservation_application_created": 178,
+        "capital_planned_start": 4,
+        "permit_issued": 65,
+        "permit_record_created": 17,
+        "planning_application_created": 70,
+        "preservation_application_created": 13,
         "source_record_created": 1
       },
       "path": "data/monthly_events/2026-08.csv"
     },
     {
       "event_month": "2026-09",
-      "record_count": 8,
+      "record_count": 173,
       "source_counts": {
         "capital_improvements": 5,
-        "capital_locations_line": 3
+        "capital_locations_line": 3,
+        "capital_locations_point": 1,
+        "historic_preservation": 164
       },
       "event_date_type_counts": {
-        "capital_planned_start": 8
+        "capital_planned_start": 9,
+        "preservation_application_created": 164
       },
       "path": "data/monthly_events/2026-09.csv"
     }

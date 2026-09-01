@@ -1,22 +1,31 @@
 {
   "format_version": "1.0.0",
   "snapshot_date": "2026-09-01",
-  "retrieved_at_utc": "2026-09-01T04:34:12+00:00",
-  "record_count": 3701,
+  "retrieved_at_utc": "2026-09-01T07:15:12+00:00",
+  "record_count": 4408,
   "source_counts": {
     "capital_improvements": 190,
     "capital_locations_line": 101,
     "capital_locations_point": 57,
     "capital_locations_polygon": 34,
-    "construction_inspections": 2595,
-    "development_coordination": 274,
-    "historic_preservation": 170,
-    "single_family_permits": 280
+    "construction_inspections": 2573,
+    "development_coordination": 273,
+    "historic_preservation": 164,
+    "single_family_permits": 1016
   },
   "source_count": 8,
-  "source_records_content_sha256": "5e04dcd379094adc08bb12696548e0d86a1fff709167ec59f05a4fa4d62b3687",
-  "source_state_sha256": "be7f3a4b973ba096d0465e3c54eaf09979d674d5314811982173daeb77e02918",
+  "source_records_content_sha256": "b34ca67ff145150af20d36868f6e8b97d85bb480175accbf1890a0ea563023f1",
+  "source_state_sha256": "7dd41992cb2c4192a0f25bfc921352e6a0b20ba5ab8ba7db866978994cc81dc3",
   "identity_rule": "source plus native ID; duplicate native identities are disambiguated by GlobalID then OBJECTID",
   "scope_note": "All records in this compact archive came from the eight configured City layers; geometry is retained in the release raw files, not duplicated here.",
-  "source_records_gzip_sha256": "d1d7abf13154d8281dd1c3b7e847150fd7596d0ee9b3a55351b2059fb0f2c654"
+  "source_records_gzip_sha256": "bc66b743c1548fc63a0450034ab3fb1b7fe5994c97fd62b311aa048d3ba07c9a",
+  "audit_status": "collection_integrity_passed",
+  "collection_integrity_passed": true,
+  "collection_integrity_method": "Two initial count-only queries, ID-only inventory, chunked feature IDs, and final count-only query agreed for every source.",
+  "supersedes_observation": {
+    "retrieved_at_utc": "2026-09-01T04:34:12+00:00",
+    "record_count": 3701,
+    "source_records_content_sha256": "5e04dcd379094adc08bb12696548e0d86a1fff709167ec59f05a4fa4d62b3687",
+    "replacement_reason": "The earlier same-day observation contained only 280 single-family permit records. Retrospective count and direct feature queries returned 1,016, demonstrating incomplete retrieval."
+  }
 }
