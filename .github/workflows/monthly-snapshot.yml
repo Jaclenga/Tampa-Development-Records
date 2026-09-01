@@ -33,6 +33,9 @@ jobs:
       - name: Run the complete test suite
         run: python -m unittest discover -s tests -v
 
+      - name: Reject workstation paths and private author emails
+        run: python scripts/check_repository_privacy.py
+
       - name: Reject malformed diffs
         run: git diff --check
 

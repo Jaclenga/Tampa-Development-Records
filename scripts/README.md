@@ -14,6 +14,12 @@ Python's standard library. The optional Accela collector uses `requests` from
 - `collect_accela.py` makes respectful, bounded anonymous searches of Tampa's
   public ACA portal, preserves token-redacted raw provenance, and writes
   normalized snapshots. See the [collector guide](../docs/ACCELA_COLLECTOR.md).
+- `collect_and_freeze_month_end.py` collects one completed Accela day into an
+  isolated Building/Planning snapshot, verifies gap-free checkpoints, records
+  SHA-256 hashes, and then runs the immutable core snapshot tracker.
+- `check_repository_privacy.py` blocks publication when tracked or unignored
+  files contain workstation home paths or private Git-author email addresses.
+  It runs from the repository's pre-commit hook and the monthly snapshot CI job.
 - `backfill_accela.py` runs resumable, non-overlapping monthly Building and
   Planning collections through ACA's public Download results control.
 - `validate_accela_backfill.py` reconciles monthly snapshots to the aggregate,

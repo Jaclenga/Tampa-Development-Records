@@ -21,3 +21,8 @@ data/processed/accela_inspection_backfill*.log
 data/processed/accela_inspection_finalizer*.log
 data/processed/accela_inspection_validation.json
 data/processed/accela_inspection_backfill_status.json
+
+# Operational month-end files can contain local command paths. The sanitized
+# Accela CSV/JSON snapshots and their hash manifest remain eligible to commit.
+data/frozen/accela/**/collection.log
+data/frozen/accela/**/status.json
