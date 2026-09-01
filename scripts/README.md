@@ -21,7 +21,8 @@ Python's standard library. The optional Accela collector uses `requests` from
   files contain workstation home paths or private Git-author email addresses.
   It runs from the repository's pre-commit hook and the monthly snapshot CI job.
 - `backfill_accela.py` runs resumable, non-overlapping monthly Building and
-  Planning collections through ACA's public Download results control.
+  Planning collections through ACA's public Download results control. The
+  earliest accepted month is January 2020.
 - `validate_accela_backfill.py` reconciles monthly snapshots to the aggregate,
   checks gaps, date bounds, temporal labels, and duplicate identifiers, and
   writes `data/integrated/accela_backfill_report.json`.

@@ -1272,9 +1272,13 @@ def main() -> None:
             "scope": "Differences between repeated observations of the configured public layers; not confirmed real-world development outcomes.",
         },
         "source_date_cohorts": {
+            "dataset_start_date": cohort_summary["dataset_start_date"],
             "row_count": cohort_summary["row_count"],
             "records_with_event_month": cohort_summary["records_with_event_month"],
             "records_without_event_month": cohort_summary["records_without_event_month"],
+            "records_excluded_before_dataset_start": cohort_summary[
+                "records_excluded_before_dataset_start"
+            ],
             "monthly_event_record_count": cohort_summary["monthly_event_record_count"],
             "planned_event_record_count": cohort_summary["planned_event_record_count"],
             "unexpected_future_event_count": cohort_summary["unexpected_future_event_count"],
@@ -1284,7 +1288,7 @@ def main() -> None:
             "first_planned_event_month": cohort_summary["first_planned_event_month"],
             "last_planned_event_month": cohort_summary["last_planned_event_month"],
             "planned_event_month_count": cohort_summary["planned_event_month_count"],
-            "scope": "The canonical table retains all selected source dates. Researcher-facing monthly_events exclude dates after their snapshot; planned_events contains only explicit forward-looking source plans.",
+            "scope": "The canonical cohort table and monthly events begin on 2020-01-01; immutable source snapshots remain unchanged as provenance. Researcher-facing monthly_events exclude dates after their snapshot, and planned_events contains only explicit forward-looking source plans.",
         },
         "context_modules": {
             **context_summary,

@@ -156,6 +156,47 @@ class MonthlyCohortTests(unittest.TestCase):
                     root / "planned_events",
                 )
 
+    def test_pre_2020_events_are_removed_from_canonical_and_monthly_outputs(self) -> None:
+        before = {field: "" for field in monthly_cohorts.COHORT_FIELDS}
+        before.update({
+            "record_id": "rec-before-cutoff",
+            "event_date": "2019-12-31",
+            "event_month": "2019-12",
+            "event_date_is_planned": "0",
+            "event_date_is_after_snapshot": "0",
+        })
+        boundary = {field: "" for field in monthly_cohorts.COHORT_FIELDS}
+        boundary.update({
+            "record_id": "rec-at-cutoff",
+            "event_date": "2020-01-01",
+            "event_month": "2020-01",
+            "event_date_is_planned": "0",
+            "event_date_is_after_snapshot": "0",
+        })
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            monthly = root / "monthly_events"
+            monthly.mkdir()
+            (monthly / "2019-12.csv").write_text("stale\n", encoding="utf-8")
+            output = root / "activity_by_month.csv"
+            summary = monthly_cohorts.write_outputs(
+                [before, boundary], output, monthly, root / "planned_events"
+            )
+
+            self.assertEqual(summary["dataset_start_date"], "2020-01-01")
+            self.assertEqual(summary["records_excluded_before_dataset_start"], 1)
+            self.assertEqual(
+                summary["monthly_events"]["records_excluded_before_dataset_start"], 1
+            )
+            self.assertEqual(summary["row_count"], 1)
+            self.assertFalse((monthly / "2019-12.csv").exists())
+            self.assertTrue((monthly / "2020-01.csv").exists())
+            with output.open(encoding="utf-8", newline="") as handle:
+                self.assertEqual(
+                    [row["record_id"] for row in csv.DictReader(handle)],
+                    ["rec-at-cutoff"],
+                )
+
 
 if __name__ == "__main__":
     unittest.main()

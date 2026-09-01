@@ -834,9 +834,13 @@ def sync_manifest(index: dict[str, object]) -> None:
         cohort_table = DATA / "processed" / "activity_by_month.csv"
         cohort_rows = read_csv(cohort_table) if cohort_table.exists() else []
         manifest["source_date_cohorts"] = {
+            "dataset_start_date": monthly_index["dataset_start_date"],
             "row_count": len(cohort_rows),
             "records_with_event_month": sum(bool(row["event_month"]) for row in cohort_rows),
             "records_without_event_month": sum(not row["event_month"] for row in cohort_rows),
+            "records_excluded_before_dataset_start": monthly_index.get(
+                "records_excluded_before_dataset_start", 0
+            ),
             "monthly_event_record_count": monthly_index["record_count"],
             "planned_event_record_count": planned_index["record_count"],
             "unexpected_future_event_count": sum(
@@ -850,7 +854,7 @@ def sync_manifest(index: dict[str, object]) -> None:
             "first_planned_event_month": planned_index["first_event_month"],
             "last_planned_event_month": planned_index["last_event_month"],
             "planned_event_month_count": planned_index["month_count"],
-            "scope": "The canonical table retains all selected source dates. Researcher-facing monthly_events exclude dates after their snapshot; planned_events contains only explicit forward-looking source plans.",
+            "scope": "The canonical cohort table and monthly events begin on 2020-01-01; immutable source snapshots remain unchanged as provenance. Researcher-facing monthly_events exclude dates after their snapshot, and planned_events contains only explicit forward-looking source plans.",
         }
     tracked_outputs = {
         path.relative_to(ROOT).as_posix()

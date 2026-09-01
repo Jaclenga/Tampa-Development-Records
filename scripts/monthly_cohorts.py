@@ -32,6 +32,7 @@ MONTHLY_EVENTS = DATA / "monthly_events"
 PLANNED_EVENTS = DATA / "planned_events"
 OUTPUT = PROCESSED / "activity_by_month.csv"
 FORMAT_VERSION = "2.0.0"
+DATASET_START_DATE = dt.date(2020, 1, 1)
 
 COHORT_FIELDS = [
     "record_id",
@@ -294,8 +295,16 @@ def write_outputs(
     monthly_events_dir: Path = MONTHLY_EVENTS,
     planned_events_dir: Path = PLANNED_EVENTS,
 ) -> dict[str, object]:
-    future_non_plans = [
+    excluded_before_start = [
         row for row in rows
+        if row["event_date"] and row["event_date"] < DATASET_START_DATE.isoformat()
+    ]
+    scoped_rows = [
+        row for row in rows
+        if not row["event_date"] or row["event_date"] >= DATASET_START_DATE.isoformat()
+    ]
+    future_non_plans = [
+        row for row in scoped_rows
         if row["event_month"]
         and row["event_date_is_after_snapshot"] == "1"
         and row["event_date_is_planned"] != "1"
@@ -308,25 +317,29 @@ def write_outputs(
         )
 
     monthly_rows = [
-        row for row in rows
+        row for row in scoped_rows
         if row["event_month"] and row["event_date_is_after_snapshot"] == "0"
     ]
     planned_rows = [
-        row for row in rows
+        row for row in scoped_rows
         if row["event_month"] and row["event_date_is_after_snapshot"] == "1"
     ]
 
-    snapshot_tracker.atomic_csv(output_path, rows, COHORT_FIELDS)
+    snapshot_tracker.atomic_csv(output_path, scoped_rows, COHORT_FIELDS)
     monthly_index = write_partition(
         monthly_rows,
         monthly_events_dir,
         extract_type="monthly_events",
-        selection_rule="event_date is on or before the source row's snapshot_date",
+        selection_rule=(
+            f"event_date is on or after {DATASET_START_DATE.isoformat()} and on or "
+            "before the source row's snapshot_date"
+        ),
         scope_note=(
             "Source-described dates that are not forward-looking relative to the TDR "
             "snapshot supplying the row. These are not TDR observation months, and "
             "different event_date_type values must not be pooled without qualification."
         ),
+        records_excluded_before_dataset_start=len(excluded_before_start),
     )
     planned_index = write_partition(
         planned_rows,
@@ -341,12 +354,14 @@ def write_outputs(
         ),
     )
 
-    dated_count = sum(bool(row["event_month"]) for row in rows)
+    dated_count = sum(bool(row["event_month"]) for row in scoped_rows)
     return {
         "format_version": FORMAT_VERSION,
-        "row_count": len(rows),
+        "dataset_start_date": DATASET_START_DATE.isoformat(),
+        "row_count": len(scoped_rows),
         "records_with_event_month": dated_count,
-        "records_without_event_month": len(rows) - dated_count,
+        "records_without_event_month": len(scoped_rows) - dated_count,
+        "records_excluded_before_dataset_start": len(excluded_before_start),
         "monthly_event_record_count": len(monthly_rows),
         "planned_event_record_count": len(planned_rows),
         "unexpected_future_event_count": len(future_non_plans),
@@ -368,6 +383,7 @@ def write_partition(
     extract_type: str,
     selection_rule: str,
     scope_note: str,
+    records_excluded_before_dataset_start: int = 0,
 ) -> dict[str, object]:
     by_month: dict[str, list[dict[str, str]]] = defaultdict(list)
     for row in rows:
@@ -394,6 +410,8 @@ def write_partition(
     index = {
         "format_version": FORMAT_VERSION,
         "extract_type": extract_type,
+        "dataset_start_date": DATASET_START_DATE.isoformat(),
+        "records_excluded_before_dataset_start": records_excluded_before_dataset_start,
         "record_count": len(rows),
         "first_event_month": month_summaries[0]["event_month"] if month_summaries else None,
         "last_event_month": month_summaries[-1]["event_month"] if month_summaries else None,

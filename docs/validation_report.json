@@ -50,6 +50,7 @@
     "planned_event_extracts_contain_only_future_plans": true,
     "research_extracts_partition_dated_cohorts": true,
     "monthly_event_index_reconciles": true,
+    "monthly_event_scope_starts_2020": true,
     "planned_event_index_reconciles": true,
     "legacy_monthly_records_directory_removed": true,
     "demolition_titles_are_semantically_consistent": true,
@@ -118,10 +119,10 @@
     "parcel_activity_links": 1054,
     "bounded_census_records": 4469,
     "source_universes": 8,
-    "activity_by_month": 4469,
-    "monthly_event_extract_rows": 4387,
-    "planned_event_extract_rows": 81,
-    "longitudinal_snapshots": 1,
-    "longitudinal_comparisons": 0
+    "activity_by_month": 4524,
+    "monthly_event_extract_rows": 4441,
+    "planned_event_extract_rows": 82,
+    "longitudinal_snapshots": 2,
+    "longitudinal_comparisons": 1
   }
 }

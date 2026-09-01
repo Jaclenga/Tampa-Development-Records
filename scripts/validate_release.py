@@ -22,10 +22,11 @@ except ImportError:  # Support direct execution: python scripts/validate_release
     )
 
 try:
-    from . import context_modules, ground_truth, snapshot_tracker
+    from . import context_modules, ground_truth, monthly_cohorts as monthly_cohort_builder, snapshot_tracker
 except ImportError:  # Support direct execution: python scripts/validate_release.py
     import context_modules
     import ground_truth
+    import monthly_cohorts as monthly_cohort_builder
     import snapshot_tracker
 
 
@@ -342,10 +343,20 @@ def main() -> None:
             bool(tracker_snapshots)
             and {
                 x["record_identity"] for x in monthly_cohorts if x["currently_observed"] == "1"
-            } == set(snapshot_tracker.index_records(
-                tracker_snapshots[-1][1],
-                set().union(*(snapshot_tracker.duplicate_bases(rows) for _, rows in tracker_snapshots)),
-            ))
+            } == {
+                identity
+                for identity, row in snapshot_tracker.index_records(
+                    tracker_snapshots[-1][1],
+                    set().union(*(
+                        snapshot_tracker.duplicate_bases(rows)
+                        for _, rows in tracker_snapshots
+                    )),
+                ).items()
+                if not (event_date := monthly_cohort_builder.select_event_date(
+                    row["source_name"], snapshot_tracker.properties(row)
+                )[0])
+                or event_date >= monthly_cohort_builder.DATASET_START_DATE.isoformat()
+            }
         ),
         "monthly_event_extracts_exclude_future_dates": (
             {x["record_id"] for x in monthly_event_extracts}
@@ -387,14 +398,19 @@ def main() -> None:
             bool(monthly_events_index)
             and monthly_events_index.get("format_version") == "2.0.0"
             and monthly_events_index.get("extract_type") == "monthly_events"
+            and monthly_events_index.get("dataset_start_date") == "2020-01-01"
             and monthly_events_index.get("record_count") == len(monthly_event_extracts)
             and monthly_events_index.get("month_count")
             == len(list(monthly_events_dir.glob("????-??.csv")))
+        ),
+        "monthly_event_scope_starts_2020": all(
+            x["event_date"] >= "2020-01-01" for x in monthly_event_extracts
         ),
         "planned_event_index_reconciles": (
             bool(planned_events_index)
             and planned_events_index.get("format_version") == "2.0.0"
             and planned_events_index.get("extract_type") == "planned_events"
+            and planned_events_index.get("dataset_start_date") == "2020-01-01"
             and planned_events_index.get("record_count") == len(planned_event_extracts)
             and planned_events_index.get("month_count")
             == len(list(planned_events_dir.glob("????-??.csv")))

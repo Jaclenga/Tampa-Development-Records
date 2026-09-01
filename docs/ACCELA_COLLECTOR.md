@@ -3,7 +3,8 @@
 This optional collector acquires date-bounded records from the City of Tampa's
 anonymous Accela Citizen Access (ACA) portal. It does not log in, bypass access
 controls, solve CAPTCHAs, or use private endpoints. It stops on HTTP 401/403 or
-a CAPTCHA response.
+a CAPTCHA response. Dataset collection begins on January 1, 2020; bounded
+searches and monthly backfills reject earlier start dates.
 
 ## Verified source and approach
 

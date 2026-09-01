@@ -7,6 +7,7 @@ from datetime import date, datetime
 from typing import Any, Mapping
 
 
+DATASET_START_DATE = date(2020, 1, 1)
 PROSPECTIVE_MONITORING_START = date(2026, 8, 1)
 
 
@@ -136,6 +137,11 @@ class SearchQuery:
             raise ValueError("A bounded search requires both --from-date and --to-date")
         if self.from_date > self.to_date:
             raise ValueError("--from-date must be on or before --to-date")
+        if self.from_date < DATASET_START_DATE:
+            raise ValueError(
+                f"--from-date cannot be before the dataset boundary "
+                f"({DATASET_START_DATE.isoformat()})"
+            )
 
 
 NORMALIZED_FIELDS = [

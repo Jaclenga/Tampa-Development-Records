@@ -14,6 +14,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 COLLECTOR = ROOT / "scripts" / "collect_accela.py"
 OUTPUT_DIR = ROOT / "data" / "processed"
+DATASET_START_MONTH = dt.date(2020, 1, 1)
 
 
 def month(value: str) -> dt.date:
@@ -51,6 +52,11 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     if args.from_month > args.to_month:
         parser.error("--from-month must be on or before --to-month")
+    if args.from_month < DATASET_START_MONTH:
+        parser.error(
+            f"--from-month cannot be before the dataset boundary "
+            f"({DATASET_START_MONTH:%Y-%m})"
+        )
 
     completed = skipped = 0
     for module in args.modules:

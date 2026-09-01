@@ -133,6 +133,12 @@ was cancelled, or a record was deleted.
 The core release pipeline uses Python's standard library. The optional Accela
 collector requires `requests` from `requirements.txt`.
 
+The historical analytical scope begins on January 1, 2020. Automated Accela
+date-range collection and monthly backfills reject earlier start dates, and
+the temporal cohort outputs exclude known event dates before the boundary.
+Immutable source snapshots remain intact as provenance and may therefore carry
+older source attributes that are not published as in-scope monthly events.
+
 ```bash
 python scripts/build_release.py --use-existing-raw
 python -m unittest discover -s tests -v

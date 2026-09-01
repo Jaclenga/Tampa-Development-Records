@@ -7,8 +7,12 @@ by TDR. It complements the prospective snapshot tracker; it does not replace
 or backfill the observation history.
 
 The canonical table is `data/processed/activity_by_month.csv`. It contains one
-row per source-record identity ever retained in an immutable TDR snapshot and
-preserves both past and forward-looking source dates with explicit flags.
+row per in-scope source-record identity ever retained in an immutable TDR
+snapshot and preserves both past and forward-looking source dates with explicit
+flags. The historical dataset boundary is January 1, 2020. Records with a known
+selected event date before that boundary are excluded from the canonical cohort
+table and researcher-facing monthly extracts. Immutable source snapshots remain
+unchanged as provenance.
 
 Researcher-facing extracts separate those meanings:
 
@@ -58,7 +62,9 @@ analytically useful, but `event_date_is_planned=1` and
 `event_date_basis=source_reported_plan` make the limitation explicit.
 
 Dates before 2000 and after 2100 are treated as invalid rather than preserving
-known ArcGIS sentinel values. `event_date_is_after_snapshot=1` identifies a
+known ArcGIS sentinel values. Valid dates before January 1, 2020 are recognized
+for deterministic scope filtering and then excluded from published cohort
+outputs. `event_date_is_after_snapshot=1` identifies a
 future-dated value relative to the snapshot supplying the row. Publication
 fails if such a value is not also an explicit source-reported plan. Valid
 future plans are routed only to `data/planned_events/` and cannot appear in
@@ -68,8 +74,8 @@ future plans are routed only to `data/planned_events/` and cannot appear in
 
 | Output | Rule | Meaning |
 | --- | --- | --- |
-| `activity_by_month.csv` | All retained record identities | Canonical table; inspect flags before analysis |
-| `monthly_events/YYYY-MM.csv` | `event_date <= snapshot_date` | Source-described dates that are not forward-looking relative to collection |
+| `activity_by_month.csv` | Undated identities plus identities with `event_date >= 2020-01-01` | Canonical in-scope table; inspect flags before analysis |
+| `monthly_events/YYYY-MM.csv` | `2020-01-01 <= event_date <= snapshot_date` | In-scope source-described dates that are not forward-looking relative to collection |
 | `planned_events/YYYY-MM.csv` | `event_date > snapshot_date` and `event_date_is_planned=1` | Forward-looking intentions reported by the source |
 | `snapshots/YYYY-MM-DD/` | TDR retrieval date | What the City source layers published when collected |
 
