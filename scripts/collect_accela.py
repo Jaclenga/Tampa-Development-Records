@@ -58,6 +58,10 @@ def parser() -> argparse.ArgumentParser:
         "--use-export", action="store_true",
         help="Use ACA's public Download results CSV for a bounded list-only collection",
     )
+    value.add_argument(
+        "--snapshot-only", action="store_true",
+        help="Write the immutable run partition without rewriting shared aggregate CSVs",
+    )
     value.add_argument("--run-id")
     value.add_argument("--match-gis", type=Path, help="Write a conservative crosswalk to this GIS source_records CSV")
     value.add_argument("--dry-run", action="store_true")
@@ -74,6 +78,8 @@ def main(argv: list[str] | None = None) -> int:
         parser().error("--max-pages must be positive")
     if args.checkpoint_every < 1:
         parser().error("--checkpoint-every must be positive")
+    if args.snapshot_only and not args.use_export:
+        parser().error("--snapshot-only requires --use-export")
     query = SearchQuery(
         module=args.module,
         from_date=args.from_date,
@@ -107,6 +113,7 @@ def main(argv: list[str] | None = None) -> int:
         "max_records": args.max_records,
         "checkpoint_every": args.checkpoint_every,
         "use_export": args.use_export,
+        "snapshot_only": args.snapshot_only,
     }
     if args.dry_run:
         print(json.dumps(plan, indent=2))
@@ -136,6 +143,7 @@ def main(argv: list[str] | None = None) -> int:
         module=args.module,
         run_id=run_id,
         query=plan,
+        update_current=not args.snapshot_only,
     )
     if args.match_gis:
         paths["crosswalk"] = str(args.output_dir / "accela_gis_crosswalk.csv")

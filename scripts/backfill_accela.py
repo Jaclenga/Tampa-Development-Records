@@ -13,6 +13,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 COLLECTOR = ROOT / "scripts" / "collect_accela.py"
+FINALIZER = ROOT / "scripts" / "finalize_accela_record_backfill.py"
 OUTPUT_DIR = ROOT / "data" / "processed"
 DATASET_START_MONTH = dt.date(2020, 1, 1)
 
@@ -35,7 +36,13 @@ def windows(start: dt.date, end: dt.date):
 
 def checkpoint_complete(module: str, run_id: str) -> bool:
     path = OUTPUT_DIR / "accela_checkpoints" / f"{module.lower()}-{run_id}.json"
-    if not path.exists():
+    snapshot_base = OUTPUT_DIR / "accela_snapshots" / f"{run_id}-{module.lower()}"
+    required_outputs = (
+        snapshot_base.with_suffix(".csv"),
+        Path(f"{snapshot_base}-gaps.json"),
+        Path(f"{snapshot_base}-summary.json"),
+    )
+    if not path.exists() or not all(output.exists() for output in required_outputs):
         return False
     try:
         return bool(json.loads(path.read_text(encoding="utf-8"))["complete"])
@@ -70,6 +77,7 @@ def main(argv: list[str] | None = None) -> int:
                 sys.executable, str(COLLECTOR), "--module", module,
                 "--from-date", start.isoformat(), "--to-date", end.isoformat(),
                 "--run-id", run_id, "--resume", "--use-export",
+                "--snapshot-only",
             ]
             print(json.dumps({"module": module, "month": f"{start:%Y-%m}", "status": "starting"}), flush=True)
             result = subprocess.run(command, cwd=ROOT, check=False)
@@ -81,7 +89,22 @@ def main(argv: list[str] | None = None) -> int:
                 return result.returncode
             completed += 1
             print(json.dumps({"module": module, "month": f"{start:%Y-%m}", "status": "complete"}), flush=True)
-    print(json.dumps({"completed_runs": completed, "skipped_complete_runs": skipped}), flush=True)
+    finalizer = [
+        sys.executable, str(FINALIZER),
+        "--from-month", f"{args.from_month:%Y-%m}",
+        "--to-month", f"{args.to_month:%Y-%m}",
+        "--modules", *args.modules,
+    ]
+    print(json.dumps({"status": "finalizing_aggregate"}), flush=True)
+    result = subprocess.run(finalizer, cwd=ROOT, check=False)
+    if result.returncode:
+        print(json.dumps({"status": "aggregate_failed", "exit_code": result.returncode}), flush=True)
+        return result.returncode
+    print(json.dumps({
+        "completed_runs": completed,
+        "skipped_complete_runs": skipped,
+        "aggregate_finalized": True,
+    }), flush=True)
     return 0
 
 
