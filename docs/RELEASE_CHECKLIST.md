@@ -21,7 +21,9 @@ review with AI-generated judgments.
 
 ## 2. Demonstrate the tracker
 
-- Collect a second comparable snapshot.
+- Preserve and inspect the August 23 to September 1 initial comparison.
+- Collect the September 30 canonical month-end snapshot; treat September 30 to
+  October 31 as the first full month-end-to-month-end interval.
 - Inspect the generated change CSV, summary JSON, and Markdown report.
 - Confirm that apparent additions and disappearances are described as
   publication changes rather than real-world outcomes.

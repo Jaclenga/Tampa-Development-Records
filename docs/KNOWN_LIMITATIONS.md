@@ -48,9 +48,9 @@
     by the archived source fields. Inspection, permit-closure, TCO, CO, and
     final-completion coverage remains unavailable until stronger official
     lifecycle data are obtained.
-20. Version 0.9.0 contains one archived core snapshot and therefore no observed
-    month-to-month change results yet. The longitudinal contribution begins
-    only after a second comparable snapshot is collected.
+20. The August 23 to September 1 core comparison is an observed nine-day
+    interval, not a month-to-month result. The canonical month-end series begins
+    September 30, and its first full monthly interval ends October 31.
 21. Snapshot differences describe changes in public-layer publication. A new
     row can be an older record newly exposed by a layer, and a disappeared row
     can reflect a filter or service change rather than deletion or cancellation.

@@ -8,9 +8,9 @@ scope, methodology, validation, and release material.
 1. **Manual validation is incomplete.** None of the 150 first-review rows or 50
    blind second-review assignments has been completed. Start with the
    [operator guide](MANUAL_VALIDATION_GUIDE.md).
-2. **The tracker has only one snapshot.** It cannot produce a longitudinal
-   result until a second comparable observation exists. See the
-   [tracker methodology](LONGITUDINAL_TRACKER.md).
+2. **The tracker does not yet have a full monthly interval.** The August 23 to
+   September 1 comparison is a nine-day initial interval. The canonical
+   month-end series begins September 30. See the [tracker methodology](LONGITUDINAL_TRACKER.md).
 3. **Version 0.9.0 is not tagged.** The metadata is prepared, but the repository
    does not yet have an annotated release tag. See the
    [release checklist](RELEASE_CHECKLIST.md).

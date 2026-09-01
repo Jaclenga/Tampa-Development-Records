@@ -1,8 +1,12 @@
-name: Monthly Tampa snapshot
+name: Month-end Tampa snapshot
 
 on:
   schedule:
-    - cron: "17 6 1 * *"
+    # GitHub cron has no "last day of month" expression. Run on candidate
+    # dates, then let the first step continue only on Tampa's month-end.
+    # 22:17 UTC is 17:17 EST / 18:17 EDT and leaves the UTC and Tampa dates
+    # aligned for the tracker's UTC-derived snapshot date.
+    - cron: "17 22 28-31 * *"
   workflow_dispatch:
 
 permissions:
@@ -17,29 +21,77 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
+      - name: Confirm Tampa month-end
+        id: month_end
+        shell: bash
+        run: |
+          if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+            echo "Manual collection requested; preserving the actual observation date."
+            exit 0
+          fi
+
+          tampa_today="$(TZ=America/New_York date +%F)"
+          tampa_month="$(TZ=America/New_York date +%m)"
+          tampa_tomorrow_month="$(TZ=America/New_York date -d tomorrow +%m)"
+          utc_today="$(date -u +%F)"
+          echo "expected_date=$tampa_today" >> "$GITHUB_OUTPUT"
+
+          if [ "$tampa_today" != "$utc_today" ]; then
+            echo "::error::UTC date $utc_today and Tampa date $tampa_today differ; refusing to create a mislabeled snapshot."
+            exit 1
+          fi
+
+          if [ "$tampa_month" = "$tampa_tomorrow_month" ]; then
+            echo "should_run=false" >> "$GITHUB_OUTPUT"
+            echo "$tampa_today is not Tampa's last calendar day; no collection needed."
+          else
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+            echo "$tampa_today is Tampa month-end; collection will run."
+          fi
+
       - name: Check out the repository
+        if: steps.month_end.outputs.should_run == 'true'
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: Set up Python
+        if: steps.month_end.outputs.should_run == 'true'
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
       - name: Collect and compare the bounded source snapshot
+        if: steps.month_end.outputs.should_run == 'true'
         run: python scripts/snapshot_tracker.py collect-live
 
+      - name: Verify the scheduled observation stayed on month-end
+        if: steps.month_end.outputs.should_run == 'true' && github.event_name == 'schedule'
+        shell: bash
+        env:
+          EXPECTED_DATE: ${{ steps.month_end.outputs.expected_date }}
+        run: |
+          actual_date="$(python -c 'import json; print(json.load(open("data/monthly_changes/index.json"))["snapshots"][-1]["snapshot_date"])')"
+          if [ "$actual_date" != "$EXPECTED_DATE" ]; then
+            echo "::error::Collection crossed the date boundary: expected $EXPECTED_DATE, got $actual_date. Nothing will be committed."
+            exit 1
+          fi
+
       - name: Run the complete test suite
+        if: steps.month_end.outputs.should_run == 'true'
         run: python -m unittest discover -s tests -v
 
       - name: Reject workstation paths and private author emails
+        if: steps.month_end.outputs.should_run == 'true'
         run: python scripts/check_repository_privacy.py
 
       - name: Reject malformed diffs
+        if: steps.month_end.outputs.should_run == 'true'
         run: git diff --check
 
       - name: Commit the new snapshot and comparison
+        if: steps.month_end.outputs.should_run == 'true'
         shell: bash
         run: |
           if git diff --quiet && [ -z "$(git ls-files --others --exclude-standard)" ]; then

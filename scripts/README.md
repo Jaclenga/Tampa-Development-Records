@@ -77,5 +77,7 @@ python scripts/monthly_cohorts.py
 
 Use `collect-live` for the scheduled monthly tracker. It collects the eight
 core layers without regenerating the release-specific manual-validation sample.
-Use the full release build only when deliberately publishing a new processed
-release and validation frame.
+The workflow collects on Tampa's last calendar day; manual runs retain the
+actual retrieval date and are never relabeled as the prior month-end. Use the
+full release build only when deliberately publishing a new processed release
+and validation frame.

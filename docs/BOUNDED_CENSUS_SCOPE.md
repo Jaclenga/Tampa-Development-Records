@@ -48,9 +48,11 @@ census feature count and completeness claim.
 ## Boundary of the dataset
 
 Each snapshot describes the contents of the eight layers at one point in time.
-The first archived observation is August 23, 2026. Repeated snapshots can show
-publication changes between observations, but they do not establish that the
-layers contain every record held by the City.
+The first archived observation is August 23, 2026, followed by an actual
+September 1 observation. Regular month-end observations begin September 30;
+the September 1 retrieval is not backdated to August 31. Repeated snapshots can
+show publication changes between observations, but they do not establish that
+the layers contain every record held by the City.
 For example, a layer may show only active projects, selected permit types, or
 records that meet an unpublished display rule.
 

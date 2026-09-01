@@ -29,3 +29,6 @@ data/logs/
 # Accela CSV/JSON snapshots and their hash manifest remain eligible to commit.
 data/frozen/accela/**/collection.log
 data/frozen/accela/**/status.json
+# Atomic Accela writers use hidden random-suffix sidecars before replacing the
+# final CSV. They are incomplete runtime files and must never be staged.
+data/processed/.accela_*.csv.*

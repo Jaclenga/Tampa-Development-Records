@@ -5,18 +5,21 @@ of Tampa, with tools for tracking changes in those records over time.
 
 ## Status
 
-This is a strong baseline, not yet a validated longitudinal result.
+This is a strong baseline with an initial observed comparison, not yet a
+validated full-month longitudinal result.
 
 | Item | Current state |
 | --- | --- |
-| Core snapshot | August 23, 2026 |
-| Published records | 4,469 records from eight City GIS layers |
+| Core release snapshot | August 23, 2026 |
+| Core release records | 4,469 records from eight City GIS layers |
 | Normalized activities | 3,323 |
 | Accela records | 56,245 unique Building/Planning records; 52,264 retrospective and 3,981 prospective |
 | Expanded activities | 57,677; core bounded-census files remain unchanged |
 | Source-date cohort view | 4,469 source records; 4,387 non-future monthly events; 81 forward-looking plans |
-| Archived snapshots | 1 |
-| Monthly comparisons | 0; requires a second snapshot |
+| Longitudinal snapshots | August 23 baseline; September 1 first follow-up |
+| Latest observed records | 3,701 records from eight City GIS layers |
+| Observed comparisons | 1; August 23 to September 1 (nine-day initial interval) |
+| Regular month-end series | Begins September 30, 2026 |
 | Manual validation | 0 of 150 first reviews completed |
 | Empirical accuracy | Not yet measured |
 | Release | Version 0.9.0 prepared; Git tag not yet published |
@@ -106,7 +109,7 @@ codes, and second-review status remain in the
 | Analyze non-future monthly events | [`data/monthly_events/`](data/monthly_events/) |
 | Analyze forward-looking source plans | [`data/planned_events/`](data/planned_events/) |
 | Inspect source coverage | [`data/processed/source_universes.csv`](data/processed/source_universes.csv) |
-| Review the immutable snapshot | [`data/snapshots/2026-08-23/`](data/snapshots/2026-08-23/) |
+| Review the immutable core snapshots | [`data/snapshots/`](data/snapshots/) |
 | Complete manual validation | [`docs/MANUAL_VALIDATION_GUIDE.md`](docs/MANUAL_VALIDATION_GUIDE.md) |
 | Collect bounded public Accela records | [`docs/ACCELA_COLLECTOR.md`](docs/ACCELA_COLLECTOR.md) |
 | Understand Accela analytical limitations | [`docs/ACCELA_LIMITATIONS.md`](docs/ACCELA_LIMITATIONS.md) |
@@ -114,15 +117,18 @@ codes, and second-review status remain in the
 
 ## What the dataset supports
 
-- Reproducing the state of eight City GIS layers on August 23, 2026.
+- Reproducing the state of eight City GIS layers on August 23 and September 1,
+  2026.
 - Mapping and filtering the published records.
 - Studying overlap among permit, planning, preservation, and capital-project
   layers.
 - Tracing normalized activities back to source records and attributes.
 - Analyzing source-reported event months separately from TDR observation
   months, with explicit date-type and planned-date flags.
-- After a second snapshot, identifying records and source fields that changed
-  between observations.
+- Identifying records and source fields that changed between archived
+  observations. Prospective longitudinal tracking began August 23, 2026; the
+  first observed comparison is August 23 to September 1. Regular month-end
+  observations begin September 30, 2026.
 
 Snapshot differences describe changes in public-layer publication. They do not
 by themselves prove that construction started, a project finished, a permit
@@ -172,7 +178,9 @@ python scripts/integrate_accela.py
 
 The August 2025 through July 2026 backfill is retrospective: Tampa currently
 reports those older event dates, but TDR did not take contemporaneous snapshots
-in those months. Prospective Accela observation begins in August 2026.
+in those months. Prospective Accela observation begins in August 2026. The
+August 31 Accela day-freeze is preserved separately from the core GIS
+observation retrieved just after midnight on September 1; neither is relabeled.
 
 See [`data/integrated/README.md`](data/integrated/README.md) for duplicate rules
 and the boundary between the expanded view and the eight-layer bounded census.
@@ -190,18 +198,21 @@ before combining monthly records across sources or date types.
 
 ## Before treating v0.9.0 as a public release
 
-The repository still has two evidence gaps and one distribution gap:
+The repository still has one evidence gap, one longitudinal maturity gap, and
+one distribution gap:
 
 1. Complete the frozen manual-validation sample and publish the resulting
    claim-specific accuracy and reviewer-agreement metrics.
-2. Collect a second comparable snapshot to demonstrate the longitudinal
-   workflow with an actual comparison.
+2. Collect the September 30 snapshot to establish the first canonical
+   month-end observation; the first full month-end-to-month-end interval will
+   be September 30 to October 31.
 3. Run the release checks and publish an annotated `v0.9.0` Git tag.
 
 The detailed sequence is in the
 [`release checklist`](docs/RELEASE_CHECKLIST.md). Until the first item is
-complete, do not claim a measured error rate. Until the second is complete, do
-not describe the project as having observed longitudinal results.
+complete, do not claim a measured error rate. Until the second is complete,
+describe August 23 to September 1 only as an initial short-interval comparison,
+not a full monthly result.
 
 ## Repository layout
 

@@ -2,10 +2,16 @@
 
 ## Current state
 
-The tracker contains one immutable observation dated August 23, 2026. It is a
-baseline only: there are no month-to-month comparisons or observed
-longitudinal results yet. A separate source-date cohort view provides
-retrospective monthly organization without claiming earlier TDR observations.
+The tracker contains two immutable core observations: the August 23, 2026
+baseline and a September 1, 2026 follow-up. Their comparison is a nine-day
+initial interval, not a monthly interval. A separate August 31 Accela day-freeze
+preserves that portal query without pretending that the core GIS retrieval,
+which occurred just after midnight Tampa time, happened on August 31.
+
+Regular core month-end observations begin September 30, 2026. The first full
+month-end-to-month-end comparison will therefore be September 30 to October
+31. The separate source-date cohort view provides retrospective monthly
+organization without claiming earlier TDR observations.
 
 ## Two complementary temporal views
 
@@ -79,10 +85,29 @@ Compare two existing snapshots explicitly:
 python scripts/snapshot_tracker.py compare --from-date 2026-08-23 --to-date 2026-09-01
 ```
 
-The scheduled workflow in `.github/workflows/monthly-snapshot.yml` runs on the
-first day of each month and can be triggered manually. It collects, tests, and
-commits new tracker artifacts only when the checks pass. It does not regenerate
-the frozen validation sample against a changing population.
+The scheduled workflow in `.github/workflows/monthly-snapshot.yml` runs at
+22:17 UTC on candidate dates from the 28th through the 31st. A Tampa-time guard
+continues only on the last local calendar day and refuses a scheduled run if
+the UTC and Tampa dates differ. A second guard checks the archived date after
+collection and prevents a commit if collection crossed midnight. This keeps
+the UTC-derived snapshot date equal to the Tampa observation date instead of
+backdating a next-day retrieval.
+
+Manual runs are still supported and always preserve their actual observation
+date. The workflow collects, tests, and commits new tracker artifacts only when
+the checks pass. It does not regenerate the frozen validation sample against a
+changing population.
+
+## Observation-date convention
+
+- `2026-08-23` is the original core baseline.
+- `2026-08-31` is an Accela day-freeze, not a core GIS snapshot.
+- `2026-09-01` is the first core follow-up and retains its actual date.
+- `2026-09-30` starts the canonical core month-end series.
+- Later scheduled observations use each month's final Tampa calendar date.
+
+Snapshot dates come from `retrieved_at_utc`; historical source dates and Accela
+query dates never substitute for the observation timestamp.
 
 ## Outputs
 
