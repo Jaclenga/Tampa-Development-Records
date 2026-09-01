@@ -22,6 +22,9 @@ data/processed/accela_inspection_finalizer*.log
 data/processed/accela_inspection_validation.json
 data/processed/accela_inspection_backfill_status.json
 
+# Runtime orchestration logs contain machine-local paths and remain local.
+data/logs/
+
 # Operational month-end files can contain local command paths. The sanitized
 # Accela CSV/JSON snapshots and their hash manifest remain eligible to commit.
 data/frozen/accela/**/collection.log
