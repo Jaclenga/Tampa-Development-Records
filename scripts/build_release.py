@@ -126,15 +126,22 @@ def get_json(url: str, params: dict[str, object] | None = None, post: bool = Fal
         return json.load(response)
 
 
-def fetch_arcgis_layer(url: str) -> dict:
+def fetch_arcgis_layer(url: str, *, return_geometry: bool = True) -> dict:
     features: list[dict] = []
     offset = 0
     while True:
         page = get_json(f"{url}/query", {
-            "where": "1=1", "outFields": "*", "returnGeometry": "true", "outSR": 4326,
-            "resultOffset": offset, "resultRecordCount": 2000, "orderByFields": "OBJECTID", "f": "geojson",
+            "where": "1=1", "outFields": "*",
+            "returnGeometry": "true" if return_geometry else "false", "outSR": 4326,
+            "resultOffset": offset, "resultRecordCount": 2000, "orderByFields": "OBJECTID",
+            "f": "geojson" if return_geometry else "json",
         })
         batch = page.get("features", [])
+        if not return_geometry:
+            batch = [
+                {"type": "Feature", "geometry": None, "properties": feature.get("attributes", {})}
+                for feature in batch
+            ]
         features.extend(batch)
         if len(batch) < 2000:
             break

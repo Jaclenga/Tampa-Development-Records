@@ -1,0 +1,87 @@
+{
+  "accela_query": {
+    "from_date": "2026-08-31",
+    "mode": "public_download_results_export",
+    "modules": [
+      "Building",
+      "Planning"
+    ],
+    "to_date": "2026-08-31"
+  },
+  "core_snapshot": {
+    "path": "data/snapshots/2026-09-01",
+    "record_count": 3701,
+    "retrieved_at_utc": "2026-09-01T04:34:12+00:00",
+    "snapshot_date": "2026-09-01",
+    "source_counts": {
+      "capital_improvements": 190,
+      "capital_locations_line": 101,
+      "capital_locations_point": 57,
+      "capital_locations_polygon": 34,
+      "construction_inspections": 2595,
+      "development_coordination": 274,
+      "historic_preservation": 170,
+      "single_family_permits": 280
+    }
+  },
+  "files": [
+    {
+      "bytes": 92386,
+      "path": "processed/accela_building_records.csv",
+      "sha256": "b5b4b0b30359bab66e55980e1d5e81c58fbdfc6031420a09ad6cfe06b2b60d26"
+    },
+    {
+      "bytes": 351071,
+      "path": "processed/accela_checkpoints/building-day-freeze-2026-08-31.json",
+      "sha256": "e25541ceaf5db36fc0780bf336bafb166059ec645b4207371af01670d324023a"
+    },
+    {
+      "bytes": 35049,
+      "path": "processed/accela_checkpoints/planning-day-freeze-2026-08-31.json",
+      "sha256": "6d24917edabe0674d95c2cd73abdd11992c0a02119b014504900ce699ee0172b"
+    },
+    {
+      "bytes": 9656,
+      "path": "processed/accela_planning_records.csv",
+      "sha256": "f4bc6df1676222a7ecaa6e51e017d332721aa0ba134e7f2763f9eb0bd24a997e"
+    },
+    {
+      "bytes": 101414,
+      "path": "processed/accela_records.csv",
+      "sha256": "4efd4192ba4159a5f9e3ba4d492e00b175e30f618304faa26c5ebf1bb31c6a4e"
+    },
+    {
+      "bytes": 3,
+      "path": "processed/accela_snapshots/day-freeze-2026-08-31-building-gaps.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "bytes": 1023,
+      "path": "processed/accela_snapshots/day-freeze-2026-08-31-building-summary.json",
+      "sha256": "85dd5f883cde0f66ac9ae89ca2f2f8abc2247acb992b95918ee7f14def345dbb"
+    },
+    {
+      "bytes": 92386,
+      "path": "processed/accela_snapshots/day-freeze-2026-08-31-building.csv",
+      "sha256": "064f8a83f7bdf2198afe53a94d87a6bafd1a32ef5423b6a794fc3775f1203bb3"
+    },
+    {
+      "bytes": 3,
+      "path": "processed/accela_snapshots/day-freeze-2026-08-31-planning-gaps.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "bytes": 1022,
+      "path": "processed/accela_snapshots/day-freeze-2026-08-31-planning-summary.json",
+      "sha256": "350a6facfad37b1c95c12db9927ce1bb5ca080a81e5a1fee3b730814a8c5254c"
+    },
+    {
+      "bytes": 9656,
+      "path": "processed/accela_snapshots/day-freeze-2026-08-31-planning.csv",
+      "sha256": "b554ea65022855747ea92c3fbc1ba45693da63419a1d4f3bbb903548791e1a9e"
+    }
+  ],
+  "format_version": "1.0.0",
+  "frozen_at_utc": "2026-09-01T04:34:19.818702+00:00",
+  "immutability_rule": "A completed manifest is never overwritten; every listed file must retain its recorded SHA-256 hash."
+}

@@ -1,0 +1,30 @@
+{
+  "checkpoint_path": "data/frozen/accela/2026-08-31/processed/accela_checkpoints/building-day-freeze-2026-08-31.json",
+  "gap_count": 0,
+  "inspections": 0,
+  "module": "Building",
+  "output_format": "CSV (Parquet is not emitted because this repository does not require a Parquet engine)",
+  "pages": 1,
+  "query": {
+    "checkpoint": "data/frozen/accela/2026-08-31/processed/accela_checkpoints/building-day-freeze-2026-08-31.json",
+    "checkpoint_every": 1,
+    "compress_raw": false,
+    "from_date": "2026-08-31",
+    "include_addresses": false,
+    "include_inspections": false,
+    "include_parcels": false,
+    "max_records": null,
+    "module": "Building",
+    "output_dir": "data/frozen/accela/2026-08-31/processed",
+    "raw_root": "data/raw/accela/month-end-freezes/2026-09-01",
+    "record_number": null,
+    "requests_per_second": 1.0,
+    "resume": true,
+    "to_date": "2026-08-31",
+    "use_export": true
+  },
+  "records": 203,
+  "requests": 4,
+  "run_id": "day-freeze-2026-08-31",
+  "truncated": false
+}

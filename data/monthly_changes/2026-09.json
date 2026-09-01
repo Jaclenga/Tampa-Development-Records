@@ -1,0 +1,95 @@
+{
+  "format_version": "1.0.0",
+  "comparison_month": "2026-09",
+  "before_snapshot_date": "2026-08-23",
+  "before_retrieved_at_utc": "2026-08-23T02:06:02+00:00",
+  "after_snapshot_date": "2026-09-01",
+  "after_retrieved_at_utc": "2026-09-01T04:34:12+00:00",
+  "before_record_count": 4469,
+  "after_record_count": 3701,
+  "records_with_any_published_change": 2040,
+  "change_rows": 2697,
+  "change_type_counts": {
+    "capital_project_phase_changed": 27,
+    "description_changed": 16,
+    "estimated_cost_changed": 310,
+    "new_record": 183,
+    "other_field_changed": 824,
+    "planned_date_changed": 40,
+    "project_name_changed": 13,
+    "record_disappeared": 951,
+    "reported_actual_cost_changed": 220,
+    "status_changed": 113
+  },
+  "semantic_type_counts": {
+    "expected_completion_changed": 38,
+    "permit_issued": 5,
+    "planning_application_added": 22
+  },
+  "source_change_counts": {
+    "capital_improvements": {
+      "capital_project_phase_changed": 13,
+      "description_changed": 7,
+      "estimated_cost_changed": 146,
+      "new_record": 1,
+      "other_field_changed": 189,
+      "planned_date_changed": 19,
+      "project_name_changed": 6,
+      "record_disappeared": 3,
+      "reported_actual_cost_changed": 188,
+      "status_changed": 18
+    },
+    "capital_locations_line": {
+      "capital_project_phase_changed": 3,
+      "estimated_cost_changed": 78,
+      "other_field_changed": 101,
+      "planned_date_changed": 2,
+      "reported_actual_cost_changed": 5,
+      "status_changed": 3
+    },
+    "capital_locations_point": {
+      "capital_project_phase_changed": 1,
+      "estimated_cost_changed": 52,
+      "other_field_changed": 57,
+      "planned_date_changed": 2,
+      "reported_actual_cost_changed": 12,
+      "status_changed": 1
+    },
+    "capital_locations_polygon": {
+      "capital_project_phase_changed": 10,
+      "estimated_cost_changed": 34,
+      "other_field_changed": 34,
+      "planned_date_changed": 17,
+      "record_disappeared": 3,
+      "reported_actual_cost_changed": 15,
+      "status_changed": 13
+    },
+    "construction_inspections": {
+      "description_changed": 9,
+      "new_record": 147,
+      "other_field_changed": 4,
+      "project_name_changed": 7,
+      "record_disappeared": 171,
+      "status_changed": 35
+    },
+    "development_coordination": {
+      "new_record": 22,
+      "other_field_changed": 2,
+      "record_disappeared": 19,
+      "status_changed": 38
+    },
+    "historic_preservation": {
+      "new_record": 9,
+      "other_field_changed": 161,
+      "record_disappeared": 8,
+      "status_changed": 2
+    },
+    "single_family_permits": {
+      "new_record": 4,
+      "other_field_changed": 276,
+      "record_disappeared": 747,
+      "status_changed": 3
+    }
+  },
+  "interpretation": "Changes describe differences between two bounded public-layer snapshots, not all Tampa development or confirmed real-world outcomes."
+}

@@ -13,6 +13,7 @@ from pathlib import Path
 import subprocess
 import sys
 import tempfile
+import time
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -123,6 +124,23 @@ def run(command: list[str], log_path: Path) -> None:
         raise RuntimeError(f"Command failed with exit {result.returncode}: {command}")
 
 
+def run_with_retries(command: list[str], log_path: Path, attempts: int = 3) -> None:
+    for attempt in range(1, attempts + 1):
+        try:
+            run(command, log_path)
+            return
+        except RuntimeError:
+            if attempt == attempts:
+                raise
+            with log_path.open("a", encoding="utf-8", newline="\n") as log:
+                log.write(json.dumps({
+                    "status": "retrying_command",
+                    "attempt": attempt + 1,
+                    "max_attempts": attempts,
+                }) + "\n")
+            time.sleep(10 * attempt)
+
+
 def checkpoint_complete(output_dir: Path, module: str, run_id: str) -> bool:
     path = output_dir / "accela_checkpoints" / f"{module.lower()}-{run_id}.json"
     if not path.exists():
@@ -204,6 +222,8 @@ def main(argv: list[str] | None = None) -> int:
     })
     try:
         for module, command in zip(MODULES, commands[:len(MODULES)], strict=True):
+            if checkpoint_complete(output_dir, module, run_id):
+                continue
             run(command, log_path)
             if not checkpoint_complete(output_dir, module, run_id):
                 raise RuntimeError(f"{module} checkpoint is incomplete or contains collection gaps")
@@ -215,7 +235,7 @@ def main(argv: list[str] | None = None) -> int:
             "updated_at_utc": dt.datetime.now(dt.timezone.utc).isoformat(),
             "target_date": target.isoformat(),
         })
-        run(commands[-1], log_path)
+        run_with_retries(commands[-1], log_path)
 
         excluded = {manifest_path.resolve(), status_path.resolve(), log_path.resolve()}
         files = [

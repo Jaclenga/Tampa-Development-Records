@@ -8,7 +8,7 @@ import unittest
 from pathlib import Path
 from unittest import mock
 
-from scripts import snapshot_tracker
+from scripts import build_release, snapshot_tracker
 
 
 def record(
@@ -48,7 +48,10 @@ class SnapshotTrackerTests(unittest.TestCase):
         source_by_url = {config["url"]: source for source, config in core.items()}
         source_by_url.update({value[0]: source for source, value in extra.items()})
 
-        def fake_layer(url: str) -> dict:
+        geometry_requests = []
+
+        def fake_layer(url: str, *, return_geometry: bool = True) -> dict:
+            geometry_requests.append(return_geometry)
             source = source_by_url[url]
             features = []
             for number in range(375):
@@ -74,7 +77,49 @@ class SnapshotTrackerTests(unittest.TestCase):
             rows = snapshot_tracker.collect_live_rows()
         self.assertEqual(len(rows), 3000)
         self.assertEqual({row["source_name"] for row in rows}, set(core) | set(extra))
+        self.assertEqual(geometry_requests, [False] * 8)
         self.assertTrue(all("POCEMAIL" not in json.loads(row["properties_json"]) for row in rows))
+
+    def test_attribute_only_arcgis_fetch_normalizes_json_attributes(self) -> None:
+        page = {"features": [{"attributes": {"OBJECTID": 1, "NAME": "Project"}}]}
+        with mock.patch("scripts.build_release.get_json", return_value=page) as get_json:
+            collection = build_release.fetch_arcgis_layer(
+                "https://example.test/FeatureServer/0", return_geometry=False,
+            )
+        self.assertEqual(collection["features"][0]["properties"]["NAME"], "Project")
+        params = get_json.call_args.args[1]
+        self.assertEqual(params["returnGeometry"], "false")
+        self.assertEqual(params["f"], "json")
+
+    def test_live_collection_retries_empty_source_response(self) -> None:
+        core = {
+            f"source_{number}": {"url": f"https://example.test/source-{number}"}
+            for number in range(8)
+        }
+        calls: dict[str, int] = {}
+
+        def fake_layer(url: str, *, return_geometry: bool = True) -> dict[str, object]:
+            calls[url] = calls.get(url, 0) + 1
+            if url.endswith("source-0") and calls[url] == 1:
+                return {"type": "FeatureCollection", "features": []}
+            return {
+                "type": "FeatureCollection",
+                "features": [
+                    {"properties": {"OBJECTID": number}}
+                    for number in range(375)
+                ],
+            }
+
+        with (
+            mock.patch("scripts.build_release.load_legacy_module", return_value=types.SimpleNamespace(SOURCES=core)),
+            mock.patch("scripts.build_release.EXTRA_CIP", {}),
+            mock.patch("scripts.build_release.fetch_arcgis_layer", side_effect=fake_layer) as fetch,
+            mock.patch("scripts.snapshot_tracker.time.sleep") as sleep,
+        ):
+            rows = snapshot_tracker.collect_live_rows()
+        self.assertEqual(len(rows), 3000)
+        self.assertEqual(fetch.call_count, 9)
+        sleep.assert_called_once_with(15)
 
     def test_native_identity_survives_objectid_change(self) -> None:
         before = record("construction_inspections", "BLD-1", {}, "2026-08-23T00:00:00Z", object_id="1")

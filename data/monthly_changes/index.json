@@ -1,8 +1,8 @@
 {
   "format_version": "1.0.0",
-  "status": "baseline_only",
-  "snapshot_count": 1,
-  "comparison_count": 0,
+  "status": "longitudinal",
+  "snapshot_count": 2,
+  "comparison_count": 1,
   "snapshots": [
     {
       "snapshot_date": "2026-08-23",
@@ -19,8 +19,34 @@
         "single_family_permits": 1023
       },
       "path": "data/snapshots/2026-08-23"
+    },
+    {
+      "snapshot_date": "2026-09-01",
+      "retrieved_at_utc": "2026-09-01T04:34:12+00:00",
+      "record_count": 3701,
+      "source_counts": {
+        "capital_improvements": 190,
+        "capital_locations_line": 101,
+        "capital_locations_point": 57,
+        "capital_locations_polygon": 34,
+        "construction_inspections": 2595,
+        "development_coordination": 274,
+        "historic_preservation": 170,
+        "single_family_permits": 280
+      },
+      "path": "data/snapshots/2026-09-01"
     }
   ],
-  "comparisons": [],
+  "comparisons": [
+    {
+      "comparison_month": "2026-09",
+      "before_snapshot_date": "2026-08-23",
+      "after_snapshot_date": "2026-09-01",
+      "records_with_any_published_change": 2040,
+      "csv": "data/monthly_changes/2026-09.csv",
+      "summary": "data/monthly_changes/2026-09.json",
+      "report": "reports/2026-09.md"
+    }
+  ],
   "scope_note": "Snapshots and comparisons cover the configured public source layers, not all Tampa development."
 }

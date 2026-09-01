@@ -19,6 +19,7 @@ import os
 import re
 import sys
 import tempfile
+import time
 from collections import Counter, defaultdict
 from pathlib import Path
 
@@ -273,11 +274,38 @@ def collect_live_rows() -> list[dict[str, str]]:
     pending: list[tuple[str, str, str, dict[str, object]]] = []
     counts: dict[str, int] = {}
     for source, endpoint in endpoints.items():
-        collection = build_release.fetch_arcgis_layer(endpoint)
-        features = collection.get("features", [])
-        if not features:
-            raise RuntimeError(f"Live collection returned zero records for {source}; refusing partial snapshot")
+        print(json.dumps({"source": source, "status": "collecting"}), flush=True)
+        for attempt in range(1, 5):
+            try:
+                collection = build_release.fetch_arcgis_layer(endpoint, return_geometry=False)
+                features = collection.get("features", [])
+                if features:
+                    break
+                if attempt == 4:
+                    raise RuntimeError(
+                        f"Live collection returned zero records for {source}; refusing partial snapshot"
+                    )
+                print(json.dumps({
+                    "source": source,
+                    "status": "retrying",
+                    "attempt": attempt + 1,
+                    "max_attempts": 4,
+                    "error_type": "EmptyResponse",
+                }), flush=True)
+                time.sleep(15 * attempt)
+            except OSError as exc:
+                if attempt == 4:
+                    raise
+                print(json.dumps({
+                    "source": source,
+                    "status": "retrying",
+                    "attempt": attempt + 1,
+                    "max_attempts": 4,
+                    "error_type": type(exc).__name__,
+                }), flush=True)
+                time.sleep(15 * attempt)
         counts[source] = len(features)
+        print(json.dumps({"source": source, "status": "complete", "records": len(features)}), flush=True)
         for feature in features:
             props = feature.get("properties") or {}
             native = build_release.native_id_for(source, props)
