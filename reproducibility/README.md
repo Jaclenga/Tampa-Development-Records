@@ -123,3 +123,10 @@ Python-version differences can still reveal previously unknown implementation
 dependencies, which is why every run records both. The historical external
 pilot used AI-assisted research and remains explicitly separate from
 deterministic automated validation.
+
+The newer bounded agentic evidence experiment is documented separately in
+`docs/AGENTIC_VALIDATION.md`. Its recorded GPT-5.6 Sol investigations are
+nondeterministic research artifacts. The committed audit runner itself is
+offline and deterministic: it verifies provenance and evidence hashes, applies
+only experimental rules with release writes disabled, and leaves every result
+for human review.

@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0.0",
+  "evidence_id": "dev-046-b-archived-city-gis",
+  "investigation_id": "agent-benchmark-v1-dev-046-run-b",
+  "sample_id": "dev-046",
+  "source": "TDR immutable City GIS snapshot: construction_inspections",
+  "source_url": "https://arcgis.tampagov.net/arcgis/rest/services/OpenData/Planning/MapServer/30",
+  "retrieved_at_utc": "2026-08-23T02:06:02Z",
+  "administrative_record_id": "BLD-24-0508474",
+  "evidence_type": "official_city_gis_record",
+  "source_state": "archived",
+  "primary_or_secondary": "primary",
+  "source_tier": "tier_1_archived_primary",
+  "mime_type": "application/json",
+  "source_archived_path": "data/raw/construction_inspections.geojson",
+  "source_content_sha256": "bcd5ff1969731a3d0ef98051db277833acf92c953f683ad17ba29e94a8d137a7",
+  "source_hash_scope": "entire source_archived_path file bytes",
+  "observed_fields": {"record_number": "BLD-24-0508474", "project_name": "Re-issued REISSUE - Remodel: MEP's", "address": "1712 W Morrison Ave", "status": "Revision", "record_type": "Residential Building Alterations (Renovations)", "global_id": "{8A3B5D61-ED69-4A42-9D1C-6BFB0474B6A5}"}
+}

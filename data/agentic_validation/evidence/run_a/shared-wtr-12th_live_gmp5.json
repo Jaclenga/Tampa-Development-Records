@@ -1,0 +1,24 @@
+{
+  "evidence_id": "run-a-shared-wtr-12th-live-gmp5",
+  "sample_ids": ["dev-068", "dev-082"],
+  "source": "City of Tampa project page",
+  "url_or_endpoint": "https://www.tampa.gov/project/wtr-20-00053-12th-st",
+  "source_tier": "tier_2_live_primary",
+  "source_state": "live",
+  "retrieved_at_utc": "2026-09-02T08:21:48Z",
+  "administrative_record_id": "WTR-20-0005.3-12th St",
+  "mime_type": "text/html",
+  "content_sha256": "85aeb577a3a2a8aead3035c97558cbcad573bf51886da1bc7acf2946e3c17989",
+  "hash_scope": "canonical_extracted_explicit_fields",
+  "extracted_explicit_fields": {
+    "project_id": "WTR-20-0005.3-12th St",
+    "project_name": "FY20 CIP Water Main Improvements Design-Build_12th St - GMP 5",
+    "project_type": "Water",
+    "status": "Closeout",
+    "project_phase": "P5: Closeout",
+    "current_phase": "Closeout",
+    "planned_end_date": "05/31/2026",
+    "funded_project": "Yes",
+    "contract_number": "20-C-00032"
+  }
+}

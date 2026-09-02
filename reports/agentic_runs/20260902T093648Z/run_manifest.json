@@ -1,0 +1,5007 @@
+{
+  "actual_models": [
+    {
+      "generation_parameters": "unavailable",
+      "model_identifier": "gpt-5.6-sol",
+      "model_snapshot": "unavailable",
+      "product": "Codex",
+      "provider": "OpenAI",
+      "reasoning_effort": "high",
+      "seed": "unavailable",
+      "temperature": "unavailable"
+    }
+  ],
+  "benchmark_case_count": 18,
+  "benchmark_case_ids": [
+    "dev-019",
+    "dev-024",
+    "dev-025",
+    "dev-027",
+    "dev-046",
+    "dev-053",
+    "dev-068",
+    "dev-072",
+    "dev-080",
+    "dev-082",
+    "dev-083",
+    "dev-092",
+    "dev-093",
+    "hol-001",
+    "hol-019",
+    "hol-035",
+    "hol-039",
+    "hol-045"
+  ],
+  "benchmark_id": "tdr-agent-evidence-benchmark-v1",
+  "benchmark_sha256": "1776f666d5d3291b2bcba84977ab1f2bad66a8d7117c3793d4d4e86fac01ca4a",
+  "benchmark_version": "1.0.0",
+  "created_at_utc": "2026-09-02T09:36:48Z",
+  "dataset_validation_changed": false,
+  "deterministic_re_evaluations": [
+    {
+      "evaluations": [
+        {
+          "after": "automatically_supported",
+          "before": "unresolved",
+          "claim": "source_identity",
+          "discovered_by": "agent",
+          "evaluated_by": "deterministic_rule",
+          "evidence_sha256": [
+            "ff4e7a66f25eef023926f32a5083b886da93dabf399a8eb9b14d37e01d060072"
+          ],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "activity_classification",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "status_interpretation",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "physical_work_started",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        }
+      ],
+      "investigation_id": "run-a-dev-080",
+      "repeat_id": "A",
+      "sample_id": "dev-080"
+    },
+    {
+      "evaluations": [
+        {
+          "after": "automatically_supported",
+          "before": "unresolved",
+          "claim": "source_identity",
+          "discovered_by": "agent",
+          "evaluated_by": "deterministic_rule",
+          "evidence_sha256": [
+            "b837f071f7e2a9acec193df11c32b5d040249b2ff5f9d22a127c9fc5b65722e8"
+          ],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "activity_classification",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "status_interpretation",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "physical_work_started",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        }
+      ],
+      "investigation_id": "run-a-dev-092",
+      "repeat_id": "A",
+      "sample_id": "dev-092"
+    },
+    {
+      "evaluations": [
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "source_identity",
+          "discovered_by": "agent",
+          "evaluated_by": "deterministic_rule",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "activity_classification",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "status_interpretation",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "physical_work_started",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        }
+      ],
+      "investigation_id": "run-a-dev-093",
+      "repeat_id": "A",
+      "sample_id": "dev-093"
+    },
+    {
+      "evaluations": [
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "source_identity",
+          "discovered_by": "agent",
+          "evaluated_by": "deterministic_rule",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "activity_classification",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "status_interpretation",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "physical_work_started",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        }
+      ],
+      "investigation_id": "run-a-dev-068",
+      "repeat_id": "A",
+      "sample_id": "dev-068"
+    },
+    {
+      "evaluations": [
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "source_identity",
+          "discovered_by": "agent",
+          "evaluated_by": "deterministic_rule",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "activity_classification",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "status_interpretation",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "physical_work_started",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        }
+      ],
+      "investigation_id": "run-a-dev-082",
+      "repeat_id": "A",
+      "sample_id": "dev-082"
+    },
+    {
+      "evaluations": [
+        {
+          "after": "automatically_supported",
+          "before": "unresolved",
+          "claim": "source_identity",
+          "discovered_by": "agent",
+          "evaluated_by": "deterministic_rule",
+          "evidence_sha256": [
+            "41557a990b218cbd36310976d7b3a8152a8e4a3e07b8c2e7365fc80874dabf5b"
+          ],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "activity_classification",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "status_interpretation",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "physical_work_started",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        }
+      ],
+      "investigation_id": "run-a-hol-035",
+      "repeat_id": "A",
+      "sample_id": "hol-035"
+    },
+    {
+      "evaluations": [
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "source_identity",
+          "discovered_by": "agent",
+          "evaluated_by": "deterministic_rule",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "activity_classification",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "status_interpretation",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "building_footprint_match",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "physical_work_started",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        }
+      ],
+      "investigation_id": "run-a-dev-025",
+      "repeat_id": "A",
+      "sample_id": "dev-025"
+    },
+    {
+      "evaluations": [
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "source_identity",
+          "discovered_by": "agent",
+          "evaluated_by": "deterministic_rule",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "activity_classification",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "status_interpretation",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "physical_work_started",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        }
+      ],
+      "investigation_id": "agent-benchmark-v1-hol-039-run-b",
+      "repeat_id": "B",
+      "sample_id": "hol-039"
+    },
+    {
+      "evaluations": [
+        {
+          "after": "automatically_supported",
+          "before": "unresolved",
+          "claim": "source_identity",
+          "discovered_by": "agent",
+          "evaluated_by": "deterministic_rule",
+          "evidence_sha256": [
+            "1d1839930d52abfe6b12a0eb5242eede58e76f84c065e595f39c3681ab13d919",
+            "49cedda7c1f6fbbd5fc592113da91af4ed336db267a096f8e516dd7318290f77"
+          ],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "activity_classification",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "status_interpretation",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "physical_work_started",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        }
+      ],
+      "investigation_id": "agent-benchmark-v1-hol-045-run-b",
+      "repeat_id": "B",
+      "sample_id": "hol-045"
+    },
+    {
+      "evaluations": [
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "source_identity",
+          "discovered_by": "agent",
+          "evaluated_by": "deterministic_rule",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "activity_classification",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "status_interpretation",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "building_footprint_match",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "physical_work_started",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        }
+      ],
+      "investigation_id": "agent-benchmark-v1-dev-025-run-b",
+      "repeat_id": "B",
+      "sample_id": "dev-025"
+    },
+    {
+      "evaluations": [
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "source_identity",
+          "discovered_by": "agent",
+          "evaluated_by": "deterministic_rule",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "activity_classification",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "status_interpretation",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "cross_source_linkage",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "building_footprint_match",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "physical_work_started",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        }
+      ],
+      "investigation_id": "agent-benchmark-v1-hol-001-run-b",
+      "repeat_id": "B",
+      "sample_id": "hol-001"
+    },
+    {
+      "evaluations": [
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "source_identity",
+          "discovered_by": "agent",
+          "evaluated_by": "deterministic_rule",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "activity_classification",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "status_interpretation",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "building_footprint_match",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "physical_work_started",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        }
+      ],
+      "investigation_id": "agent-benchmark-v1-dev-046-run-b",
+      "repeat_id": "B",
+      "sample_id": "dev-046"
+    },
+    {
+      "evaluations": [
+        {
+          "after": "automatically_supported",
+          "before": "unresolved",
+          "claim": "source_identity",
+          "discovered_by": "agent",
+          "evaluated_by": "deterministic_rule",
+          "evidence_sha256": [
+            "aced9607f2af8a33ed483e11884d53b3ccd24172546bfcf950dbb8a58f671b9b"
+          ],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "activity_classification",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "status_interpretation",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "physical_work_started",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        }
+      ],
+      "investigation_id": "agent-benchmark-v1-dev-027-run-b",
+      "repeat_id": "B",
+      "sample_id": "dev-027"
+    },
+    {
+      "evaluations": [
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "source_identity",
+          "discovered_by": "agent",
+          "evaluated_by": "deterministic_rule",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "activity_classification",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "status_interpretation",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "physical_work_started",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        }
+      ],
+      "investigation_id": "agent-benchmark-v1-dev-068-run-b",
+      "repeat_id": "B",
+      "sample_id": "dev-068"
+    },
+    {
+      "evaluations": [
+        {
+          "after": "automatically_supported",
+          "before": "unresolved",
+          "claim": "source_identity",
+          "discovered_by": "agent",
+          "evaluated_by": "deterministic_rule",
+          "evidence_sha256": [
+            "9d17b9204f0ace93ebb22b9e94d08a982f641f1434e6a1d111c9c0863cd93cd7"
+          ],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "activity_classification",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "status_interpretation",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "physical_work_started",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        }
+      ],
+      "investigation_id": "run-c-hol-019",
+      "repeat_id": "C",
+      "sample_id": "hol-019"
+    },
+    {
+      "evaluations": [
+        {
+          "after": "automatically_supported",
+          "before": "unresolved",
+          "claim": "source_identity",
+          "discovered_by": "agent",
+          "evaluated_by": "deterministic_rule",
+          "evidence_sha256": [
+            "8ae5b0b77d88958890730cb466387c7e5f3892b7fb251a7314d833d20e0bba4a"
+          ],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "activity_classification",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "status_interpretation",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "building_footprint_match",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "physical_work_started",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        }
+      ],
+      "investigation_id": "run-c-dev-019",
+      "repeat_id": "C",
+      "sample_id": "dev-019"
+    },
+    {
+      "evaluations": [
+        {
+          "after": "automatically_supported",
+          "before": "unresolved",
+          "claim": "source_identity",
+          "discovered_by": "agent",
+          "evaluated_by": "deterministic_rule",
+          "evidence_sha256": [
+            "3a5ef6fe7f07dc1c61690df241ae632ca7b317704d4e2d9d69060d33ab4a51a3"
+          ],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "activity_classification",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "status_interpretation",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "physical_work_started",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        }
+      ],
+      "investigation_id": "run-c-dev-083",
+      "repeat_id": "C",
+      "sample_id": "dev-083"
+    },
+    {
+      "evaluations": [
+        {
+          "after": "automatically_supported",
+          "before": "unresolved",
+          "claim": "source_identity",
+          "discovered_by": "agent",
+          "evaluated_by": "deterministic_rule",
+          "evidence_sha256": [
+            "b8fafb082c7f8398a91b8af103f157154f994f21881ed51904dc2dca2a04a920"
+          ],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "activity_classification",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "status_interpretation",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "physical_work_started",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        }
+      ],
+      "investigation_id": "run-c-dev-024",
+      "repeat_id": "C",
+      "sample_id": "dev-024"
+    },
+    {
+      "evaluations": [
+        {
+          "after": "automatically_supported",
+          "before": "unresolved",
+          "claim": "source_identity",
+          "discovered_by": "agent",
+          "evaluated_by": "deterministic_rule",
+          "evidence_sha256": [
+            "fc9e778f10e2a7d4f15d9fad94bf47635f993539ec7b61e59db95277c993bb8a"
+          ],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "activity_classification",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "status_interpretation",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "physical_work_started",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        }
+      ],
+      "investigation_id": "run-c-dev-072",
+      "repeat_id": "C",
+      "sample_id": "dev-072"
+    },
+    {
+      "evaluations": [
+        {
+          "after": "automatically_supported",
+          "before": "unresolved",
+          "claim": "source_identity",
+          "discovered_by": "agent",
+          "evaluated_by": "deterministic_rule",
+          "evidence_sha256": [
+            "3cacce4034eecace5e85fa0e6d291aa406330f358a14778d1f65cb94c4708c54"
+          ],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "activity_classification",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "status_interpretation",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        }
+      ],
+      "investigation_id": "run-c-dev-053",
+      "repeat_id": "C",
+      "sample_id": "dev-053"
+    },
+    {
+      "evaluations": [
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "source_identity",
+          "discovered_by": "agent",
+          "evaluated_by": "deterministic_rule",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "activity_classification",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "status_interpretation",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "physical_work_started",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        }
+      ],
+      "investigation_id": "run-c-dev-068",
+      "repeat_id": "C",
+      "sample_id": "dev-068"
+    },
+    {
+      "evaluations": [
+        {
+          "after": "automatically_supported",
+          "before": "unresolved",
+          "claim": "source_identity",
+          "discovered_by": "agent",
+          "evaluated_by": "deterministic_rule",
+          "evidence_sha256": [
+            "bec38f27f680db9153159fdccf3b7f790da2bbc34e998bedfef40b9e97b9a102"
+          ],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "activity_classification",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "status_interpretation",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "building_footprint_match",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        },
+        {
+          "after": "unresolved_requires_human_review",
+          "before": "unresolved",
+          "claim": "physical_work_started",
+          "discovered_by": "agent",
+          "evaluated_by": "no_approved_rule_available",
+          "evidence_sha256": [],
+          "experimental_only": true,
+          "release_write_enabled": false,
+          "requires_human_review": true,
+          "rule_id": null,
+          "rule_set_version": "0.1.0-experimental"
+        }
+      ],
+      "investigation_id": "run-c-dev-025",
+      "repeat_id": "C",
+      "sample_id": "dev-025"
+    }
+  ],
+  "format_version": "1.0.0",
+  "frozen_sample_sha256_after": "2855ccef25e39b59cfb5eb48a3d7201a5fc6b6acfdd6b856e7c24cf8b653c4ce",
+  "frozen_sample_sha256_before": "2855ccef25e39b59cfb5eb48a3d7201a5fc6b6acfdd6b856e7c24cf8b653c4ce",
+  "frozen_sample_unchanged": true,
+  "human_audit_completed": false,
+  "human_decisions_changed": false,
+  "investigations": [
+    {
+      "candidate_evidence": [
+        {
+          "accepted_for_rule_evaluation": false,
+          "applicable_rule_id": "unavailable",
+          "archived_path": "data/agentic_validation/evidence/run_a/dev-080_archived_capital_polygon.json",
+          "candidate_count": 1,
+          "candidate_evidence_id": "run-a-dev-080-archived-capital-polygon",
+          "conflicting_fields": [],
+          "content_sha256": "bc66b743c1548fc63a0450034ab3fb1b7fe5994c97fd62b311aa048d3ba07c9a",
+          "evidence_file_sha256": "ff4e7a66f25eef023926f32a5083b886da93dabf399a8eb9b14d37e01d060072",
+          "evidence_fingerprint": "5ca37567259f0dd2e480d993f0d2b08b7f4253f004d0a1c5cdece1494cdc15e7",
+          "exact_identifiers": {
+            "project_id": "SW60008"
+          },
+          "identity_category": "exact_identifier",
+          "identity_match_method": "exact administrative project ID",
+          "observed_facts": [
+            "project ID SW60008",
+            "project type Stormwater",
+            "status Cancelled",
+            "actual-start and actual-end fields are null"
+          ],
+          "primary_or_secondary": "primary",
+          "rejection_reason": "no approved supplied rule governs these unresolved claims",
+          "requires_human_review": true,
+          "source_content_sha256": "bc66b743c1548fc63a0450034ab3fb1b7fe5994c97fd62b311aa048d3ba07c9a",
+          "source_reference": "https://arcgis.tampagov.net/arcgis/rest/services/CapitalProjects/CityWideProjectsPublic/FeatureServer/2",
+          "source_tier": "tier_1_archived_primary",
+          "supporting_fields": [
+            "project_name",
+            "source_object_id",
+            "source_global_id"
+          ]
+        }
+      ],
+      "claim_results": [
+        {
+          "claim": "source_identity",
+          "status": "evidence_found"
+        },
+        {
+          "claim": "activity_classification",
+          "status": "evidence_found"
+        },
+        {
+          "claim": "status_interpretation",
+          "status": "evidence_found"
+        },
+        {
+          "claim": "physical_work_started",
+          "status": "insufficient_evidence"
+        }
+      ],
+      "conflicts": [],
+      "cost_usage": {
+        "cached_tokens": "unavailable",
+        "http_requests": "unavailable",
+        "input_tokens": "unavailable",
+        "model_cost_usd": "unavailable",
+        "output_tokens": "unavailable",
+        "tool_requests": 3,
+        "wall_clock_seconds": "unavailable"
+      },
+      "identity_assessment": {
+        "accepted_for_rule_evaluation": false,
+        "candidate_count": 1,
+        "conflicting_fields": [],
+        "exact_identifiers": {
+          "project_id": "SW60008"
+        },
+        "identity_category": "exact_identifier",
+        "identity_match_method": "exact administrative project ID plus unique archived object",
+        "supporting_fields": [
+          "project_name",
+          "project_type"
+        ]
+      },
+      "investigated_claims": [
+        "source_identity",
+        "activity_classification",
+        "status_interpretation",
+        "physical_work_started"
+      ],
+      "investigation_id": "run-a-dev-080",
+      "missing_information": [
+        "explicit actual-start evidence",
+        "inspection or construction-progress record",
+        "official explanation of cancellation"
+      ],
+      "plan": [
+        {
+          "strategy": [
+            "find the exact project ID in archived City GIS",
+            "compare object and Global IDs",
+            "check for duplicate exact project IDs"
+          ],
+          "unresolved_claim": "source_identity"
+        },
+        {
+          "strategy": [
+            "extract the official project type",
+            "retain the source wording without semantic expansion"
+          ],
+          "unresolved_claim": "activity_classification"
+        },
+        {
+          "strategy": [
+            "extract the time-stamped official status",
+            "look for a corroborating official project page",
+            "do not infer facts beyond the status field"
+          ],
+          "unresolved_claim": "status_interpretation"
+        },
+        {
+          "strategy": [
+            "look for explicit actual-start or inspection evidence",
+            "treat planned dates and cancellation as insufficient for physical-work claims"
+          ],
+          "unresolved_claim": "physical_work_started"
+        }
+      ],
+      "recommended_next_action": "human_review",
+      "recorded_response_path": "data/agentic_validation/recorded_responses/run_a.json",
+      "repeat_id": "A",
+      "repeatability_probe": false,
+      "requires_human_review": true,
+      "sample_id": "dev-080",
+      "status": "evidence_found",
+      "tool_actions": [
+        {
+          "occurred_at_utc": "2026-09-02T08:21:48Z",
+          "query": "exact source_record_id SW60008 in 2026-08-23 and 2026-09-01 source snapshots",
+          "result": "one exact archived City polygon feature located",
+          "result_ref": "data/agentic_validation/evidence/run_a/dev-080_archived_capital_polygon.json",
+          "tool": "search_archived_evidence"
+        },
+        {
+          "occurred_at_utc": "2026-09-02T08:21:48Z",
+          "query": "site:tampa.gov exact SW60008 Gardner",
+          "result": "no official page result returned",
+          "result_ref": "official-search-run-a-dev-080",
+          "tool": "search_official_web"
+        },
+        {
+          "occurred_at_utc": "2026-09-02T08:21:48Z",
+          "query": "archive concise extracted fields and existing source-file hash",
+          "result": "archived",
+          "result_ref": "data/agentic_validation/evidence/run_a/dev-080_archived_capital_polygon.json",
+          "tool": "archive_evidence"
+        }
+      ]
+    },
+    {
+      "candidate_evidence": [
+        {
+          "accepted_for_rule_evaluation": false,
+          "applicable_rule_id": "unavailable",
+          "archived_path": "data/agentic_validation/evidence/run_a/dev-092_archived_capital_point.json",
+          "candidate_count": 1,
+          "candidate_evidence_id": "run-a-dev-092-archived-capital-point",
+          "conflicting_fields": [],
+          "content_sha256": "bc66b743c1548fc63a0450034ab3fb1b7fe5994c97fd62b311aa048d3ba07c9a",
+          "evidence_file_sha256": "b837f071f7e2a9acec193df11c32b5d040249b2ff5f9d22a127c9fc5b65722e8",
+          "evidence_fingerprint": "fca920dca087787e79e25115a7cd39103355c00c36321aed1597ecbe7fc45955",
+          "exact_identifiers": {
+            "project_id": "1001865.4B"
+          },
+          "identity_category": "exact_identifier",
+          "identity_match_method": "exact administrative project ID",
+          "observed_facts": [
+            "project ID 1001865.4B",
+            "project type Wastewater",
+            "phase P5: Closeout",
+            "status Cancelled",
+            "contract 23-C-00020",
+            "actual-start and actual-end fields are null"
+          ],
+          "primary_or_secondary": "primary",
+          "rejection_reason": "no approved supplied rule governs these unresolved claims",
+          "requires_human_review": true,
+          "source_content_sha256": "bc66b743c1548fc63a0450034ab3fb1b7fe5994c97fd62b311aa048d3ba07c9a",
+          "source_reference": "https://arcgis.tampagov.net/arcgis/rest/services/CapitalProjects/CityWideProjectsPublic/FeatureServer/0",
+          "source_tier": "tier_1_archived_primary",
+          "supporting_fields": [
+            "project_name",
+            "contract_number",
+            "source_global_id"
+          ]
+        }
+      ],
+      "claim_results": [
+        {
+          "claim": "source_identity",
+          "status": "evidence_found"
+        },
+        {
+          "claim": "activity_classification",
+          "status": "evidence_found"
+        },
+        {
+          "claim": "status_interpretation",
+          "status": "evidence_found"
+        },
+        {
+          "claim": "physical_work_started",
+          "status": "insufficient_evidence"
+        }
+      ],
+      "conflicts": [
+        "the same observation reports phase P5: Closeout and status Cancelled; semantic reconciliation requires human review"
+      ],
+      "cost_usage": {
+        "cached_tokens": "unavailable",
+        "http_requests": "unavailable",
+        "input_tokens": "unavailable",
+        "model_cost_usd": "unavailable",
+        "output_tokens": "unavailable",
+        "tool_requests": 3,
+        "wall_clock_seconds": "unavailable"
+      },
+      "identity_assessment": {
+        "accepted_for_rule_evaluation": false,
+        "candidate_count": 1,
+        "conflicting_fields": [],
+        "exact_identifiers": {
+          "contract_number": "23-C-00020",
+          "project_id": "1001865.4B"
+        },
+        "identity_category": "exact_identifier",
+        "identity_match_method": "exact administrative project ID plus unique archived object",
+        "supporting_fields": [
+          "project_name",
+          "project_type"
+        ]
+      },
+      "investigated_claims": [
+        "source_identity",
+        "activity_classification",
+        "status_interpretation",
+        "physical_work_started"
+      ],
+      "investigation_id": "run-a-dev-092",
+      "missing_information": [
+        "explicit actual-start evidence",
+        "inspection or construction-progress record",
+        "official cancellation/closeout explanation"
+      ],
+      "plan": [
+        {
+          "strategy": [
+            "find exact project ID in archived City GIS",
+            "compare object, Global, facility, and contract IDs",
+            "check duplicate exact IDs"
+          ],
+          "unresolved_claim": "source_identity"
+        },
+        {
+          "strategy": [
+            "extract official project type",
+            "compare project title and scope fields"
+          ],
+          "unresolved_claim": "activity_classification"
+        },
+        {
+          "strategy": [
+            "extract status and project phase",
+            "seek an official project page",
+            "preserve cancellation/closeout wording without inference"
+          ],
+          "unresolved_claim": "status_interpretation"
+        },
+        {
+          "strategy": [
+            "look for explicit actual-start or inspection evidence",
+            "do not treat planned dates, closeout, or cancellation alone as physical evidence"
+          ],
+          "unresolved_claim": "physical_work_started"
+        }
+      ],
+      "recommended_next_action": "human_review",
+      "recorded_response_path": "data/agentic_validation/recorded_responses/run_a.json",
+      "repeat_id": "A",
+      "repeatability_probe": false,
+      "requires_human_review": true,
+      "sample_id": "dev-092",
+      "status": "evidence_found",
+      "tool_actions": [
+        {
+          "occurred_at_utc": "2026-09-02T08:21:48Z",
+          "query": "exact source_record_id 1001865.4B in archived source snapshots",
+          "result": "one exact archived City point feature located",
+          "result_ref": "data/agentic_validation/evidence/run_a/dev-092_archived_capital_point.json",
+          "tool": "search_archived_evidence"
+        },
+        {
+          "occurred_at_utc": "2026-09-02T08:21:48Z",
+          "query": "site:tampa.gov exact 1001865.4B Howard F. Curren",
+          "result": "no official page result returned",
+          "result_ref": "official-search-run-a-dev-092",
+          "tool": "search_official_web"
+        },
+        {
+          "occurred_at_utc": "2026-09-02T08:21:48Z",
+          "query": "archive concise extracted fields and existing source-file hash",
+          "result": "archived",
+          "result_ref": "data/agentic_validation/evidence/run_a/dev-092_archived_capital_point.json",
+          "tool": "archive_evidence"
+        }
+      ]
+    },
+    {
+      "candidate_evidence": [
+        {
+          "accepted_for_rule_evaluation": false,
+          "applicable_rule_id": "unavailable",
+          "archived_path": "data/agentic_validation/evidence/run_a/dev-093_archived_sitewide.json",
+          "candidate_count": 2,
+          "candidate_evidence_id": "run-a-dev-093-archived-sitewide",
+          "conflicting_fields": [
+            "another source object uses the same project ID with a different name and status"
+          ],
+          "content_sha256": "bc66b743c1548fc63a0450034ab3fb1b7fe5994c97fd62b311aa048d3ba07c9a",
+          "evidence_file_sha256": "05c3b2974eb5c98a1f0ec8f314b7e932203d229db9f7c072cffa77a2d558d24c",
+          "evidence_fingerprint": "4e4e8d4c40dc88559c635f6584932d12956d4f9cc3a4f654e78b6114fbc45c2e",
+          "exact_identifiers": {
+            "project_id": "WTR-20-0001.11",
+            "source_object_id": "35707"
+          },
+          "identity_category": "ambiguous",
+          "identity_match_method": "exact ID plus project name and source layer",
+          "observed_facts": [
+            "exact project ID",
+            "name Sitewide Electrical Improvement",
+            "contract 20-C-00008",
+            "status Final Contract Review & Approval",
+            "phase P4: Construction"
+          ],
+          "primary_or_secondary": "primary",
+          "rejection_reason": "exact administrative ID is not unique across archived source objects",
+          "requires_human_review": true,
+          "source_content_sha256": "bc66b743c1548fc63a0450034ab3fb1b7fe5994c97fd62b311aa048d3ba07c9a",
+          "source_reference": "https://arcgis.tampagov.net/arcgis/rest/services/CapitalProjects/CapitalProjects/FeatureServer/0",
+          "source_tier": "tier_1_archived_primary",
+          "supporting_fields": [
+            "project_name",
+            "contract_number"
+          ]
+        },
+        {
+          "accepted_for_rule_evaluation": false,
+          "applicable_rule_id": "unavailable",
+          "archived_path": "data/agentic_validation/evidence/run_a/dev-093_archived_teco_house.json",
+          "candidate_count": 2,
+          "candidate_evidence_id": "run-a-dev-093-archived-teco-house",
+          "conflicting_fields": [
+            "project_name",
+            "status",
+            "source_object_id",
+            "source_global_id"
+          ],
+          "content_sha256": "bc66b743c1548fc63a0450034ab3fb1b7fe5994c97fd62b311aa048d3ba07c9a",
+          "evidence_file_sha256": "f7f59db1705207e96d913385fdeec5c02db568180079cd44f45fe15450f255c9",
+          "evidence_fingerprint": "a9e53dcc759e448505ba5a5cfe9cd39ab9ee9756b21c401516d37e40d6b270ee",
+          "exact_identifiers": {
+            "project_id": "WTR-20-0001.11",
+            "source_object_id": "2908"
+          },
+          "identity_category": "ambiguous",
+          "identity_match_method": "exact ID with conflicting source-object context",
+          "observed_facts": [
+            "same exact project ID",
+            "name TECO House and Sitewide Electrical",
+            "status Construction in Progress",
+            "phase P4: Construction"
+          ],
+          "primary_or_secondary": "primary",
+          "rejection_reason": "candidate may be a related component but cannot be silently merged",
+          "requires_human_review": true,
+          "source_content_sha256": "bc66b743c1548fc63a0450034ab3fb1b7fe5994c97fd62b311aa048d3ba07c9a",
+          "source_reference": "https://arcgis.tampagov.net/arcgis/rest/services/CapitalProjects/CityWideProjectsPublic/FeatureServer/0",
+          "source_tier": "tier_1_archived_primary",
+          "supporting_fields": [
+            "related project wording",
+            "project_type"
+          ]
+        },
+        {
+          "accepted_for_rule_evaluation": false,
+          "applicable_rule_id": "unavailable",
+          "archived_path": "data/agentic_validation/evidence/run_a/dev-093_live_sitewide.json",
+          "candidate_count": 2,
+          "candidate_evidence_id": "run-a-dev-093-live-sitewide",
+          "conflicting_fields": [
+            "archived City point object with the same project ID has different name and status"
+          ],
+          "content_sha256": "4cda37060bb23a464f9a7925edd1b98fddfd9d204308d9264bfa0052b8d1fadd",
+          "evidence_file_sha256": "ac7533bcc92ef387ace8407c8b170e2d44690aca9a3754ec263c15ff40148d85",
+          "evidence_fingerprint": "22e7112212a564c381bcabdf369660d0d471fe104cd02fa0fa6b59f96adaa080",
+          "exact_identifiers": {
+            "contract_number": "20-C-00008",
+            "project_id": "WTR-20-0001.11"
+          },
+          "identity_category": "ambiguous",
+          "identity_match_method": "exact ID plus name and contract",
+          "observed_facts": [
+            "live page repeats exact project ID, Sitewide Electrical name, contract 20-C-00008, and Final Contract Review & Approval status"
+          ],
+          "primary_or_secondary": "primary",
+          "rejection_reason": "duplicate exact project ID remains unresolved across source objects",
+          "requires_human_review": true,
+          "source_content_sha256": "4cda37060bb23a464f9a7925edd1b98fddfd9d204308d9264bfa0052b8d1fadd",
+          "source_reference": "https://www.tampa.gov/project/wtr-20-000111",
+          "source_tier": "tier_2_live_primary",
+          "supporting_fields": [
+            "project_name",
+            "project_type",
+            "planned dates"
+          ]
+        }
+      ],
+      "claim_results": [
+        {
+          "claim": "source_identity",
+          "status": "ambiguous_identity"
+        },
+        {
+          "claim": "activity_classification",
+          "status": "evidence_found"
+        },
+        {
+          "claim": "status_interpretation",
+          "status": "conflicting_evidence_found"
+        },
+        {
+          "claim": "physical_work_started",
+          "status": "insufficient_evidence"
+        }
+      ],
+      "conflicts": [
+        "two archived City objects share the exact project ID but have different object/Global IDs, names, and statuses"
+      ],
+      "cost_usage": {
+        "cached_tokens": "unavailable",
+        "http_requests": "unavailable",
+        "input_tokens": "unavailable",
+        "model_cost_usd": "unavailable",
+        "output_tokens": "unavailable",
+        "tool_requests": 4,
+        "wall_clock_seconds": "unavailable"
+      },
+      "identity_assessment": {
+        "accepted_for_rule_evaluation": false,
+        "candidate_count": 2,
+        "conflicting_fields": [
+          "source_object_id",
+          "source_global_id",
+          "project_name",
+          "status"
+        ],
+        "exact_identifiers": {
+          "project_id": "WTR-20-0001.11"
+        },
+        "identity_category": "ambiguous",
+        "identity_match_method": "exact project ID is duplicated; project name, contract, layer, object ID, and Global ID distinguish candidates",
+        "supporting_fields": [
+          "project_name",
+          "contract_number",
+          "source_layer"
+        ]
+      },
+      "investigated_claims": [
+        "source_identity",
+        "activity_classification",
+        "status_interpretation",
+        "physical_work_started"
+      ],
+      "investigation_id": "run-a-dev-093",
+      "missing_information": [
+        "authoritative relationship between the two City objects",
+        "explicit actual-start evidence",
+        "approved rule for interpreting construction phase"
+      ],
+      "plan": [
+        {
+          "strategy": [
+            "enumerate every archived object with the exact project ID",
+            "compare source layer, object ID, Global ID, name, and contract",
+            "do not merge distinct objects"
+          ],
+          "unresolved_claim": "source_identity"
+        },
+        {
+          "strategy": [
+            "compare official project-type fields across candidates",
+            "retain common explicit classification only"
+          ],
+          "unresolved_claim": "activity_classification"
+        },
+        {
+          "strategy": [
+            "compare archived status fields",
+            "fetch the exact official project page",
+            "preserve divergent statuses by source object"
+          ],
+          "unresolved_claim": "status_interpretation"
+        },
+        {
+          "strategy": [
+            "seek explicit actual-start or inspection evidence",
+            "treat construction phase labels as insufficient without an approved rule"
+          ],
+          "unresolved_claim": "physical_work_started"
+        }
+      ],
+      "recommended_next_action": "human_review",
+      "recorded_response_path": "data/agentic_validation/recorded_responses/run_a.json",
+      "repeat_id": "A",
+      "repeatability_probe": false,
+      "requires_human_review": true,
+      "sample_id": "dev-093",
+      "status": "ambiguous_identity",
+      "tool_actions": [
+        {
+          "occurred_at_utc": "2026-09-02T08:21:48Z",
+          "query": "all exact source_record_id WTR-20-0001.11 records in archived snapshots",
+          "result": "two exact-ID City objects in different source layers located",
+          "result_ref": "run-a-dev-093-archived-pair",
+          "tool": "search_archived_evidence"
+        },
+        {
+          "occurred_at_utc": "2026-09-02T08:21:48Z",
+          "query": "site:tampa.gov exact WTR-20-0001.11",
+          "result": "official City project page located",
+          "result_ref": "https://www.tampa.gov/project/wtr-20-000111",
+          "tool": "search_official_web"
+        },
+        {
+          "occurred_at_utc": "2026-09-02T08:21:48Z",
+          "query": "fetch official project page",
+          "result": "primary HTML fields extracted; embedded content treated as untrusted data",
+          "result_ref": "https://www.tampa.gov/project/wtr-20-000111",
+          "tool": "fetch_official_document"
+        },
+        {
+          "occurred_at_utc": "2026-09-02T08:21:48Z",
+          "query": "archive two archived candidates and one live observation",
+          "result": "three concise evidence records archived",
+          "result_ref": "data/agentic_validation/evidence/run_a/dev-093_*",
+          "tool": "archive_evidence"
+        }
+      ]
+    },
+    {
+      "candidate_evidence": [
+        {
+          "accepted_for_rule_evaluation": false,
+          "applicable_rule_id": "unavailable",
+          "archived_path": "data/agentic_validation/evidence/run_a/shared-wtr-12th_archived_gmp5.json",
+          "candidate_count": 2,
+          "candidate_evidence_id": "run-a-shared-wtr-12th-archived-gmp5",
+          "conflicting_fields": [
+            "a GMP 3 object reuses the project ID"
+          ],
+          "content_sha256": "bc66b743c1548fc63a0450034ab3fb1b7fe5994c97fd62b311aa048d3ba07c9a",
+          "evidence_file_sha256": "22167ed1cae5c58a660516f562b9f878c41a4547303442d986727a63a6f4e26f",
+          "evidence_fingerprint": "44f16baa97f113d84a95354348bb7cfa5f7a29236eaab462a2a1492564439ded",
+          "exact_identifiers": {
+            "contract_number": "20-C-00032",
+            "project_id": "WTR-20-0005.3-12th St",
+            "source_object_id": "52915"
+          },
+          "identity_category": "strong_multi_field",
+          "identity_match_method": "exact ID plus exact GMP 5 name, contract, and source layer",
+          "observed_facts": [
+            "exact project ID",
+            "GMP 5 project name",
+            "contract 20-C-00032",
+            "status and phase Closeout"
+          ],
+          "primary_or_secondary": "primary",
+          "rejection_reason": "exact project ID is reused; current registry accepts only a unique exact identifier",
+          "requires_human_review": true,
+          "source_content_sha256": "bc66b743c1548fc63a0450034ab3fb1b7fe5994c97fd62b311aa048d3ba07c9a",
+          "source_reference": "https://arcgis.tampagov.net/arcgis/rest/services/CapitalProjects/CapitalProjects/FeatureServer/0",
+          "source_tier": "tier_1_archived_primary",
+          "supporting_fields": [
+            "project_name",
+            "source_global_id",
+            "project_type"
+          ]
+        },
+        {
+          "accepted_for_rule_evaluation": false,
+          "applicable_rule_id": "unavailable",
+          "archived_path": "data/agentic_validation/evidence/run_a/shared-wtr-12th_archived_gmp3.json",
+          "candidate_count": 2,
+          "candidate_evidence_id": "run-a-shared-wtr-12th-archived-gmp3",
+          "conflicting_fields": [
+            "project_name",
+            "GMP number",
+            "status",
+            "project_phase",
+            "source_object_id"
+          ],
+          "content_sha256": "bc66b743c1548fc63a0450034ab3fb1b7fe5994c97fd62b311aa048d3ba07c9a",
+          "evidence_file_sha256": "59fde0192196388301916a5b7decaa0d7f0793f554f284de8c2dcea3b0c48949",
+          "evidence_fingerprint": "4cb75ac305e106bc65deb8f9eb342624bf863a7c08ae4674963ab7d9de6bb183",
+          "exact_identifiers": {
+            "project_id": "WTR-20-0005.3-12th St",
+            "source_object_id": "39134"
+          },
+          "identity_category": "conflicting",
+          "identity_match_method": "exact ID with conflicting GMP number and source-object context",
+          "observed_facts": [
+            "same project ID appears on a GMP 3 line object",
+            "status Final Inspection and Testing",
+            "different object and Global IDs"
+          ],
+          "primary_or_secondary": "primary",
+          "rejection_reason": "GMP 3 observation is not the frozen GMP 5 project name",
+          "requires_human_review": true,
+          "source_content_sha256": "bc66b743c1548fc63a0450034ab3fb1b7fe5994c97fd62b311aa048d3ba07c9a",
+          "source_reference": "https://arcgis.tampagov.net/arcgis/rest/services/CapitalProjects/CityWideProjectsPublic/FeatureServer/1",
+          "source_tier": "tier_1_archived_primary",
+          "supporting_fields": [
+            "project_type"
+          ]
+        },
+        {
+          "accepted_for_rule_evaluation": false,
+          "applicable_rule_id": "unavailable",
+          "archived_path": "data/agentic_validation/evidence/run_a/shared-wtr-12th_live_gmp5.json",
+          "candidate_count": 2,
+          "candidate_evidence_id": "run-a-shared-wtr-12th-live-gmp5",
+          "conflicting_fields": [
+            "a distinct GMP 3 object uses the same project ID"
+          ],
+          "content_sha256": "85aeb577a3a2a8aead3035c97558cbcad573bf51886da1bc7acf2946e3c17989",
+          "evidence_file_sha256": "63518c516b3cee6b6bea6995a00d796043c7b9585c27c1c55de527d6c3394c23",
+          "evidence_fingerprint": "6edc39fc93c4e6f71751eb97900fb64ebff88fc0bfdee4da68b414ffd6ba6bda",
+          "exact_identifiers": {
+            "contract_number": "20-C-00032",
+            "project_id": "WTR-20-0005.3-12th St"
+          },
+          "identity_category": "strong_multi_field",
+          "identity_match_method": "exact ID plus exact GMP 5 name and contract",
+          "observed_facts": [
+            "live City page matches GMP 5 name",
+            "contract 20-C-00032",
+            "status Closeout",
+            "planned end 05/31/2026"
+          ],
+          "primary_or_secondary": "primary",
+          "rejection_reason": "project-ID reuse prevents unique exact-identifier acceptance",
+          "requires_human_review": true,
+          "source_content_sha256": "85aeb577a3a2a8aead3035c97558cbcad573bf51886da1bc7acf2946e3c17989",
+          "source_reference": "https://www.tampa.gov/project/wtr-20-00053-12th-st",
+          "source_tier": "tier_2_live_primary",
+          "supporting_fields": [
+            "project_name",
+            "project_type",
+            "planned_end_date"
+          ]
+        }
+      ],
+      "claim_results": [
+        {
+          "claim": "source_identity",
+          "status": "evidence_found"
+        },
+        {
+          "claim": "activity_classification",
+          "status": "evidence_found"
+        },
+        {
+          "claim": "status_interpretation",
+          "status": "evidence_found"
+        },
+        {
+          "claim": "physical_work_started",
+          "status": "insufficient_evidence"
+        }
+      ],
+      "conflicts": [
+        "GMP 3 and GMP 5 source objects reuse the same project ID but have different names, statuses, phases, and object identifiers"
+      ],
+      "cost_usage": {
+        "cached_tokens": "unavailable",
+        "http_requests": "unavailable",
+        "input_tokens": "unavailable",
+        "model_cost_usd": "unavailable",
+        "output_tokens": "unavailable",
+        "tool_requests": 4,
+        "wall_clock_seconds": "unavailable"
+      },
+      "identity_assessment": {
+        "accepted_for_rule_evaluation": false,
+        "candidate_count": 2,
+        "conflicting_fields": [
+          "same project ID on GMP 3 object"
+        ],
+        "exact_identifiers": {
+          "contract_number": "20-C-00032",
+          "project_id": "WTR-20-0005.3-12th St"
+        },
+        "identity_category": "strong_multi_field",
+        "identity_match_method": "exact ID plus GMP 5 name, contract, object ID, Global ID, and source layer",
+        "supporting_fields": [
+          "project_name",
+          "source_object_id",
+          "source_layer"
+        ]
+      },
+      "investigated_claims": [
+        "source_identity",
+        "activity_classification",
+        "status_interpretation",
+        "physical_work_started"
+      ],
+      "investigation_id": "run-a-dev-068",
+      "missing_information": [
+        "official explanation of project-ID reuse",
+        "explicit actual-start evidence for GMP 5",
+        "approved deterministic status rule"
+      ],
+      "plan": [
+        {
+          "strategy": [
+            "enumerate exact-ID records",
+            "compare GMP number, project name, contract, source object, and layer",
+            "avoid merging GMP 5 and GMP 3"
+          ],
+          "unresolved_claim": "source_identity"
+        },
+        {
+          "strategy": [
+            "extract official project type from the source-specific candidate"
+          ],
+          "unresolved_claim": "activity_classification"
+        },
+        {
+          "strategy": [
+            "compare archived candidate statuses",
+            "fetch official project page matching GMP 5",
+            "preserve status as administrative wording"
+          ],
+          "unresolved_claim": "status_interpretation"
+        },
+        {
+          "strategy": [
+            "look for actual-start or inspection evidence",
+            "do not treat closeout or planned dates as physical proof"
+          ],
+          "unresolved_claim": "physical_work_started"
+        }
+      ],
+      "recommended_next_action": "human_review",
+      "recorded_response_path": "data/agentic_validation/recorded_responses/run_a.json",
+      "repeat_id": "A",
+      "repeatability_probe": true,
+      "requires_human_review": true,
+      "sample_id": "dev-068",
+      "status": "evidence_found",
+      "tool_actions": [
+        {
+          "occurred_at_utc": "2026-09-02T08:21:48Z",
+          "query": "all exact source_record_id WTR-20-0005.3-12th St records",
+          "result": "GMP 5 and GMP 3 source objects located",
+          "result_ref": "run-a-shared-wtr-12th-archived-pair",
+          "tool": "search_archived_evidence"
+        },
+        {
+          "occurred_at_utc": "2026-09-02T08:21:48Z",
+          "query": "site:tampa.gov exact WTR-20-0005.3-12th St",
+          "result": "official GMP 5 page located",
+          "result_ref": "https://www.tampa.gov/project/wtr-20-00053-12th-st",
+          "tool": "search_official_web"
+        },
+        {
+          "occurred_at_utc": "2026-09-02T08:21:48Z",
+          "query": "fetch official GMP 5 project page",
+          "result": "primary HTML fields extracted; embedded content treated as untrusted data",
+          "result_ref": "https://www.tampa.gov/project/wtr-20-00053-12th-st",
+          "tool": "fetch_official_document"
+        },
+        {
+          "occurred_at_utc": "2026-09-02T08:21:48Z",
+          "query": "archive GMP 5, GMP 3, and live GMP 5 observations",
+          "result": "three concise evidence records archived",
+          "result_ref": "data/agentic_validation/evidence/run_a/shared-wtr-12th_*",
+          "tool": "archive_evidence"
+        }
+      ]
+    },
+    {
+      "candidate_evidence": [
+        {
+          "accepted_for_rule_evaluation": false,
+          "applicable_rule_id": "unavailable",
+          "archived_path": "data/agentic_validation/evidence/run_a/shared-wtr-12th_archived_gmp3.json",
+          "candidate_count": 2,
+          "candidate_evidence_id": "run-a-shared-wtr-12th-archived-gmp3",
+          "conflicting_fields": [
+            "a GMP 5 object and page reuse the project ID"
+          ],
+          "content_sha256": "bc66b743c1548fc63a0450034ab3fb1b7fe5994c97fd62b311aa048d3ba07c9a",
+          "evidence_file_sha256": "59fde0192196388301916a5b7decaa0d7f0793f554f284de8c2dcea3b0c48949",
+          "evidence_fingerprint": "4cb75ac305e106bc65deb8f9eb342624bf863a7c08ae4674963ab7d9de6bb183",
+          "exact_identifiers": {
+            "project_id": "WTR-20-0005.3-12th St",
+            "source_object_id": "39134"
+          },
+          "identity_category": "strong_multi_field",
+          "identity_match_method": "exact ID plus GMP 3 name and line-source object",
+          "observed_facts": [
+            "exact project ID",
+            "GMP 3 project name",
+            "status Final Inspection and Testing",
+            "source-reported actual-end epoch field",
+            "no explicit inspection result"
+          ],
+          "primary_or_secondary": "primary",
+          "rejection_reason": "exact project ID is reused and no unique contract identifier is present for GMP 3",
+          "requires_human_review": true,
+          "source_content_sha256": "bc66b743c1548fc63a0450034ab3fb1b7fe5994c97fd62b311aa048d3ba07c9a",
+          "source_reference": "https://arcgis.tampagov.net/arcgis/rest/services/CapitalProjects/CityWideProjectsPublic/FeatureServer/1",
+          "source_tier": "tier_1_archived_primary",
+          "supporting_fields": [
+            "project_name",
+            "source_global_id",
+            "source_layer"
+          ]
+        },
+        {
+          "accepted_for_rule_evaluation": false,
+          "applicable_rule_id": "unavailable",
+          "archived_path": "data/agentic_validation/evidence/run_a/shared-wtr-12th_archived_gmp5.json",
+          "candidate_count": 2,
+          "candidate_evidence_id": "run-a-shared-wtr-12th-archived-gmp5",
+          "conflicting_fields": [
+            "project_name",
+            "GMP number",
+            "status",
+            "project_phase",
+            "source_object_id"
+          ],
+          "content_sha256": "bc66b743c1548fc63a0450034ab3fb1b7fe5994c97fd62b311aa048d3ba07c9a",
+          "evidence_file_sha256": "22167ed1cae5c58a660516f562b9f878c41a4547303442d986727a63a6f4e26f",
+          "evidence_fingerprint": "44f16baa97f113d84a95354348bb7cfa5f7a29236eaab462a2a1492564439ded",
+          "exact_identifiers": {
+            "contract_number": "20-C-00032",
+            "project_id": "WTR-20-0005.3-12th St",
+            "source_object_id": "52915"
+          },
+          "identity_category": "conflicting",
+          "identity_match_method": "exact ID with conflicting GMP number and source-object context",
+          "observed_facts": [
+            "same project ID appears on a GMP 5 object",
+            "contract 20-C-00032",
+            "status Closeout"
+          ],
+          "primary_or_secondary": "primary",
+          "rejection_reason": "GMP 5 observation is not the frozen GMP 3 project name",
+          "requires_human_review": true,
+          "source_content_sha256": "bc66b743c1548fc63a0450034ab3fb1b7fe5994c97fd62b311aa048d3ba07c9a",
+          "source_reference": "https://arcgis.tampagov.net/arcgis/rest/services/CapitalProjects/CapitalProjects/FeatureServer/0",
+          "source_tier": "tier_1_archived_primary",
+          "supporting_fields": [
+            "project_type"
+          ]
+        },
+        {
+          "accepted_for_rule_evaluation": false,
+          "applicable_rule_id": "unavailable",
+          "archived_path": "data/agentic_validation/evidence/run_a/shared-wtr-12th_live_gmp5.json",
+          "candidate_count": 2,
+          "candidate_evidence_id": "run-a-shared-wtr-12th-live-gmp5",
+          "conflicting_fields": [
+            "project_name",
+            "GMP number",
+            "status",
+            "project_phase",
+            "contract_number"
+          ],
+          "content_sha256": "85aeb577a3a2a8aead3035c97558cbcad573bf51886da1bc7acf2946e3c17989",
+          "evidence_file_sha256": "63518c516b3cee6b6bea6995a00d796043c7b9585c27c1c55de527d6c3394c23",
+          "evidence_fingerprint": "6edc39fc93c4e6f71751eb97900fb64ebff88fc0bfdee4da68b414ffd6ba6bda",
+          "exact_identifiers": {
+            "project_id": "WTR-20-0005.3-12th St"
+          },
+          "identity_category": "conflicting",
+          "identity_match_method": "exact ID but conflicting GMP number and project name",
+          "observed_facts": [
+            "exact project ID resolves to a GMP 5 page",
+            "contract 20-C-00032",
+            "status Closeout"
+          ],
+          "primary_or_secondary": "primary",
+          "rejection_reason": "official page describes GMP 5 while the frozen case describes GMP 3",
+          "requires_human_review": true,
+          "source_content_sha256": "85aeb577a3a2a8aead3035c97558cbcad573bf51886da1bc7acf2946e3c17989",
+          "source_reference": "https://www.tampa.gov/project/wtr-20-00053-12th-st",
+          "source_tier": "tier_2_live_primary",
+          "supporting_fields": [
+            "project_type"
+          ]
+        }
+      ],
+      "claim_results": [
+        {
+          "claim": "source_identity",
+          "status": "ambiguous_identity"
+        },
+        {
+          "claim": "activity_classification",
+          "status": "evidence_found"
+        },
+        {
+          "claim": "status_interpretation",
+          "status": "conflicting_evidence_found"
+        },
+        {
+          "claim": "physical_work_started",
+          "status": "insufficient_evidence"
+        }
+      ],
+      "conflicts": [
+        "the exact-ID official page is GMP 5 while this sample row is GMP 3",
+        "GMP 3 and GMP 5 have different statuses and project phases"
+      ],
+      "cost_usage": {
+        "cached_tokens": "unavailable",
+        "http_requests": "unavailable",
+        "input_tokens": "unavailable",
+        "model_cost_usd": "unavailable",
+        "output_tokens": "unavailable",
+        "tool_requests": 4,
+        "wall_clock_seconds": "unavailable"
+      },
+      "identity_assessment": {
+        "accepted_for_rule_evaluation": false,
+        "candidate_count": 2,
+        "conflicting_fields": [
+          "same ID on GMP 5 object and live page"
+        ],
+        "exact_identifiers": {
+          "project_id": "WTR-20-0005.3-12th St"
+        },
+        "identity_category": "ambiguous",
+        "identity_match_method": "exact project ID plus GMP name and source-object context",
+        "supporting_fields": [
+          "GMP 3 project_name",
+          "source_object_id",
+          "source_global_id",
+          "source_layer"
+        ]
+      },
+      "investigated_claims": [
+        "source_identity",
+        "activity_classification",
+        "status_interpretation",
+        "physical_work_started"
+      ],
+      "investigation_id": "run-a-dev-082",
+      "missing_information": [
+        "unique GMP 3 administrative identifier or contract",
+        "explicit inspection type/result/date",
+        "approved deterministic rule for the actual-end field"
+      ],
+      "plan": [
+        {
+          "strategy": [
+            "enumerate exact-ID records",
+            "compare GMP number, source layer, object ID, Global ID, and contract",
+            "do not attach the GMP 5 page to GMP 3 without an explicit relationship"
+          ],
+          "unresolved_claim": "source_identity"
+        },
+        {
+          "strategy": [
+            "extract official project type from both candidates",
+            "retain common explicit classification only"
+          ],
+          "unresolved_claim": "activity_classification"
+        },
+        {
+          "strategy": [
+            "compare GMP 3 and GMP 5 statuses",
+            "preserve each status with its source object"
+          ],
+          "unresolved_claim": "status_interpretation"
+        },
+        {
+          "strategy": [
+            "look for explicit actual-start or inspection-result evidence",
+            "do not convert Final Inspection and Testing narrative into a passed final inspection"
+          ],
+          "unresolved_claim": "physical_work_started"
+        }
+      ],
+      "recommended_next_action": "human_review",
+      "recorded_response_path": "data/agentic_validation/recorded_responses/run_a.json",
+      "repeat_id": "A",
+      "repeatability_probe": false,
+      "requires_human_review": true,
+      "sample_id": "dev-082",
+      "status": "ambiguous_identity",
+      "tool_actions": [
+        {
+          "occurred_at_utc": "2026-09-02T08:21:48Z",
+          "query": "all exact source_record_id WTR-20-0005.3-12th St records",
+          "result": "GMP 3 and GMP 5 source objects located",
+          "result_ref": "run-a-shared-wtr-12th-archived-pair",
+          "tool": "search_archived_evidence"
+        },
+        {
+          "occurred_at_utc": "2026-09-02T08:21:48Z",
+          "query": "site:tampa.gov exact WTR-20-0005.3-12th St",
+          "result": "official page resolves to GMP 5, not the requested GMP 3 name",
+          "result_ref": "https://www.tampa.gov/project/wtr-20-00053-12th-st",
+          "tool": "search_official_web"
+        },
+        {
+          "occurred_at_utc": "2026-09-02T08:21:48Z",
+          "query": "fetch official exact-ID project page",
+          "result": "page fields extracted and retained as a conflicting candidate, not attached to GMP 3",
+          "result_ref": "https://www.tampa.gov/project/wtr-20-00053-12th-st",
+          "tool": "fetch_official_document"
+        },
+        {
+          "occurred_at_utc": "2026-09-02T08:21:48Z",
+          "query": "archive GMP 3, GMP 5, and live page candidates",
+          "result": "three concise evidence records archived",
+          "result_ref": "data/agentic_validation/evidence/run_a/shared-wtr-12th_*",
+          "tool": "archive_evidence"
+        }
+      ]
+    },
+    {
+      "candidate_evidence": [
+        {
+          "accepted_for_rule_evaluation": false,
+          "applicable_rule_id": "unavailable",
+          "archived_path": "data/agentic_validation/evidence/run_a/hol-035_archived_capital_point.json",
+          "candidate_count": 1,
+          "candidate_evidence_id": "run-a-hol-035-archived-capital-point",
+          "conflicting_fields": [],
+          "content_sha256": "bc66b743c1548fc63a0450034ab3fb1b7fe5994c97fd62b311aa048d3ba07c9a",
+          "evidence_file_sha256": "41557a990b218cbd36310976d7b3a8152a8e4a3e07b8c2e7365fc80874dabf5b",
+          "evidence_fingerprint": "e442072d1e159d475c2561df5ac735bc327a939a736fed162bb4aee4ad806453",
+          "exact_identifiers": {
+            "facility_id": "178755",
+            "project_id": "1001810.13"
+          },
+          "identity_category": "exact_identifier",
+          "identity_match_method": "exact project ID plus project name and facility ID",
+          "observed_facts": [
+            "project ID 1001810.13",
+            "facility ID 178755",
+            "Oak Haven Pumping Station Rehabilitation",
+            "project type Wastewater",
+            "phase and status Planning",
+            "actual-start and actual-end fields are null"
+          ],
+          "primary_or_secondary": "primary",
+          "rejection_reason": "no approved supplied rule governs these unresolved claims",
+          "requires_human_review": true,
+          "source_content_sha256": "bc66b743c1548fc63a0450034ab3fb1b7fe5994c97fd62b311aa048d3ba07c9a",
+          "source_reference": "https://arcgis.tampagov.net/arcgis/rest/services/CapitalProjects/CityWideProjectsPublic/FeatureServer/0",
+          "source_tier": "tier_1_archived_primary",
+          "supporting_fields": [
+            "project_name",
+            "contract_number",
+            "source_global_id"
+          ]
+        }
+      ],
+      "claim_results": [
+        {
+          "claim": "source_identity",
+          "status": "evidence_found"
+        },
+        {
+          "claim": "activity_classification",
+          "status": "evidence_found"
+        },
+        {
+          "claim": "status_interpretation",
+          "status": "evidence_found"
+        },
+        {
+          "claim": "physical_work_started",
+          "status": "insufficient_evidence"
+        }
+      ],
+      "conflicts": [],
+      "cost_usage": {
+        "cached_tokens": "unavailable",
+        "http_requests": "unavailable",
+        "input_tokens": "unavailable",
+        "model_cost_usd": "unavailable",
+        "output_tokens": "unavailable",
+        "tool_requests": 3,
+        "wall_clock_seconds": "unavailable"
+      },
+      "identity_assessment": {
+        "accepted_for_rule_evaluation": false,
+        "candidate_count": 1,
+        "conflicting_fields": [],
+        "exact_identifiers": {
+          "contract_number": "20-C-00016",
+          "facility_id": "178755",
+          "project_id": "1001810.13"
+        },
+        "identity_category": "exact_identifier",
+        "identity_match_method": "exact project ID plus unique archived object",
+        "supporting_fields": [
+          "project_name",
+          "project_type"
+        ]
+      },
+      "investigated_claims": [
+        "source_identity",
+        "activity_classification",
+        "status_interpretation",
+        "physical_work_started"
+      ],
+      "investigation_id": "run-a-hol-035",
+      "missing_information": [
+        "explicit actual-start evidence",
+        "inspection or construction-progress record",
+        "public project page"
+      ],
+      "plan": [
+        {
+          "strategy": [
+            "find exact project ID in archived City GIS",
+            "compare facility, object, Global, contract, and project-name fields"
+          ],
+          "unresolved_claim": "source_identity"
+        },
+        {
+          "strategy": [
+            "extract official project type and scope"
+          ],
+          "unresolved_claim": "activity_classification"
+        },
+        {
+          "strategy": [
+            "extract time-stamped status and phase",
+            "seek a public official page",
+            "do not infer later progress"
+          ],
+          "unresolved_claim": "status_interpretation"
+        },
+        {
+          "strategy": [
+            "look for actual-start or inspection evidence",
+            "treat future planned dates as insufficient"
+          ],
+          "unresolved_claim": "physical_work_started"
+        }
+      ],
+      "recommended_next_action": "human_review",
+      "recorded_response_path": "data/agentic_validation/recorded_responses/run_a.json",
+      "repeat_id": "A",
+      "repeatability_probe": false,
+      "requires_human_review": true,
+      "sample_id": "hol-035",
+      "status": "evidence_found",
+      "tool_actions": [
+        {
+          "occurred_at_utc": "2026-09-02T08:21:48Z",
+          "query": "exact source_record_id 1001810.13 in archived source snapshots",
+          "result": "one exact archived City point feature located",
+          "result_ref": "data/agentic_validation/evidence/run_a/hol-035_archived_capital_point.json",
+          "tool": "search_archived_evidence"
+        },
+        {
+          "occurred_at_utc": "2026-09-02T08:21:48Z",
+          "query": "site:tampa.gov exact 1001810.13 Oak Haven",
+          "result": "no official page result returned",
+          "result_ref": "official-search-run-a-hol-035",
+          "tool": "search_official_web"
+        },
+        {
+          "occurred_at_utc": "2026-09-02T08:21:48Z",
+          "query": "archive concise extracted fields and existing source-file hash",
+          "result": "archived",
+          "result_ref": "data/agentic_validation/evidence/run_a/hol-035_archived_capital_point.json",
+          "tool": "archive_evidence"
+        }
+      ]
+    },
+    {
+      "candidate_evidence": [
+        {
+          "accepted_for_rule_evaluation": false,
+          "applicable_rule_id": "unavailable",
+          "archived_path": "data/agentic_validation/evidence/run_a/dev-025_archived_gis_record.json",
+          "candidate_count": 1,
+          "candidate_evidence_id": "run-a-dev-025-archived-gis-record",
+          "conflicting_fields": [
+            "later Accela status is About to Expire"
+          ],
+          "content_sha256": "bcd5ff1969731a3d0ef98051db277833acf92c953f683ad17ba29e94a8d137a7",
+          "evidence_file_sha256": "6f2236963a0e42b60c3d896180828f05a47312e5e5809d05b2887946ed8563cf",
+          "evidence_fingerprint": "0a650a8d882ecc47916279be2c143594a4c86fc16606c222871a51dda5d86af6",
+          "exact_identifiers": {
+            "record_id": "BLD-26-0519341"
+          },
+          "identity_category": "exact_identifier",
+          "identity_match_method": "exact permit ID plus address and record type",
+          "observed_facts": [
+            "exact record ID",
+            "address 206 N MacDill Ave",
+            "record type Residential Building Alterations",
+            "status Revision",
+            "private provider Yes"
+          ],
+          "primary_or_secondary": "primary",
+          "rejection_reason": "no approved supplied rule governs source status or work-start claims",
+          "requires_human_review": true,
+          "source_content_sha256": "bcd5ff1969731a3d0ef98051db277833acf92c953f683ad17ba29e94a8d137a7",
+          "source_reference": "https://arcgis.tampagov.net/arcgis/rest/services/OpenData/Planning/MapServer/30",
+          "source_tier": "tier_1_archived_primary",
+          "supporting_fields": [
+            "address",
+            "record_type",
+            "project_name",
+            "source_global_id"
+          ]
+        },
+        {
+          "accepted_for_rule_evaluation": false,
+          "applicable_rule_id": "unavailable",
+          "archived_path": "data/agentic_validation/evidence/run_a/dev-025_archived_accela_record.json",
+          "candidate_count": 1,
+          "candidate_evidence_id": "run-a-dev-025-archived-accela-record",
+          "conflicting_fields": [
+            "earlier GIS status is Revision"
+          ],
+          "content_sha256": "5b08b9a189765277d16a033d9c18e9135c1276d4ea04fe0bbccc357995697f28",
+          "evidence_file_sha256": "157884349cfb6e5f3abf49620f471ca7c2eccbcc5f65731892a80e24091aa8d1",
+          "evidence_fingerprint": "678a93a7df3a94f45499119a8fa8c5696c030d577134da6a1edbe8538046792f",
+          "exact_identifiers": {
+            "record_number": "BLD-26-0519341"
+          },
+          "identity_category": "exact_identifier",
+          "identity_match_method": "exact permit ID plus address and record type",
+          "observed_facts": [
+            "exact record number",
+            "same 206 N MacDill address",
+            "same record type",
+            "status About to Expire",
+            "expiration date 09/05/2026"
+          ],
+          "primary_or_secondary": "primary",
+          "rejection_reason": "no explicit inspection result or approved applicable rule",
+          "requires_human_review": true,
+          "source_content_sha256": "5b08b9a189765277d16a033d9c18e9135c1276d4ea04fe0bbccc357995697f28",
+          "source_reference": "https://aca-prod.accela.com/TAMPA/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=25CAP&capID2=00000&capID3=02MKF&agencyCode=TAMPA",
+          "source_tier": "tier_1_archived_primary",
+          "supporting_fields": [
+            "address",
+            "record_type",
+            "source URL"
+          ]
+        },
+        {
+          "accepted_for_rule_evaluation": false,
+          "applicable_rule_id": "unavailable",
+          "archived_path": "data/agentic_validation/evidence/run_a/dev-025_archived_spatial_match.json",
+          "candidate_count": 1,
+          "candidate_evidence_id": "run-a-dev-025-archived-spatial-match",
+          "conflicting_fields": [
+            "street number",
+            "30.75 metre separation",
+            "medium match confidence"
+          ],
+          "content_sha256": "890bcfaf76138652fb3316b99704968e7da455bc8119351add66b9ca23cee431",
+          "evidence_file_sha256": "be1f7741981b923fbe3127896101ba32cf0de9cc722d03b422d5ccdcde77c402",
+          "evidence_fingerprint": "6a2d94e82bb8b87ebd720cd3382534c74625c6c5ef1736aa1d8c6ec5d4da9832",
+          "exact_identifiers": {
+            "building_object_id": "774371",
+            "folio": "169094.0125"
+          },
+          "identity_category": "ambiguous",
+          "identity_match_method": "nearest footprint within 35 metres",
+          "observed_facts": [
+            "nearest-footprint candidate is 30.75 metres away",
+            "candidate building address is 210 N Macdill Ave",
+            "permit address is 206 N MacDill Ave",
+            "match confidence is medium"
+          ],
+          "primary_or_secondary": "primary",
+          "rejection_reason": "building address differs and the proximity match is explicitly medium confidence",
+          "requires_human_review": true,
+          "source_content_sha256": "890bcfaf76138652fb3316b99704968e7da455bc8119351add66b9ca23cee431",
+          "source_reference": "https://arcgis.tampagov.net/arcgis/rest/services/OpenData/Location/MapServer/0",
+          "source_tier": "tier_1_archived_primary",
+          "supporting_fields": [
+            "street name proximity"
+          ]
+        }
+      ],
+      "claim_results": [
+        {
+          "claim": "source_identity",
+          "status": "evidence_found"
+        },
+        {
+          "claim": "activity_classification",
+          "status": "evidence_found"
+        },
+        {
+          "claim": "status_interpretation",
+          "status": "conflicting_evidence_found"
+        },
+        {
+          "claim": "building_footprint_match",
+          "status": "ambiguous_identity"
+        },
+        {
+          "claim": "physical_work_started",
+          "status": "insufficient_evidence"
+        }
+      ],
+      "conflicts": [
+        "dated City sources report Revision and About to Expire statuses",
+        "the matched building is numbered 210 while the permit is numbered 206"
+      ],
+      "cost_usage": {
+        "cached_tokens": "unavailable",
+        "http_requests": "unavailable",
+        "input_tokens": "unavailable",
+        "model_cost_usd": "unavailable",
+        "output_tokens": "unavailable",
+        "tool_requests": 3,
+        "wall_clock_seconds": "unavailable"
+      },
+      "identity_assessment": {
+        "accepted_for_rule_evaluation": false,
+        "candidate_count": 1,
+        "conflicting_fields": [
+          "permit status differs across dated sources",
+          "building address 210 differs from permit address 206",
+          "building match distance 30.75 metres"
+        ],
+        "exact_identifiers": {
+          "record_number": "BLD-26-0519341"
+        },
+        "identity_category": "ambiguous",
+        "identity_match_method": "permit identity is exact; building identity uses a medium-confidence nearest-footprint association",
+        "supporting_fields": [
+          "permit address",
+          "record type",
+          "project name"
+        ]
+      },
+      "investigated_claims": [
+        "source_identity",
+        "activity_classification",
+        "status_interpretation",
+        "building_footprint_match",
+        "physical_work_started"
+      ],
+      "investigation_id": "run-a-dev-025",
+      "missing_information": [
+        "explicit inspection type/result/date",
+        "parcel ID on the Accela record",
+        "exact building-footprint or parcel linkage",
+        "evidence that physical work began"
+      ],
+      "plan": [
+        {
+          "strategy": [
+            "locate exact permit ID in archived City GIS and Accela exports",
+            "compare exact ID, address, record type, and source URL"
+          ],
+          "unresolved_claim": "source_identity"
+        },
+        {
+          "strategy": [
+            "compare official record-type fields across archived sources"
+          ],
+          "unresolved_claim": "activity_classification"
+        },
+        {
+          "strategy": [
+            "compare time-stamped GIS and Accela statuses",
+            "do not treat status change as construction evidence"
+          ],
+          "unresolved_claim": "status_interpretation"
+        },
+        {
+          "strategy": [
+            "inspect the archived match method, candidate address, and distance",
+            "reject exact attachment when the building address differs"
+          ],
+          "unresolved_claim": "building_footprint_match"
+        },
+        {
+          "strategy": [
+            "search archived inspection/permit fields for explicit performed-work evidence",
+            "treat Revision and About to Expire as insufficient"
+          ],
+          "unresolved_claim": "physical_work_started"
+        }
+      ],
+      "recommended_next_action": "human_review",
+      "recorded_response_path": "data/agentic_validation/recorded_responses/run_a.json",
+      "repeat_id": "A",
+      "repeatability_probe": true,
+      "requires_human_review": true,
+      "sample_id": "dev-025",
+      "status": "ambiguous_identity",
+      "tool_actions": [
+        {
+          "occurred_at_utc": "2026-09-02T08:21:48Z",
+          "query": "exact BLD-26-0519341 in City GIS snapshot, Accela archive, and parcel-building match output",
+          "result": "exact permit records found; one medium-distance building candidate found",
+          "result_ref": "run-a-dev-025-archived-set",
+          "tool": "search_archived_evidence"
+        },
+        {
+          "occurred_at_utc": "2026-09-02T08:21:48Z",
+          "query": "site:tampa.gov exact BLD-26-0519341",
+          "result": "no allowlisted official page result returned; live Accela host not used under source allowlist",
+          "result_ref": "official-search-run-a-dev-025",
+          "tool": "search_official_web"
+        },
+        {
+          "occurred_at_utc": "2026-09-02T08:21:48Z",
+          "query": "archive GIS record, Accela search row, and spatial match fields with source-file hashes",
+          "result": "three concise evidence records archived",
+          "result_ref": "data/agentic_validation/evidence/run_a/dev-025_*",
+          "tool": "archive_evidence"
+        }
+      ]
+    },
+    {
+      "candidate_evidence": [
+        {
+          "archived_path": "data/agentic_validation/evidence/run_b/hol-039-archived.json",
+          "content_sha256": "ab1f159439d64d2f307901cf8b138a86a7816867a055691708e0b8e7e6ae4e8f",
+          "evidence_file_sha256": "ab1f159439d64d2f307901cf8b138a86a7816867a055691708e0b8e7e6ae4e8f",
+          "evidence_fingerprint": "c636d23704da056d9f6606b6b33c7f760a7fc6be16b5c9cd7da1554198db878c",
+          "evidence_id": "hol-039-b-archived-city-gis",
+          "identity_category": "exact_identifier",
+          "observed_facts": [
+            "Project ID SW50019",
+            "P2: Design",
+            "60% Design Completion"
+          ],
+          "sha256": "ab1f159439d64d2f307901cf8b138a86a7816867a055691708e0b8e7e6ae4e8f",
+          "source_content_sha256": "ab1f159439d64d2f307901cf8b138a86a7816867a055691708e0b8e7e6ae4e8f",
+          "source_reference": "https://arcgis.tampagov.net/arcgis/rest/services/CapitalProjects/CityWideProjectsPublic/FeatureServer/2",
+          "source_tier": "tier_1_archived_primary"
+        },
+        {
+          "archived_path": "data/agentic_validation/evidence/run_b/hol-039-live.json",
+          "content_sha256": "eb8e42a97dcb2ce321563d1d7561b9b3653652d0d1b0d26e9a045f3526ca2c4d",
+          "evidence_file_sha256": "eb8e42a97dcb2ce321563d1d7561b9b3653652d0d1b0d26e9a045f3526ca2c4d",
+          "evidence_fingerprint": "398bfc4bcfa94253d85c904313b2d58d40e2da1e64f973b49ade26b5f2ec3395",
+          "evidence_id": "hol-039-b-live-city-project-page",
+          "identity_category": "exact_identifier",
+          "observed_facts": [
+            "Project and department ID SW50019",
+            "P3: Procurement",
+            "Contract Negotiations"
+          ],
+          "sha256": "eb8e42a97dcb2ce321563d1d7561b9b3653652d0d1b0d26e9a045f3526ca2c4d",
+          "source_content_sha256": "eb8e42a97dcb2ce321563d1d7561b9b3653652d0d1b0d26e9a045f3526ca2c4d",
+          "source_reference": "https://www.tampa.gov/project/sw50019",
+          "source_tier": "tier_2_live_primary"
+        }
+      ],
+      "conflicts": [
+        "The archived polygon record reports P2: Design and 60% Design Completion, while the live project page reports P3: Procurement and Contract Negotiations.",
+        "The differences may reflect source-layer or observation-time changes and are not resolved by this investigation."
+      ],
+      "cost_usage": {
+        "cached_tokens": "unavailable",
+        "http_requests": "unavailable",
+        "input_tokens": "unavailable",
+        "model_cost_usd": "unavailable",
+        "output_tokens": "unavailable",
+        "tool_requests": 3,
+        "wall_clock_seconds": "unavailable"
+      },
+      "identity_assessment": {
+        "accepted_for_rule_evaluation": false,
+        "candidate_count": 2,
+        "conflicting_fields": [
+          "project phase",
+          "status",
+          "planned dates",
+          "estimated cost"
+        ],
+        "exact_identifiers": [
+          "SW50019"
+        ],
+        "identity_category": "exact_identifier",
+        "identity_match_method": "exact administrative project identifier with matching name and description",
+        "supporting_fields": [
+          "project name",
+          "description",
+          "project type"
+        ]
+      },
+      "investigated_claims": [
+        "source_identity",
+        "activity_classification",
+        "status_interpretation",
+        "physical_work_started"
+      ],
+      "investigation_id": "agent-benchmark-v1-hol-039-run-b",
+      "missing_information": [
+        "No actual-start field or inspection evidence establishes physical work.",
+        "No approved deterministic rule was supplied."
+      ],
+      "plan": [
+        "Search immutable City GIS evidence for the exact project identifier.",
+        "Search allowlisted City sources for the same identifier and project name.",
+        "Compare identity, phase, status, dates, and contradictions.",
+        "Archive candidate evidence for deterministic re-evaluation and human review."
+      ],
+      "prompt_hashes": {
+        "evidence_assessment": "81027cfc6e345f61218d871e4c375300c6170bc0ee00c0e2ad62825688a8b45d",
+        "investigation": "2c99b098a04518195708c1ce22e69a3fb73080722998c94b144f89c847ccd672",
+        "system": "ce14333f117928b1a786dbdc4ffcd902a883eacc9565945a7f1f9d417166629b"
+      },
+      "prompt_version": "v1",
+      "recommended_next_action": "Human review should reconcile the phase/status observations; eligible exact-ID fields may then be submitted to an approved deterministic rule.",
+      "record_number": "SW50019",
+      "recorded_response_path": "data/agentic_validation/recorded_responses/run_b.json",
+      "repeat_id": "B",
+      "requires_human_review": true,
+      "sample_id": "hol-039",
+      "status": "conflicting_evidence_found",
+      "tool_actions": [
+        {
+          "parameters": {
+            "record_number": "SW50019"
+          },
+          "result": "exact_identifier_record_found",
+          "result_reference": "data/raw/capital_locations_polygon.geojson",
+          "sequence": 1,
+          "tool": "search_archived_evidence"
+        },
+        {
+          "parameters": {
+            "host_allowlist": [
+              "tampa.gov",
+              "tampagov.net"
+            ],
+            "query": "SW50019"
+          },
+          "result": "official_project_page_found",
+          "result_reference": "https://www.tampa.gov/project/sw50019",
+          "sequence": 2,
+          "tool": "search_official_web"
+        },
+        {
+          "parameters": {
+            "url": "https://www.tampa.gov/project/sw50019"
+          },
+          "result": "page_fields_extracted_and_archived",
+          "result_reference": "data/agentic_validation/evidence/run_b/hol-039.json",
+          "sequence": 3,
+          "tool": "fetch_official_document"
+        }
+      ]
+    },
+    {
+      "candidate_evidence": [
+        {
+          "archived_path": "data/agentic_validation/evidence/run_b/hol-045-archived.json",
+          "content_sha256": "49cedda7c1f6fbbd5fc592113da91af4ed336db267a096f8e516dd7318290f77",
+          "evidence_file_sha256": "49cedda7c1f6fbbd5fc592113da91af4ed336db267a096f8e516dd7318290f77",
+          "evidence_fingerprint": "2b5676ddd8fa3f7f7de22228f1e4c874f7c7ebdd9d2ce93d7e3636980d105060",
+          "evidence_id": "hol-045-b-archived-city-gis",
+          "identity_category": "exact_identifier",
+          "observed_facts": [
+            "Project ID 1001810.14",
+            "P1: Planning",
+            "Planning",
+            "Contract 20-C-00016"
+          ],
+          "sha256": "49cedda7c1f6fbbd5fc592113da91af4ed336db267a096f8e516dd7318290f77",
+          "source_content_sha256": "49cedda7c1f6fbbd5fc592113da91af4ed336db267a096f8e516dd7318290f77",
+          "source_reference": "https://arcgis.tampagov.net/arcgis/rest/services/CapitalProjects/CityWideProjectsPublic/FeatureServer/0",
+          "source_tier": "tier_1_archived_primary"
+        },
+        {
+          "archived_path": "data/agentic_validation/evidence/run_b/hol-045-live.json",
+          "content_sha256": "1d1839930d52abfe6b12a0eb5242eede58e76f84c065e595f39c3681ab13d919",
+          "evidence_file_sha256": "1d1839930d52abfe6b12a0eb5242eede58e76f84c065e595f39c3681ab13d919",
+          "evidence_fingerprint": "c97ef8c8350c4efcc48020e7a9743ed1dfbdbaefd239b1e451e1ce9e4bcd2937",
+          "evidence_id": "hol-045-b-live-city-project-page",
+          "identity_category": "exact_identifier",
+          "observed_facts": [
+            "Project ID 1001810.14",
+            "Department ID WW1001810.14",
+            "P1: Planning",
+            "Planning"
+          ],
+          "sha256": "1d1839930d52abfe6b12a0eb5242eede58e76f84c065e595f39c3681ab13d919",
+          "source_content_sha256": "1d1839930d52abfe6b12a0eb5242eede58e76f84c065e595f39c3681ab13d919",
+          "source_reference": "https://www.tampa.gov/project/ww100181014",
+          "source_tier": "tier_2_live_primary"
+        }
+      ],
+      "conflicts": [],
+      "cost_usage": {
+        "cached_tokens": "unavailable",
+        "http_requests": "unavailable",
+        "input_tokens": "unavailable",
+        "model_cost_usd": "unavailable",
+        "output_tokens": "unavailable",
+        "tool_requests": 3,
+        "wall_clock_seconds": "unavailable"
+      },
+      "identity_assessment": {
+        "accepted_for_rule_evaluation": false,
+        "candidate_count": 1,
+        "conflicting_fields": [],
+        "exact_identifiers": [
+          "1001810.14",
+          "WW1001810.14",
+          "20-C-00016"
+        ],
+        "identity_category": "exact_identifier",
+        "identity_match_method": "exact administrative identifier plus matching title, address, contract, and coordinates",
+        "supporting_fields": [
+          "project name",
+          "5001 Palm Springs Blvd",
+          "project type",
+          "coordinates"
+        ]
+      },
+      "investigated_claims": [
+        "source_identity",
+        "activity_classification",
+        "status_interpretation",
+        "physical_work_started"
+      ],
+      "investigation_id": "agent-benchmark-v1-hol-045-run-b",
+      "missing_information": [
+        "Planning and future planned dates do not establish physical work.",
+        "No actual-start record or inspection evidence was located.",
+        "No approved deterministic rule was supplied."
+      ],
+      "plan": [
+        "Search immutable City GIS evidence for the exact project identifier.",
+        "Search allowlisted City sources for the identifier and project name.",
+        "Compare identifier, address, type, phase, status, and dates.",
+        "Archive candidate evidence and identify information still requiring review."
+      ],
+      "prompt_hashes": {
+        "evidence_assessment": "81027cfc6e345f61218d871e4c375300c6170bc0ee00c0e2ad62825688a8b45d",
+        "investigation": "2c99b098a04518195708c1ce22e69a3fb73080722998c94b144f89c847ccd672",
+        "system": "ce14333f117928b1a786dbdc4ffcd902a883eacc9565945a7f1f9d417166629b"
+      },
+      "prompt_version": "v1",
+      "recommended_next_action": "Submit the exact-identifier candidate to deterministic identity/status evaluation when an approved rule is available; retain physical-work claim for human review.",
+      "record_number": "1001810.14",
+      "recorded_response_path": "data/agentic_validation/recorded_responses/run_b.json",
+      "repeat_id": "B",
+      "requires_human_review": true,
+      "sample_id": "hol-045",
+      "status": "evidence_found",
+      "tool_actions": [
+        {
+          "parameters": {
+            "record_number": "1001810.14"
+          },
+          "result": "exact_identifier_record_found",
+          "result_reference": "data/raw/capital_locations_point.geojson",
+          "sequence": 1,
+          "tool": "search_archived_evidence"
+        },
+        {
+          "parameters": {
+            "host_allowlist": [
+              "tampa.gov",
+              "tampagov.net"
+            ],
+            "query": "Palm Springs Pumping Station Rehabilitation 1001810.14"
+          },
+          "result": "official_project_page_found",
+          "result_reference": "https://www.tampa.gov/project/ww100181014",
+          "sequence": 2,
+          "tool": "search_official_web"
+        },
+        {
+          "parameters": {
+            "url": "https://www.tampa.gov/project/ww100181014"
+          },
+          "result": "page_fields_extracted_and_archived",
+          "result_reference": "data/agentic_validation/evidence/run_b/hol-045.json",
+          "sequence": 3,
+          "tool": "fetch_official_document"
+        }
+      ]
+    },
+    {
+      "candidate_evidence": [
+        {
+          "archived_path": "data/agentic_validation/evidence/run_b/dev-025-archived.json",
+          "content_sha256": "7da9345bf0185e369f1c95d32618bf14d7678d073411ea8b67818388ebce9910",
+          "evidence_file_sha256": "7da9345bf0185e369f1c95d32618bf14d7678d073411ea8b67818388ebce9910",
+          "evidence_fingerprint": "01c2bb2edbd15a1c9acd58542722c3f245e34e1a84cafab41d64f5111a8df389",
+          "evidence_id": "dev-025-b-archived-city-gis",
+          "identity_category": "exact_identifier",
+          "observed_facts": [
+            "Record BLD-26-0519341",
+            "206 N MacDill Ave",
+            "Residential Building Alterations (Renovations)",
+            "Revision",
+            "Private provider: Yes"
+          ],
+          "sha256": "7da9345bf0185e369f1c95d32618bf14d7678d073411ea8b67818388ebce9910",
+          "source_content_sha256": "7da9345bf0185e369f1c95d32618bf14d7678d073411ea8b67818388ebce9910",
+          "source_reference": "https://arcgis.tampagov.net/arcgis/rest/services/OpenData/Planning/MapServer/30",
+          "source_tier": "tier_1_archived_primary"
+        }
+      ],
+      "conflicts": [],
+      "cost_usage": {
+        "cached_tokens": "unavailable",
+        "http_requests": "unavailable",
+        "input_tokens": "unavailable",
+        "model_cost_usd": "unavailable",
+        "output_tokens": "unavailable",
+        "tool_requests": 4,
+        "wall_clock_seconds": "unavailable"
+      },
+      "identity_assessment": {
+        "accepted_for_rule_evaluation": false,
+        "candidate_count": 1,
+        "conflicting_fields": [
+          "building footprint association remains medium confidence at 30.75 meters"
+        ],
+        "exact_identifiers": [
+          "BLD-26-0519341",
+          "{2B400FF9-7D1A-45A4-8002-492A9045E1AF}"
+        ],
+        "identity_category": "ambiguous",
+        "identity_match_method": "exact permit identifier for the administrative record; separate nearest-footprint heuristic for spatial association",
+        "supporting_fields": [
+          "address",
+          "project name",
+          "description",
+          "record type"
+        ]
+      },
+      "investigated_claims": [
+        "source_identity",
+        "activity_classification",
+        "status_interpretation",
+        "building_footprint_match",
+        "physical_work_started"
+      ],
+      "investigation_id": "agent-benchmark-v1-dev-025-run-b",
+      "missing_information": [
+        "Live Accela details and inspection history were unavailable.",
+        "Revision status does not establish work start.",
+        "The building-footprint association lacks an exact parcel or footprint identifier.",
+        "No approved deterministic rule was supplied."
+      ],
+      "plan": [
+        "Locate the exact permit in immutable City GIS evidence.",
+        "Attempt the allowlisted Accela record and an exact-record official search.",
+        "Keep administrative identity separate from the medium-confidence footprint association.",
+        "Archive available evidence and retain unsupported claims for human review."
+      ],
+      "prompt_hashes": {
+        "evidence_assessment": "81027cfc6e345f61218d871e4c375300c6170bc0ee00c0e2ad62825688a8b45d",
+        "investigation": "2c99b098a04518195708c1ce22e69a3fb73080722998c94b144f89c847ccd672",
+        "system": "ce14333f117928b1a786dbdc4ffcd902a883eacc9565945a7f1f9d417166629b"
+      },
+      "prompt_version": "v1",
+      "recommended_next_action": "Human review should open Accela when available and independently assess the footprint association; do not infer work from Revision status.",
+      "record_number": "BLD-26-0519341",
+      "recorded_response_path": "data/agentic_validation/recorded_responses/run_b.json",
+      "repeat_id": "B",
+      "requires_human_review": true,
+      "sample_id": "dev-025",
+      "status": "evidence_found",
+      "tool_actions": [
+        {
+          "parameters": {
+            "record_number": "BLD-26-0519341"
+          },
+          "result": "exact_identifier_record_found",
+          "result_reference": "data/raw/construction_inspections.geojson",
+          "sequence": 1,
+          "tool": "search_archived_evidence"
+        },
+        {
+          "error": "available web retriever rejected the detail URL",
+          "parameters": {
+            "official_record_url": "record URL from benchmark"
+          },
+          "result": "retrieval_error",
+          "sequence": 2,
+          "tool": "fetch_accela_record"
+        },
+        {
+          "error": "detail URL remained inaccessible",
+          "parameters": {
+            "official_record_url": "same record URL",
+            "retry": 1
+          },
+          "result": "retrieval_error",
+          "sequence": 3,
+          "tool": "fetch_accela_record"
+        },
+        {
+          "parameters": {
+            "host_allowlist": [
+              "aca-prod.accela.com"
+            ],
+            "query": "BLD-26-0519341"
+          },
+          "result": "no_additional_evidence_found",
+          "sequence": 4,
+          "tool": "search_official_web"
+        }
+      ]
+    },
+    {
+      "candidate_evidence": [
+        {
+          "archived_path": "data/agentic_validation/evidence/run_b/hol-001-construction.json",
+          "content_sha256": "798e8dd3ad7ca5f456503eca45dc7601aa971acbb1dd450bd0f12e21fb472e6f",
+          "evidence_file_sha256": "798e8dd3ad7ca5f456503eca45dc7601aa971acbb1dd450bd0f12e21fb472e6f",
+          "evidence_fingerprint": "16613403a3ad0c4c96088706306a441517a3f21050a7f82f09fca8f73a06d2a9",
+          "evidence_id": "hol-001-b-archived-construction",
+          "identity_category": "exact_identifier",
+          "observed_facts": [
+            "Record BLD-26-0522370",
+            "618 Luzon Ave",
+            "FEMA New 2-Story SFR",
+            "Issued"
+          ],
+          "sha256": "798e8dd3ad7ca5f456503eca45dc7601aa971acbb1dd450bd0f12e21fb472e6f",
+          "source_content_sha256": "798e8dd3ad7ca5f456503eca45dc7601aa971acbb1dd450bd0f12e21fb472e6f",
+          "source_reference": "https://arcgis.tampagov.net/arcgis/rest/services/OpenData/Planning/MapServer/30",
+          "source_tier": "tier_1_archived_primary"
+        },
+        {
+          "archived_path": "data/agentic_validation/evidence/run_b/hol-001-single-family.json",
+          "content_sha256": "c125e49f0176cc2d2d16851e849a7f8ffc5560bb81bbcfea91e6dc89401a0501",
+          "evidence_file_sha256": "c125e49f0176cc2d2d16851e849a7f8ffc5560bb81bbcfea91e6dc89401a0501",
+          "evidence_fingerprint": "15d727e2fac804372ba5f44227996580c710995174a5575399d103bab6353d8a",
+          "evidence_id": "hol-001-b-archived-single-family",
+          "identity_category": "exact_identifier",
+          "observed_facts": [
+            "Record BLD-26-0522370",
+            "618 Luzon Ave",
+            "Application status Issued",
+            "Issuance task status Issued"
+          ],
+          "sha256": "c125e49f0176cc2d2d16851e849a7f8ffc5560bb81bbcfea91e6dc89401a0501",
+          "source_content_sha256": "c125e49f0176cc2d2d16851e849a7f8ffc5560bb81bbcfea91e6dc89401a0501",
+          "source_reference": "https://arcgis.tampagov.net/arcgis/rest/services/OpenData/Planning/MapServer/32",
+          "source_tier": "tier_1_archived_primary"
+        }
+      ],
+      "conflicts": [],
+      "cost_usage": {
+        "cached_tokens": "unavailable",
+        "http_requests": "unavailable",
+        "input_tokens": "unavailable",
+        "model_cost_usd": "unavailable",
+        "output_tokens": "unavailable",
+        "tool_requests": 4,
+        "wall_clock_seconds": "unavailable"
+      },
+      "identity_assessment": {
+        "accepted_for_rule_evaluation": false,
+        "candidate_count": 2,
+        "conflicting_fields": [
+          "building footprint association remains medium confidence at 25.01 meters"
+        ],
+        "exact_identifiers": [
+          "BLD-26-0522370"
+        ],
+        "identity_category": "ambiguous",
+        "identity_match_method": "exact permit identifier and address across two official source layers; separate nearest-footprint heuristic",
+        "supporting_fields": [
+          "address",
+          "record/application type",
+          "Issued status"
+        ]
+      },
+      "investigated_claims": [
+        "source_identity",
+        "activity_classification",
+        "status_interpretation",
+        "cross_source_linkage",
+        "building_footprint_match",
+        "physical_work_started"
+      ],
+      "investigation_id": "agent-benchmark-v1-hol-001-run-b",
+      "missing_information": [
+        "Live Accela details and inspection history were unavailable.",
+        "Issued status does not establish work start.",
+        "The footprint association lacks an exact parcel or footprint identifier.",
+        "No approved deterministic rule was supplied."
+      ],
+      "plan": [
+        "Locate the exact permit in each immutable City GIS source.",
+        "Attempt the allowlisted Accela record and exact-record official search.",
+        "Compare source identifiers and separate linkage from spatial association.",
+        "Archive candidates and retain unsupported claims for human review."
+      ],
+      "prompt_hashes": {
+        "evidence_assessment": "81027cfc6e345f61218d871e4c375300c6170bc0ee00c0e2ad62825688a8b45d",
+        "investigation": "2c99b098a04518195708c1ce22e69a3fb73080722998c94b144f89c847ccd672",
+        "system": "ce14333f117928b1a786dbdc4ffcd902a883eacc9565945a7f1f9d417166629b"
+      },
+      "prompt_version": "v1",
+      "recommended_next_action": "The cross-source exact-ID candidate may be submitted to an approved linkage rule; human review remains required for footprint and physical-work claims.",
+      "record_number": "BLD-26-0522370",
+      "recorded_response_path": "data/agentic_validation/recorded_responses/run_b.json",
+      "repeat_id": "B",
+      "requires_human_review": true,
+      "sample_id": "hol-001",
+      "status": "evidence_found",
+      "tool_actions": [
+        {
+          "parameters": {
+            "record_number": "BLD-26-0522370",
+            "sources": [
+              "construction_inspections",
+              "single_family_permits"
+            ]
+          },
+          "result": "two_exact_identifier_records_found",
+          "result_reference": "data/agentic_validation/evidence/run_b/hol-001.json",
+          "sequence": 1,
+          "tool": "search_archived_evidence"
+        },
+        {
+          "error": "available web retriever rejected the detail URL",
+          "parameters": {
+            "official_record_url": "record URL from benchmark"
+          },
+          "result": "retrieval_error",
+          "sequence": 2,
+          "tool": "fetch_accela_record"
+        },
+        {
+          "error": "detail URL remained inaccessible",
+          "parameters": {
+            "official_record_url": "same record URL",
+            "retry": 1
+          },
+          "result": "retrieval_error",
+          "sequence": 3,
+          "tool": "fetch_accela_record"
+        },
+        {
+          "parameters": {
+            "host_allowlist": [
+              "aca-prod.accela.com",
+              "tampa.gov"
+            ],
+            "query": "BLD-26-0522370"
+          },
+          "result": "no_additional_evidence_found",
+          "sequence": 4,
+          "tool": "search_official_web"
+        }
+      ]
+    },
+    {
+      "candidate_evidence": [
+        {
+          "archived_path": "data/agentic_validation/evidence/run_b/dev-046-archived.json",
+          "content_sha256": "e06f0fc932471338a81f87270973ff924b497a86a5aaf8806bf560592e1688da",
+          "evidence_file_sha256": "e06f0fc932471338a81f87270973ff924b497a86a5aaf8806bf560592e1688da",
+          "evidence_fingerprint": "39e52b2a2ae92cfb6a986c57a39b36f8d27ed813decd8d4f825978432949ed6c",
+          "evidence_id": "dev-046-b-archived-city-gis",
+          "identity_category": "exact_identifier",
+          "observed_facts": [
+            "Record BLD-24-0508474",
+            "1712 W Morrison Ave",
+            "Residential Building Alterations (Renovations)",
+            "Revision"
+          ],
+          "sha256": "e06f0fc932471338a81f87270973ff924b497a86a5aaf8806bf560592e1688da",
+          "source_content_sha256": "e06f0fc932471338a81f87270973ff924b497a86a5aaf8806bf560592e1688da",
+          "source_reference": "https://arcgis.tampagov.net/arcgis/rest/services/OpenData/Planning/MapServer/30",
+          "source_tier": "tier_1_archived_primary"
+        }
+      ],
+      "conflicts": [],
+      "cost_usage": {
+        "cached_tokens": "unavailable",
+        "http_requests": "unavailable",
+        "input_tokens": "unavailable",
+        "model_cost_usd": "unavailable",
+        "output_tokens": "unavailable",
+        "tool_requests": 4,
+        "wall_clock_seconds": "unavailable"
+      },
+      "identity_assessment": {
+        "accepted_for_rule_evaluation": false,
+        "candidate_count": 1,
+        "conflicting_fields": [
+          "building footprint association remains medium confidence at 8.2 meters"
+        ],
+        "exact_identifiers": [
+          "BLD-24-0508474",
+          "{8A3B5D61-ED69-4A42-9D1C-6BFB0474B6A5}"
+        ],
+        "identity_category": "ambiguous",
+        "identity_match_method": "exact permit identifier for the administrative record; separate nearest-footprint heuristic",
+        "supporting_fields": [
+          "address",
+          "project name",
+          "description",
+          "record type"
+        ]
+      },
+      "investigated_claims": [
+        "source_identity",
+        "activity_classification",
+        "status_interpretation",
+        "building_footprint_match",
+        "physical_work_started"
+      ],
+      "investigation_id": "agent-benchmark-v1-dev-046-run-b",
+      "missing_information": [
+        "Live Accela details and inspection history were unavailable.",
+        "Revision status does not establish work start.",
+        "The footprint association lacks an exact parcel or footprint identifier.",
+        "No approved deterministic rule was supplied."
+      ],
+      "plan": [
+        "Locate the exact permit in immutable City GIS evidence.",
+        "Attempt the allowlisted Accela detail record and exact official search.",
+        "Separate exact administrative identity from the footprint heuristic.",
+        "Archive the candidate and preserve missing inspection/work evidence."
+      ],
+      "prompt_hashes": {
+        "evidence_assessment": "81027cfc6e345f61218d871e4c375300c6170bc0ee00c0e2ad62825688a8b45d",
+        "investigation": "2c99b098a04518195708c1ce22e69a3fb73080722998c94b144f89c847ccd672",
+        "system": "ce14333f117928b1a786dbdc4ffcd902a883eacc9565945a7f1f9d417166629b"
+      },
+      "prompt_version": "v1",
+      "recommended_next_action": "Human review should inspect Accela when available and independently assess the footprint association.",
+      "record_number": "BLD-24-0508474",
+      "recorded_response_path": "data/agentic_validation/recorded_responses/run_b.json",
+      "repeat_id": "B",
+      "requires_human_review": true,
+      "sample_id": "dev-046",
+      "status": "evidence_found",
+      "tool_actions": [
+        {
+          "parameters": {
+            "record_number": "BLD-24-0508474"
+          },
+          "result": "exact_identifier_record_found",
+          "result_reference": "data/raw/construction_inspections.geojson",
+          "sequence": 1,
+          "tool": "search_archived_evidence"
+        },
+        {
+          "error": "available web retriever rejected the detail URL",
+          "parameters": {
+            "official_record_url": "record URL from benchmark"
+          },
+          "result": "retrieval_error",
+          "sequence": 2,
+          "tool": "fetch_accela_record"
+        },
+        {
+          "error": "detail URL remained inaccessible",
+          "parameters": {
+            "official_record_url": "same record URL",
+            "retry": 1
+          },
+          "result": "retrieval_error",
+          "sequence": 3,
+          "tool": "fetch_accela_record"
+        },
+        {
+          "parameters": {
+            "host_allowlist": [
+              "aca-prod.accela.com"
+            ],
+            "query": "BLD-24-0508474"
+          },
+          "result": "no_additional_evidence_found",
+          "sequence": 4,
+          "tool": "search_official_web"
+        }
+      ]
+    },
+    {
+      "candidate_evidence": [
+        {
+          "archived_path": "data/agentic_validation/evidence/run_b/dev-027-archived.json",
+          "content_sha256": "aced9607f2af8a33ed483e11884d53b3ccd24172546bfcf950dbb8a58f671b9b",
+          "evidence_file_sha256": "aced9607f2af8a33ed483e11884d53b3ccd24172546bfcf950dbb8a58f671b9b",
+          "evidence_fingerprint": "1a01f9a4069bbddc06f345a6e85f52b53c48dc577a8b3a439deff782fd134c23",
+          "evidence_id": "dev-027-b-archived-city-gis",
+          "identity_category": "exact_identifier",
+          "observed_facts": [
+            "Record BDE-26-0445189",
+            "3816 N Whittier St",
+            "Residential Demolition Permit",
+            "Issued"
+          ],
+          "sha256": "aced9607f2af8a33ed483e11884d53b3ccd24172546bfcf950dbb8a58f671b9b",
+          "source_content_sha256": "aced9607f2af8a33ed483e11884d53b3ccd24172546bfcf950dbb8a58f671b9b",
+          "source_reference": "https://arcgis.tampagov.net/arcgis/rest/services/OpenData/Planning/MapServer/30",
+          "source_tier": "tier_1_archived_primary"
+        }
+      ],
+      "conflicts": [],
+      "cost_usage": {
+        "cached_tokens": "unavailable",
+        "http_requests": "unavailable",
+        "input_tokens": "unavailable",
+        "model_cost_usd": "unavailable",
+        "output_tokens": "unavailable",
+        "tool_requests": 4,
+        "wall_clock_seconds": "unavailable"
+      },
+      "identity_assessment": {
+        "accepted_for_rule_evaluation": false,
+        "candidate_count": 1,
+        "conflicting_fields": [],
+        "exact_identifiers": [
+          "BDE-26-0445189",
+          "{779CA603-7869-45F1-9299-4C485475A449}"
+        ],
+        "identity_category": "exact_identifier",
+        "identity_match_method": "exact permit identifier with matching address, project name, description, and record type",
+        "supporting_fields": [
+          "address",
+          "project name",
+          "description",
+          "record type"
+        ]
+      },
+      "investigated_claims": [
+        "source_identity",
+        "activity_classification",
+        "status_interpretation",
+        "physical_work_started"
+      ],
+      "investigation_id": "agent-benchmark-v1-dev-027-run-b",
+      "missing_information": [
+        "Live Accela details and inspection history were unavailable.",
+        "Issued status and Stop Work Order No do not establish demolition or physical work.",
+        "No approved deterministic rule was supplied."
+      ],
+      "plan": [
+        "Locate the exact demolition permit in immutable City GIS evidence.",
+        "Attempt the allowlisted Accela detail record and exact official search.",
+        "Compare identifier, address, permit type, and status without inferring work.",
+        "Archive the candidate and preserve missing inspection evidence."
+      ],
+      "prompt_hashes": {
+        "evidence_assessment": "81027cfc6e345f61218d871e4c375300c6170bc0ee00c0e2ad62825688a8b45d",
+        "investigation": "2c99b098a04518195708c1ce22e69a3fb73080722998c94b144f89c847ccd672",
+        "system": "ce14333f117928b1a786dbdc4ffcd902a883eacc9565945a7f1f9d417166629b"
+      },
+      "prompt_version": "v1",
+      "recommended_next_action": "Submit exact identity/type fields only after an approved deterministic rule is selected; retain work-start interpretation for human review.",
+      "record_number": "BDE-26-0445189",
+      "recorded_response_path": "data/agentic_validation/recorded_responses/run_b.json",
+      "repeat_id": "B",
+      "requires_human_review": true,
+      "sample_id": "dev-027",
+      "status": "evidence_found",
+      "tool_actions": [
+        {
+          "parameters": {
+            "record_number": "BDE-26-0445189"
+          },
+          "result": "exact_identifier_record_found",
+          "result_reference": "data/raw/construction_inspections.geojson",
+          "sequence": 1,
+          "tool": "search_archived_evidence"
+        },
+        {
+          "error": "available web retriever rejected the detail URL",
+          "parameters": {
+            "official_record_url": "record URL from benchmark"
+          },
+          "result": "retrieval_error",
+          "sequence": 2,
+          "tool": "fetch_accela_record"
+        },
+        {
+          "error": "detail URL remained inaccessible",
+          "parameters": {
+            "official_record_url": "same record URL",
+            "retry": 1
+          },
+          "result": "retrieval_error",
+          "sequence": 3,
+          "tool": "fetch_accela_record"
+        },
+        {
+          "parameters": {
+            "host_allowlist": [
+              "aca-prod.accela.com"
+            ],
+            "query": "BDE-26-0445189"
+          },
+          "result": "no_additional_evidence_found",
+          "sequence": 4,
+          "tool": "search_official_web"
+        }
+      ]
+    },
+    {
+      "candidate_evidence": [
+        {
+          "archived_path": "data/agentic_validation/evidence/run_b/dev-068-capital.json",
+          "content_sha256": "33c999e83188d353bd4ddd2655885e61b7436acbf4d5b263a0b25a033a0c3eaa",
+          "evidence_file_sha256": "33c999e83188d353bd4ddd2655885e61b7436acbf4d5b263a0b25a033a0c3eaa",
+          "evidence_fingerprint": "daa160cd0d8928da8be8f577d5673241fa2f992bb737c8d02515f06684cbc4ab",
+          "evidence_id": "dev-068-b-archived-capital-improvements",
+          "identity_category": "exact_identifier",
+          "observed_facts": [
+            "Project ID WTR-20-0005.3-12th St",
+            "GMP 5",
+            "P5: Closeout",
+            "Closeout",
+            "Contract 20-C-00032"
+          ],
+          "sha256": "33c999e83188d353bd4ddd2655885e61b7436acbf4d5b263a0b25a033a0c3eaa",
+          "source_content_sha256": "33c999e83188d353bd4ddd2655885e61b7436acbf4d5b263a0b25a033a0c3eaa",
+          "source_reference": "https://arcgis.tampagov.net/arcgis/rest/services/CapitalProjects/CapitalProjects/FeatureServer/0",
+          "source_tier": "tier_1_archived_primary"
+        },
+        {
+          "archived_path": "data/agentic_validation/evidence/run_b/dev-068-line.json",
+          "content_sha256": "8fd194c110fbf5ddf35ad468855f30567b99c9d645ad21a5fcef4a61fb102603",
+          "evidence_file_sha256": "8fd194c110fbf5ddf35ad468855f30567b99c9d645ad21a5fcef4a61fb102603",
+          "evidence_fingerprint": "a496d1eae1f6383bf924fa16916bed6635b33a007180f407f6d0c360c9037d87",
+          "evidence_id": "dev-068-b-archived-line-conflict",
+          "identity_category": "conflicting",
+          "observed_facts": [
+            "Same project ID",
+            "GMP 3",
+            "P4: Construction",
+            "Final Inspection and Testing"
+          ],
+          "sha256": "8fd194c110fbf5ddf35ad468855f30567b99c9d645ad21a5fcef4a61fb102603",
+          "source_content_sha256": "8fd194c110fbf5ddf35ad468855f30567b99c9d645ad21a5fcef4a61fb102603",
+          "source_reference": "https://arcgis.tampagov.net/arcgis/rest/services/CapitalProjects/CityWideProjectsPublic/FeatureServer/1",
+          "source_tier": "tier_1_archived_primary"
+        },
+        {
+          "archived_path": "data/agentic_validation/evidence/run_b/dev-068-live.json",
+          "content_sha256": "4a02a6b95493bf4bb0abfbb7f428dab9a53197b395a082ec2a52e09612934b5b",
+          "evidence_file_sha256": "4a02a6b95493bf4bb0abfbb7f428dab9a53197b395a082ec2a52e09612934b5b",
+          "evidence_fingerprint": "5e037a9aeec850a5086587dd9dd003fca692df0e1c38e2228e7cc828704e84bc",
+          "evidence_id": "dev-068-b-live-city-project-page",
+          "identity_category": "exact_identifier",
+          "observed_facts": [
+            "Project and department ID WTR-20-0005.3-12th St",
+            "GMP 5",
+            "P5: Closeout",
+            "Closeout",
+            "Contract 20-C-00032"
+          ],
+          "sha256": "4a02a6b95493bf4bb0abfbb7f428dab9a53197b395a082ec2a52e09612934b5b",
+          "source_content_sha256": "4a02a6b95493bf4bb0abfbb7f428dab9a53197b395a082ec2a52e09612934b5b",
+          "source_reference": "https://www.tampa.gov/project/wtr-20-00053-12th-st",
+          "source_tier": "tier_2_live_primary"
+        }
+      ],
+      "conflicts": [
+        "The exact project identifier is reused by a GMP 5 point record and a GMP 3 line record with different phases and statuses.",
+        "The live City page matches the GMP 5 candidate but does not explain the duplicate identifier."
+      ],
+      "cost_usage": {
+        "cached_tokens": "unavailable",
+        "http_requests": "unavailable",
+        "input_tokens": "unavailable",
+        "model_cost_usd": "unavailable",
+        "output_tokens": "unavailable",
+        "tool_requests": 4,
+        "wall_clock_seconds": "unavailable"
+      },
+      "identity_assessment": {
+        "accepted_for_rule_evaluation": false,
+        "candidate_count": 2,
+        "conflicting_fields": [
+          "GMP 5 versus GMP 3 title",
+          "P5: Closeout versus P4: Construction",
+          "Closeout versus Final Inspection and Testing"
+        ],
+        "exact_identifiers": [
+          "WTR-20-0005.3-12th St",
+          "20-C-00032"
+        ],
+        "identity_category": "conflicting",
+        "identity_match_method": "exact project identifier collides across two official source records; live title, contract, and coordinates support the GMP 5 candidate",
+        "supporting_fields": [
+          "GMP 5 title",
+          "description",
+          "project type",
+          "contract",
+          "coordinates"
+        ]
+      },
+      "investigated_claims": [
+        "source_identity",
+        "activity_classification",
+        "status_interpretation",
+        "physical_work_started"
+      ],
+      "investigation_id": "agent-benchmark-v1-dev-068-run-b",
+      "missing_information": [
+        "No source explains whether GMP 3 and GMP 5 are components or identifier reuse.",
+        "Closeout and a planned end date do not independently establish physical completion or work start.",
+        "No approved deterministic rule was supplied."
+      ],
+      "plan": [
+        "Search all immutable City GIS layers for the exact project identifier.",
+        "Fetch an allowlisted live City project page for the identifier.",
+        "Compare project titles, phases, statuses, dates, contracts, and coordinates.",
+        "Archive the identity collision and retain it for human resolution."
+      ],
+      "prompt_hashes": {
+        "evidence_assessment": "81027cfc6e345f61218d871e4c375300c6170bc0ee00c0e2ad62825688a8b45d",
+        "investigation": "2c99b098a04518195708c1ce22e69a3fb73080722998c94b144f89c847ccd672",
+        "system": "ce14333f117928b1a786dbdc4ffcd902a883eacc9565945a7f1f9d417166629b"
+      },
+      "prompt_version": "v1",
+      "recommended_next_action": "Human review must resolve the duplicate project identity before any deterministic handoff; seek contract/component documentation for GMP 3 and GMP 5.",
+      "record_number": "WTR-20-0005.3-12th St",
+      "recorded_response_path": "data/agentic_validation/recorded_responses/run_b.json",
+      "repeat_id": "B",
+      "requires_human_review": true,
+      "sample_id": "dev-068",
+      "status": "conflicting_evidence_found",
+      "tool_actions": [
+        {
+          "parameters": {
+            "record_number": "WTR-20-0005.3-12th St",
+            "source": "capital_improvements"
+          },
+          "result": "exact_identifier_record_found",
+          "result_reference": "data/raw/capital_improvements.geojson",
+          "sequence": 1,
+          "tool": "search_archived_evidence"
+        },
+        {
+          "parameters": {
+            "record_number": "WTR-20-0005.3-12th St",
+            "source": "capital_locations_line"
+          },
+          "result": "second_exact_identifier_record_with_conflicting_project_variant_found",
+          "result_reference": "data/raw/capital_locations_line.geojson",
+          "sequence": 2,
+          "tool": "search_archived_evidence"
+        },
+        {
+          "parameters": {
+            "host_allowlist": [
+              "tampa.gov",
+              "tampagov.net"
+            ],
+            "query": "WTR-20-0005.3-12th St"
+          },
+          "result": "official_project_page_found",
+          "result_reference": "https://www.tampa.gov/project/wtr-20-00053-12th-st",
+          "sequence": 3,
+          "tool": "search_official_web"
+        },
+        {
+          "parameters": {
+            "url": "https://www.tampa.gov/project/wtr-20-00053-12th-st"
+          },
+          "result": "page_fields_extracted_and_archived",
+          "result_reference": "data/agentic_validation/evidence/run_b/dev-068.json",
+          "sequence": 4,
+          "tool": "fetch_official_document"
+        }
+      ]
+    },
+    {
+      "activity_id": "tpa-2dd394e087fb26",
+      "candidate_evidence": [
+        {
+          "applicable_rule_id": "unavailable",
+          "archived_path": "data/agentic_validation/evidence/run_c/hol-019_archived_city_record.json",
+          "content_sha256": "9d17b9204f0ace93ebb22b9e94d08a982f641f1434e6a1d111c9c0863cd93cd7",
+          "evidence_file_sha256": "9d17b9204f0ace93ebb22b9e94d08a982f641f1434e6a1d111c9c0863cd93cd7",
+          "evidence_fingerprint": "0f4e0b078e9c41b890756751021f1003ebb7bd75d7a996997a595d8228cd4175",
+          "evidence_id": "9d17b9204f0ace93ebb22b9e94d08a982f641f1434e6a1d111c9c0863cd93cd7",
+          "observed_facts": [
+            "exact record number",
+            "matching project name, address, description, and type",
+            "City source reports Issued"
+          ],
+          "primary_or_secondary": "primary",
+          "source_content_sha256": "9d17b9204f0ace93ebb22b9e94d08a982f641f1434e6a1d111c9c0863cd93cd7",
+          "source_reference": "https://arcgis.tampagov.net/arcgis/rest/services/OpenData/Planning/MapServer/30",
+          "source_tier": "tier_1_archived_primary"
+        }
+      ],
+      "conflicts": [],
+      "cost_usage": {
+        "cached_tokens": "unavailable",
+        "http_requests": "unavailable",
+        "input_tokens": "unavailable",
+        "model_cost_usd": "unavailable",
+        "output_tokens": "unavailable",
+        "tool_requests": 4,
+        "wall_clock_seconds": "unavailable"
+      },
+      "identity_assessment": {
+        "accepted_for_rule_evaluation": true,
+        "candidate_count": 1,
+        "conflicting_fields": [],
+        "exact_identifiers": {
+          "record_number": "BDE-22-0441973"
+        },
+        "identity_category": "exact_identifier",
+        "identity_match_method": "exact administrative record number plus matching descriptive fields",
+        "supporting_fields": [
+          "project_name",
+          "address",
+          "description",
+          "record_type"
+        ]
+      },
+      "investigated_claims": [
+        "source_identity",
+        "activity_classification",
+        "status_interpretation",
+        "physical_work_started"
+      ],
+      "investigation_id": "run-c-hol-019",
+      "missing_information": [
+        "inspection history",
+        "affirmative dated evidence of physical work"
+      ],
+      "plan": [
+        "locate the exact identifier in archived City evidence",
+        "search archived inspection history for the exact record",
+        "attempt the linked official record only for missing fields",
+        "archive candidate facts and preserve unresolved physical-work evidence"
+      ],
+      "recommended_next_action": "human_review",
+      "record_number": "BDE-22-0441973",
+      "recorded_response_path": "data/agentic_validation/recorded_responses/run_c.json",
+      "repeat_id": "C",
+      "requires_human_review": true,
+      "sample_id": "hol-019",
+      "status": "evidence_found",
+      "tool_actions": [
+        {
+          "parameters": {
+            "record_number": "BDE-22-0441973",
+            "source": "data/processed/source_records.csv"
+          },
+          "result": {
+            "candidate_count": 1,
+            "source_record_key": "src-dd1687db49df041b"
+          },
+          "sequence": 1,
+          "status": "ok",
+          "tool": "search_archived_evidence"
+        },
+        {
+          "parameters": {
+            "record_number": "BDE-22-0441973",
+            "source": "data/processed/accela_inspections.csv"
+          },
+          "result": {
+            "interpretation": "absence is not evidence of no physical work",
+            "row_count": 0
+          },
+          "sequence": 2,
+          "status": "not_found",
+          "tool": "search_inspections"
+        },
+        {
+          "parameters": {
+            "record_number": "BDE-22-0441973",
+            "record_url_host": "aca-prod.accela.com"
+          },
+          "result": {
+            "reason": "bounded web fetch rejected the direct URL as unsafe; no page content was used"
+          },
+          "sequence": 3,
+          "status": "retrieval_error",
+          "tool": "fetch_official_document"
+        },
+        {
+          "parameters": {
+            "official_domains": [
+              "tampa.gov",
+              "tampagov.net"
+            ],
+            "record_number": "BDE-22-0441973"
+          },
+          "result": {
+            "result_count": 0
+          },
+          "sequence": 4,
+          "status": "not_found",
+          "tool": "search_official_web"
+        }
+      ]
+    },
+    {
+      "activity_id": "tpa-8624d7ab20bd7f",
+      "candidate_evidence": [
+        {
+          "applicable_rule_id": "unavailable",
+          "archived_path": "data/agentic_validation/evidence/run_c/dev-019_archived_city_record.json",
+          "content_sha256": "8ae5b0b77d88958890730cb466387c7e5f3892b7fb251a7314d833d20e0bba4a",
+          "evidence_file_sha256": "8ae5b0b77d88958890730cb466387c7e5f3892b7fb251a7314d833d20e0bba4a",
+          "evidence_fingerprint": "b896b3df3aaef873b50bb128fbf3ffcf7f236961764d10f08ba721f610b09125",
+          "evidence_id": "8ae5b0b77d88958890730cb466387c7e5f3892b7fb251a7314d833d20e0bba4a",
+          "observed_facts": [
+            "exact record number",
+            "matching addition project name, address, description, and type",
+            "City source reports Issued"
+          ],
+          "primary_or_secondary": "primary",
+          "source_content_sha256": "8ae5b0b77d88958890730cb466387c7e5f3892b7fb251a7314d833d20e0bba4a",
+          "source_reference": "https://arcgis.tampagov.net/arcgis/rest/services/OpenData/Planning/MapServer/30",
+          "source_tier": "tier_1_archived_primary"
+        }
+      ],
+      "conflicts": [],
+      "cost_usage": {
+        "cached_tokens": "unavailable",
+        "http_requests": "unavailable",
+        "input_tokens": "unavailable",
+        "model_cost_usd": "unavailable",
+        "output_tokens": "unavailable",
+        "tool_requests": 4,
+        "wall_clock_seconds": "unavailable"
+      },
+      "identity_assessment": {
+        "accepted_for_rule_evaluation": true,
+        "candidate_count": 1,
+        "conflicting_fields": [],
+        "exact_identifiers": {
+          "record_number": "BLD-26-0522941"
+        },
+        "identity_category": "exact_identifier",
+        "identity_match_method": "exact administrative record number plus matching descriptive fields",
+        "supporting_fields": [
+          "project_name",
+          "address",
+          "description",
+          "record_type"
+        ]
+      },
+      "investigated_claims": [
+        "source_identity",
+        "activity_classification",
+        "status_interpretation",
+        "building_footprint_match",
+        "physical_work_started"
+      ],
+      "investigation_id": "run-c-dev-019",
+      "missing_information": [
+        "exact parcel or building identifier for the footprint association",
+        "inspection history",
+        "affirmative dated evidence of physical work"
+      ],
+      "plan": [
+        "locate the exact identifier in archived City evidence",
+        "search archived inspections",
+        "attempt the linked official record",
+        "separate administrative identity from the medium-confidence footprint association"
+      ],
+      "recommended_next_action": "human_review",
+      "record_number": "BLD-26-0522941",
+      "recorded_response_path": "data/agentic_validation/recorded_responses/run_c.json",
+      "repeat_id": "C",
+      "requires_human_review": true,
+      "sample_id": "dev-019",
+      "status": "evidence_found",
+      "tool_actions": [
+        {
+          "parameters": {
+            "record_number": "BLD-26-0522941",
+            "source": "data/processed/source_records.csv"
+          },
+          "result": {
+            "candidate_count": 1,
+            "source_record_key": "src-bb1d8713350c59fc"
+          },
+          "sequence": 1,
+          "status": "ok",
+          "tool": "search_archived_evidence"
+        },
+        {
+          "parameters": {
+            "record_number": "BLD-26-0522941",
+            "source": "data/processed/accela_inspections.csv"
+          },
+          "result": {
+            "interpretation": "absence is not evidence of no physical work",
+            "row_count": 0
+          },
+          "sequence": 2,
+          "status": "not_found",
+          "tool": "search_inspections"
+        },
+        {
+          "parameters": {
+            "record_number": "BLD-26-0522941",
+            "record_url_host": "aca-prod.accela.com"
+          },
+          "result": {
+            "reason": "bounded web fetch rejected the direct URL as unsafe; no page content was used"
+          },
+          "sequence": 3,
+          "status": "retrieval_error",
+          "tool": "fetch_official_document"
+        },
+        {
+          "parameters": {
+            "official_domains": [
+              "tampa.gov",
+              "tampagov.net"
+            ],
+            "record_number": "BLD-26-0522941"
+          },
+          "result": {
+            "result_count": 0
+          },
+          "sequence": 4,
+          "status": "not_found",
+          "tool": "search_official_web"
+        }
+      ]
+    },
+    {
+      "activity_id": "tpa-e70b04f43c4362",
+      "candidate_evidence": [
+        {
+          "applicable_rule_id": "unavailable",
+          "archived_path": "data/agentic_validation/evidence/run_c/dev-083_archived_city_record.json",
+          "content_sha256": "3a5ef6fe7f07dc1c61690df241ae632ca7b317704d4e2d9d69060d33ab4a51a3",
+          "evidence_file_sha256": "3a5ef6fe7f07dc1c61690df241ae632ca7b317704d4e2d9d69060d33ab4a51a3",
+          "evidence_fingerprint": "581768ad5c49225a0f8e569c5f1eec9dd91abf7fe0b2c86163fb57e17a20006b",
+          "evidence_id": "3a5ef6fe7f07dc1c61690df241ae632ca7b317704d4e2d9d69060d33ab4a51a3",
+          "observed_facts": [
+            "exact project ID",
+            "matching North Embankment project name and Water type",
+            "status Closeout and phase P5: Closeout",
+            "actual-start and actual-end fields are null"
+          ],
+          "primary_or_secondary": "primary",
+          "source_content_sha256": "3a5ef6fe7f07dc1c61690df241ae632ca7b317704d4e2d9d69060d33ab4a51a3",
+          "source_reference": "https://arcgis.tampagov.net/arcgis/rest/services/CapitalProjects/CityWideProjectsPublic/FeatureServer/0",
+          "source_tier": "tier_1_archived_primary"
+        }
+      ],
+      "conflicts": [],
+      "cost_usage": {
+        "cached_tokens": "unavailable",
+        "http_requests": "unavailable",
+        "input_tokens": "unavailable",
+        "model_cost_usd": "unavailable",
+        "output_tokens": "unavailable",
+        "tool_requests": 3,
+        "wall_clock_seconds": "unavailable"
+      },
+      "identity_assessment": {
+        "accepted_for_rule_evaluation": true,
+        "candidate_count": 1,
+        "conflicting_fields": [],
+        "exact_identifiers": {
+          "project_id": "WTR20006"
+        },
+        "identity_category": "exact_identifier",
+        "identity_match_method": "exact administrative project ID plus matching name and type",
+        "supporting_fields": [
+          "project_name",
+          "project_type"
+        ]
+      },
+      "investigated_claims": [
+        "source_identity",
+        "activity_classification",
+        "status_interpretation",
+        "physical_work_started"
+      ],
+      "investigation_id": "run-c-dev-083",
+      "missing_information": [
+        "affirmative dated evidence that physical work started",
+        "actual-start and actual-end dates"
+      ],
+      "plan": [
+        "locate the exact project ID in archived City evidence",
+        "inspect official schedule and lifecycle fields",
+        "attempt the linked official document for missing fields",
+        "preserve closeout as administrative rather than physical evidence"
+      ],
+      "recommended_next_action": "human_review",
+      "record_number": "WTR20006",
+      "recorded_response_path": "data/agentic_validation/recorded_responses/run_c.json",
+      "repeat_id": "C",
+      "requires_human_review": true,
+      "sample_id": "dev-083",
+      "status": "evidence_found",
+      "tool_actions": [
+        {
+          "parameters": {
+            "project_id": "WTR20006",
+            "source": "data/processed/source_records.csv"
+          },
+          "result": {
+            "candidate_count": 1,
+            "source_record_key": "src-2a5be5c658f28661"
+          },
+          "sequence": 1,
+          "status": "ok",
+          "tool": "search_archived_evidence"
+        },
+        {
+          "parameters": {
+            "project_id": "WTR20006",
+            "record_url_host": "apps.tampagov.net"
+          },
+          "result": {
+            "reason": "bounded web fetch rejected the direct URL as unsafe; no page content was used"
+          },
+          "sequence": 2,
+          "status": "retrieval_error",
+          "tool": "fetch_official_document"
+        },
+        {
+          "parameters": {
+            "official_domains": [
+              "tampa.gov",
+              "tampagov.net"
+            ],
+            "project_id": "WTR20006"
+          },
+          "result": {
+            "result_count": 0
+          },
+          "sequence": 3,
+          "status": "not_found",
+          "tool": "search_official_web"
+        }
+      ]
+    },
+    {
+      "activity_id": "tpa-b086eca67a5628",
+      "candidate_evidence": [
+        {
+          "applicable_rule_id": "unavailable",
+          "archived_path": "data/agentic_validation/evidence/run_c/dev-024_archived_city_record.json",
+          "content_sha256": "b8fafb082c7f8398a91b8af103f157154f994f21881ed51904dc2dca2a04a920",
+          "evidence_file_sha256": "b8fafb082c7f8398a91b8af103f157154f994f21881ed51904dc2dca2a04a920",
+          "evidence_fingerprint": "f0260dc456b40117efd4912d4bfb897c99cb380163f4336373b5e69fbea19c77",
+          "evidence_id": "b8fafb082c7f8398a91b8af103f157154f994f21881ed51904dc2dca2a04a920",
+          "observed_facts": [
+            "exact record number",
+            "matching Interior ALT name, address, description, and type",
+            "City source reports Revision"
+          ],
+          "primary_or_secondary": "primary",
+          "source_content_sha256": "b8fafb082c7f8398a91b8af103f157154f994f21881ed51904dc2dca2a04a920",
+          "source_reference": "https://arcgis.tampagov.net/arcgis/rest/services/OpenData/Planning/MapServer/30",
+          "source_tier": "tier_1_archived_primary"
+        }
+      ],
+      "conflicts": [],
+      "cost_usage": {
+        "cached_tokens": "unavailable",
+        "http_requests": "unavailable",
+        "input_tokens": "unavailable",
+        "model_cost_usd": "unavailable",
+        "output_tokens": "unavailable",
+        "tool_requests": 4,
+        "wall_clock_seconds": "unavailable"
+      },
+      "identity_assessment": {
+        "accepted_for_rule_evaluation": true,
+        "candidate_count": 1,
+        "conflicting_fields": [],
+        "exact_identifiers": {
+          "record_number": "BLD-26-0522738"
+        },
+        "identity_category": "exact_identifier",
+        "identity_match_method": "exact administrative record number plus matching descriptive fields",
+        "supporting_fields": [
+          "project_name",
+          "address",
+          "description",
+          "record_type"
+        ]
+      },
+      "investigated_claims": [
+        "source_identity",
+        "activity_classification",
+        "status_interpretation",
+        "physical_work_started"
+      ],
+      "investigation_id": "run-c-dev-024",
+      "missing_information": [
+        "inspection history",
+        "affirmative dated evidence of physical work"
+      ],
+      "plan": [
+        "locate the exact identifier in archived City evidence",
+        "search archived inspections",
+        "attempt the linked official record",
+        "archive candidate fields without interpreting Revision as physical work"
+      ],
+      "recommended_next_action": "human_review",
+      "record_number": "BLD-26-0522738",
+      "recorded_response_path": "data/agentic_validation/recorded_responses/run_c.json",
+      "repeat_id": "C",
+      "requires_human_review": true,
+      "sample_id": "dev-024",
+      "status": "evidence_found",
+      "tool_actions": [
+        {
+          "parameters": {
+            "record_number": "BLD-26-0522738",
+            "source": "data/processed/source_records.csv"
+          },
+          "result": {
+            "candidate_count": 1,
+            "source_record_key": "src-c9701d1e9f0738fa"
+          },
+          "sequence": 1,
+          "status": "ok",
+          "tool": "search_archived_evidence"
+        },
+        {
+          "parameters": {
+            "record_number": "BLD-26-0522738",
+            "source": "data/processed/accela_inspections.csv"
+          },
+          "result": {
+            "interpretation": "absence is not evidence of no physical work",
+            "row_count": 0
+          },
+          "sequence": 2,
+          "status": "not_found",
+          "tool": "search_inspections"
+        },
+        {
+          "parameters": {
+            "record_number": "BLD-26-0522738",
+            "record_url_host": "aca-prod.accela.com"
+          },
+          "result": {
+            "reason": "bounded web fetch rejected the direct URL as unsafe; no page content was used"
+          },
+          "sequence": 3,
+          "status": "retrieval_error",
+          "tool": "fetch_official_document"
+        },
+        {
+          "parameters": {
+            "official_domains": [
+              "tampa.gov",
+              "tampagov.net"
+            ],
+            "record_number": "BLD-26-0522738"
+          },
+          "result": {
+            "result_count": 0
+          },
+          "sequence": 4,
+          "status": "not_found",
+          "tool": "search_official_web"
+        }
+      ]
+    },
+    {
+      "activity_id": "tpa-48ce4f012a0d8e",
+      "candidate_evidence": [
+        {
+          "applicable_rule_id": "unavailable",
+          "archived_path": "data/agentic_validation/evidence/run_c/dev-072_archived_city_record.json",
+          "content_sha256": "fc9e778f10e2a7d4f15d9fad94bf47635f993539ec7b61e59db95277c993bb8a",
+          "evidence_file_sha256": "fc9e778f10e2a7d4f15d9fad94bf47635f993539ec7b61e59db95277c993bb8a",
+          "evidence_fingerprint": "14f19a71bb63cf71c7386c2de2fe8f8618d8985401eb9bd7e274b58b78d86aef",
+          "evidence_id": "fc9e778f10e2a7d4f15d9fad94bf47635f993539ec7b61e59db95277c993bb8a",
+          "observed_facts": [
+            "exact project ID",
+            "matching project name and Water type",
+            "status 90% Design Completion and phase P2: Design",
+            "activity_status says CW2.1-WOA construction",
+            "actual-start and actual-end are null"
+          ],
+          "primary_or_secondary": "primary",
+          "source_content_sha256": "fc9e778f10e2a7d4f15d9fad94bf47635f993539ec7b61e59db95277c993bb8a",
+          "source_reference": "https://arcgis.tampagov.net/arcgis/rest/services/CapitalProjects/CityWideProjectsPublic/FeatureServer/1",
+          "source_tier": "tier_1_archived_primary"
+        }
+      ],
+      "conflicts": [
+        "The same City feature reports a design-phase status while its activity-status field contains a construction label; neither includes an actual-start date."
+      ],
+      "cost_usage": {
+        "cached_tokens": "unavailable",
+        "http_requests": "unavailable",
+        "input_tokens": "unavailable",
+        "model_cost_usd": "unavailable",
+        "output_tokens": "unavailable",
+        "tool_requests": 3,
+        "wall_clock_seconds": "unavailable"
+      },
+      "identity_assessment": {
+        "accepted_for_rule_evaluation": true,
+        "candidate_count": 1,
+        "conflicting_fields": [],
+        "exact_identifiers": {
+          "project_id": "WUR-20-0019"
+        },
+        "identity_category": "exact_identifier",
+        "identity_match_method": "exact administrative project ID plus matching name and type",
+        "supporting_fields": [
+          "project_name",
+          "project_type"
+        ]
+      },
+      "investigated_claims": [
+        "source_identity",
+        "activity_classification",
+        "status_interpretation",
+        "physical_work_started"
+      ],
+      "investigation_id": "run-c-dev-072",
+      "missing_information": [
+        "authoritative resolution of the phase/activity-status discrepancy",
+        "affirmative dated evidence that physical work started"
+      ],
+      "plan": [
+        "locate the exact project ID in archived City evidence",
+        "compare phase, status, schedule, and activity fields",
+        "attempt the linked official document",
+        "archive the semantic conflict for human review"
+      ],
+      "recommended_next_action": "human_review",
+      "record_number": "WUR-20-0019",
+      "recorded_response_path": "data/agentic_validation/recorded_responses/run_c.json",
+      "repeat_id": "C",
+      "requires_human_review": true,
+      "sample_id": "dev-072",
+      "status": "conflicting_evidence_found",
+      "tool_actions": [
+        {
+          "parameters": {
+            "project_id": "WUR-20-0019",
+            "source": "data/processed/source_records.csv"
+          },
+          "result": {
+            "candidate_count": 1,
+            "source_record_key": "src-f60489380ddbbc05"
+          },
+          "sequence": 1,
+          "status": "ok",
+          "tool": "search_archived_evidence"
+        },
+        {
+          "parameters": {
+            "project_id": "WUR-20-0019",
+            "record_url_host": "apps.tampagov.net"
+          },
+          "result": {
+            "reason": "bounded web fetch rejected the direct URL as unsafe; no page content was used"
+          },
+          "sequence": 2,
+          "status": "retrieval_error",
+          "tool": "fetch_official_document"
+        },
+        {
+          "parameters": {
+            "official_domains": [
+              "tampa.gov",
+              "tampagov.net"
+            ],
+            "project_id": "WUR-20-0019"
+          },
+          "result": {
+            "result_count": 0
+          },
+          "sequence": 3,
+          "status": "not_found",
+          "tool": "search_official_web"
+        }
+      ]
+    },
+    {
+      "activity_id": "tpa-63ef0ddb73c579",
+      "candidate_evidence": [
+        {
+          "applicable_rule_id": "unavailable",
+          "archived_path": "data/agentic_validation/evidence/run_c/dev-053_archived_city_record.json",
+          "content_sha256": "3cacce4034eecace5e85fa0e6d291aa406330f358a14778d1f65cb94c4708c54",
+          "evidence_file_sha256": "3cacce4034eecace5e85fa0e6d291aa406330f358a14778d1f65cb94c4708c54",
+          "evidence_fingerprint": "aeda3c89bf82899c8f1f3603a81c89d954c56da9aa4e7623312cffc357b8e1db",
+          "evidence_id": "3cacce4034eecace5e85fa0e6d291aa406330f358a14778d1f65cb94c4708c54",
+          "observed_facts": [
+            "exact record number",
+            "matching Formal Decision alias and address",
+            "application status Awaiting Client Reply",
+            "tentative hearing N/A"
+          ],
+          "primary_or_secondary": "primary",
+          "source_content_sha256": "3cacce4034eecace5e85fa0e6d291aa406330f358a14778d1f65cb94c4708c54",
+          "source_reference": "https://arcgis.tampagov.net/arcgis/rest/services/OpenData/Planning/MapServer/31",
+          "source_tier": "tier_1_archived_primary"
+        }
+      ],
+      "conflicts": [],
+      "cost_usage": {
+        "cached_tokens": "unavailable",
+        "http_requests": "unavailable",
+        "input_tokens": "unavailable",
+        "model_cost_usd": "unavailable",
+        "output_tokens": "unavailable",
+        "tool_requests": 3,
+        "wall_clock_seconds": "unavailable"
+      },
+      "identity_assessment": {
+        "accepted_for_rule_evaluation": true,
+        "candidate_count": 1,
+        "conflicting_fields": [],
+        "exact_identifiers": {
+          "record_number": "FDN-26-0000118"
+        },
+        "identity_category": "exact_identifier",
+        "identity_match_method": "exact administrative record number plus matching alias and address",
+        "supporting_fields": [
+          "record_alias",
+          "address"
+        ]
+      },
+      "investigated_claims": [
+        "source_identity",
+        "activity_classification",
+        "status_interpretation"
+      ],
+      "investigation_id": "run-c-dev-053",
+      "missing_information": [
+        "human interpretation of the nonfinal planning workflow status"
+      ],
+      "plan": [
+        "locate the exact planning record in archived City evidence",
+        "compare alias, address, and workflow status",
+        "attempt the linked official record",
+        "archive the administrative observations for human review"
+      ],
+      "recommended_next_action": "human_review",
+      "record_number": "FDN-26-0000118",
+      "recorded_response_path": "data/agentic_validation/recorded_responses/run_c.json",
+      "repeat_id": "C",
+      "requires_human_review": true,
+      "sample_id": "dev-053",
+      "status": "evidence_found",
+      "tool_actions": [
+        {
+          "parameters": {
+            "record_number": "FDN-26-0000118",
+            "source": "data/processed/source_records.csv"
+          },
+          "result": {
+            "candidate_count": 1,
+            "source_record_key": "src-163548eeef12ed9e"
+          },
+          "sequence": 1,
+          "status": "ok",
+          "tool": "search_archived_evidence"
+        },
+        {
+          "parameters": {
+            "record_number": "FDN-26-0000118",
+            "record_url_host": "aca-prod.accela.com"
+          },
+          "result": {
+            "reason": "bounded web fetch rejected the direct URL as unsafe; no page content was used"
+          },
+          "sequence": 2,
+          "status": "retrieval_error",
+          "tool": "fetch_official_document"
+        },
+        {
+          "parameters": {
+            "official_domains": [
+              "tampa.gov",
+              "tampagov.net"
+            ],
+            "record_number": "FDN-26-0000118"
+          },
+          "result": {
+            "result_count": 0
+          },
+          "sequence": 3,
+          "status": "not_found",
+          "tool": "search_official_web"
+        }
+      ]
+    },
+    {
+      "activity_id": "tpa-18140cc0c8929a",
+      "candidate_evidence": [
+        {
+          "applicable_rule_id": "unavailable",
+          "archived_path": "data/agentic_validation/evidence/run_c/dev-068_gmp5_archived_city_record.json",
+          "content_sha256": "ad2f6bab32f841b246c791352457c05892b3471a2b8fa62bbf639604547cd182",
+          "evidence_file_sha256": "ad2f6bab32f841b246c791352457c05892b3471a2b8fa62bbf639604547cd182",
+          "evidence_fingerprint": "36b39555a5a441cd6aa29151762ce57818a671a8d17dcdcfbb505ae6454a9b5c",
+          "evidence_id": "ad2f6bab32f841b246c791352457c05892b3471a2b8fa62bbf639604547cd182",
+          "observed_facts": [
+            "exact project ID",
+            "GMP 5 name",
+            "Closeout/P5 status",
+            "GMP 5-specific global ID and point location"
+          ],
+          "primary_or_secondary": "primary",
+          "source_content_sha256": "ad2f6bab32f841b246c791352457c05892b3471a2b8fa62bbf639604547cd182",
+          "source_reference": "https://arcgis.tampagov.net/arcgis/rest/services/CapitalProjects/CapitalProjects/FeatureServer/0",
+          "source_tier": "tier_1_archived_primary"
+        },
+        {
+          "applicable_rule_id": "unavailable",
+          "archived_path": "data/agentic_validation/evidence/run_c/dev-068_gmp3_archived_city_record.json",
+          "content_sha256": "283223f61a5a33b207e6420a07809d8dfa349a4f3ae994fd0d1654bea1bcb21b",
+          "evidence_file_sha256": "283223f61a5a33b207e6420a07809d8dfa349a4f3ae994fd0d1654bea1bcb21b",
+          "evidence_fingerprint": "78869c0a87f8f1f63d3c7a791c6c72ce463bb54a0a54d6e04158c35dbb6b1066",
+          "evidence_id": "283223f61a5a33b207e6420a07809d8dfa349a4f3ae994fd0d1654bea1bcb21b",
+          "observed_facts": [
+            "same exact project ID",
+            "GMP 3 name",
+            "Final Inspection and Testing/P4 status",
+            "different global ID and line geometry"
+          ],
+          "primary_or_secondary": "primary",
+          "source_content_sha256": "283223f61a5a33b207e6420a07809d8dfa349a4f3ae994fd0d1654bea1bcb21b",
+          "source_reference": "https://arcgis.tampagov.net/arcgis/rest/services/CapitalProjects/CityWideProjectsPublic/FeatureServer/1",
+          "source_tier": "tier_1_archived_primary"
+        },
+        {
+          "applicable_rule_id": "unavailable",
+          "archived_path": "data/agentic_validation/evidence/run_c/dev-068_gmp5_live_city_page.json",
+          "content_sha256": "f06379b12970e81b88271ad53a9a1850abd429aebaa5c45c949520798ff9ee93",
+          "evidence_file_sha256": "f06379b12970e81b88271ad53a9a1850abd429aebaa5c45c949520798ff9ee93",
+          "evidence_fingerprint": "efa26e944c82cbfba234d71c0c0b535425eb50ff1a17a3bbdafc72055d1e110e",
+          "evidence_id": "f06379b12970e81b88271ad53a9a1850abd429aebaa5c45c949520798ff9ee93",
+          "observed_facts": [
+            "live City page matches the GMP 5 name, ID, description, Closeout status, contract, cost, and coordinates"
+          ],
+          "primary_or_secondary": "primary",
+          "source_content_sha256": "f06379b12970e81b88271ad53a9a1850abd429aebaa5c45c949520798ff9ee93",
+          "source_reference": "https://www.tampa.gov/project/wtr-20-00053-12th-st",
+          "source_tier": "tier_2_live_primary"
+        }
+      ],
+      "conflicts": [
+        "City archives contain GMP 5 and GMP 3 features with the same project ID but different global IDs, phases, statuses, and geometries."
+      ],
+      "cost_usage": {
+        "cached_tokens": "unavailable",
+        "http_requests": "unavailable",
+        "input_tokens": "unavailable",
+        "model_cost_usd": "unavailable",
+        "output_tokens": "unavailable",
+        "tool_requests": 3,
+        "wall_clock_seconds": "unavailable"
+      },
+      "identity_assessment": {
+        "accepted_for_rule_evaluation": false,
+        "candidate_count": 2,
+        "conflicting_fields": [
+          "a second archived City record uses the same project ID for GMP 3",
+          "global_id",
+          "project_phase",
+          "status",
+          "geometry"
+        ],
+        "exact_identifiers": {
+          "project_id": "WTR-20-0005.3-12th St"
+        },
+        "identity_category": "ambiguous",
+        "identity_match_method": "duplicated exact administrative project ID with multi-field discrimination",
+        "supporting_fields": [
+          "GMP 5 project_name",
+          "description",
+          "coordinates",
+          "contract_number",
+          "live City page"
+        ]
+      },
+      "investigated_claims": [
+        "source_identity",
+        "activity_classification",
+        "status_interpretation",
+        "physical_work_started"
+      ],
+      "investigation_id": "run-c-dev-068",
+      "missing_information": [
+        "authoritative unique identifier or crosswalk separating GMP 5 from GMP 3",
+        "affirmative dated evidence that physical work started for the requested GMP 5 record"
+      ],
+      "plan": [
+        "locate every exact project-ID candidate in archived City evidence",
+        "compare global IDs, GMP names, statuses, phases, and geometry",
+        "retrieve the allowlisted official City project page",
+        "preserve the duplicate identifier and submit both archived candidates for human review"
+      ],
+      "recommended_next_action": "human_review",
+      "record_number": "WTR-20-0005.3-12th St",
+      "recorded_response_path": "data/agentic_validation/recorded_responses/run_c.json",
+      "repeat_id": "C",
+      "requires_human_review": true,
+      "sample_id": "dev-068",
+      "status": "ambiguous_identity",
+      "tool_actions": [
+        {
+          "parameters": {
+            "project_id": "WTR-20-0005.3-12th St",
+            "source": "data/processed/source_records.csv"
+          },
+          "result": {
+            "candidate_count": 2,
+            "source_record_keys": [
+              "src-30b7dc8f6c03c020",
+              "src-b1cd662d1db56ce7"
+            ]
+          },
+          "sequence": 1,
+          "status": "ok",
+          "tool": "search_archived_evidence"
+        },
+        {
+          "parameters": {
+            "official_domains": [
+              "tampa.gov",
+              "tampagov.net"
+            ],
+            "project_id": "WTR-20-0005.3-12th St"
+          },
+          "result": {
+            "result_count": 1,
+            "url": "https://www.tampa.gov/project/wtr-20-00053-12th-st"
+          },
+          "sequence": 2,
+          "status": "ok",
+          "tool": "search_official_web"
+        },
+        {
+          "parameters": {
+            "url": "https://www.tampa.gov/project/wtr-20-00053-12th-st"
+          },
+          "result": {
+            "observed_project_id": "WTR-20-0005.3-12th St",
+            "observed_project_name_suffix": "GMP 5",
+            "retrieved_at_utc": "2026-09-02T08:28:04Z"
+          },
+          "sequence": 3,
+          "status": "ok",
+          "tool": "fetch_official_document"
+        }
+      ]
+    },
+    {
+      "activity_id": "tpa-439c74811140ba",
+      "candidate_evidence": [
+        {
+          "applicable_rule_id": "unavailable",
+          "archived_path": "data/agentic_validation/evidence/run_c/dev-025_archived_city_record.json",
+          "content_sha256": "bec38f27f680db9153159fdccf3b7f790da2bbc34e998bedfef40b9e97b9a102",
+          "evidence_file_sha256": "bec38f27f680db9153159fdccf3b7f790da2bbc34e998bedfef40b9e97b9a102",
+          "evidence_fingerprint": "8527074cfcdcd0348f0abc09487cfd5e405be535907b62c9381a5952fc3d1eba",
+          "evidence_id": "bec38f27f680db9153159fdccf3b7f790da2bbc34e998bedfef40b9e97b9a102",
+          "observed_facts": [
+            "exact record number",
+            "matching private-provider interior-remodel name, address, description, and type",
+            "City source reports Revision"
+          ],
+          "primary_or_secondary": "primary",
+          "source_content_sha256": "bec38f27f680db9153159fdccf3b7f790da2bbc34e998bedfef40b9e97b9a102",
+          "source_reference": "https://arcgis.tampagov.net/arcgis/rest/services/OpenData/Planning/MapServer/30",
+          "source_tier": "tier_1_archived_primary"
+        }
+      ],
+      "conflicts": [],
+      "cost_usage": {
+        "cached_tokens": "unavailable",
+        "http_requests": "unavailable",
+        "input_tokens": "unavailable",
+        "model_cost_usd": "unavailable",
+        "output_tokens": "unavailable",
+        "tool_requests": 4,
+        "wall_clock_seconds": "unavailable"
+      },
+      "identity_assessment": {
+        "accepted_for_rule_evaluation": true,
+        "candidate_count": 1,
+        "conflicting_fields": [],
+        "exact_identifiers": {
+          "record_number": "BLD-26-0519341"
+        },
+        "identity_category": "exact_identifier",
+        "identity_match_method": "exact administrative record number plus matching descriptive fields",
+        "supporting_fields": [
+          "project_name",
+          "address",
+          "description",
+          "record_type"
+        ]
+      },
+      "investigated_claims": [
+        "source_identity",
+        "activity_classification",
+        "status_interpretation",
+        "building_footprint_match",
+        "physical_work_started"
+      ],
+      "investigation_id": "run-c-dev-025",
+      "missing_information": [
+        "exact parcel or building identifier for the 30.75 metre footprint association",
+        "private-provider or City inspection history",
+        "affirmative dated evidence of physical work"
+      ],
+      "plan": [
+        "locate the exact identifier in archived City evidence",
+        "search archived inspection evidence",
+        "attempt the linked official record",
+        "keep permit identity separate from the medium-confidence footprint association"
+      ],
+      "recommended_next_action": "human_review",
+      "record_number": "BLD-26-0519341",
+      "recorded_response_path": "data/agentic_validation/recorded_responses/run_c.json",
+      "repeat_id": "C",
+      "requires_human_review": true,
+      "sample_id": "dev-025",
+      "status": "evidence_found",
+      "tool_actions": [
+        {
+          "parameters": {
+            "record_number": "BLD-26-0519341",
+            "source": "data/processed/source_records.csv"
+          },
+          "result": {
+            "candidate_count": 1,
+            "source_record_key": "src-d9a95081ee26bd27"
+          },
+          "sequence": 1,
+          "status": "ok",
+          "tool": "search_archived_evidence"
+        },
+        {
+          "parameters": {
+            "record_number": "BLD-26-0519341",
+            "source": "data/processed/accela_inspections.csv"
+          },
+          "result": {
+            "interpretation": "absence is not evidence of no physical work",
+            "row_count": 0
+          },
+          "sequence": 2,
+          "status": "not_found",
+          "tool": "search_inspections"
+        },
+        {
+          "parameters": {
+            "record_number": "BLD-26-0519341",
+            "record_url_host": "aca-prod.accela.com"
+          },
+          "result": {
+            "reason": "bounded web fetch rejected the direct URL as unsafe; no page content was used"
+          },
+          "sequence": 3,
+          "status": "retrieval_error",
+          "tool": "fetch_official_document"
+        },
+        {
+          "parameters": {
+            "official_domains": [
+              "tampa.gov",
+              "tampagov.net"
+            ],
+            "record_number": "BLD-26-0519341"
+          },
+          "result": {
+            "result_count": 0
+          },
+          "sequence": 4,
+          "status": "not_found",
+          "tool": "search_official_web"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Agent discovery and mutable live sources are not computationally deterministic.",
+    "Token counts and model cost are unavailable unless exposed in recorded agent metadata.",
+    "Evidence precision and false-association rates require blinded human audit.",
+    "Experimental rule matches cannot write release validation results."
+  ],
+  "metrics": {
+    "ambiguity_rate": 0.18181818181818182,
+    "candidate_evidence_investigations": 22,
+    "conflict_discovery_rate": 0.13636363636363635,
+    "cost": {
+      "average_duration_seconds": null,
+      "cost_per_ambiguity_resolved": null,
+      "cost_per_evidence_found": null,
+      "cost_per_investigation": null,
+      "http_requests_recorded": null,
+      "token_usage_status": "unavailable",
+      "tool_requests_recorded": 78,
+      "total_model_cost_usd": null
+    },
+    "evidence_precision_from_human_audit": null,
+    "evidence_retrieval_yield": 1.0,
+    "experimental_cases_with_rule_match": 12,
+    "experimental_deterministic_resolution_yield": 0.5454545454545454,
+    "experimental_deterministic_rule_matches": 12,
+    "false_positive_association_rate_from_human_audit": null,
+    "human_review_reduction": 0.0,
+    "investigations_attempted": 22,
+    "release_deterministic_resolution_yield": 0.0,
+    "release_unresolved_after": 18,
+    "release_unresolved_before": 18,
+    "retrieval_failure_rate": 0.0,
+    "source_distribution": {
+      "aca-prod.accela.com": 1,
+      "arcgis.tampagov.net": 27,
+      "www.tampa.gov": 6
+    },
+    "status_counts": {
+      "ambiguous_identity": 4,
+      "conflicting_evidence_found": 3,
+      "evidence_found": 15
+    },
+    "unique_cases_investigated": 18
+  },
+  "network": {
+    "live_evidence_ingested": true,
+    "note": "The runner made no network request; agent action logs preserve recorded retrieval provenance.",
+    "runner_http_requests": 0
+  },
+  "prompt_provenance": [
+    {
+      "name": "evidence_assessment",
+      "path": "prompts/agent/evidence_assessment_v1.md",
+      "prompt_hash": "81027cfc6e345f61218d871e4c375300c6170bc0ee00c0e2ad62825688a8b45d",
+      "version": "v1"
+    },
+    {
+      "name": "investigation",
+      "path": "prompts/agent/investigation_v1.md",
+      "prompt_hash": "2c99b098a04518195708c1ce22e69a3fb73080722998c94b144f89c847ccd672",
+      "version": "v1"
+    },
+    {
+      "name": "system",
+      "path": "prompts/agent/system_v1.md",
+      "prompt_hash": "ce14333f117928b1a786dbdc4ffcd902a883eacc9565945a7f1f9d417166629b",
+      "version": "v1"
+    }
+  ],
+  "recorded_responses": [
+    {
+      "path": "data/agentic_validation/recorded_responses/run_a.json",
+      "sha256": "6aa892c6816e55e03d8471b0707279ab9d482c0fd4ec99fed967f60995df9012"
+    },
+    {
+      "path": "data/agentic_validation/recorded_responses/run_b.json",
+      "sha256": "298d4d41a2b1fbecc46f20217e90e8400f669abb38f1435f0480c9a4aa42d0bb"
+    },
+    {
+      "path": "data/agentic_validation/recorded_responses/run_c.json",
+      "sha256": "fc7338dca835fc2442b303f546d6122a39a4bae953d7d38339b87b0685266e87"
+    }
+  ],
+  "repeatability": {
+    "cases": [
+      {
+        "evidence_sets": [
+          [
+            "0a650a8d882ecc47916279be2c143594a4c86fc16606c222871a51dda5d86af6",
+            "678a93a7df3a94f45499119a8fa8c5696c030d577134da6a1edbe8538046792f",
+            "6a2d94e82bb8b87ebd720cd3382534c74625c6c5ef1736aa1d8c6ec5d4da9832"
+          ],
+          [
+            "01c2bb2edbd15a1c9acd58542722c3f245e34e1a84cafab41d64f5111a8df389"
+          ],
+          [
+            "8527074cfcdcd0348f0abc09487cfd5e405be535907b62c9381a5952fc3d1eba"
+          ]
+        ],
+        "repeat_count": 3,
+        "same_evidence_discovered": false,
+        "same_final_deterministic_classification": false,
+        "same_source_selected": false,
+        "sample_id": "dev-025"
+      },
+      {
+        "evidence_sets": [
+          [
+            "44f16baa97f113d84a95354348bb7cfa5f7a29236eaab462a2a1492564439ded",
+            "4cb75ac305e106bc65deb8f9eb342624bf863a7c08ae4674963ab7d9de6bb183",
+            "6edc39fc93c4e6f71751eb97900fb64ebff88fc0bfdee4da68b414ffd6ba6bda"
+          ],
+          [
+            "5e037a9aeec850a5086587dd9dd003fca692df0e1c38e2228e7cc828704e84bc",
+            "a496d1eae1f6383bf924fa16916bed6635b33a007180f407f6d0c360c9037d87",
+            "daa160cd0d8928da8be8f577d5673241fa2f992bb737c8d02515f06684cbc4ab"
+          ],
+          [
+            "36b39555a5a441cd6aa29151762ce57818a671a8d17dcdcfbb505ae6454a9b5c",
+            "78869c0a87f8f1f63d3c7a791c6c72ce463bb54a0a54d6e04158c35dbb6b1066",
+            "efa26e944c82cbfba234d71c0c0b535425eb50ff1a17a3bbdafc72055d1e110e"
+          ]
+        ],
+        "repeat_count": 3,
+        "same_evidence_discovered": false,
+        "same_final_deterministic_classification": true,
+        "same_source_selected": true,
+        "sample_id": "dev-068"
+      }
+    ],
+    "repeated_cases": 2,
+    "same_deterministic_classification_rate": 0.5,
+    "same_evidence_rate": 0.0,
+    "same_source_rate": 0.5
+  },
+  "rule_registry": {
+    "path": "config/agent_evidence_rules.json",
+    "release_write_enabled": false,
+    "sha256": "0837701bd17a83b4d529849ccdbeeebd4448d382a06da11f304715affcafb2f3",
+    "version": "0.1.0-experimental"
+  },
+  "run_id": "20260902T093648Z",
+  "runner_version": "1.0.0",
+  "scale_to_full_sample_recommended": false,
+  "study": "core"
+}

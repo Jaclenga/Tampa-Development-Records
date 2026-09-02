@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0.0",
+  "evidence_id": "hol-039-b-live-city-project-page",
+  "investigation_id": "agent-benchmark-v1-hol-039-run-b",
+  "sample_id": "hol-039",
+  "source": "City of Tampa project page",
+  "source_url": "https://www.tampa.gov/project/sw50019",
+  "retrieved_at_utc": "2026-09-02T08:28:48Z",
+  "administrative_record_id": "SW50019",
+  "evidence_type": "official_city_project_page_extract",
+  "source_state": "live",
+  "primary_or_secondary": "primary",
+  "source_tier": "tier_2_live_primary",
+  "mime_type": "application/json",
+  "observed_fields": {"record_number": "SW50019", "department_id": "SW50019", "project_name": "17th and Annona", "project_type": "Stormwater Engineering", "project_phase": "P3: Procurement", "status": "Contract Negotiations", "planned_start_date": "2026-01-31", "planned_end_date": "2026-07-31", "location": "28.040766363506, -82.440781886307"}
+}

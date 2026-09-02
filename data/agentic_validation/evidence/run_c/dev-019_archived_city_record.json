@@ -1,0 +1,28 @@
+{
+  "evidence_schema_version": "1.0.0",
+  "sample_id": "dev-019",
+  "source_tier": "tier_1_archived_primary",
+  "source": "City of Tampa OpenData construction inspections snapshot",
+  "source_endpoint": "https://arcgis.tampagov.net/arcgis/rest/services/OpenData/Planning/MapServer/30",
+  "original_archive_path": "data/processed/source_records.csv",
+  "original_retrieved_at_utc": "2026-08-23T02:06:02+00:00",
+  "source_record_key": "src-bb1d8713350c59fc",
+  "observed_fields": {
+    "record_number": "BLD-26-0522941",
+    "object_id": 1108,
+    "global_id": "{0D121284-6E4C-4363-B70A-D8FAC3FBBFBD}",
+    "project_name": "2nd Floor Addition & Rear Addition",
+    "description": "SCOPE OF WORK INCLUDES A REAR ADDITION AND ADDITION OF SECOND FLOOR",
+    "address": "907 S Bruce St",
+    "record_type": "Residential New Construction and Additions (1 and 2 Family)",
+    "project_status": "Issued",
+    "created_date_epoch_ms": 1771977600000,
+    "last_update_epoch_ms": 1777939200000,
+    "source_url": "https://aca-prod.accela.com/TAMPA/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=26CAP&capID2=00000&capID3=00BTI&agencyCode=TAMPA"
+  },
+  "limitations": [
+    "This layer contains no inspection-history row for the record.",
+    "The archived 17.31 metre nearest-footprint association is not an exact parcel or building identifier.",
+    "Issued status does not establish that physical work started."
+  ]
+}

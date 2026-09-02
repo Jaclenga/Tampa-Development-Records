@@ -69,6 +69,14 @@ Python's standard library. The optional Accela collector uses `requests` from
 
 ## Validation and analysis
 
+- `build_agent_benchmark.py` reproducibly derives the bounded 18-case agent
+  benchmark from the frozen core validation sample.
+- `run_agentic_validation.py` audits recorded agent investigations, verifies
+  archived evidence and prompt/model provenance, performs experimental
+  deterministic handoff, and writes a separate agent-performance report. It
+  never calls a model or changes validation decisions.
+- `verify_agent_benchmark_freeze.py` checks the pre-human-audit hashes for the
+  evaluated agent implementation and the unchanged Runs A/B/C package.
 - `validate_release.py` checks release schemas, relationships, and counts.
 - `verify_data_accuracy.py` checks fidelity to the archived source records.
 - `validation_study.py` validates and reuses the hash-frozen core manual-review

@@ -50,6 +50,10 @@ scope, methodology, validation, and release material.
 
 ## Validation
 
+- [Agentic evidence validation](AGENTIC_VALIDATION.md) - bounded evidence
+  retrieval, source controls, deterministic handoff, repeatability, and the
+  boundary between agent metrics and dataset validity.
+
 - [Manual-validation operator guide](MANUAL_VALIDATION_GUIDE.md) — the shortest
   path for reviewers completing the frozen sample.
 - [Manual-validation protocol](MANUAL_VALIDATION_PROTOCOL.md) — controlling

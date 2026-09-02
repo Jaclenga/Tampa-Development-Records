@@ -1,0 +1,20 @@
+{
+  "format_version": "1.0.0",
+  "outputs": [
+    {
+      "bytes": 2906,
+      "path": "outputs/accuracy_verification_report.json",
+      "sha256": "ee42aebd44489b860fe1c77daaa54dfa65ee05f9c2aca46f3ce0c781f5938b10"
+    },
+    {
+      "bytes": 34,
+      "path": "outputs/repository_privacy_check.txt",
+      "sha256": "e45c3df78d0a5ed4fc1451929a9018e3d48feff8da7500dd2e7097921bf2b4ca"
+    },
+    {
+      "bytes": 6597,
+      "path": "outputs/validation_report.json",
+      "sha256": "fd6bc3cf55f869cd48cebc3070cda9e2c6713a87a7d28b0167e42666c84daba5"
+    }
+  ]
+}

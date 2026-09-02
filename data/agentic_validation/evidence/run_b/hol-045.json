@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0.0",
+  "investigation_id": "agent-benchmark-v1-hol-045-run-b",
+  "sample_id": "hol-045",
+  "repeat_id": "B",
+  "archived_at_utc": "2026-09-02T08:38:01Z",
+  "evidence": [
+    {
+      "evidence_id": "hol-045-b-archived-city-gis",
+      "source": "TDR immutable City GIS snapshot: capital_locations_point",
+      "source_url": "https://arcgis.tampagov.net/arcgis/rest/services/CapitalProjects/CityWideProjectsPublic/FeatureServer/0",
+      "retrieval_timestamp_utc": "2026-08-23T02:06:02Z",
+      "administrative_record_id": "1001810.14",
+      "evidence_type": "official_city_gis_record",
+      "archived_path": "data/agentic_validation/evidence/run_b/hol-045.json",
+      "source_archived_path": "data/raw/capital_locations_point.geojson",
+      "sha256": "1bb39a06542032343f65b38f84c91fce0f5d08721c7c56836f924a6a97edce46",
+      "content_sha256": "1bb39a06542032343f65b38f84c91fce0f5d08721c7c56836f924a6a97edce46",
+      "hash_scope": "entire source_archived_path file bytes",
+      "mime_type": "application/geo+json",
+      "source_state": "archived",
+      "primary_or_secondary": "primary",
+      "source_tier": "tier_1_archived_primary",
+      "observed_fields": {
+        "OBJECTID": 5375,
+        "GlobalID": "{EFCE0D30-EBA0-478D-AC14-F17FD36D6F07}",
+        "projid": "1001810.14",
+        "projname": "Palm Springs Pumping Station Rehabilitation",
+        "projtype": "Wastewater",
+        "projphase": "P1: Planning",
+        "status": "Planning",
+        "ContractNumber": "20-C-00016",
+        "actstart": null,
+        "actend": null
+      }
+    },
+    {
+      "evidence_id": "hol-045-b-live-city-project-page",
+      "source": "City of Tampa project page",
+      "source_url": "https://www.tampa.gov/project/ww100181014",
+      "retrieval_timestamp_utc": "2026-09-02T08:28:48Z",
+      "administrative_record_id": "1001810.14",
+      "evidence_type": "official_city_project_page_extract",
+      "archived_path": "data/agentic_validation/evidence/run_b/hol-045.json",
+      "sha256": "f99289ed58fdd177061fbc83d197e7a5c4badd4eee16cf4258f094457f4a9e03",
+      "content_sha256": "f99289ed58fdd177061fbc83d197e7a5c4badd4eee16cf4258f094457f4a9e03",
+      "hash_scope": "canonical JSON of observed_fields",
+      "mime_type": "application/json",
+      "source_state": "live",
+      "primary_or_secondary": "primary",
+      "source_tier": "tier_2_live_primary",
+      "observed_fields": {
+        "project_id": "1001810.14",
+        "department_id": "WW1001810.14",
+        "title": "Palm Springs Pumping Station Rehabilitation",
+        "address": "5001 Palm Springs Blvd",
+        "project_type": "Wastewater",
+        "project_phase": "P1: Planning",
+        "status": "Planning",
+        "planned_start_date": "2027-09-01",
+        "planned_end_date": "2028-03-01",
+        "contract_number": "20-C-00016",
+        "location": "28.121275635933, -82.391039802453"
+      }
+    }
+  ],
+  "untrusted_content_handling": "Source text was treated only as evidence data; no embedded instruction was followed."
+}

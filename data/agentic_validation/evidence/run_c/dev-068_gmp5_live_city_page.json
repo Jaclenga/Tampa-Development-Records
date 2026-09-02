@@ -1,0 +1,28 @@
+{
+  "evidence_schema_version": "1.0.0",
+  "sample_id": "dev-068",
+  "source_tier": "tier_2_live_primary",
+  "source": "City of Tampa project page",
+  "source_url": "https://www.tampa.gov/project/wtr-20-00053-12th-st",
+  "retrieved_at_utc": "2026-09-02T08:28:04Z",
+  "retrieval_method": "bounded official-web search and page fetch",
+  "observed_fields": {
+    "project_id": "WTR-20-0005.3-12th St",
+    "department_id": "WTR-20-0005.3-12th St",
+    "project_name": "FY20 CIP Water Main Improvements Design-Build_12th St - GMP 5",
+    "description": "Approximately 15,960 Linear Feet of water mains ranging from 2 to 8 inches in diameter will be replaced and upgraded.",
+    "project_type": "Water",
+    "status": "Closeout",
+    "project_phase": "P5: Closeout",
+    "construction_fiscal_year": "2026",
+    "planned_end_date": "2026-05-31",
+    "estimated_cost": 5596767,
+    "contract_number": "20-C-00032",
+    "latitude": 27.978613538442,
+    "longitude": -82.447072624744
+  },
+  "limitations": [
+    "This mutable live page corroborates GMP 5 but does not erase the duplicate identifier in the archived City data.",
+    "Closeout and a planned end date do not independently establish a physical-work start date."
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "dataset_version": "0.9.0",
+  "verified_at_utc": null,
+  "machine_verification_passed": true,
+  "source_snapshot_fidelity": "verified",
+  "ground_truth_status": "not_established",
+  "ground_truth_note": "Passing checks show that the released rows accurately reproduce the bundled public-source snapshots and programmed transformations. They do not prove that physical work occurred, that records form unique projects, or that all Tampa development is present.",
+  "checks": {
+    "all_raw_features_have_source_rows": true,
+    "all_raw_features_have_locations": true,
+    "all_raw_features_have_bounded_rows": true,
+    "raw_to_processed_fields_match": true,
+    "manifest_source_hashes_match": true,
+    "manifest_context_hashes_match": true,
+    "source_universe_counts_reconcile": true,
+    "activity_and_source_links_resolve": true,
+    "activity_dates_are_iso_dates": true,
+    "coordinates_are_finite_pairs": true,
+    "configured_private_contact_fields_are_absent": true,
+    "raw_snapshots_are_privacy_minimized": true,
+    "context_snapshots_are_privacy_minimized": true,
+    "investment_amount_rows_match_activity_fields": true
+  },
+  "counts": {
+    "raw_features": 4469,
+    "source_records": 4469,
+    "bounded_census_records": 4469,
+    "activities": 3323,
+    "manual_sample_rows": 150,
+    "manually_reviewed_rows": 0,
+    "double_review_assignment_rows": 50,
+    "double_reviewed_rows": 0
+  },
+  "raw_feature_counts": {
+    "construction_inspections": 2619,
+    "development_coordination": 271,
+    "single_family_permits": 1023,
+    "historic_preservation": 169,
+    "capital_improvements": 192,
+    "capital_locations_point": 57,
+    "capital_locations_line": 101,
+    "capital_locations_polygon": 37
+  },
+  "mismatch_counts": {},
+  "manifest_hash_failures": [],
+  "context_manifest_hash_failures": [],
+  "universe_count_errors": {},
+  "invalid_dates": [],
+  "invalid_coordinate_ids": [],
+  "privacy_leak_record_keys": [],
+  "raw_privacy_leak_fields": [],
+  "context_privacy_leak_fields": [],
+  "broken_link_count": 0,
+  "amount_error_ids": [],
+  "live_source_comparison": {
+    "status": "not_requested",
+    "layers": {}
+  },
+  "interpretation": {
+    "verified": [
+      "Every bundled source feature is represented once in the source and bounded-census tables.",
+      "Retained source properties and geometries match the bundled GeoJSON after documented field suppression.",
+      "Identifiers, source lineage, centroids, counts, dates, hashes, and extracted amount rows satisfy the coded rules."
+    ],
+    "not_verified": [
+      "Whether each record represents one distinct real-world development.",
+      "Whether construction started or was completed.",
+      "Whether building-footprint matches are correct.",
+      "Whether the eight layers contain all Tampa development or investment."
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "evidence_id": "run-a-dev-025-archived-spatial-match",
+  "sample_ids": ["dev-025"],
+  "source": "TDR archived City building-footprint match output",
+  "url_or_endpoint": "https://arcgis.tampagov.net/arcgis/rest/services/OpenData/Location/MapServer/0",
+  "source_tier": "tier_1_archived_primary",
+  "source_state": "archived",
+  "retrieved_at_utc": "2026-08-23T02:06:02Z",
+  "investigation_accessed_at_utc": "2026-09-02T08:21:48Z",
+  "administrative_record_id": "BLD-26-0519341",
+  "mime_type": "text/csv",
+  "archived_source_path": "data/processed/parcel_building_matches.csv",
+  "content_sha256": "890bcfaf76138652fb3316b99704968e7da455bc8119351add66b9ca23cee431",
+  "hash_scope": "archived_source_file",
+  "extracted_explicit_fields": {
+    "activity_id": "tpa-439c74811140ba",
+    "location_id": "loc-f9b121e01248e4f0",
+    "building_object_id": "774371",
+    "folio": "169094.0125",
+    "strap": "1829224IZ000001000080A",
+    "building_address": "210 N Macdill Ave",
+    "match_method": "nearest_footprint_within_35m",
+    "match_confidence": "medium",
+    "match_distance_m": "30.75"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0.0",
+  "evidence_id": "hol-001-b-archived-single-family",
+  "investigation_id": "agent-benchmark-v1-hol-001-run-b",
+  "sample_id": "hol-001",
+  "source": "TDR immutable City GIS snapshot: single_family_permits",
+  "source_url": "https://arcgis.tampagov.net/arcgis/rest/services/OpenData/Planning/MapServer/32",
+  "retrieved_at_utc": "2026-08-23T02:06:02Z",
+  "administrative_record_id": "BLD-26-0522370",
+  "evidence_type": "official_city_gis_record",
+  "source_state": "archived",
+  "primary_or_secondary": "primary",
+  "source_tier": "tier_1_archived_primary",
+  "mime_type": "application/json",
+  "source_archived_path": "data/raw/single_family_permits.geojson",
+  "source_content_sha256": "6a0f2ad15253eb71fd76a343ad01538e5883d516f699be148b5bc167edba0a57",
+  "source_hash_scope": "entire source_archived_path file bytes",
+  "observed_fields": {"record_number": "BLD-26-0522370", "address": "618 Luzon Ave", "application_type": "Residential New Construction and Additions (1 and 2 Family)", "application_status": "Issued", "task": "Issuance", "task_status": "Issued", "global_id": "{B1D323FE-8F61-4230-98BA-58763CF6CAD5}"}
+}

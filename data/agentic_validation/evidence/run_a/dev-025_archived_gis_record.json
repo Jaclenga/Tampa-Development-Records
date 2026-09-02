@@ -1,0 +1,25 @@
+{
+  "evidence_id": "run-a-dev-025-archived-gis-record",
+  "sample_ids": ["dev-025"],
+  "source": "City of Tampa OpenData Planning MapServer/30 archived export",
+  "url_or_endpoint": "https://arcgis.tampagov.net/arcgis/rest/services/OpenData/Planning/MapServer/30",
+  "source_tier": "tier_1_archived_primary",
+  "source_state": "archived",
+  "retrieved_at_utc": "2026-08-23T02:06:02Z",
+  "investigation_accessed_at_utc": "2026-09-02T08:21:48Z",
+  "administrative_record_id": "BLD-26-0519341",
+  "mime_type": "application/geo+json",
+  "archived_source_path": "data/raw/construction_inspections.geojson",
+  "content_sha256": "bcd5ff1969731a3d0ef98051db277833acf92c953f683ad17ba29e94a8d137a7",
+  "hash_scope": "archived_source_file",
+  "extracted_explicit_fields": {
+    "source_object_id": "2534",
+    "source_global_id": "{2B400FF9-7D1A-45A4-8002-492A9045E1AF}",
+    "record_id": "BLD-26-0519341",
+    "project_name": "PP: Interior Remodel",
+    "record_type": "Residential Building Alterations (Renovations)",
+    "project_status": "Revision",
+    "address": "206 N MacDill Ave",
+    "private_provider": "Yes"
+  }
+}

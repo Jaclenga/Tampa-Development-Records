@@ -6,7 +6,11 @@
   "model": "GPT-5",
   "exact_model_version": "unavailable",
   "prompt_files": [
-    "reproducibility/prompts/validator_implementation_prompt.md"
+    "reproducibility/prompts/validator_implementation_prompt.md",
+    "reproducibility/prompts/agentic_evidence_layer_implementation_prompt.md",
+    "prompts/agent/system_v1.md",
+    "prompts/agent/investigation_v1.md",
+    "prompts/agent/evidence_assessment_v1.md"
   ],
   "roles": [
     "implementation assistance",
@@ -24,6 +28,23 @@
     "llm_required": false,
     "ai_derived_classifications_combined_with_deterministic_results": false,
     "statement": "The automated validator executes committed Python rules against archived files and does not call an AI model. Manual reviews and the historical AI-assisted evidence pilot remain separately labeled."
+  },
+  "agentic_evidence_runtime": {
+    "ai_used": true,
+    "provider": "OpenAI",
+    "product": "Codex",
+    "model_identifier": "gpt-5.6-sol",
+    "reasoning_effort": "high",
+    "exact_model_snapshot": "unavailable",
+    "temperature": "unavailable",
+    "seed": "unavailable",
+    "scope": "18-case bounded agent-system benchmark with two three-run repeatability probes",
+    "authority": "candidate evidence retrieval only; no dataset validation, human-review, or release-write authority",
+    "recorded_responses": [
+      "data/agentic_validation/recorded_responses/run_a.json",
+      "data/agentic_validation/recorded_responses/run_b.json",
+      "data/agentic_validation/recorded_responses/run_c.json"
+    ]
   },
   "limitations": "The archived prompt and available metadata document development provenance but do not guarantee identical regeneration of AI-assisted code. Model generation can be nondeterministic and the exact backend model build was not exposed."
 }

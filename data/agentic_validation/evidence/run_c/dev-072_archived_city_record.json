@@ -1,0 +1,29 @@
+{
+  "evidence_schema_version": "1.0.0",
+  "sample_id": "dev-072",
+  "source_tier": "tier_1_archived_primary",
+  "source": "City of Tampa CityWideProjectsPublic line snapshot",
+  "source_endpoint": "https://arcgis.tampagov.net/arcgis/rest/services/CapitalProjects/CityWideProjectsPublic/FeatureServer/1",
+  "original_archive_path": "data/processed/source_records.csv",
+  "original_retrieved_at_utc": "2026-08-23T02:06:02+00:00",
+  "source_record_key": "src-f60489380ddbbc05",
+  "observed_fields": {
+    "project_id": "WUR-20-0019",
+    "object_id": 39092,
+    "global_id": "{91B6E59E-8809-4DBA-9897-99D3722BC76E}",
+    "project_name": "Brorein_Tampa St WM Abandonment",
+    "project_type": "Water",
+    "status": "90% Design Completion",
+    "project_phase": "P2: Design",
+    "activity_status": "CW2.1-WOA construction",
+    "planned_start_epoch_ms": 1677628800000,
+    "planned_end_epoch_ms": 1727740800000,
+    "actual_start": null,
+    "actual_end": null,
+    "estimated_cost": 240703.55
+  },
+  "limitations": [
+    "The design-phase fields and activity-status text point in different semantic directions.",
+    "No actual-start or actual-end date is present; the construction label alone does not establish physical work."
+  ]
+}

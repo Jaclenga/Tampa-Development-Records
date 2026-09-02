@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0.0",
+  "evidence_id": "hol-045-b-live-city-project-page",
+  "investigation_id": "agent-benchmark-v1-hol-045-run-b",
+  "sample_id": "hol-045",
+  "source": "City of Tampa project page",
+  "source_url": "https://www.tampa.gov/project/ww100181014",
+  "retrieved_at_utc": "2026-09-02T08:28:48Z",
+  "administrative_record_id": "1001810.14",
+  "evidence_type": "official_city_project_page_extract",
+  "source_state": "live",
+  "primary_or_secondary": "primary",
+  "source_tier": "tier_2_live_primary",
+  "mime_type": "application/json",
+  "observed_fields": {"record_number": "1001810.14", "department_id": "WW1001810.14", "project_name": "Palm Springs Pumping Station Rehabilitation", "address": "5001 Palm Springs Blvd", "project_type": "Wastewater", "project_phase": "P1: Planning", "status": "Planning", "planned_start_date": "2027-09-01", "planned_end_date": "2028-03-01", "contract_number": "20-C-00016", "location": "28.121275635933, -82.391039802453"}
+}

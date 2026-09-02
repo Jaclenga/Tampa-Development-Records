@@ -1,0 +1,139 @@
+{
+  "schema_version": "1.0.0",
+  "layer_version": "1.0.0",
+  "execution": {
+    "mode": "benchmark_only",
+    "live_research_enabled": false,
+    "live_research_requires_explicit_authorization": true,
+    "live_research_authorized_scopes": [
+      "bounded_benchmark"
+    ],
+    "all_unresolved_requires_explicit_authorization": true,
+    "may_modify_frozen_samples": false,
+    "may_modify_human_decisions": false,
+    "deterministic_handoff_required": true
+  },
+  "model": {
+    "requested_development_configuration": {
+      "model_family": "GPT-5.6 Sol",
+      "reasoning_effort": "high"
+    },
+    "runtime_metadata_defaults": {
+      "provider": "unavailable",
+      "product_api": "unavailable",
+      "model_identifier": "unavailable",
+      "reasoning_effort": "unavailable",
+      "model_snapshot_version": "unavailable",
+      "temperature": "unavailable",
+      "seed": "unavailable",
+      "generation_parameters": "unavailable"
+    },
+    "metadata_policy": "Record values exposed by the runtime; retain unavailable for every value the runtime does not expose. Requested configuration is not evidence of actual runtime configuration."
+  },
+  "investigation_budget": {
+    "max_tool_calls": 16,
+    "max_source_queries": 10,
+    "max_repeated_queries": 2,
+    "max_duration_seconds": 300,
+    "max_input_tokens": 30000,
+    "max_output_tokens": 5000,
+    "max_cost_usd": 5.0
+  },
+  "source_policy": {
+    "allowed_schemes": [
+      "https"
+    ],
+    "allowed_ports": [
+      443
+    ],
+    "live_primary_hosts": [
+      "tampa.gov",
+      "tampagov.net",
+      "tampa.maps.arcgis.com",
+      "tampagov.maps.arcgis.com",
+      "city-tampa.opendata.arcgis.com"
+    ],
+    "live_primary_exact_hosts": [
+      "aca-prod.accela.com"
+    ],
+    "secondary_sources_enabled": false,
+    "secondary_hosts": [],
+    "discovery_hosts": [],
+    "unknown_hosts_allowed": false,
+    "tiers": {
+      "tier_1_archived_primary": {
+        "rank": 1,
+        "may_support_claim": true,
+        "description": "Immutable archived official administrative evidence."
+      },
+      "tier_2_live_primary": {
+        "rank": 2,
+        "may_support_claim": true,
+        "description": "Allowlisted live City of Tampa or government primary evidence."
+      },
+      "tier_3_secondary": {
+        "rank": 3,
+        "may_support_claim": false,
+        "description": "Explicitly allowlisted secondary corroboration; disabled by default."
+      },
+      "tier_4_discovery_only": {
+        "rank": 4,
+        "may_support_claim": false,
+        "description": "Explicitly allowlisted discovery material that must be traced to primary evidence."
+      }
+    }
+  },
+  "tool_policy": {
+    "allowed_tools": [
+      "search_accela",
+      "fetch_accela_record",
+      "search_city_gis",
+      "fetch_city_record",
+      "search_archived_evidence",
+      "search_inspections",
+      "search_official_web",
+      "fetch_official_document",
+      "archive_evidence",
+      "calculate_hash",
+      "submit_candidate_evidence"
+    ],
+    "unrestricted_computer_access": false,
+    "direct_validation_result_writes": false
+  },
+  "prompts": {
+    "system": {
+      "version": "v1",
+      "path": "prompts/agent/system_v1.md",
+      "sha256": "ce14333f117928b1a786dbdc4ffcd902a883eacc9565945a7f1f9d417166629b"
+    },
+    "investigation": {
+      "version": "v1",
+      "path": "prompts/agent/investigation_v1.md",
+      "sha256": "2c99b098a04518195708c1ce22e69a3fb73080722998c94b144f89c847ccd672"
+    },
+    "evidence_assessment": {
+      "version": "v1",
+      "path": "prompts/agent/evidence_assessment_v1.md",
+      "sha256": "81027cfc6e345f61218d871e4c375300c6170bc0ee00c0e2ad62825688a8b45d"
+    }
+  },
+  "output_policy": {
+    "store_hidden_chain_of_thought": false,
+    "agent_is_human_reviewer": false,
+    "permitted_statuses": [
+      "evidence_found",
+      "conflicting_evidence_found",
+      "insufficient_evidence",
+      "ambiguous_identity",
+      "source_unavailable",
+      "retrieval_error",
+      "no_additional_evidence_found",
+      "investigation_budget_exhausted"
+    ],
+    "forbidden_statuses": [
+      "verified",
+      "true",
+      "false"
+    ]
+  }
+}

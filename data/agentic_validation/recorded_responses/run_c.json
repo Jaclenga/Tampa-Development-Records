@@ -1,0 +1,302 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "run_c",
+  "repeat_id": "C",
+  "benchmark_id": "tdr-agent-evidence-benchmark-v1",
+  "scope": {
+    "benchmark_case_positions": [13, 14, 15, 16, 17, 18],
+    "repeatability_probes": ["dev-068", "dev-025"],
+    "frozen_samples_modified": false,
+    "deterministic_rules_modified": false,
+    "human_decisions_modified": false,
+    "live_scope_authorization": "bounded_benchmark"
+  },
+  "actual_model": {
+    "provider": "OpenAI",
+    "product_api": "Codex",
+    "model_identifier": "gpt-5.6-sol",
+    "reasoning_effort": "high",
+    "model_snapshot_version": "unavailable",
+    "temperature": "unavailable",
+    "seed": "unavailable",
+    "generation_parameters": "unavailable"
+  },
+  "prompt_provenance": {
+    "system": {
+      "version": "v1",
+      "path": "prompts/agent/system_v1.md",
+      "sha256": "ce14333f117928b1a786dbdc4ffcd902a883eacc9565945a7f1f9d417166629b"
+    },
+    "investigation": {
+      "version": "v1",
+      "path": "prompts/agent/investigation_v1.md",
+      "sha256": "2c99b098a04518195708c1ce22e69a3fb73080722998c94b144f89c847ccd672"
+    },
+    "evidence_assessment": {
+      "version": "v1",
+      "path": "prompts/agent/evidence_assessment_v1.md",
+      "sha256": "81027cfc6e345f61218d871e4c375300c6170bc0ee00c0e2ad62825688a8b45d"
+    }
+  },
+  "budget": {
+    "max_tool_calls_per_investigation": 16,
+    "max_source_queries_per_investigation": 10,
+    "max_repeated_queries_per_investigation": 2,
+    "max_duration_seconds_per_investigation": 300,
+    "max_input_tokens_per_investigation": 30000,
+    "max_output_tokens_per_investigation": 5000,
+    "max_cost_usd_per_investigation": 5.0
+  },
+  "investigations": [
+    {
+      "investigation_id": "run-c-hol-019",
+      "repeat_id": "C",
+      "sample_id": "hol-019",
+      "activity_id": "tpa-2dd394e087fb26",
+      "record_number": "BDE-22-0441973",
+      "investigated_claims": ["source_identity", "activity_classification", "status_interpretation", "physical_work_started"],
+      "status": "evidence_found",
+      "plan": [
+        "locate the exact identifier in archived City evidence",
+        "search archived inspection history for the exact record",
+        "attempt the linked official record only for missing fields",
+        "archive candidate facts and preserve unresolved physical-work evidence"
+      ],
+      "tool_actions": [
+        {
+          "sequence": 1,
+          "tool": "search_archived_evidence",
+          "parameters": {"record_number": "BDE-22-0441973", "source": "data/processed/source_records.csv"},
+          "status": "ok",
+          "result": {"candidate_count": 1, "source_record_key": "src-dd1687db49df041b"}
+        },
+        {
+          "sequence": 2,
+          "tool": "search_inspections",
+          "parameters": {"record_number": "BDE-22-0441973", "source": "data/processed/accela_inspections.csv"},
+          "status": "not_found",
+          "result": {"row_count": 0, "interpretation": "absence is not evidence of no physical work"}
+        },
+        {
+          "sequence": 3,
+          "tool": "fetch_official_document",
+          "parameters": {"record_url_host": "aca-prod.accela.com", "record_number": "BDE-22-0441973"},
+          "status": "retrieval_error",
+          "result": {"reason": "bounded web fetch rejected the direct URL as unsafe; no page content was used"}
+        },
+        {
+          "sequence": 4,
+          "tool": "search_official_web",
+          "parameters": {"official_domains": ["tampa.gov", "tampagov.net"], "record_number": "BDE-22-0441973"},
+          "status": "not_found",
+          "result": {"result_count": 0}
+        }
+      ],
+      "candidate_evidence": [
+        {
+          "evidence_id": "9d17b9204f0ace93ebb22b9e94d08a982f641f1434e6a1d111c9c0863cd93cd7",
+          "source_tier": "tier_1_archived_primary",
+          "primary_or_secondary": "primary",
+          "archived_path": "data/agentic_validation/evidence/run_c/hol-019_archived_city_record.json",
+          "content_sha256": "9d17b9204f0ace93ebb22b9e94d08a982f641f1434e6a1d111c9c0863cd93cd7",
+          "observed_facts": ["exact record number", "matching project name, address, description, and type", "City source reports Issued"],
+          "applicable_rule_id": "unavailable"
+        }
+      ],
+      "identity_assessment": {
+        "identity_match_method": "exact administrative record number plus matching descriptive fields",
+        "exact_identifiers": {"record_number": "BDE-22-0441973"},
+        "supporting_fields": ["project_name", "address", "description", "record_type"],
+        "conflicting_fields": [],
+        "candidate_count": 1,
+        "identity_category": "exact_identifier",
+        "accepted_for_rule_evaluation": true
+      },
+      "conflicts": [],
+      "missing_information": ["inspection history", "affirmative dated evidence of physical work"],
+      "recommended_next_action": "human_review",
+      "requires_human_review": true,
+      "cost_usage": {"input_tokens": "unavailable", "output_tokens": "unavailable", "cached_tokens": "unavailable", "model_cost_usd": "unavailable", "tool_requests": 4, "http_requests": "unavailable", "wall_clock_seconds": "unavailable"}
+    },
+    {
+      "investigation_id": "run-c-dev-019",
+      "repeat_id": "C",
+      "sample_id": "dev-019",
+      "activity_id": "tpa-8624d7ab20bd7f",
+      "record_number": "BLD-26-0522941",
+      "investigated_claims": ["source_identity", "activity_classification", "status_interpretation", "building_footprint_match", "physical_work_started"],
+      "status": "evidence_found",
+      "plan": ["locate the exact identifier in archived City evidence", "search archived inspections", "attempt the linked official record", "separate administrative identity from the medium-confidence footprint association"],
+      "tool_actions": [
+        {"sequence": 1, "tool": "search_archived_evidence", "parameters": {"record_number": "BLD-26-0522941", "source": "data/processed/source_records.csv"}, "status": "ok", "result": {"candidate_count": 1, "source_record_key": "src-bb1d8713350c59fc"}},
+        {"sequence": 2, "tool": "search_inspections", "parameters": {"record_number": "BLD-26-0522941", "source": "data/processed/accela_inspections.csv"}, "status": "not_found", "result": {"row_count": 0, "interpretation": "absence is not evidence of no physical work"}},
+        {"sequence": 3, "tool": "fetch_official_document", "parameters": {"record_url_host": "aca-prod.accela.com", "record_number": "BLD-26-0522941"}, "status": "retrieval_error", "result": {"reason": "bounded web fetch rejected the direct URL as unsafe; no page content was used"}},
+        {"sequence": 4, "tool": "search_official_web", "parameters": {"official_domains": ["tampa.gov", "tampagov.net"], "record_number": "BLD-26-0522941"}, "status": "not_found", "result": {"result_count": 0}}
+      ],
+      "candidate_evidence": [
+        {"evidence_id": "8ae5b0b77d88958890730cb466387c7e5f3892b7fb251a7314d833d20e0bba4a", "source_tier": "tier_1_archived_primary", "primary_or_secondary": "primary", "archived_path": "data/agentic_validation/evidence/run_c/dev-019_archived_city_record.json", "content_sha256": "8ae5b0b77d88958890730cb466387c7e5f3892b7fb251a7314d833d20e0bba4a", "observed_facts": ["exact record number", "matching addition project name, address, description, and type", "City source reports Issued"], "applicable_rule_id": "unavailable"}
+      ],
+      "identity_assessment": {"identity_match_method": "exact administrative record number plus matching descriptive fields", "exact_identifiers": {"record_number": "BLD-26-0522941"}, "supporting_fields": ["project_name", "address", "description", "record_type"], "conflicting_fields": [], "candidate_count": 1, "identity_category": "exact_identifier", "accepted_for_rule_evaluation": true},
+      "conflicts": [],
+      "missing_information": ["exact parcel or building identifier for the footprint association", "inspection history", "affirmative dated evidence of physical work"],
+      "recommended_next_action": "human_review",
+      "requires_human_review": true,
+      "cost_usage": {"input_tokens": "unavailable", "output_tokens": "unavailable", "cached_tokens": "unavailable", "model_cost_usd": "unavailable", "tool_requests": 4, "http_requests": "unavailable", "wall_clock_seconds": "unavailable"}
+    },
+    {
+      "investigation_id": "run-c-dev-083",
+      "repeat_id": "C",
+      "sample_id": "dev-083",
+      "activity_id": "tpa-e70b04f43c4362",
+      "record_number": "WTR20006",
+      "investigated_claims": ["source_identity", "activity_classification", "status_interpretation", "physical_work_started"],
+      "status": "evidence_found",
+      "plan": ["locate the exact project ID in archived City evidence", "inspect official schedule and lifecycle fields", "attempt the linked official document for missing fields", "preserve closeout as administrative rather than physical evidence"],
+      "tool_actions": [
+        {"sequence": 1, "tool": "search_archived_evidence", "parameters": {"project_id": "WTR20006", "source": "data/processed/source_records.csv"}, "status": "ok", "result": {"candidate_count": 1, "source_record_key": "src-2a5be5c658f28661"}},
+        {"sequence": 2, "tool": "fetch_official_document", "parameters": {"record_url_host": "apps.tampagov.net", "project_id": "WTR20006"}, "status": "retrieval_error", "result": {"reason": "bounded web fetch rejected the direct URL as unsafe; no page content was used"}},
+        {"sequence": 3, "tool": "search_official_web", "parameters": {"official_domains": ["tampa.gov", "tampagov.net"], "project_id": "WTR20006"}, "status": "not_found", "result": {"result_count": 0}}
+      ],
+      "candidate_evidence": [
+        {"evidence_id": "3a5ef6fe7f07dc1c61690df241ae632ca7b317704d4e2d9d69060d33ab4a51a3", "source_tier": "tier_1_archived_primary", "primary_or_secondary": "primary", "archived_path": "data/agentic_validation/evidence/run_c/dev-083_archived_city_record.json", "content_sha256": "3a5ef6fe7f07dc1c61690df241ae632ca7b317704d4e2d9d69060d33ab4a51a3", "observed_facts": ["exact project ID", "matching North Embankment project name and Water type", "status Closeout and phase P5: Closeout", "actual-start and actual-end fields are null"], "applicable_rule_id": "unavailable"}
+      ],
+      "identity_assessment": {"identity_match_method": "exact administrative project ID plus matching name and type", "exact_identifiers": {"project_id": "WTR20006"}, "supporting_fields": ["project_name", "project_type"], "conflicting_fields": [], "candidate_count": 1, "identity_category": "exact_identifier", "accepted_for_rule_evaluation": true},
+      "conflicts": [],
+      "missing_information": ["affirmative dated evidence that physical work started", "actual-start and actual-end dates"],
+      "recommended_next_action": "human_review",
+      "requires_human_review": true,
+      "cost_usage": {"input_tokens": "unavailable", "output_tokens": "unavailable", "cached_tokens": "unavailable", "model_cost_usd": "unavailable", "tool_requests": 3, "http_requests": "unavailable", "wall_clock_seconds": "unavailable"}
+    },
+    {
+      "investigation_id": "run-c-dev-024",
+      "repeat_id": "C",
+      "sample_id": "dev-024",
+      "activity_id": "tpa-b086eca67a5628",
+      "record_number": "BLD-26-0522738",
+      "investigated_claims": ["source_identity", "activity_classification", "status_interpretation", "physical_work_started"],
+      "status": "evidence_found",
+      "plan": ["locate the exact identifier in archived City evidence", "search archived inspections", "attempt the linked official record", "archive candidate fields without interpreting Revision as physical work"],
+      "tool_actions": [
+        {"sequence": 1, "tool": "search_archived_evidence", "parameters": {"record_number": "BLD-26-0522738", "source": "data/processed/source_records.csv"}, "status": "ok", "result": {"candidate_count": 1, "source_record_key": "src-c9701d1e9f0738fa"}},
+        {"sequence": 2, "tool": "search_inspections", "parameters": {"record_number": "BLD-26-0522738", "source": "data/processed/accela_inspections.csv"}, "status": "not_found", "result": {"row_count": 0, "interpretation": "absence is not evidence of no physical work"}},
+        {"sequence": 3, "tool": "fetch_official_document", "parameters": {"record_url_host": "aca-prod.accela.com", "record_number": "BLD-26-0522738"}, "status": "retrieval_error", "result": {"reason": "bounded web fetch rejected the direct URL as unsafe; no page content was used"}},
+        {"sequence": 4, "tool": "search_official_web", "parameters": {"official_domains": ["tampa.gov", "tampagov.net"], "record_number": "BLD-26-0522738"}, "status": "not_found", "result": {"result_count": 0}}
+      ],
+      "candidate_evidence": [
+        {"evidence_id": "b8fafb082c7f8398a91b8af103f157154f994f21881ed51904dc2dca2a04a920", "source_tier": "tier_1_archived_primary", "primary_or_secondary": "primary", "archived_path": "data/agentic_validation/evidence/run_c/dev-024_archived_city_record.json", "content_sha256": "b8fafb082c7f8398a91b8af103f157154f994f21881ed51904dc2dca2a04a920", "observed_facts": ["exact record number", "matching Interior ALT name, address, description, and type", "City source reports Revision"], "applicable_rule_id": "unavailable"}
+      ],
+      "identity_assessment": {"identity_match_method": "exact administrative record number plus matching descriptive fields", "exact_identifiers": {"record_number": "BLD-26-0522738"}, "supporting_fields": ["project_name", "address", "description", "record_type"], "conflicting_fields": [], "candidate_count": 1, "identity_category": "exact_identifier", "accepted_for_rule_evaluation": true},
+      "conflicts": [],
+      "missing_information": ["inspection history", "affirmative dated evidence of physical work"],
+      "recommended_next_action": "human_review",
+      "requires_human_review": true,
+      "cost_usage": {"input_tokens": "unavailable", "output_tokens": "unavailable", "cached_tokens": "unavailable", "model_cost_usd": "unavailable", "tool_requests": 4, "http_requests": "unavailable", "wall_clock_seconds": "unavailable"}
+    },
+    {
+      "investigation_id": "run-c-dev-072",
+      "repeat_id": "C",
+      "sample_id": "dev-072",
+      "activity_id": "tpa-48ce4f012a0d8e",
+      "record_number": "WUR-20-0019",
+      "investigated_claims": ["source_identity", "activity_classification", "status_interpretation", "physical_work_started"],
+      "status": "conflicting_evidence_found",
+      "plan": ["locate the exact project ID in archived City evidence", "compare phase, status, schedule, and activity fields", "attempt the linked official document", "archive the semantic conflict for human review"],
+      "tool_actions": [
+        {"sequence": 1, "tool": "search_archived_evidence", "parameters": {"project_id": "WUR-20-0019", "source": "data/processed/source_records.csv"}, "status": "ok", "result": {"candidate_count": 1, "source_record_key": "src-f60489380ddbbc05"}},
+        {"sequence": 2, "tool": "fetch_official_document", "parameters": {"record_url_host": "apps.tampagov.net", "project_id": "WUR-20-0019"}, "status": "retrieval_error", "result": {"reason": "bounded web fetch rejected the direct URL as unsafe; no page content was used"}},
+        {"sequence": 3, "tool": "search_official_web", "parameters": {"official_domains": ["tampa.gov", "tampagov.net"], "project_id": "WUR-20-0019"}, "status": "not_found", "result": {"result_count": 0}}
+      ],
+      "candidate_evidence": [
+        {"evidence_id": "fc9e778f10e2a7d4f15d9fad94bf47635f993539ec7b61e59db95277c993bb8a", "source_tier": "tier_1_archived_primary", "primary_or_secondary": "primary", "archived_path": "data/agentic_validation/evidence/run_c/dev-072_archived_city_record.json", "content_sha256": "fc9e778f10e2a7d4f15d9fad94bf47635f993539ec7b61e59db95277c993bb8a", "observed_facts": ["exact project ID", "matching project name and Water type", "status 90% Design Completion and phase P2: Design", "activity_status says CW2.1-WOA construction", "actual-start and actual-end are null"], "applicable_rule_id": "unavailable"}
+      ],
+      "identity_assessment": {"identity_match_method": "exact administrative project ID plus matching name and type", "exact_identifiers": {"project_id": "WUR-20-0019"}, "supporting_fields": ["project_name", "project_type"], "conflicting_fields": [], "candidate_count": 1, "identity_category": "exact_identifier", "accepted_for_rule_evaluation": true},
+      "conflicts": ["The same City feature reports a design-phase status while its activity-status field contains a construction label; neither includes an actual-start date."],
+      "missing_information": ["authoritative resolution of the phase/activity-status discrepancy", "affirmative dated evidence that physical work started"],
+      "recommended_next_action": "human_review",
+      "requires_human_review": true,
+      "cost_usage": {"input_tokens": "unavailable", "output_tokens": "unavailable", "cached_tokens": "unavailable", "model_cost_usd": "unavailable", "tool_requests": 3, "http_requests": "unavailable", "wall_clock_seconds": "unavailable"}
+    },
+    {
+      "investigation_id": "run-c-dev-053",
+      "repeat_id": "C",
+      "sample_id": "dev-053",
+      "activity_id": "tpa-63ef0ddb73c579",
+      "record_number": "FDN-26-0000118",
+      "investigated_claims": ["source_identity", "activity_classification", "status_interpretation"],
+      "status": "evidence_found",
+      "plan": ["locate the exact planning record in archived City evidence", "compare alias, address, and workflow status", "attempt the linked official record", "archive the administrative observations for human review"],
+      "tool_actions": [
+        {"sequence": 1, "tool": "search_archived_evidence", "parameters": {"record_number": "FDN-26-0000118", "source": "data/processed/source_records.csv"}, "status": "ok", "result": {"candidate_count": 1, "source_record_key": "src-163548eeef12ed9e"}},
+        {"sequence": 2, "tool": "fetch_official_document", "parameters": {"record_url_host": "aca-prod.accela.com", "record_number": "FDN-26-0000118"}, "status": "retrieval_error", "result": {"reason": "bounded web fetch rejected the direct URL as unsafe; no page content was used"}},
+        {"sequence": 3, "tool": "search_official_web", "parameters": {"official_domains": ["tampa.gov", "tampagov.net"], "record_number": "FDN-26-0000118"}, "status": "not_found", "result": {"result_count": 0}}
+      ],
+      "candidate_evidence": [
+        {"evidence_id": "3cacce4034eecace5e85fa0e6d291aa406330f358a14778d1f65cb94c4708c54", "source_tier": "tier_1_archived_primary", "primary_or_secondary": "primary", "archived_path": "data/agentic_validation/evidence/run_c/dev-053_archived_city_record.json", "content_sha256": "3cacce4034eecace5e85fa0e6d291aa406330f358a14778d1f65cb94c4708c54", "observed_facts": ["exact record number", "matching Formal Decision alias and address", "application status Awaiting Client Reply", "tentative hearing N/A"], "applicable_rule_id": "unavailable"}
+      ],
+      "identity_assessment": {"identity_match_method": "exact administrative record number plus matching alias and address", "exact_identifiers": {"record_number": "FDN-26-0000118"}, "supporting_fields": ["record_alias", "address"], "conflicting_fields": [], "candidate_count": 1, "identity_category": "exact_identifier", "accepted_for_rule_evaluation": true},
+      "conflicts": [],
+      "missing_information": ["human interpretation of the nonfinal planning workflow status"],
+      "recommended_next_action": "human_review",
+      "requires_human_review": true,
+      "cost_usage": {"input_tokens": "unavailable", "output_tokens": "unavailable", "cached_tokens": "unavailable", "model_cost_usd": "unavailable", "tool_requests": 3, "http_requests": "unavailable", "wall_clock_seconds": "unavailable"}
+    },
+    {
+      "investigation_id": "run-c-dev-068",
+      "repeat_id": "C",
+      "sample_id": "dev-068",
+      "activity_id": "tpa-18140cc0c8929a",
+      "record_number": "WTR-20-0005.3-12th St",
+      "investigated_claims": ["source_identity", "activity_classification", "status_interpretation", "physical_work_started"],
+      "status": "ambiguous_identity",
+      "plan": ["locate every exact project-ID candidate in archived City evidence", "compare global IDs, GMP names, statuses, phases, and geometry", "retrieve the allowlisted official City project page", "preserve the duplicate identifier and submit both archived candidates for human review"],
+      "tool_actions": [
+        {"sequence": 1, "tool": "search_archived_evidence", "parameters": {"project_id": "WTR-20-0005.3-12th St", "source": "data/processed/source_records.csv"}, "status": "ok", "result": {"candidate_count": 2, "source_record_keys": ["src-30b7dc8f6c03c020", "src-b1cd662d1db56ce7"]}},
+        {"sequence": 2, "tool": "search_official_web", "parameters": {"official_domains": ["tampa.gov", "tampagov.net"], "project_id": "WTR-20-0005.3-12th St"}, "status": "ok", "result": {"result_count": 1, "url": "https://www.tampa.gov/project/wtr-20-00053-12th-st"}},
+        {"sequence": 3, "tool": "fetch_official_document", "parameters": {"url": "https://www.tampa.gov/project/wtr-20-00053-12th-st"}, "status": "ok", "result": {"observed_project_id": "WTR-20-0005.3-12th St", "observed_project_name_suffix": "GMP 5", "retrieved_at_utc": "2026-09-02T08:28:04Z"}}
+      ],
+      "candidate_evidence": [
+        {"evidence_id": "ad2f6bab32f841b246c791352457c05892b3471a2b8fa62bbf639604547cd182", "source_tier": "tier_1_archived_primary", "primary_or_secondary": "primary", "archived_path": "data/agentic_validation/evidence/run_c/dev-068_gmp5_archived_city_record.json", "content_sha256": "ad2f6bab32f841b246c791352457c05892b3471a2b8fa62bbf639604547cd182", "observed_facts": ["exact project ID", "GMP 5 name", "Closeout/P5 status", "GMP 5-specific global ID and point location"], "applicable_rule_id": "unavailable"},
+        {"evidence_id": "283223f61a5a33b207e6420a07809d8dfa349a4f3ae994fd0d1654bea1bcb21b", "source_tier": "tier_1_archived_primary", "primary_or_secondary": "primary", "archived_path": "data/agentic_validation/evidence/run_c/dev-068_gmp3_archived_city_record.json", "content_sha256": "283223f61a5a33b207e6420a07809d8dfa349a4f3ae994fd0d1654bea1bcb21b", "observed_facts": ["same exact project ID", "GMP 3 name", "Final Inspection and Testing/P4 status", "different global ID and line geometry"], "applicable_rule_id": "unavailable"},
+        {"evidence_id": "f06379b12970e81b88271ad53a9a1850abd429aebaa5c45c949520798ff9ee93", "source_tier": "tier_2_live_primary", "primary_or_secondary": "primary", "archived_path": "data/agentic_validation/evidence/run_c/dev-068_gmp5_live_city_page.json", "content_sha256": "f06379b12970e81b88271ad53a9a1850abd429aebaa5c45c949520798ff9ee93", "observed_facts": ["live City page matches the GMP 5 name, ID, description, Closeout status, contract, cost, and coordinates"], "applicable_rule_id": "unavailable"}
+      ],
+      "identity_assessment": {"identity_match_method": "duplicated exact administrative project ID with multi-field discrimination", "exact_identifiers": {"project_id": "WTR-20-0005.3-12th St"}, "supporting_fields": ["GMP 5 project_name", "description", "coordinates", "contract_number", "live City page"], "conflicting_fields": ["a second archived City record uses the same project ID for GMP 3", "global_id", "project_phase", "status", "geometry"], "candidate_count": 2, "identity_category": "ambiguous", "accepted_for_rule_evaluation": false},
+      "conflicts": ["City archives contain GMP 5 and GMP 3 features with the same project ID but different global IDs, phases, statuses, and geometries."],
+      "missing_information": ["authoritative unique identifier or crosswalk separating GMP 5 from GMP 3", "affirmative dated evidence that physical work started for the requested GMP 5 record"],
+      "recommended_next_action": "human_review",
+      "requires_human_review": true,
+      "cost_usage": {"input_tokens": "unavailable", "output_tokens": "unavailable", "cached_tokens": "unavailable", "model_cost_usd": "unavailable", "tool_requests": 3, "http_requests": "unavailable", "wall_clock_seconds": "unavailable"}
+    },
+    {
+      "investigation_id": "run-c-dev-025",
+      "repeat_id": "C",
+      "sample_id": "dev-025",
+      "activity_id": "tpa-439c74811140ba",
+      "record_number": "BLD-26-0519341",
+      "investigated_claims": ["source_identity", "activity_classification", "status_interpretation", "building_footprint_match", "physical_work_started"],
+      "status": "evidence_found",
+      "plan": ["locate the exact identifier in archived City evidence", "search archived inspection evidence", "attempt the linked official record", "keep permit identity separate from the medium-confidence footprint association"],
+      "tool_actions": [
+        {"sequence": 1, "tool": "search_archived_evidence", "parameters": {"record_number": "BLD-26-0519341", "source": "data/processed/source_records.csv"}, "status": "ok", "result": {"candidate_count": 1, "source_record_key": "src-d9a95081ee26bd27"}},
+        {"sequence": 2, "tool": "search_inspections", "parameters": {"record_number": "BLD-26-0519341", "source": "data/processed/accela_inspections.csv"}, "status": "not_found", "result": {"row_count": 0, "interpretation": "absence is not evidence of no physical work"}},
+        {"sequence": 3, "tool": "fetch_official_document", "parameters": {"record_url_host": "aca-prod.accela.com", "record_number": "BLD-26-0519341"}, "status": "retrieval_error", "result": {"reason": "bounded web fetch rejected the direct URL as unsafe; no page content was used"}},
+        {"sequence": 4, "tool": "search_official_web", "parameters": {"official_domains": ["tampa.gov", "tampagov.net"], "record_number": "BLD-26-0519341"}, "status": "not_found", "result": {"result_count": 0}}
+      ],
+      "candidate_evidence": [
+        {"evidence_id": "bec38f27f680db9153159fdccf3b7f790da2bbc34e998bedfef40b9e97b9a102", "source_tier": "tier_1_archived_primary", "primary_or_secondary": "primary", "archived_path": "data/agentic_validation/evidence/run_c/dev-025_archived_city_record.json", "content_sha256": "bec38f27f680db9153159fdccf3b7f790da2bbc34e998bedfef40b9e97b9a102", "observed_facts": ["exact record number", "matching private-provider interior-remodel name, address, description, and type", "City source reports Revision"], "applicable_rule_id": "unavailable"}
+      ],
+      "identity_assessment": {"identity_match_method": "exact administrative record number plus matching descriptive fields", "exact_identifiers": {"record_number": "BLD-26-0519341"}, "supporting_fields": ["project_name", "address", "description", "record_type"], "conflicting_fields": [], "candidate_count": 1, "identity_category": "exact_identifier", "accepted_for_rule_evaluation": true},
+      "conflicts": [],
+      "missing_information": ["exact parcel or building identifier for the 30.75 metre footprint association", "private-provider or City inspection history", "affirmative dated evidence of physical work"],
+      "recommended_next_action": "human_review",
+      "requires_human_review": true,
+      "cost_usage": {"input_tokens": "unavailable", "output_tokens": "unavailable", "cached_tokens": "unavailable", "model_cost_usd": "unavailable", "tool_requests": 4, "http_requests": "unavailable", "wall_clock_seconds": "unavailable"}
+    }
+  ],
+  "run_limitations": [
+    "Direct Accela and tampagov.net file-handler URLs were not retrievable through the bounded web fetch in this runtime.",
+    "Official-domain searches returned no additional records except the City GMP 5 project page.",
+    "No missing result was interpreted as affirmative absence.",
+    "Agent evidence associations and interpretations are not human review or dataset validation conclusions.",
+    "No deterministic rule was applied by this run."
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "evidence_schema_version": "1.0.0",
+  "sample_id": "hol-019",
+  "source_tier": "tier_1_archived_primary",
+  "source": "City of Tampa OpenData construction inspections snapshot",
+  "source_endpoint": "https://arcgis.tampagov.net/arcgis/rest/services/OpenData/Planning/MapServer/30",
+  "original_archive_path": "data/processed/source_records.csv",
+  "original_retrieved_at_utc": "2026-08-23T02:06:02+00:00",
+  "source_record_key": "src-dd1687db49df041b",
+  "observed_fields": {
+    "record_number": "BDE-22-0441973",
+    "object_id": 11,
+    "global_id": "{497AC76F-B022-4A41-9F0A-1610C8E65A5F}",
+    "project_name": "REISSUE - 3506 E 8th Ave (ACA)",
+    "description": "Demolition and removal of single family dwelling to come in compliance with city code department. Original Application Date 12/15/2021",
+    "address": "3506 E 8th Ave",
+    "record_type": "Residential Demolition Permit",
+    "project_status": "Issued",
+    "created_date_epoch_ms": 1639526400000,
+    "last_update_epoch_ms": 1662940800000,
+    "source_url": "https://aca-prod.accela.com/TAMPA/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=21CAP&capID2=00000&capID3=02WJ5&agencyCode=TAMPA"
+  },
+  "limitations": [
+    "This layer contains no inspection-history row for the record.",
+    "Issued status does not establish that physical work started."
+  ]
+}

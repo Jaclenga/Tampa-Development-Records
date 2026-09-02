@@ -1,0 +1,29 @@
+{
+  "evidence_schema_version": "1.0.0",
+  "sample_id": "dev-083",
+  "source_tier": "tier_1_archived_primary",
+  "source": "City of Tampa CityWideProjectsPublic point snapshot",
+  "source_endpoint": "https://arcgis.tampagov.net/arcgis/rest/services/CapitalProjects/CityWideProjectsPublic/FeatureServer/0",
+  "original_archive_path": "data/processed/source_records.csv",
+  "original_retrieved_at_utc": "2026-08-23T02:06:02+00:00",
+  "source_record_key": "src-2a5be5c658f28661",
+  "observed_fields": {
+    "project_id": "WTR20006",
+    "object_id": 878,
+    "global_id": "{37596268-56A6-4C77-A75C-213B48C86070}",
+    "project_name": "North Embankment Remediation",
+    "project_type": "Water",
+    "status": "Closeout",
+    "project_phase": "P5: Closeout",
+    "planned_start_epoch_ms": 1625011200000,
+    "planned_end_epoch_ms": 1639526400000,
+    "actual_start": null,
+    "actual_end": null,
+    "contract_number": "21-C-00012",
+    "estimated_cost": 845790
+  },
+  "limitations": [
+    "Closeout is an administrative project status and is not by itself physical-work evidence.",
+    "The archived actual-start and actual-end fields are null."
+  ]
+}

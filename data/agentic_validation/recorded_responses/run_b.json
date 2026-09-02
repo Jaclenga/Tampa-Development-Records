@@ -1,0 +1,378 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "agentic-benchmark-run-b",
+  "repeat_id": "B",
+  "scope": "benchmark cases 7-12 plus repeat probe dev-068",
+  "started_at_utc": "2026-09-02T08:18:00Z",
+  "ended_at_utc": "2026-09-02T08:38:01Z",
+  "actual_model": {
+    "provider": "OpenAI",
+    "product": "Codex",
+    "model_identifier": "gpt-5.6-sol",
+    "reasoning_effort": "high",
+    "model_snapshot": "unavailable",
+    "temperature": "unavailable",
+    "seed": "unavailable",
+    "generation_parameters": "unavailable"
+  },
+  "prompt_provenance": {
+    "system": {
+      "version": "v1",
+      "path": "prompts/agent/system_v1.md",
+      "sha256": "ce14333f117928b1a786dbdc4ffcd902a883eacc9565945a7f1f9d417166629b"
+    },
+    "investigation": {
+      "version": "v1",
+      "path": "prompts/agent/investigation_v1.md",
+      "sha256": "2c99b098a04518195708c1ce22e69a3fb73080722998c94b144f89c847ccd672"
+    },
+    "evidence_assessment": {
+      "version": "v1",
+      "path": "prompts/agent/evidence_assessment_v1.md",
+      "sha256": "81027cfc6e345f61218d871e4c375300c6170bc0ee00c0e2ad62825688a8b45d"
+    }
+  },
+  "investigation_budget": {
+    "max_tool_calls": 16,
+    "max_source_queries": 10,
+    "max_repeated_queries": 2,
+    "max_duration_seconds": 300,
+    "max_input_tokens": 30000,
+    "max_output_tokens": 5000,
+    "max_cost_usd": 5.0
+  },
+  "investigations": [
+    {
+      "investigation_id": "agent-benchmark-v1-hol-039-run-b",
+      "repeat_id": "B",
+      "sample_id": "hol-039",
+      "record_number": "SW50019",
+      "investigated_claims": [
+        "source_identity",
+        "activity_classification",
+        "status_interpretation",
+        "physical_work_started"
+      ],
+      "status": "conflicting_evidence_found",
+      "plan": [
+        "Search immutable City GIS evidence for the exact project identifier.",
+        "Search allowlisted City sources for the same identifier and project name.",
+        "Compare identity, phase, status, dates, and contradictions.",
+        "Archive candidate evidence for deterministic re-evaluation and human review."
+      ],
+      "tool_actions": [
+        {
+          "sequence": 1,
+          "tool": "search_archived_evidence",
+          "parameters": {"record_number": "SW50019"},
+          "result": "exact_identifier_record_found",
+          "result_reference": "data/raw/capital_locations_polygon.geojson"
+        },
+        {
+          "sequence": 2,
+          "tool": "search_official_web",
+          "parameters": {"query": "SW50019", "host_allowlist": ["tampa.gov", "tampagov.net"]},
+          "result": "official_project_page_found",
+          "result_reference": "https://www.tampa.gov/project/sw50019"
+        },
+        {
+          "sequence": 3,
+          "tool": "fetch_official_document",
+          "parameters": {"url": "https://www.tampa.gov/project/sw50019"},
+          "result": "page_fields_extracted_and_archived",
+          "result_reference": "data/agentic_validation/evidence/run_b/hol-039.json"
+        }
+      ],
+      "candidate_evidence": [
+        {
+          "evidence_id": "hol-039-b-archived-city-gis",
+          "archived_path": "data/agentic_validation/evidence/run_b/hol-039-archived.json",
+          "sha256": "ab1f159439d64d2f307901cf8b138a86a7816867a055691708e0b8e7e6ae4e8f",
+          "content_sha256": "ab1f159439d64d2f307901cf8b138a86a7816867a055691708e0b8e7e6ae4e8f",
+          "source_tier": "tier_1_archived_primary",
+          "identity_category": "exact_identifier",
+          "observed_facts": ["Project ID SW50019", "P2: Design", "60% Design Completion"]
+        },
+        {
+          "evidence_id": "hol-039-b-live-city-project-page",
+          "archived_path": "data/agentic_validation/evidence/run_b/hol-039-live.json",
+          "sha256": "eb8e42a97dcb2ce321563d1d7561b9b3653652d0d1b0d26e9a045f3526ca2c4d",
+          "content_sha256": "eb8e42a97dcb2ce321563d1d7561b9b3653652d0d1b0d26e9a045f3526ca2c4d",
+          "source_tier": "tier_2_live_primary",
+          "identity_category": "exact_identifier",
+          "observed_facts": ["Project and department ID SW50019", "P3: Procurement", "Contract Negotiations"]
+        }
+      ],
+      "identity_assessment": {
+        "identity_match_method": "exact administrative project identifier with matching name and description",
+        "exact_identifiers": ["SW50019"],
+        "supporting_fields": ["project name", "description", "project type"],
+        "conflicting_fields": ["project phase", "status", "planned dates", "estimated cost"],
+        "candidate_count": 2,
+        "identity_category": "exact_identifier",
+        "accepted_for_rule_evaluation": false
+      },
+      "conflicts": [
+        "The archived polygon record reports P2: Design and 60% Design Completion, while the live project page reports P3: Procurement and Contract Negotiations.",
+        "The differences may reflect source-layer or observation-time changes and are not resolved by this investigation."
+      ],
+      "missing_information": ["No actual-start field or inspection evidence establishes physical work.", "No approved deterministic rule was supplied."],
+      "recommended_next_action": "Human review should reconcile the phase/status observations; eligible exact-ID fields may then be submitted to an approved deterministic rule.",
+      "requires_human_review": true,
+      "prompt_version": "v1",
+      "prompt_hashes": {
+        "system": "ce14333f117928b1a786dbdc4ffcd902a883eacc9565945a7f1f9d417166629b",
+        "investigation": "2c99b098a04518195708c1ce22e69a3fb73080722998c94b144f89c847ccd672",
+        "evidence_assessment": "81027cfc6e345f61218d871e4c375300c6170bc0ee00c0e2ad62825688a8b45d"
+      },
+      "cost_usage": {"input_tokens": "unavailable", "output_tokens": "unavailable", "cached_tokens": "unavailable", "model_cost_usd": "unavailable", "tool_requests": 3, "http_requests": "unavailable", "wall_clock_seconds": "unavailable"}
+    },
+    {
+      "investigation_id": "agent-benchmark-v1-hol-045-run-b",
+      "repeat_id": "B",
+      "sample_id": "hol-045",
+      "record_number": "1001810.14",
+      "investigated_claims": ["source_identity", "activity_classification", "status_interpretation", "physical_work_started"],
+      "status": "evidence_found",
+      "plan": [
+        "Search immutable City GIS evidence for the exact project identifier.",
+        "Search allowlisted City sources for the identifier and project name.",
+        "Compare identifier, address, type, phase, status, and dates.",
+        "Archive candidate evidence and identify information still requiring review."
+      ],
+      "tool_actions": [
+        {
+          "sequence": 1,
+          "tool": "search_archived_evidence",
+          "parameters": {"record_number": "1001810.14"},
+          "result": "exact_identifier_record_found",
+          "result_reference": "data/raw/capital_locations_point.geojson"
+        },
+        {
+          "sequence": 2,
+          "tool": "search_official_web",
+          "parameters": {"query": "Palm Springs Pumping Station Rehabilitation 1001810.14", "host_allowlist": ["tampa.gov", "tampagov.net"]},
+          "result": "official_project_page_found",
+          "result_reference": "https://www.tampa.gov/project/ww100181014"
+        },
+        {
+          "sequence": 3,
+          "tool": "fetch_official_document",
+          "parameters": {"url": "https://www.tampa.gov/project/ww100181014"},
+          "result": "page_fields_extracted_and_archived",
+          "result_reference": "data/agentic_validation/evidence/run_b/hol-045.json"
+        }
+      ],
+      "candidate_evidence": [
+        {
+          "evidence_id": "hol-045-b-archived-city-gis",
+          "archived_path": "data/agentic_validation/evidence/run_b/hol-045-archived.json",
+          "sha256": "49cedda7c1f6fbbd5fc592113da91af4ed336db267a096f8e516dd7318290f77",
+          "content_sha256": "49cedda7c1f6fbbd5fc592113da91af4ed336db267a096f8e516dd7318290f77",
+          "source_tier": "tier_1_archived_primary",
+          "identity_category": "exact_identifier",
+          "observed_facts": ["Project ID 1001810.14", "P1: Planning", "Planning", "Contract 20-C-00016"]
+        },
+        {
+          "evidence_id": "hol-045-b-live-city-project-page",
+          "archived_path": "data/agentic_validation/evidence/run_b/hol-045-live.json",
+          "sha256": "1d1839930d52abfe6b12a0eb5242eede58e76f84c065e595f39c3681ab13d919",
+          "content_sha256": "1d1839930d52abfe6b12a0eb5242eede58e76f84c065e595f39c3681ab13d919",
+          "source_tier": "tier_2_live_primary",
+          "identity_category": "exact_identifier",
+          "observed_facts": ["Project ID 1001810.14", "Department ID WW1001810.14", "P1: Planning", "Planning"]
+        }
+      ],
+      "identity_assessment": {
+        "identity_match_method": "exact administrative identifier plus matching title, address, contract, and coordinates",
+        "exact_identifiers": ["1001810.14", "WW1001810.14", "20-C-00016"],
+        "supporting_fields": ["project name", "5001 Palm Springs Blvd", "project type", "coordinates"],
+        "conflicting_fields": [],
+        "candidate_count": 1,
+        "identity_category": "exact_identifier",
+        "accepted_for_rule_evaluation": false
+      },
+      "conflicts": [],
+      "missing_information": ["Planning and future planned dates do not establish physical work.", "No actual-start record or inspection evidence was located.", "No approved deterministic rule was supplied."],
+      "recommended_next_action": "Submit the exact-identifier candidate to deterministic identity/status evaluation when an approved rule is available; retain physical-work claim for human review.",
+      "requires_human_review": true,
+      "prompt_version": "v1",
+      "prompt_hashes": {"system": "ce14333f117928b1a786dbdc4ffcd902a883eacc9565945a7f1f9d417166629b", "investigation": "2c99b098a04518195708c1ce22e69a3fb73080722998c94b144f89c847ccd672", "evidence_assessment": "81027cfc6e345f61218d871e4c375300c6170bc0ee00c0e2ad62825688a8b45d"},
+      "cost_usage": {"input_tokens": "unavailable", "output_tokens": "unavailable", "cached_tokens": "unavailable", "model_cost_usd": "unavailable", "tool_requests": 3, "http_requests": "unavailable", "wall_clock_seconds": "unavailable"}
+    },
+    {
+      "investigation_id": "agent-benchmark-v1-dev-025-run-b",
+      "repeat_id": "B",
+      "sample_id": "dev-025",
+      "record_number": "BLD-26-0519341",
+      "investigated_claims": ["source_identity", "activity_classification", "status_interpretation", "building_footprint_match", "physical_work_started"],
+      "status": "evidence_found",
+      "plan": [
+        "Locate the exact permit in immutable City GIS evidence.",
+        "Attempt the allowlisted Accela record and an exact-record official search.",
+        "Keep administrative identity separate from the medium-confidence footprint association.",
+        "Archive available evidence and retain unsupported claims for human review."
+      ],
+      "tool_actions": [
+        {"sequence": 1, "tool": "search_archived_evidence", "parameters": {"record_number": "BLD-26-0519341"}, "result": "exact_identifier_record_found", "result_reference": "data/raw/construction_inspections.geojson"},
+        {"sequence": 2, "tool": "fetch_accela_record", "parameters": {"official_record_url": "record URL from benchmark"}, "result": "retrieval_error", "error": "available web retriever rejected the detail URL"},
+        {"sequence": 3, "tool": "fetch_accela_record", "parameters": {"official_record_url": "same record URL", "retry": 1}, "result": "retrieval_error", "error": "detail URL remained inaccessible"},
+        {"sequence": 4, "tool": "search_official_web", "parameters": {"query": "BLD-26-0519341", "host_allowlist": ["aca-prod.accela.com"]}, "result": "no_additional_evidence_found"}
+      ],
+      "candidate_evidence": [
+        {"evidence_id": "dev-025-b-archived-city-gis", "archived_path": "data/agentic_validation/evidence/run_b/dev-025-archived.json", "sha256": "7da9345bf0185e369f1c95d32618bf14d7678d073411ea8b67818388ebce9910", "content_sha256": "7da9345bf0185e369f1c95d32618bf14d7678d073411ea8b67818388ebce9910", "source_tier": "tier_1_archived_primary", "identity_category": "exact_identifier", "observed_facts": ["Record BLD-26-0519341", "206 N MacDill Ave", "Residential Building Alterations (Renovations)", "Revision", "Private provider: Yes"]}
+      ],
+      "identity_assessment": {
+        "identity_match_method": "exact permit identifier for the administrative record; separate nearest-footprint heuristic for spatial association",
+        "exact_identifiers": ["BLD-26-0519341", "{2B400FF9-7D1A-45A4-8002-492A9045E1AF}"],
+        "supporting_fields": ["address", "project name", "description", "record type"],
+        "conflicting_fields": ["building footprint association remains medium confidence at 30.75 meters"],
+        "candidate_count": 1,
+        "identity_category": "ambiguous",
+        "accepted_for_rule_evaluation": false
+      },
+      "conflicts": [],
+      "missing_information": ["Live Accela details and inspection history were unavailable.", "Revision status does not establish work start.", "The building-footprint association lacks an exact parcel or footprint identifier.", "No approved deterministic rule was supplied."],
+      "recommended_next_action": "Human review should open Accela when available and independently assess the footprint association; do not infer work from Revision status.",
+      "requires_human_review": true,
+      "prompt_version": "v1",
+      "prompt_hashes": {"system": "ce14333f117928b1a786dbdc4ffcd902a883eacc9565945a7f1f9d417166629b", "investigation": "2c99b098a04518195708c1ce22e69a3fb73080722998c94b144f89c847ccd672", "evidence_assessment": "81027cfc6e345f61218d871e4c375300c6170bc0ee00c0e2ad62825688a8b45d"},
+      "cost_usage": {"input_tokens": "unavailable", "output_tokens": "unavailable", "cached_tokens": "unavailable", "model_cost_usd": "unavailable", "tool_requests": 4, "http_requests": "unavailable", "wall_clock_seconds": "unavailable"}
+    },
+    {
+      "investigation_id": "agent-benchmark-v1-hol-001-run-b",
+      "repeat_id": "B",
+      "sample_id": "hol-001",
+      "record_number": "BLD-26-0522370",
+      "investigated_claims": ["source_identity", "activity_classification", "status_interpretation", "cross_source_linkage", "building_footprint_match", "physical_work_started"],
+      "status": "evidence_found",
+      "plan": [
+        "Locate the exact permit in each immutable City GIS source.",
+        "Attempt the allowlisted Accela record and exact-record official search.",
+        "Compare source identifiers and separate linkage from spatial association.",
+        "Archive candidates and retain unsupported claims for human review."
+      ],
+      "tool_actions": [
+        {"sequence": 1, "tool": "search_archived_evidence", "parameters": {"record_number": "BLD-26-0522370", "sources": ["construction_inspections", "single_family_permits"]}, "result": "two_exact_identifier_records_found", "result_reference": "data/agentic_validation/evidence/run_b/hol-001.json"},
+        {"sequence": 2, "tool": "fetch_accela_record", "parameters": {"official_record_url": "record URL from benchmark"}, "result": "retrieval_error", "error": "available web retriever rejected the detail URL"},
+        {"sequence": 3, "tool": "fetch_accela_record", "parameters": {"official_record_url": "same record URL", "retry": 1}, "result": "retrieval_error", "error": "detail URL remained inaccessible"},
+        {"sequence": 4, "tool": "search_official_web", "parameters": {"query": "BLD-26-0522370", "host_allowlist": ["aca-prod.accela.com", "tampa.gov"]}, "result": "no_additional_evidence_found"}
+      ],
+      "candidate_evidence": [
+        {"evidence_id": "hol-001-b-archived-construction", "archived_path": "data/agentic_validation/evidence/run_b/hol-001-construction.json", "sha256": "798e8dd3ad7ca5f456503eca45dc7601aa971acbb1dd450bd0f12e21fb472e6f", "content_sha256": "798e8dd3ad7ca5f456503eca45dc7601aa971acbb1dd450bd0f12e21fb472e6f", "source_tier": "tier_1_archived_primary", "identity_category": "exact_identifier", "observed_facts": ["Record BLD-26-0522370", "618 Luzon Ave", "FEMA New 2-Story SFR", "Issued"]},
+        {"evidence_id": "hol-001-b-archived-single-family", "archived_path": "data/agentic_validation/evidence/run_b/hol-001-single-family.json", "sha256": "c125e49f0176cc2d2d16851e849a7f8ffc5560bb81bbcfea91e6dc89401a0501", "content_sha256": "c125e49f0176cc2d2d16851e849a7f8ffc5560bb81bbcfea91e6dc89401a0501", "source_tier": "tier_1_archived_primary", "identity_category": "exact_identifier", "observed_facts": ["Record BLD-26-0522370", "618 Luzon Ave", "Application status Issued", "Issuance task status Issued"]}
+      ],
+      "identity_assessment": {
+        "identity_match_method": "exact permit identifier and address across two official source layers; separate nearest-footprint heuristic",
+        "exact_identifiers": ["BLD-26-0522370"],
+        "supporting_fields": ["address", "record/application type", "Issued status"],
+        "conflicting_fields": ["building footprint association remains medium confidence at 25.01 meters"],
+        "candidate_count": 2,
+        "identity_category": "ambiguous",
+        "accepted_for_rule_evaluation": false
+      },
+      "conflicts": [],
+      "missing_information": ["Live Accela details and inspection history were unavailable.", "Issued status does not establish work start.", "The footprint association lacks an exact parcel or footprint identifier.", "No approved deterministic rule was supplied."],
+      "recommended_next_action": "The cross-source exact-ID candidate may be submitted to an approved linkage rule; human review remains required for footprint and physical-work claims.",
+      "requires_human_review": true,
+      "prompt_version": "v1",
+      "prompt_hashes": {"system": "ce14333f117928b1a786dbdc4ffcd902a883eacc9565945a7f1f9d417166629b", "investigation": "2c99b098a04518195708c1ce22e69a3fb73080722998c94b144f89c847ccd672", "evidence_assessment": "81027cfc6e345f61218d871e4c375300c6170bc0ee00c0e2ad62825688a8b45d"},
+      "cost_usage": {"input_tokens": "unavailable", "output_tokens": "unavailable", "cached_tokens": "unavailable", "model_cost_usd": "unavailable", "tool_requests": 4, "http_requests": "unavailable", "wall_clock_seconds": "unavailable"}
+    },
+    {
+      "investigation_id": "agent-benchmark-v1-dev-046-run-b",
+      "repeat_id": "B",
+      "sample_id": "dev-046",
+      "record_number": "BLD-24-0508474",
+      "investigated_claims": ["source_identity", "activity_classification", "status_interpretation", "building_footprint_match", "physical_work_started"],
+      "status": "evidence_found",
+      "plan": ["Locate the exact permit in immutable City GIS evidence.", "Attempt the allowlisted Accela detail record and exact official search.", "Separate exact administrative identity from the footprint heuristic.", "Archive the candidate and preserve missing inspection/work evidence."],
+      "tool_actions": [
+        {"sequence": 1, "tool": "search_archived_evidence", "parameters": {"record_number": "BLD-24-0508474"}, "result": "exact_identifier_record_found", "result_reference": "data/raw/construction_inspections.geojson"},
+        {"sequence": 2, "tool": "fetch_accela_record", "parameters": {"official_record_url": "record URL from benchmark"}, "result": "retrieval_error", "error": "available web retriever rejected the detail URL"},
+        {"sequence": 3, "tool": "fetch_accela_record", "parameters": {"official_record_url": "same record URL", "retry": 1}, "result": "retrieval_error", "error": "detail URL remained inaccessible"},
+        {"sequence": 4, "tool": "search_official_web", "parameters": {"query": "BLD-24-0508474", "host_allowlist": ["aca-prod.accela.com"]}, "result": "no_additional_evidence_found"}
+      ],
+      "candidate_evidence": [
+        {"evidence_id": "dev-046-b-archived-city-gis", "archived_path": "data/agentic_validation/evidence/run_b/dev-046-archived.json", "sha256": "e06f0fc932471338a81f87270973ff924b497a86a5aaf8806bf560592e1688da", "content_sha256": "e06f0fc932471338a81f87270973ff924b497a86a5aaf8806bf560592e1688da", "source_tier": "tier_1_archived_primary", "identity_category": "exact_identifier", "observed_facts": ["Record BLD-24-0508474", "1712 W Morrison Ave", "Residential Building Alterations (Renovations)", "Revision"]}
+      ],
+      "identity_assessment": {"identity_match_method": "exact permit identifier for the administrative record; separate nearest-footprint heuristic", "exact_identifiers": ["BLD-24-0508474", "{8A3B5D61-ED69-4A42-9D1C-6BFB0474B6A5}"], "supporting_fields": ["address", "project name", "description", "record type"], "conflicting_fields": ["building footprint association remains medium confidence at 8.2 meters"], "candidate_count": 1, "identity_category": "ambiguous", "accepted_for_rule_evaluation": false},
+      "conflicts": [],
+      "missing_information": ["Live Accela details and inspection history were unavailable.", "Revision status does not establish work start.", "The footprint association lacks an exact parcel or footprint identifier.", "No approved deterministic rule was supplied."],
+      "recommended_next_action": "Human review should inspect Accela when available and independently assess the footprint association.",
+      "requires_human_review": true,
+      "prompt_version": "v1",
+      "prompt_hashes": {"system": "ce14333f117928b1a786dbdc4ffcd902a883eacc9565945a7f1f9d417166629b", "investigation": "2c99b098a04518195708c1ce22e69a3fb73080722998c94b144f89c847ccd672", "evidence_assessment": "81027cfc6e345f61218d871e4c375300c6170bc0ee00c0e2ad62825688a8b45d"},
+      "cost_usage": {"input_tokens": "unavailable", "output_tokens": "unavailable", "cached_tokens": "unavailable", "model_cost_usd": "unavailable", "tool_requests": 4, "http_requests": "unavailable", "wall_clock_seconds": "unavailable"}
+    },
+    {
+      "investigation_id": "agent-benchmark-v1-dev-027-run-b",
+      "repeat_id": "B",
+      "sample_id": "dev-027",
+      "record_number": "BDE-26-0445189",
+      "investigated_claims": ["source_identity", "activity_classification", "status_interpretation", "physical_work_started"],
+      "status": "evidence_found",
+      "plan": ["Locate the exact demolition permit in immutable City GIS evidence.", "Attempt the allowlisted Accela detail record and exact official search.", "Compare identifier, address, permit type, and status without inferring work.", "Archive the candidate and preserve missing inspection evidence."],
+      "tool_actions": [
+        {"sequence": 1, "tool": "search_archived_evidence", "parameters": {"record_number": "BDE-26-0445189"}, "result": "exact_identifier_record_found", "result_reference": "data/raw/construction_inspections.geojson"},
+        {"sequence": 2, "tool": "fetch_accela_record", "parameters": {"official_record_url": "record URL from benchmark"}, "result": "retrieval_error", "error": "available web retriever rejected the detail URL"},
+        {"sequence": 3, "tool": "fetch_accela_record", "parameters": {"official_record_url": "same record URL", "retry": 1}, "result": "retrieval_error", "error": "detail URL remained inaccessible"},
+        {"sequence": 4, "tool": "search_official_web", "parameters": {"query": "BDE-26-0445189", "host_allowlist": ["aca-prod.accela.com"]}, "result": "no_additional_evidence_found"}
+      ],
+      "candidate_evidence": [
+        {"evidence_id": "dev-027-b-archived-city-gis", "archived_path": "data/agentic_validation/evidence/run_b/dev-027-archived.json", "sha256": "aced9607f2af8a33ed483e11884d53b3ccd24172546bfcf950dbb8a58f671b9b", "content_sha256": "aced9607f2af8a33ed483e11884d53b3ccd24172546bfcf950dbb8a58f671b9b", "source_tier": "tier_1_archived_primary", "identity_category": "exact_identifier", "observed_facts": ["Record BDE-26-0445189", "3816 N Whittier St", "Residential Demolition Permit", "Issued"]}
+      ],
+      "identity_assessment": {"identity_match_method": "exact permit identifier with matching address, project name, description, and record type", "exact_identifiers": ["BDE-26-0445189", "{779CA603-7869-45F1-9299-4C485475A449}"], "supporting_fields": ["address", "project name", "description", "record type"], "conflicting_fields": [], "candidate_count": 1, "identity_category": "exact_identifier", "accepted_for_rule_evaluation": false},
+      "conflicts": [],
+      "missing_information": ["Live Accela details and inspection history were unavailable.", "Issued status and Stop Work Order No do not establish demolition or physical work.", "No approved deterministic rule was supplied."],
+      "recommended_next_action": "Submit exact identity/type fields only after an approved deterministic rule is selected; retain work-start interpretation for human review.",
+      "requires_human_review": true,
+      "prompt_version": "v1",
+      "prompt_hashes": {"system": "ce14333f117928b1a786dbdc4ffcd902a883eacc9565945a7f1f9d417166629b", "investigation": "2c99b098a04518195708c1ce22e69a3fb73080722998c94b144f89c847ccd672", "evidence_assessment": "81027cfc6e345f61218d871e4c375300c6170bc0ee00c0e2ad62825688a8b45d"},
+      "cost_usage": {"input_tokens": "unavailable", "output_tokens": "unavailable", "cached_tokens": "unavailable", "model_cost_usd": "unavailable", "tool_requests": 4, "http_requests": "unavailable", "wall_clock_seconds": "unavailable"}
+    },
+    {
+      "investigation_id": "agent-benchmark-v1-dev-068-run-b",
+      "repeat_id": "B",
+      "sample_id": "dev-068",
+      "record_number": "WTR-20-0005.3-12th St",
+      "investigated_claims": ["source_identity", "activity_classification", "status_interpretation", "physical_work_started"],
+      "status": "conflicting_evidence_found",
+      "plan": ["Search all immutable City GIS layers for the exact project identifier.", "Fetch an allowlisted live City project page for the identifier.", "Compare project titles, phases, statuses, dates, contracts, and coordinates.", "Archive the identity collision and retain it for human resolution."],
+      "tool_actions": [
+        {"sequence": 1, "tool": "search_archived_evidence", "parameters": {"record_number": "WTR-20-0005.3-12th St", "source": "capital_improvements"}, "result": "exact_identifier_record_found", "result_reference": "data/raw/capital_improvements.geojson"},
+        {"sequence": 2, "tool": "search_archived_evidence", "parameters": {"record_number": "WTR-20-0005.3-12th St", "source": "capital_locations_line"}, "result": "second_exact_identifier_record_with_conflicting_project_variant_found", "result_reference": "data/raw/capital_locations_line.geojson"},
+        {"sequence": 3, "tool": "search_official_web", "parameters": {"query": "WTR-20-0005.3-12th St", "host_allowlist": ["tampa.gov", "tampagov.net"]}, "result": "official_project_page_found", "result_reference": "https://www.tampa.gov/project/wtr-20-00053-12th-st"},
+        {"sequence": 4, "tool": "fetch_official_document", "parameters": {"url": "https://www.tampa.gov/project/wtr-20-00053-12th-st"}, "result": "page_fields_extracted_and_archived", "result_reference": "data/agentic_validation/evidence/run_b/dev-068.json"}
+      ],
+      "candidate_evidence": [
+        {"evidence_id": "dev-068-b-archived-capital-improvements", "archived_path": "data/agentic_validation/evidence/run_b/dev-068-capital.json", "sha256": "33c999e83188d353bd4ddd2655885e61b7436acbf4d5b263a0b25a033a0c3eaa", "content_sha256": "33c999e83188d353bd4ddd2655885e61b7436acbf4d5b263a0b25a033a0c3eaa", "source_tier": "tier_1_archived_primary", "identity_category": "exact_identifier", "observed_facts": ["Project ID WTR-20-0005.3-12th St", "GMP 5", "P5: Closeout", "Closeout", "Contract 20-C-00032"]},
+        {"evidence_id": "dev-068-b-archived-line-conflict", "archived_path": "data/agentic_validation/evidence/run_b/dev-068-line.json", "sha256": "8fd194c110fbf5ddf35ad468855f30567b99c9d645ad21a5fcef4a61fb102603", "content_sha256": "8fd194c110fbf5ddf35ad468855f30567b99c9d645ad21a5fcef4a61fb102603", "source_tier": "tier_1_archived_primary", "identity_category": "conflicting", "observed_facts": ["Same project ID", "GMP 3", "P4: Construction", "Final Inspection and Testing"]},
+        {"evidence_id": "dev-068-b-live-city-project-page", "archived_path": "data/agentic_validation/evidence/run_b/dev-068-live.json", "sha256": "4a02a6b95493bf4bb0abfbb7f428dab9a53197b395a082ec2a52e09612934b5b", "content_sha256": "4a02a6b95493bf4bb0abfbb7f428dab9a53197b395a082ec2a52e09612934b5b", "source_tier": "tier_2_live_primary", "identity_category": "exact_identifier", "observed_facts": ["Project and department ID WTR-20-0005.3-12th St", "GMP 5", "P5: Closeout", "Closeout", "Contract 20-C-00032"]}
+      ],
+      "identity_assessment": {
+        "identity_match_method": "exact project identifier collides across two official source records; live title, contract, and coordinates support the GMP 5 candidate",
+        "exact_identifiers": ["WTR-20-0005.3-12th St", "20-C-00032"],
+        "supporting_fields": ["GMP 5 title", "description", "project type", "contract", "coordinates"],
+        "conflicting_fields": ["GMP 5 versus GMP 3 title", "P5: Closeout versus P4: Construction", "Closeout versus Final Inspection and Testing"],
+        "candidate_count": 2,
+        "identity_category": "conflicting",
+        "accepted_for_rule_evaluation": false
+      },
+      "conflicts": ["The exact project identifier is reused by a GMP 5 point record and a GMP 3 line record with different phases and statuses.", "The live City page matches the GMP 5 candidate but does not explain the duplicate identifier."],
+      "missing_information": ["No source explains whether GMP 3 and GMP 5 are components or identifier reuse.", "Closeout and a planned end date do not independently establish physical completion or work start.", "No approved deterministic rule was supplied."],
+      "recommended_next_action": "Human review must resolve the duplicate project identity before any deterministic handoff; seek contract/component documentation for GMP 3 and GMP 5.",
+      "requires_human_review": true,
+      "prompt_version": "v1",
+      "prompt_hashes": {"system": "ce14333f117928b1a786dbdc4ffcd902a883eacc9565945a7f1f9d417166629b", "investigation": "2c99b098a04518195708c1ce22e69a3fb73080722998c94b144f89c847ccd672", "evidence_assessment": "81027cfc6e345f61218d871e4c375300c6170bc0ee00c0e2ad62825688a8b45d"},
+      "cost_usage": {"input_tokens": "unavailable", "output_tokens": "unavailable", "cached_tokens": "unavailable", "model_cost_usd": "unavailable", "tool_requests": 4, "http_requests": "unavailable", "wall_clock_seconds": "unavailable"}
+    }
+  ],
+  "run_limitations": [
+    "Accela record-detail pages were inaccessible to the available retrievers and exact-record searches returned no indexed results.",
+    "The in-app browser surface was unavailable.",
+    "Live ArcGIS exact-record query URLs were rejected by the web retriever; archived City GIS snapshots were used instead.",
+    "No candidate was passed through or accepted by a deterministic rule in this run.",
+    "Token usage, model cost, HTTP-request counts, and per-investigation duration were not exposed and remain unavailable."
+  ]
+}

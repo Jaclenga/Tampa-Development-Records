@@ -1,0 +1,29 @@
+{
+  "evidence_schema_version": "1.0.0",
+  "sample_id": "dev-068",
+  "source_tier": "tier_1_archived_primary",
+  "source": "City of Tampa CapitalProjects snapshot",
+  "source_endpoint": "https://arcgis.tampagov.net/arcgis/rest/services/CapitalProjects/CapitalProjects/FeatureServer/0",
+  "original_archive_path": "data/processed/source_records.csv",
+  "original_retrieved_at_utc": "2026-08-23T02:06:02+00:00",
+  "source_record_key": "src-30b7dc8f6c03c020",
+  "observed_fields": {
+    "project_id": "WTR-20-0005.3-12th St",
+    "object_id": 52915,
+    "global_id": "{A2C0F384-83CA-439D-8F48-E77CD68B4057}",
+    "project_name": "FY20 CIP Water Main Improvements Design-Build_12th St - GMP 5",
+    "project_type": "Water",
+    "status": "Closeout",
+    "project_phase": "P5: Closeout",
+    "actual_start": null,
+    "actual_end": null,
+    "contract_number": "20-C-00032",
+    "estimated_cost": 5596767,
+    "latitude": 27.9786135,
+    "longitude": -82.4470726
+  },
+  "limitations": [
+    "A separate archived City feature uses the same project_id for GMP 3.",
+    "Closeout is an administrative state and actual-start and actual-end are null."
+  ]
+}

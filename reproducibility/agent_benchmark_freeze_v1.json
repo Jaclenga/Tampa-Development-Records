@@ -1,0 +1,115 @@
+{
+  "format_version": "1.0.0",
+  "freeze_id": "tdr-agent-benchmark-pre-human-audit-v1",
+  "created_at_utc": "2026-09-02T09:48:11Z",
+  "freeze_stage": "after_agent_benchmark_before_blinded_human_audit",
+  "evaluated_benchmark_run_id": "20260902T094712Z",
+  "benchmark_id": "tdr-agent-evidence-benchmark-v1",
+  "benchmark_case_count": 18,
+  "active_agent_runs": [
+    "run_a",
+    "run_b",
+    "run_c"
+  ],
+  "excluded_exploratory_runs": [
+    "run_d",
+    "run_e",
+    "run_f"
+  ],
+  "human_audit_completed_at_freeze": false,
+  "release_write_enabled": false,
+  "frozen_sample_sha256": "2855ccef25e39b59cfb5eb48a3d7201a5fc6b6acfdd6b856e7c24cf8b653c4ce",
+  "benchmark_result": {
+    "investigations_attempted": 22,
+    "unique_cases_investigated": 18,
+    "status_counts": {
+      "evidence_found": 15,
+      "ambiguous_identity": 4,
+      "conflicting_evidence_found": 3
+    },
+    "repeated_cases": 2,
+    "same_evidence_rate": 0.0,
+    "same_source_rate": 0.5,
+    "same_deterministic_classification_rate": 0.5,
+    "release_authorized_deterministic_resolutions": 0
+  },
+  "audit_policy": {
+    "frozen_artifacts_may_be_modified": false,
+    "completed_human_audit_must_be_separate": true,
+    "prompt_rule_or_code_change_requires_new_system_version": true,
+    "future_full_sample_execution_requires_new_run_ids": true
+  },
+  "hash_algorithms": {
+    "file": "SHA-256 of file bytes",
+    "directory_manifest": "SHA-256 of UTF-8 lines '<relative_path>\\t<file_sha256>\\n' sorted by relative path; __pycache__ and .pyc files excluded",
+    "freeze_root": "SHA-256 of sorted UTF-8 file and directory declaration lines"
+  },
+  "artifacts": {
+    "files": [
+      {
+        "path": "data/processed/manual_validation_sample.csv",
+        "sha256": "2855ccef25e39b59cfb5eb48a3d7201a5fc6b6acfdd6b856e7c24cf8b653c4ce"
+      },
+      {
+        "path": "data/agentic_validation/benchmark_v1.json",
+        "sha256": "1776f666d5d3291b2bcba84977ab1f2bad66a8d7117c3793d4d4e86fac01ca4a"
+      },
+      {
+        "path": "config/agent_evidence_rules.json",
+        "sha256": "0837701bd17a83b4d529849ccdbeeebd4448d382a06da11f304715affcafb2f3"
+      },
+      {
+        "path": "config/agentic_validation.json",
+        "sha256": "5f03c6e1de02754005654de0f0a7d572c17ae02b836c8f61070344fed3cf59aa"
+      },
+      {
+        "path": "scripts/build_agent_benchmark.py",
+        "sha256": "6f64373791d19e152255140068d72c13098dc8fc6964954d3130bb85de120a5e"
+      },
+      {
+        "path": "scripts/run_agentic_validation.py",
+        "sha256": "3241dbe74861e615add5c1170c898785bf465cfadf4dec916ba6286f66387d26"
+      },
+      {
+        "path": "scripts/verify_agent_benchmark_freeze.py",
+        "sha256": "f93462b696ca8d98276f93fce0b2dea2494ca4e975a3998d5ec86440ca5f8839"
+      },
+      {
+        "path": "reports/AGENTIC_VALIDATION_REPORT.md",
+        "sha256": "46423a4a427d16c888be729071c677115bf541c08dda860488da1ee13eb86595"
+      },
+      {
+        "path": "reproducibility/deviations/2026-09-02-premature-agent-expansion.json",
+        "sha256": "0ba69454831103e7460785ce6f5bca4715350614fdad320c2e64ad4bcb1d4b1e"
+      }
+    ],
+    "directories": [
+      {
+        "path": "prompts/agent",
+        "manifest_sha256": "917e93390b7d97a611c50a122e860985fd33fb8ccfad48e5d1cc01012868f015",
+        "file_count": 3
+      },
+      {
+        "path": "src/tampa_validation/agent",
+        "manifest_sha256": "012dd5be3de12a5590cd11e5a50d90c3230ee268722f5f6cc37799bcba460af9",
+        "file_count": 9
+      },
+      {
+        "path": "data/agentic_validation/recorded_responses",
+        "manifest_sha256": "969eb2c1e380f4a792c36860e8b96b172b1dda0b6cdea14406f0b5fdd8c22dbf",
+        "file_count": 3
+      },
+      {
+        "path": "data/agentic_validation/evidence",
+        "manifest_sha256": "d96043bebb06a869a90adb1b6ba1a6ac2117c94865acf41a41faa18934fb0be6",
+        "file_count": 41
+      },
+      {
+        "path": "reports/agentic_runs/20260902T094712Z",
+        "manifest_sha256": "714f683394099e86a873cfed4f652d557e1d7bb856484bef99be0a26f6980a1b",
+        "file_count": 5
+      }
+    ]
+  },
+  "freeze_root_sha256": "6e5ffa1d3e4557163ceffa0dbac0b34a76e3e4a38659eab848f1d72539866b75"
+}

@@ -1,0 +1,29 @@
+{
+  "evidence_schema_version": "1.0.0",
+  "sample_id": "dev-025",
+  "source_tier": "tier_1_archived_primary",
+  "source": "City of Tampa OpenData construction inspections snapshot",
+  "source_endpoint": "https://arcgis.tampagov.net/arcgis/rest/services/OpenData/Planning/MapServer/30",
+  "original_archive_path": "data/processed/source_records.csv",
+  "original_retrieved_at_utc": "2026-08-23T02:06:02+00:00",
+  "source_record_key": "src-d9a95081ee26bd27",
+  "observed_fields": {
+    "record_number": "BLD-26-0519341",
+    "object_id": 2534,
+    "global_id": "{2B400FF9-7D1A-45A4-8002-492A9045E1AF}",
+    "project_name": "PP: Interior Remodel",
+    "description": "PRIVATE PROVIDER - INSPECTIONS ONLY. Interior renovations to include drywall, floor, cabinets, counters, fixtures, paint, siding, windows, and doors.",
+    "address": "206 N MacDill Ave",
+    "record_type": "Residential Building Alterations (Renovations)",
+    "project_status": "Revision",
+    "private_provider": "Yes",
+    "created_date_epoch_ms": 1760313600000,
+    "last_update_epoch_ms": 1778716800000,
+    "source_url": "https://aca-prod.accela.com/TAMPA/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=25CAP&capID2=00000&capID3=02MKF&agencyCode=TAMPA"
+  },
+  "limitations": [
+    "The archived inspection table contains no inspection-history row for this record.",
+    "The 30.75 metre nearest-footprint association is not an exact parcel or building identifier.",
+    "Revision and private-provider fields do not establish that physical work started."
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "ambiguity_rate": 0.18181818181818182,
+  "candidate_evidence_investigations": 22,
+  "conflict_discovery_rate": 0.13636363636363635,
+  "cost": {
+    "average_duration_seconds": null,
+    "cost_per_ambiguity_resolved": null,
+    "cost_per_evidence_found": null,
+    "cost_per_investigation": null,
+    "http_requests_recorded": null,
+    "token_usage_status": "unavailable",
+    "tool_requests_recorded": 78,
+    "total_model_cost_usd": null
+  },
+  "evidence_precision_from_human_audit": null,
+  "evidence_retrieval_yield": 1.0,
+  "experimental_cases_with_rule_match": 12,
+  "experimental_deterministic_resolution_yield": 0.5454545454545454,
+  "experimental_deterministic_rule_matches": 12,
+  "false_positive_association_rate_from_human_audit": null,
+  "human_review_reduction": 0.0,
+  "investigations_attempted": 22,
+  "release_deterministic_resolution_yield": 0.0,
+  "release_unresolved_after": 18,
+  "release_unresolved_before": 18,
+  "retrieval_failure_rate": 0.0,
+  "source_distribution": {
+    "aca-prod.accela.com": 1,
+    "arcgis.tampagov.net": 27,
+    "www.tampa.gov": 6
+  },
+  "status_counts": {
+    "ambiguous_identity": 4,
+    "conflicting_evidence_found": 3,
+    "evidence_found": 15
+  },
+  "unique_cases_investigated": 18
+}

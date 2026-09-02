@@ -1,0 +1,23 @@
+{
+  "evidence_id": "run-a-dev-025-archived-accela-record",
+  "sample_ids": ["dev-025"],
+  "source": "City of Tampa Accela Citizen Access archived search export",
+  "url_or_endpoint": "https://aca-prod.accela.com/TAMPA/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=25CAP&capID2=00000&capID3=02MKF&agencyCode=TAMPA",
+  "source_tier": "tier_1_archived_primary",
+  "source_state": "archived",
+  "retrieved_at_utc": "2026-08-31T06:20:43Z",
+  "investigation_accessed_at_utc": "2026-09-02T08:21:48Z",
+  "administrative_record_id": "BLD-26-0519341",
+  "mime_type": "text/csv",
+  "archived_source_path": "data/raw/accela/2026-08-31/building/backfill-2025-10/00004-search-export-5b08b9a18976.csv",
+  "content_sha256": "5b08b9a189765277d16a033d9c18e9135c1276d4ea04fe0bbccc357995697f28",
+  "hash_scope": "archived_source_file",
+  "extracted_explicit_fields": {
+    "opened_date": "10/13/2025",
+    "record_number": "BLD-26-0519341",
+    "record_type": "Residential Building Alterations (Renovations)",
+    "address": "206 N MacDill Ave T 33609",
+    "record_status": "About to Expire",
+    "expiration_date": "09/05/2026"
+  }
+}

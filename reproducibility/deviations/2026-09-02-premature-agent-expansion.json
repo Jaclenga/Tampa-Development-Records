@@ -1,0 +1,67 @@
+{
+  "format_version": "1.0.0",
+  "deviation_id": "AGENTIC-PROTOCOL-DEVIATION-2026-09-02-001",
+  "date": "2026-09-02",
+  "classification": "excluded exploratory full-sample evidence-retrieval expansion",
+  "prespecified_order": [
+    "complete the 18-case benchmark",
+    "freeze benchmark agent outputs",
+    "complete the blinded human evidence audit",
+    "measure evidence precision and false associations",
+    "scale only if the prespecified gate passes"
+  ],
+  "deviation": "The remaining 132 frozen-sample cases were sent to evidence-retrieval agents before the blinded human audit of the 18-case benchmark was completed.",
+  "execution": {
+    "model_identifier": "gpt-5.6-sol",
+    "reasoning_effort": "high",
+    "model_snapshot": "unavailable",
+    "partitions": {
+      "run_d": {
+        "case_count": 44,
+        "response_sha256": "55126bbc21ac6dfd70fd455ae60b12713ec5c881a9e1980c1e0d730bc5011099",
+        "evidence_file_count": 63,
+        "evidence_manifest_sha256": "d8b3b98e33429ab644e2a6613eb524de2e64aafac3d8cbe40411beba1143be98"
+      },
+      "run_e": {
+        "case_count": 44,
+        "response_sha256": "a1314e1de2ae8c2f3c6ebeed67a620c0180e3e91a346dabf48d688d14bd7746f",
+        "evidence_file_count": 63,
+        "evidence_manifest_sha256": "bc552fa3579e2c29aea4ea3772ee386bf8574d5da3bbcb6b995437b4553019dd"
+      },
+      "run_f": {
+        "case_count": 44,
+        "response_sha256": "6bf9a742f024b00ffb7322b762f6f897030687d8b38f9c1c535af7322ecab26f",
+        "evidence_file_count": 44,
+        "evidence_manifest_sha256": "17b73be3e114c4f69746ac542e977e14f20e7a42e91462b4c84f5c98843b5619"
+      }
+    },
+    "full_sample_request_manifest_sha256": "166fd7ef97f5395d659bf8829265d95e8c446bb1d4f474c2ccebf5b27ff7d597",
+    "full_sample_run_manifest_sha256": "4fc19fed78797e52be8617ea39756f4fde142dd059634a8b3daa779fde82e496"
+  },
+  "exposure": {
+    "project_owner_case_level_review_completed": false,
+    "aggregate_status_information_exposed": true,
+    "known_aggregate_information": {
+      "run_d": {
+        "evidence_found": 35,
+        "ambiguous_identity": 9
+      }
+    },
+    "technical_schema_inspection": "One Run F evidence bundle was opened by the implementation agent solely to diagnose source-schema aggregation.",
+    "used_for_prompt_tuning": false,
+    "used_for_rule_tuning": false,
+    "used_for_protocol_tuning": false,
+    "used_for_human_decisions": false
+  },
+  "disposition": {
+    "experimental_status": "excluded_exploratory_runs",
+    "excluded_from_analysis": true,
+    "active_experimental_workspace_outputs_removed": true,
+    "original_18_case_benchmark_retained": true,
+    "frozen_sample_modified": false,
+    "human_review_fields_modified": false,
+    "release_validation_modified": false,
+    "future_scaling_requirement": "Complete and lock the blinded benchmark audit first; if the gate passes, investigate the 132 cases again under new run IDs rather than restoring these outputs."
+  },
+  "evidence_manifest_hash_algorithm": "SHA-256 of UTF-8 lines '<filename>\\t<file_sha256>\\n' sorted by filename"
+}

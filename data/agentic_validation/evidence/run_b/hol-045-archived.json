@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0.0",
+  "evidence_id": "hol-045-b-archived-city-gis",
+  "investigation_id": "agent-benchmark-v1-hol-045-run-b",
+  "sample_id": "hol-045",
+  "source": "TDR immutable City GIS snapshot: capital_locations_point",
+  "source_url": "https://arcgis.tampagov.net/arcgis/rest/services/CapitalProjects/CityWideProjectsPublic/FeatureServer/0",
+  "retrieved_at_utc": "2026-08-23T02:06:02Z",
+  "administrative_record_id": "1001810.14",
+  "evidence_type": "official_city_gis_record",
+  "source_state": "archived",
+  "primary_or_secondary": "primary",
+  "source_tier": "tier_1_archived_primary",
+  "mime_type": "application/json",
+  "source_archived_path": "data/raw/capital_locations_point.geojson",
+  "source_content_sha256": "1bb39a06542032343f65b38f84c91fce0f5d08721c7c56836f924a6a97edce46",
+  "source_hash_scope": "entire source_archived_path file bytes",
+  "observed_fields": {"record_number": "1001810.14", "project_name": "Palm Springs Pumping Station Rehabilitation", "project_type": "Wastewater", "project_phase": "P1: Planning", "status": "Planning", "contract_number": "20-C-00016", "actual_start": null, "actual_end": null, "global_id": "{EFCE0D30-EBA0-478D-AC14-F17FD36D6F07}"}
+}

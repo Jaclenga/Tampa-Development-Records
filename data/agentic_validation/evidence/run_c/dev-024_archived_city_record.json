@@ -1,0 +1,27 @@
+{
+  "evidence_schema_version": "1.0.0",
+  "sample_id": "dev-024",
+  "source_tier": "tier_1_archived_primary",
+  "source": "City of Tampa OpenData construction inspections snapshot",
+  "source_endpoint": "https://arcgis.tampagov.net/arcgis/rest/services/OpenData/Planning/MapServer/30",
+  "original_archive_path": "data/processed/source_records.csv",
+  "original_retrieved_at_utc": "2026-08-23T02:06:02+00:00",
+  "source_record_key": "src-c9701d1e9f0738fa",
+  "observed_fields": {
+    "record_number": "BLD-26-0522738",
+    "object_id": 965,
+    "global_id": "{367A49AE-AAA7-4009-A309-D5C5FBA93C8E}",
+    "project_name": "Interior ALT",
+    "description": "INTERIOR RENOVATION OF KITCHEN, DINING, AND POWDER BATH, INCLUDES MEP'S AND GAS.",
+    "address": "106 S Glen Ave",
+    "record_type": "Residential Building Alterations (Renovations)",
+    "project_status": "Revision",
+    "created_date_epoch_ms": 1771286400000,
+    "last_update_epoch_ms": 1782777600000,
+    "source_url": "https://aca-prod.accela.com/TAMPA/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=26CAP&capID2=00000&capID3=00A07&agencyCode=TAMPA"
+  },
+  "limitations": [
+    "This layer contains no inspection-history row for the record.",
+    "Revision status does not establish that physical work started."
+  ]
+}

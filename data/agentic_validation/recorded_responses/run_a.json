@@ -1,0 +1,594 @@
+{
+  "actual_model": {
+    "provider": "OpenAI",
+    "product": "Codex",
+    "model_identifier": "gpt-5.6-sol",
+    "reasoning_effort": "high",
+    "model_snapshot": "unavailable",
+    "temperature": "unavailable",
+    "seed": "unavailable",
+    "generation_parameters": "unavailable"
+  },
+  "prompt_provenance": [
+    {
+      "name": "system",
+      "version": "v1",
+      "path": "prompts/agent/system_v1.md",
+      "sha256": "ce14333f117928b1a786dbdc4ffcd902a883eacc9565945a7f1f9d417166629b"
+    },
+    {
+      "name": "investigation",
+      "version": "v1",
+      "path": "prompts/agent/investigation_v1.md",
+      "sha256": "2c99b098a04518195708c1ce22e69a3fb73080722998c94b144f89c847ccd672"
+    },
+    {
+      "name": "evidence_assessment",
+      "version": "v1",
+      "path": "prompts/agent/evidence_assessment_v1.md",
+      "sha256": "81027cfc6e345f61218d871e4c375300c6170bc0ee00c0e2ad62825688a8b45d"
+    }
+  ],
+  "run_metadata": {
+    "run_id": "run_a",
+    "repeat_id": "A",
+    "recorded_at_utc": "2026-09-02T08:21:48Z",
+    "benchmark_path": "data/agentic_validation/benchmark_v1.json",
+    "config_path": "config/agentic_validation.json",
+    "explicit_live_source_authorization": true,
+    "live_source_scope": "assigned benchmark cases and official Tampa/government sources only",
+    "hidden_chain_of_thought_stored": false,
+    "human_review_counted": false
+  },
+  "investigations": [
+    {
+      "investigation_id": "run-a-dev-080",
+      "repeat_id": "A",
+      "sample_id": "dev-080",
+      "repeatability_probe": false,
+      "investigated_claims": [
+        "source_identity",
+        "activity_classification",
+        "status_interpretation",
+        "physical_work_started"
+      ],
+      "status": "evidence_found",
+      "plan": [
+        {
+          "unresolved_claim": "source_identity",
+          "strategy": ["find the exact project ID in archived City GIS", "compare object and Global IDs", "check for duplicate exact project IDs"]
+        },
+        {
+          "unresolved_claim": "activity_classification",
+          "strategy": ["extract the official project type", "retain the source wording without semantic expansion"]
+        },
+        {
+          "unresolved_claim": "status_interpretation",
+          "strategy": ["extract the time-stamped official status", "look for a corroborating official project page", "do not infer facts beyond the status field"]
+        },
+        {
+          "unresolved_claim": "physical_work_started",
+          "strategy": ["look for explicit actual-start or inspection evidence", "treat planned dates and cancellation as insufficient for physical-work claims"]
+        }
+      ],
+      "tool_actions": [
+        {
+          "tool": "search_archived_evidence",
+          "query": "exact source_record_id SW60008 in 2026-08-23 and 2026-09-01 source snapshots",
+          "occurred_at_utc": "2026-09-02T08:21:48Z",
+          "result_ref": "data/agentic_validation/evidence/run_a/dev-080_archived_capital_polygon.json",
+          "result": "one exact archived City polygon feature located"
+        },
+        {
+          "tool": "search_official_web",
+          "query": "site:tampa.gov exact SW60008 Gardner",
+          "occurred_at_utc": "2026-09-02T08:21:48Z",
+          "result_ref": "official-search-run-a-dev-080",
+          "result": "no official page result returned"
+        },
+        {
+          "tool": "archive_evidence",
+          "query": "archive concise extracted fields and existing source-file hash",
+          "occurred_at_utc": "2026-09-02T08:21:48Z",
+          "result_ref": "data/agentic_validation/evidence/run_a/dev-080_archived_capital_polygon.json",
+          "result": "archived"
+        }
+      ],
+      "candidate_evidence": [
+        {
+          "candidate_evidence_id": "run-a-dev-080-archived-capital-polygon",
+          "archived_path": "data/agentic_validation/evidence/run_a/dev-080_archived_capital_polygon.json",
+          "content_sha256": "bc66b743c1548fc63a0450034ab3fb1b7fe5994c97fd62b311aa048d3ba07c9a",
+          "source_tier": "tier_1_archived_primary",
+          "primary_or_secondary": "primary",
+          "observed_facts": ["project ID SW60008", "project type Stormwater", "status Cancelled", "actual-start and actual-end fields are null"],
+          "identity_match_method": "exact administrative project ID",
+          "exact_identifiers": {"project_id": "SW60008"},
+          "supporting_fields": ["project_name", "source_object_id", "source_global_id"],
+          "conflicting_fields": [],
+          "candidate_count": 1,
+          "identity_category": "exact_identifier",
+          "accepted_for_rule_evaluation": false,
+          "rejection_reason": "no approved supplied rule governs these unresolved claims",
+          "applicable_rule_id": "unavailable",
+          "requires_human_review": true
+        }
+      ],
+      "identity_assessment": {
+        "identity_match_method": "exact administrative project ID plus unique archived object",
+        "exact_identifiers": {"project_id": "SW60008"},
+        "supporting_fields": ["project_name", "project_type"],
+        "conflicting_fields": [],
+        "candidate_count": 1,
+        "identity_category": "exact_identifier",
+        "accepted_for_rule_evaluation": false
+      },
+      "claim_results": [
+        {"claim": "source_identity", "status": "evidence_found"},
+        {"claim": "activity_classification", "status": "evidence_found"},
+        {"claim": "status_interpretation", "status": "evidence_found"},
+        {"claim": "physical_work_started", "status": "insufficient_evidence"}
+      ],
+      "conflicts": [],
+      "missing_information": ["explicit actual-start evidence", "inspection or construction-progress record", "official explanation of cancellation"],
+      "recommended_next_action": "human_review",
+      "requires_human_review": true,
+      "cost_usage": {"input_tokens": "unavailable", "output_tokens": "unavailable", "cached_tokens": "unavailable", "model_cost_usd": "unavailable", "tool_requests": 3, "http_requests": "unavailable", "wall_clock_seconds": "unavailable"}
+    },
+    {
+      "investigation_id": "run-a-dev-092",
+      "repeat_id": "A",
+      "sample_id": "dev-092",
+      "repeatability_probe": false,
+      "investigated_claims": ["source_identity", "activity_classification", "status_interpretation", "physical_work_started"],
+      "status": "evidence_found",
+      "plan": [
+        {"unresolved_claim": "source_identity", "strategy": ["find exact project ID in archived City GIS", "compare object, Global, facility, and contract IDs", "check duplicate exact IDs"]},
+        {"unresolved_claim": "activity_classification", "strategy": ["extract official project type", "compare project title and scope fields"]},
+        {"unresolved_claim": "status_interpretation", "strategy": ["extract status and project phase", "seek an official project page", "preserve cancellation/closeout wording without inference"]},
+        {"unresolved_claim": "physical_work_started", "strategy": ["look for explicit actual-start or inspection evidence", "do not treat planned dates, closeout, or cancellation alone as physical evidence"]}
+      ],
+      "tool_actions": [
+        {"tool": "search_archived_evidence", "query": "exact source_record_id 1001865.4B in archived source snapshots", "occurred_at_utc": "2026-09-02T08:21:48Z", "result_ref": "data/agentic_validation/evidence/run_a/dev-092_archived_capital_point.json", "result": "one exact archived City point feature located"},
+        {"tool": "search_official_web", "query": "site:tampa.gov exact 1001865.4B Howard F. Curren", "occurred_at_utc": "2026-09-02T08:21:48Z", "result_ref": "official-search-run-a-dev-092", "result": "no official page result returned"},
+        {"tool": "archive_evidence", "query": "archive concise extracted fields and existing source-file hash", "occurred_at_utc": "2026-09-02T08:21:48Z", "result_ref": "data/agentic_validation/evidence/run_a/dev-092_archived_capital_point.json", "result": "archived"}
+      ],
+      "candidate_evidence": [
+        {
+          "candidate_evidence_id": "run-a-dev-092-archived-capital-point",
+          "archived_path": "data/agentic_validation/evidence/run_a/dev-092_archived_capital_point.json",
+          "content_sha256": "bc66b743c1548fc63a0450034ab3fb1b7fe5994c97fd62b311aa048d3ba07c9a",
+          "source_tier": "tier_1_archived_primary",
+          "primary_or_secondary": "primary",
+          "observed_facts": ["project ID 1001865.4B", "project type Wastewater", "phase P5: Closeout", "status Cancelled", "contract 23-C-00020", "actual-start and actual-end fields are null"],
+          "identity_match_method": "exact administrative project ID",
+          "exact_identifiers": {"project_id": "1001865.4B"},
+          "supporting_fields": ["project_name", "contract_number", "source_global_id"],
+          "conflicting_fields": [],
+          "candidate_count": 1,
+          "identity_category": "exact_identifier",
+          "accepted_for_rule_evaluation": false,
+          "rejection_reason": "no approved supplied rule governs these unresolved claims",
+          "applicable_rule_id": "unavailable",
+          "requires_human_review": true
+        }
+      ],
+      "identity_assessment": {"identity_match_method": "exact administrative project ID plus unique archived object", "exact_identifiers": {"project_id": "1001865.4B", "contract_number": "23-C-00020"}, "supporting_fields": ["project_name", "project_type"], "conflicting_fields": [], "candidate_count": 1, "identity_category": "exact_identifier", "accepted_for_rule_evaluation": false},
+      "claim_results": [
+        {"claim": "source_identity", "status": "evidence_found"},
+        {"claim": "activity_classification", "status": "evidence_found"},
+        {"claim": "status_interpretation", "status": "evidence_found"},
+        {"claim": "physical_work_started", "status": "insufficient_evidence"}
+      ],
+      "conflicts": ["the same observation reports phase P5: Closeout and status Cancelled; semantic reconciliation requires human review"],
+      "missing_information": ["explicit actual-start evidence", "inspection or construction-progress record", "official cancellation/closeout explanation"],
+      "recommended_next_action": "human_review",
+      "requires_human_review": true,
+      "cost_usage": {"input_tokens": "unavailable", "output_tokens": "unavailable", "cached_tokens": "unavailable", "model_cost_usd": "unavailable", "tool_requests": 3, "http_requests": "unavailable", "wall_clock_seconds": "unavailable"}
+    },
+    {
+      "investigation_id": "run-a-dev-093",
+      "repeat_id": "A",
+      "sample_id": "dev-093",
+      "repeatability_probe": false,
+      "investigated_claims": ["source_identity", "activity_classification", "status_interpretation", "physical_work_started"],
+      "status": "ambiguous_identity",
+      "plan": [
+        {"unresolved_claim": "source_identity", "strategy": ["enumerate every archived object with the exact project ID", "compare source layer, object ID, Global ID, name, and contract", "do not merge distinct objects"]},
+        {"unresolved_claim": "activity_classification", "strategy": ["compare official project-type fields across candidates", "retain common explicit classification only"]},
+        {"unresolved_claim": "status_interpretation", "strategy": ["compare archived status fields", "fetch the exact official project page", "preserve divergent statuses by source object"]},
+        {"unresolved_claim": "physical_work_started", "strategy": ["seek explicit actual-start or inspection evidence", "treat construction phase labels as insufficient without an approved rule"]}
+      ],
+      "tool_actions": [
+        {"tool": "search_archived_evidence", "query": "all exact source_record_id WTR-20-0001.11 records in archived snapshots", "occurred_at_utc": "2026-09-02T08:21:48Z", "result_ref": "run-a-dev-093-archived-pair", "result": "two exact-ID City objects in different source layers located"},
+        {"tool": "search_official_web", "query": "site:tampa.gov exact WTR-20-0001.11", "occurred_at_utc": "2026-09-02T08:21:48Z", "result_ref": "https://www.tampa.gov/project/wtr-20-000111", "result": "official City project page located"},
+        {"tool": "fetch_official_document", "query": "fetch official project page", "occurred_at_utc": "2026-09-02T08:21:48Z", "result_ref": "https://www.tampa.gov/project/wtr-20-000111", "result": "primary HTML fields extracted; embedded content treated as untrusted data"},
+        {"tool": "archive_evidence", "query": "archive two archived candidates and one live observation", "occurred_at_utc": "2026-09-02T08:21:48Z", "result_ref": "data/agentic_validation/evidence/run_a/dev-093_*", "result": "three concise evidence records archived"}
+      ],
+      "candidate_evidence": [
+        {
+          "candidate_evidence_id": "run-a-dev-093-archived-sitewide",
+          "archived_path": "data/agentic_validation/evidence/run_a/dev-093_archived_sitewide.json",
+          "content_sha256": "bc66b743c1548fc63a0450034ab3fb1b7fe5994c97fd62b311aa048d3ba07c9a",
+          "source_tier": "tier_1_archived_primary",
+          "primary_or_secondary": "primary",
+          "observed_facts": ["exact project ID", "name Sitewide Electrical Improvement", "contract 20-C-00008", "status Final Contract Review & Approval", "phase P4: Construction"],
+          "identity_match_method": "exact ID plus project name and source layer",
+          "exact_identifiers": {"project_id": "WTR-20-0001.11", "source_object_id": "35707"},
+          "supporting_fields": ["project_name", "contract_number"],
+          "conflicting_fields": ["another source object uses the same project ID with a different name and status"],
+          "candidate_count": 2,
+          "identity_category": "ambiguous",
+          "accepted_for_rule_evaluation": false,
+          "rejection_reason": "exact administrative ID is not unique across archived source objects",
+          "applicable_rule_id": "unavailable",
+          "requires_human_review": true
+        },
+        {
+          "candidate_evidence_id": "run-a-dev-093-archived-teco-house",
+          "archived_path": "data/agentic_validation/evidence/run_a/dev-093_archived_teco_house.json",
+          "content_sha256": "bc66b743c1548fc63a0450034ab3fb1b7fe5994c97fd62b311aa048d3ba07c9a",
+          "source_tier": "tier_1_archived_primary",
+          "primary_or_secondary": "primary",
+          "observed_facts": ["same exact project ID", "name TECO House and Sitewide Electrical", "status Construction in Progress", "phase P4: Construction"],
+          "identity_match_method": "exact ID with conflicting source-object context",
+          "exact_identifiers": {"project_id": "WTR-20-0001.11", "source_object_id": "2908"},
+          "supporting_fields": ["related project wording", "project_type"],
+          "conflicting_fields": ["project_name", "status", "source_object_id", "source_global_id"],
+          "candidate_count": 2,
+          "identity_category": "ambiguous",
+          "accepted_for_rule_evaluation": false,
+          "rejection_reason": "candidate may be a related component but cannot be silently merged",
+          "applicable_rule_id": "unavailable",
+          "requires_human_review": true
+        },
+        {
+          "candidate_evidence_id": "run-a-dev-093-live-sitewide",
+          "archived_path": "data/agentic_validation/evidence/run_a/dev-093_live_sitewide.json",
+          "content_sha256": "4cda37060bb23a464f9a7925edd1b98fddfd9d204308d9264bfa0052b8d1fadd",
+          "source_tier": "tier_2_live_primary",
+          "primary_or_secondary": "primary",
+          "observed_facts": ["live page repeats exact project ID, Sitewide Electrical name, contract 20-C-00008, and Final Contract Review & Approval status"],
+          "identity_match_method": "exact ID plus name and contract",
+          "exact_identifiers": {"project_id": "WTR-20-0001.11", "contract_number": "20-C-00008"},
+          "supporting_fields": ["project_name", "project_type", "planned dates"],
+          "conflicting_fields": ["archived City point object with the same project ID has different name and status"],
+          "candidate_count": 2,
+          "identity_category": "ambiguous",
+          "accepted_for_rule_evaluation": false,
+          "rejection_reason": "duplicate exact project ID remains unresolved across source objects",
+          "applicable_rule_id": "unavailable",
+          "requires_human_review": true
+        }
+      ],
+      "identity_assessment": {"identity_match_method": "exact project ID is duplicated; project name, contract, layer, object ID, and Global ID distinguish candidates", "exact_identifiers": {"project_id": "WTR-20-0001.11"}, "supporting_fields": ["project_name", "contract_number", "source_layer"], "conflicting_fields": ["source_object_id", "source_global_id", "project_name", "status"], "candidate_count": 2, "identity_category": "ambiguous", "accepted_for_rule_evaluation": false},
+      "claim_results": [
+        {"claim": "source_identity", "status": "ambiguous_identity"},
+        {"claim": "activity_classification", "status": "evidence_found"},
+        {"claim": "status_interpretation", "status": "conflicting_evidence_found"},
+        {"claim": "physical_work_started", "status": "insufficient_evidence"}
+      ],
+      "conflicts": ["two archived City objects share the exact project ID but have different object/Global IDs, names, and statuses"],
+      "missing_information": ["authoritative relationship between the two City objects", "explicit actual-start evidence", "approved rule for interpreting construction phase"],
+      "recommended_next_action": "human_review",
+      "requires_human_review": true,
+      "cost_usage": {"input_tokens": "unavailable", "output_tokens": "unavailable", "cached_tokens": "unavailable", "model_cost_usd": "unavailable", "tool_requests": 4, "http_requests": "unavailable", "wall_clock_seconds": "unavailable"}
+    },
+    {
+      "investigation_id": "run-a-dev-068",
+      "repeat_id": "A",
+      "sample_id": "dev-068",
+      "repeatability_probe": true,
+      "investigated_claims": ["source_identity", "activity_classification", "status_interpretation", "physical_work_started"],
+      "status": "evidence_found",
+      "plan": [
+        {"unresolved_claim": "source_identity", "strategy": ["enumerate exact-ID records", "compare GMP number, project name, contract, source object, and layer", "avoid merging GMP 5 and GMP 3"]},
+        {"unresolved_claim": "activity_classification", "strategy": ["extract official project type from the source-specific candidate"]},
+        {"unresolved_claim": "status_interpretation", "strategy": ["compare archived candidate statuses", "fetch official project page matching GMP 5", "preserve status as administrative wording"]},
+        {"unresolved_claim": "physical_work_started", "strategy": ["look for actual-start or inspection evidence", "do not treat closeout or planned dates as physical proof"]}
+      ],
+      "tool_actions": [
+        {"tool": "search_archived_evidence", "query": "all exact source_record_id WTR-20-0005.3-12th St records", "occurred_at_utc": "2026-09-02T08:21:48Z", "result_ref": "run-a-shared-wtr-12th-archived-pair", "result": "GMP 5 and GMP 3 source objects located"},
+        {"tool": "search_official_web", "query": "site:tampa.gov exact WTR-20-0005.3-12th St", "occurred_at_utc": "2026-09-02T08:21:48Z", "result_ref": "https://www.tampa.gov/project/wtr-20-00053-12th-st", "result": "official GMP 5 page located"},
+        {"tool": "fetch_official_document", "query": "fetch official GMP 5 project page", "occurred_at_utc": "2026-09-02T08:21:48Z", "result_ref": "https://www.tampa.gov/project/wtr-20-00053-12th-st", "result": "primary HTML fields extracted; embedded content treated as untrusted data"},
+        {"tool": "archive_evidence", "query": "archive GMP 5, GMP 3, and live GMP 5 observations", "occurred_at_utc": "2026-09-02T08:21:48Z", "result_ref": "data/agentic_validation/evidence/run_a/shared-wtr-12th_*", "result": "three concise evidence records archived"}
+      ],
+      "candidate_evidence": [
+        {
+          "candidate_evidence_id": "run-a-shared-wtr-12th-archived-gmp5",
+          "archived_path": "data/agentic_validation/evidence/run_a/shared-wtr-12th_archived_gmp5.json",
+          "content_sha256": "bc66b743c1548fc63a0450034ab3fb1b7fe5994c97fd62b311aa048d3ba07c9a",
+          "source_tier": "tier_1_archived_primary",
+          "primary_or_secondary": "primary",
+          "observed_facts": ["exact project ID", "GMP 5 project name", "contract 20-C-00032", "status and phase Closeout"],
+          "identity_match_method": "exact ID plus exact GMP 5 name, contract, and source layer",
+          "exact_identifiers": {"project_id": "WTR-20-0005.3-12th St", "source_object_id": "52915", "contract_number": "20-C-00032"},
+          "supporting_fields": ["project_name", "source_global_id", "project_type"],
+          "conflicting_fields": ["a GMP 3 object reuses the project ID"],
+          "candidate_count": 2,
+          "identity_category": "strong_multi_field",
+          "accepted_for_rule_evaluation": false,
+          "rejection_reason": "exact project ID is reused; current registry accepts only a unique exact identifier",
+          "applicable_rule_id": "unavailable",
+          "requires_human_review": true
+        },
+        {
+          "candidate_evidence_id": "run-a-shared-wtr-12th-archived-gmp3",
+          "archived_path": "data/agentic_validation/evidence/run_a/shared-wtr-12th_archived_gmp3.json",
+          "content_sha256": "bc66b743c1548fc63a0450034ab3fb1b7fe5994c97fd62b311aa048d3ba07c9a",
+          "source_tier": "tier_1_archived_primary",
+          "primary_or_secondary": "primary",
+          "observed_facts": ["same project ID appears on a GMP 3 line object", "status Final Inspection and Testing", "different object and Global IDs"],
+          "identity_match_method": "exact ID with conflicting GMP number and source-object context",
+          "exact_identifiers": {"project_id": "WTR-20-0005.3-12th St", "source_object_id": "39134"},
+          "supporting_fields": ["project_type"],
+          "conflicting_fields": ["project_name", "GMP number", "status", "project_phase", "source_object_id"],
+          "candidate_count": 2,
+          "identity_category": "conflicting",
+          "accepted_for_rule_evaluation": false,
+          "rejection_reason": "GMP 3 observation is not the frozen GMP 5 project name",
+          "applicable_rule_id": "unavailable",
+          "requires_human_review": true
+        },
+        {
+          "candidate_evidence_id": "run-a-shared-wtr-12th-live-gmp5",
+          "archived_path": "data/agentic_validation/evidence/run_a/shared-wtr-12th_live_gmp5.json",
+          "content_sha256": "85aeb577a3a2a8aead3035c97558cbcad573bf51886da1bc7acf2946e3c17989",
+          "source_tier": "tier_2_live_primary",
+          "primary_or_secondary": "primary",
+          "observed_facts": ["live City page matches GMP 5 name", "contract 20-C-00032", "status Closeout", "planned end 05/31/2026"],
+          "identity_match_method": "exact ID plus exact GMP 5 name and contract",
+          "exact_identifiers": {"project_id": "WTR-20-0005.3-12th St", "contract_number": "20-C-00032"},
+          "supporting_fields": ["project_name", "project_type", "planned_end_date"],
+          "conflicting_fields": ["a distinct GMP 3 object uses the same project ID"],
+          "candidate_count": 2,
+          "identity_category": "strong_multi_field",
+          "accepted_for_rule_evaluation": false,
+          "rejection_reason": "project-ID reuse prevents unique exact-identifier acceptance",
+          "applicable_rule_id": "unavailable",
+          "requires_human_review": true
+        }
+      ],
+      "identity_assessment": {"identity_match_method": "exact ID plus GMP 5 name, contract, object ID, Global ID, and source layer", "exact_identifiers": {"project_id": "WTR-20-0005.3-12th St", "contract_number": "20-C-00032"}, "supporting_fields": ["project_name", "source_object_id", "source_layer"], "conflicting_fields": ["same project ID on GMP 3 object"], "candidate_count": 2, "identity_category": "strong_multi_field", "accepted_for_rule_evaluation": false},
+      "claim_results": [
+        {"claim": "source_identity", "status": "evidence_found"},
+        {"claim": "activity_classification", "status": "evidence_found"},
+        {"claim": "status_interpretation", "status": "evidence_found"},
+        {"claim": "physical_work_started", "status": "insufficient_evidence"}
+      ],
+      "conflicts": ["GMP 3 and GMP 5 source objects reuse the same project ID but have different names, statuses, phases, and object identifiers"],
+      "missing_information": ["official explanation of project-ID reuse", "explicit actual-start evidence for GMP 5", "approved deterministic status rule"],
+      "recommended_next_action": "human_review",
+      "requires_human_review": true,
+      "cost_usage": {"input_tokens": "unavailable", "output_tokens": "unavailable", "cached_tokens": "unavailable", "model_cost_usd": "unavailable", "tool_requests": 4, "http_requests": "unavailable", "wall_clock_seconds": "unavailable"}
+    },
+    {
+      "investigation_id": "run-a-dev-082",
+      "repeat_id": "A",
+      "sample_id": "dev-082",
+      "repeatability_probe": false,
+      "investigated_claims": ["source_identity", "activity_classification", "status_interpretation", "physical_work_started"],
+      "status": "ambiguous_identity",
+      "plan": [
+        {"unresolved_claim": "source_identity", "strategy": ["enumerate exact-ID records", "compare GMP number, source layer, object ID, Global ID, and contract", "do not attach the GMP 5 page to GMP 3 without an explicit relationship"]},
+        {"unresolved_claim": "activity_classification", "strategy": ["extract official project type from both candidates", "retain common explicit classification only"]},
+        {"unresolved_claim": "status_interpretation", "strategy": ["compare GMP 3 and GMP 5 statuses", "preserve each status with its source object"]},
+        {"unresolved_claim": "physical_work_started", "strategy": ["look for explicit actual-start or inspection-result evidence", "do not convert Final Inspection and Testing narrative into a passed final inspection"]}
+      ],
+      "tool_actions": [
+        {"tool": "search_archived_evidence", "query": "all exact source_record_id WTR-20-0005.3-12th St records", "occurred_at_utc": "2026-09-02T08:21:48Z", "result_ref": "run-a-shared-wtr-12th-archived-pair", "result": "GMP 3 and GMP 5 source objects located"},
+        {"tool": "search_official_web", "query": "site:tampa.gov exact WTR-20-0005.3-12th St", "occurred_at_utc": "2026-09-02T08:21:48Z", "result_ref": "https://www.tampa.gov/project/wtr-20-00053-12th-st", "result": "official page resolves to GMP 5, not the requested GMP 3 name"},
+        {"tool": "fetch_official_document", "query": "fetch official exact-ID project page", "occurred_at_utc": "2026-09-02T08:21:48Z", "result_ref": "https://www.tampa.gov/project/wtr-20-00053-12th-st", "result": "page fields extracted and retained as a conflicting candidate, not attached to GMP 3"},
+        {"tool": "archive_evidence", "query": "archive GMP 3, GMP 5, and live page candidates", "occurred_at_utc": "2026-09-02T08:21:48Z", "result_ref": "data/agentic_validation/evidence/run_a/shared-wtr-12th_*", "result": "three concise evidence records archived"}
+      ],
+      "candidate_evidence": [
+        {
+          "candidate_evidence_id": "run-a-shared-wtr-12th-archived-gmp3",
+          "archived_path": "data/agentic_validation/evidence/run_a/shared-wtr-12th_archived_gmp3.json",
+          "content_sha256": "bc66b743c1548fc63a0450034ab3fb1b7fe5994c97fd62b311aa048d3ba07c9a",
+          "source_tier": "tier_1_archived_primary",
+          "primary_or_secondary": "primary",
+          "observed_facts": ["exact project ID", "GMP 3 project name", "status Final Inspection and Testing", "source-reported actual-end epoch field", "no explicit inspection result"],
+          "identity_match_method": "exact ID plus GMP 3 name and line-source object",
+          "exact_identifiers": {"project_id": "WTR-20-0005.3-12th St", "source_object_id": "39134"},
+          "supporting_fields": ["project_name", "source_global_id", "source_layer"],
+          "conflicting_fields": ["a GMP 5 object and page reuse the project ID"],
+          "candidate_count": 2,
+          "identity_category": "strong_multi_field",
+          "accepted_for_rule_evaluation": false,
+          "rejection_reason": "exact project ID is reused and no unique contract identifier is present for GMP 3",
+          "applicable_rule_id": "unavailable",
+          "requires_human_review": true
+        },
+        {
+          "candidate_evidence_id": "run-a-shared-wtr-12th-archived-gmp5",
+          "archived_path": "data/agentic_validation/evidence/run_a/shared-wtr-12th_archived_gmp5.json",
+          "content_sha256": "bc66b743c1548fc63a0450034ab3fb1b7fe5994c97fd62b311aa048d3ba07c9a",
+          "source_tier": "tier_1_archived_primary",
+          "primary_or_secondary": "primary",
+          "observed_facts": ["same project ID appears on a GMP 5 object", "contract 20-C-00032", "status Closeout"],
+          "identity_match_method": "exact ID with conflicting GMP number and source-object context",
+          "exact_identifiers": {"project_id": "WTR-20-0005.3-12th St", "source_object_id": "52915", "contract_number": "20-C-00032"},
+          "supporting_fields": ["project_type"],
+          "conflicting_fields": ["project_name", "GMP number", "status", "project_phase", "source_object_id"],
+          "candidate_count": 2,
+          "identity_category": "conflicting",
+          "accepted_for_rule_evaluation": false,
+          "rejection_reason": "GMP 5 observation is not the frozen GMP 3 project name",
+          "applicable_rule_id": "unavailable",
+          "requires_human_review": true
+        },
+        {
+          "candidate_evidence_id": "run-a-shared-wtr-12th-live-gmp5",
+          "archived_path": "data/agentic_validation/evidence/run_a/shared-wtr-12th_live_gmp5.json",
+          "content_sha256": "85aeb577a3a2a8aead3035c97558cbcad573bf51886da1bc7acf2946e3c17989",
+          "source_tier": "tier_2_live_primary",
+          "primary_or_secondary": "primary",
+          "observed_facts": ["exact project ID resolves to a GMP 5 page", "contract 20-C-00032", "status Closeout"],
+          "identity_match_method": "exact ID but conflicting GMP number and project name",
+          "exact_identifiers": {"project_id": "WTR-20-0005.3-12th St"},
+          "supporting_fields": ["project_type"],
+          "conflicting_fields": ["project_name", "GMP number", "status", "project_phase", "contract_number"],
+          "candidate_count": 2,
+          "identity_category": "conflicting",
+          "accepted_for_rule_evaluation": false,
+          "rejection_reason": "official page describes GMP 5 while the frozen case describes GMP 3",
+          "applicable_rule_id": "unavailable",
+          "requires_human_review": true
+        }
+      ],
+      "identity_assessment": {"identity_match_method": "exact project ID plus GMP name and source-object context", "exact_identifiers": {"project_id": "WTR-20-0005.3-12th St"}, "supporting_fields": ["GMP 3 project_name", "source_object_id", "source_global_id", "source_layer"], "conflicting_fields": ["same ID on GMP 5 object and live page"], "candidate_count": 2, "identity_category": "ambiguous", "accepted_for_rule_evaluation": false},
+      "claim_results": [
+        {"claim": "source_identity", "status": "ambiguous_identity"},
+        {"claim": "activity_classification", "status": "evidence_found"},
+        {"claim": "status_interpretation", "status": "conflicting_evidence_found"},
+        {"claim": "physical_work_started", "status": "insufficient_evidence"}
+      ],
+      "conflicts": ["the exact-ID official page is GMP 5 while this sample row is GMP 3", "GMP 3 and GMP 5 have different statuses and project phases"],
+      "missing_information": ["unique GMP 3 administrative identifier or contract", "explicit inspection type/result/date", "approved deterministic rule for the actual-end field"],
+      "recommended_next_action": "human_review",
+      "requires_human_review": true,
+      "cost_usage": {"input_tokens": "unavailable", "output_tokens": "unavailable", "cached_tokens": "unavailable", "model_cost_usd": "unavailable", "tool_requests": 4, "http_requests": "unavailable", "wall_clock_seconds": "unavailable"}
+    },
+    {
+      "investigation_id": "run-a-hol-035",
+      "repeat_id": "A",
+      "sample_id": "hol-035",
+      "repeatability_probe": false,
+      "investigated_claims": ["source_identity", "activity_classification", "status_interpretation", "physical_work_started"],
+      "status": "evidence_found",
+      "plan": [
+        {"unresolved_claim": "source_identity", "strategy": ["find exact project ID in archived City GIS", "compare facility, object, Global, contract, and project-name fields"]},
+        {"unresolved_claim": "activity_classification", "strategy": ["extract official project type and scope"]},
+        {"unresolved_claim": "status_interpretation", "strategy": ["extract time-stamped status and phase", "seek a public official page", "do not infer later progress"]},
+        {"unresolved_claim": "physical_work_started", "strategy": ["look for actual-start or inspection evidence", "treat future planned dates as insufficient"]}
+      ],
+      "tool_actions": [
+        {"tool": "search_archived_evidence", "query": "exact source_record_id 1001810.13 in archived source snapshots", "occurred_at_utc": "2026-09-02T08:21:48Z", "result_ref": "data/agentic_validation/evidence/run_a/hol-035_archived_capital_point.json", "result": "one exact archived City point feature located"},
+        {"tool": "search_official_web", "query": "site:tampa.gov exact 1001810.13 Oak Haven", "occurred_at_utc": "2026-09-02T08:21:48Z", "result_ref": "official-search-run-a-hol-035", "result": "no official page result returned"},
+        {"tool": "archive_evidence", "query": "archive concise extracted fields and existing source-file hash", "occurred_at_utc": "2026-09-02T08:21:48Z", "result_ref": "data/agentic_validation/evidence/run_a/hol-035_archived_capital_point.json", "result": "archived"}
+      ],
+      "candidate_evidence": [
+        {
+          "candidate_evidence_id": "run-a-hol-035-archived-capital-point",
+          "archived_path": "data/agentic_validation/evidence/run_a/hol-035_archived_capital_point.json",
+          "content_sha256": "bc66b743c1548fc63a0450034ab3fb1b7fe5994c97fd62b311aa048d3ba07c9a",
+          "source_tier": "tier_1_archived_primary",
+          "primary_or_secondary": "primary",
+          "observed_facts": ["project ID 1001810.13", "facility ID 178755", "Oak Haven Pumping Station Rehabilitation", "project type Wastewater", "phase and status Planning", "actual-start and actual-end fields are null"],
+          "identity_match_method": "exact project ID plus project name and facility ID",
+          "exact_identifiers": {"project_id": "1001810.13", "facility_id": "178755"},
+          "supporting_fields": ["project_name", "contract_number", "source_global_id"],
+          "conflicting_fields": [],
+          "candidate_count": 1,
+          "identity_category": "exact_identifier",
+          "accepted_for_rule_evaluation": false,
+          "rejection_reason": "no approved supplied rule governs these unresolved claims",
+          "applicable_rule_id": "unavailable",
+          "requires_human_review": true
+        }
+      ],
+      "identity_assessment": {"identity_match_method": "exact project ID plus unique archived object", "exact_identifiers": {"project_id": "1001810.13", "facility_id": "178755", "contract_number": "20-C-00016"}, "supporting_fields": ["project_name", "project_type"], "conflicting_fields": [], "candidate_count": 1, "identity_category": "exact_identifier", "accepted_for_rule_evaluation": false},
+      "claim_results": [
+        {"claim": "source_identity", "status": "evidence_found"},
+        {"claim": "activity_classification", "status": "evidence_found"},
+        {"claim": "status_interpretation", "status": "evidence_found"},
+        {"claim": "physical_work_started", "status": "insufficient_evidence"}
+      ],
+      "conflicts": [],
+      "missing_information": ["explicit actual-start evidence", "inspection or construction-progress record", "public project page"],
+      "recommended_next_action": "human_review",
+      "requires_human_review": true,
+      "cost_usage": {"input_tokens": "unavailable", "output_tokens": "unavailable", "cached_tokens": "unavailable", "model_cost_usd": "unavailable", "tool_requests": 3, "http_requests": "unavailable", "wall_clock_seconds": "unavailable"}
+    },
+    {
+      "investigation_id": "run-a-dev-025",
+      "repeat_id": "A",
+      "sample_id": "dev-025",
+      "repeatability_probe": true,
+      "investigated_claims": ["source_identity", "activity_classification", "status_interpretation", "building_footprint_match", "physical_work_started"],
+      "status": "ambiguous_identity",
+      "plan": [
+        {"unresolved_claim": "source_identity", "strategy": ["locate exact permit ID in archived City GIS and Accela exports", "compare exact ID, address, record type, and source URL"]},
+        {"unresolved_claim": "activity_classification", "strategy": ["compare official record-type fields across archived sources"]},
+        {"unresolved_claim": "status_interpretation", "strategy": ["compare time-stamped GIS and Accela statuses", "do not treat status change as construction evidence"]},
+        {"unresolved_claim": "building_footprint_match", "strategy": ["inspect the archived match method, candidate address, and distance", "reject exact attachment when the building address differs"]},
+        {"unresolved_claim": "physical_work_started", "strategy": ["search archived inspection/permit fields for explicit performed-work evidence", "treat Revision and About to Expire as insufficient"]}
+      ],
+      "tool_actions": [
+        {"tool": "search_archived_evidence", "query": "exact BLD-26-0519341 in City GIS snapshot, Accela archive, and parcel-building match output", "occurred_at_utc": "2026-09-02T08:21:48Z", "result_ref": "run-a-dev-025-archived-set", "result": "exact permit records found; one medium-distance building candidate found"},
+        {"tool": "search_official_web", "query": "site:tampa.gov exact BLD-26-0519341", "occurred_at_utc": "2026-09-02T08:21:48Z", "result_ref": "official-search-run-a-dev-025", "result": "no allowlisted official page result returned; live Accela host not used under source allowlist"},
+        {"tool": "archive_evidence", "query": "archive GIS record, Accela search row, and spatial match fields with source-file hashes", "occurred_at_utc": "2026-09-02T08:21:48Z", "result_ref": "data/agentic_validation/evidence/run_a/dev-025_*", "result": "three concise evidence records archived"}
+      ],
+      "candidate_evidence": [
+        {
+          "candidate_evidence_id": "run-a-dev-025-archived-gis-record",
+          "archived_path": "data/agentic_validation/evidence/run_a/dev-025_archived_gis_record.json",
+          "content_sha256": "bcd5ff1969731a3d0ef98051db277833acf92c953f683ad17ba29e94a8d137a7",
+          "source_tier": "tier_1_archived_primary",
+          "primary_or_secondary": "primary",
+          "observed_facts": ["exact record ID", "address 206 N MacDill Ave", "record type Residential Building Alterations", "status Revision", "private provider Yes"],
+          "identity_match_method": "exact permit ID plus address and record type",
+          "exact_identifiers": {"record_id": "BLD-26-0519341"},
+          "supporting_fields": ["address", "record_type", "project_name", "source_global_id"],
+          "conflicting_fields": ["later Accela status is About to Expire"],
+          "candidate_count": 1,
+          "identity_category": "exact_identifier",
+          "accepted_for_rule_evaluation": false,
+          "rejection_reason": "no approved supplied rule governs source status or work-start claims",
+          "applicable_rule_id": "unavailable",
+          "requires_human_review": true
+        },
+        {
+          "candidate_evidence_id": "run-a-dev-025-archived-accela-record",
+          "archived_path": "data/agentic_validation/evidence/run_a/dev-025_archived_accela_record.json",
+          "content_sha256": "5b08b9a189765277d16a033d9c18e9135c1276d4ea04fe0bbccc357995697f28",
+          "source_tier": "tier_1_archived_primary",
+          "primary_or_secondary": "primary",
+          "observed_facts": ["exact record number", "same 206 N MacDill address", "same record type", "status About to Expire", "expiration date 09/05/2026"],
+          "identity_match_method": "exact permit ID plus address and record type",
+          "exact_identifiers": {"record_number": "BLD-26-0519341"},
+          "supporting_fields": ["address", "record_type", "source URL"],
+          "conflicting_fields": ["earlier GIS status is Revision"],
+          "candidate_count": 1,
+          "identity_category": "exact_identifier",
+          "accepted_for_rule_evaluation": false,
+          "rejection_reason": "no explicit inspection result or approved applicable rule",
+          "applicable_rule_id": "unavailable",
+          "requires_human_review": true
+        },
+        {
+          "candidate_evidence_id": "run-a-dev-025-archived-spatial-match",
+          "archived_path": "data/agentic_validation/evidence/run_a/dev-025_archived_spatial_match.json",
+          "content_sha256": "890bcfaf76138652fb3316b99704968e7da455bc8119351add66b9ca23cee431",
+          "source_tier": "tier_1_archived_primary",
+          "primary_or_secondary": "primary",
+          "observed_facts": ["nearest-footprint candidate is 30.75 metres away", "candidate building address is 210 N Macdill Ave", "permit address is 206 N MacDill Ave", "match confidence is medium"],
+          "identity_match_method": "nearest footprint within 35 metres",
+          "exact_identifiers": {"building_object_id": "774371", "folio": "169094.0125"},
+          "supporting_fields": ["street name proximity"],
+          "conflicting_fields": ["street number", "30.75 metre separation", "medium match confidence"],
+          "candidate_count": 1,
+          "identity_category": "ambiguous",
+          "accepted_for_rule_evaluation": false,
+          "rejection_reason": "building address differs and the proximity match is explicitly medium confidence",
+          "applicable_rule_id": "unavailable",
+          "requires_human_review": true
+        }
+      ],
+      "identity_assessment": {"identity_match_method": "permit identity is exact; building identity uses a medium-confidence nearest-footprint association", "exact_identifiers": {"record_number": "BLD-26-0519341"}, "supporting_fields": ["permit address", "record type", "project name"], "conflicting_fields": ["permit status differs across dated sources", "building address 210 differs from permit address 206", "building match distance 30.75 metres"], "candidate_count": 1, "identity_category": "ambiguous", "accepted_for_rule_evaluation": false},
+      "claim_results": [
+        {"claim": "source_identity", "status": "evidence_found"},
+        {"claim": "activity_classification", "status": "evidence_found"},
+        {"claim": "status_interpretation", "status": "conflicting_evidence_found"},
+        {"claim": "building_footprint_match", "status": "ambiguous_identity"},
+        {"claim": "physical_work_started", "status": "insufficient_evidence"}
+      ],
+      "conflicts": ["dated City sources report Revision and About to Expire statuses", "the matched building is numbered 210 while the permit is numbered 206"],
+      "missing_information": ["explicit inspection type/result/date", "parcel ID on the Accela record", "exact building-footprint or parcel linkage", "evidence that physical work began"],
+      "recommended_next_action": "human_review",
+      "requires_human_review": true,
+      "cost_usage": {"input_tokens": "unavailable", "output_tokens": "unavailable", "cached_tokens": "unavailable", "model_cost_usd": "unavailable", "tool_requests": 3, "http_requests": "unavailable", "wall_clock_seconds": "unavailable"}
+    }
+  ]
+}

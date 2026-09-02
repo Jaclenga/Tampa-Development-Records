@@ -1,0 +1,1682 @@
+{
+  "benchmark_id": "tdr-agent-evidence-benchmark-v1",
+  "benchmark_version": "1.0.0",
+  "cases": [
+    {
+      "benchmark_case_id": "agent-benchmark-v1-dev-080",
+      "comparison_baseline": {
+        "conflicts_detected": "not_assessed",
+        "cost": null,
+        "deterministic_only": "not_run",
+        "deterministic_plus_agentic": "not_run",
+        "evidence_availability": "not_assessed",
+        "execution_time_seconds": null,
+        "false_association": "not_assessed",
+        "human_review_required": "not_assessed",
+        "status": "not_run",
+        "unresolved_case": "not_assessed"
+      },
+      "investigation_request": {
+        "activity_id": "tpa-3bc05d25e4572c",
+        "address": "",
+        "dataset_context": {
+          "activity_class": "public_capital:stormwater",
+          "latitude": "",
+          "longitude": "",
+          "sample_phase": "development",
+          "sampling_stratum": "capital_project"
+        },
+        "description": "2500 block of Gardner Court experiences frequent flooding due to low elevations and lack of",
+        "known_dates": {},
+        "known_evidence": [
+          {
+            "evidence_type": "frozen_dataset_context",
+            "evidentiary_status": "unreviewed_context_not_ground_truth",
+            "fields": {
+              "activity_stage": "inactive",
+              "physical_work_started_dataset": "unknown",
+              "realization_evidence_grade": "X",
+              "source_memberships": "capital_locations_polygon",
+              "source_record_id": "SW60008",
+              "source_url": "",
+              "status": "Cancelled"
+            }
+          }
+        ],
+        "project_name": "2504 Gardner Ct",
+        "record_number": "SW60008",
+        "record_type": "Stormwater",
+        "sample_id": "dev-080",
+        "schema_version": "1.0.0",
+        "study": "core",
+        "unresolved_claims": [
+          {
+            "basis_field": "source_identity_result",
+            "basis_value": "",
+            "claim_id": "source_identity",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "activity_classification_result",
+            "basis_value": "",
+            "claim_id": "activity_classification",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "status_interpretation_result",
+            "basis_value": "",
+            "claim_id": "status_interpretation",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "physical_work_started_dataset",
+            "basis_value": "unknown",
+            "claim_id": "physical_work_started",
+            "reason": "frozen dataset value is explicitly unknown and manual evidence is blank"
+          }
+        ]
+      },
+      "selection": {
+        "matched_categories": [
+          "potential_conflicting_evidence",
+          "missing_source_evidence"
+        ],
+        "primary_category": "potential_conflicting_evidence",
+        "sha256_rank": "371ba95c1ae1843d98ab199de9a2f34a129b1ac64010d5376e6f9fb32e765a6a"
+      },
+      "source_types": [
+        "capital_locations_polygon"
+      ]
+    },
+    {
+      "benchmark_case_id": "agent-benchmark-v1-dev-092",
+      "comparison_baseline": {
+        "conflicts_detected": "not_assessed",
+        "cost": null,
+        "deterministic_only": "not_run",
+        "deterministic_plus_agentic": "not_run",
+        "evidence_availability": "not_assessed",
+        "execution_time_seconds": null,
+        "false_association": "not_assessed",
+        "human_review_required": "not_assessed",
+        "status": "not_run",
+        "unresolved_case": "not_assessed"
+      },
+      "investigation_request": {
+        "activity_id": "tpa-5094836b257f3e",
+        "address": "",
+        "dataset_context": {
+          "activity_class": "public_capital:wastewater",
+          "latitude": "27.9233374",
+          "longitude": "-82.4372403",
+          "sample_phase": "development",
+          "sampling_stratum": "capital_project"
+        },
+        "description": "This project provides for the design and equipment purchase of the Return Sludge Pump Stations No. 1, No. 2 and No. 3 electrical system improvements at the Howard F. Curren AWTP. The project will include replacement of the motor control centers, switchgears, variable frequency drivers, lighting panels and miscellaneous electrical components.",
+        "known_dates": {},
+        "known_evidence": [
+          {
+            "evidence_type": "frozen_dataset_context",
+            "evidentiary_status": "unreviewed_context_not_ground_truth",
+            "fields": {
+              "activity_stage": "inactive",
+              "physical_work_started_dataset": "unknown",
+              "realization_evidence_grade": "X",
+              "source_memberships": "capital_locations_point",
+              "source_record_id": "1001865.4B",
+              "source_url": "",
+              "status": "Cancelled"
+            }
+          }
+        ],
+        "project_name": "Howard F. Curren AWTP Master Plan Improvements, Phase 2, Design-build Amendment No. 1",
+        "record_number": "1001865.4B",
+        "record_type": "Wastewater",
+        "sample_id": "dev-092",
+        "schema_version": "1.0.0",
+        "study": "core",
+        "unresolved_claims": [
+          {
+            "basis_field": "source_identity_result",
+            "basis_value": "",
+            "claim_id": "source_identity",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "activity_classification_result",
+            "basis_value": "",
+            "claim_id": "activity_classification",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "status_interpretation_result",
+            "basis_value": "",
+            "claim_id": "status_interpretation",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "physical_work_started_dataset",
+            "basis_value": "unknown",
+            "claim_id": "physical_work_started",
+            "reason": "frozen dataset value is explicitly unknown and manual evidence is blank"
+          }
+        ]
+      },
+      "selection": {
+        "matched_categories": [
+          "potential_conflicting_evidence",
+          "missing_source_evidence"
+        ],
+        "primary_category": "potential_conflicting_evidence",
+        "sha256_rank": "e6b67d17267b9810d0566551488ac08c23d6229c82ac2176c8fabd294b672d76"
+      },
+      "source_types": [
+        "capital_locations_point"
+      ]
+    },
+    {
+      "benchmark_case_id": "agent-benchmark-v1-dev-093",
+      "comparison_baseline": {
+        "conflicts_detected": "not_assessed",
+        "cost": null,
+        "deterministic_only": "not_run",
+        "deterministic_plus_agentic": "not_run",
+        "evidence_availability": "not_assessed",
+        "execution_time_seconds": null,
+        "false_association": "not_assessed",
+        "human_review_required": "not_assessed",
+        "status": "not_run",
+        "unresolved_case": "not_assessed"
+      },
+      "investigation_request": {
+        "activity_id": "tpa-3ec359f44a049e",
+        "address": "",
+        "dataset_context": {
+          "activity_class": "public_capital:water",
+          "latitude": "28.0142478",
+          "longitude": "-82.4239247",
+          "sample_phase": "development",
+          "sampling_stratum": "capital_project"
+        },
+        "description": "The TECO House and Sitewide Electric project will optimize facility performance capabilities, improve water quality and expand our water treatment capacity. This project will rehabilitate and replace existing infrastructure and eliminate deteriorating facilities and equipment to increase operational and maintenance efficiency. New infrastructure upgrades will increase our capacity to produce drinking water and we will also add new back-up systems to strengthen our resiliency when faced with a natural disaster or other emergency. New treatment processes will also be explored to achieve the twin goals of enhancing the taste and odor of our drinking water while reducing the use of water treatment chemicals.",
+        "known_dates": {},
+        "known_evidence": [
+          {
+            "evidence_type": "frozen_dataset_context",
+            "evidentiary_status": "unreviewed_context_not_ground_truth",
+            "fields": {
+              "activity_stage": "preconstruction_or_unknown",
+              "physical_work_started_dataset": "unknown",
+              "realization_evidence_grade": "U",
+              "source_memberships": "capital_improvements",
+              "source_record_id": "WTR-20-0001.11",
+              "source_url": "https://apps.tampagov.net/Directory_Lister/FileHandler.ashx?file=GIS%2fWTR-20-0001.11.pdf",
+              "status": "Final Contract Review & Approval"
+            }
+          }
+        ],
+        "project_name": "Sitewide Electrical Improvement",
+        "record_number": "WTR-20-0001.11",
+        "record_type": "Water",
+        "sample_id": "dev-093",
+        "schema_version": "1.0.0",
+        "study": "core",
+        "unresolved_claims": [
+          {
+            "basis_field": "source_identity_result",
+            "basis_value": "",
+            "claim_id": "source_identity",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "activity_classification_result",
+            "basis_value": "",
+            "claim_id": "activity_classification",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "status_interpretation_result",
+            "basis_value": "",
+            "claim_id": "status_interpretation",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "physical_work_started_dataset",
+            "basis_value": "unknown",
+            "claim_id": "physical_work_started",
+            "reason": "frozen dataset value is explicitly unknown and manual evidence is blank"
+          }
+        ]
+      },
+      "selection": {
+        "matched_categories": [
+          "multiple_candidate_records"
+        ],
+        "primary_category": "multiple_candidate_records",
+        "sha256_rank": "7172f18055aa86a1fc45e6c58899b79e426f3b4aa6f8b6436857aa8e581cb76c"
+      },
+      "source_types": [
+        "capital_improvements"
+      ]
+    },
+    {
+      "benchmark_case_id": "agent-benchmark-v1-dev-068",
+      "comparison_baseline": {
+        "conflicts_detected": "not_assessed",
+        "cost": null,
+        "deterministic_only": "not_run",
+        "deterministic_plus_agentic": "not_run",
+        "evidence_availability": "not_assessed",
+        "execution_time_seconds": null,
+        "false_association": "not_assessed",
+        "human_review_required": "not_assessed",
+        "status": "not_run",
+        "unresolved_case": "not_assessed"
+      },
+      "investigation_request": {
+        "activity_id": "tpa-18140cc0c8929a",
+        "address": "",
+        "dataset_context": {
+          "activity_class": "public_capital:water",
+          "latitude": "27.9786135",
+          "longitude": "-82.4470726",
+          "sample_phase": "development",
+          "sampling_stratum": "capital_project"
+        },
+        "description": "Approximately 15,960 Linear Feet of water mains ranging from 2 to 8 inches in diameter will be replaced and upgraded.",
+        "known_dates": {},
+        "known_evidence": [
+          {
+            "evidence_type": "frozen_dataset_context",
+            "evidentiary_status": "unreviewed_context_not_ground_truth",
+            "fields": {
+              "activity_stage": "completed_or_closeout",
+              "physical_work_started_dataset": "unknown",
+              "realization_evidence_grade": "D",
+              "source_memberships": "capital_improvements",
+              "source_record_id": "WTR-20-0005.3-12th St",
+              "source_url": "https://apps.tampagov.net/Directory_Lister/FileHandler.ashx?file=GIS%2fWTR-20-0005.3-12th",
+              "status": "Closeout"
+            }
+          }
+        ],
+        "project_name": "FY20 CIP Water Main Improvements Design-Build_12th St – GMP 5",
+        "record_number": "WTR-20-0005.3-12th St",
+        "record_type": "Water",
+        "sample_id": "dev-068",
+        "schema_version": "1.0.0",
+        "study": "core",
+        "unresolved_claims": [
+          {
+            "basis_field": "source_identity_result",
+            "basis_value": "",
+            "claim_id": "source_identity",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "activity_classification_result",
+            "basis_value": "",
+            "claim_id": "activity_classification",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "status_interpretation_result",
+            "basis_value": "",
+            "claim_id": "status_interpretation",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "physical_work_started_dataset",
+            "basis_value": "unknown",
+            "claim_id": "physical_work_started",
+            "reason": "frozen dataset value is explicitly unknown and manual evidence is blank"
+          }
+        ]
+      },
+      "selection": {
+        "matched_categories": [
+          "multiple_candidate_records"
+        ],
+        "primary_category": "multiple_candidate_records",
+        "sha256_rank": "dd3cf926330eb19c6327bf7ef3ab3e92f5758dd1730a5988571413a4895146a1"
+      },
+      "source_types": [
+        "capital_improvements"
+      ]
+    },
+    {
+      "benchmark_case_id": "agent-benchmark-v1-dev-082",
+      "comparison_baseline": {
+        "conflicts_detected": "not_assessed",
+        "cost": null,
+        "deterministic_only": "not_run",
+        "deterministic_plus_agentic": "not_run",
+        "evidence_availability": "not_assessed",
+        "execution_time_seconds": null,
+        "false_association": "not_assessed",
+        "human_review_required": "not_assessed",
+        "status": "not_run",
+        "unresolved_case": "not_assessed"
+      },
+      "investigation_request": {
+        "activity_id": "tpa-5fef9ad1d2fa7a",
+        "address": "",
+        "dataset_context": {
+          "activity_class": "public_capital:water",
+          "latitude": "",
+          "longitude": "",
+          "sample_phase": "development",
+          "sampling_stratum": "capital_project"
+        },
+        "description": "The 12th St project will improve the City of Tampa’s water distribution system by replacing the existing water mains and increasing the capacity of the system. It will also increase capacity to serve a growing population. Approximately 15,960 Linear Feet of water mains ranging from 2 to 8 inches in diameter will be replaced and upgraded.",
+        "known_dates": {},
+        "known_evidence": [
+          {
+            "evidence_type": "frozen_dataset_context",
+            "evidentiary_status": "unreviewed_context_not_ground_truth",
+            "fields": {
+              "activity_stage": "completed_or_closeout",
+              "physical_work_started_dataset": "unknown",
+              "realization_evidence_grade": "U",
+              "source_memberships": "capital_locations_line",
+              "source_record_id": "WTR-20-0005.3-12th St",
+              "source_url": "",
+              "status": "Final Inspection and Testing"
+            }
+          }
+        ],
+        "project_name": "FY20 CIP Water Main Improvements Design-Build_12th St – GMP 3",
+        "record_number": "WTR-20-0005.3-12th St",
+        "record_type": "Water",
+        "sample_id": "dev-082",
+        "schema_version": "1.0.0",
+        "study": "core",
+        "unresolved_claims": [
+          {
+            "basis_field": "source_identity_result",
+            "basis_value": "",
+            "claim_id": "source_identity",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "activity_classification_result",
+            "basis_value": "",
+            "claim_id": "activity_classification",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "status_interpretation_result",
+            "basis_value": "",
+            "claim_id": "status_interpretation",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "physical_work_started_dataset",
+            "basis_value": "unknown",
+            "claim_id": "physical_work_started",
+            "reason": "frozen dataset value is explicitly unknown and manual evidence is blank"
+          }
+        ]
+      },
+      "selection": {
+        "matched_categories": [
+          "multiple_candidate_records",
+          "missing_source_evidence"
+        ],
+        "primary_category": "multiple_candidate_records",
+        "sha256_rank": "fa21019680d50af8ca6e7bc5eeff4252ff35b86131e86a0bbb5b84b712a1b39a"
+      },
+      "source_types": [
+        "capital_locations_line"
+      ]
+    },
+    {
+      "benchmark_case_id": "agent-benchmark-v1-hol-035",
+      "comparison_baseline": {
+        "conflicts_detected": "not_assessed",
+        "cost": null,
+        "deterministic_only": "not_run",
+        "deterministic_plus_agentic": "not_run",
+        "evidence_availability": "not_assessed",
+        "execution_time_seconds": null,
+        "false_association": "not_assessed",
+        "human_review_required": "not_assessed",
+        "status": "not_run",
+        "unresolved_case": "not_assessed"
+      },
+      "investigation_request": {
+        "activity_id": "tpa-82b9a79b60113f",
+        "address": "",
+        "dataset_context": {
+          "activity_class": "public_capital:wastewater",
+          "latitude": "28.0035408",
+          "longitude": "-82.410539",
+          "sample_phase": "holdout",
+          "sampling_stratum": "capital_project"
+        },
+        "description": "The project provides for the rehabilitation of the wastewater pumping station at 4210 E Hanna Ave. Project will include replacement of pumps, piping, valves, and electrical improvements to ensure continued reliability of the station.",
+        "known_dates": {},
+        "known_evidence": [
+          {
+            "evidence_type": "frozen_dataset_context",
+            "evidentiary_status": "unreviewed_context_not_ground_truth",
+            "fields": {
+              "activity_stage": "preconstruction_or_unknown",
+              "physical_work_started_dataset": "unknown",
+              "realization_evidence_grade": "U",
+              "source_memberships": "capital_locations_point",
+              "source_record_id": "1001810.13",
+              "source_url": "",
+              "status": "Planning"
+            }
+          }
+        ],
+        "project_name": "Oak Haven Pumping Station Rehabilitation",
+        "record_number": "1001810.13",
+        "record_type": "Wastewater",
+        "sample_id": "hol-035",
+        "schema_version": "1.0.0",
+        "study": "core",
+        "unresolved_claims": [
+          {
+            "basis_field": "source_identity_result",
+            "basis_value": "",
+            "claim_id": "source_identity",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "activity_classification_result",
+            "basis_value": "",
+            "claim_id": "activity_classification",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "status_interpretation_result",
+            "basis_value": "",
+            "claim_id": "status_interpretation",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "physical_work_started_dataset",
+            "basis_value": "unknown",
+            "claim_id": "physical_work_started",
+            "reason": "frozen dataset value is explicitly unknown and manual evidence is blank"
+          }
+        ]
+      },
+      "selection": {
+        "matched_categories": [
+          "missing_source_evidence"
+        ],
+        "primary_category": "missing_source_evidence",
+        "sha256_rank": "013548c3396eeba778312882d881681e0d33a92d24085c5c2bcbe46fd89fe4d7"
+      },
+      "source_types": [
+        "capital_locations_point"
+      ]
+    },
+    {
+      "benchmark_case_id": "agent-benchmark-v1-hol-039",
+      "comparison_baseline": {
+        "conflicts_detected": "not_assessed",
+        "cost": null,
+        "deterministic_only": "not_run",
+        "deterministic_plus_agentic": "not_run",
+        "evidence_availability": "not_assessed",
+        "execution_time_seconds": null,
+        "false_association": "not_assessed",
+        "human_review_required": "not_assessed",
+        "status": "not_run",
+        "unresolved_case": "not_assessed"
+      },
+      "investigation_request": {
+        "activity_id": "tpa-ea21c7053f823c",
+        "address": "",
+        "dataset_context": {
+          "activity_class": "public_capital:stormwater",
+          "latitude": "",
+          "longitude": "",
+          "sample_phase": "holdout",
+          "sampling_stratum": "capital_project"
+        },
+        "description": "Construction of new inlets and pipes connecting to the existing system",
+        "known_dates": {},
+        "known_evidence": [
+          {
+            "evidence_type": "frozen_dataset_context",
+            "evidentiary_status": "unreviewed_context_not_ground_truth",
+            "fields": {
+              "activity_stage": "preconstruction_or_unknown",
+              "physical_work_started_dataset": "unknown",
+              "realization_evidence_grade": "U",
+              "source_memberships": "capital_locations_polygon",
+              "source_record_id": "SW50019",
+              "source_url": "",
+              "status": "60% Design Completion"
+            }
+          }
+        ],
+        "project_name": "17TH & Annona",
+        "record_number": "SW50019",
+        "record_type": "Stormwater",
+        "sample_id": "hol-039",
+        "schema_version": "1.0.0",
+        "study": "core",
+        "unresolved_claims": [
+          {
+            "basis_field": "source_identity_result",
+            "basis_value": "",
+            "claim_id": "source_identity",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "activity_classification_result",
+            "basis_value": "",
+            "claim_id": "activity_classification",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "status_interpretation_result",
+            "basis_value": "",
+            "claim_id": "status_interpretation",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "physical_work_started_dataset",
+            "basis_value": "unknown",
+            "claim_id": "physical_work_started",
+            "reason": "frozen dataset value is explicitly unknown and manual evidence is blank"
+          }
+        ]
+      },
+      "selection": {
+        "matched_categories": [
+          "missing_source_evidence"
+        ],
+        "primary_category": "missing_source_evidence",
+        "sha256_rank": "0196273cb4310f6fc50e64211c455bf954edafe48d0e2b8ae6cf6e12a5cbf414"
+      },
+      "source_types": [
+        "capital_locations_polygon"
+      ]
+    },
+    {
+      "benchmark_case_id": "agent-benchmark-v1-hol-045",
+      "comparison_baseline": {
+        "conflicts_detected": "not_assessed",
+        "cost": null,
+        "deterministic_only": "not_run",
+        "deterministic_plus_agentic": "not_run",
+        "evidence_availability": "not_assessed",
+        "execution_time_seconds": null,
+        "false_association": "not_assessed",
+        "human_review_required": "not_assessed",
+        "status": "not_run",
+        "unresolved_case": "not_assessed"
+      },
+      "investigation_request": {
+        "activity_id": "tpa-aa75cdf7422756",
+        "address": "",
+        "dataset_context": {
+          "activity_class": "public_capital:wastewater",
+          "latitude": "28.1212549",
+          "longitude": "-82.3910712",
+          "sample_phase": "holdout",
+          "sampling_stratum": "capital_project"
+        },
+        "description": "The project provides for the rehabilitation of the wastewater pumping station at 5001 Palm Springs Blvd. Project will include replacement of pumps, piping, valves, and electrical improvements to ensure continued reliability of the station.",
+        "known_dates": {},
+        "known_evidence": [
+          {
+            "evidence_type": "frozen_dataset_context",
+            "evidentiary_status": "unreviewed_context_not_ground_truth",
+            "fields": {
+              "activity_stage": "preconstruction_or_unknown",
+              "physical_work_started_dataset": "unknown",
+              "realization_evidence_grade": "U",
+              "source_memberships": "capital_locations_point",
+              "source_record_id": "1001810.14",
+              "source_url": "",
+              "status": "Planning"
+            }
+          }
+        ],
+        "project_name": "Palm Springs Pumping Station Rehabilitation",
+        "record_number": "1001810.14",
+        "record_type": "Wastewater",
+        "sample_id": "hol-045",
+        "schema_version": "1.0.0",
+        "study": "core",
+        "unresolved_claims": [
+          {
+            "basis_field": "source_identity_result",
+            "basis_value": "",
+            "claim_id": "source_identity",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "activity_classification_result",
+            "basis_value": "",
+            "claim_id": "activity_classification",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "status_interpretation_result",
+            "basis_value": "",
+            "claim_id": "status_interpretation",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "physical_work_started_dataset",
+            "basis_value": "unknown",
+            "claim_id": "physical_work_started",
+            "reason": "frozen dataset value is explicitly unknown and manual evidence is blank"
+          }
+        ]
+      },
+      "selection": {
+        "matched_categories": [
+          "missing_source_evidence"
+        ],
+        "primary_category": "missing_source_evidence",
+        "sha256_rank": "66e098d968504435d3df14f3947ebed0668b15a72d9884dbbef9384798ce4d62"
+      },
+      "source_types": [
+        "capital_locations_point"
+      ]
+    },
+    {
+      "benchmark_case_id": "agent-benchmark-v1-dev-025",
+      "comparison_baseline": {
+        "conflicts_detected": "not_assessed",
+        "cost": null,
+        "deterministic_only": "not_run",
+        "deterministic_plus_agentic": "not_run",
+        "evidence_availability": "not_assessed",
+        "execution_time_seconds": null,
+        "false_association": "not_assessed",
+        "human_review_required": "not_assessed",
+        "status": "not_run",
+        "unresolved_case": "not_assessed"
+      },
+      "investigation_request": {
+        "activity_id": "tpa-439c74811140ba",
+        "address": "206 N MacDill Ave",
+        "dataset_context": {
+          "activity_class": "building_construction",
+          "latitude": "27.946359",
+          "longitude": "-82.4934555",
+          "sample_phase": "development",
+          "sampling_stratum": "permit"
+        },
+        "description": "PRIVATE PROVIDER – INSPECTIONS ONLY Interior renovations to include drywall replacement, floor replacement, cabinet and counter replacement, light fixture replacement, paint, siding, windows, and doors",
+        "known_dates": {},
+        "known_evidence": [
+          {
+            "evidence_type": "frozen_dataset_context",
+            "evidentiary_status": "unreviewed_context_not_ground_truth",
+            "fields": {
+              "activity_stage": "preconstruction_or_unknown",
+              "physical_work_started_dataset": "unknown",
+              "realization_evidence_grade": "U",
+              "source_memberships": "construction_inspections",
+              "source_record_id": "BLD-26-0519341",
+              "source_url": "https://aca-prod.accela.com/TAMPA/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=25CAP&capID2=00000&capID3=02MKF&agencyCode=TAMPA",
+              "status": "Revision"
+            }
+          },
+          {
+            "evidence_type": "frozen_spatial_match_context",
+            "evidentiary_status": "unreviewed_context_not_ground_truth",
+            "fields": {
+              "match_distances_m": "30.75",
+              "match_methods": "nearest_footprint_within_35m",
+              "parcel_match_confidence": "medium"
+            }
+          }
+        ],
+        "project_name": "PP: Interior Remodel",
+        "record_number": "BLD-26-0519341",
+        "record_type": "Residential Building Alterations (Renovations)",
+        "sample_id": "dev-025",
+        "schema_version": "1.0.0",
+        "study": "core",
+        "unresolved_claims": [
+          {
+            "basis_field": "source_identity_result",
+            "basis_value": "",
+            "claim_id": "source_identity",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "activity_classification_result",
+            "basis_value": "",
+            "claim_id": "activity_classification",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "status_interpretation_result",
+            "basis_value": "",
+            "claim_id": "status_interpretation",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "building_footprint_match_result",
+            "basis_value": "",
+            "claim_id": "building_footprint_match",
+            "reason": "spatial-match context is explicit and the review result is blank"
+          },
+          {
+            "basis_field": "physical_work_started_dataset",
+            "basis_value": "unknown",
+            "claim_id": "physical_work_started",
+            "reason": "frozen dataset value is explicitly unknown and manual evidence is blank"
+          }
+        ]
+      },
+      "selection": {
+        "matched_categories": [
+          "ambiguous_spatial_identity",
+          "inspection_related"
+        ],
+        "primary_category": "ambiguous_spatial_identity",
+        "sha256_rank": "1c852c1f02d2f3b210d9d809e9f65af5c99cde0d426bdad667b7071e641628e8"
+      },
+      "source_types": [
+        "construction_inspections"
+      ]
+    },
+    {
+      "benchmark_case_id": "agent-benchmark-v1-hol-001",
+      "comparison_baseline": {
+        "conflicts_detected": "not_assessed",
+        "cost": null,
+        "deterministic_only": "not_run",
+        "deterministic_plus_agentic": "not_run",
+        "evidence_availability": "not_assessed",
+        "execution_time_seconds": null,
+        "false_association": "not_assessed",
+        "human_review_required": "not_assessed",
+        "status": "not_run",
+        "unresolved_case": "not_assessed"
+      },
+      "investigation_request": {
+        "activity_id": "tpa-b7618df7784dd1",
+        "address": "618 Luzon Ave",
+        "dataset_context": {
+          "activity_class": "building_construction",
+          "latitude": "27.920097",
+          "longitude": "-82.452177",
+          "sample_phase": "holdout",
+          "sampling_stratum": "cross_source_merge"
+        },
+        "description": "Construction of a new two-story single-family residence with five bedrooms, six bathrooms, a front porch, garage, and lanai. PREVIOUSLY APPROVED UNDER SPR.",
+        "known_dates": {},
+        "known_evidence": [
+          {
+            "evidence_type": "frozen_dataset_context",
+            "evidentiary_status": "unreviewed_context_not_ground_truth",
+            "fields": {
+              "activity_stage": "permit_or_funding_approved",
+              "physical_work_started_dataset": "unknown",
+              "realization_evidence_grade": "U",
+              "source_memberships": "construction_inspections;single_family_permits",
+              "source_record_id": "BLD-26-0522370",
+              "source_url": "https://aca-prod.accela.com/TAMPA/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=26CAP&capID2=00000&capID3=007DC&agencyCode=TAMPA",
+              "status": "Issued"
+            }
+          },
+          {
+            "evidence_type": "frozen_spatial_match_context",
+            "evidentiary_status": "unreviewed_context_not_ground_truth",
+            "fields": {
+              "match_distances_m": "25.01",
+              "match_methods": "nearest_footprint_within_35m",
+              "parcel_match_confidence": "medium"
+            }
+          }
+        ],
+        "project_name": "FEMA New 2-Story SFR",
+        "record_number": "BLD-26-0522370",
+        "record_type": "Residential New Construction and Additions (1 and 2 Family)",
+        "sample_id": "hol-001",
+        "schema_version": "1.0.0",
+        "study": "core",
+        "unresolved_claims": [
+          {
+            "basis_field": "source_identity_result",
+            "basis_value": "",
+            "claim_id": "source_identity",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "activity_classification_result",
+            "basis_value": "",
+            "claim_id": "activity_classification",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "status_interpretation_result",
+            "basis_value": "",
+            "claim_id": "status_interpretation",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "cross_source_linkage_result",
+            "basis_value": "",
+            "claim_id": "cross_source_linkage",
+            "reason": "multiple source memberships are explicit and the review result is blank"
+          },
+          {
+            "basis_field": "building_footprint_match_result",
+            "basis_value": "",
+            "claim_id": "building_footprint_match",
+            "reason": "spatial-match context is explicit and the review result is blank"
+          },
+          {
+            "basis_field": "physical_work_started_dataset",
+            "basis_value": "unknown",
+            "claim_id": "physical_work_started",
+            "reason": "frozen dataset value is explicitly unknown and manual evidence is blank"
+          }
+        ]
+      },
+      "selection": {
+        "matched_categories": [
+          "ambiguous_spatial_identity",
+          "inspection_related"
+        ],
+        "primary_category": "ambiguous_spatial_identity",
+        "sha256_rank": "2b42d7d8a92eaba6717dc614aa52721bec30a4c2fbbd05edcb7094b3235add3f"
+      },
+      "source_types": [
+        "construction_inspections",
+        "single_family_permits"
+      ]
+    },
+    {
+      "benchmark_case_id": "agent-benchmark-v1-dev-046",
+      "comparison_baseline": {
+        "conflicts_detected": "not_assessed",
+        "cost": null,
+        "deterministic_only": "not_run",
+        "deterministic_plus_agentic": "not_run",
+        "evidence_availability": "not_assessed",
+        "execution_time_seconds": null,
+        "false_association": "not_assessed",
+        "human_review_required": "not_assessed",
+        "status": "not_run",
+        "unresolved_case": "not_assessed"
+      },
+      "investigation_request": {
+        "activity_id": "tpa-277231a57f13b6",
+        "address": "1712 W Morrison Ave",
+        "dataset_context": {
+          "activity_class": "building_construction",
+          "latitude": "27.933498",
+          "longitude": "-82.4777235",
+          "sample_phase": "development",
+          "sampling_stratum": "permit"
+        },
+        "description": "REISSUE - Select interior demolition and remodel of existing 1st floor space. Reconfiguration of existing plumbing, electrical, and mechanical ductwork to be included in compliance with current FBC. Exterior door opening to back patio to be enlarged for new door installation. Original Application",
+        "known_dates": {},
+        "known_evidence": [
+          {
+            "evidence_type": "frozen_dataset_context",
+            "evidentiary_status": "unreviewed_context_not_ground_truth",
+            "fields": {
+              "activity_stage": "preconstruction_or_unknown",
+              "physical_work_started_dataset": "unknown",
+              "realization_evidence_grade": "U",
+              "source_memberships": "construction_inspections",
+              "source_record_id": "BLD-24-0508474",
+              "source_url": "https://aca-prod.accela.com/TAMPA/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=24CAP&capID2=00000&capID3=00OZ8&agencyCode=TAMPA",
+              "status": "Revision"
+            }
+          },
+          {
+            "evidence_type": "frozen_spatial_match_context",
+            "evidentiary_status": "unreviewed_context_not_ground_truth",
+            "fields": {
+              "match_distances_m": "8.2",
+              "match_methods": "nearest_footprint_within_35m",
+              "parcel_match_confidence": "medium"
+            }
+          }
+        ],
+        "project_name": "Re-issued REISSUE - Remodel: MEP's",
+        "record_number": "BLD-24-0508474",
+        "record_type": "Residential Building Alterations (Renovations)",
+        "sample_id": "dev-046",
+        "schema_version": "1.0.0",
+        "study": "core",
+        "unresolved_claims": [
+          {
+            "basis_field": "source_identity_result",
+            "basis_value": "",
+            "claim_id": "source_identity",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "activity_classification_result",
+            "basis_value": "",
+            "claim_id": "activity_classification",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "status_interpretation_result",
+            "basis_value": "",
+            "claim_id": "status_interpretation",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "building_footprint_match_result",
+            "basis_value": "",
+            "claim_id": "building_footprint_match",
+            "reason": "spatial-match context is explicit and the review result is blank"
+          },
+          {
+            "basis_field": "physical_work_started_dataset",
+            "basis_value": "unknown",
+            "claim_id": "physical_work_started",
+            "reason": "frozen dataset value is explicitly unknown and manual evidence is blank"
+          }
+        ]
+      },
+      "selection": {
+        "matched_categories": [
+          "ambiguous_spatial_identity",
+          "inspection_related"
+        ],
+        "primary_category": "ambiguous_spatial_identity",
+        "sha256_rank": "3c8f171f17e3a2d90f939eb4275ee3083a349e8709868a2bb4a443386b0b1041"
+      },
+      "source_types": [
+        "construction_inspections"
+      ]
+    },
+    {
+      "benchmark_case_id": "agent-benchmark-v1-dev-027",
+      "comparison_baseline": {
+        "conflicts_detected": "not_assessed",
+        "cost": null,
+        "deterministic_only": "not_run",
+        "deterministic_plus_agentic": "not_run",
+        "evidence_availability": "not_assessed",
+        "execution_time_seconds": null,
+        "false_association": "not_assessed",
+        "human_review_required": "not_assessed",
+        "status": "not_run",
+        "unresolved_case": "not_assessed"
+      },
+      "investigation_request": {
+        "activity_id": "tpa-845d9a0cf1ec08",
+        "address": "3816 N Whittier St",
+        "dataset_context": {
+          "activity_class": "demolition",
+          "latitude": "27.980658",
+          "longitude": "-82.398753",
+          "sample_phase": "development",
+          "sampling_stratum": "permit"
+        },
+        "description": "REISSUE - Demolition of residential structure. Original Application Date 11/20/2025",
+        "known_dates": {},
+        "known_evidence": [
+          {
+            "evidence_type": "frozen_dataset_context",
+            "evidentiary_status": "unreviewed_context_not_ground_truth",
+            "fields": {
+              "activity_stage": "permit_or_funding_approved",
+              "physical_work_started_dataset": "unknown",
+              "realization_evidence_grade": "U",
+              "source_memberships": "construction_inspections",
+              "source_record_id": "BDE-26-0445189",
+              "source_url": "https://aca-prod.accela.com/TAMPA/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=25CAP&capID2=00000&capID3=02UPZ&agencyCode=TAMPA",
+              "status": "Issued"
+            }
+          }
+        ],
+        "project_name": "REISSUE - Demo SFR",
+        "record_number": "BDE-26-0445189",
+        "record_type": "Residential Demolition Permit",
+        "sample_id": "dev-027",
+        "schema_version": "1.0.0",
+        "study": "core",
+        "unresolved_claims": [
+          {
+            "basis_field": "source_identity_result",
+            "basis_value": "",
+            "claim_id": "source_identity",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "activity_classification_result",
+            "basis_value": "",
+            "claim_id": "activity_classification",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "status_interpretation_result",
+            "basis_value": "",
+            "claim_id": "status_interpretation",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "physical_work_started_dataset",
+            "basis_value": "unknown",
+            "claim_id": "physical_work_started",
+            "reason": "frozen dataset value is explicitly unknown and manual evidence is blank"
+          }
+        ]
+      },
+      "selection": {
+        "matched_categories": [
+          "inspection_related",
+          "easy_identifier_lookup"
+        ],
+        "primary_category": "inspection_related",
+        "sha256_rank": "01825d8ce662fdafa031231f1d2557754e850db12e351cc5a7b05ac994f4d4ab"
+      },
+      "source_types": [
+        "construction_inspections"
+      ]
+    },
+    {
+      "benchmark_case_id": "agent-benchmark-v1-hol-019",
+      "comparison_baseline": {
+        "conflicts_detected": "not_assessed",
+        "cost": null,
+        "deterministic_only": "not_run",
+        "deterministic_plus_agentic": "not_run",
+        "evidence_availability": "not_assessed",
+        "execution_time_seconds": null,
+        "false_association": "not_assessed",
+        "human_review_required": "not_assessed",
+        "status": "not_run",
+        "unresolved_case": "not_assessed"
+      },
+      "investigation_request": {
+        "activity_id": "tpa-2dd394e087fb26",
+        "address": "3506 E 8th Ave",
+        "dataset_context": {
+          "activity_class": "other_permitted_work",
+          "latitude": "27.961119",
+          "longitude": "-82.420542",
+          "sample_phase": "holdout",
+          "sampling_stratum": "permit"
+        },
+        "description": "Demolition and removal of single family dwelling to come in compliance with city code department. Original Application Date 12/15/2021",
+        "known_dates": {},
+        "known_evidence": [
+          {
+            "evidence_type": "frozen_dataset_context",
+            "evidentiary_status": "unreviewed_context_not_ground_truth",
+            "fields": {
+              "activity_stage": "permit_or_funding_approved",
+              "physical_work_started_dataset": "unknown",
+              "realization_evidence_grade": "U",
+              "source_memberships": "construction_inspections",
+              "source_record_id": "BDE-22-0441973",
+              "source_url": "https://aca-prod.accela.com/TAMPA/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=21CAP&capID2=00000&capID3=02WJ5&agencyCode=TAMPA",
+              "status": "Issued"
+            }
+          }
+        ],
+        "project_name": "REISSUE - 3506 E 8th Ave (ACA)",
+        "record_number": "BDE-22-0441973",
+        "record_type": "Residential Demolition Permit",
+        "sample_id": "hol-019",
+        "schema_version": "1.0.0",
+        "study": "core",
+        "unresolved_claims": [
+          {
+            "basis_field": "source_identity_result",
+            "basis_value": "",
+            "claim_id": "source_identity",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "activity_classification_result",
+            "basis_value": "",
+            "claim_id": "activity_classification",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "status_interpretation_result",
+            "basis_value": "",
+            "claim_id": "status_interpretation",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "physical_work_started_dataset",
+            "basis_value": "unknown",
+            "claim_id": "physical_work_started",
+            "reason": "frozen dataset value is explicitly unknown and manual evidence is blank"
+          }
+        ]
+      },
+      "selection": {
+        "matched_categories": [
+          "inspection_related",
+          "easy_identifier_lookup"
+        ],
+        "primary_category": "inspection_related",
+        "sha256_rank": "01a5437394184bad2992a3c00843336ae4ab0c66c56e34e1dc1fdb83716adc07"
+      },
+      "source_types": [
+        "construction_inspections"
+      ]
+    },
+    {
+      "benchmark_case_id": "agent-benchmark-v1-dev-019",
+      "comparison_baseline": {
+        "conflicts_detected": "not_assessed",
+        "cost": null,
+        "deterministic_only": "not_run",
+        "deterministic_plus_agentic": "not_run",
+        "evidence_availability": "not_assessed",
+        "execution_time_seconds": null,
+        "false_association": "not_assessed",
+        "human_review_required": "not_assessed",
+        "status": "not_run",
+        "unresolved_case": "not_assessed"
+      },
+      "investigation_request": {
+        "activity_id": "tpa-8624d7ab20bd7f",
+        "address": "907 S Bruce St",
+        "dataset_context": {
+          "activity_class": "building_construction",
+          "latitude": "27.934335",
+          "longitude": "-82.480257",
+          "sample_phase": "development",
+          "sampling_stratum": "permit"
+        },
+        "description": "SCOPE OF WORK INCLUDES A REAR ADDITION AND ADDITION OF SECOND FLOOR",
+        "known_dates": {},
+        "known_evidence": [
+          {
+            "evidence_type": "frozen_dataset_context",
+            "evidentiary_status": "unreviewed_context_not_ground_truth",
+            "fields": {
+              "activity_stage": "permit_or_funding_approved",
+              "physical_work_started_dataset": "unknown",
+              "realization_evidence_grade": "U",
+              "source_memberships": "construction_inspections",
+              "source_record_id": "BLD-26-0522941",
+              "source_url": "https://aca-prod.accela.com/TAMPA/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=26CAP&capID2=00000&capID3=00BTI&agencyCode=TAMPA",
+              "status": "Issued"
+            }
+          },
+          {
+            "evidence_type": "frozen_spatial_match_context",
+            "evidentiary_status": "unreviewed_context_not_ground_truth",
+            "fields": {
+              "match_distances_m": "17.31",
+              "match_methods": "nearest_footprint_within_35m",
+              "parcel_match_confidence": "medium"
+            }
+          }
+        ],
+        "project_name": "2nd Floor Addition & Rear Addition",
+        "record_number": "BLD-26-0522941",
+        "record_type": "Residential New Construction and Additions (1 and 2 Family)",
+        "sample_id": "dev-019",
+        "schema_version": "1.0.0",
+        "study": "core",
+        "unresolved_claims": [
+          {
+            "basis_field": "source_identity_result",
+            "basis_value": "",
+            "claim_id": "source_identity",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "activity_classification_result",
+            "basis_value": "",
+            "claim_id": "activity_classification",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "status_interpretation_result",
+            "basis_value": "",
+            "claim_id": "status_interpretation",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "building_footprint_match_result",
+            "basis_value": "",
+            "claim_id": "building_footprint_match",
+            "reason": "spatial-match context is explicit and the review result is blank"
+          },
+          {
+            "basis_field": "physical_work_started_dataset",
+            "basis_value": "unknown",
+            "claim_id": "physical_work_started",
+            "reason": "frozen dataset value is explicitly unknown and manual evidence is blank"
+          }
+        ]
+      },
+      "selection": {
+        "matched_categories": [
+          "ambiguous_spatial_identity",
+          "inspection_related"
+        ],
+        "primary_category": "inspection_related",
+        "sha256_rank": "0713072a0117e59faf881cefb19a14978a355607ab6ab307dadfd53bde996c7c"
+      },
+      "source_types": [
+        "construction_inspections"
+      ]
+    },
+    {
+      "benchmark_case_id": "agent-benchmark-v1-dev-083",
+      "comparison_baseline": {
+        "conflicts_detected": "not_assessed",
+        "cost": null,
+        "deterministic_only": "not_run",
+        "deterministic_plus_agentic": "not_run",
+        "evidence_availability": "not_assessed",
+        "execution_time_seconds": null,
+        "false_association": "not_assessed",
+        "human_review_required": "not_assessed",
+        "status": "not_run",
+        "unresolved_case": "not_assessed"
+      },
+      "investigation_request": {
+        "activity_id": "tpa-e70b04f43c4362",
+        "address": "",
+        "dataset_context": {
+          "activity_class": "public_capital:water",
+          "latitude": "28.0254897",
+          "longitude": "-82.4286002",
+          "sample_phase": "development",
+          "sampling_stratum": "capital_project"
+        },
+        "description": "The North Embankment Remediation project will optimize facility performance capabilities, improve water quality and expand our water treatment capacity. This project will rehabilitate and replace existing infrastructure and eliminate deteriorating facili",
+        "known_dates": {},
+        "known_evidence": [
+          {
+            "evidence_type": "frozen_dataset_context",
+            "evidentiary_status": "unreviewed_context_not_ground_truth",
+            "fields": {
+              "activity_stage": "completed_or_closeout",
+              "physical_work_started_dataset": "unknown",
+              "realization_evidence_grade": "D",
+              "source_memberships": "capital_locations_point",
+              "source_record_id": "WTR20006",
+              "source_url": "https://apps.tampagov.net/Directory_Lister/FileHandler.ashx?file=GIS%2fWTR20006",
+              "status": "Closeout"
+            }
+          }
+        ],
+        "project_name": "North Embankment Remediation",
+        "record_number": "WTR20006",
+        "record_type": "Water",
+        "sample_id": "dev-083",
+        "schema_version": "1.0.0",
+        "study": "core",
+        "unresolved_claims": [
+          {
+            "basis_field": "source_identity_result",
+            "basis_value": "",
+            "claim_id": "source_identity",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "activity_classification_result",
+            "basis_value": "",
+            "claim_id": "activity_classification",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "status_interpretation_result",
+            "basis_value": "",
+            "claim_id": "status_interpretation",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "physical_work_started_dataset",
+            "basis_value": "unknown",
+            "claim_id": "physical_work_started",
+            "reason": "frozen dataset value is explicitly unknown and manual evidence is blank"
+          }
+        ]
+      },
+      "selection": {
+        "matched_categories": [
+          "easy_identifier_lookup"
+        ],
+        "primary_category": "easy_identifier_lookup",
+        "sha256_rank": "0047656682abae7ec54d29b5bacdeb4a80560f33bb26bf19dff2dff84bb1b62e"
+      },
+      "source_types": [
+        "capital_locations_point"
+      ]
+    },
+    {
+      "benchmark_case_id": "agent-benchmark-v1-dev-024",
+      "comparison_baseline": {
+        "conflicts_detected": "not_assessed",
+        "cost": null,
+        "deterministic_only": "not_run",
+        "deterministic_plus_agentic": "not_run",
+        "evidence_availability": "not_assessed",
+        "execution_time_seconds": null,
+        "false_association": "not_assessed",
+        "human_review_required": "not_assessed",
+        "status": "not_run",
+        "unresolved_case": "not_assessed"
+      },
+      "investigation_request": {
+        "activity_id": "tpa-b086eca67a5628",
+        "address": "106 S Glen Ave",
+        "dataset_context": {
+          "activity_class": "building_construction",
+          "latitude": "27.943605",
+          "longitude": "-82.4991885",
+          "sample_phase": "development",
+          "sampling_stratum": "permit"
+        },
+        "description": "INTERIOR RENOVATION OF KITCHEN, DINING, AND POWDER BATH, INCLUDES MEP'S AND GAS.",
+        "known_dates": {},
+        "known_evidence": [
+          {
+            "evidence_type": "frozen_dataset_context",
+            "evidentiary_status": "unreviewed_context_not_ground_truth",
+            "fields": {
+              "activity_stage": "preconstruction_or_unknown",
+              "physical_work_started_dataset": "unknown",
+              "realization_evidence_grade": "U",
+              "source_memberships": "construction_inspections",
+              "source_record_id": "BLD-26-0522738",
+              "source_url": "https://aca-prod.accela.com/TAMPA/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=26CAP&capID2=00000&capID3=00A07&agencyCode=TAMPA",
+              "status": "Revision"
+            }
+          }
+        ],
+        "project_name": "Interior ALT",
+        "record_number": "BLD-26-0522738",
+        "record_type": "Residential Building Alterations (Renovations)",
+        "sample_id": "dev-024",
+        "schema_version": "1.0.0",
+        "study": "core",
+        "unresolved_claims": [
+          {
+            "basis_field": "source_identity_result",
+            "basis_value": "",
+            "claim_id": "source_identity",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "activity_classification_result",
+            "basis_value": "",
+            "claim_id": "activity_classification",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "status_interpretation_result",
+            "basis_value": "",
+            "claim_id": "status_interpretation",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "physical_work_started_dataset",
+            "basis_value": "unknown",
+            "claim_id": "physical_work_started",
+            "reason": "frozen dataset value is explicitly unknown and manual evidence is blank"
+          }
+        ]
+      },
+      "selection": {
+        "matched_categories": [
+          "inspection_related",
+          "easy_identifier_lookup"
+        ],
+        "primary_category": "easy_identifier_lookup",
+        "sha256_rank": "01596033545515baa6f2b58ce926b15c9e05671e62cd0150f3a67aee0562f69c"
+      },
+      "source_types": [
+        "construction_inspections"
+      ]
+    },
+    {
+      "benchmark_case_id": "agent-benchmark-v1-dev-072",
+      "comparison_baseline": {
+        "conflicts_detected": "not_assessed",
+        "cost": null,
+        "deterministic_only": "not_run",
+        "deterministic_plus_agentic": "not_run",
+        "evidence_availability": "not_assessed",
+        "execution_time_seconds": null,
+        "false_association": "not_assessed",
+        "human_review_required": "not_assessed",
+        "status": "not_run",
+        "unresolved_case": "not_assessed"
+      },
+      "investigation_request": {
+        "activity_id": "tpa-48ce4f012a0d8e",
+        "address": "",
+        "dataset_context": {
+          "activity_class": "public_capital:water",
+          "latitude": "",
+          "longitude": "",
+          "sample_phase": "development",
+          "sampling_stratum": "capital_project"
+        },
+        "description": "The Brorein_Tampa St project will improve the City of Tampa’s water distribution system by replacing the existing water mains and increasing the capacity of the system. It will also improve our ability to serve a growing population. Approximately 967 Linear Feet of water mains ranging from 6 to 8 inches in diameter will be abandoned",
+        "known_dates": {},
+        "known_evidence": [
+          {
+            "evidence_type": "frozen_dataset_context",
+            "evidentiary_status": "unreviewed_context_not_ground_truth",
+            "fields": {
+              "activity_stage": "preconstruction_or_unknown",
+              "physical_work_started_dataset": "unknown",
+              "realization_evidence_grade": "U",
+              "source_memberships": "capital_locations_line",
+              "source_record_id": "WUR-20-0019",
+              "source_url": "https://apps.tampagov.net/Directory_Lister/FileHandler.ashx?file=GIS%2fWUR-20-0019.pdf",
+              "status": "90% Design Completion"
+            }
+          }
+        ],
+        "project_name": "Brorein_Tampa St WM Abandonment",
+        "record_number": "WUR-20-0019",
+        "record_type": "Water",
+        "sample_id": "dev-072",
+        "schema_version": "1.0.0",
+        "study": "core",
+        "unresolved_claims": [
+          {
+            "basis_field": "source_identity_result",
+            "basis_value": "",
+            "claim_id": "source_identity",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "activity_classification_result",
+            "basis_value": "",
+            "claim_id": "activity_classification",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "status_interpretation_result",
+            "basis_value": "",
+            "claim_id": "status_interpretation",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "physical_work_started_dataset",
+            "basis_value": "unknown",
+            "claim_id": "physical_work_started",
+            "reason": "frozen dataset value is explicitly unknown and manual evidence is blank"
+          }
+        ]
+      },
+      "selection": {
+        "matched_categories": [
+          "easy_identifier_lookup"
+        ],
+        "primary_category": "easy_identifier_lookup",
+        "sha256_rank": "015debc2f6f028a1512542c1ce7daa115e6249401a8408b759914ec38c2848b2"
+      },
+      "source_types": [
+        "capital_locations_line"
+      ]
+    },
+    {
+      "benchmark_case_id": "agent-benchmark-v1-dev-053",
+      "comparison_baseline": {
+        "conflicts_detected": "not_assessed",
+        "cost": null,
+        "deterministic_only": "not_run",
+        "deterministic_plus_agentic": "not_run",
+        "evidence_availability": "not_assessed",
+        "execution_time_seconds": null,
+        "false_association": "not_assessed",
+        "human_review_required": "not_assessed",
+        "status": "not_run",
+        "unresolved_case": "not_assessed"
+      },
+      "investigation_request": {
+        "activity_id": "tpa-63ef0ddb73c579",
+        "address": "108 S Delaware Ave",
+        "dataset_context": {
+          "activity_class": "planning_application",
+          "latitude": "27.9440576",
+          "longitude": "-82.4705254",
+          "sample_phase": "development",
+          "sampling_stratum": "planning"
+        },
+        "description": "",
+        "known_dates": {},
+        "known_evidence": [
+          {
+            "evidence_type": "frozen_dataset_context",
+            "evidentiary_status": "unreviewed_context_not_ground_truth",
+            "fields": {
+              "activity_stage": "planning_review",
+              "physical_work_started_dataset": "not_applicable",
+              "realization_evidence_grade": "P",
+              "source_memberships": "development_coordination",
+              "source_record_id": "FDN-26-0000118",
+              "source_url": "https://aca-prod.accela.com/TAMPA/Cap/CapDetail.aspx?Module=Planning&TabName=Planning&capID1=26CAP&capID2=00000&capID3=025ZZ&agencyCode=TAMPA",
+              "status": "Awaiting Client Reply"
+            }
+          }
+        ],
+        "project_name": "Formal Decision",
+        "record_number": "FDN-26-0000118",
+        "record_type": "Formal Decision",
+        "sample_id": "dev-053",
+        "schema_version": "1.0.0",
+        "study": "core",
+        "unresolved_claims": [
+          {
+            "basis_field": "source_identity_result",
+            "basis_value": "",
+            "claim_id": "source_identity",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "activity_classification_result",
+            "basis_value": "",
+            "claim_id": "activity_classification",
+            "reason": "frozen manual-review result is blank"
+          },
+          {
+            "basis_field": "status_interpretation_result",
+            "basis_value": "",
+            "claim_id": "status_interpretation",
+            "reason": "frozen manual-review result is blank"
+          }
+        ]
+      },
+      "selection": {
+        "matched_categories": [
+          "easy_identifier_lookup"
+        ],
+        "primary_category": "easy_identifier_lookup",
+        "sha256_rank": "022bcd79d7020eb395884910be98af61ede9d6ba08d7c4e4029e2ce5d4ef0d60"
+      },
+      "source_types": [
+        "development_coordination"
+      ]
+    }
+  ],
+  "counts": {
+    "original_sampling_strata": {
+      "capital_project": 10,
+      "cross_source_merge": 1,
+      "permit": 6,
+      "planning": 1
+    },
+    "primary_categories": {
+      "ambiguous_spatial_identity": 3,
+      "easy_identifier_lookup": 4,
+      "inspection_related": 3,
+      "missing_source_evidence": 3,
+      "multiple_candidate_records": 3,
+      "potential_conflicting_evidence": 2
+    },
+    "sample_phases": {
+      "development": 13,
+      "holdout": 5
+    },
+    "selected_cases": 18,
+    "source_types": {
+      "capital_improvements": 2,
+      "capital_locations_line": 2,
+      "capital_locations_point": 4,
+      "capital_locations_polygon": 2,
+      "construction_inspections": 7,
+      "development_coordination": 1,
+      "single_family_permits": 1
+    }
+  },
+  "input": {
+    "frozen_sample_modified": false,
+    "path": "data/processed/manual_validation_sample.csv",
+    "row_count": 150,
+    "sha256": "2855ccef25e39b59cfb5eb48a3d7201a5fc6b6acfdd6b856e7c24cf8b653c4ce"
+  },
+  "purpose": "evaluation subset for deterministic-only versus deterministic-plus-agentic evidence retrieval",
+  "scope_boundaries": [
+    "This is an evaluation subset, not a replacement probability sample.",
+    "No agent investigation or external evidence retrieval was run by this builder.",
+    "Selection signals are not validation conclusions or ground-truth labels.",
+    "Agent results may not bypass deterministic re-evaluation or human review."
+  ],
+  "selection_protocol": {
+    "algorithm": "sha256-category-rank-without-replacement",
+    "algorithm_version": "1.0.0",
+    "category_definitions": {
+      "ambiguous_spatial_identity": "parcel_match_confidence is medium or a non-footprint match distance is present",
+      "easy_identifier_lookup": "a non-placeholder source_record_id and source_url are present, without a repeated identifier or ambiguous spatial signal",
+      "inspection_related": "source_memberships explicitly includes construction_inspections",
+      "missing_source_evidence": "source_url is blank or source_record_id is blank/a documented placeholder",
+      "multiple_candidate_records": "a non-placeholder source_record_id occurs in more than one frozen sample row; this is a candidate-review signal, not a finding that records should be merged",
+      "potential_conflicting_evidence": "a conflict-detection probe: realization_evidence_grade is X, or physical_work_started_dataset is yes while status is cancelled/canceled/inactive; the category does not assert that conflicting evidence has been found"
+    },
+    "category_order": [
+      "potential_conflicting_evidence",
+      "multiple_candidate_records",
+      "missing_source_evidence",
+      "ambiguous_spatial_identity",
+      "inspection_related",
+      "easy_identifier_lookup"
+    ],
+    "category_quotas": {
+      "ambiguous_spatial_identity": 3,
+      "easy_identifier_lookup": 4,
+      "inspection_related": 3,
+      "missing_source_evidence": 3,
+      "multiple_candidate_records": 3,
+      "potential_conflicting_evidence": 2
+    },
+    "ranking_token": "seed|algorithm_version|category|audit_sample_id",
+    "seed": 20260902,
+    "target_size": 18,
+    "without_replacement": true
+  }
+}

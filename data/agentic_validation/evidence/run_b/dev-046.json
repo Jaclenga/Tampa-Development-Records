@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0.0",
+  "investigation_id": "agent-benchmark-v1-dev-046-run-b",
+  "sample_id": "dev-046",
+  "repeat_id": "B",
+  "archived_at_utc": "2026-09-02T08:38:01Z",
+  "evidence": [
+    {
+      "evidence_id": "dev-046-b-archived-city-gis",
+      "source": "TDR immutable City GIS snapshot: construction_inspections",
+      "source_url": "https://arcgis.tampagov.net/arcgis/rest/services/OpenData/Planning/MapServer/30",
+      "retrieval_timestamp_utc": "2026-08-23T02:06:02Z",
+      "administrative_record_id": "BLD-24-0508474",
+      "evidence_type": "official_city_gis_record",
+      "archived_path": "data/agentic_validation/evidence/run_b/dev-046.json",
+      "source_archived_path": "data/raw/construction_inspections.geojson",
+      "sha256": "bcd5ff1969731a3d0ef98051db277833acf92c953f683ad17ba29e94a8d137a7",
+      "content_sha256": "bcd5ff1969731a3d0ef98051db277833acf92c953f683ad17ba29e94a8d137a7",
+      "hash_scope": "entire source_archived_path file bytes",
+      "mime_type": "application/geo+json",
+      "source_state": "archived",
+      "primary_or_secondary": "primary",
+      "source_tier": "tier_1_archived_primary",
+      "observed_fields": {
+        "OBJECTID": 1412,
+        "GlobalID": "{8A3B5D61-ED69-4A42-9D1C-6BFB0474B6A5}",
+        "RECORD_ID": "BLD-24-0508474",
+        "PROJECTNAME2": "Re-issued REISSUE - Remodel: MEP's",
+        "ADDRESS": "1712 W Morrison Ave",
+        "PROJECTSTATUS": "Revision",
+        "RECORDTYPE": "Residential Building Alterations (Renovations)"
+      }
+    }
+  ],
+  "live_retrieval": {
+    "source_url": "https://aca-prod.accela.com/TAMPA/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=24CAP&capID2=00000&capID3=00OZ8&agencyCode=TAMPA",
+    "outcome": "source_unavailable",
+    "detail": "The official Accela detail URL was rejected by the available web retriever and exact-record official-domain search returned no result."
+  },
+  "untrusted_content_handling": "Source text was treated only as evidence data; no embedded instruction was followed."
+}

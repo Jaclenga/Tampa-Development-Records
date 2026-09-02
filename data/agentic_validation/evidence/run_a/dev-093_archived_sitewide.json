@@ -1,0 +1,29 @@
+{
+  "evidence_id": "run-a-dev-093-archived-sitewide",
+  "sample_ids": ["dev-093"],
+  "source": "City of Tampa CapitalProjects CapitalProjects FeatureServer/0 snapshot",
+  "url_or_endpoint": "https://arcgis.tampagov.net/arcgis/rest/services/CapitalProjects/CapitalProjects/FeatureServer/0",
+  "source_tier": "tier_1_archived_primary",
+  "source_state": "archived",
+  "retrieved_at_utc": "2026-09-01T07:15:12Z",
+  "investigation_accessed_at_utc": "2026-09-02T08:21:48Z",
+  "administrative_record_id": "WTR-20-0001.11",
+  "mime_type": "application/json",
+  "archived_source_path": "data/snapshots/2026-09-01/source_records.csv.gz",
+  "content_sha256": "bc66b743c1548fc63a0450034ab3fb1b7fe5994c97fd62b311aa048d3ba07c9a",
+  "hash_scope": "archived_source_file",
+  "extracted_explicit_fields": {
+    "source_object_id": "35707",
+    "source_global_id": "{BFCBA3D0-BE2E-468D-AB5A-7F57DA686B4C}",
+    "project_id": "WTR-20-0001.11",
+    "project_name": "Sitewide Electrical Improvement",
+    "project_type": "Water",
+    "project_phase": "P4: Construction",
+    "status": "Final Contract Review & Approval",
+    "contract_number": "20-C-00008",
+    "planned_start_epoch_ms": 1768840041000,
+    "planned_end_epoch_ms": 1842794850000,
+    "actual_start": null,
+    "actual_end": null
+  }
+}

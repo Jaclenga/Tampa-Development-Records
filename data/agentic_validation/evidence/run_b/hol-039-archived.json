@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0.0",
+  "evidence_id": "hol-039-b-archived-city-gis",
+  "investigation_id": "agent-benchmark-v1-hol-039-run-b",
+  "sample_id": "hol-039",
+  "source": "TDR immutable City GIS snapshot: capital_locations_polygon",
+  "source_url": "https://arcgis.tampagov.net/arcgis/rest/services/CapitalProjects/CityWideProjectsPublic/FeatureServer/2",
+  "retrieved_at_utc": "2026-08-23T02:06:02Z",
+  "administrative_record_id": "SW50019",
+  "evidence_type": "official_city_gis_record",
+  "source_state": "archived",
+  "primary_or_secondary": "primary",
+  "source_tier": "tier_1_archived_primary",
+  "mime_type": "application/json",
+  "source_archived_path": "data/raw/capital_locations_polygon.geojson",
+  "source_content_sha256": "87cc0d7e4629491546abd7df0cceca795e0152f5feeb38c615a1ac21875ad9da",
+  "source_hash_scope": "entire source_archived_path file bytes",
+  "observed_fields": {"record_number": "SW50019", "project_name": "17TH & Annona", "project_type": "Stormwater", "project_phase": "P2: Design", "status": "60% Design Completion", "actual_start": null, "actual_end": null, "global_id": "{696361A8-C03B-4171-8504-D473907A9E69}"}
+}

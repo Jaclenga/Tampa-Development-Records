@@ -142,6 +142,7 @@ codes, and second-review status remain in the
 | Explore snapshot differences | [`docs/dashboard/index.html`](docs/dashboard/index.html) |
 | Understand change metrics and alerts | [`docs/CHANGE_DASHBOARD.md`](docs/CHANGE_DASHBOARD.md) |
 | Complete manual validation | [`docs/MANUAL_VALIDATION_GUIDE.md`](docs/MANUAL_VALIDATION_GUIDE.md) |
+| Review the bounded agent evidence experiment | [`docs/AGENTIC_VALIDATION.md`](docs/AGENTIC_VALIDATION.md) |
 | Collect bounded public Accela records | [`docs/ACCELA_COLLECTOR.md`](docs/ACCELA_COLLECTOR.md) |
 | Understand Accela analytical limitations | [`docs/ACCELA_LIMITATIONS.md`](docs/ACCELA_LIMITATIONS.md) |
 | Navigate all documentation | [`docs/README.md`](docs/README.md) |
@@ -197,6 +198,15 @@ available AI-development metadata are archived in
 reproduced from the code, rules, frozen evidence, and dependencies rather than
 by asking an AI system to regenerate or rejudge them. Live-source checks remain
 mutable and are explicitly separate from the preferred offline workflow.
+
+A separate experimental agentic layer has investigated an 18-case benchmark
+and archived candidate evidence without changing the dataset or human-review
+fields. Reproduce its deterministic audit with `python
+scripts/run_agentic_validation.py --study core --repeat 3
+--allow-recorded-live`; see the [agentic validation
+guide](docs/AGENTIC_VALIDATION.md) and the separate
+[`AGENTIC_VALIDATION_REPORT`](reports/AGENTIC_VALIDATION_REPORT.md). Its metrics
+measure the evidence investigator, not dataset accuracy.
 
 Plan or run a bounded anonymous Accela collection with:
 

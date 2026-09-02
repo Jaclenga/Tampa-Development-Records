@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0.0",
+  "evidence_id": "dev-027-b-archived-city-gis",
+  "investigation_id": "agent-benchmark-v1-dev-027-run-b",
+  "sample_id": "dev-027",
+  "source": "TDR immutable City GIS snapshot: construction_inspections",
+  "source_url": "https://arcgis.tampagov.net/arcgis/rest/services/OpenData/Planning/MapServer/30",
+  "retrieved_at_utc": "2026-08-23T02:06:02Z",
+  "administrative_record_id": "BDE-26-0445189",
+  "evidence_type": "official_city_gis_record",
+  "source_state": "archived",
+  "primary_or_secondary": "primary",
+  "source_tier": "tier_1_archived_primary",
+  "mime_type": "application/json",
+  "source_archived_path": "data/raw/construction_inspections.geojson",
+  "source_content_sha256": "bcd5ff1969731a3d0ef98051db277833acf92c953f683ad17ba29e94a8d137a7",
+  "source_hash_scope": "entire source_archived_path file bytes",
+  "observed_fields": {"record_number": "BDE-26-0445189", "project_name": "REISSUE - Demo SFR", "address": "3816 N Whittier St", "status": "Issued", "record_type": "Residential Demolition Permit", "stop_work_order": "No", "global_id": "{779CA603-7869-45F1-9299-4C485475A449}"}
+}

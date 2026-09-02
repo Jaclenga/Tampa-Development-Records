@@ -1,0 +1,1403 @@
+[
+  {
+    "evaluations": [
+      {
+        "after": "automatically_supported",
+        "before": "unresolved",
+        "claim": "source_identity",
+        "discovered_by": "agent",
+        "evaluated_by": "deterministic_rule",
+        "evidence_sha256": [
+          "ff4e7a66f25eef023926f32a5083b886da93dabf399a8eb9b14d37e01d060072"
+        ],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "activity_classification",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "status_interpretation",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "physical_work_started",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      }
+    ],
+    "investigation_id": "run-a-dev-080",
+    "repeat_id": "A",
+    "sample_id": "dev-080"
+  },
+  {
+    "evaluations": [
+      {
+        "after": "automatically_supported",
+        "before": "unresolved",
+        "claim": "source_identity",
+        "discovered_by": "agent",
+        "evaluated_by": "deterministic_rule",
+        "evidence_sha256": [
+          "b837f071f7e2a9acec193df11c32b5d040249b2ff5f9d22a127c9fc5b65722e8"
+        ],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "activity_classification",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "status_interpretation",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "physical_work_started",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      }
+    ],
+    "investigation_id": "run-a-dev-092",
+    "repeat_id": "A",
+    "sample_id": "dev-092"
+  },
+  {
+    "evaluations": [
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "source_identity",
+        "discovered_by": "agent",
+        "evaluated_by": "deterministic_rule",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "activity_classification",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "status_interpretation",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "physical_work_started",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      }
+    ],
+    "investigation_id": "run-a-dev-093",
+    "repeat_id": "A",
+    "sample_id": "dev-093"
+  },
+  {
+    "evaluations": [
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "source_identity",
+        "discovered_by": "agent",
+        "evaluated_by": "deterministic_rule",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "activity_classification",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "status_interpretation",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "physical_work_started",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      }
+    ],
+    "investigation_id": "run-a-dev-068",
+    "repeat_id": "A",
+    "sample_id": "dev-068"
+  },
+  {
+    "evaluations": [
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "source_identity",
+        "discovered_by": "agent",
+        "evaluated_by": "deterministic_rule",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "activity_classification",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "status_interpretation",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "physical_work_started",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      }
+    ],
+    "investigation_id": "run-a-dev-082",
+    "repeat_id": "A",
+    "sample_id": "dev-082"
+  },
+  {
+    "evaluations": [
+      {
+        "after": "automatically_supported",
+        "before": "unresolved",
+        "claim": "source_identity",
+        "discovered_by": "agent",
+        "evaluated_by": "deterministic_rule",
+        "evidence_sha256": [
+          "41557a990b218cbd36310976d7b3a8152a8e4a3e07b8c2e7365fc80874dabf5b"
+        ],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "activity_classification",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "status_interpretation",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "physical_work_started",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      }
+    ],
+    "investigation_id": "run-a-hol-035",
+    "repeat_id": "A",
+    "sample_id": "hol-035"
+  },
+  {
+    "evaluations": [
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "source_identity",
+        "discovered_by": "agent",
+        "evaluated_by": "deterministic_rule",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "activity_classification",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "status_interpretation",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "building_footprint_match",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "physical_work_started",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      }
+    ],
+    "investigation_id": "run-a-dev-025",
+    "repeat_id": "A",
+    "sample_id": "dev-025"
+  },
+  {
+    "evaluations": [
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "source_identity",
+        "discovered_by": "agent",
+        "evaluated_by": "deterministic_rule",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "activity_classification",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "status_interpretation",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "physical_work_started",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      }
+    ],
+    "investigation_id": "agent-benchmark-v1-hol-039-run-b",
+    "repeat_id": "B",
+    "sample_id": "hol-039"
+  },
+  {
+    "evaluations": [
+      {
+        "after": "automatically_supported",
+        "before": "unresolved",
+        "claim": "source_identity",
+        "discovered_by": "agent",
+        "evaluated_by": "deterministic_rule",
+        "evidence_sha256": [
+          "1d1839930d52abfe6b12a0eb5242eede58e76f84c065e595f39c3681ab13d919",
+          "49cedda7c1f6fbbd5fc592113da91af4ed336db267a096f8e516dd7318290f77"
+        ],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "activity_classification",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "status_interpretation",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "physical_work_started",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      }
+    ],
+    "investigation_id": "agent-benchmark-v1-hol-045-run-b",
+    "repeat_id": "B",
+    "sample_id": "hol-045"
+  },
+  {
+    "evaluations": [
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "source_identity",
+        "discovered_by": "agent",
+        "evaluated_by": "deterministic_rule",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "activity_classification",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "status_interpretation",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "building_footprint_match",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "physical_work_started",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      }
+    ],
+    "investigation_id": "agent-benchmark-v1-dev-025-run-b",
+    "repeat_id": "B",
+    "sample_id": "dev-025"
+  },
+  {
+    "evaluations": [
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "source_identity",
+        "discovered_by": "agent",
+        "evaluated_by": "deterministic_rule",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "activity_classification",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "status_interpretation",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "cross_source_linkage",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "building_footprint_match",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "physical_work_started",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      }
+    ],
+    "investigation_id": "agent-benchmark-v1-hol-001-run-b",
+    "repeat_id": "B",
+    "sample_id": "hol-001"
+  },
+  {
+    "evaluations": [
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "source_identity",
+        "discovered_by": "agent",
+        "evaluated_by": "deterministic_rule",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "activity_classification",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "status_interpretation",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "building_footprint_match",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "physical_work_started",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      }
+    ],
+    "investigation_id": "agent-benchmark-v1-dev-046-run-b",
+    "repeat_id": "B",
+    "sample_id": "dev-046"
+  },
+  {
+    "evaluations": [
+      {
+        "after": "automatically_supported",
+        "before": "unresolved",
+        "claim": "source_identity",
+        "discovered_by": "agent",
+        "evaluated_by": "deterministic_rule",
+        "evidence_sha256": [
+          "aced9607f2af8a33ed483e11884d53b3ccd24172546bfcf950dbb8a58f671b9b"
+        ],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "activity_classification",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "status_interpretation",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "physical_work_started",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      }
+    ],
+    "investigation_id": "agent-benchmark-v1-dev-027-run-b",
+    "repeat_id": "B",
+    "sample_id": "dev-027"
+  },
+  {
+    "evaluations": [
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "source_identity",
+        "discovered_by": "agent",
+        "evaluated_by": "deterministic_rule",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "activity_classification",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "status_interpretation",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "physical_work_started",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      }
+    ],
+    "investigation_id": "agent-benchmark-v1-dev-068-run-b",
+    "repeat_id": "B",
+    "sample_id": "dev-068"
+  },
+  {
+    "evaluations": [
+      {
+        "after": "automatically_supported",
+        "before": "unresolved",
+        "claim": "source_identity",
+        "discovered_by": "agent",
+        "evaluated_by": "deterministic_rule",
+        "evidence_sha256": [
+          "9d17b9204f0ace93ebb22b9e94d08a982f641f1434e6a1d111c9c0863cd93cd7"
+        ],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "activity_classification",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "status_interpretation",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "physical_work_started",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      }
+    ],
+    "investigation_id": "run-c-hol-019",
+    "repeat_id": "C",
+    "sample_id": "hol-019"
+  },
+  {
+    "evaluations": [
+      {
+        "after": "automatically_supported",
+        "before": "unresolved",
+        "claim": "source_identity",
+        "discovered_by": "agent",
+        "evaluated_by": "deterministic_rule",
+        "evidence_sha256": [
+          "8ae5b0b77d88958890730cb466387c7e5f3892b7fb251a7314d833d20e0bba4a"
+        ],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "activity_classification",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "status_interpretation",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "building_footprint_match",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "physical_work_started",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      }
+    ],
+    "investigation_id": "run-c-dev-019",
+    "repeat_id": "C",
+    "sample_id": "dev-019"
+  },
+  {
+    "evaluations": [
+      {
+        "after": "automatically_supported",
+        "before": "unresolved",
+        "claim": "source_identity",
+        "discovered_by": "agent",
+        "evaluated_by": "deterministic_rule",
+        "evidence_sha256": [
+          "3a5ef6fe7f07dc1c61690df241ae632ca7b317704d4e2d9d69060d33ab4a51a3"
+        ],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "activity_classification",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "status_interpretation",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "physical_work_started",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      }
+    ],
+    "investigation_id": "run-c-dev-083",
+    "repeat_id": "C",
+    "sample_id": "dev-083"
+  },
+  {
+    "evaluations": [
+      {
+        "after": "automatically_supported",
+        "before": "unresolved",
+        "claim": "source_identity",
+        "discovered_by": "agent",
+        "evaluated_by": "deterministic_rule",
+        "evidence_sha256": [
+          "b8fafb082c7f8398a91b8af103f157154f994f21881ed51904dc2dca2a04a920"
+        ],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "activity_classification",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "status_interpretation",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "physical_work_started",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      }
+    ],
+    "investigation_id": "run-c-dev-024",
+    "repeat_id": "C",
+    "sample_id": "dev-024"
+  },
+  {
+    "evaluations": [
+      {
+        "after": "automatically_supported",
+        "before": "unresolved",
+        "claim": "source_identity",
+        "discovered_by": "agent",
+        "evaluated_by": "deterministic_rule",
+        "evidence_sha256": [
+          "fc9e778f10e2a7d4f15d9fad94bf47635f993539ec7b61e59db95277c993bb8a"
+        ],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "activity_classification",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "status_interpretation",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "physical_work_started",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      }
+    ],
+    "investigation_id": "run-c-dev-072",
+    "repeat_id": "C",
+    "sample_id": "dev-072"
+  },
+  {
+    "evaluations": [
+      {
+        "after": "automatically_supported",
+        "before": "unresolved",
+        "claim": "source_identity",
+        "discovered_by": "agent",
+        "evaluated_by": "deterministic_rule",
+        "evidence_sha256": [
+          "3cacce4034eecace5e85fa0e6d291aa406330f358a14778d1f65cb94c4708c54"
+        ],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "activity_classification",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "status_interpretation",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      }
+    ],
+    "investigation_id": "run-c-dev-053",
+    "repeat_id": "C",
+    "sample_id": "dev-053"
+  },
+  {
+    "evaluations": [
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "source_identity",
+        "discovered_by": "agent",
+        "evaluated_by": "deterministic_rule",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "activity_classification",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "status_interpretation",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "physical_work_started",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      }
+    ],
+    "investigation_id": "run-c-dev-068",
+    "repeat_id": "C",
+    "sample_id": "dev-068"
+  },
+  {
+    "evaluations": [
+      {
+        "after": "automatically_supported",
+        "before": "unresolved",
+        "claim": "source_identity",
+        "discovered_by": "agent",
+        "evaluated_by": "deterministic_rule",
+        "evidence_sha256": [
+          "bec38f27f680db9153159fdccf3b7f790da2bbc34e998bedfef40b9e97b9a102"
+        ],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "activity_classification",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "status_interpretation",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "building_footprint_match",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      },
+      {
+        "after": "unresolved_requires_human_review",
+        "before": "unresolved",
+        "claim": "physical_work_started",
+        "discovered_by": "agent",
+        "evaluated_by": "no_approved_rule_available",
+        "evidence_sha256": [],
+        "experimental_only": true,
+        "release_write_enabled": false,
+        "requires_human_review": true,
+        "rule_id": null,
+        "rule_set_version": "0.1.0-experimental"
+      }
+    ],
+    "investigation_id": "run-c-dev-025",
+    "repeat_id": "C",
+    "sample_id": "dev-025"
+  }
+]

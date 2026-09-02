@@ -1,0 +1,8 @@
+# Exact development/test dependencies for the agentic validation layer.
+# Install the hash-locked runtime requirements first, then this isolated test set.
+pytest==8.4.2
+iniconfig==2.3.0
+packaging==26.2
+pluggy==1.6.0
+Pygments==2.20.0
+colorama==0.4.6; sys_platform == "win32"

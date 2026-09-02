@@ -1,0 +1,27 @@
+{
+  "evidence_id": "run-a-dev-080-archived-capital-polygon",
+  "sample_ids": ["dev-080"],
+  "source": "City of Tampa CapitalProjects CityWideProjectsPublic FeatureServer/2 snapshot",
+  "url_or_endpoint": "https://arcgis.tampagov.net/arcgis/rest/services/CapitalProjects/CityWideProjectsPublic/FeatureServer/2",
+  "source_tier": "tier_1_archived_primary",
+  "source_state": "archived",
+  "retrieved_at_utc": "2026-09-01T07:15:12Z",
+  "investigation_accessed_at_utc": "2026-09-02T08:21:48Z",
+  "administrative_record_id": "SW60008",
+  "mime_type": "application/json",
+  "archived_source_path": "data/snapshots/2026-09-01/source_records.csv.gz",
+  "content_sha256": "bc66b743c1548fc63a0450034ab3fb1b7fe5994c97fd62b311aa048d3ba07c9a",
+  "hash_scope": "archived_source_file",
+  "extracted_explicit_fields": {
+    "source_object_id": "6994",
+    "source_global_id": "{DD917BE8-D747-4E59-AC3F-66100D873C61}",
+    "project_id": "SW60008",
+    "project_name": "2504 Gardner Ct",
+    "project_type": "Stormwater",
+    "status": "Cancelled",
+    "planned_start_epoch_ms": 1710460800000,
+    "planned_end_epoch_ms": 1741996800000,
+    "actual_start": null,
+    "actual_end": null
+  }
+}

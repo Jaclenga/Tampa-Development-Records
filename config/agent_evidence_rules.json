@@ -1,0 +1,72 @@
+{
+  "registry_format_version": "1.0.0",
+  "rule_set_version": "0.1.0-experimental",
+  "effective_date": "2026-09-02",
+  "scope": "agent benchmark deterministic handoff only",
+  "may_modify_dataset_validation": false,
+  "may_modify_human_review": false,
+  "release_activation_requires_human_approval": true,
+  "rules": [
+    {
+      "rule_id": "AGENT_EVIDENCE_IDENTITY_001",
+      "status": "experimental",
+      "claim": "source_identity",
+      "purpose": "Determine whether agent-discovered evidence is eligible for experimental rule evaluation.",
+      "accepted_identity_categories": [
+        "exact_identifier"
+      ],
+      "required_conditions": [
+        "candidate administrative record identifier exactly equals a frozen request identifier",
+        "no conflicting administrative identifier is present",
+        "candidate_count equals one"
+      ],
+      "rejection_outcome": "requires_human_review",
+      "experimental_result": "automatically_supported",
+      "release_write_enabled": false,
+      "notes": "Address or project-name similarity alone is never sufficient. This rule does not merge records."
+    },
+    {
+      "rule_id": "ACCELA_FINAL_INSPECTION_001",
+      "status": "experimental_requires_human_approval_for_release",
+      "claim": "final_inspection_passed",
+      "required_conditions": [
+        "AGENT_EVIDENCE_IDENTITY_001 accepted the evidence",
+        "source tier is archived_primary or live_primary",
+        "source field explicitly identifies a final building inspection",
+        "inspection result explicitly equals an allowed passed value",
+        "inspection date is present"
+      ],
+      "allowed_passed_values": [
+        "passed",
+        "approved",
+        "complete"
+      ],
+      "experimental_result": "automatically_supported",
+      "release_write_enabled": false,
+      "notes": "Agent interpretation cannot satisfy this rule; the archived structured fields must satisfy every predicate."
+    },
+    {
+      "rule_id": "ACCELA_CERTIFICATE_OF_OCCUPANCY_001",
+      "status": "experimental_requires_human_approval_for_release",
+      "claim": "certificate_of_occupancy_issued",
+      "required_conditions": [
+        "AGENT_EVIDENCE_IDENTITY_001 accepted the evidence",
+        "source tier is archived_primary or live_primary",
+        "an explicit permanent certificate-of-occupancy identifier or issuance date is present",
+        "temporary occupancy evidence is excluded"
+      ],
+      "experimental_result": "automatically_supported",
+      "release_write_enabled": false,
+      "notes": "Narrative implication, permit closeout, and temporary occupancy do not satisfy this rule."
+    }
+  ],
+  "change_policy": {
+    "required_for_release_activation": [
+      "explicit human approval",
+      "rule documentation",
+      "unit and adversarial tests",
+      "rule-set version increment"
+    ],
+    "agent_may_activate_rules": false
+  }
+}

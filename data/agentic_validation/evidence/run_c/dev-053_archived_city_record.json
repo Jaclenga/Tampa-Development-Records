@@ -1,0 +1,26 @@
+{
+  "evidence_schema_version": "1.0.0",
+  "sample_id": "dev-053",
+  "source_tier": "tier_1_archived_primary",
+  "source": "City of Tampa OpenData development coordination snapshot",
+  "source_endpoint": "https://arcgis.tampagov.net/arcgis/rest/services/OpenData/Planning/MapServer/31",
+  "original_archive_path": "data/processed/source_records.csv",
+  "original_retrieved_at_utc": "2026-08-23T02:06:02+00:00",
+  "source_record_key": "src-163548eeef12ed9e",
+  "observed_fields": {
+    "record_number": "FDN-26-0000118",
+    "object_id": 241,
+    "global_id": "{34EBE9FA-38BA-44D6-A994-054D5B7C55D5}",
+    "record_alias": "Formal Decision",
+    "address": "108 S Delaware Ave",
+    "application_status": "Awaiting Client Reply",
+    "tentative_hearing": "N/A",
+    "created_date_epoch_ms": 1786492800000,
+    "last_update_epoch_ms": 1787097600000,
+    "source_url": "https://aca-prod.accela.com/TAMPA/Cap/CapDetail.aspx?Module=Planning&TabName=Planning&capID1=26CAP&capID2=00000&capID3=025ZZ&agencyCode=TAMPA"
+  },
+  "limitations": [
+    "The record is a planning application; no physical-work claim was investigated for this case.",
+    "Awaiting Client Reply describes workflow state, not a final planning outcome."
+  ]
+}

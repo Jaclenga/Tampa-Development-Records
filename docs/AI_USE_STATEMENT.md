@@ -24,6 +24,13 @@ web research. It was purposively selected, was not independently replicated,
 and is retained only as documented pilot evidence. It is excluded from
 population accuracy estimates.
 
+A separate Phase 16 agent experiment used recorded GPT-5.6 Sol investigations
+on an 18-case benchmark drawn reproducibly from the frozen core sample. The
+agents could retrieve and propose candidate evidence only. Their outputs were
+hash-audited and passed to experimental deterministic rules with release writes
+disabled; all cases still require human review. Agent yield and repeatability
+are reported separately and are not dataset-accuracy estimates.
+
 The frozen manual-validation study records AI assistance in the
 `ai_assistance_used` field. AI may help locate candidate evidence, but a human
 reviewer must personally open the cited source, record evidence provenance and

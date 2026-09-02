@@ -1,0 +1,26 @@
+{
+  "evidence_schema_version": "1.0.0",
+  "sample_id": "dev-068",
+  "source_tier": "tier_1_archived_primary",
+  "source": "City of Tampa CityWideProjectsPublic line snapshot",
+  "source_endpoint": "https://arcgis.tampagov.net/arcgis/rest/services/CapitalProjects/CityWideProjectsPublic/FeatureServer/1",
+  "original_archive_path": "data/processed/source_records.csv",
+  "original_retrieved_at_utc": "2026-08-23T02:06:02+00:00",
+  "source_record_key": "src-b1cd662d1db56ce7",
+  "observed_fields": {
+    "project_id": "WTR-20-0005.3-12th St",
+    "object_id": 39134,
+    "global_id": "{C3726980-BAD1-4420-93CD-ED82EFF17825}",
+    "project_name": "FY20 CIP Water Main Improvements Design-Build_12th St - GMP 3",
+    "project_type": "Water",
+    "status": "Final Inspection and Testing",
+    "project_phase": "P4: Construction",
+    "actual_start": null,
+    "actual_end_epoch_ms": 1770940800000,
+    "estimated_cost": 5596464
+  },
+  "limitations": [
+    "This feature shares the requested project_id but its GMP name, global id, phase, status, and geometry differ from the GMP 5 request.",
+    "The duplicated administrative identifier makes identifier-only association ambiguous."
+  ]
+}

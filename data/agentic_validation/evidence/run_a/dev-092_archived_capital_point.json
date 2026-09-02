@@ -1,0 +1,27 @@
+{
+  "evidence_id": "run-a-dev-092-archived-capital-point",
+  "sample_ids": ["dev-092"],
+  "source": "City of Tampa CapitalProjects CityWideProjectsPublic FeatureServer/0 snapshot",
+  "url_or_endpoint": "https://arcgis.tampagov.net/arcgis/rest/services/CapitalProjects/CityWideProjectsPublic/FeatureServer/0",
+  "source_tier": "tier_1_archived_primary",
+  "source_state": "archived",
+  "retrieved_at_utc": "2026-09-01T07:15:12Z",
+  "investigation_accessed_at_utc": "2026-09-02T08:21:48Z",
+  "administrative_record_id": "1001865.4B",
+  "mime_type": "application/json",
+  "archived_source_path": "data/snapshots/2026-09-01/source_records.csv.gz",
+  "content_sha256": "bc66b743c1548fc63a0450034ab3fb1b7fe5994c97fd62b311aa048d3ba07c9a",
+  "hash_scope": "archived_source_file",
+  "extracted_explicit_fields": {
+    "source_object_id": "5365",
+    "source_global_id": "{8D9B03EB-85E4-4CCF-8D7A-2B64AE5313F3}",
+    "project_id": "1001865.4B",
+    "project_name": "Howard F. Curren AWTP Master Plan Improvements, Phase 2, Design-build Amendment No. 1",
+    "project_type": "Wastewater",
+    "project_phase": "P5: Closeout",
+    "status": "Cancelled",
+    "contract_number": "23-C-00020",
+    "actual_start": null,
+    "actual_end": null
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0.0",
+  "investigation_id": "agent-benchmark-v1-hol-039-run-b",
+  "sample_id": "hol-039",
+  "repeat_id": "B",
+  "archived_at_utc": "2026-09-02T08:38:01Z",
+  "evidence": [
+    {
+      "evidence_id": "hol-039-b-archived-city-gis",
+      "source": "TDR immutable City GIS snapshot: capital_locations_polygon",
+      "source_url": "https://arcgis.tampagov.net/arcgis/rest/services/CapitalProjects/CityWideProjectsPublic/FeatureServer/2",
+      "retrieval_timestamp_utc": "2026-08-23T02:06:02Z",
+      "administrative_record_id": "SW50019",
+      "evidence_type": "official_city_gis_record",
+      "archived_path": "data/agentic_validation/evidence/run_b/hol-039.json",
+      "source_archived_path": "data/raw/capital_locations_polygon.geojson",
+      "sha256": "87cc0d7e4629491546abd7df0cceca795e0152f5feeb38c615a1ac21875ad9da",
+      "content_sha256": "87cc0d7e4629491546abd7df0cceca795e0152f5feeb38c615a1ac21875ad9da",
+      "hash_scope": "entire source_archived_path file bytes",
+      "mime_type": "application/geo+json",
+      "source_state": "archived",
+      "primary_or_secondary": "primary",
+      "source_tier": "tier_1_archived_primary",
+      "observed_fields": {
+        "OBJECTID": 854,
+        "GlobalID": "{696361A8-C03B-4171-8504-D473907A9E69}",
+        "projid": "SW50019",
+        "projname": "17TH & Annona",
+        "projdesc": "Construction of new inlets and pipes connecting to the existing system",
+        "projtype": "Stormwater",
+        "projphase": "P2: Design",
+        "status": "60% Design Completion",
+        "actstart": null,
+        "actend": null
+      }
+    },
+    {
+      "evidence_id": "hol-039-b-live-city-project-page",
+      "source": "City of Tampa project page",
+      "source_url": "https://www.tampa.gov/project/sw50019",
+      "retrieval_timestamp_utc": "2026-09-02T08:28:48Z",
+      "administrative_record_id": "SW50019",
+      "evidence_type": "official_city_project_page_extract",
+      "archived_path": "data/agentic_validation/evidence/run_b/hol-039.json",
+      "sha256": "b5615bced37fd9fb8f221498998e439b1d2599004523f945acec1df6a0a5d06a",
+      "content_sha256": "b5615bced37fd9fb8f221498998e439b1d2599004523f945acec1df6a0a5d06a",
+      "hash_scope": "canonical JSON of observed_fields",
+      "mime_type": "application/json",
+      "source_state": "live",
+      "primary_or_secondary": "primary",
+      "source_tier": "tier_2_live_primary",
+      "observed_fields": {
+        "project_id": "SW50019",
+        "department_id": "SW50019",
+        "title": "17th and Annona",
+        "description": "Construction of new inlets and pipes connecting to the existing system",
+        "project_type": "Stormwater Engineering",
+        "project_phase": "P3: Procurement",
+        "status": "Contract Negotiations",
+        "planned_start_date": "2026-01-31",
+        "planned_end_date": "2026-07-31",
+        "location": "28.040766363506, -82.440781886307"
+      }
+    }
+  ],
+  "untrusted_content_handling": "Source text was treated only as evidence data; no embedded instruction was followed."
+}

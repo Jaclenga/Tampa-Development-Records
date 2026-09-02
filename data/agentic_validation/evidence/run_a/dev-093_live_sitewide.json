@@ -1,0 +1,25 @@
+{
+  "evidence_id": "run-a-dev-093-live-sitewide",
+  "sample_ids": ["dev-093"],
+  "source": "City of Tampa project page",
+  "url_or_endpoint": "https://www.tampa.gov/project/wtr-20-000111",
+  "source_tier": "tier_2_live_primary",
+  "source_state": "live",
+  "retrieved_at_utc": "2026-09-02T08:21:48Z",
+  "administrative_record_id": "WTR-20-0001.11",
+  "mime_type": "text/html",
+  "content_sha256": "4cda37060bb23a464f9a7925edd1b98fddfd9d204308d9264bfa0052b8d1fadd",
+  "hash_scope": "canonical_extracted_explicit_fields",
+  "extracted_explicit_fields": {
+    "project_id": "WTR-20-0001.11",
+    "project_name": "Sitewide Electrical Improvement",
+    "project_type": "Water",
+    "status": "Final Contract Review & Approval",
+    "project_phase": "P4: Construction",
+    "current_phase": "Construction",
+    "planned_start_date": "01/19/2026",
+    "planned_end_date": "05/24/2028",
+    "funded_project": "No",
+    "contract_number": "20-C-00008"
+  }
+}

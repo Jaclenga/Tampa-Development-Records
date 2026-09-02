@@ -1,0 +1,52 @@
+{
+  "cases": [
+    {
+      "evidence_sets": [
+        [
+          "0a650a8d882ecc47916279be2c143594a4c86fc16606c222871a51dda5d86af6",
+          "678a93a7df3a94f45499119a8fa8c5696c030d577134da6a1edbe8538046792f",
+          "6a2d94e82bb8b87ebd720cd3382534c74625c6c5ef1736aa1d8c6ec5d4da9832"
+        ],
+        [
+          "01c2bb2edbd15a1c9acd58542722c3f245e34e1a84cafab41d64f5111a8df389"
+        ],
+        [
+          "8527074cfcdcd0348f0abc09487cfd5e405be535907b62c9381a5952fc3d1eba"
+        ]
+      ],
+      "repeat_count": 3,
+      "same_evidence_discovered": false,
+      "same_final_deterministic_classification": false,
+      "same_source_selected": false,
+      "sample_id": "dev-025"
+    },
+    {
+      "evidence_sets": [
+        [
+          "44f16baa97f113d84a95354348bb7cfa5f7a29236eaab462a2a1492564439ded",
+          "4cb75ac305e106bc65deb8f9eb342624bf863a7c08ae4674963ab7d9de6bb183",
+          "6edc39fc93c4e6f71751eb97900fb64ebff88fc0bfdee4da68b414ffd6ba6bda"
+        ],
+        [
+          "5e037a9aeec850a5086587dd9dd003fca692df0e1c38e2228e7cc828704e84bc",
+          "a496d1eae1f6383bf924fa16916bed6635b33a007180f407f6d0c360c9037d87",
+          "daa160cd0d8928da8be8f577d5673241fa2f992bb737c8d02515f06684cbc4ab"
+        ],
+        [
+          "36b39555a5a441cd6aa29151762ce57818a671a8d17dcdcfbb505ae6454a9b5c",
+          "78869c0a87f8f1f63d3c7a791c6c72ce463bb54a0a54d6e04158c35dbb6b1066",
+          "efa26e944c82cbfba234d71c0c0b535425eb50ff1a17a3bbdafc72055d1e110e"
+        ]
+      ],
+      "repeat_count": 3,
+      "same_evidence_discovered": false,
+      "same_final_deterministic_classification": true,
+      "same_source_selected": true,
+      "sample_id": "dev-068"
+    }
+  ],
+  "repeated_cases": 2,
+  "same_deterministic_classification_rate": 0.5,
+  "same_evidence_rate": 0.0,
+  "same_source_rate": 0.5
+}

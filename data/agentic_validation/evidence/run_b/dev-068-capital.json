@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0.0",
+  "evidence_id": "dev-068-b-archived-capital-improvements",
+  "investigation_id": "agent-benchmark-v1-dev-068-run-b",
+  "sample_id": "dev-068",
+  "source": "TDR immutable City GIS snapshot: capital_improvements",
+  "source_url": "https://arcgis.tampagov.net/arcgis/rest/services/CapitalProjects/CapitalProjects/FeatureServer/0",
+  "retrieved_at_utc": "2026-08-23T02:06:02Z",
+  "administrative_record_id": "WTR-20-0005.3-12th St",
+  "evidence_type": "official_city_gis_record",
+  "source_state": "archived",
+  "primary_or_secondary": "primary",
+  "source_tier": "tier_1_archived_primary",
+  "mime_type": "application/json",
+  "source_archived_path": "data/raw/capital_improvements.geojson",
+  "source_content_sha256": "b13b4b8c48ef9d0bb228c791786d4890287e12877e5f7a8b4a99e78cb34c8b2c",
+  "source_hash_scope": "entire source_archived_path file bytes",
+  "observed_fields": {"record_number": "WTR-20-0005.3-12th St", "project_name": "FY20 CIP Water Main Improvements Design-Build_12th St – GMP 5", "project_type": "Water", "project_phase": "P5: Closeout", "status": "Closeout", "contract_number": "20-C-00032", "actual_start": null, "actual_end": null, "global_id": "{A2C0F384-83CA-439D-8F48-E77CD68B4057}"}
+}
