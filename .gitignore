@@ -32,3 +32,8 @@ data/frozen/accela/**/status.json
 # Atomic Accela writers use hidden random-suffix sidecars before replacing the
 # final CSV. They are incomplete runtime files and must never be staged.
 data/processed/.accela_*.csv.*
+
+# The expanded Accela CSV now exceeds ordinary Git hosting limits. The
+# deterministic .csv.gz artifact is published; this reproducible local copy is
+# retained only as a working output.
+data/integrated/tampa_development_activity_with_accela.csv

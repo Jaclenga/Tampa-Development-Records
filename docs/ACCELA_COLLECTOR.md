@@ -49,8 +49,8 @@ python scripts/collect_accela.py --module Planning --from-date 2026-08-01 --to-d
 python scripts/collect_accela.py --module Building --from-date 2026-08-01 --to-date 2026-08-31 --use-export
 
 # Resumable monthly historical backfill and validation
-python scripts/backfill_accela.py --from-month 2025-08 --to-month 2026-07
-python scripts/validate_accela_backfill.py
+python scripts/backfill_accela.py --from-month 2020-01 --to-month 2025-07
+python scripts/validate_accela_backfill.py --from-month 2020-01 --to-month 2026-07
 
 # Resumable Planning-then-Building inspection history (gzip raw archive)
 python scripts/backfill_accela_inspections.py --from-month 2025-08 --to-month 2026-08
@@ -89,6 +89,13 @@ same pipeline. Export mode is list-only and rejects detail, parcel, inspection,
 and `--max-records` options. It reduces a monthly backfill from hundreds of
 pagination requests to one bounded search, one export postback, and one
 download.
+
+Historical backfills add `--snapshot-only` internally. Each month writes its
+CSV, summary, gaps file, and checkpoint without repeatedly rewriting the large
+shared aggregate. A partition is skipped only when all four artifacts show a
+complete run. Temporary month failures receive bounded retries. After every
+requested partition succeeds, `finalize_accela_record_backfill.py` validates
+the artifacts and rebuilds the shared aggregate and module CSVs once.
 
 ## Network and recovery behavior
 
@@ -170,8 +177,11 @@ and each matching signal.
 
 Run `python scripts/integrate_accela.py` after collection. It writes a separate
 expanded edition at
-`data/integrated/tampa_development_activity_with_accela.csv`, preserving the
-original eight-layer bounded-census tables and claims. Stable Accela IDs and
+`data/integrated/tampa_development_activity_with_accela.csv.gz`, preserving the
+original eight-layer bounded-census tables and claims. The normal build removes
+the uncompressed intermediate because it exceeds ordinary Git hosting limits;
+pass `--keep-expanded` when a local expanded CSV is needed.
+Stable Accela IDs and
 canonical public record numbers are deduplicated first. A record merges into a
 core activity only on one unambiguous exact public record-number match; fuzzy
 matches never merge automatically. The adjacent audit CSV and report JSON make

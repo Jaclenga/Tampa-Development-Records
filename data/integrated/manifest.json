@@ -1,0 +1,45 @@
+{
+  "artifacts": [
+    {
+      "bytes": 9881807,
+      "path": "data/integrated/tampa_development_activity_with_accela.csv.gz",
+      "sha256": "720e819544390789423b59a8c660b852950c093d8bc0de567c9edb9a3adc3e91"
+    },
+    {
+      "bytes": 44502623,
+      "path": "data/integrated/accela_integration_audit.csv",
+      "sha256": "0dfc4ac8625f39d045515e0aafab04460c3862eb5882b7d6cb3ce5c044a674e2"
+    },
+    {
+      "bytes": 1712,
+      "path": "data/integrated/accela_integration_report.json",
+      "sha256": "e2588a01b1ead673b500823d89717a121b9a8053453534f04504fa0dc39034ff"
+    },
+    {
+      "bytes": 22442,
+      "path": "data/integrated/accela_backfill_report.json",
+      "sha256": "8234df2a59e38bfec4c4c4b8cb77dce3e28c5fcbd72c0a1b2ed309e02f9c95da"
+    }
+  ],
+  "coverage": {
+    "prospective_tracking_from": "2026-08-01",
+    "retrospective_source_records_from": "2020-01-01",
+    "retrospective_source_records_through": "2026-07-31"
+  },
+  "edition": "expanded_accela",
+  "expanded_csv": {
+    "bytes": 171720757,
+    "path": "data/integrated/tampa_development_activity_with_accela.csv",
+    "published": false,
+    "reason": "The deterministic gzip copy is published to stay below ordinary Git hosting limits.",
+    "rebuild_command": "python scripts/integrate_accela.py --keep-expanded",
+    "sha256": "276c733cef7b1aa3d47ed5e4f9b6f39875942559faa904a8a7f808b31a47372b"
+  },
+  "format_version": "1.0.0",
+  "record_counts": {
+    "integrated_activities": 339179,
+    "prospective_snapshot_records": 3981,
+    "retrospective_source_records": 334808,
+    "unique_accela_records": 338789
+  }
+}

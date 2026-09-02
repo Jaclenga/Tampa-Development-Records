@@ -11,11 +11,13 @@ from __future__ import annotations
 
 import argparse
 import csv
+import gzip
 import hashlib
 import json
 import os
 from pathlib import Path
 import re
+import shutil
 import tempfile
 import time
 import sys
@@ -32,8 +34,11 @@ CORE_SOURCES = ROOT / "data" / "processed" / "source_records.csv"
 ACCELA_RECORDS = ROOT / "data" / "processed" / "accela_records.csv"
 OUTPUT_DIR = ROOT / "data" / "integrated"
 OUTPUT = OUTPUT_DIR / "tampa_development_activity_with_accela.csv"
+COMPRESSED_OUTPUT = OUTPUT_DIR / "tampa_development_activity_with_accela.csv.gz"
 AUDIT = OUTPUT_DIR / "accela_integration_audit.csv"
 REPORT = OUTPUT_DIR / "accela_integration_report.json"
+BACKFILL_REPORT = OUTPUT_DIR / "accela_backfill_report.json"
+MANIFEST = OUTPUT_DIR / "manifest.json"
 
 AUDIT_FIELDS = [
     "accela_record_id", "record_number", "source_module", "disposition",
@@ -87,6 +92,60 @@ def write_csv(path: Path, rows: Iterable[Mapping[str, object]], fields: list[str
 
 def write_json(path: Path, value: object) -> None:
     atomic_write(path, lambda handle: handle.write(json.dumps(value, indent=2, sort_keys=True) + "\n"))
+
+
+def write_deterministic_gzip(source: Path, destination: Path) -> None:
+    """Publish a byte-stable gzip copy suitable for ordinary Git hosting."""
+    destination = destination.resolve()
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    descriptor, temporary = tempfile.mkstemp(prefix=f".{destination.name}.", dir=destination.parent)
+    try:
+        with source.open("rb") as input_handle, os.fdopen(descriptor, "wb") as output_handle:
+            with gzip.GzipFile(
+                filename="", mode="wb", fileobj=output_handle, compresslevel=9, mtime=0
+            ) as archive:
+                shutil.copyfileobj(input_handle, archive, length=1024 * 1024)
+            output_handle.flush()
+            os.fsync(output_handle.fileno())
+        for attempt in range(9):
+            try:
+                os.replace(temporary, destination)
+                break
+            except PermissionError:
+                if attempt == 8:
+                    raise
+                time.sleep(0.1 * (2**attempt))
+    except Exception:
+        try:
+            Path(temporary).unlink(missing_ok=True)
+        except OSError:
+            pass
+        raise
+
+
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def publication_path(path: Path) -> str:
+    """Return a privacy-safe repository-relative artifact path."""
+    resolved = path.resolve()
+    try:
+        return resolved.relative_to(ROOT.resolve()).as_posix()
+    except ValueError:
+        return path.name
+
+
+def artifact_metadata(path: Path) -> dict[str, object]:
+    return {
+        "path": publication_path(path),
+        "bytes": path.stat().st_size,
+        "sha256": sha256_file(path),
+    }
 
 
 def clean(value: object) -> str:
@@ -409,8 +468,16 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--core-sources", type=Path, default=CORE_SOURCES)
     parser.add_argument("--accela", type=Path, default=ACCELA_RECORDS)
     parser.add_argument("--output", type=Path, default=OUTPUT)
+    parser.add_argument("--compressed-output", type=Path, default=COMPRESSED_OUTPUT)
     parser.add_argument("--audit", type=Path, default=AUDIT)
     parser.add_argument("--report", type=Path, default=REPORT)
+    parser.add_argument("--backfill-report", type=Path, default=BACKFILL_REPORT)
+    parser.add_argument("--manifest", type=Path, default=MANIFEST)
+    parser.add_argument(
+        "--keep-expanded",
+        action="store_true",
+        help="retain the oversized uncompressed working CSV after publishing its gzip copy",
+    )
     args = parser.parse_args(argv)
     core = read_csv(args.core_activity)
     sources = read_csv(args.core_sources)
@@ -420,9 +487,65 @@ def main(argv: list[str] | None = None) -> int:
     integrated, audit, report = integrate(core, sources, accela)
     output_fields = list(core[0]) + [field for field in TEMPORAL_FIELDS if field not in core[0]]
     write_csv(args.output, integrated, output_fields)
+    expanded_metadata = artifact_metadata(args.output)
+    write_deterministic_gzip(args.output, args.compressed_output)
     write_csv(args.audit, audit, AUDIT_FIELDS)
+    report["published_output"] = "data/integrated/tampa_development_activity_with_accela.csv.gz"
+    report["published_output_compression"] = "gzip"
     write_json(args.report, report)
-    print(json.dumps({**report, "output": str(args.output), "audit": str(args.audit), "report": str(args.report)}, indent=2))
+    artifacts = [
+        artifact_metadata(args.compressed_output),
+        artifact_metadata(args.audit),
+        artifact_metadata(args.report),
+    ]
+    coverage = {
+        "retrospective_source_records_from": "2020-01-01",
+        "retrospective_source_records_through": "2026-07-31",
+        "prospective_tracking_from": report["temporal_boundary"],
+    }
+    if args.backfill_report.exists():
+        artifacts.append(artifact_metadata(args.backfill_report))
+        backfill_report = json.loads(args.backfill_report.read_text(encoding="utf-8"))
+        backfill_window = backfill_report.get("backfill_window", {})
+        coverage["retrospective_source_records_from"] = backfill_window.get(
+            "from", coverage["retrospective_source_records_from"]
+        )
+        coverage["retrospective_source_records_through"] = backfill_window.get(
+            "to", coverage["retrospective_source_records_through"]
+        )
+    manifest = {
+        "format_version": "1.0.0",
+        "edition": "expanded_accela",
+        "coverage": coverage,
+        "record_counts": {
+            "integrated_activities": report["integrated_activity_rows"],
+            "unique_accela_records": report["accela_unique_rows_after_deduplication"],
+            "retrospective_source_records": report["temporal_evidence_counts"][
+                "retrospective_source_record"
+            ],
+            "prospective_snapshot_records": report["temporal_evidence_counts"][
+                "prospective_snapshot"
+            ],
+        },
+        "artifacts": artifacts,
+        "expanded_csv": {
+            **expanded_metadata,
+            "published": False,
+            "reason": "The deterministic gzip copy is published to stay below ordinary Git hosting limits.",
+            "rebuild_command": "python scripts/integrate_accela.py --keep-expanded",
+        },
+    }
+    write_json(args.manifest, manifest)
+    if not args.keep_expanded:
+        args.output.unlink(missing_ok=True)
+    print(json.dumps({
+        **report,
+        "expanded_output_retained": args.keep_expanded,
+        "compressed_output": str(args.compressed_output),
+        "audit": str(args.audit),
+        "report": str(args.report),
+        "manifest": str(args.manifest),
+    }, indent=2))
     return 0
 
 

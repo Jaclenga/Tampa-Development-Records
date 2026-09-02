@@ -1,6 +1,6 @@
 {
-  "accela_input_rows": 56245,
-  "accela_unique_rows_after_deduplication": 56245,
+  "accela_input_rows": 338789,
+  "accela_unique_rows_after_deduplication": 338789,
   "ambiguous_exact_matches_held_for_review": 0,
   "core_activity_rows": 3323,
   "deduplication": {
@@ -10,26 +10,28 @@
     "missing_stable_id_rows": 0
   },
   "deterministic_activity_id_collisions_merged": 0,
-  "exact_core_record_number_matches": 1891,
+  "exact_core_record_number_matches": 2933,
   "format_version": "1.0.0",
   "identity_note": "activity_id is the row key. Existing core source_record_id values can repeat across source namespaces or placeholder IDs and are not auto-merged without stronger identity evidence.",
   "inherited_cross_namespace_primary_id_reuse_groups": 24,
   "integrated_accela_record_numbers_unique": true,
   "integrated_activity_ids_unique": true,
-  "integrated_activity_rows": 57677,
-  "new_accela_activities_appended": 54354,
+  "integrated_activity_rows": 339179,
+  "new_accela_activities_appended": 335856,
   "policy": [
     "Deduplicate Accela stable IDs, then canonical public record numbers.",
     "Merge only a single exact public record-number match into a core activity.",
     "Hold ambiguous exact matches for review; never fuzzy-auto-merge.",
     "Assign deterministic activity IDs to unmatched records and fail on final duplicate IDs/numbers."
   ],
+  "published_output": "data/integrated/tampa_development_activity_with_accela.csv.gz",
+  "published_output_compression": "gzip",
   "scope_note": "Local integrated edition; the eight-layer ArcGIS bounded-census files and claims are unchanged.",
   "temporal_boundary": "2026-08-01",
   "temporal_evidence_counts": {
     "prospective_snapshot": 3981,
     "retrospective_event_history": 0,
-    "retrospective_source_record": 52264,
+    "retrospective_source_record": 334808,
     "unknown": 0
   }
 }

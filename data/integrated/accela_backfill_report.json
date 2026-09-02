@@ -1,14 +1,14 @@
 {
   "aggregate_public_record_numbers_unique": true,
-  "aggregate_records": 56245,
+  "aggregate_records": 338789,
   "aggregate_stable_ids_unique": true,
-  "backfill_records": 52264,
+  "backfill_records": 334808,
   "backfill_records_by_module": {
-    "Building": 48960,
-    "Planning": 3304
+    "Building": 316443,
+    "Planning": 18365
   },
   "backfill_window": {
-    "from": "2025-08-01",
+    "from": "2020-01-01",
     "to": "2026-07-31"
   },
   "errors": [],
@@ -20,6 +20,475 @@
     "Planning"
   ],
   "month_counts": [
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2020-01",
+      "records": 3608,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2020-02",
+      "records": 3615,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2020-03",
+      "records": 3582,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2020-04",
+      "records": 3315,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2020-05",
+      "records": 3454,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2020-06",
+      "records": 4078,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2020-07",
+      "records": 3907,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2020-08",
+      "records": 3948,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2020-09",
+      "records": 3788,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2020-10",
+      "records": 3953,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2020-11",
+      "records": 3156,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2020-12",
+      "records": 3569,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2021-01",
+      "records": 3377,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2021-02",
+      "records": 3481,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2021-03",
+      "records": 4249,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2021-04",
+      "records": 4381,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2021-05",
+      "records": 3870,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2021-06",
+      "records": 4378,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2021-07",
+      "records": 3863,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2021-08",
+      "records": 3888,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2021-09",
+      "records": 3778,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2021-10",
+      "records": 4101,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2021-11",
+      "records": 3577,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2021-12",
+      "records": 3490,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2022-01",
+      "records": 3799,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2022-02",
+      "records": 3851,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2022-03",
+      "records": 4534,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2022-04",
+      "records": 3988,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2022-05",
+      "records": 4309,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2022-06",
+      "records": 4301,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2022-07",
+      "records": 3967,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2022-08",
+      "records": 4523,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2022-09",
+      "records": 3351,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2022-10",
+      "records": 4083,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2022-11",
+      "records": 3659,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2022-12",
+      "records": 3444,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2023-01",
+      "records": 3828,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2023-02",
+      "records": 3873,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2023-03",
+      "records": 4341,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2023-04",
+      "records": 3808,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2023-05",
+      "records": 4212,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2023-06",
+      "records": 4186,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2023-07",
+      "records": 3763,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2023-08",
+      "records": 4560,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2023-09",
+      "records": 4040,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2023-10",
+      "records": 4531,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2023-11",
+      "records": 3661,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2023-12",
+      "records": 3382,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2024-01",
+      "records": 3631,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2024-02",
+      "records": 3904,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2024-03",
+      "records": 4021,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2024-04",
+      "records": 4287,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2024-05",
+      "records": 4655,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2024-06",
+      "records": 3987,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2024-07",
+      "records": 4300,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2024-08",
+      "records": 4051,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2024-09",
+      "records": 3398,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2024-10",
+      "records": 3555,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2024-11",
+      "records": 3969,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2024-12",
+      "records": 3853,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2025-01",
+      "records": 4517,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2025-02",
+      "records": 4363,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2025-03",
+      "records": 4726,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2025-04",
+      "records": 5069,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2025-05",
+      "records": 4891,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2025-06",
+      "records": 4894,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Building",
+      "month": "2025-07",
+      "records": 5012,
+      "truncated": false
+    },
     {
       "gap_count": 0,
       "module": "Building",
@@ -107,6 +576,475 @@
     {
       "gap_count": 0,
       "module": "Planning",
+      "month": "2020-01",
+      "records": 163,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2020-02",
+      "records": 200,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2020-03",
+      "records": 149,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2020-04",
+      "records": 151,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2020-05",
+      "records": 149,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2020-06",
+      "records": 197,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2020-07",
+      "records": 183,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2020-08",
+      "records": 202,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2020-09",
+      "records": 220,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2020-10",
+      "records": 223,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2020-11",
+      "records": 196,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2020-12",
+      "records": 200,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2021-01",
+      "records": 207,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2021-02",
+      "records": 261,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2021-03",
+      "records": 249,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2021-04",
+      "records": 289,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2021-05",
+      "records": 239,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2021-06",
+      "records": 273,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2021-07",
+      "records": 241,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2021-08",
+      "records": 322,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2021-09",
+      "records": 248,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2021-10",
+      "records": 305,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2021-11",
+      "records": 240,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2021-12",
+      "records": 187,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2022-01",
+      "records": 241,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2022-02",
+      "records": 234,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2022-03",
+      "records": 280,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2022-04",
+      "records": 223,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2022-05",
+      "records": 220,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2022-06",
+      "records": 241,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2022-07",
+      "records": 212,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2022-08",
+      "records": 222,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2022-09",
+      "records": 191,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2022-10",
+      "records": 197,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2022-11",
+      "records": 195,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2022-12",
+      "records": 179,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2023-01",
+      "records": 224,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2023-02",
+      "records": 238,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2023-03",
+      "records": 239,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2023-04",
+      "records": 209,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2023-05",
+      "records": 236,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2023-06",
+      "records": 227,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2023-07",
+      "records": 213,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2023-08",
+      "records": 237,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2023-09",
+      "records": 217,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2023-10",
+      "records": 206,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2023-11",
+      "records": 192,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2023-12",
+      "records": 165,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2024-01",
+      "records": 208,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2024-02",
+      "records": 199,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2024-03",
+      "records": 232,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2024-04",
+      "records": 264,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2024-05",
+      "records": 256,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2024-06",
+      "records": 245,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2024-07",
+      "records": 219,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2024-08",
+      "records": 238,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2024-09",
+      "records": 233,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2024-10",
+      "records": 198,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2024-11",
+      "records": 183,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2024-12",
+      "records": 250,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2025-01",
+      "records": 239,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2025-02",
+      "records": 238,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2025-03",
+      "records": 223,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2025-04",
+      "records": 296,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2025-05",
+      "records": 256,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2025-06",
+      "records": 265,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
+      "month": "2025-07",
+      "records": 287,
+      "truncated": false
+    },
+    {
+      "gap_count": 0,
+      "module": "Planning",
       "month": "2025-08",
       "records": 302,
       "truncated": false
@@ -189,13 +1127,13 @@
       "truncated": false
     }
   ],
-  "monthly_runs": 24,
+  "monthly_runs": 158,
   "passed": true,
   "temporal_boundary": "2026-08-01",
   "temporal_evidence_counts": {
     "prospective_snapshot": 3981,
     "retrospective_event_history": 0,
-    "retrospective_source_record": 52264,
+    "retrospective_source_record": 334808,
     "unknown": 0
   },
   "truncated_runs": 0

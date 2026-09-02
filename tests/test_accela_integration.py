@@ -1,6 +1,9 @@
+import gzip
+from pathlib import Path
+import tempfile
 import unittest
 
-from scripts.integrate_accela import activity_id_for, integrate
+from scripts.integrate_accela import activity_id_for, integrate, write_deterministic_gzip
 
 
 FIELDS = [
@@ -36,6 +39,19 @@ def accela(record_id="acc-1", number="BLD-1", module="Building"):
 
 
 class AccelaIntegrationTests(unittest.TestCase):
+    def test_published_gzip_is_deterministic_and_lossless(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source = root / "input.csv"
+            first = root / "first.csv.gz"
+            second = root / "second.csv.gz"
+            payload = b"record_number,status\nBLD-1,Complete\n"
+            source.write_bytes(payload)
+            write_deterministic_gzip(source, first)
+            write_deterministic_gzip(source, second)
+            self.assertEqual(first.read_bytes(), second.read_bytes())
+            self.assertEqual(gzip.decompress(first.read_bytes()), payload)
+
     def test_exact_number_enriches_without_appending(self):
         activities, audit, report = integrate(
             [core()],

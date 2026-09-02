@@ -9,6 +9,7 @@ import json
 from pathlib import Path
 import subprocess
 import sys
+import time
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -56,6 +57,14 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--to-month", required=True, type=month)
     parser.add_argument("--modules", nargs="+", default=["Building", "Planning"], choices=["Building", "Planning"])
     parser.add_argument("--force", action="store_true", help="Rerun checkpoints already marked complete")
+    parser.add_argument(
+        "--month-attempts", type=int, default=4,
+        help="Attempts per monthly partition after request-level retries are exhausted",
+    )
+    parser.add_argument(
+        "--month-retry-delay", type=float, default=15.0,
+        help="Seconds to wait between monthly partition attempts",
+    )
     args = parser.parse_args(argv)
     if args.from_month > args.to_month:
         parser.error("--from-month must be on or before --to-month")
@@ -64,6 +73,10 @@ def main(argv: list[str] | None = None) -> int:
             f"--from-month cannot be before the dataset boundary "
             f"({DATASET_START_MONTH:%Y-%m})"
         )
+    if args.month_attempts < 1:
+        parser.error("--month-attempts must be positive")
+    if args.month_retry_delay < 0:
+        parser.error("--month-retry-delay cannot be negative")
 
     completed = skipped = 0
     for module in args.modules:
@@ -79,14 +92,34 @@ def main(argv: list[str] | None = None) -> int:
                 "--run-id", run_id, "--resume", "--use-export",
                 "--snapshot-only",
             ]
-            print(json.dumps({"module": module, "month": f"{start:%Y-%m}", "status": "starting"}), flush=True)
-            result = subprocess.run(command, cwd=ROOT, check=False)
-            if result.returncode:
+            result = None
+            for attempt in range(1, args.month_attempts + 1):
+                print(json.dumps({
+                    "module": module,
+                    "month": f"{start:%Y-%m}",
+                    "status": "starting",
+                    "attempt": attempt,
+                    "max_attempts": args.month_attempts,
+                }), flush=True)
+                result = subprocess.run(command, cwd=ROOT, check=False)
+                if result.returncode == 0:
+                    break
+                if attempt < args.month_attempts:
+                    print(json.dumps({
+                        "module": module,
+                        "month": f"{start:%Y-%m}",
+                        "status": "retrying_month",
+                        "exit_code": result.returncode,
+                        "delay_seconds": args.month_retry_delay,
+                    }), flush=True)
+                    time.sleep(args.month_retry_delay)
+            if result is None or result.returncode:
                 print(json.dumps({
                     "module": module, "month": f"{start:%Y-%m}",
-                    "status": "failed", "exit_code": result.returncode,
+                    "status": "failed", "exit_code": result.returncode if result else None,
+                    "attempts": args.month_attempts,
                 }), flush=True)
-                return result.returncode
+                return result.returncode if result else 1
             completed += 1
             print(json.dumps({"module": module, "month": f"{start:%Y-%m}", "status": "complete"}), flush=True)
     finalizer = [

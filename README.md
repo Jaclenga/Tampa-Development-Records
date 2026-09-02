@@ -13,8 +13,8 @@ validated full-month longitudinal result.
 | Core release snapshot | August 23, 2026 |
 | Core release records | 4,469 records from eight City GIS layers |
 | Normalized activities | 3,323 |
-| Accela records | 56,245 unique Building/Planning records; 52,264 retrospective and 3,981 prospective |
-| Expanded activities | 57,677; core bounded-census files remain unchanged |
+| Accela records | 338,789 unique Building/Planning records; 334,808 retrospective and 3,981 prospective |
+| Expanded activities | 339,179; core bounded-census files remain unchanged |
 | Source-date cohort view | 4,549 canonical records; 4,464 non-future monthly events; 84 forward-looking plans |
 | Longitudinal snapshots | August 23 baseline; September 1 first follow-up |
 | Latest observed records | 4,408 records from eight City GIS layers |
@@ -124,7 +124,8 @@ codes, and second-review status remain in the
 | --- | --- |
 | Analyze every published source record | [`data/processed/bounded_census_records.csv`](data/processed/bounded_census_records.csv) |
 | Use the consolidated activity view | [`data/processed/tampa_development_activity.csv`](data/processed/tampa_development_activity.csv) |
-| Use the expanded activity view with Accela data | [`data/integrated/tampa_development_activity_with_accela.csv`](data/integrated/tampa_development_activity_with_accela.csv) |
+| Use the expanded activity view with Accela data | [`data/integrated/tampa_development_activity_with_accela.csv.gz`](data/integrated/tampa_development_activity_with_accela.csv.gz) |
+| Verify expanded-edition hashes and counts | [`data/integrated/manifest.json`](data/integrated/manifest.json) |
 | Use linked Accela inspection events | `data/processed/accela_inspections.csv` (generated one-to-many table) |
 | Analyze the canonical source-date table | [`data/processed/activity_by_month.csv`](data/processed/activity_by_month.csv) |
 | Analyze non-future monthly events | [`data/monthly_events/`](data/monthly_events/) |
@@ -182,8 +183,8 @@ python -m pip install -r requirements.txt
 python scripts/collect_accela.py --module Building --from-date 2026-08-13 --to-date 2026-08-13 --dry-run
 python scripts/collect_accela.py --module Building --from-date 2026-08-13 --to-date 2026-08-13 --max-records 25
 python scripts/collect_accela.py --module Building --from-date 2026-08-01 --to-date 2026-08-31 --use-export
-python scripts/backfill_accela.py --from-month 2025-08 --to-month 2026-07
-python scripts/validate_accela_backfill.py
+python scripts/backfill_accela.py --from-month 2020-01 --to-month 2025-07
+python scripts/validate_accela_backfill.py --from-month 2020-01 --to-month 2026-07
 ```
 
 Collect the linked inspection history for the August 2025–August 2026 cohorts
@@ -200,9 +201,10 @@ numbers:
 python scripts/integrate_accela.py
 ```
 
-The August 2025 through July 2026 backfill is retrospective: Tampa currently
+The January 2020 through July 2026 backfill is retrospective: Tampa currently
 reports those older event dates, but TDR did not take contemporaneous snapshots
-in those months. Prospective Accela observation begins in August 2026. The
+in those months. The dataset boundary prevents record backfills before January
+2020. Prospective Accela observation begins in August 2026. The
 August 31 Accela day-freeze is preserved separately from the core GIS
 observation retrieved at 3:15 a.m. Tampa time on September 1; neither is
 relabeled.

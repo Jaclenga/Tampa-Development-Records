@@ -73,7 +73,8 @@
     `data/planned_events/`; `data/monthly_events/` contains no event date later
     than the snapshot supplying that row. Planned dates remain intentions, not
     observations or proof that work occurred.
-27. The August 2025 through July 2026 Accela backfill was retrieved in August
-    2026. Its event dates are retrospective source assertions, not evidence of
-    what the public portal displayed in those earlier months or of intervening
-    status changes. Prospective Accela snapshots begin in August 2026.
+27. The January 2020 through July 2026 Accela backfill was retrieved in August
+    and September 2026. Its event dates are retrospective source assertions,
+    not evidence of what the public portal displayed in those earlier months
+    or of intervening status changes. Record backfill does not extend before
+    January 2020; prospective Accela snapshots begin in August 2026.

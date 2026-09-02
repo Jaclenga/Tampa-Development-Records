@@ -8,9 +8,10 @@ to the expanded Tampa Development Records dataset. These limitations do not
 make the data unusable. They determine which conclusions the data can support
 and which conclusions require additional evidence.
 
-The current Accela aggregate contains 56,245 unique records. Of these, 52,264
-belong to the retrospective August 2025 through July 2026 backfill, and 3,981
-belong to the prospectively monitored August 2026 cohort.
+The current Accela aggregate contains 338,789 unique records. Of these, 334,808
+belong to the retrospective January 2020 through July 2026 backfill, and 3,981
+belong to the prospectively monitored August 2026 cohort. Record backfill is
+bounded at January 2020 and does not include earlier records.
 
 ## Summary
 
@@ -25,10 +26,10 @@ belong to the prospectively monitored August 2026 cohort.
 
 ## 1. Retrospective records are not contemporaneous snapshots
 
-The records opened from 2025-08-01 through 2026-07-31 were collected from the
-public Accela system in August 2026. Tampa currently reports that those records
-have older event dates, but Tampa Development Records did not observe the
-public system when those events originally occurred.
+The records opened from 2020-01-01 through 2026-07-31 were collected from the
+public Accela system in August and September 2026. Tampa currently reports that
+those records have older event dates, but Tampa Development Records did not
+observe the public system when those events originally occurred.
 
 For example, a record can report an April 2026 opening date while its first TDR
 observation occurred in August 2026. The opening date is a source-reported
@@ -87,7 +88,7 @@ Before interpreting a time trend:
 4. identify apparent system-adoption or migration breakpoints; and
 5. avoid growth-rate claims across periods that do not appear comparable.
 
-The 24 completed monthly queries have zero recorded collection gaps and zero
+The 158 completed monthly queries have zero recorded collection gaps and zero
 truncation. That establishes integrity for what the public interface returned
 to those bounded queries. It does not establish that the interface exposed the
 same share of underlying City records in every month.
