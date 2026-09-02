@@ -1,4 +1,8 @@
 {
+  "study_id": "core_eight_layer_manual_validation",
+  "study_name": "Core eight-layer manual validation study",
+  "inference_scope": "Original core normalized activity universe only; excludes the later Accela expansion.",
+  "assignment_status": "hash_frozen_and_not_redrawn",
   "protocol_version": "1.0.0",
   "frozen_on": "2026-08-23",
   "random_seed": 20260823,

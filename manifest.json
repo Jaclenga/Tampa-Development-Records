@@ -129,8 +129,16 @@
     "data/processed/development_events.csv",
     "data/processed/external_verification_pilot.csv",
     "data/processed/investment_amounts.csv",
+    "data/processed/manual_validation_accela_normalization.csv",
+    "data/processed/manual_validation_accela_normalization_second_review.csv",
+    "data/processed/manual_validation_accela_source_fidelity.csv",
+    "data/processed/manual_validation_accela_source_fidelity_second_review.csv",
+    "data/processed/manual_validation_change_events.csv",
+    "data/processed/manual_validation_change_events_second_review.csv",
     "data/processed/manual_validation_development_sample.csv",
     "data/processed/manual_validation_holdout_sample.csv",
+    "data/processed/manual_validation_integration_links.csv",
+    "data/processed/manual_validation_integration_links_second_review.csv",
     "data/processed/manual_validation_sample.csv",
     "data/processed/manual_validation_second_review.csv",
     "data/processed/master_project_activity_links.csv",
@@ -195,6 +203,16 @@
     "holdout_rows": 50,
     "independent_second_reviews": 50,
     "final_inference_phase": "holdout"
+  },
+  "expanded_validation_studies": {
+    "status": "assignments_frozen_pending_human_review",
+    "source_fidelity_rows": 200,
+    "normalization_rows": 125,
+    "integration_link_rows": 100,
+    "change_event_rows": 75,
+    "independent_second_review_rows": 125,
+    "external_outcome_validation": "not_measured",
+    "scope_note": "Source fidelity, transformation validity, linkage validity, change-event interpretation, and real-world outcome validity are separate claims."
   },
   "external_verification_status": "historical_12_row_pilot_retained_not_used_as_population_estimate",
   "longitudinal_tracker": {

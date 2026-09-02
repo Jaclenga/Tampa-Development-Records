@@ -21,6 +21,12 @@ ROOT = Path(__file__).resolve().parent.parent
 PROCESSED = ROOT / "data" / "processed"
 PROTOCOL_VERSION = "1.0.0"
 RANDOM_SEED = 20260823
+FROZEN_ASSIGNMENT_HASHES = {
+    "manual_validation_sample.csv": "3b12c9f4a7968f85f79be08fbf1724a464aadabe8b68f36e9c1568d186fa7fc1",
+    "manual_validation_development_sample.csv": "8cd417921e866f69556f238a854e21d9cf75ab4dc0ff5e3dc84f79c74957b9a4",
+    "manual_validation_holdout_sample.csv": "b425570ba0e6b06af5c17491fd10b04663957a640a9bcde064eeb81fd5760610",
+    "manual_validation_second_review.csv": "ecba3651ee10b6328b017d353232962ca5291309c165b7efc9f123ccfac04be8",
+}
 
 # Disjoint strata make each activity's inclusion probability explicit. The
 # cross-source stratum takes precedence over source-family strata.
@@ -141,6 +147,30 @@ def write_csv(path: Path, rows: list[dict], columns: tuple[str, ...]) -> None:
 def random_rank(activity_id: str, phase: str, stratum: str, purpose: str) -> str:
     token = f"{RANDOM_SEED}|{PROTOCOL_VERSION}|{purpose}|{phase}|{stratum}|{activity_id}"
     return hashlib.sha256(token.encode("utf-8")).hexdigest()
+
+
+def assignment_hash(rows: list[dict]) -> str:
+    payload = [
+        [row.get(field, "") for field in CONTEXT_FIELDS]
+        for row in sorted(rows, key=lambda item: item.get("audit_sample_id", ""))
+    ]
+    return hashlib.sha256(
+        json.dumps(payload, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
+
+
+def assert_frozen_assignments(processed: Path = PROCESSED) -> None:
+    """Fail if any original core-study assignment context has changed."""
+    for name, expected in FROZEN_ASSIGNMENT_HASHES.items():
+        path = processed / name
+        if not path.exists():
+            raise FileNotFoundError(f"Frozen core validation file is missing: {path}")
+        observed = assignment_hash(read_csv(path))
+        if observed != expected:
+            raise RuntimeError(
+                f"Frozen core validation assignments changed in {name}; "
+                "use the explicit --force override only for a new versioned study"
+            )
 
 
 def sampling_stratum(activity: dict) -> str:
@@ -309,6 +339,14 @@ def write_study_files(
         PROCESSED / "manual_validation_holdout_sample.csv",
         PROCESSED / "manual_validation_second_review.csv",
     )
+    if protect_completed and any(path.exists() for path in outputs):
+        missing = [path.name for path in outputs if not path.exists()]
+        if missing:
+            raise FileNotFoundError(
+                "Frozen core validation study is incomplete; missing: " + ", ".join(missing)
+            )
+        assert_frozen_assignments()
+        return read_csv(outputs[0]), read_csv(outputs[3])
     first, second = draw_sample(activities, matches)
     if protect_completed:
         first_sources = [read_csv(path) for path in outputs[:3] if path.exists()]

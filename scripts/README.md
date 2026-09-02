@@ -71,7 +71,18 @@ Python's standard library. The optional Accela collector uses `requests` from
 
 - `validate_release.py` checks release schemas, relationships, and counts.
 - `verify_data_accuracy.py` checks fidelity to the archived source records.
-- `validation_study.py` creates the reproducible manual-review sample.
+- `validation_study.py` validates and reuses the hash-frozen core manual-review
+  assignments; an explicit override is required to redraw them.
+- `validation_sampling.py` provides shared seeded stratification, universe
+  hashes, weights, freeze guards, and blinded second-review selection.
+- `build_accela_source_fidelity_sample.py` creates the 200-row Accela
+  source-fidelity study and 50 second-review assignments.
+- `build_accela_normalization_sample.py` creates the separate 125-row semantic
+  transformation study and 31 second-review assignments.
+- `build_integration_validation_sample.py` creates the 100-case GIS–Accela
+  linkage/deduplication audit and 25 second-review assignments.
+- `build_change_validation_sample.py` creates the 75-event longitudinal review
+  sample and 19 second-review assignments.
 - `review_metrics.py` calculates phase-specific validation metrics.
 - `build_verification_summary.py` regenerates the README scorecard and
   `verification/verification_summary.csv` from release and record-level data.

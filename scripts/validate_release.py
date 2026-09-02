@@ -13,12 +13,12 @@ from pathlib import Path
 try:
     from .validation_study import (
         CLAIM_RESULT_FIELDS, PHASE_QUOTAS, PROTOCOL_VERSION, RANDOM_SEED, REVIEW_FIELDS,
-        SECOND_REVIEW_QUOTAS,
+        SECOND_REVIEW_QUOTAS, assert_frozen_assignments,
     )
 except ImportError:  # Support direct execution: python scripts/validate_release.py
     from validation_study import (
         CLAIM_RESULT_FIELDS, PHASE_QUOTAS, PROTOCOL_VERSION, RANDOM_SEED, REVIEW_FIELDS,
-        SECOND_REVIEW_QUOTAS,
+        SECOND_REVIEW_QUOTAS, assert_frozen_assignments,
     )
 
 try:
@@ -56,6 +56,27 @@ def review_values_valid(row: dict[str, str]) -> bool:
     )
 
 
+def expanded_review_values_valid(row: dict[str, str]) -> bool:
+    allowed = {"", "yes", "no", "unknown", "not_applicable"}
+    outcome_fields = [
+        field for field in row
+        if field.endswith("_outcome") or field in {
+            "source_record_found", "record_number_matches", "module_matches",
+            "record_type_matches", "status_matches", "primary_date_matches",
+            "identity_matches", "event_type_correct", "event_date_source_field_correct",
+            "event_date_value_correct", "status_normalization_correct",
+            "retrospective_flag_correct", "planned_date_flag_correct",
+            "activity_mapping_correct", "record_identity_correct", "false_positive_link",
+            "false_negative_link", "ambiguous", "source_change_confirmed",
+            "likely_publication_artifact",
+        }
+    ]
+    return (
+        row.get("review_status", "") in {"", "pending", "in_progress", "complete", "excluded"}
+        and all(row.get(field, "") in allowed for field in outcome_fields)
+    )
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--allow-hcpa", action="store_true", help="Allow optional HCPA fallback rows in a non-public local build.")
@@ -85,12 +106,21 @@ def main() -> None:
     parcel_context = read("parcel_context.csv")
     parcel_links = read("parcel_activity_links.csv")
     review2 = read("manual_validation_second_review.csv")
+    accela_source_review = read("manual_validation_accela_source_fidelity.csv")
+    accela_source_review2 = read("manual_validation_accela_source_fidelity_second_review.csv")
+    accela_normalization_review = read("manual_validation_accela_normalization.csv")
+    accela_normalization_review2 = read("manual_validation_accela_normalization_second_review.csv")
+    integration_review = read("manual_validation_integration_links.csv")
+    integration_review2 = read("manual_validation_integration_links_second_review.csv")
+    change_review = read("manual_validation_change_events.csv")
+    change_review2 = read("manual_validation_change_events_second_review.csv")
     census_records = read("bounded_census_records.csv")
     universes = read("source_universes.csv")
     census_summary = read("bounded_census_summary.csv")
     monthly_cohorts = read("activity_by_month.csv")
     monthly_events_dir = ROOT / "data" / "monthly_events"
     planned_events_dir = ROOT / "data" / "planned_events"
+    assert_frozen_assignments()
 
     def read_extracts(directory: Path) -> list[dict[str, str]]:
         extracted = []
@@ -199,6 +229,30 @@ def main() -> None:
         and (ROOT / comparison["report"]).exists()
         for comparison in tracker_index.get("comparisons", [])
     )
+    expanded_primary = {
+        "accela_source_fidelity_manual_validation": accela_source_review,
+        "accela_normalization_validation": accela_normalization_review,
+        "gis_accela_linkage_audit": integration_review,
+        "longitudinal_change_event_validation": change_review,
+    }
+    expanded_second = [
+        *accela_source_review2, *accela_normalization_review2,
+        *integration_review2, *change_review2,
+    ]
+    with (ROOT / "verification" / "verification_summary.csv").open(encoding="utf-8", newline="") as handle:
+        verification_summary = {row["verification_type"]: row for row in csv.DictReader(handle)}
+
+    def expanded_design_valid(rows: list[dict[str, str]]) -> bool:
+        return bool(rows) and (
+            len({row["validation_sample_id"] for row in rows}) == len(rows)
+            and len({row["sampling_universe_sha256"] for row in rows}) == 1
+            and all(
+                abs(float(row["inclusion_probability"]) - int(row["stratum_sample_size"]) / int(row["stratum_population"])) < 1e-10
+                and abs(float(row["sampling_weight"]) - int(row["stratum_population"]) / int(row["stratum_sample_size"])) < 1e-8
+                for row in rows
+            )
+            and all(expanded_review_values_valid(row) for row in rows)
+        )
     checks = {
         "activity_ids_unique": len(activity_ids) == len(activities),
         "source_record_keys_unique": len(source_keys) == len(sources),
@@ -268,6 +322,41 @@ def main() -> None:
         ),
         "manual_audit_review_values_use_protocol_vocabularies": all(
             review_values_valid(x) for x in audit + audit_development + audit_holdout
+        ),
+        "expanded_validation_sample_sizes_match_design": (
+            len(accela_source_review) == 200
+            and len(accela_normalization_review) == 125
+            and len(integration_review) == 100
+            and len(change_review) == 75
+        ),
+        "expanded_validation_samples_are_seeded_weighted_and_unique": all(
+            expanded_design_valid(rows) for rows in expanded_primary.values()
+        ),
+        "accela_validation_studies_do_not_overlap": (
+            {row["record_id"] for row in accela_source_review}.isdisjoint(
+                {row["record_id"] for row in accela_normalization_review}
+            )
+        ),
+        "expanded_second_reviews_are_blinded_and_independent": (
+            len(accela_source_review2) == 50
+            and len(accela_normalization_review2) == 31
+            and len(integration_review2) == 25
+            and len(change_review2) == 19
+            and len({row["second_review_assignment_id"] for row in expanded_second}) == 125
+            and all(
+                not row["first_reviewer_code"] and not row["first_outcome"]
+                and row["second_review_status"] in {"", "pending", "in_progress", "complete", "excluded"}
+                for row in expanded_second
+            )
+        ),
+        "verification_summary_reconciles_expanded_studies": all(
+            study in verification_summary
+            and verification_summary[study]["eligible_records"] == str(len(rows))
+            for study, rows in expanded_primary.items()
+        ) and verification_summary.get("expanded_double_review", {}).get("eligible_records") == "125",
+        "verification_summary_has_no_composite_score": (
+            not any("composite" in key.lower() for key in verification_summary)
+            and len(verification_summary) == 12
         ),
         "external_pilot_has_12_unique_checks": len(pilot) == 12 and len({x["verification_id"] for x in pilot}) == 12,
         "external_pilot_references_release_activities": all(x["activity_id"] in activity_ids for x in pilot),
@@ -562,6 +651,14 @@ def main() -> None:
             "manual_validation_development_sample": len(audit_development),
             "manual_validation_holdout_sample": len(audit_holdout),
             "manual_validation_second_review": len(review2),
+            "manual_validation_accela_source_fidelity": len(accela_source_review),
+            "manual_validation_accela_source_fidelity_second_review": len(accela_source_review2),
+            "manual_validation_accela_normalization": len(accela_normalization_review),
+            "manual_validation_accela_normalization_second_review": len(accela_normalization_review2),
+            "manual_validation_integration_links": len(integration_review),
+            "manual_validation_integration_links_second_review": len(integration_review2),
+            "manual_validation_change_events": len(change_review),
+            "manual_validation_change_events_second_review": len(change_review2),
             "external_verification_pilot": len(pilot),
             "activity_truth_status": len(truth), "master_projects": len(projects),
             "master_project_candidates": len(candidates), "development_events": len(events),

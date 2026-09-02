@@ -1,6 +1,6 @@
 # Manual validation protocol
 
-## Frozen protocol
+## Frozen protocol — core eight-layer manual validation study
 
 - Protocol version: **1.0.0**
 - Frozen before review of the new study sample: **2026-08-23**
@@ -8,6 +8,10 @@
 - Unit sampled: one normalized activity in `tampa_development_activity.csv`
 - First review: **150 activities**
 - Independent second review: **50 activities**
+- Inference scope: **the original core eight-layer normalized universe only**
+
+This frozen study predates the Accela expansion. It has not been redrawn and
+must not be cited as validation of the expanded 339,179-activity edition.
 
 The historical 12-row pilot is not forced into this sample and is not used to
 estimate error rates. Any change to the definitions below creates a new
@@ -35,10 +39,10 @@ family that generated them.
 | **Total** | **100** | **50** | **150** | **50** |
 
 Each row records its stratum population, phase sample size, inclusion
-probability, and inverse-probability weight. `scripts/validation_study.py` creates the
-sample. Rebuilding with unchanged sampling context preserves populated reviewer
-fields; it refuses to remap them if the activity or context changed. `--force`
-explicitly discards reviews for a deliberately new versioned study.
+probability, and inverse-probability weight. `scripts/validation_study.py`
+contains the original draw logic, but ordinary release builds now verify fixed
+assignment-context hashes and reuse the existing files without rewriting them.
+`--force` is the explicit override for a deliberately new versioned study.
 
 ## Blinding and phase order
 

@@ -1,8 +1,13 @@
 # Manual validation: step-by-step operator guide
 
-This guide explains what to do with the frozen manual-validation CSV files.
+This guide explains what to do with the distinct frozen manual-validation CSV files.
 The controlling definitions and statistical design remain in
 [`MANUAL_VALIDATION_PROTOCOL.md`](MANUAL_VALIDATION_PROTOCOL.md).
+
+The original protocol document governs only the **Core eight-layer manual
+validation study**. It does not govern or validate the expanded Accela edition.
+The additive study designs are registered in
+[`verification/README.md`](../verification/README.md).
 
 ## Current progress and release gate
 
@@ -111,3 +116,131 @@ preserves reviews only while each sampled activity and its review context are
 unchanged; it refuses to silently attach an old judgment to changed context.
 Keep an independent copy of completed review files before forcing a new sample
 or protocol version.
+
+## Expanded Accela and longitudinal studies
+
+These studies answer different questions and must remain in separate files.
+All use SHA-256 deterministic rankings, explicit seeds, frozen universe hashes,
+stratum-specific inclusion probabilities, and inverse-probability weights.
+
+### Accela source fidelity
+
+- **File:** `manual_validation_accela_source_fidelity.csv`
+- **Population:** 338,789 unique Building and Planning records in the completed
+  Accela aggregate.
+- **Seed and size:** 20260911; 200 rows.
+- **Strata:** module, retrospective/prospective observation, event period, and
+  common versus relatively rare record type. Allocation is proportional after
+  reserving at least two rows for each nonempty stratum.
+- **Review question:** does the live or archived City source show the same
+  record number, module, type, status, primary date, and identity?
+- **Outcomes:** `yes`, `no`, `unknown`, `not_applicable` in each decision field
+  and `source_fidelity_outcome`.
+- **Inference:** fidelity to the City publication, not real-world occurrence or
+  semantic correctness of TDR transformations.
+
+Open the cited source record, compare every requested source field, record the
+stable URL or archive reference, and use `unknown` when source evidence is no
+longer accessible. A missing page is not automatically evidence that collection
+was wrong.
+
+### Accela normalization and semantic correctness
+
+- **File:** `manual_validation_accela_normalization.csv`
+- **Population:** 338,589 Accela records after deliberately excluding the 200
+  source-fidelity assignments, preventing accidental cross-study reuse.
+- **Seed and size:** 20260912; 125 rows.
+- **Strata and weights:** the same module, observation, period, and type-rarity
+  design; proportional allocation with minimum two per nonempty stratum.
+- **Review question:** did TDR select the intended source field and value for
+  the event date, normalize status correctly, assign temporal/planned semantics
+  correctly, map the activity correctly, and preserve record identity?
+- **Inference:** transformation validity only. A correct transformation can
+  faithfully preserve an incorrect or incomplete City value.
+
+Evaluate the source-to-normalized rule in code and compare the retained source
+fields with the analytical row. Do not use external project outcome evidence to
+decide whether the transformation itself was correctly applied.
+
+### GIS–Accela linkage and deduplication
+
+- **File:** `manual_validation_integration_links.csv`
+- **Population:** 338,789 integration decisions.
+- **Seed and size:** 20260913; 100 cases.
+- **Current strata:** 50 exact GIS–Accela matches and 50 retained-unmatched
+  Accela records. The builder supports ambiguous/multi-candidate and duplicate-
+  suppression strata if those populations become nonempty.
+- **Review question:** is the linkage decision supported, was a duplicate
+  correctly suppressed, and is there evidence of a false positive, false
+  negative, or unresolved ambiguity?
+- **Inference:** linkage precision/error characteristics, reported separately
+  by decision stratum; never ordinary record-level accuracy.
+
+A shared address alone is insufficient linkage evidence. Use stable record
+numbers and uniquely identifying official context. Unmatched review can reveal
+false negatives; matched review estimates false-positive risk. Do not combine
+those denominators without the published sampling weights.
+
+### Longitudinal change-event validation
+
+- **File:** `manual_validation_change_events.csv`
+- **Population:** 2,822 machine-detected changes in the currently archived
+  August 23 to September 1 comparison.
+- **Seed and size:** 20260914; 75 events.
+- **Strata:** detected change type, with proportional allocation and at least
+  three rows per nonempty type.
+- **Review question:** is the source-field change confirmed, what is its
+  defensible semantic interpretation, and is it likely a publication artifact?
+- **Inference:** interpretation of detected source changes. It does not prove
+  physical development, and collection reconciliation does not answer it.
+
+Compare the prior and current archived values first. Then inspect the source or
+archive reference. Keep formatting refreshes, source corrections, and actual
+administrative changes distinct. Use `unknown` rather than treating every
+machine-detected difference as a substantive real-world event.
+
+## Expanded second review and adjudication
+
+Each new first-review file has an adjacent `_second_review.csv` assignment file:
+50 source-fidelity, 31 normalization, 25 linkage, and 19 change-event rows. This
+is approximately 25% of each study. The second reviewer must not see the first
+reviewer's code, outcome, notes, or evidence judgment before locking
+`second_outcome` and `second_review_status=complete`.
+
+After both reviews are locked:
+
+1. copy the original first-review code and outcome into the reconciliation
+   fields without modifying either source file;
+2. record `agreement=yes`, `no`, `unknown`, or `not_applicable`;
+3. set `adjudication_status` to `not_needed`, `pending`, or `complete`;
+4. if needed, have a separate adjudicator record `adjudicated_outcome` and
+   concise evidence-based notes; and
+5. calculate agreement from the two original outcomes, never from the
+   adjudicated replacement.
+
+Automated QA and collection-integrity reconciliation are not second review.
+
+## Statistical reporting for new studies
+
+Do not publish an empirical accuracy percentage until the relevant probability
+sample is reviewed to its stated completion rule. When supported, report the
+evaluated n, sampling universe and hash, weighted estimate, weighting method,
+confidence interval, unknown/not-applicable counts, and stratum-level raw counts.
+Disproportionate allocation protects small strata, so a simple unweighted total
+is descriptive only. Never derive a dataset-wide estimate from the 12-row pilot,
+an incomplete sample, a convenience review, or source reconciliation alone.
+
+## Generating new frozen assignments
+
+Run these once for a new versioned study frame:
+
+```bash
+python scripts/build_accela_source_fidelity_sample.py
+python scripts/build_accela_normalization_sample.py
+python scripts/build_integration_validation_sample.py
+python scripts/build_change_validation_sample.py
+```
+
+The scripts refuse to overwrite existing frozen assignments. `--force` is an
+explicit destructive override and must not be used after review begins without
+versioning the study and preserving the prior files.

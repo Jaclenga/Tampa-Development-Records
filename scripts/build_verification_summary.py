@@ -142,6 +142,61 @@ def row(snapshot: str, kind: str, counts: ReviewCounts, status: str, notes: str,
     return result
 
 
+def manual_study_row(
+    snapshot: str, kind: str, counts: ReviewCounts, notes: str, **extra
+) -> dict:
+    result = row(
+        snapshot,
+        kind,
+        counts,
+        "complete" if counts.awaiting == 0 else "awaiting_review",
+        notes,
+        **extra,
+    )
+    if counts.evaluated == 0:
+        for field in ("passed_supported", "failed_conflicting", "unknown", "not_applicable", "partial_support"):
+            result[field] = ""
+    return result
+
+
+def not_measured_row(snapshot: str, kind: str, notes: str) -> dict:
+    result = row(snapshot, kind, ReviewCounts(0, 0, 0, 0, 0, 0, 0, 0), "not_measured", notes)
+    for field in (
+        "eligible_records", "evaluated_records", "passed_supported", "failed_conflicting",
+        "unknown", "not_applicable", "partial_support", "awaiting_review",
+        "second_review_count", "coverage_percentage",
+    ):
+        result[field] = ""
+    return result
+
+
+def summarize_study(path: Path, outcome_field: str) -> ReviewCounts:
+    adapted = [
+        {
+            **item,
+            "audit_sample_id": item["validation_sample_id"],
+            "outcome": item.get(outcome_field, ""),
+        }
+        for item in read_csv(path)
+    ]
+    return summarize_reviews(
+        adapted,
+        outcome_field="outcome",
+        allowed_outcomes={"yes", "no", "unknown", "not_applicable"},
+    )
+
+
+def summarize_expanded_second_reviews(paths: list[Path]) -> ReviewCounts:
+    rows = []
+    for path in paths:
+        rows.extend({
+            **item,
+            "audit_sample_id": item["second_review_assignment_id"],
+            "review_status": item.get("second_review_status", ""),
+        } for item in read_csv(path))
+    return summarize_reviews(rows)
+
+
 def latest_snapshot_metadata(snapshot_root: Path, *, content_hash: str | None = None) -> dict:
     candidates = []
     for path in snapshot_root.glob("*/metadata.json"):
@@ -235,37 +290,77 @@ def build_summary() -> list[dict]:
         allowed_outcomes={"yes", "no", "partial", "not_established", "unknown", "not_applicable"},
     )
 
+    accela_source_counts = summarize_study(
+        PROCESSED / "manual_validation_accela_source_fidelity.csv", "source_fidelity_outcome"
+    )
+    accela_normalization_counts = summarize_study(
+        PROCESSED / "manual_validation_accela_normalization.csv", "normalization_outcome"
+    )
+    integration_counts = summarize_study(
+        PROCESSED / "manual_validation_integration_links.csv", "linkage_outcome"
+    )
+    change_counts = summarize_study(
+        PROCESSED / "manual_validation_change_events.csv", "change_validation_outcome"
+    )
+    expanded_second_counts = summarize_expanded_second_reviews([
+        PROCESSED / "manual_validation_accela_source_fidelity_second_review.csv",
+        PROCESSED / "manual_validation_accela_normalization_second_review.csv",
+        PROCESSED / "manual_validation_integration_links_second_review.csv",
+        PROCESSED / "manual_validation_change_events_second_review.csv",
+    ])
+    backfill = json.loads(
+        (ROOT / "data" / "integrated" / "accela_backfill_report.json").read_text(encoding="utf-8")
+    )
+    backfill_runs = int(backfill.get("monthly_runs", 0))
+    backfill_passed = bool(backfill.get("passed")) and not backfill.get("errors")
+    collection_counts = ReviewCounts(
+        backfill_runs,
+        backfill_runs,
+        backfill_runs if backfill_passed else 0,
+        0 if backfill_passed else backfill_runs,
+        0, 0, 0, 0,
+    )
+
     trace_passed = source_count == raw_count and accuracy.get("source_snapshot_fidelity") == "verified"
     trace_counts = ReviewCounts(raw_count, raw_count, raw_count if trace_passed else 0,
                                 0 if trace_passed else raw_count, 0, 0, 0, 0)
     rows = [
-        row(snapshot_date, "automated_qa", qa_counts, "passed" if qa_passed else "flagged",
+        row(snapshot_date, "automated_qa_core_release", qa_counts, "passed" if qa_passed else "flagged",
             "Record coverage is the bounded source census; results are check-level because some checks are release-wide."
             + (f" Flagged checks: {', '.join(qa_issues)}." if qa_issues else ""),
             passed_supported="", failed_conflicting="",
             checks_evaluated=qa_check_counts["evaluated"], checks_passed=qa_check_counts["passed"],
             checks_flagged=qa_check_counts["flagged"]),
-        row(snapshot_date, "source_traceability", trace_counts, "passed" if trace_passed else "flagged",
+        row(snapshot_date, "core_source_traceability", trace_counts, "passed" if trace_passed else "flagged",
             "Reconciles bundled City source features to retained source rows; establishes source fidelity, not real-world truth."),
-        {
-            **row(snapshot_date, "automated_evidence", ReviewCounts(0, 0, 0, 0, 0, 0, 0, 0),
-                  "not_measured", "No distinct reproducible software check of external supporting evidence exists."),
-            "eligible_records": "", "evaluated_records": "", "passed_supported": "",
-            "failed_conflicting": "", "unknown": "", "not_applicable": "",
-            "partial_support": "", "awaiting_review": "", "coverage_percentage": "",
-        },
-        row(snapshot_date, "manual_validation", manual_counts,
-            "complete" if manual_counts.awaiting == 0 else "in_progress",
-            "Frozen seeded stratified probability sample; results are claim-specific, so no universal supported count is produced.",
+        manual_study_row(snapshot_date, "core_eight_layer_manual_validation", manual_counts,
+            "Frozen seeded stratified probability sample from the original core universe; it does not validate the Accela expansion.",
             passed_supported="", failed_conflicting="", unknown="", not_applicable="", partial_support="",
             second_review_count=second_counts.evaluated),
-        row(snapshot_date, "external_outcome_verification", pilot_counts, "historical_pilot",
+        row(snapshot_date, "core_external_outcome_verification", pilot_counts, "historical_pilot",
             "Historical evidence-selected pilot; physical-realization outcomes are not a population estimate."),
-        row(snapshot_date, "double_review", second_counts,
+        row(snapshot_date, "core_double_review", second_counts,
             "complete" if second_counts.awaiting == 0 else "in_progress",
             "Independent blinded second-review assignments only; automated checks are excluded.",
             passed_supported="", failed_conflicting="", unknown="", not_applicable="", partial_support="",
             second_review_count=second_counts.evaluated),
+        row(snapshot_date, "accela_collection_integrity", collection_counts,
+            "passed" if backfill_passed else "flagged",
+            "Reconciles Accela module-month partitions, gap/truncation checks, and aggregate counts; this is not record-level accuracy."),
+        manual_study_row(snapshot_date, "accela_source_fidelity_manual_validation", accela_source_counts,
+            "Probability sample testing fidelity to the City portal; outcome validity is outside this study."),
+        manual_study_row(snapshot_date, "accela_normalization_validation", accela_normalization_counts,
+            "Separate probability sample testing TDR transformation and semantic rules, not whether the City portal is correct."),
+        manual_study_row(snapshot_date, "gis_accela_linkage_audit", integration_counts,
+            "Disproportionately stratified audit of matched and unmatched integration decisions; report linkage metrics separately."),
+        manual_study_row(snapshot_date, "longitudinal_change_event_validation", change_counts,
+            "Sample of machine-detected snapshot changes; collection fidelity does not establish substantive real-world change."),
+        not_measured_row(snapshot_date, "expanded_external_outcome_verification",
+            "No probability-based external outcome study has yet been performed for the expanded Accela edition."),
+        manual_study_row(snapshot_date, "expanded_double_review", expanded_second_counts,
+            "Independent blinded assignments across the four new studies; automated QA is not second review.",
+            passed_supported="", failed_conflicting="", unknown="", not_applicable="", partial_support="",
+            second_review_count=expanded_second_counts.evaluated),
     ]
     if manual_counts.eligible != 150 or second_counts.eligible != 50:
         raise ValueError(
@@ -286,43 +381,67 @@ def write_summary(rows: list[dict]) -> Path:
 
 def render_readme_scorecard(rows: list[dict]) -> str:
     by_type = {item["verification_type"]: item for item in rows}
-    qa = by_type["automated_qa"]
-    trace = by_type["source_traceability"]
-    manual = by_type["manual_validation"]
-    pilot = by_type["external_outcome_verification"]
-    second = by_type["double_review"]
-    study_status = "COMPLETE" if manual["status"] == second["status"] == "complete" else "IN PROGRESS"
+    qa = by_type["automated_qa_core_release"]
+    trace = by_type["core_source_traceability"]
+    manual = by_type["core_eight_layer_manual_validation"]
+    pilot = by_type["core_external_outcome_verification"]
+    second = by_type["core_double_review"]
+    collection = by_type["accela_collection_integrity"]
+    source = by_type["accela_source_fidelity_manual_validation"]
+    normalization = by_type["accela_normalization_validation"]
+    linkage = by_type["gis_accela_linkage_audit"]
+    change = by_type["longitudinal_change_event_validation"]
+    outcome = by_type["expanded_external_outcome_verification"]
+    expanded_second = by_type["expanded_double_review"]
+
+    def progress(item: dict) -> str:
+        if item["eligible_records"] == "":
+            return "Not measured"
+        return f"{int(item['evaluated_records']):,} / {int(item['eligible_records']):,} ({item['coverage_percentage']}%)"
+
+    def manual_result(item: dict) -> str:
+        if item["evaluated_records"] == "" or int(item["evaluated_records"]) == 0:
+            return "Not measured"
+        return "See study-specific outcomes"
+
     qa_result = (
         f"{qa['checks_passed']} checks passed; {qa['checks_flagged']} checks flagged"
         if qa["checks_evaluated"] != ""
         else "Not measured"
     )
-    return f"""Coverage says how many eligible records were evaluated. Results describe only
-those evaluated records; they are not a dataset-wide accuracy percentage.
+    return f"""Validation results apply only to the stated sampling universe and validation
+layer. Source fidelity, transformation validity, and real-world outcome validity
+are separate claims. No composite verification score is calculated.
 
-| Verification layer | Coverage / progress | Result among evaluated | What it establishes |
+### Core eight-layer verification
+
+The frozen 150-row core sample was selected before the Accela expansion and has
+not been redrawn from the expanded dataset.
+
+| Validation layer | Coverage / progress | Result among evaluated | What it establishes |
 | --- | ---: | --- | --- |
-| Automated QA | {int(qa['evaluated_records']):,} / {int(qa['eligible_records']):,} ({qa['coverage_percentage']}%) | {qa_result} | Structural, relationship, range, consistency, privacy, and release-integrity checks |
-| Source traceability | {int(trace['evaluated_records']):,} / {int(trace['eligible_records']):,} ({trace['coverage_percentage']}%) | {int(trace['passed_supported']):,} reconciled; {int(trace['failed_conflicting']):,} conflicting | Fidelity to the eight archived City source layers, not necessarily real-world truth |
-| Automated evidence checks | Not measured | Not measured | No separate software system currently checks external supporting evidence |
-| Manual validation sample | {manual['evaluated_records']} / {manual['eligible_records']} ({manual['coverage_percentage']}%) | {'No claim outcomes yet' if manual['evaluated_records'] == 0 else 'See claim-specific review metrics'} | Human application of the frozen, documented validation protocol |
-| External outcome verification | {pilot['evaluated_records']} / {pilot['eligible_records']} historical pilot rows | {pilot['passed_supported']} work documented; {pilot['partial_support']} partial; {pilot['unknown']} not established; {pilot['not_applicable']} not applicable | Limited cited evidence about physical realization; not a representative estimate |
-| Double review | {second['evaluated_records']} / {second['eligible_records']} ({second['coverage_percentage']}%) | {'No agreement result yet' if second['evaluated_records'] == 0 else 'See reviewer-agreement metrics'} | Independent, blinded second-review coverage |
+| Automated QA — core release | {progress(qa)} | {qa_result} | Structural and release-integrity checks |
+| Core source traceability | {progress(trace)} | {int(trace['passed_supported']):,} reconciled; {int(trace['failed_conflicting']):,} conflicting | Fidelity to the eight archived City layers, not real-world outcomes |
+| Core eight-layer manual validation | {progress(manual)} | {manual_result(manual)} | Claim-specific review of the original normalized/core universe only |
+| Core external outcome verification | {pilot['evaluated_records']} / {pilot['eligible_records']} historical pilot rows | {pilot['passed_supported']} documented; {pilot['partial_support']} partial; {pilot['unknown']} not established; {pilot['not_applicable']} not applicable | Evidence-selected pilot, not a population estimate |
+| Core double review | {progress(second)} | {manual_result(second)} | Independent blinded review of 50 frozen core assignments |
 
-**Release-level status:** Automated QA {int(qa['evaluated_records']):,} / {int(qa['eligible_records']):,}; source traceability
-{int(trace['evaluated_records']):,} / {int(trace['eligible_records']):,}; automated evidence `Not measured`; manual validation {manual['evaluated_records']} / {manual['eligible_records']};
-external outcome pilot {pilot['evaluated_records']} / {pilot['eligible_records']}; double-reviewed {second['evaluated_records']} / {second['eligible_records']}; validation study
-`{study_status}`.
+### Expanded Accela verification
 
-```text
-Manual validation sample
-{manual['eligible_records']} selected
-|
-+-- Reviewed ............... {manual['evaluated_records']}
-|   `-- Claim outcomes ..... {'Not measured' if manual['evaluated_records'] == 0 else 'See claim-specific metrics'}
-|
-`-- Awaiting review ....... {manual['awaiting_review']}
-```"""
+| Validation layer | Coverage / progress | Result among evaluated | What it establishes |
+| --- | ---: | --- | --- |
+| Accela collection integrity | {progress(collection)} | {collection['passed_supported']} module-month partitions passed | Retrieval completeness and reconciliation, not semantic or outcome accuracy |
+| Accela source-fidelity manual validation | {progress(source)} | {manual_result(source)} | Whether TDR captured what the City portal published |
+| Accela normalization validation | {progress(normalization)} | {manual_result(normalization)} | Whether TDR transformed and interpreted source records correctly |
+| GIS–Accela linkage audit | {progress(linkage)} | {manual_result(linkage)} | Linkage and deduplication decisions; not ordinary record-level accuracy |
+| Expanded external outcome verification | {progress(outcome)} | Not measured | Whether external evidence establishes real-world activity |
+| Expanded double review | {progress(expanded_second)} | {manual_result(expanded_second)} | Independent blinded assignments across the new studies |
+
+### Longitudinal verification
+
+| Validation layer | Coverage / progress | Result among evaluated | What it establishes |
+| --- | ---: | --- | --- |
+| Longitudinal change-event validation | {progress(change)} | {manual_result(change)} | Whether detected source changes are confirmed and substantively interpretable rather than publication artifacts |"""
 
 
 def update_readme(rows: list[dict]) -> None:

@@ -917,6 +917,16 @@ FIELD_METADATA = {
 def metadata_for(
     field: str, table: str | None = None,
 ) -> tuple[str, str, str, str, str, str, str, str]:
+    if table and (
+        table.startswith("manual_validation_accela_")
+        or table.startswith("manual_validation_integration_")
+        or table.startswith("manual_validation_change_")
+    ):
+        try:
+            from . import validation_sampling
+        except ImportError:
+            import validation_sampling
+        return validation_sampling.metadata_for(field)
     if table == "activity_by_month.csv":
         try:
             from . import monthly_cohorts
@@ -1154,6 +1164,14 @@ def create_public_archive() -> None:
             "data/processed/manual_validation_development_sample.csv",
             "data/processed/manual_validation_holdout_sample.csv",
             "data/processed/manual_validation_second_review.csv",
+            "data/processed/manual_validation_accela_source_fidelity.csv",
+            "data/processed/manual_validation_accela_source_fidelity_second_review.csv",
+            "data/processed/manual_validation_accela_normalization.csv",
+            "data/processed/manual_validation_accela_normalization_second_review.csv",
+            "data/processed/manual_validation_integration_links.csv",
+            "data/processed/manual_validation_integration_links_second_review.csv",
+            "data/processed/manual_validation_change_events.csv",
+            "data/processed/manual_validation_change_events_second_review.csv",
             "data/processed/activity_by_month.csv",
             "data/monthly_events/index.json",
             "data/planned_events/index.json",
@@ -1315,6 +1333,14 @@ def main() -> None:
             PROCESSED / "manual_validation_development_sample.csv",
             PROCESSED / "manual_validation_holdout_sample.csv",
             PROCESSED / "manual_validation_second_review.csv",
+            PROCESSED / "manual_validation_accela_source_fidelity.csv",
+            PROCESSED / "manual_validation_accela_source_fidelity_second_review.csv",
+            PROCESSED / "manual_validation_accela_normalization.csv",
+            PROCESSED / "manual_validation_accela_normalization_second_review.csv",
+            PROCESSED / "manual_validation_integration_links.csv",
+            PROCESSED / "manual_validation_integration_links_second_review.csv",
+            PROCESSED / "manual_validation_change_events.csv",
+            PROCESSED / "manual_validation_change_events_second_review.csv",
             PROCESSED / "activity_truth_status.csv", PROCESSED / "master_projects.csv",
             PROCESSED / "master_project_activity_links.csv", PROCESSED / "master_project_candidates.csv",
             PROCESSED / "development_events.csv", PROCESSED / "investment_amounts.csv",
@@ -1345,6 +1371,16 @@ def main() -> None:
         "validation_study": {
             **review_status, "development_rows": 100, "holdout_rows": 50,
             "independent_second_reviews": 50, "final_inference_phase": "holdout",
+        },
+        "expanded_validation_studies": {
+            "status": "assignments_frozen_pending_human_review",
+            "source_fidelity_rows": 200,
+            "normalization_rows": 125,
+            "integration_link_rows": 100,
+            "change_event_rows": 75,
+            "independent_second_review_rows": 125,
+            "external_outcome_validation": "not_measured",
+            "scope_note": "Source fidelity, transformation validity, linkage validity, change-event interpretation, and real-world outcome validity are separate claims.",
         },
         "external_verification_status": "historical_12_row_pilot_retained_not_used_as_population_estimate",
         "longitudinal_tracker": {

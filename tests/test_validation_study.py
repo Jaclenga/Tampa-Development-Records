@@ -32,6 +32,12 @@ class ValidationStudyTests(unittest.TestCase):
         self.assertTrue(development.isdisjoint(holdout))
         self.assertEqual((len(development), len(holdout)), (100, 50))
 
+    def test_published_core_assignments_match_frozen_hashes(self) -> None:
+        validation_study.assert_frozen_assignments()
+        for name, expected in validation_study.FROZEN_ASSIGNMENT_HASHES.items():
+            rows = validation_study.read_csv(validation_study.PROCESSED / name)
+            self.assertEqual(validation_study.assignment_hash(rows), expected)
+
     def test_frozen_phase_stratum_quotas(self) -> None:
         first, second = validation_study.draw_sample(self.activities, self.matches)
         first_counts = Counter((row["sample_phase"], row["sampling_stratum"]) for row in first)

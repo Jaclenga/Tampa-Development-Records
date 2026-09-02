@@ -52,42 +52,48 @@ snapshot metadata.
 ## Verification Status — 2026-08-23 snapshot
 
 <!-- verification-scorecard:start -->
-Coverage says how many eligible records were evaluated. Results describe only
-those evaluated records; they are not a dataset-wide accuracy percentage.
+Validation results apply only to the stated sampling universe and validation
+layer. Source fidelity, transformation validity, and real-world outcome validity
+are separate claims. No composite verification score is calculated.
 
-| Verification layer | Coverage / progress | Result among evaluated | What it establishes |
+### Core eight-layer verification
+
+The frozen 150-row core sample was selected before the Accela expansion and has
+not been redrawn from the expanded dataset.
+
+| Validation layer | Coverage / progress | Result among evaluated | What it establishes |
 | --- | ---: | --- | --- |
-| Automated QA | 4,469 / 4,469 (100.0%) | 14 checks passed; 0 checks flagged | Structural, relationship, range, consistency, privacy, and release-integrity checks |
-| Source traceability | 4,469 / 4,469 (100.0%) | 4,469 reconciled; 0 conflicting | Fidelity to the eight archived City source layers, not necessarily real-world truth |
-| Automated evidence checks | Not measured | Not measured | No separate software system currently checks external supporting evidence |
-| Manual validation sample | 0 / 150 (0.0%) | No claim outcomes yet | Human application of the frozen, documented validation protocol |
-| External outcome verification | 12 / 12 historical pilot rows | 1 work documented; 3 partial; 7 not established; 1 not applicable | Limited cited evidence about physical realization; not a representative estimate |
-| Double review | 0 / 50 (0.0%) | No agreement result yet | Independent, blinded second-review coverage |
+| Automated QA — core release | 4,469 / 4,469 (100.0%) | 14 checks passed; 0 checks flagged | Structural and release-integrity checks |
+| Core source traceability | 4,469 / 4,469 (100.0%) | 4,469 reconciled; 0 conflicting | Fidelity to the eight archived City layers, not real-world outcomes |
+| Core eight-layer manual validation | 0 / 150 (0.0%) | Not measured | Claim-specific review of the original normalized/core universe only |
+| Core external outcome verification | 12 / 12 historical pilot rows | 1 documented; 3 partial; 7 not established; 1 not applicable | Evidence-selected pilot, not a population estimate |
+| Core double review | 0 / 50 (0.0%) | Not measured | Independent blinded review of 50 frozen core assignments |
 
-**Release-level status:** Automated QA 4,469 / 4,469; source traceability
-4,469 / 4,469; automated evidence `Not measured`; manual validation 0 / 150;
-external outcome pilot 12 / 12; double-reviewed 0 / 50; validation study
-`IN PROGRESS`.
+### Expanded Accela verification
 
-```text
-Manual validation sample
-150 selected
-|
-+-- Reviewed ............... 0
-|   `-- Claim outcomes ..... Not measured
-|
-`-- Awaiting review ....... 150
-```
+| Validation layer | Coverage / progress | Result among evaluated | What it establishes |
+| --- | ---: | --- | --- |
+| Accela collection integrity | 158 / 158 (100.0%) | 158 module-month partitions passed | Retrieval completeness and reconciliation, not semantic or outcome accuracy |
+| Accela source-fidelity manual validation | 0 / 200 (0.0%) | Not measured | Whether TDR captured what the City portal published |
+| Accela normalization validation | 0 / 125 (0.0%) | Not measured | Whether TDR transformed and interpreted source records correctly |
+| GIS–Accela linkage audit | 0 / 100 (0.0%) | Not measured | Linkage and deduplication decisions; not ordinary record-level accuracy |
+| Expanded external outcome verification | Not measured | Not measured | Whether external evidence establishes real-world activity |
+| Expanded double review | 0 / 125 (0.0%) | Not measured | Independent blinded assignments across the new studies |
+
+### Longitudinal verification
+
+| Validation layer | Coverage / progress | Result among evaluated | What it establishes |
+| --- | ---: | --- | --- |
+| Longitudinal change-event validation | 0 / 75 (0.0%) | Not measured | Whether detected source changes are confirmed and substantively interpretable rather than publication artifacts |
 <!-- verification-scorecard:end -->
 
-The manual study is a frozen, seeded stratified probability sample of normalized
-activities: 100 development rows and a separately drawn 50-row holdout. It was
-not selected based on evidence availability. However, no reviews are complete,
-so it currently supports no accuracy estimate. The older 12-row pilot was
-selected partly because evidence was available. Its coverage and outcomes are
-verification progress only and must not be interpreted as dataset-wide
-accuracy. Even after partial review, outcomes must not be generalized until the
-documented sampling design and completion rules support that inference.
+The core manual study is a frozen, seeded stratified probability sample of 150
+original normalized activities: 100 development rows and a separately drawn
+50-row holdout. It remains unchanged. Separate Accela source-fidelity,
+normalization, integration-linkage, and longitudinal change-event samples now
+cover the expanded validation frame. None has completed human review, so they
+currently support no empirical accuracy estimate. The older 12-row pilot was
+selected partly because evidence was available and remains descriptive only.
 
 Definitions and reproducible counts are in
 [`verification/verification_summary.csv`](verification/verification_summary.csv)
