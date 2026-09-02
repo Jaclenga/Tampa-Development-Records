@@ -18,7 +18,9 @@ Python's standard library. The optional Accela collector uses `requests` from
   isolated Building/Planning snapshot, verifies gap-free checkpoints, records
   SHA-256 hashes, and then runs the immutable core snapshot tracker.
 - `check_repository_privacy.py` blocks publication when tracked or unignored
-  files contain workstation home paths or private Git-author email addresses.
+  files contain workstation identities, private Git-author email addresses, or
+  direct contact/identity data in integrated CSV artifacts. Gzip CSVs are
+  decompressed and scanned rather than skipped as binary files.
   It runs from the repository's pre-commit hook and the monthly snapshot CI job.
 - `backfill_accela.py` runs resumable, non-overlapping monthly Building and
   Planning collections through ACA's public Download results control. It
