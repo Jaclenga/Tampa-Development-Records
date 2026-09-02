@@ -1,0 +1,7 @@
+# Canonical commands; run-specific commands are copied into every run directory.
+python -m venv .venv
+python -m pip install -r requirements.txt
+python scripts/run_automated_validation.py --all --offline
+python scripts/validate_release.py
+python scripts/verify_data_accuracy.py
+python scripts/check_repository_privacy.py

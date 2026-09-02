@@ -182,6 +182,22 @@ python -m unittest discover -s tests -v
 python scripts/validate_release.py
 ```
 
+For the publication-grade, offline reproducibility workflow—including frozen
+input protection, versioned rule traceability, environment and command capture,
+output hashes, and an automatic repeat-run comparison—use:
+
+```bash
+python scripts/run_automated_validation.py --all --offline
+```
+
+The validator was developed with AI assistance, but no AI model is called by
+this automated validation command. The complete implementation prompt and
+available AI-development metadata are archived in
+[`reproducibility/`](reproducibility/README.md). Reported automated results are
+reproduced from the code, rules, frozen evidence, and dependencies rather than
+by asking an AI system to regenerate or rejudge them. Live-source checks remain
+mutable and are explicitly separate from the preferred offline workflow.
+
 Plan or run a bounded anonymous Accela collection with:
 
 ```bash

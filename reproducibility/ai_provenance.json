@@ -1,0 +1,29 @@
+{
+  "format_version": "1.0.0",
+  "ai_assisted": true,
+  "provider": "OpenAI",
+  "product": "Codex",
+  "model": "GPT-5",
+  "exact_model_version": "unavailable",
+  "prompt_files": [
+    "reproducibility/prompts/validator_implementation_prompt.md"
+  ],
+  "roles": [
+    "implementation assistance",
+    "test generation",
+    "documentation assistance",
+    "reproducibility analysis"
+  ],
+  "human_roles": [
+    "research question and source selection",
+    "validation policy",
+    "review",
+    "acceptance or rejection of changes"
+  ],
+  "validation_runtime": {
+    "llm_required": false,
+    "ai_derived_classifications_combined_with_deterministic_results": false,
+    "statement": "The automated validator executes committed Python rules against archived files and does not call an AI model. Manual reviews and the historical AI-assisted evidence pilot remain separately labeled."
+  },
+  "limitations": "The archived prompt and available metadata document development provenance but do not guarantee identical regeneration of AI-assisted code. Model generation can be nondeterministic and the exact backend model build was not exposed."
+}

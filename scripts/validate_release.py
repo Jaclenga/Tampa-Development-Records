@@ -80,6 +80,12 @@ def expanded_review_values_valid(row: dict[str, str]) -> bool:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--allow-hcpa", action="store_true", help="Allow optional HCPA fallback rows in a non-public local build.")
+    parser.add_argument(
+        "--report",
+        type=Path,
+        default=ROOT / "docs" / "validation_report.json",
+        help="JSON report path (defaults to the published report).",
+    )
     args = parser.parse_args()
     activities = read("tampa_development_activity.csv")
     sources = read("source_records.csv")
@@ -675,7 +681,8 @@ def main() -> None:
             "longitudinal_comparisons": len(tracker_index.get("comparisons", [])),
         },
     }
-    (ROOT / "docs" / "validation_report.json").write_text(json.dumps(report, indent=2), encoding="utf-8")
+    args.report.parent.mkdir(parents=True, exist_ok=True)
+    args.report.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(report, indent=2))
     if not report["passed"]:
         raise SystemExit(1)

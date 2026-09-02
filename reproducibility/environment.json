@@ -1,0 +1,18 @@
+{
+  "format_version": "1.0.0",
+  "captured_at_utc": "2026-09-02",
+  "operating_system": "Windows 11 10.0.26200",
+  "architecture": "AMD64",
+  "python_implementation": "CPython",
+  "python_version": "3.14.5",
+  "python_build": "3.14.5 (tags/v3.14.5:5607950, May 10 2026, 10:43:50) [MSC v.1944 64 bit (AMD64)]",
+  "locale": "English_United States.1252",
+  "preferred_encoding": "cp1252",
+  "timezone": "America/New_York",
+  "git_version": "2.39.0.windows.2",
+  "repository_git_commit": "64b09dc0fae4ed447f7739f5f102671da1c4baf8",
+  "working_tree_state": "dirty_during_implementation; exact paths and code hashes are captured by each run",
+  "dependency_lock_file": "requirements.txt",
+  "dependency_lock_sha256": "5aadb6d178996fd38cb8091601f9397387ec62b4d54a3ea9a6d6905ec983c70c",
+  "installation_note": "Offline validation uses the Python standard library. requirements.txt is hash-locked for optional Accela collection and should be installed with its --require-hashes directive intact. Each run manifest captures the actual runtime platform and Git state."
+}

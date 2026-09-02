@@ -2,6 +2,7 @@ y __pycache__/
 *.py[cod]
 .venv/
 .cache/
+reproducibility/.determinism_tmp/
 tests/.tmp_*/
 dist/
 tampa_development_dataset_v*.zip

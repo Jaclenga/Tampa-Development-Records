@@ -1,0 +1,155 @@
+{"source": "source_0", "status": "collecting"}
+{"source": "source_0", "status": "retrying", "attempt": 2, "max_attempts": 4, "error_type": "EmptyResponse"}
+{"source": "source_0", "status": "complete", "records": 375}
+{"source": "source_1", "status": "collecting"}
+{"source": "source_1", "status": "complete", "records": 375}
+{"source": "source_2", "status": "collecting"}
+{"source": "source_2", "status": "complete", "records": 375}
+{"source": "source_3", "status": "collecting"}
+{"source": "source_3", "status": "complete", "records": 375}
+{"source": "source_4", "status": "collecting"}
+{"source": "source_4", "status": "complete", "records": 375}
+{"source": "source_5", "status": "collecting"}
+{"source": "source_5", "status": "complete", "records": 375}
+{"source": "source_6", "status": "collecting"}
+{"source": "source_6", "status": "complete", "records": 375}
+{"source": "source_7", "status": "collecting"}
+{"source": "source_7", "status": "complete", "records": 375}
+{"source": "construction_inspections", "status": "collecting"}
+{"source": "construction_inspections", "status": "complete", "records": 375}
+{"source": "development_coordination", "status": "collecting"}
+{"source": "development_coordination", "status": "complete", "records": 375}
+{"source": "single_family_permits", "status": "collecting"}
+{"source": "single_family_permits", "status": "complete", "records": 375}
+{"source": "historic_preservation", "status": "collecting"}
+{"source": "historic_preservation", "status": "complete", "records": 375}
+{"source": "capital_improvements", "status": "collecting"}
+{"source": "capital_improvements", "status": "complete", "records": 375}
+{"source": "capital_locations_point", "status": "collecting"}
+{"source": "capital_locations_point", "status": "complete", "records": 375}
+{"source": "capital_locations_line", "status": "collecting"}
+{"source": "capital_locations_line", "status": "complete", "records": 375}
+{"source": "capital_locations_polygon", "status": "collecting"}
+{"source": "capital_locations_polygon", "status": "complete", "records": 375}
+test_collection_failure_returns_explicit_gap (test_accela_client.AccelaClientTests.test_collection_failure_returns_explicit_gap) ... ok
+test_follows_only_bounded_same_origin_redirects (test_accela_client.AccelaClientTests.test_follows_only_bounded_same_origin_redirects) ... ok
+test_non_retry_http_error_is_wrapped (test_accela_client.AccelaClientTests.test_non_retry_http_error_is_wrapped) ... ok
+test_parses_official_export_and_rejects_schema_drift (test_accela_client.AccelaClientTests.test_parses_official_export_and_rejects_schema_drift) ... ok
+test_raw_redaction_and_checkpoint_resume (test_accela_client.AccelaClientTests.test_raw_redaction_and_checkpoint_resume) ... ok
+test_rejects_cross_origin_links_and_redirects (test_accela_client.AccelaClientTests.test_rejects_cross_origin_links_and_redirects) ... ok
+test_rejects_oversized_response_before_buffering (test_accela_client.AccelaClientTests.test_rejects_oversized_response_before_buffering) ... ok
+test_rejects_response_that_exceeds_decoded_limit (test_accela_client.AccelaClientTests.test_rejects_response_that_exceeds_decoded_limit) ... ok
+test_retries_429_and_500 (test_accela_client.AccelaClientTests.test_retries_429_and_500) ... ok
+test_stops_on_access_restriction_and_captcha (test_accela_client.AccelaClientTests.test_stops_on_access_restriction_and_captcha) ... ok
+test_literal_leading_apostrophes_round_trip (test_accela_csv_safety.AccelaCsvSafetyTests.test_literal_leading_apostrophes_round_trip) ... ok
+test_neutralizes_spreadsheet_formula_prefixes (test_accela_csv_safety.AccelaCsvSafetyTests.test_neutralizes_spreadsheet_formula_prefixes) ... ok
+test_writer_is_excel_safe_and_internal_reader_round_trips (test_accela_csv_safety.AccelaCsvSafetyTests.test_writer_is_excel_safe_and_internal_reader_round_trips) ... ok
+test_direct_bounded_search_accepts_boundary (test_accela_date_boundary.AccelaDateBoundaryTests.test_direct_bounded_search_accepts_boundary) ... ok
+test_direct_bounded_search_rejects_pre_2020_start (test_accela_date_boundary.AccelaDateBoundaryTests.test_direct_bounded_search_rejects_pre_2020_start) ... ok
+test_inspection_backfill_rejects_pre_2020_month (test_accela_date_boundary.AccelaDateBoundaryTests.test_inspection_backfill_rejects_pre_2020_month) ... usage: python.exe -m unittest [-h] --from-month FROM_MONTH --to-month TO_MONTH
+                              [--modules {Planning,Building} [{Planning,Building} ...]]
+                              [--requests-per-second REQUESTS_PER_SECOND]
+                              [--run-retries RUN_RETRIES] [--force]
+                              [--dry-run]
+python.exe -m unittest: error: --from-month cannot be before the dataset boundary (2020-01)
+ok
+test_record_backfill_rejects_pre_2020_month (test_accela_date_boundary.AccelaDateBoundaryTests.test_record_backfill_rejects_pre_2020_month) ... usage: python.exe -m unittest [-h] --from-month FROM_MONTH --to-month TO_MONTH
+                              [--modules {Building,Planning} [{Building,Planning} ...]]
+                              [--force] [--month-attempts MONTH_ATTEMPTS]
+                              [--month-retry-delay MONTH_RETRY_DELAY]
+python.exe -m unittest: error: --from-month cannot be before the dataset boundary (2020-01)
+ok
+test_record_backfill_requires_partition_outputs_before_skip (test_accela_date_boundary.AccelaDateBoundaryTests.test_record_backfill_requires_partition_outputs_before_skip) ... ok
+test_record_number_lookup_remains_available_for_verification (test_accela_date_boundary.AccelaDateBoundaryTests.test_record_number_lookup_remains_available_for_verification) ... ok
+test_empty_layout_does_not_emit_an_observation (test_accela_inspections.AccelaInspectionParserTests.test_empty_layout_does_not_emit_an_observation) ... ok
+test_finds_completed_next_target (test_accela_inspections.AccelaInspectionParserTests.test_finds_completed_next_target) ... ok
+test_parses_presentation_row_and_detail_identifier (test_accela_inspections.AccelaInspectionParserTests.test_parses_presentation_row_and_detail_identifier) ... ok
+test_ambiguous_core_match_is_held_not_duplicated (test_accela_integration.AccelaIntegrationTests.test_ambiguous_core_match_is_held_not_duplicated) ... ok
+test_duplicate_accela_number_is_kept_once (test_accela_integration.AccelaIntegrationTests.test_duplicate_accela_number_is_kept_once) ... ok
+test_exact_number_enriches_without_appending (test_accela_integration.AccelaIntegrationTests.test_exact_number_enriches_without_appending) ... ok
+test_published_gzip_is_deterministic_and_lossless (test_accela_integration.AccelaIntegrationTests.test_published_gzip_is_deterministic_and_lossless) ... ok
+test_unmatched_record_appends_deterministically (test_accela_integration.AccelaIntegrationTests.test_unmatched_record_appends_deterministically) ... ok
+test_ambiguous_exact_matches_require_review (test_accela_matching.MatchingTests.test_ambiguous_exact_matches_require_review) ... ok
+test_exact_number_wins (test_accela_matching.MatchingTests.test_exact_number_wins) ... ok
+test_exact_parcel_and_fuzzy_candidate (test_accela_matching.MatchingTests.test_exact_parcel_and_fuzzy_candidate) ... ok
+test_unmatched_is_retained (test_accela_matching.MatchingTests.test_unmatched_is_retained) ... ok
+test_duplicate_merge_prefers_later_non_null (test_accela_normalize.AccelaNormalizeTests.test_duplicate_merge_prefers_later_non_null) ... ok
+test_historical_record_is_labeled_as_retrospective_not_as_old_snapshot (test_accela_normalize.AccelaNormalizeTests.test_historical_record_is_labeled_as_retrospective_not_as_old_snapshot) ... ok
+test_inspection_id_is_namespaced_to_record_and_history_is_labeled (test_accela_normalize.AccelaNormalizeTests.test_inspection_id_is_namespaced_to_record_and_history_is_labeled) ... ok
+test_inspection_normalization_has_stable_fallback_id (test_accela_normalize.AccelaNormalizeTests.test_inspection_normalization_has_stable_fallback_id) ... ok
+test_malformed_dates_become_null (test_accela_normalize.AccelaNormalizeTests.test_malformed_dates_become_null) ... ok
+test_normalizes_search_and_detail_fields (test_accela_normalize.AccelaNormalizeTests.test_normalizes_search_and_detail_fields) ... ok
+test_public_number_dedup_prefers_cap_link_and_preserves_observation_range (test_accela_normalize.AccelaNormalizeTests.test_public_number_dedup_prefers_cap_link_and_preserves_observation_range) ... ok
+test_snapshot_only_partition_can_be_merged_once_after_collection (test_accela_output.AccelaInspectionOutputTests.test_snapshot_only_partition_can_be_merged_once_after_collection) ... ok
+test_upsert_is_idempotent_and_preserves_observation_range (test_accela_output.AccelaInspectionOutputTests.test_upsert_is_idempotent_and_preserves_observation_range) ... ok
+test_empty_and_changing_schema_are_deterministic (test_accela_pagination.PaginationParsingTests.test_empty_and_changing_schema_are_deterministic) ... ok
+test_malformed_row_is_skipped (test_accela_pagination.PaginationParsingTests.test_malformed_row_is_skipped) ... ok
+test_rows_and_dynamic_next_target (test_accela_pagination.PaginationParsingTests.test_rows_and_dynamic_next_target) ... ok
+test_acceptance_fixture (test_change_analysis.ChangeAnalysisTests.test_acceptance_fixture) ... ok
+test_artifacts_are_byte_deterministic (test_change_analysis.ChangeAnalysisTests.test_artifacts_are_byte_deterministic) ... ok
+test_blank_and_malformed_links_are_reported (test_change_analysis.ChangeAnalysisTests.test_blank_and_malformed_links_are_reported) ... ok
+test_duplicate_and_blank_native_ids_remain_identity_safe (test_change_analysis.ChangeAnalysisTests.test_duplicate_and_blank_native_ids_remain_identity_safe) ... ok
+test_healthy_and_no_change_comparisons (test_change_analysis.ChangeAnalysisTests.test_healthy_and_no_change_comparisons) ... ok
+test_interval_classification (test_change_analysis.ChangeAnalysisTests.test_interval_classification) ... ok
+test_mass_field_refresh_deduplicates_identities (test_change_analysis.ChangeAnalysisTests.test_mass_field_refresh_deduplicates_identities) ... ok
+test_source_collapse_and_exclusion_view (test_change_analysis.ChangeAnalysisTests.test_source_collapse_and_exclusion_view) ... ok
+test_status_phase_date_and_cost_classification (test_change_analysis.ChangeAnalysisTests.test_status_phase_date_and_cost_classification) ... ok
+test_undefined_denominators_are_null (test_change_analysis.ChangeAnalysisTests.test_undefined_denominators_are_null) ... ok
+test_dashboard_is_accessible_static_and_deterministic (test_change_dashboard.ChangeDashboardTests.test_dashboard_is_accessible_static_and_deterministic) ... ok
+test_budget_book_context_uses_exact_project_id_and_typed_observations (test_context_and_events.ContextAndEventTests.test_budget_book_context_uses_exact_project_id_and_typed_observations) ... ok
+test_context_whitelist_drops_owner_and_contact_fields (test_context_and_events.ContextAndEventTests.test_context_whitelist_drops_owner_and_contact_fields) ... ok
+test_event_model_preserves_source_observations_without_completion_claims (test_context_and_events.ContextAndEventTests.test_event_model_preserves_source_observations_without_completion_claims) ... ok
+test_parcel_links_are_pending_and_do_not_imply_legal_match (test_context_and_events.ContextAndEventTests.test_parcel_links_are_pending_and_do_not_imply_legal_match) ... ok
+test_accela_source_and_normalization_samples_do_not_overlap (test_expanded_validation_studies.ExpandedValidationStudyTests.test_accela_source_and_normalization_samples_do_not_overlap) ... ok
+test_documentation_separates_validity_concepts (test_expanded_validation_studies.ExpandedValidationStudyTests.test_documentation_separates_validity_concepts) ... ok
+test_frozen_writer_refuses_silent_overwrite (test_expanded_validation_studies.ExpandedValidationStudyTests.test_frozen_writer_refuses_silent_overwrite) ... ok
+test_published_samples_have_expected_sizes_and_unique_units (test_expanded_validation_studies.ExpandedValidationStudyTests.test_published_samples_have_expected_sizes_and_unique_units) ... ok
+test_required_accela_and_linkage_strata_are_represented (test_expanded_validation_studies.ExpandedValidationStudyTests.test_required_accela_and_linkage_strata_are_represented) ... ok
+test_review_outcomes_are_blank_or_explicit_and_no_generic_verified_field_exists (test_expanded_validation_studies.ExpandedValidationStudyTests.test_review_outcomes_are_blank_or_explicit_and_no_generic_verified_field_exists) ... ok
+test_second_review_assignments_are_independent (test_expanded_validation_studies.ExpandedValidationStudyTests.test_second_review_assignments_are_independent) ... ok
+test_shared_draw_is_deterministic_and_stratified (test_expanded_validation_studies.ExpandedValidationStudyTests.test_shared_draw_is_deterministic_and_stratified) ... ok
+test_verification_summary_reconciles_study_files_and_not_measured (test_expanded_validation_studies.ExpandedValidationStudyTests.test_verification_summary_reconciles_study_files_and_not_measured) ... ok
+test_build_retains_disappeared_records_and_separates_three_months (test_monthly_cohorts.MonthlyCohortTests.test_build_retains_disappeared_records_and_separates_three_months) ... ok
+test_future_non_plan_is_rejected_from_researcher_extracts (test_monthly_cohorts.MonthlyCohortTests.test_future_non_plan_is_rejected_from_researcher_extracts) ... ok
+test_pre_2020_events_are_removed_from_canonical_and_monthly_outputs (test_monthly_cohorts.MonthlyCohortTests.test_pre_2020_events_are_removed_from_canonical_and_monthly_outputs) ... ok
+test_source_specific_event_date_semantics (test_monthly_cohorts.MonthlyCohortTests.test_source_specific_event_date_semantics) ... ok
+test_integrated_csv_rejects_contact_columns_and_direct_pii (test_repository_privacy.RepositoryPrivacyTests.test_integrated_csv_rejects_contact_columns_and_direct_pii) ... ok
+test_month_end_paths_are_made_repository_relative (test_repository_privacy.RepositoryPrivacyTests.test_month_end_paths_are_made_repository_relative) ... ok
+test_scanner_decompresses_published_gzip (test_repository_privacy.RepositoryPrivacyTests.test_scanner_decompresses_published_gzip) ... ok
+test_scanner_reports_absolute_workstation_path_without_echoing_value (test_repository_privacy.RepositoryPrivacyTests.test_scanner_reports_absolute_workstation_path_without_echoing_value) ... ok
+test_every_frozen_sample_is_hashed (test_reproducibility.ReproducibilityTests.test_every_frozen_sample_is_hashed) ... ok
+test_offline_substantive_outputs_repeat_identically (test_reproducibility.ReproducibilityTests.test_offline_substantive_outputs_repeat_identically) ... ok
+test_rule_registry_is_hashed_and_runtime_is_non_ai (test_reproducibility.ReproducibilityTests.test_rule_registry_is_hashed_and_runtime_is_non_ai) ... ok
+test_arcgis_fetch_rejects_count_inventory_mismatch (test_snapshot_tracker.SnapshotTrackerTests.test_arcgis_fetch_rejects_count_inventory_mismatch) ... ok
+test_arcgis_fetch_rejects_duplicate_inventory_ids (test_snapshot_tracker.SnapshotTrackerTests.test_arcgis_fetch_rejects_duplicate_inventory_ids) ... ok
+test_arcgis_fetch_rejects_nonempty_partial_feature_page (test_snapshot_tracker.SnapshotTrackerTests.test_arcgis_fetch_rejects_nonempty_partial_feature_page) ... ok
+test_archive_is_immutable_and_idempotent (test_snapshot_tracker.SnapshotTrackerTests.test_archive_is_immutable_and_idempotent) ... ok
+test_attribute_only_arcgis_fetch_normalizes_json_attributes (test_snapshot_tracker.SnapshotTrackerTests.test_attribute_only_arcgis_fetch_normalizes_json_attributes) ... ok
+test_change_types_and_semantics (test_snapshot_tracker.SnapshotTrackerTests.test_change_types_and_semantics) ... ok
+test_duplicate_native_ids_use_global_ids_across_snapshots (test_snapshot_tracker.SnapshotTrackerTests.test_duplicate_native_ids_use_global_ids_across_snapshots) ... ok
+test_live_collection_retries_empty_source_response (test_snapshot_tracker.SnapshotTrackerTests.test_live_collection_retries_empty_source_response) ... ok
+test_live_collection_uses_eight_layers_and_privacy_whitelist (test_snapshot_tracker.SnapshotTrackerTests.test_live_collection_uses_eight_layers_and_privacy_whitelist) ... ok
+test_native_identity_survives_objectid_change (test_snapshot_tracker.SnapshotTrackerTests.test_native_identity_survives_objectid_change) ... ok
+test_update_creates_monthly_machine_and_human_outputs (test_snapshot_tracker.SnapshotTrackerTests.test_update_creates_monthly_machine_and_human_outputs) ... ok
+test_draw_is_reproducible_and_disjoint (test_validation_study.ValidationStudyTests.test_draw_is_reproducible_and_disjoint) ... ok
+test_frozen_phase_stratum_quotas (test_validation_study.ValidationStudyTests.test_frozen_phase_stratum_quotas) ... ok
+test_published_core_assignments_match_frozen_hashes (test_validation_study.ValidationStudyTests.test_published_core_assignments_match_frozen_hashes) ... ok
+test_rebuild_preserves_reviews_when_context_is_unchanged (test_validation_study.ValidationStudyTests.test_rebuild_preserves_reviews_when_context_is_unchanged) ... ok
+test_second_review_is_blinded (test_validation_study.ValidationStudyTests.test_second_review_is_blinded) ... ok
+test_wilson_and_kappa (test_validation_study.ValidationStudyTests.test_wilson_and_kappa) ... ok
+test_completely_reviewed_sample (test_verification_summary.VerificationSummaryTests.test_completely_reviewed_sample) ... ok
+test_denominator_is_eligible_rows_not_evaluated_rows (test_verification_summary.VerificationSummaryTests.test_denominator_is_eligible_rows_not_evaluated_rows) ... ok
+test_duplicate_review_records_fail_loudly (test_verification_summary.VerificationSummaryTests.test_duplicate_review_records_fail_loudly) ... ok
+test_failed_aggregate_qa_does_not_mark_every_record_failed (test_verification_summary.VerificationSummaryTests.test_failed_aggregate_qa_does_not_mark_every_record_failed) ... ok
+test_latest_snapshot_is_discovered (test_verification_summary.VerificationSummaryTests.test_latest_snapshot_is_discovered) ... ok
+test_partially_reviewed_sample_and_unknown (test_verification_summary.VerificationSummaryTests.test_partially_reviewed_sample_and_unknown) ... ok
+test_phase_files_are_authoritative_for_review_progress (test_verification_summary.VerificationSummaryTests.test_phase_files_are_authoritative_for_review_progress) ... ok
+test_second_reviews_use_their_own_denominator (test_verification_summary.VerificationSummaryTests.test_second_reviews_use_their_own_denominator) ... ok
+test_snapshot_can_be_selected_by_release_content_hash (test_verification_summary.VerificationSummaryTests.test_snapshot_can_be_selected_by_release_content_hash) ... ok
+test_unknown_outcome_fails_loudly (test_verification_summary.VerificationSummaryTests.test_unknown_outcome_fails_loudly) ... ok
+test_zero_reviewed_records (test_verification_summary.VerificationSummaryTests.test_zero_reviewed_records) ... ok
+
+----------------------------------------------------------------------
+Ran 106 tests in 14.814s
+
+OK

@@ -1,0 +1,29 @@
+Environment snapshot generated 2026-09-02
+
+python --version
+Python 3.14.5
+
+python implementation
+CPython 3.14.5, MSC v.1944, 64 bit (AMD64)
+
+git --version
+git version 2.39.0.windows.2
+
+python -m pip --version
+pip 26.1.1 (Python 3.14)
+
+Declared hash-locked dependencies installed in the capture environment
+requests==2.34.2
+urllib3==2.7.0
+certifi==2026.4.22
+idna==3.15
+charset-normalizer==3.4.7
+
+Dependency source of truth
+requirements.txt
+SHA-256: 5aadb6d178996fd38cb8091601f9397387ec62b4d54a3ea9a6d6905ec983c70c
+
+The complete global Python environment is intentionally not treated as the
+project environment: unrelated globally installed packages are not validator
+dependencies. Create an isolated virtual environment and install the declared,
+hash-locked requirements as described in reproducibility/README.md.

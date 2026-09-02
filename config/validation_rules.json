@@ -1,0 +1,52 @@
+{
+  "registry_format_version": "1.0.0",
+  "rule_set_version": "1.0.0",
+  "effective_date": "2026-09-02",
+  "deterministic_runtime": true,
+  "llm_required_at_runtime": false,
+  "rule_id_policy": {
+    "description": "Each emitted report check is an individual rule conclusion. Its stable rule ID is formed from the suite ID, a colon, and the report check key.",
+    "template": "<suite_id>:<check_key>"
+  },
+  "suites": [
+    {
+      "suite_id": "TDR-RELEASE-1",
+      "implementation": "scripts/validate_release.py",
+      "report": "outputs/validation_report.json",
+      "check_container": "checks",
+      "purpose": "Cross-table, schema, semantic, longitudinal, sample-design, and release-integrity validation."
+    },
+    {
+      "suite_id": "TDR-FIDELITY-1",
+      "implementation": "scripts/verify_data_accuracy.py",
+      "report": "outputs/accuracy_verification_report.json",
+      "check_container": "checks",
+      "purpose": "Archived City snapshot fidelity, transformation, hash, coordinate, and privacy validation."
+    },
+    {
+      "suite_id": "TDR-PRIVACY-1",
+      "implementation": "scripts/check_repository_privacy.py",
+      "report": "outputs/repository_privacy_check.txt",
+      "fixed_check_keys": [
+        "repository_content_is_privacy_safe"
+      ],
+      "purpose": "Reject workstation paths, private Git email addresses, account names, contact columns, and direct contact values."
+    },
+    {
+      "suite_id": "TDR-REPRO-1",
+      "implementation": "scripts/run_automated_validation.py",
+      "fixed_check_keys": [
+        "frozen_samples_unchanged",
+        "frozen_archives_match_embedded_manifests",
+        "substantive_outputs_repeat_identically"
+      ],
+      "purpose": "Protect frozen inputs and establish deterministic offline analytical output."
+    }
+  ],
+  "manual_review_boundary": {
+    "automated_rule": false,
+    "protocol_version": "1.0.0",
+    "protocol": "docs/MANUAL_VALIDATION_PROTOCOL.md",
+    "statement": "Human review outcomes remain record-level judgments and are never relabeled as deterministic automated rules."
+  }
+}

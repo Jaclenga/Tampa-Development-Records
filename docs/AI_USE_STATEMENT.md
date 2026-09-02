@@ -34,3 +34,7 @@ The repository owner made the project-level scope and publication decisions
 and remains responsible for the released code, documentation, licensing,
 interpretation, and any errors. AI systems are not authors or co-authors of
 this dataset.
+
+The Phase 10 implementation prompt, exposed model metadata, and limitations of
+AI-development reproducibility are archived in `reproducibility/`. Automated
+validation run manifests explicitly record that no LLM is invoked at runtime.

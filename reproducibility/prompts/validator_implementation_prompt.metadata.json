@@ -1,0 +1,17 @@
+{
+  "format_version": "1.0.0",
+  "prompt_file": "reproducibility/prompts/validator_implementation_prompt.md",
+  "prompt_sha256": "6a0d134da0ccec4fa369bd82535a7697f31c3a41cfa877fce655c1342609f26c",
+  "date": "2026-09-02",
+  "purpose": "Phase 10 full computational and development reproducibility implementation",
+  "repository": "Tampa-Development-Records",
+  "git_commit_before_implementation": "64b09dc0fae4ed447f7739f5f102671da1c4baf8",
+  "git_commit_after_implementation": "unavailable_uncommitted_worktree",
+  "ai_provider": "OpenAI",
+  "ai_product": "Codex",
+  "model": "GPT-5",
+  "exact_model_version": "unavailable",
+  "execution_environment": "Codex coding agent on Windows with repository filesystem and terminal tools",
+  "agentic_tools_available": true,
+  "content_note": "The prompt file is byte-for-byte identical to the supplied attachment; metadata is separate so no text was prepended."
+}

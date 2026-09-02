@@ -132,6 +132,11 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--live", action="store_true", help="Also compare snapshot OBJECTIDs with the layers as they exist now.")
     parser.add_argument("--report", type=Path, default=REPORT, help="JSON report path.")
+    parser.add_argument(
+        "--deterministic-report",
+        action="store_true",
+        help="Omit the volatile verification timestamp; the run manifest records execution time.",
+    )
     args = parser.parse_args()
 
     manifest = json.loads((ROOT / "manifest.json").read_text(encoding="utf-8"))
@@ -324,7 +329,10 @@ def main() -> None:
 
     report = {
         "dataset_version": manifest.get("version"),
-        "verified_at_utc": dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat(),
+        "verified_at_utc": (
+            None if args.deterministic_report
+            else dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat()
+        ),
         "machine_verification_passed": all(checks.values()),
         "source_snapshot_fidelity": "verified" if all(checks.values()) else "failed",
         "ground_truth_status": "not_established",
