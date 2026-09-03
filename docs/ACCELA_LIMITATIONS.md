@@ -175,8 +175,11 @@ collected source files. They do not measure whether the underlying public
 record is factually correct or whether an inferred real-world claim is true.
 
 The repository contains a frozen 150-record manual-validation design: 100
-development rows and a separate 50-row holdout. At present, 0 of 150 first
-reviews and 0 of 50 blind second-review assignments are complete. Therefore:
+development rows and a separate 50-row holdout. At present, 10 of 150 first
+reviews (6.7%) are complete, all in the development phase. The other 90
+development first reviews, all 50 holdout first reviews, and all 50 blind
+second-review assignments remain unfinished. The partial results are
+exploratory development diagnostics only. Therefore:
 
 - no empirical dataset-wide accuracy or error rate has been measured;
 - reviewer agreement has not been measured;

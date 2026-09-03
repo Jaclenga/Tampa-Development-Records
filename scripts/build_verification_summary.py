@@ -334,7 +334,8 @@ def build_summary() -> list[dict]:
         row(snapshot_date, "core_source_traceability", trace_counts, "passed" if trace_passed else "flagged",
             "Reconciles bundled City source features to retained source rows; establishes source fidelity, not real-world truth."),
         manual_study_row(snapshot_date, "core_eight_layer_manual_validation", manual_counts,
-            "Frozen seeded stratified probability sample from the original core universe; it does not validate the Accela expansion.",
+            "Frozen seeded stratified probability sample from the original core universe; partial development results are "
+            "exploratory only and do not validate the Accela expansion or estimate population accuracy.",
             passed_supported="", failed_conflicting="", unknown="", not_applicable="", partial_support="",
             second_review_count=second_counts.evaluated),
         row(snapshot_date, "core_external_outcome_verification", pilot_counts, "historical_pilot",
@@ -402,6 +403,8 @@ def render_readme_scorecard(rows: list[dict]) -> str:
     def manual_result(item: dict) -> str:
         if item["evaluated_records"] == "" or int(item["evaluated_records"]) == 0:
             return "Not measured"
+        if item["awaiting_review"] != "" and int(item["awaiting_review"]) > 0:
+            return "Exploratory partial results only"
         return "See study-specific outcomes"
 
     qa_result = (

@@ -131,16 +131,16 @@ class ExpandedValidationStudyTests(unittest.TestCase):
         with (ROOT / "verification" / "verification_summary.csv").open(encoding="utf-8", newline="") as handle:
             summary = {row["verification_type"]: row for row in csv.DictReader(handle)}
         expected = {
-            "core_eight_layer_manual_validation": 150,
-            "accela_source_fidelity_manual_validation": 200,
-            "accela_normalization_validation": 125,
-            "gis_accela_linkage_audit": 100,
-            "longitudinal_change_event_validation": 75,
-            "expanded_double_review": 125,
+            "core_eight_layer_manual_validation": (150, 10),
+            "accela_source_fidelity_manual_validation": (200, 0),
+            "accela_normalization_validation": (125, 0),
+            "gis_accela_linkage_audit": (100, 0),
+            "longitudinal_change_event_validation": (75, 0),
+            "expanded_double_review": (125, 0),
         }
-        for study, count in expected.items():
+        for study, (count, evaluated) in expected.items():
             self.assertEqual(int(summary[study]["eligible_records"]), count)
-            self.assertEqual(int(summary[study]["evaluated_records"]), 0)
+            self.assertEqual(int(summary[study]["evaluated_records"]), evaluated)
         external = summary["expanded_external_outcome_verification"]
         self.assertEqual(external["eligible_records"], "")
         self.assertEqual(external["coverage_percentage"], "")

@@ -20,7 +20,7 @@ validated full-month longitudinal result.
 | Latest observed records | 4,408 records from eight City GIS layers |
 | Observed comparisons | 1; August 23 to September 1 (nine-day initial interval) |
 | Regular month-end series | Begins September 30, 2026 |
-| Manual validation | 0 of 150 first reviews completed |
+| Manual validation | 10 of 150 first reviews completed (6.7%); development phase only |
 | Empirical accuracy | Not yet measured |
 | Release | Version 0.9.0 prepared; Git tag not yet published |
 
@@ -65,7 +65,7 @@ not been redrawn from the expanded dataset.
 | --- | ---: | --- | --- |
 | Automated QA — core release | 4,469 / 4,469 (100.0%) | 14 checks passed; 0 checks flagged | Structural and release-integrity checks |
 | Core source traceability | 4,469 / 4,469 (100.0%) | 4,469 reconciled; 0 conflicting | Fidelity to the eight archived City layers, not real-world outcomes |
-| Core eight-layer manual validation | 0 / 150 (0.0%) | Not measured | Claim-specific review of the original normalized/core universe only |
+| Core eight-layer manual validation | 10 / 150 (6.7%) | Exploratory partial results only | Claim-specific review of the original normalized/core universe only |
 | Core external outcome verification | 12 / 12 historical pilot rows | 1 documented; 3 partial; 7 not established; 1 not applicable | Evidence-selected pilot, not a population estimate |
 | Core double review | 0 / 50 (0.0%) | Not measured | Independent blinded review of 50 frozen core assignments |
 
@@ -89,11 +89,14 @@ not been redrawn from the expanded dataset.
 
 The core manual study is a frozen, seeded stratified probability sample of 150
 original normalized activities: 100 development rows and a separately drawn
-50-row holdout. It remains unchanged. Separate Accela source-fidelity,
-normalization, integration-linkage, and longitudinal change-event samples now
-cover the expanded validation frame. None has completed human review, so they
-currently support no empirical accuracy estimate. The older 12-row pilot was
-selected partly because evidence was available and remains descriptive only.
+50-row holdout. Ten development first reviews are complete; the other 90
+development reviews, all 50 holdout reviews, and all 50 blind second reviews
+remain unfinished. These partial results are exploratory development
+diagnostics only, not a population estimate. Separate Accela source-fidelity,
+normalization, integration-linkage, and longitudinal change-event samples have
+no completed human reviews. The repository therefore still supports no
+empirical accuracy estimate. The older 12-row pilot was selected partly because
+evidence was available and remains descriptive only.
 
 Definitions and reproducible counts are in
 [`verification/verification_summary.csv`](verification/verification_summary.csv)

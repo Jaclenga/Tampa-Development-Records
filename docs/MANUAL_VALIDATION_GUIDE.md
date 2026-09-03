@@ -13,15 +13,17 @@ The additive study designs are registered in
 
 | Review phase | Required | Completed |
 | --- | ---: | ---: |
-| Development first review | 100 | 0 |
+| Development first review | 100 | 10 |
 | Holdout first review | 50 | 0 |
 | Blind second review | 50 | 0 |
 
-The repository does not yet have an empirical error baseline. A public release
-may describe the sample as designed, but it must not claim measured accuracy,
-precision, or reviewer agreement until the applicable rows are complete and
-the metrics are published. The recommended v0.9.0 publication sequence is in
-the [release checklist](RELEASE_CHECKLIST.md).
+Core first-review progress is 10 of 150 (6.7%). The completed rows are an
+exploratory development-phase diagnostic subset; they are not a population
+accuracy estimate. The repository does not yet have an empirical error
+baseline. A public release may describe the sample and progress, but it must
+not claim measured accuracy, precision, or reviewer agreement until the
+applicable rows are complete and the metrics are published. The recommended
+v0.9.0 publication sequence is in the [release checklist](RELEASE_CHECKLIST.md).
 
 ## What the review data are for
 

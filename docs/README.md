@@ -5,9 +5,11 @@ scope, methodology, validation, and release material.
 
 ## Current blockers
 
-1. **Manual validation is incomplete.** None of the 150 first-review rows or 50
-   blind second-review assignments has been completed. Start with the
-   [operator guide](MANUAL_VALIDATION_GUIDE.md).
+1. **Manual validation is incomplete.** Ten of 150 core first-review rows are
+   complete, all in the 100-row development phase; all 50 holdout first reviews
+   and all 50 blind second-review assignments remain unfinished. The partial
+   results are exploratory diagnostics, not an accuracy estimate. Continue with
+   the [operator guide](MANUAL_VALIDATION_GUIDE.md).
 2. **The tracker does not yet have a full monthly interval.** The August 23 to
    September 1 comparison is a nine-day initial interval. The canonical
    month-end series begins September 30. See the [tracker methodology](LONGITUDINAL_TRACKER.md).
