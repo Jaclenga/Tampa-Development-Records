@@ -126,6 +126,7 @@ codes, and second-review status remain in the
 
 | Goal | File |
 | --- | --- |
+| Audit all upstream sources and provenance | [`docs/reference/SOURCES.md`](docs/reference/SOURCES.md) |
 | Analyze every published source record | [`data/processed/bounded_census_records.csv`](data/processed/bounded_census_records.csv) |
 | Use the consolidated activity view | [`data/processed/tampa_development_activity.csv`](data/processed/tampa_development_activity.csv) |
 | Use the expanded activity view with Accela data | [`data/integrated/tampa_development_activity_with_accela.csv.gz`](data/integrated/tampa_development_activity_with_accela.csv.gz) |

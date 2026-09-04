@@ -8,6 +8,7 @@ hand-maintained explanations in this directory.
 
 | Need | Document |
 | --- | --- |
+| Audit source endpoints, roles, dates, and retrieval methods | [Source inventory and provenance](reference/SOURCES.md) |
 | Understand what the dataset includes | [Bounded census scope](methodology/BOUNDED_CENSUS_SCOPE.md) |
 | Use the longitudinal outputs correctly | [Longitudinal tracker](methodology/LONGITUDINAL_TRACKER.md) |
 | Collect public Accela records | [Accela collector guide](guides/ACCELA_COLLECTOR.md) |
@@ -52,6 +53,7 @@ statements.
 - [Data dictionary](reference/data_dictionary.csv)
 - [Known limitations](reference/KNOWN_LIMITATIONS.md)
 - [License notes](reference/LICENSE_NOTES.md)
+- [Source inventory and provenance](reference/SOURCES.md)
 
 ### `validation/`
 

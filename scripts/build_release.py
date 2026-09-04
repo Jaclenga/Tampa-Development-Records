@@ -1209,6 +1209,7 @@ def create_public_archive() -> None:
             "scripts/build_lean_validation_plan.py",
             "scripts/monthly_cohorts.py",
             "docs/methodology/TEMPORAL_COHORTS.md",
+            "docs/reference/SOURCES.md",
             "verification/verification_summary.csv",
         )
         missing_release_files = [
@@ -1399,6 +1400,7 @@ def main() -> None:
             ROOT / "config" / "manual_validation_plan.json",
             DOC_REFERENCE / "LICENSE_NOTES.md", DOC_GUIDES / "PUBLIC_RECORDS_REQUEST.md",
             DOC_REFERENCE / "AI_USE_STATEMENT.md",
+            DOC_REFERENCE / "SOURCES.md",
             DOC_GUIDES / "MANUAL_VALIDATION_GUIDE.md", DOC_VALIDATION / "MANUAL_VALIDATION_PROTOCOL.md",
             DOC_VALIDATION / "LEAN_VALIDATION_PLAN.md",
             DOC_VALIDATION / "VERIFICATION_REPORT.md", DOC_METHODOLOGY / "GROUND_TRUTH_METHODOLOGY.md", DOC_METHODOLOGY / "BOUNDED_CENSUS_SCOPE.md",
