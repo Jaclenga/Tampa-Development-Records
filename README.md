@@ -126,6 +126,7 @@ codes, and second-review status remain in the
 
 | Goal | File |
 | --- | --- |
+| Explore the data in a public notebook | [`notebooks/tampa_development_exploration.ipynb`](notebooks/tampa_development_exploration.ipynb) |
 | Audit all upstream sources and provenance | [`docs/reference/SOURCES.md`](docs/reference/SOURCES.md) |
 | Analyze every published source record | [`data/processed/bounded_census_records.csv`](data/processed/bounded_census_records.csv) |
 | Use the consolidated activity view | [`data/processed/tampa_development_activity.csv`](data/processed/tampa_development_activity.csv) |
@@ -177,8 +178,10 @@ Immutable source snapshots remain intact as provenance and may therefore carry
 older source attributes that are not published as in-scope monthly events.
 
 ```bash
+python -m pip install -r requirements.txt
+python -m pip install -r requirements-dev.txt
 python scripts/build_release.py --use-existing-raw
-python -m unittest discover -s tests -v
+python -m pytest -q
 python scripts/validate_release.py
 ```
 
@@ -282,6 +285,7 @@ docs/methodology/     analytical scope, semantics, and methods
 docs/reference/       dictionaries, limitations, licensing, and provenance
 docs/validation/      protocols and validation interpretation
 prompts/              versioned prompts used by the agent experiment
+notebooks/            public, reproducible data explorations
 reports/              generated dashboards, comparisons, and validation output
 reproducibility/      frozen runs, manifests, prompts, and environment records
 scripts/              command-line acquisition, build, analysis, and QA tools

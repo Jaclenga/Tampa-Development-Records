@@ -62,6 +62,12 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Install test dependencies
+        if: steps.month_end.outputs.should_run == 'true'
+        run: |
+          python -m pip install -r requirements.txt
+          python -m pip install -r requirements-dev.txt
+
       - name: Collect and compare the bounded source snapshot
         if: steps.month_end.outputs.should_run == 'true'
         run: python scripts/snapshot_tracker.py collect-live
@@ -80,7 +86,7 @@ jobs:
 
       - name: Run the complete test suite
         if: steps.month_end.outputs.should_run == 'true'
-        run: python -m unittest discover -s tests -v
+        run: python -m pytest -q
 
       - name: Reject workstation paths and private author emails
         if: steps.month_end.outputs.should_run == 'true'

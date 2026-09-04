@@ -37,7 +37,9 @@ review with AI-generated judgments.
 ## 3. Run the release checks
 
 ```bash
-python -m unittest discover -s tests -v
+python -m pip install -r requirements.txt
+python -m pip install -r requirements-dev.txt
+python -m pytest -q
 python scripts/validate_release.py
 python scripts/verify_data_accuracy.py
 git diff --check
