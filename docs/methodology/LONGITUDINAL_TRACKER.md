@@ -17,13 +17,13 @@ organization without claiming earlier TDR observations.
 
 | Snapshot date | Retrieved at UTC | Records | Role | Artifacts |
 | --- | --- | ---: | --- | --- |
-| `2026-08-23` | `2026-08-23T02:06:02+00:00` | 4,469 | Original baseline | [Snapshot](../data/snapshots/2026-08-23/) |
-| `2026-09-01` | `2026-09-01T07:15:12+00:00` | 4,408 | Reconciled first follow-up | [Snapshot](../data/snapshots/2026-09-01/) |
+| `2026-08-23` | `2026-08-23T02:06:02+00:00` | 4,469 | Original baseline | [Snapshot](../../data/snapshots/2026-08-23/) |
+| `2026-09-01` | `2026-09-01T07:15:12+00:00` | 4,408 | Reconciled first follow-up | [Snapshot](../../data/snapshots/2026-09-01/) |
 
 The accepted September 1 observation was retrieved at 3:15 a.m. Tampa time. The
-[machine-readable comparison](../data/monthly_changes/2026-09.json) and
-[September update](../reports/2026-09.md) compare it with the August 23
-baseline. The separate [August 31 Accela freeze](../data/frozen/accela/2026-08-31/)
+[machine-readable comparison](../../data/monthly_changes/2026-09.json) and
+[September update](../../reports/changes/2026-09.md) compare it with the August 23
+baseline. The separate [August 31 Accela freeze](../../data/frozen/accela/2026-08-31/)
 contains records returned for that Accela query date and is not a third core
 observation.
 
@@ -161,10 +161,10 @@ data/snapshots/YYYY-MM-DD/       immutable compact snapshot and metadata
 data/monthly_changes/index.json  snapshot and comparison inventory
 data/monthly_changes/YYYY-MM.csv record-level changes
 data/monthly_changes/YYYY-MM.json comparison summary
-reports/YYYY-MM.md               readable monthly update
+reports/changes/YYYY-MM.md       readable monthly update
 data/monthly_changes/analysis/   deterministic analysis JSON and CSVs
-docs/dashboard/index.html        static comparison dashboard
-docs/dashboard/comparisons/      identity-safe comparison detail pages
+reports/dashboard/index.html     static comparison dashboard
+reports/dashboard/comparisons/   identity-safe comparison detail pages
 data/processed/activity_by_month.csv canonical source-date table
 data/monthly_events/YYYY-MM.csv  non-future source-date extracts
 data/monthly_events/index.json   non-future extract inventory

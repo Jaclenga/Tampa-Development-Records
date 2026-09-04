@@ -25,7 +25,7 @@ ROOT = Path(__file__).resolve().parent.parent
 RAW = ROOT / "data" / "raw"
 CONTEXT_RAW = ROOT / "data" / "context" / "raw"
 PROCESSED = ROOT / "data" / "processed"
-REPORT = ROOT / "docs" / "accuracy_verification_report.json"
+REPORT = ROOT / "reports" / "validation" / "accuracy_verification_report.json"
 
 ENDPOINTS = {
     "construction_inspections": "https://arcgis.tampagov.net/arcgis/rest/services/OpenData/Planning/MapServer/30",

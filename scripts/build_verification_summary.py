@@ -25,7 +25,7 @@ except ImportError:  # Direct execution: python scripts/build_verification_summa
 
 ROOT = Path(__file__).resolve().parent.parent
 PROCESSED = ROOT / "data" / "processed"
-DOCS = ROOT / "docs"
+VALIDATION_REPORTS = ROOT / "reports" / "validation"
 OUTPUT_DIR = ROOT / "verification"
 SUMMARY_COLUMNS = (
     "snapshot_date",
@@ -260,7 +260,7 @@ def summarize_automated_qa(accuracy: dict) -> tuple[ReviewCounts, list[str], dic
 
 
 def build_summary() -> list[dict]:
-    accuracy = json.loads((DOCS / "accuracy_verification_report.json").read_text(encoding="utf-8"))
+    accuracy = json.loads((VALIDATION_REPORTS / "accuracy_verification_report.json").read_text(encoding="utf-8"))
     try:
         from . import snapshot_tracker
     except ImportError:  # Direct execution.

@@ -16,7 +16,7 @@ auditable release.
   the claims supported by those results.
 
 Follow the [manual-validation operator guide](MANUAL_VALIDATION_GUIDE.md) and
-the controlling [protocol](MANUAL_VALIDATION_PROTOCOL.md). Do not replace human
+the controlling [protocol](../validation/MANUAL_VALIDATION_PROTOCOL.md). Do not replace human
 review with AI-generated judgments.
 
 ## 2. Demonstrate the tracker

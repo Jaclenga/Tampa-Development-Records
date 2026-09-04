@@ -176,9 +176,9 @@ def render_report(analysis: dict[str, object], changes: list[dict[str, str]]) ->
         "",
         "This report compares two observations of eight named City of Tampa public GIS layers. A newly observed record may have existed before the interval, and a record no longer returned is not necessarily deleted, cancelled, or complete. A phase change is a source-reported label change, not proof of completed construction. Permit issuance is authorization, planned dates are schedules, and estimated or reported actual costs are not a citywide investment total.",
         "",
-        f"- Raw changes: [`data/monthly_changes/{comparison['comparison_month']}.csv`](../data/monthly_changes/{comparison['comparison_month']}.csv)",
-        f"- Analysis: [`data/monthly_changes/analysis/{comparison['comparison_month']}.json`](../data/monthly_changes/analysis/{comparison['comparison_month']}.json)",
-        f"- Dashboard detail: [`docs/dashboard/comparisons/{comparison['comparison_month']}.html`](../docs/dashboard/comparisons/{comparison['comparison_month']}.html)",
+        f"- Raw changes: [`data/monthly_changes/{comparison['comparison_month']}.csv`](../../data/monthly_changes/{comparison['comparison_month']}.csv)",
+        f"- Analysis: [`data/monthly_changes/analysis/{comparison['comparison_month']}.json`](../../data/monthly_changes/analysis/{comparison['comparison_month']}.json)",
+        f"- Dashboard detail: [`reports/dashboard/comparisons/{comparison['comparison_month']}.html`](../dashboard/comparisons/{comparison['comparison_month']}.html)",
         "",
     ])
     return "\n".join(lines)

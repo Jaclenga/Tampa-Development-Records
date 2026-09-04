@@ -25,7 +25,7 @@ DATA = ROOT / "data"
 SNAPSHOTS = DATA / "snapshots"
 CHANGES = DATA / "monthly_changes"
 ANALYSIS = CHANGES / "analysis"
-REPORTS = ROOT / "reports"
+REPORTS = ROOT / "reports" / "changes"
 THRESHOLDS = ROOT / "config" / "change_analysis_thresholds.json"
 SCHEMA_VERSION = "1.0.0"
 INVALID_NATIVE_IDS = {"", "N/A", "NA", "NONE", "NULL", "UNKNOWN", "0000000", "0", "-"}
@@ -787,6 +787,6 @@ def update_index(index_path: Path = CHANGES / "index.json", analysis_dir: Path =
             "warning_alert_count": severities["warning"],
             "canonical_monthly_comparison": analysis["comparison"]["canonical_monthly_comparison"],
             "usable_for_global_aggregate_trend": analysis["trend_eligibility"]["usable_for_global_aggregate_trend"],
-            "dashboard_page": f"docs/dashboard/comparisons/{month}.html",
+            "dashboard_page": f"reports/dashboard/comparisons/{month}.html",
         })
     atomic_json(index_path, index)

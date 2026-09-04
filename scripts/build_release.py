@@ -36,6 +36,11 @@ RAW = DATA / "raw"
 PROCESSED = DATA / "processed"
 DOCS = ROOT / "docs"
 REPORTS = ROOT / "reports"
+DOC_GUIDES = DOCS / "guides"
+DOC_METHODOLOGY = DOCS / "methodology"
+DOC_REFERENCE = DOCS / "reference"
+DOC_VALIDATION = DOCS / "validation"
+VALIDATION_REPORTS = REPORTS / "validation"
 CACHE = ROOT / ".cache" / "source_cache"
 RELEASE_VERSION = "0.9.0"
 DATASET_TITLE = "Tampa Published Development Records: Source-Bounded Longitudinal Tracker"
@@ -826,7 +831,7 @@ FIELD_METADATA = {
     "verification_id": ("Stable identifier for one externally checked pilot claim.", "text", "", "Never blank.", "verification workflow", "Assigned in the v0.4 external evidence audit.", "verify-*", "Pilot claims are not a population accuracy estimate."),
     "claim_tested": ("Specific dataset assertion compared with external public evidence.", "text", "", "Never blank.", "verification workflow", "Defined before evaluating the cited evidence.", "Free text.", "Only the stated claim was evaluated."),
     "dataset_value": ("Dataset value or assertion subjected to the external check.", "text", "", "Never blank.", "dataset snapshot", "Copied from the referenced activity.", "Free text.", "Interpret together with claim_tested."),
-    "evidence_result": ("Outcome of comparing the stated claim with the cited evidence.", "categorical text", "", "Never blank.", "verification workflow", "Evidence review documented in VERIFICATION_REPORT.md.", "supported; contradicted; inconclusive", "Supported does not imply physical completion unless separately stated."),
+    "evidence_result": ("Outcome of comparing the stated claim with the cited evidence.", "categorical text", "", "Never blank.", "verification workflow", "Evidence review documented in docs/validation/VERIFICATION_REPORT.md.", "supported; contradicted; inconclusive", "Supported does not imply physical completion unless separately stated."),
     "evidence_type": ("Provenance category of the external evidence.", "categorical text", "", "Never blank.", "verification workflow", "Classified from the cited publisher/source.", "authoritative_city_page; authoritative_city_news; independent_city_data_mirror; third_party_permit_aggregation", "City pages can reflect the same administrative system as the GIS layer."),
     "evidence_url": ("Primary public URL supporting the verification judgment.", "URL", "", "Never blank.", "external evidence", "Public-source review.", "HTTP(S) URL.", "Web content can change after the review date."),
     "secondary_evidence_url": ("Optional second public URL used to corroborate the judgment.", "URL", "", "Blank means one evidence source was used.", "external evidence", "Public-source review.", "HTTP(S) URL.", "A second URL is not necessarily independent of the first."),
@@ -970,7 +975,7 @@ def metadata_for(
     if context_metadata:
         return context_metadata
     if field.startswith("audit_"):
-        return ("Identifier or metadata for the manual-validation audit row.", "text", "", "Blank until human review where applicable.", "audit workflow", "See MANUAL_VALIDATION_PROTOCOL.md.", "Protocol-defined.", "Not a validation result until completed by a reviewer.")
+        return ("Identifier or metadata for the manual-validation audit row.", "text", "", "Blank until human review where applicable.", "audit workflow", "See docs/validation/MANUAL_VALIDATION_PROTOCOL.md.", "Protocol-defined.", "Not a validation result until completed by a reviewer.")
     if field == "protocol_version":
         return ("Frozen validation-protocol version governing the row.", "text", "", "Never blank.", "validation study design", "validation_study.PROTOCOL_VERSION.", "Semantic version.", "Do not combine results governed by different protocol versions.")
     if field == "random_seed":
@@ -992,12 +997,12 @@ def metadata_for(
     if field in {"sampling_stratum", "match_methods", "match_distances_m"}:
         return ("Sampling or match context included to support manual review.", "text", "", "Blank when not applicable.", "derived audit context", "Created by create_manual_validation_sample().", "Protocol-defined.", "Context is not a human judgment.")
     if field == "review_status":
-        return ("Reviewer workflow state for the row.", "categorical text", "", "Blank means not started.", "reviewer-entered", "See MANUAL_VALIDATION_PROTOCOL.md.", "in_progress; complete", "Metrics require complete plus all evidence gates.")
+        return ("Reviewer workflow state for the row.", "categorical text", "", "Blank means not started.", "reviewer-entered", "See docs/validation/MANUAL_VALIDATION_PROTOCOL.md.", "in_progress; complete", "Metrics require complete plus all evidence gates.")
     if field.endswith("_result") and field in {
         "source_identity_result", "activity_classification_result", "cross_source_linkage_result",
         "status_interpretation_result", "building_footprint_match_result",
     }:
-        return ("Human-review outcome for the named dataset claim.", "categorical text", "", "Blank means not yet reviewed.", "reviewer-entered", "Frozen field-level rules in MANUAL_VALIDATION_PROTOCOL.md.", "supported; contradicted; inconclusive; not_applicable", "An unsuccessful evidence search is inconclusive, not contradicted.")
+        return ("Human-review outcome for the named dataset claim.", "categorical text", "", "Blank means not yet reviewed.", "reviewer-entered", "Frozen field-level rules in docs/validation/MANUAL_VALIDATION_PROTOCOL.md.", "supported; contradicted; inconclusive; not_applicable", "An unsuccessful evidence search is inconclusive, not contradicted.")
     if field == "reviewed_activity_class":
         return ("Evidence-based activity class assigned by the reviewer.", "categorical text", "", "Blank when classification is inconclusive or not applicable.", "reviewer-entered", "Frozen activity-classification rule.", "Dataset activity_class vocabulary.", "Requires cited, manually confirmed evidence.")
     if field == "reviewed_activity_stage":
@@ -1005,7 +1010,7 @@ def metadata_for(
     if field == "physical_work_evidence":
         return ("Reviewer's finding about affirmative evidence of physical work.", "categorical text", "", "Blank means not yet reviewed.", "reviewer-entered", "Frozen physical-evidence rule.", "present; absent; unknown; not_applicable", "Failure to find evidence must be coded unknown, not absent.")
     if field == "evidence_source_types":
-        return ("Semicolon-delimited categories of sources manually reviewed.", "text", "", "Blank means not yet reviewed.", "reviewer-entered", "Acceptable-source list in MANUAL_VALIDATION_PROTOCOL.md.", "Protocol-defined source categories.", "AI output alone is not an evidence source.")
+        return ("Semicolon-delimited categories of sources manually reviewed.", "text", "", "Blank means not yet reviewed.", "reviewer-entered", "Acceptable-source list in docs/validation/MANUAL_VALIDATION_PROTOCOL.md.", "Protocol-defined source categories.", "AI output alone is not an evidence source.")
     if field in {"primary_evidence_url", "secondary_evidence_url"}:
         return ("Public URL for evidence used in the review.", "URL", "", "Blank when unavailable; a stable document reference is required if the primary URL is blank.", "reviewer-entered", "Manually opened evidence source.", "HTTP(S) URL.", "Links can change; record access time and document reference when possible.")
     if field == "evidence_document_reference":
@@ -1017,7 +1022,7 @@ def metadata_for(
     if field == "manual_evidence_confirmed":
         return ("Whether a human opened and confirmed the cited evidence.", "categorical text", "", "Blank means not yet reviewed.", "reviewer-entered", "Completion gate in scripts/review_metrics.py.", "yes; no", "Only yes is accepted for a completed review.")
     if field in {"review_notes", "reviewer_id"}:
-        return ("Reviewer-entered audit evidence or provenance.", "text", "", "Blank means not yet reviewed or not applicable.", "reviewer-entered", "See MANUAL_VALIDATION_PROTOCOL.md.", "Protocol-defined.", "Independent evidence URLs and reviewer provenance are required for completed judgments where specified.")
+        return ("Reviewer-entered audit evidence or provenance.", "text", "", "Blank means not yet reviewed or not applicable.", "reviewer-entered", "See docs/validation/MANUAL_VALIDATION_PROTOCOL.md.", "Protocol-defined.", "Independent evidence URLs and reviewer provenance are required for completed judgments where specified.")
     if field in {"review_status", "match_count", "source"}:
         return ("Workflow status, stratum count, or cited source for the table row.", "text", "", "Blank means unavailable or pending.", "derived/source metadata", "See the table-specific methodology documentation.", "Table-defined.", "Interpret only in the context of its table.")
     raise KeyError(f"Missing data-dictionary metadata for field: {field}")
@@ -1043,7 +1048,7 @@ def write_data_dictionary() -> None:
                 "source_field_or_derivation": derivation, "valid_values": valid_values,
                 "interpretation_warning": warning,
             })
-    write_csv(DOCS / "data_dictionary.csv", dictionary, lineterminator="\n")
+    write_csv(DOC_REFERENCE / "data_dictionary.csv", dictionary, lineterminator="\n")
 
 
 def write_documentation(counts: dict[str, int], activities: list[dict], matches: list[dict], retrieved: str) -> None:
@@ -1121,7 +1126,7 @@ def write_documentation(counts: dict[str, int], activities: list[dict], matches:
             "Parcel links remain proposed analytical links pending human review and are not legal parcel determinations.",
         ],
     }
-    (DOCS / "qa_report.json").write_text(json.dumps(qa, indent=2), encoding="utf-8")
+    (VALIDATION_REPORTS / "qa_report.json").write_text(json.dumps(qa, indent=2), encoding="utf-8")
 
     write_data_dictionary()
 
@@ -1143,7 +1148,7 @@ def create_public_archive() -> None:
         *sorted((DATA / "monthly_events").rglob("*")),
         *sorted((DATA / "planned_events").rglob("*")),
         *(sorted(REPORTS.rglob("*")) if REPORTS.exists() else []),
-        *sorted(PROCESSED.glob("*.csv")), *sorted(DOCS.glob("*")),
+        *sorted(PROCESSED.glob("*.csv")), *sorted(DOCS.rglob("*")),
         *sorted((ROOT / "verification").glob("*")),
     ]
     with zipfile.ZipFile(temporary_archive, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as bundle:
@@ -1177,7 +1182,7 @@ def create_public_archive() -> None:
             "data/planned_events/index.json",
             "scripts/validation_study.py",
             "scripts/monthly_cohorts.py",
-            "docs/TEMPORAL_COHORTS.md",
+            "docs/methodology/TEMPORAL_COHORTS.md",
             "verification/verification_summary.csv",
         )
         missing_release_files = [
@@ -1199,7 +1204,10 @@ def main() -> None:
         help="Rebuild from bundled raw snapshots without refreshing live ArcGIS layers.",
     )
     args = parser.parse_args()
-    for directory in (RAW, PROCESSED, DOCS, CACHE):
+    for directory in (
+        RAW, PROCESSED, DOC_GUIDES, DOC_METHODOLOGY, DOC_REFERENCE,
+        DOC_VALIDATION, VALIDATION_REPORTS, CACHE,
+    ):
         directory.mkdir(parents=True, exist_ok=True)
     if args.include_hcpa:
         ensure_hcpa_latlon()
@@ -1352,17 +1360,17 @@ def main() -> None:
             PROCESSED / "bounded_census_records.csv", PROCESSED / "source_universes.csv",
             PROCESSED / "bounded_census_summary.csv",
             PROCESSED / "activity_by_month.csv",
-            PROCESSED / "completeness_benchmarks.csv", DOCS / "data_dictionary.csv", DOCS / "qa_report.json",
+            PROCESSED / "completeness_benchmarks.csv", DOC_REFERENCE / "data_dictionary.csv", VALIDATION_REPORTS / "qa_report.json",
             ROOT / "verification" / "verification_summary.csv",
-            DOCS / "validation_report.json", DOCS / "KNOWN_LIMITATIONS.md",
-            DOCS / "accuracy_verification_report.json",
-            DOCS / "validation_study_design.json",
-            DOCS / "review_metrics_development.json", DOCS / "review_metrics_holdout.json",
-            DOCS / "LICENSE_NOTES.md", DOCS / "PUBLIC_RECORDS_REQUEST.md",
-            DOCS / "AI_USE_STATEMENT.md",
-            DOCS / "MANUAL_VALIDATION_GUIDE.md", DOCS / "MANUAL_VALIDATION_PROTOCOL.md",
-            DOCS / "VERIFICATION_REPORT.md", DOCS / "GROUND_TRUTH_METHODOLOGY.md", DOCS / "BOUNDED_CENSUS_SCOPE.md",
-            DOCS / "CONTEXT_MODULES.md", DOCS / "TEMPORAL_COHORTS.md", *longitudinal_files,
+            VALIDATION_REPORTS / "validation_report.json", DOC_REFERENCE / "KNOWN_LIMITATIONS.md",
+            VALIDATION_REPORTS / "accuracy_verification_report.json",
+            VALIDATION_REPORTS / "validation_study_design.json",
+            VALIDATION_REPORTS / "review_metrics_development.json", VALIDATION_REPORTS / "review_metrics_holdout.json",
+            DOC_REFERENCE / "LICENSE_NOTES.md", DOC_GUIDES / "PUBLIC_RECORDS_REQUEST.md",
+            DOC_REFERENCE / "AI_USE_STATEMENT.md",
+            DOC_GUIDES / "MANUAL_VALIDATION_GUIDE.md", DOC_VALIDATION / "MANUAL_VALIDATION_PROTOCOL.md",
+            DOC_VALIDATION / "VERIFICATION_REPORT.md", DOC_METHODOLOGY / "GROUND_TRUTH_METHODOLOGY.md", DOC_METHODOLOGY / "BOUNDED_CENSUS_SCOPE.md",
+            DOC_METHODOLOGY / "CONTEXT_MODULES.md", DOC_METHODOLOGY / "TEMPORAL_COHORTS.md", *longitudinal_files,
         ]),
         "license_note": "The public archive contains privacy-minimized City-hosted core and context source snapshots only. Code is MIT-licensed; source data remain subject to City terms described in DATA_LICENSE.md.",
         "bounded_census_claim": "All features returned by eight named City ArcGIS layers at the recorded snapshot retrieval time are included.",
@@ -1449,7 +1457,7 @@ def main() -> None:
         deprecated.unlink(missing_ok=True)
     if not args.include_hcpa:
         create_public_archive()
-    print(json.dumps(json.loads((DOCS / "qa_report.json").read_text()), indent=2))
+    print(json.dumps(json.loads((VALIDATION_REPORTS / "qa_report.json").read_text()), indent=2))
 
 
 if __name__ == "__main__":

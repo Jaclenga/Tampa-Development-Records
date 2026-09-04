@@ -8,7 +8,7 @@ collections. The current Accela aggregate covers records opened from
 This is a local expanded edition, not a replacement for the source-bounded
 ArcGIS census. It must not be described as a complete census of Tampa permits,
 projects, inspections, certificates, construction, or investment.
-See the detailed [Accela limitations](../../docs/ACCELA_LIMITATIONS.md) before
+See the detailed [Accela limitations](../../docs/reference/ACCELA_LIMITATIONS.md) before
 using the expanded edition for trends or outcome claims.
 
 The published file is a deterministic gzip-compressed CSV because the complete

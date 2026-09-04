@@ -1,77 +1,74 @@
-# Documentation guide
+# Documentation
 
-The root README is intentionally brief. Use this index to find the detailed
-scope, methodology, validation, and release material.
+Documentation is organized by what a reader is trying to do. Generated JSON
+and HTML are kept in [`reports/`](../reports/README.md), separate from the
+hand-maintained explanations in this directory.
 
-## Current blockers
+## Start here
 
-1. **Manual validation is incomplete.** Ten of 150 core first-review rows are
-   complete, all in the 100-row development phase; all 50 holdout first reviews
-   and all 50 blind second-review assignments remain unfinished. The partial
-   results are exploratory diagnostics, not an accuracy estimate. Continue with
-   the [operator guide](MANUAL_VALIDATION_GUIDE.md).
-2. **The tracker does not yet have a full monthly interval.** The August 23 to
-   September 1 comparison is a nine-day initial interval. The canonical
-   month-end series begins September 30. See the [tracker methodology](LONGITUDINAL_TRACKER.md).
-3. **Version 0.9.0 is not tagged.** The metadata is prepared, but the repository
-   does not yet have an annotated release tag. See the
-   [release checklist](RELEASE_CHECKLIST.md).
+| Need | Document |
+| --- | --- |
+| Understand what the dataset includes | [Bounded census scope](methodology/BOUNDED_CENSUS_SCOPE.md) |
+| Use the longitudinal outputs correctly | [Longitudinal tracker](methodology/LONGITUDINAL_TRACKER.md) |
+| Collect public Accela records | [Accela collector guide](guides/ACCELA_COLLECTOR.md) |
+| Complete a manual review | [Manual-validation guide](guides/MANUAL_VALIDATION_GUIDE.md) |
+| Interpret the validation evidence | [Verification report](validation/VERIFICATION_REPORT.md) |
+| Prepare a release | [Release checklist](guides/RELEASE_CHECKLIST.md) |
+| Look up fields | [Data dictionary](reference/data_dictionary.csv) |
+| Review limitations | [Known limitations](reference/KNOWN_LIMITATIONS.md) and [Accela limitations](reference/ACCELA_LIMITATIONS.md) |
 
-## Dataset scope
+## Sections
 
-- [Accela limitations](ACCELA_LIMITATIONS.md) - retrospective timing,
-  coverage comparability, module imbalance, administrative outcomes, census
-  boundaries, and unfinished manual validation.
+### `guides/`
 
-- [Source scope](BOUNDED_CENSUS_SCOPE.md) — included layers, record counts,
-  completeness boundary, and priority coverage gaps.
-- [Data dictionary](data_dictionary.csv) — field-level definitions for the
-  processed outputs.
-- [Known limitations](KNOWN_LIMITATIONS.md) — claims the data cannot support.
-- [Source and redistribution notes](LICENSE_NOTES.md) — provenance and source
-  licensing considerations.
-- [Public-records request](PUBLIC_RECORDS_REQUEST.md) — request specification
-  for missing official lifecycle records.
+Task-oriented instructions for collection, manual review, records requests,
+and release publication.
 
-## Methods
+- [Accela collector](guides/ACCELA_COLLECTOR.md)
+- [Manual-validation operator guide](guides/MANUAL_VALIDATION_GUIDE.md)
+- [Public-records request](guides/PUBLIC_RECORDS_REQUEST.md)
+- [Release checklist](guides/RELEASE_CHECKLIST.md)
 
-- [Tampa Accela collector](ACCELA_COLLECTOR.md) — verified anonymous search
-  flow, safe operating commands, provenance, limitations, and GIS crosswalk.
+### `methodology/`
 
-- [Longitudinal tracker](LONGITUDINAL_TRACKER.md) — snapshot identity,
-  comparison semantics, outputs, and operating commands.
-- [Snapshot-change dashboard](CHANGE_DASHBOARD.md) — metrics, alert thresholds,
-  interval classification, trend eligibility, static outputs, and limitations.
-- [Source-date monthly events and plans](TEMPORAL_COHORTS.md) — canonical dates,
-  non-future monthly extracts, forward-looking plans, observation months,
-  source-specific date rules, and valid uses.
-- [Ground-truth methodology](GROUND_TRUTH_METHODOLOGY.md) — evidence grades and
-  restrictions on inferred outcomes.
-- [Context modules](CONTEXT_MODULES.md) — capital-budget, parcel, and building
-  context kept outside the bounded-census count.
+Definitions, analytical boundaries, temporal semantics, and transformation
+methods.
 
-## Validation
+- [Bounded census scope](methodology/BOUNDED_CENSUS_SCOPE.md)
+- [Change dashboard](methodology/CHANGE_DASHBOARD.md)
+- [Context modules](methodology/CONTEXT_MODULES.md)
+- [Ground-truth methodology](methodology/GROUND_TRUTH_METHODOLOGY.md)
+- [Longitudinal tracker](methodology/LONGITUDINAL_TRACKER.md)
+- [Temporal cohorts](methodology/TEMPORAL_COHORTS.md)
 
-- [Agentic evidence validation](AGENTIC_VALIDATION.md) - bounded evidence
-  retrieval, source controls, deterministic handoff, repeatability, and the
-  boundary between agent metrics and dataset validity.
+### `reference/`
 
-- [Manual-validation operator guide](MANUAL_VALIDATION_GUIDE.md) — the shortest
-  path for reviewers completing the frozen sample.
-- [Manual-validation protocol](MANUAL_VALIDATION_PROTOCOL.md) — controlling
-  definitions, sampling design, and decision rules.
-- [Verification notes](VERIFICATION_REPORT.md) — automated and external checks
-  already performed.
-- [`validation_report.json`](validation_report.json) — machine-readable release
-  integrity results.
-- [`validation_study_design.json`](validation_study_design.json) — frozen sample
-  design and phase allocation.
+Field definitions, known limitations, licensing notes, and disclosure
+statements.
 
-## Operations and publication
+- [Accela limitations](reference/ACCELA_LIMITATIONS.md)
+- [AI use statement](reference/AI_USE_STATEMENT.md)
+- [Data dictionary](reference/data_dictionary.csv)
+- [Known limitations](reference/KNOWN_LIMITATIONS.md)
+- [License notes](reference/LICENSE_NOTES.md)
 
-- [Release checklist](RELEASE_CHECKLIST.md) — validation gates, tagging, and
-  publication steps.
-- [Script command index](../scripts/README.md) — build, tracking, verification,
-  and review-metric commands.
-- [AI use statement](AI_USE_STATEMENT.md) — where AI assisted and which work
-  still requires human judgment.
+### `validation/`
+
+Validation protocols, evidence-layer documentation, and interpretation of
+completed checks.
+
+- [Agentic evidence validation](validation/AGENTIC_VALIDATION.md)
+- [Manual-validation protocol](validation/MANUAL_VALIDATION_PROTOCOL.md)
+- [Verification report](validation/VERIFICATION_REPORT.md)
+
+## Current release blockers
+
+1. Manual validation is incomplete: 10 of 150 core first reviews are complete,
+   while holdout and blind second reviews remain unfinished.
+2. The tracker has a nine-day initial comparison, not yet a full
+   month-end-to-month-end interval.
+3. Version 0.9.0 metadata is prepared, but the annotated release tag has not
+   been published.
+
+See the [release checklist](guides/RELEASE_CHECKLIST.md) for the controlling
+sequence and gates.

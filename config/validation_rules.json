@@ -46,7 +46,7 @@
   "manual_review_boundary": {
     "automated_rule": false,
     "protocol_version": "1.0.0",
-    "protocol": "docs/MANUAL_VALIDATION_PROTOCOL.md",
+    "protocol": "docs/validation/MANUAL_VALIDATION_PROTOCOL.md",
     "statement": "Human review outcomes remain record-level judgments and are never relabeled as deterministic automated rules."
   }
 }

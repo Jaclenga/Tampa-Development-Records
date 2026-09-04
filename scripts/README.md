@@ -13,7 +13,7 @@ Python's standard library. The optional Accela collector uses `requests` from
   available and stages only explicitly delivered lifecycle events.
 - `collect_accela.py` makes respectful, bounded anonymous searches of Tampa's
   public ACA portal, preserves token-redacted raw provenance, and writes
-  normalized snapshots. See the [collector guide](../docs/ACCELA_COLLECTOR.md).
+  normalized snapshots. See the [collector guide](../docs/guides/ACCELA_COLLECTOR.md).
 - `collect_and_freeze_month_end.py` collects one completed Accela day into an
   isolated Building/Planning snapshot, verifies gap-free checkpoints, records
   SHA-256 hashes, and then runs the immutable core snapshot tracker.
@@ -46,7 +46,7 @@ Python's standard library. The optional Accela collector uses `requests` from
 - `snapshot_tracker.py` writes immutable compact source-record snapshots and,
   once two snapshots exist, publishes deterministic monthly change CSVs,
   summary JSON, and readable Markdown updates. See the detailed
-  [tracker methodology](../docs/LONGITUDINAL_TRACKER.md).
+  [tracker methodology](../docs/methodology/LONGITUDINAL_TRACKER.md).
   Live collection reconciles repeated count-only results, the ID-only
   inventory, chunked feature pages, and a final count before archiving; partial
   nonzero layers are rejected.
@@ -59,7 +59,7 @@ Python's standard library. The optional Accela collector uses `requests` from
 - `monthly_cohorts.py` builds the cross-snapshot canonical source-date table,
   non-future `monthly_events` extracts, and forward-looking `planned_events`
   extracts while keeping event, first-observed, and snapshot months distinct. See
-  [the cohort methodology](../docs/TEMPORAL_COHORTS.md).
+  [the cohort methodology](../docs/methodology/TEMPORAL_COHORTS.md).
 
 ## Transformation
 

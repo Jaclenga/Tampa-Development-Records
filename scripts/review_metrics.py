@@ -195,7 +195,7 @@ def main() -> None:
         action="store_true",
         help="Emit clearly labeled exploratory summaries before all assigned reviews are complete.",
     )
-    parser.add_argument("--output", type=Path, help="JSON output path; defaults to docs/review_metrics_<phase>.json")
+    parser.add_argument("--output", type=Path, help="JSON output path; defaults to reports/validation/review_metrics_<phase>.json")
     args = parser.parse_args()
 
     first = rows(f"manual_validation_{args.phase}_sample.csv")
@@ -250,7 +250,7 @@ def main() -> None:
             else "Claim types are reported separately. Inconclusive and not-applicable judgments are shown but excluded from precision denominators."
         )
 
-    output = args.output or ROOT / "docs" / f"review_metrics_{args.phase}.json"
+    output = args.output or ROOT / "reports" / "validation" / f"review_metrics_{args.phase}.json"
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(report, indent=2))

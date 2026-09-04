@@ -221,10 +221,10 @@ substantially equivalent to:
 
 ## Related documentation
 
-- [Accela collector methodology](ACCELA_COLLECTOR.md)
-- [Temporal cohort methodology](TEMPORAL_COHORTS.md)
+- [Accela collector methodology](../guides/ACCELA_COLLECTOR.md)
+- [Temporal cohort methodology](../methodology/TEMPORAL_COHORTS.md)
 - [General known limitations](KNOWN_LIMITATIONS.md)
-- [Manual-validation protocol](MANUAL_VALIDATION_PROTOCOL.md)
-- [Manual-validation operator guide](MANUAL_VALIDATION_GUIDE.md)
-- [Integrated dataset notes](../data/integrated/README.md)
-- [Backfill validation report](../data/integrated/accela_backfill_report.json)
+- [Manual-validation protocol](../validation/MANUAL_VALIDATION_PROTOCOL.md)
+- [Manual-validation operator guide](../guides/MANUAL_VALIDATION_GUIDE.md)
+- [Integrated dataset notes](../../data/integrated/README.md)
+- [Backfill validation report](../../data/integrated/accela_backfill_report.json)

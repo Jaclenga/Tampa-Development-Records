@@ -47,14 +47,14 @@
       "records_with_any_published_change": 2103,
       "csv": "data/monthly_changes/2026-09.csv",
       "summary": "data/monthly_changes/2026-09.json",
-      "report": "reports/2026-09.md",
+      "report": "reports/changes/2026-09.md",
       "analysis_json": "data/monthly_changes/analysis/2026-09.json",
       "analysis_status": "review",
       "critical_alert_count": 0,
       "warning_alert_count": 12,
       "canonical_monthly_comparison": false,
       "usable_for_global_aggregate_trend": false,
-      "dashboard_page": "docs/dashboard/comparisons/2026-09.html"
+      "dashboard_page": "reports/dashboard/comparisons/2026-09.html"
     }
   ],
   "scope_note": "Snapshots and comparisons cover the configured public source layers, not all Tampa development."

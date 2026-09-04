@@ -2,12 +2,12 @@
 
 This guide explains what to do with the distinct frozen manual-validation CSV files.
 The controlling definitions and statistical design remain in
-[`MANUAL_VALIDATION_PROTOCOL.md`](MANUAL_VALIDATION_PROTOCOL.md).
+[`MANUAL_VALIDATION_PROTOCOL.md`](../validation/MANUAL_VALIDATION_PROTOCOL.md).
 
 The original protocol document governs only the **Core eight-layer manual
 validation study**. It does not govern or validate the expanded Accela edition.
 The additive study designs are registered in
-[`verification/README.md`](../verification/README.md).
+[`verification/README.md`](../../verification/README.md).
 
 ## Current progress and release gate
 

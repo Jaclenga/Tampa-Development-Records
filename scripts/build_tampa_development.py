@@ -344,8 +344,10 @@ def main() -> None:
     parser.add_argument("--output-dir", default=str(ROOT / "data"))
     args = parser.parse_args()
     root = Path(args.output_dir)
-    raw_dir, processed_dir, docs_dir = root / "raw", root / "processed", root.parent / "docs"
-    for d in (raw_dir, processed_dir, docs_dir):
+    raw_dir, processed_dir = root / "raw", root / "processed"
+    reference_dir = root.parent / "docs" / "reference"
+    validation_reports_dir = root.parent / "reports" / "validation"
+    for d in (raw_dir, processed_dir, reference_dir, validation_reports_dir):
         d.mkdir(parents=True, exist_ok=True)
 
     retrieved = dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat()
@@ -363,7 +365,7 @@ def main() -> None:
     write_csv(processed_dir / "tampa_physical_development_candidates.csv", candidates)
     summary = summarize(central)
     write_csv(processed_dir / "tampa_neighborhood_summary.csv", summary, list(summary[0]) if summary else [])
-    write_dictionary(docs_dir / "data_dictionary.csv")
+    write_dictionary(reference_dir / "data_dictionary.csv")
 
     qa = {
         "retrieved_at_utc": retrieved,
@@ -383,7 +385,7 @@ def main() -> None:
             "The physical-candidate file is a research queue, not a verified inventory of built development.",
         ],
     }
-    (docs_dir / "qa_report.json").write_text(json.dumps(qa, indent=2), encoding="utf-8")
+    (validation_reports_dir / "qa_report.json").write_text(json.dumps(qa, indent=2), encoding="utf-8")
     manifest = {
         "title": "City of Tampa Centralized Development Activity Dataset",
         "version": "0.1.0", "retrieved_at_utc": retrieved, "geography": "City of Tampa, Florida",
@@ -393,7 +395,7 @@ def main() -> None:
             "data/processed/tampa_development_activity.csv",
             "data/processed/tampa_physical_development_candidates.csv",
             "data/processed/tampa_neighborhood_summary.csv",
-            "docs/data_dictionary.csv", "docs/qa_report.json",
+            "docs/reference/data_dictionary.csv", "reports/validation/qa_report.json",
         ],
     }
     (root.parent / "manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")

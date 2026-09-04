@@ -47,5 +47,5 @@
   "final_analysis_phase": "holdout",
   "human_confirmation_required": true,
   "ai_policy": "AI may locate candidate sources; every label requires a manually confirmed cited URL or stable document reference.",
-  "protocol_document": "docs/MANUAL_VALIDATION_PROTOCOL.md"
+  "protocol_document": "docs/validation/MANUAL_VALIDATION_PROTOCOL.md"
 }

@@ -335,7 +335,7 @@ def metadata_for(field: str) -> tuple[str, str, str, str, str, str, str, str]:
         "second_review_assignment_id", "first_reviewer_code", "first_outcome", "agreement",
         "adjudication_status", "adjudicated_outcome", "adjudication_notes",
     }:
-        return ("Independent second-review or adjudication field.", "text", "", "Blank means the blinded workflow has not reached this step.", "reviewer/adjudicator", "See MANUAL_VALIDATION_GUIDE.md.", "Study-defined explicit vocabulary.", "Never overwrite either original reviewer judgment.")
+        return ("Independent second-review or adjudication field.", "text", "", "Blank means the blinded workflow has not reached this step.", "reviewer/adjudicator", "See docs/guides/MANUAL_VALIDATION_GUIDE.md.", "Study-defined explicit vocabulary.", "Never overwrite either original reviewer judgment.")
     if field == "review_status":
         return ("First-review workflow state.", "categorical text", "", "Blank means not started.", "reviewer", "Entered under the study guide.", "pending; in_progress; complete; excluded", "Complete does not imply a yes outcome.")
     outcome_fields = {
@@ -351,7 +351,7 @@ def metadata_for(field: str) -> tuple[str, str, str, str, str, str, str, str]:
     if field in outcome_fields:
         return ("Claim-specific human-review outcome.", "categorical text", "", "Blank means not reviewed.", "reviewer", "Evidence-based decision under the study guide.", "yes; no; unknown; not_applicable", "Applies only to the named validation claim.")
     if field in {"reviewer_code", "reviewed_at", "review_notes", "evidence_reference"}:
-        return ("Human-review provenance or evidence field.", "text", "", "Blank means not reviewed or unavailable.", "reviewer", "Entered under MANUAL_VALIDATION_GUIDE.md.", "Non-personal code, ISO timestamp, citation, or concise notes.", "Do not enter personal contact data; AI output is not evidence.")
+        return ("Human-review provenance or evidence field.", "text", "", "Blank means not reviewed or unavailable.", "reviewer", "Entered under docs/guides/MANUAL_VALIDATION_GUIDE.md.", "Non-personal code, ISO timestamp, citation, or concise notes.", "Do not enter personal contact data; AI output is not evidence.")
     if field in {"human_linkage_assessment", "duplicate_assessment", "semantic_change_interpretation"}:
-        return ("Study-specific human interpretation.", "categorical text", "", "Blank means not reviewed.", "reviewer", "Decision rules in MANUAL_VALIDATION_GUIDE.md.", "Study-defined vocabulary including unknown and not_applicable.", "Not a generic record-level accuracy score.")
+        return ("Study-specific human interpretation.", "categorical text", "", "Blank means not reviewed.", "reviewer", "Decision rules in docs/guides/MANUAL_VALIDATION_GUIDE.md.", "Study-defined vocabulary including unknown and not_applicable.", "Not a generic record-level accuracy score.")
     return ("Source, transformation, linkage, or change context frozen with the validation assignment.", "text", "", "Blank when the source or decision does not supply the field.", "source or deterministic transformation", "Copied without personal contact fields by the study builder.", "Source- or study-defined.", "Context is not a human validation judgment.")

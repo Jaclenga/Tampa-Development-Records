@@ -28,7 +28,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
 SNAPSHOTS = DATA / "snapshots"
 CHANGES = DATA / "monthly_changes"
-REPORTS = ROOT / "reports"
+REPORTS = ROOT / "reports" / "changes"
 INDEX = CHANGES / "index.json"
 FORMAT_VERSION = "1.0.0"
 
@@ -731,7 +731,7 @@ def report_markdown(summary: dict[str, object], changes: list[dict[str, str]]) -
         "A newly observed record may have existed before the interval, and a record that is no longer returned is not necessarily deleted, cancelled, or complete. "
         "Permit issuance is authorization, planned dates are schedules, and estimated costs are not actual spending.",
         "",
-        f"Full machine-readable changes: [`data/monthly_changes/{summary['comparison_month']}.csv`](../data/monthly_changes/{summary['comparison_month']}.csv)",
+        f"Full machine-readable changes: [`data/monthly_changes/{summary['comparison_month']}.csv`](../../data/monthly_changes/{summary['comparison_month']}.csv)",
         "",
     ])
     return "\n".join(lines)
@@ -782,7 +782,7 @@ def compare_snapshots(
     analysis_dir = changes_dir / "analysis"
     change_analysis.write_analysis_artifacts(analysis, analysis_dir=analysis_dir)
     change_analysis.atomic_text(report_path, analyze_snapshot_changes.render_report(analysis, analysis_changes))
-    dashboard_dir = ROOT / "docs" / "dashboard" if changes_dir == CHANGES else reports_dir.parent / "docs" / "dashboard"
+    dashboard_dir = ROOT / "reports" / "dashboard" if changes_dir == CHANGES else reports_dir.parent / "dashboard"
     build_change_dashboard.build_dashboard(
         analysis_dir=analysis_dir,
         changes_dir=changes_dir,
@@ -824,7 +824,7 @@ def tracker_index(
                 "records_with_any_published_change": summary["records_with_any_published_change"],
                 "csv": f"data/monthly_changes/{summary['comparison_month']}.csv",
                 "summary": f"data/monthly_changes/{summary['comparison_month']}.json",
-                "report": f"reports/{summary['comparison_month']}.md",
+                "report": f"reports/changes/{summary['comparison_month']}.md",
             }
             analysis_path = changes_dir / "analysis" / f"{summary['comparison_month']}.json"
             if analysis_path.exists():
@@ -837,7 +837,7 @@ def tracker_index(
                     "warning_alert_count": severities["warning"],
                     "canonical_monthly_comparison": analysis["comparison"]["canonical_monthly_comparison"],
                     "usable_for_global_aggregate_trend": analysis["trend_eligibility"]["usable_for_global_aggregate_trend"],
-                    "dashboard_page": f"docs/dashboard/comparisons/{summary['comparison_month']}.html",
+                    "dashboard_page": f"reports/dashboard/comparisons/{summary['comparison_month']}.html",
                 })
             comparisons.append(comparison)
     return {
@@ -902,7 +902,7 @@ def sync_manifest(index: dict[str, object]) -> None:
         path.relative_to(ROOT).as_posix()
         for directory in (
             DATA / "coverage", SNAPSHOTS, CHANGES,
-            DATA / "monthly_events", DATA / "planned_events", REPORTS,
+            DATA / "monthly_events", DATA / "planned_events", ROOT / "reports",
         )
         if directory.exists()
         for path in directory.rglob("*")
@@ -914,7 +914,7 @@ def sync_manifest(index: dict[str, object]) -> None:
     replaced_prefixes = ("data/monthly_records/", "data/monthly_events/", "data/planned_events/")
     existing_outputs = {
         path for path in manifest.get("outputs", [])
-        if not path.startswith(replaced_prefixes)
+        if not path.startswith(replaced_prefixes) and (ROOT / path).exists()
     }
     manifest["outputs"] = sorted(existing_outputs | tracked_outputs)
     atomic_json(manifest_path, manifest)

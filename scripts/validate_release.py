@@ -83,7 +83,7 @@ def main() -> None:
     parser.add_argument(
         "--report",
         type=Path,
-        default=ROOT / "docs" / "validation_report.json",
+        default=ROOT / "reports" / "validation" / "validation_report.json",
         help="JSON report path (defaults to the published report).",
     )
     args = parser.parse_args()
@@ -169,7 +169,7 @@ def main() -> None:
             for field in json.loads(row["properties_json"]):
                 if field.lower() in PRIVACY_BLOCKED_FIELDS:
                     tracker_privacy_fields.append(f"{metadata['snapshot_date']}:{field}")
-    with (ROOT / "docs" / "data_dictionary.csv").open(encoding="utf-8", newline="") as handle:
+    with (ROOT / "docs" / "reference" / "data_dictionary.csv").open(encoding="utf-8", newline="") as handle:
         dictionary = list(csv.DictReader(handle))
     documented_fields = {(x["table"], x["field"]) for x in dictionary}
     processed_fields = set()
@@ -620,7 +620,7 @@ def main() -> None:
             )
             for row in review2
         ),
-        "validation_study_design_is_published": (ROOT / "docs" / "validation_study_design.json").exists(),
+        "validation_study_design_is_published": (ROOT / "reports" / "validation" / "validation_study_design.json").exists(),
         "bounded_census_has_eight_named_universes": len(universes) == 8 and len(universe_ids) == 8,
         "bounded_census_contains_every_source_feature_once": (
             len(census_records) == len(sources)

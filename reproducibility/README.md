@@ -92,7 +92,7 @@ must never be recorded.
 
 ## Human and research provenance
 
-Human review follows `docs/MANUAL_VALIDATION_PROTOCOL.md`. Record-level files
+Human review follows `docs/validation/MANUAL_VALIDATION_PROTOCOL.md`. Record-level files
 preserve the protocol version, instructions, evidence references, reviewer
 code, timestamps, first/second-review distinction, and explicit AI-assistance
 field. Human judgments stay separate from deterministic validation.
@@ -125,7 +125,7 @@ pilot used AI-assisted research and remains explicitly separate from
 deterministic automated validation.
 
 The newer bounded agentic evidence experiment is documented separately in
-`docs/AGENTIC_VALIDATION.md`. Its recorded GPT-5.6 Sol investigations are
+`docs/validation/AGENTIC_VALIDATION.md`. Its recorded GPT-5.6 Sol investigations are
 nondeterministic research artifacts. The committed audit runner itself is
 offline and deterministic: it verifies provenance and evidence hashes, applies
 only experimental rules with release writes disabled, and leaves every result

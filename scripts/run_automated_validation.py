@@ -127,8 +127,8 @@ def input_paths() -> list[Path]:
             and "__pycache__" not in path.parts
             and path.suffix.lower() not in {".pyc", ".pyo"}
             and path not in {
-                ROOT / "docs" / "validation_report.json",
-                ROOT / "docs" / "accuracy_verification_report.json",
+                ROOT / "reports" / "validation" / "validation_report.json",
+                ROOT / "reports" / "validation" / "accuracy_verification_report.json",
             }
         ),
         key=lambda path: path.relative_to(ROOT).as_posix(),

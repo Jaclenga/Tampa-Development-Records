@@ -41,7 +41,7 @@ deduplicate identities within each source and field.
 
 ## Alerts and thresholds
 
-[`config/change_analysis_thresholds.json`](../config/change_analysis_thresholds.json)
+[`config/change_analysis_thresholds.json`](../../config/change_analysis_thresholds.json)
 is the controlling configuration. Critical alerts identify source count
 collapses or disappearance rates of at least 50% when at least 100 records are
 affected. Warning thresholds cover 20% source shifts, 30% publication churn,
@@ -83,7 +83,7 @@ an incomplete same-day capture that returned only 280 permits. The current
 August 23 to September 1 comparison has no critical collection-integrity alert;
 its `review` status reflects systematic field refreshes and the noncanonical
 nine-day interval. Supersession provenance is retained in the
-[snapshot metadata](../data/snapshots/2026-09-01/metadata.json).
+[snapshot metadata](../../data/snapshots/2026-09-01/metadata.json).
 
 `trend_eligibility` separates raw reporting from trend use. Raw reporting
 remains available even for critical comparisons. Global aggregate trends
@@ -116,9 +116,9 @@ data/monthly_changes/analysis/YYYY-MM.json
 data/monthly_changes/analysis/YYYY-MM_sources.csv
 data/monthly_changes/analysis/YYYY-MM_fields.csv
 data/monthly_changes/analysis/YYYY-MM_transitions.csv
-reports/YYYY-MM.md
-docs/dashboard/index.html
-docs/dashboard/comparisons/YYYY-MM.html
+reports/changes/YYYY-MM.md
+reports/dashboard/index.html
+reports/dashboard/comparisons/YYYY-MM.html
 ```
 
 The dashboard is self-contained and works from a local file or static host. It

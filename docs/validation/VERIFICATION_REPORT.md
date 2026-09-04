@@ -11,7 +11,7 @@ python scripts/verify_data_accuracy.py
 The script reconstructs source identifiers from the bundled GeoJSON and
 compares every source record, retained property, geometry, centroid, universe
 count, date, amount row, and recorded SHA-256 hash with the release tables. Its
-machine-readable output is `accuracy_verification_report.json`.
+machine-readable output is [`reports/validation/accuracy_verification_report.json`](../../reports/validation/accuracy_verification_report.json).
 
 For version 0.9.0, all automated checks passed for 4,469 core source features. This
 result establishes fidelity to the archived City layer snapshots. It does not

@@ -38,9 +38,9 @@ Tampa permits, developments, construction outcomes, or investment.
 The first observed comparison covers August 23 to September 1 and is a
 nine-day initial interval, not a full monthly interval. Its
 [`change summary`](data/monthly_changes/2026-09.json) and
-[`readable report`](reports/2026-09.md) are archived with the snapshots. The
-[`change dashboard`](docs/dashboard/index.html) and
-[`analysis documentation`](docs/CHANGE_DASHBOARD.md) flag unusually large
+[`readable report`](reports/changes/2026-09.md) are archived with the snapshots. The
+[`change dashboard`](reports/dashboard/index.html) and
+[`analysis documentation`](docs/methodology/CHANGE_DASHBOARD.md) flag unusually large
 source shifts before they are interpreted substantively.
 
 The accepted September 1 observation passed repeated count-only, ID-only,
@@ -141,13 +141,13 @@ codes, and second-review status remain in the
 | Analyze forward-looking source plans | [`data/planned_events/`](data/planned_events/) |
 | Inspect source coverage | [`data/processed/source_universes.csv`](data/processed/source_universes.csv) |
 | Review the latest core snapshot | [`data/snapshots/2026-09-01/`](data/snapshots/2026-09-01/) |
-| Review the initial observed comparison | [`reports/2026-09.md`](reports/2026-09.md) |
-| Explore snapshot differences | [`docs/dashboard/index.html`](docs/dashboard/index.html) |
-| Understand change metrics and alerts | [`docs/CHANGE_DASHBOARD.md`](docs/CHANGE_DASHBOARD.md) |
-| Complete manual validation | [`docs/MANUAL_VALIDATION_GUIDE.md`](docs/MANUAL_VALIDATION_GUIDE.md) |
-| Review the bounded agent evidence experiment | [`docs/AGENTIC_VALIDATION.md`](docs/AGENTIC_VALIDATION.md) |
-| Collect bounded public Accela records | [`docs/ACCELA_COLLECTOR.md`](docs/ACCELA_COLLECTOR.md) |
-| Understand Accela analytical limitations | [`docs/ACCELA_LIMITATIONS.md`](docs/ACCELA_LIMITATIONS.md) |
+| Review the initial observed comparison | [`reports/changes/2026-09.md`](reports/changes/2026-09.md) |
+| Explore snapshot differences | [`reports/dashboard/index.html`](reports/dashboard/index.html) |
+| Understand change metrics and alerts | [`docs/methodology/CHANGE_DASHBOARD.md`](docs/methodology/CHANGE_DASHBOARD.md) |
+| Complete manual validation | [`docs/guides/MANUAL_VALIDATION_GUIDE.md`](docs/guides/MANUAL_VALIDATION_GUIDE.md) |
+| Review the bounded agent evidence experiment | [`docs/validation/AGENTIC_VALIDATION.md`](docs/validation/AGENTIC_VALIDATION.md) |
+| Collect bounded public Accela records | [`docs/guides/ACCELA_COLLECTOR.md`](docs/guides/ACCELA_COLLECTOR.md) |
+| Understand Accela analytical limitations | [`docs/reference/ACCELA_LIMITATIONS.md`](docs/reference/ACCELA_LIMITATIONS.md) |
 | Navigate all documentation | [`docs/README.md`](docs/README.md) |
 
 ## What the dataset supports
@@ -207,7 +207,7 @@ and archived candidate evidence without changing the dataset or human-review
 fields. Reproduce its deterministic audit with `python
 scripts/run_agentic_validation.py --study core --repeat 3
 --allow-recorded-live`; see the [agentic validation
-guide](docs/AGENTIC_VALIDATION.md) and the separate
+guide](docs/validation/AGENTIC_VALIDATION.md) and the separate
 [`AGENTIC_VALIDATION_REPORT`](reports/AGENTIC_VALIDATION_REPORT.md). Its metrics
 measure the evidence investigator, not dataset accuracy.
 
@@ -254,8 +254,8 @@ python scripts/snapshot_tracker.py collect-live
 ```
 
 See [`scripts/README.md`](scripts/README.md) for the complete command index and
-[`docs/LONGITUDINAL_TRACKER.md`](docs/LONGITUDINAL_TRACKER.md) for snapshot and
-comparison semantics. See [`docs/TEMPORAL_COHORTS.md`](docs/TEMPORAL_COHORTS.md)
+[`docs/methodology/LONGITUDINAL_TRACKER.md`](docs/methodology/LONGITUDINAL_TRACKER.md) for snapshot and
+comparison semantics. See [`docs/methodology/TEMPORAL_COHORTS.md`](docs/methodology/TEMPORAL_COHORTS.md)
 before combining monthly records across sources or date types.
 
 ## Before treating v0.9.0 as a public release
@@ -271,7 +271,7 @@ one distribution gap:
 3. Run the release checks and publish an annotated `v0.9.0` Git tag.
 
 The detailed sequence is in the
-[`release checklist`](docs/RELEASE_CHECKLIST.md). Until the first item is
+[`release checklist`](docs/guides/RELEASE_CHECKLIST.md). Until the first item is
 complete, do not claim a measured error rate. Until the second is complete,
 describe August 23 to September 1 only as an initial short-interval comparison,
 not a full monthly result.
@@ -279,17 +279,19 @@ not a full monthly result.
 ## Repository layout
 
 ```text
-data/raw/             archived privacy-minimized source files
-data/processed/       analysis-ready tables and review queues
-data/integrated/      optional duplicate-safe expanded activity editions
-data/snapshots/       compact immutable observations by date
-data/monthly_changes/ machine-readable comparisons and index
-data/monthly_events/ non-future source-date extracts and index
-data/planned_events/ forward-looking source-plan extracts and index
-docs/                 scope, methods, validation, and release guidance
-scripts/              acquisition, transformation, tracking, and QA
-src/tampa_accela/     optional public ACA collector package
+config/               machine-readable pipeline and validation rules
+data/                 source archives, derived tables, snapshots, and cohorts
+docs/guides/          task-oriented operating and review instructions
+docs/methodology/     analytical scope, semantics, and methods
+docs/reference/       dictionaries, limitations, licensing, and provenance
+docs/validation/      protocols and validation interpretation
+prompts/              versioned prompts used by the agent experiment
+reports/              generated dashboards, comparisons, and validation output
+reproducibility/      frozen runs, manifests, prompts, and environment records
+scripts/              command-line acquisition, build, analysis, and QA tools
+src/                  reusable Accela and validation packages
 tests/                deterministic workflow tests
+verification/         study register, assignments, and summary tables
 ```
 
 ## Citation and license
@@ -299,4 +301,4 @@ tests/                deterministic workflow tests
 
 Code and original documentation are MIT-licensed. City records remain subject
 to their source terms; see [`DATA_LICENSE.md`](DATA_LICENSE.md). AI-assistance
-details are recorded in [`docs/AI_USE_STATEMENT.md`](docs/AI_USE_STATEMENT.md).
+details are recorded in [`docs/reference/AI_USE_STATEMENT.md`](docs/reference/AI_USE_STATEMENT.md).

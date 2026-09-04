@@ -17,7 +17,7 @@ if str(ROOT) not in sys.path:
 from scripts import change_analysis  # noqa: E402
 
 
-DASHBOARD = ROOT / "docs" / "dashboard"
+DASHBOARD = ROOT / "reports" / "dashboard"
 DETAILS = DASHBOARD / "comparisons"
 DISCLAIMER = (
     "This dashboard describes changes in records returned by published sources. "

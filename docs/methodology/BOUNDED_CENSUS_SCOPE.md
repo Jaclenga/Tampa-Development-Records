@@ -77,9 +77,9 @@ annual capital-budget records.
 
 No verified public bulk endpoint for the first three was located in the
 official interfaces checked on August 28, 2026. The
-[`source_gap_registry.csv`](../data/coverage/source_gap_registry.csv) records
+[`source_gap_registry.csv`](../../data/coverage/source_gap_registry.csv) records
 the desired universes, analytical value, current evidence, and next action.
-The [public-records request](PUBLIC_RECORDS_REQUEST.md) provides a reproducible
+The [public-records request](../guides/PUBLIC_RECORDS_REQUEST.md) provides a reproducible
 path to the missing official records without scraping address-level pages.
 
 ## Dates
