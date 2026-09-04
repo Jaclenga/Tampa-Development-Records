@@ -112,6 +112,9 @@ def main() -> None:
     parcel_context = read("parcel_context.csv")
     parcel_links = read("parcel_activity_links.csv")
     review2 = read("manual_validation_second_review.csv")
+    core_reliability = read("manual_validation_core_reliability.csv")
+    accela_audit_plan = read("manual_validation_accela_audit_plan.csv")
+    longitudinal_initial_plan = read("manual_validation_longitudinal_initial_plan.csv")
     accela_source_review = read("manual_validation_accela_source_fidelity.csv")
     accela_source_review2 = read("manual_validation_accela_source_fidelity_second_review.csv")
     accela_normalization_review = read("manual_validation_accela_normalization.csv")
@@ -126,6 +129,7 @@ def main() -> None:
     monthly_cohorts = read("activity_by_month.csv")
     monthly_events_dir = ROOT / "data" / "monthly_events"
     planned_events_dir = ROOT / "data" / "planned_events"
+    lean_plan = json.loads((ROOT / "config" / "manual_validation_plan.json").read_text(encoding="utf-8"))
     assert_frozen_assignments()
 
     def read_extracts(directory: Path) -> list[dict[str, str]]:
@@ -235,7 +239,7 @@ def main() -> None:
         and (ROOT / comparison["report"]).exists()
         for comparison in tracker_index.get("comparisons", [])
     )
-    expanded_primary = {
+    legacy_expanded_primary = {
         "accela_source_fidelity_manual_validation": accela_source_review,
         "accela_normalization_validation": accela_normalization_review,
         "gis_accela_linkage_audit": integration_review,
@@ -329,21 +333,21 @@ def main() -> None:
         "manual_audit_review_values_use_protocol_vocabularies": all(
             review_values_valid(x) for x in audit + audit_development + audit_holdout
         ),
-        "expanded_validation_sample_sizes_match_design": (
+        "legacy_expanded_assignment_sizes_preserved": (
             len(accela_source_review) == 200
             and len(accela_normalization_review) == 125
             and len(integration_review) == 100
             and len(change_review) == 75
         ),
-        "expanded_validation_samples_are_seeded_weighted_and_unique": all(
-            expanded_design_valid(rows) for rows in expanded_primary.values()
+        "legacy_expanded_assignments_are_seeded_weighted_and_unique": all(
+            expanded_design_valid(rows) for rows in legacy_expanded_primary.values()
         ),
         "accela_validation_studies_do_not_overlap": (
             {row["record_id"] for row in accela_source_review}.isdisjoint(
                 {row["record_id"] for row in accela_normalization_review}
             )
         ),
-        "expanded_second_reviews_are_blinded_and_independent": (
+        "legacy_expanded_second_reviews_are_preserved": (
             len(accela_source_review2) == 50
             and len(accela_normalization_review2) == 31
             and len(integration_review2) == 25
@@ -355,14 +359,40 @@ def main() -> None:
                 for row in expanded_second
             )
         ),
-        "verification_summary_reconciles_expanded_studies": all(
-            study in verification_summary
-            and verification_summary[study]["eligible_records"] == str(len(rows))
-            for study, rows in expanded_primary.items()
-        ) and verification_summary.get("expanded_double_review", {}).get("eligible_records") == "125",
+        "lean_validation_plan_targets_are_published": (
+            lean_plan.get("plan_version") == "2.0.0"
+            and lean_plan.get("total_initial_human_judgments") == 280
+            and len(core_reliability) == 25
+            and len(accela_audit_plan) == 75
+            and len(longitudinal_initial_plan) == 30
+        ),
+        "core_reliability_subset_is_unique_and_from_frozen_candidates": (
+            len({row["audit_sample_id"] for row in core_reliability}) == 25
+            and {row["audit_sample_id"] for row in core_reliability}.issubset(
+                {row["audit_sample_id"] for row in review2}
+            )
+        ),
+        "targeted_accela_plan_has_required_component_allocation": (
+            Counter(row["audit_component"] for row in accela_audit_plan) == {
+                "source_fidelity_spot_check": 15,
+                "normalization_and_semantics": 30,
+                "linkage_and_deduplication": 30,
+            }
+            and len({row["portfolio_case_id"] for row in accela_audit_plan}) == 75
+        ),
+        "longitudinal_plan_has_high_impact_and_control_cases": (
+            Counter(row["risk_tier"] for row in longitudinal_initial_plan)
+            == {"high_impact": 20, "control": 10}
+            and len({row["audit_case_id"] for row in longitudinal_initial_plan}) == 30
+        ),
+        "verification_summary_reconciles_active_manual_plan": (
+            verification_summary.get("core_double_review", {}).get("eligible_records") == "25"
+            and verification_summary.get("targeted_accela_manual_audit", {}).get("eligible_records") == "75"
+            and verification_summary.get("initial_longitudinal_change_audit", {}).get("eligible_records") == "30"
+        ),
         "verification_summary_has_no_composite_score": (
             not any("composite" in key.lower() for key in verification_summary)
-            and len(verification_summary) == 12
+            and len(verification_summary) == 9
         ),
         "external_pilot_has_12_unique_checks": len(pilot) == 12 and len({x["verification_id"] for x in pilot}) == 12,
         "external_pilot_references_release_activities": all(x["activity_id"] in activity_ids for x in pilot),
@@ -657,6 +687,9 @@ def main() -> None:
             "manual_validation_development_sample": len(audit_development),
             "manual_validation_holdout_sample": len(audit_holdout),
             "manual_validation_second_review": len(review2),
+            "manual_validation_core_reliability": len(core_reliability),
+            "manual_validation_accela_audit_plan": len(accela_audit_plan),
+            "manual_validation_longitudinal_initial_plan": len(longitudinal_initial_plan),
             "manual_validation_accela_source_fidelity": len(accela_source_review),
             "manual_validation_accela_source_fidelity_second_review": len(accela_source_review2),
             "manual_validation_accela_normalization": len(accela_normalization_review),

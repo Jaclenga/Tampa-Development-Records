@@ -186,6 +186,37 @@ def summarize_study(path: Path, outcome_field: str) -> ReviewCounts:
     )
 
 
+def summarize_selected_plan(
+    plan_path: Path, outcome_fields: dict[str, str]
+) -> ReviewCounts:
+    """Summarize only active v2 cases while retaining legacy source files."""
+    selected = read_csv(plan_path)
+    cache: dict[str, dict[str, dict[str, str]]] = {}
+    adapted = []
+    for item in selected:
+        source_file = item["source_assignment_file"]
+        if source_file not in outcome_fields:
+            raise ValueError(f"No outcome mapping for active plan source: {source_file}")
+        if source_file not in cache:
+            source_rows = read_csv(ROOT / source_file)
+            require_unique(source_rows, "validation_sample_id", source_file)
+            cache[source_file] = {row["validation_sample_id"]: row for row in source_rows}
+        identifier = item["source_validation_sample_id"]
+        if identifier not in cache[source_file]:
+            raise ValueError(f"Active plan case {identifier} is missing from {source_file}")
+        source = cache[source_file][identifier]
+        adapted.append({
+            **source,
+            "audit_sample_id": f"{source_file}:{identifier}",
+            "outcome": source.get(outcome_fields[source_file], ""),
+        })
+    return summarize_reviews(
+        adapted,
+        outcome_field="outcome",
+        allowed_outcomes={"yes", "no", "unknown", "not_applicable"},
+    )
+
+
 def summarize_expanded_second_reviews(paths: list[Path]) -> ReviewCounts:
     rows = []
     for path in paths:
@@ -277,7 +308,7 @@ def build_summary() -> list[dict]:
     qa_passed = not qa_issues
 
     manual = load_manual_reviews(PROCESSED)
-    second = read_csv(PROCESSED / "manual_validation_second_review.csv")
+    second = read_csv(PROCESSED / "manual_validation_core_reliability.csv")
     pilot = read_csv(PROCESSED / "external_verification_pilot.csv")
     require_unique(pilot, "verification_id", "external verification pilot")
     # Reuse the protocol's strict completion rule for both first and second review.
@@ -290,24 +321,18 @@ def build_summary() -> list[dict]:
         allowed_outcomes={"yes", "no", "partial", "not_established", "unknown", "not_applicable"},
     )
 
-    accela_source_counts = summarize_study(
-        PROCESSED / "manual_validation_accela_source_fidelity.csv", "source_fidelity_outcome"
+    accela_counts = summarize_selected_plan(
+        PROCESSED / "manual_validation_accela_audit_plan.csv",
+        {
+            "data/processed/manual_validation_accela_source_fidelity.csv": "source_fidelity_outcome",
+            "data/processed/manual_validation_accela_normalization.csv": "normalization_outcome",
+            "data/processed/manual_validation_integration_links.csv": "linkage_outcome",
+        },
     )
-    accela_normalization_counts = summarize_study(
-        PROCESSED / "manual_validation_accela_normalization.csv", "normalization_outcome"
+    change_counts = summarize_selected_plan(
+        PROCESSED / "manual_validation_longitudinal_initial_plan.csv",
+        {"data/processed/manual_validation_change_events.csv": "change_validation_outcome"},
     )
-    integration_counts = summarize_study(
-        PROCESSED / "manual_validation_integration_links.csv", "linkage_outcome"
-    )
-    change_counts = summarize_study(
-        PROCESSED / "manual_validation_change_events.csv", "change_validation_outcome"
-    )
-    expanded_second_counts = summarize_expanded_second_reviews([
-        PROCESSED / "manual_validation_accela_source_fidelity_second_review.csv",
-        PROCESSED / "manual_validation_accela_normalization_second_review.csv",
-        PROCESSED / "manual_validation_integration_links_second_review.csv",
-        PROCESSED / "manual_validation_change_events_second_review.csv",
-    ])
     backfill = json.loads(
         (ROOT / "data" / "integrated" / "accela_backfill_report.json").read_text(encoding="utf-8")
     )
@@ -342,30 +367,27 @@ def build_summary() -> list[dict]:
             "Historical evidence-selected pilot; physical-realization outcomes are not a population estimate."),
         row(snapshot_date, "core_double_review", second_counts,
             "complete" if second_counts.awaiting == 0 else "in_progress",
-            "Independent blinded second-review assignments only; automated checks are excluded.",
+            "Active plan-v2 independent blinded subset; 25 of the 50 frozen candidates are required.",
             passed_supported="", failed_conflicting="", unknown="", not_applicable="", partial_support="",
             second_review_count=second_counts.evaluated),
         row(snapshot_date, "accela_collection_integrity", collection_counts,
             "passed" if backfill_passed else "flagged",
             "Reconciles Accela module-month partitions, gap/truncation checks, and aggregate counts; this is not record-level accuracy."),
-        manual_study_row(snapshot_date, "accela_source_fidelity_manual_validation", accela_source_counts,
-            "Probability sample testing fidelity to the City portal; outcome validity is outside this study."),
-        manual_study_row(snapshot_date, "accela_normalization_validation", accela_normalization_counts,
-            "Separate probability sample testing TDR transformation and semantic rules, not whether the City portal is correct."),
-        manual_study_row(snapshot_date, "gis_accela_linkage_audit", integration_counts,
-            "Disproportionately stratified audit of matched and unmatched integration decisions; report linkage metrics separately."),
-        manual_study_row(snapshot_date, "longitudinal_change_event_validation", change_counts,
-            "Sample of machine-detected snapshot changes; collection fidelity does not establish substantive real-world change."),
+        manual_study_row(snapshot_date, "targeted_accela_manual_audit", accela_counts,
+            "Risk-based 75-case portfolio spanning source-fidelity spot checks, normalization, and linkage; not a population accuracy sample."),
+        manual_study_row(snapshot_date, "initial_longitudinal_change_audit", change_counts,
+            "Plan-v2 subset of 20 high-impact changes and 10 controls; source-publication interpretation only."),
         not_measured_row(snapshot_date, "expanded_external_outcome_verification",
             "No probability-based external outcome study has yet been performed for the expanded Accela edition."),
-        manual_study_row(snapshot_date, "expanded_double_review", expanded_second_counts,
-            "Independent blinded assignments across the four new studies; automated QA is not second review.",
-            passed_supported="", failed_conflicting="", unknown="", not_applicable="", partial_support="",
-            second_review_count=expanded_second_counts.evaluated),
     ]
-    if manual_counts.eligible != 150 or second_counts.eligible != 50:
+    if (
+        manual_counts.eligible != 150 or second_counts.eligible != 25
+        or accela_counts.eligible != 75 or change_counts.eligible != 30
+    ):
         raise ValueError(
-            f"Study denominators disagree with frozen design: manual={manual_counts.eligible}, second={second_counts.eligible}"
+            "Study denominators disagree with active plan: "
+            f"manual={manual_counts.eligible}, second={second_counts.eligible}, "
+            f"accela={accela_counts.eligible}, longitudinal={change_counts.eligible}"
         )
     return rows
 
@@ -388,12 +410,9 @@ def render_readme_scorecard(rows: list[dict]) -> str:
     pilot = by_type["core_external_outcome_verification"]
     second = by_type["core_double_review"]
     collection = by_type["accela_collection_integrity"]
-    source = by_type["accela_source_fidelity_manual_validation"]
-    normalization = by_type["accela_normalization_validation"]
-    linkage = by_type["gis_accela_linkage_audit"]
-    change = by_type["longitudinal_change_event_validation"]
+    accela = by_type["targeted_accela_manual_audit"]
+    change = by_type["initial_longitudinal_change_audit"]
     outcome = by_type["expanded_external_outcome_verification"]
-    expanded_second = by_type["expanded_double_review"]
 
     def progress(item: dict) -> str:
         if item["eligible_records"] == "":
@@ -427,24 +446,21 @@ not been redrawn from the expanded dataset.
 | Core source traceability | {progress(trace)} | {int(trace['passed_supported']):,} reconciled; {int(trace['failed_conflicting']):,} conflicting | Fidelity to the eight archived City layers, not real-world outcomes |
 | Core eight-layer manual validation | {progress(manual)} | {manual_result(manual)} | Claim-specific review of the original normalized/core universe only |
 | Core external outcome verification | {pilot['evaluated_records']} / {pilot['eligible_records']} historical pilot rows | {pilot['passed_supported']} documented; {pilot['partial_support']} partial; {pilot['unknown']} not established; {pilot['not_applicable']} not applicable | Evidence-selected pilot, not a population estimate |
-| Core double review | {progress(second)} | {manual_result(second)} | Independent blinded review of 50 frozen core assignments |
+| Core reviewer reliability | {progress(second)} | {manual_result(second)} | Independent blinded review of the active 25-row subset |
 
 ### Expanded Accela verification
 
 | Validation layer | Coverage / progress | Result among evaluated | What it establishes |
 | --- | ---: | --- | --- |
 | Accela collection integrity | {progress(collection)} | {collection['passed_supported']} module-month partitions passed | Retrieval completeness and reconciliation, not semantic or outcome accuracy |
-| Accela source-fidelity manual validation | {progress(source)} | {manual_result(source)} | Whether TDR captured what the City portal published |
-| Accela normalization validation | {progress(normalization)} | {manual_result(normalization)} | Whether TDR transformed and interpreted source records correctly |
-| GIS–Accela linkage audit | {progress(linkage)} | {manual_result(linkage)} | Linkage and deduplication decisions; not ordinary record-level accuracy |
+| Targeted Accela manual audit | {progress(accela)} | {manual_result(accela)} | Risk-focused source fidelity, normalization, and linkage checks; no global accuracy estimate |
 | Expanded external outcome verification | {progress(outcome)} | Not measured | Whether external evidence establishes real-world activity |
-| Expanded double review | {progress(expanded_second)} | {manual_result(expanded_second)} | Independent blinded assignments across the new studies |
 
 ### Longitudinal verification
 
 | Validation layer | Coverage / progress | Result among evaluated | What it establishes |
 | --- | ---: | --- | --- |
-| Longitudinal change-event validation | {progress(change)} | {manual_result(change)} | Whether detected source changes are confirmed and substantively interpretable rather than publication artifacts |"""
+| Initial longitudinal change audit | {progress(change)} | {manual_result(change)} | High-impact changes plus controls; source-publication changes rather than physical outcomes |"""
 
 
 def update_readme(rows: list[dict]) -> None:

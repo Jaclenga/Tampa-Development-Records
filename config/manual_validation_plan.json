@@ -1,0 +1,50 @@
+{
+  "plan_version": "2.0.0",
+  "effective_date": "2026-09-03",
+  "status": "active",
+  "total_initial_human_judgments": 280,
+  "studies": {
+    "core_semantic_validation": {
+      "target": 150,
+      "design": "pooled frozen stratified probability sample",
+      "inference": "claim-specific transformation quality for the original core normalized activity universe",
+      "confidence_interval": "Wilson 95% interval with design-weighted estimate"
+    },
+    "core_reviewer_reliability": {
+      "target": 25,
+      "design": "deterministic stratified subset of the 50 frozen second-review candidates",
+      "inference": "protocol reproducibility and inter-reviewer agreement"
+    },
+    "targeted_accela_audit": {
+      "target": 75,
+      "design": "risk-based audit portfolio",
+      "allocation": {
+        "source_fidelity_spot_checks": 15,
+        "normalization_and_semantics": 30,
+        "linkage_and_deduplication": 30
+      },
+      "inference": "failure-mode evidence by component; no population-wide Accela accuracy estimate"
+    },
+    "initial_longitudinal_audit": {
+      "target": 30,
+      "design": "20 high-impact or flagged changes plus 10 deterministic controls",
+      "inference": "interpretation of the initial source-publication comparison only"
+    }
+  },
+  "future_longitudinal_cycles": {
+    "minimum_reviews": 25,
+    "maximum_reviews": 40,
+    "selection": "all critical or substantively important flags up to the cap, plus deterministic random controls",
+    "trigger": "each release cycle with a new canonical comparison"
+  },
+  "claim_boundaries": {
+    "source_fidelity": "automated reconciliation plus selected manual spot checks",
+    "normalization_semantics": "core probability sample and targeted Accela audit",
+    "reviewer_reliability": "independent 25-row blinded core subset",
+    "gis_accela_linkage": "targeted risk-based cases reported by decision type",
+    "real_world_outcomes": "not established",
+    "longitudinal_changes": "changes in source publication; not proof of physical-world change"
+  },
+  "legacy_assignment_policy": "Original frozen assignment files remain unchanged for provenance. Only IDs listed by the v2 active-subset files are required under this plan.",
+  "plan_document": "docs/validation/LEAN_VALIDATION_PLAN.md"
+}

@@ -342,34 +342,39 @@ def write_csv(
 
 
 def validation_review_status() -> dict:
-    """Summarize protocol-gated review completion without producing estimates."""
+    """Summarize plan-v2 review completion without producing estimates."""
     try:
         from . import review_metrics
     except ImportError:  # Support direct execution from the scripts directory.
         import review_metrics
 
-    result = {"protocol_version": "1.0.0", "random_seed": 20260823}
-    all_ready = True
+    result = {"protocol_version": "1.0.0", "plan_version": "2.0.0", "random_seed": 20260823}
+    first_complete_total = 0
+    first_required_total = 0
     for phase in ("development", "holdout"):
         first_path = PROCESSED / f"manual_validation_{phase}_sample.csv"
-        second_path = PROCESSED / "manual_validation_second_review.csv"
         first = read_csv_path(first_path) if first_path.exists() else []
-        second_all = read_csv_path(second_path) if second_path.exists() else []
-        second = [row for row in second_all if row.get("sample_phase") == phase]
         first_complete = sum(review_metrics.is_complete(row) for row in first)
-        second_complete = sum(review_metrics.is_complete(row) for row in second)
-        ready = bool(first) and first_complete == len(first) and bool(second) and second_complete == len(second)
-        all_ready = all_ready and ready
+        first_complete_total += first_complete
+        first_required_total += len(first)
         result[phase] = {
             "first_reviews_complete": first_complete, "first_reviews_required": len(first),
-            "second_reviews_complete": second_complete, "second_reviews_required": len(second),
-            "ready_for_metrics": ready,
         }
-    result["status"] = (
-        "complete" if all_ready else
-        "development_complete_holdout_pending" if result["development"]["ready_for_metrics"] else
-        "pending_human_review"
+    reliability_path = PROCESSED / "manual_validation_core_reliability.csv"
+    reliability = read_csv_path(reliability_path) if reliability_path.exists() else []
+    reliability_complete = sum(review_metrics.is_complete(row) for row in reliability)
+    ready = (
+        first_required_total == 150 and first_complete_total == first_required_total
+        and len(reliability) == 25 and reliability_complete == len(reliability)
     )
+    result.update({
+        "first_reviews_complete": first_complete_total,
+        "first_reviews_required": first_required_total,
+        "independent_reviews_complete": reliability_complete,
+        "independent_reviews_required": len(reliability),
+        "ready_for_metrics": ready,
+        "status": "complete" if ready else "pending_human_review",
+    })
     return result
 
 
@@ -922,6 +927,23 @@ FIELD_METADATA = {
 def metadata_for(
     field: str, table: str | None = None,
 ) -> tuple[str, str, str, str, str, str, str, str]:
+    lean_plan_metadata = {
+        "portfolio_case_id": ("Stable identifier for a case in the targeted Accela audit.", "text", "", "Never blank.", "lean validation plan", "Sequential identifier assigned after deterministic selection.", "laa-001 through laa-075", "Identifies an audit case, not an Accela record."),
+        "audit_case_id": ("Stable identifier for a case in the initial longitudinal audit.", "text", "", "Never blank.", "lean validation plan", "Sequential identifier assigned after deterministic selection.", "lli-001 through lli-030", "Identifies an audit case, not a source change event."),
+        "plan_version": ("Version of the active lean manual-validation plan.", "text", "", "Never blank.", "validation study design", "config/manual_validation_plan.json.", "2.0.0", "The underlying legacy assignments retain their original protocol versions."),
+        "selection_seed": ("Integer seed used to select the active subset deterministically.", "integer", "", "Never blank.", "lean validation plan", "scripts/build_lean_validation_plan.py.", "20260903", "Changing the seed changes the active subset."),
+        "audit_component": ("Claim-specific component assigned within the targeted Accela audit.", "categorical text", "", "Never blank.", "lean validation plan", "Risk-based component allocation.", "source_fidelity_spot_check; normalization_and_semantics; linkage_and_deduplication", "Components support separate claims and must not be combined into a global accuracy estimate."),
+        "source_assignment_file": ("Repository-relative path to the preserved frozen assignment containing the full review fields.", "path", "", "Never blank.", "lean validation plan", "Selected from the legacy assignment inventory.", "Existing data/processed CSV path.", "Complete the human judgment in the referenced source assignment row."),
+        "source_validation_sample_id": ("Identifier of the selected row in the preserved source assignment.", "text", "", "Never blank.", "lean validation plan", "Copied from validation_sample_id in the source assignment.", "Protocol-defined identifier.", "Join with source_assignment_file before entering or analyzing outcomes."),
+        "risk_tier": ("Selection tier used to balance difficult cases with controls.", "categorical text", "", "Never blank.", "lean validation plan", "Deterministic risk rules in scripts/build_lean_validation_plan.py.", "elevated; matched; unmatched; high_impact; control", "Risk-targeted selections do not support population-wide estimates."),
+        "risk_reason": ("Concise reason the case was assigned to its risk tier.", "text", "", "Never blank.", "lean validation plan", "Deterministic case-selection rules.", "Plan-defined free text.", "This is sampling context, not a reviewer conclusion."),
+        "detected_change_type": ("Automated source-publication change category attached to the selected event.", "categorical text", "", "Never blank.", "longitudinal change detector", "Copied from the preserved change-event assignment.", "Protocol-defined change type.", "A detected publication change is not proof of real-world construction change."),
+    }
+    if table in {
+        "manual_validation_accela_audit_plan.csv",
+        "manual_validation_longitudinal_initial_plan.csv",
+    } and field in lean_plan_metadata:
+        return lean_plan_metadata[field]
     if table and (
         table.startswith("manual_validation_accela_")
         or table.startswith("manual_validation_integration_")
@@ -1120,7 +1142,7 @@ def write_documentation(counts: dict[str, int], activities: list[dict], matches:
             "CIP viewer data covers active projects for some City departments rather than the complete adopted capital program.",
             "Blank numeric fields mean unknown, not zero.",
             "The 12-row external verification pilot is purposive and is not a population accuracy estimate.",
-            "The frozen 150-row study reports no accuracy estimate until human review and the phase-specific completion gates are satisfied.",
+            "The frozen 150-row core study reports no accuracy estimate until all first reviews and the active 25-row reliability subset are complete.",
             "Budget Book and linked-parcel context sources are separately dated and excluded from the eight-layer bounded-census count.",
             "Budget Book amounts are reported levels, not a budget-amendment or expenditure history.",
             "Parcel links remain proposed analytical links pending human review and are not legal parcel determinations.",
@@ -1169,6 +1191,9 @@ def create_public_archive() -> None:
             "data/processed/manual_validation_development_sample.csv",
             "data/processed/manual_validation_holdout_sample.csv",
             "data/processed/manual_validation_second_review.csv",
+            "data/processed/manual_validation_core_reliability.csv",
+            "data/processed/manual_validation_accela_audit_plan.csv",
+            "data/processed/manual_validation_longitudinal_initial_plan.csv",
             "data/processed/manual_validation_accela_source_fidelity.csv",
             "data/processed/manual_validation_accela_source_fidelity_second_review.csv",
             "data/processed/manual_validation_accela_normalization.csv",
@@ -1181,6 +1206,7 @@ def create_public_archive() -> None:
             "data/monthly_events/index.json",
             "data/planned_events/index.json",
             "scripts/validation_study.py",
+            "scripts/build_lean_validation_plan.py",
             "scripts/monthly_cohorts.py",
             "docs/methodology/TEMPORAL_COHORTS.md",
             "verification/verification_summary.csv",
@@ -1341,6 +1367,9 @@ def main() -> None:
             PROCESSED / "manual_validation_development_sample.csv",
             PROCESSED / "manual_validation_holdout_sample.csv",
             PROCESSED / "manual_validation_second_review.csv",
+            PROCESSED / "manual_validation_core_reliability.csv",
+            PROCESSED / "manual_validation_accela_audit_plan.csv",
+            PROCESSED / "manual_validation_longitudinal_initial_plan.csv",
             PROCESSED / "manual_validation_accela_source_fidelity.csv",
             PROCESSED / "manual_validation_accela_source_fidelity_second_review.csv",
             PROCESSED / "manual_validation_accela_normalization.csv",
@@ -1365,30 +1394,33 @@ def main() -> None:
             VALIDATION_REPORTS / "validation_report.json", DOC_REFERENCE / "KNOWN_LIMITATIONS.md",
             VALIDATION_REPORTS / "accuracy_verification_report.json",
             VALIDATION_REPORTS / "validation_study_design.json",
+            VALIDATION_REPORTS / "review_metrics_core.json",
             VALIDATION_REPORTS / "review_metrics_development.json", VALIDATION_REPORTS / "review_metrics_holdout.json",
+            ROOT / "config" / "manual_validation_plan.json",
             DOC_REFERENCE / "LICENSE_NOTES.md", DOC_GUIDES / "PUBLIC_RECORDS_REQUEST.md",
             DOC_REFERENCE / "AI_USE_STATEMENT.md",
             DOC_GUIDES / "MANUAL_VALIDATION_GUIDE.md", DOC_VALIDATION / "MANUAL_VALIDATION_PROTOCOL.md",
+            DOC_VALIDATION / "LEAN_VALIDATION_PLAN.md",
             DOC_VALIDATION / "VERIFICATION_REPORT.md", DOC_METHODOLOGY / "GROUND_TRUTH_METHODOLOGY.md", DOC_METHODOLOGY / "BOUNDED_CENSUS_SCOPE.md",
             DOC_METHODOLOGY / "CONTEXT_MODULES.md", DOC_METHODOLOGY / "TEMPORAL_COHORTS.md", *longitudinal_files,
         ]),
         "license_note": "The public archive contains privacy-minimized City-hosted core and context source snapshots only. Code is MIT-licensed; source data remain subject to City terms described in DATA_LICENSE.md.",
         "bounded_census_claim": "All features returned by eight named City ArcGIS layers at the recorded snapshot retrieval time are included.",
         "bounded_census_nonclaim": "This is not a census of all Tampa permits, projects, construction, completions, or investment.",
-        "manual_validation_status": f"protocol_1.0.0_frozen_150_rows_{review_status['status']}",
+        "manual_validation_status": f"lean_plan_2.0.0_frozen_core_150_rows_{review_status['status']}",
         "validation_study": {
-            **review_status, "development_rows": 100, "holdout_rows": 50,
-            "independent_second_reviews": 50, "final_inference_phase": "holdout",
+            **review_status,
+            "core_rows": 150,
+            "independent_second_reviews": 25,
+            "final_inference_phase": "pooled_core",
         },
         "expanded_validation_studies": {
-            "status": "assignments_frozen_pending_human_review",
-            "source_fidelity_rows": 200,
-            "normalization_rows": 125,
-            "integration_link_rows": 100,
-            "change_event_rows": 75,
-            "independent_second_review_rows": 125,
+            "status": "lean_plan_active_legacy_assignments_preserved",
+            "targeted_accela_audit_rows": 75,
+            "initial_longitudinal_audit_rows": 30,
+            "future_longitudinal_rows_per_cycle": "25-40",
             "external_outcome_validation": "not_measured",
-            "scope_note": "Source fidelity, transformation validity, linkage validity, change-event interpretation, and real-world outcome validity are separate claims.",
+            "scope_note": "The Accela and longitudinal audits are risk-targeted and do not support population-wide accuracy estimates. Real-world outcomes remain outside scope.",
         },
         "external_verification_status": "historical_12_row_pilot_retained_not_used_as_population_estimate",
         "longitudinal_tracker": {

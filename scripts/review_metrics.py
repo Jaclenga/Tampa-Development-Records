@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Report claim-specific validation estimates and inter-reviewer agreement.
 
-The default is the untouched holdout phase. Population estimates are withheld
-until every assigned first and second review in the requested phase is marked
-complete and passes the evidence-provenance checks.
+Plan v2 defaults to the pooled frozen 150-row core sample and the active
+25-row reliability subset. Population estimates are withheld until every
+required row passes the evidence-provenance checks.
 """
 
 from __future__ import annotations
@@ -42,6 +42,21 @@ REQUIRED_COMPLETION_FIELDS = (
 def rows(name: str) -> list[dict[str, str]]:
     with (P / name).open(encoding="utf-8", newline="") as handle:
         return list(csv.DictReader(handle))
+
+
+def pooled_core_rows() -> list[dict[str, str]]:
+    """Load authoritative phase files and recompute weights for the pooled draw."""
+    sample = rows("manual_validation_development_sample.csv") + rows("manual_validation_holdout_sample.csv")
+    by_stratum = Counter(row["sampling_stratum"] for row in sample)
+    pooled = []
+    for source in sample:
+        row = dict(source)
+        population = int(row["stratum_population"])
+        selected = by_stratum[row["sampling_stratum"]]
+        row["selection_probability"] = f"{selected / population:.10f}"
+        row["sampling_weight"] = f"{population / selected:.10f}"
+        pooled.append(row)
+    return pooled
 
 
 def wilson(successes: float, total: float, z: float = 1.959963984540054) -> dict | None:
@@ -189,7 +204,7 @@ def agreement(first: list[dict[str, str]], second: list[dict[str, str]]) -> dict
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--phase", choices=("development", "holdout"), default="holdout")
+    parser.add_argument("--phase", choices=("pooled", "development", "holdout"), default="pooled")
     parser.add_argument(
         "--allow-partial",
         action="store_true",
@@ -198,8 +213,12 @@ def main() -> None:
     parser.add_argument("--output", type=Path, help="JSON output path; defaults to reports/validation/review_metrics_<phase>.json")
     args = parser.parse_args()
 
-    first = rows(f"manual_validation_{args.phase}_sample.csv")
-    second = [row for row in rows("manual_validation_second_review.csv") if row["sample_phase"] == args.phase]
+    if args.phase == "pooled":
+        first = pooled_core_rows()
+        second = rows("manual_validation_core_reliability.csv")
+    else:
+        first = rows(f"manual_validation_{args.phase}_sample.csv")
+        second = [row for row in rows("manual_validation_second_review.csv") if row["sample_phase"] == args.phase]
     invalid_protocol = [row["audit_sample_id"] for row in first + second if row["protocol_version"] != PROTOCOL_VERSION]
     complete_first = [row for row in first if is_complete(row)]
     complete_second = [row for row in second if is_complete(row)]
@@ -207,7 +226,11 @@ def main() -> None:
 
     report: dict = {
         "status": "estimable" if ready else "not_estimable",
-        "analysis_type": "final_holdout" if args.phase == "holdout" else "development_debugging",
+        "analysis_type": (
+            "pooled_core_probability_sample" if args.phase == "pooled"
+            else "legacy_final_holdout" if args.phase == "holdout"
+            else "legacy_development_debugging"
+        ),
         "protocol_version": PROTOCOL_VERSION,
         "phase": args.phase,
         "generated_at_utc": dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat(),
@@ -245,12 +268,13 @@ def main() -> None:
         )
         report["inter_reviewer_agreement"] = agreement(analysis_rows, second_rows)
         report["interpretation"] = (
-            "Exploratory partial results are not a population estimate and must not be used to tune rules and claim final performance."
+            "Exploratory partial results are not a population estimate and must not be reported as final performance."
             if not ready
             else "Claim types are reported separately. Inconclusive and not-applicable judgments are shown but excluded from precision denominators."
         )
 
-    output = args.output or ROOT / "reports" / "validation" / f"review_metrics_{args.phase}.json"
+    default_name = "review_metrics_core.json" if args.phase == "pooled" else f"review_metrics_{args.phase}.json"
+    output = args.output or ROOT / "reports" / "validation" / default_name
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(report, indent=2))

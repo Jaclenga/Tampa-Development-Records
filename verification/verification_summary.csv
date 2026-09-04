@@ -3,11 +3,8 @@ snapshot_date,verification_type,eligible_records,evaluated_records,passed_suppor
 2026-08-23,core_source_traceability,4469,4469,4469,0,0,0,0,0,,,,,100.0,passed,"Reconciles bundled City source features to retained source rows; establishes source fidelity, not real-world truth."
 2026-08-23,core_eight_layer_manual_validation,150,10,,,,,,140,0,,,,6.7,awaiting_review,Frozen seeded stratified probability sample from the original core universe; partial development results are exploratory only and do not validate the Accela expansion or estimate population accuracy.
 2026-08-23,core_external_outcome_verification,12,12,1,0,7,1,3,0,,,,,100.0,historical_pilot,Historical evidence-selected pilot; physical-realization outcomes are not a population estimate.
-2026-08-23,core_double_review,50,0,,,,,,50,0,,,,0.0,in_progress,Independent blinded second-review assignments only; automated checks are excluded.
+2026-08-23,core_double_review,25,0,,,,,,25,0,,,,0.0,in_progress,Active plan-v2 independent blinded subset; 25 of the 50 frozen candidates are required.
 2026-08-23,accela_collection_integrity,158,158,158,0,0,0,0,0,,,,,100.0,passed,"Reconciles Accela module-month partitions, gap/truncation checks, and aggregate counts; this is not record-level accuracy."
-2026-08-23,accela_source_fidelity_manual_validation,200,0,,,,,,200,,,,,0.0,awaiting_review,Probability sample testing fidelity to the City portal; outcome validity is outside this study.
-2026-08-23,accela_normalization_validation,125,0,,,,,,125,,,,,0.0,awaiting_review,"Separate probability sample testing TDR transformation and semantic rules, not whether the City portal is correct."
-2026-08-23,gis_accela_linkage_audit,100,0,,,,,,100,,,,,0.0,awaiting_review,Disproportionately stratified audit of matched and unmatched integration decisions; report linkage metrics separately.
-2026-08-23,longitudinal_change_event_validation,75,0,,,,,,75,,,,,0.0,awaiting_review,Sample of machine-detected snapshot changes; collection fidelity does not establish substantive real-world change.
+2026-08-23,targeted_accela_manual_audit,75,0,,,,,,75,,,,,0.0,awaiting_review,"Risk-based 75-case portfolio spanning source-fidelity spot checks, normalization, and linkage; not a population accuracy sample."
+2026-08-23,initial_longitudinal_change_audit,30,0,,,,,,30,,,,,0.0,awaiting_review,Plan-v2 subset of 20 high-impact changes and 10 controls; source-publication interpretation only.
 2026-08-23,expanded_external_outcome_verification,,,,,,,,,,,,,,not_measured,No probability-based external outcome study has yet been performed for the expanded Accela edition.
-2026-08-23,expanded_double_review,125,0,,,,,,125,0,,,,0.0,awaiting_review,Independent blinded assignments across the four new studies; automated QA is not second review.

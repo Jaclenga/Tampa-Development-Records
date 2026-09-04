@@ -82,8 +82,10 @@ rankings.
 ## Frozen designed study retained in version 0.9.0
 
 The current external-validation workflow uses a frozen, seeded stratified
-sample of 150 activities, with a 100-row development phase, a separately drawn
-50-row holdout, and 50 blinded second-review assignments. Claim-specific
+sample of 150 activities, with historical 100-row development and 50-row
+holdout labels. Plan v2 pools those first reviews and activates a deterministic
+25-row subset of the 50 frozen blinded second-review candidates. Claim-specific
 criteria and acceptable sources were fixed before review in
-`MANUAL_VALIDATION_PROTOCOL.md`. Human coding is pending; no error rate or
-agreement statistic is claimed yet.
+`MANUAL_VALIDATION_PROTOCOL.md`. Ten core first reviews are complete; the rest
+of the active human work is pending. No final error rate or agreement statistic
+is claimed yet.

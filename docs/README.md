@@ -13,6 +13,7 @@ hand-maintained explanations in this directory.
 | Collect public Accela records | [Accela collector guide](guides/ACCELA_COLLECTOR.md) |
 | Complete a manual review | [Manual-validation guide](guides/MANUAL_VALIDATION_GUIDE.md) |
 | Interpret the validation evidence | [Verification report](validation/VERIFICATION_REPORT.md) |
+| Understand the active review design | [Lean validation plan](validation/LEAN_VALIDATION_PLAN.md) |
 | Prepare a release | [Release checklist](guides/RELEASE_CHECKLIST.md) |
 | Look up fields | [Data dictionary](reference/data_dictionary.csv) |
 | Review limitations | [Known limitations](reference/KNOWN_LIMITATIONS.md) and [Accela limitations](reference/ACCELA_LIMITATIONS.md) |
@@ -58,13 +59,14 @@ Validation protocols, evidence-layer documentation, and interpretation of
 completed checks.
 
 - [Agentic evidence validation](validation/AGENTIC_VALIDATION.md)
+- [Lean manual-validation plan](validation/LEAN_VALIDATION_PLAN.md)
 - [Manual-validation protocol](validation/MANUAL_VALIDATION_PROTOCOL.md)
 - [Verification report](validation/VERIFICATION_REPORT.md)
 
 ## Current release blockers
 
-1. Manual validation is incomplete: 10 of 150 core first reviews are complete,
-   while holdout and blind second reviews remain unfinished.
+1. Manual validation is incomplete: 10 of 150 core first reviews are complete;
+   the 25 reliability, 75 targeted Accela, and 30 longitudinal cases remain.
 2. The tracker has a nine-day initial comparison, not yet a full
    month-end-to-month-end interval.
 3. Version 0.9.0 metadata is prepared, but the annotated release tag has not

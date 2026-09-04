@@ -1,5 +1,12 @@
 # Manual validation protocol
 
+> **Historical protocol and field rules.** The original assignments and the
+> decision rules below remain frozen as protocol 1.0.0. The active workload,
+> pooled core analysis, and 25-case reliability requirement are now governed by
+> the [lean validation plan v2](LEAN_VALIDATION_PLAN.md). References below to a
+> 50-case second-review gate and holdout-only final inference describe the
+> original design and are retained for provenance.
+
 ## Frozen protocol — core eight-layer manual validation study
 
 - Protocol version: **1.0.0**

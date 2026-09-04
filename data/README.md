@@ -18,3 +18,11 @@
 The primary researcher-facing tables are in `processed/`. Start with
 `processed/bounded_census_records.csv` for source records or
 `processed/tampa_development_activity.csv` for the consolidated activity view.
+
+The active manual-review indexes are
+`processed/manual_validation_core_reliability.csv` (25 independent duplicate
+reviews), `processed/manual_validation_accela_audit_plan.csv` (75 targeted
+Accela cases), and `processed/manual_validation_longitudinal_initial_plan.csv`
+(30 initial change cases). The preserved assignment files named by those
+indexes contain the full review fields and remain the authoritative place to
+enter judgments.

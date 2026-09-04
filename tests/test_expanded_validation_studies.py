@@ -132,11 +132,9 @@ class ExpandedValidationStudyTests(unittest.TestCase):
             summary = {row["verification_type"]: row for row in csv.DictReader(handle)}
         expected = {
             "core_eight_layer_manual_validation": (150, 10),
-            "accela_source_fidelity_manual_validation": (200, 0),
-            "accela_normalization_validation": (125, 0),
-            "gis_accela_linkage_audit": (100, 0),
-            "longitudinal_change_event_validation": (75, 0),
-            "expanded_double_review": (125, 0),
+            "core_double_review": (25, 0),
+            "targeted_accela_manual_audit": (75, 0),
+            "initial_longitudinal_change_audit": (30, 0),
         }
         for study, (count, evaluated) in expected.items():
             self.assertEqual(int(summary[study]["eligible_records"]), count)

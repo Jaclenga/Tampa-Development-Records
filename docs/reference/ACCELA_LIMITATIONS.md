@@ -174,12 +174,14 @@ relationships, identifier uniqueness, reproducibility, and fidelity to the
 collected source files. They do not measure whether the underlying public
 record is factually correct or whether an inferred real-world claim is true.
 
-The repository contains a frozen 150-record manual-validation design: 100
-development rows and a separate 50-row holdout. At present, 10 of 150 first
-reviews (6.7%) are complete, all in the development phase. The other 90
-development first reviews, all 50 holdout first reviews, and all 50 blind
-second-review assignments remain unfinished. The partial results are
-exploratory development diagnostics only. Therefore:
+The active lean plan retains the frozen 150-record probability sample and pools
+its historical 100-row development and 50-row holdout phases for final
+analysis. At present, 10 of 150 first reviews (6.7%) are complete. The other
+140 first reviews and all 25 active independent-review assignments remain
+unfinished. A separate risk-targeted Accela audit contains 75 cases spanning
+source fidelity, normalization/semantics, and GIS–Accela linkage. Those cases
+are not a probability sample and cannot support a global Accela accuracy rate.
+The partial results are exploratory only. Therefore:
 
 - no empirical dataset-wide accuracy or error rate has been measured;
 - reviewer agreement has not been measured;

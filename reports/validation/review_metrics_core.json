@@ -1,0 +1,325 @@
+{
+  "status": "exploratory_partial",
+  "analysis_type": "pooled_core_probability_sample",
+  "protocol_version": "1.0.0",
+  "phase": "pooled",
+  "generated_at_utc": "2026-09-04T01:39:10+00:00",
+  "completion": {
+    "first_reviews_complete": 10,
+    "first_reviews_required": 150,
+    "second_reviews_complete": 0,
+    "second_reviews_required": 25,
+    "invalid_protocol_rows": []
+  },
+  "interpretation": "Exploratory partial results are not a population estimate and must not be reported as final performance.",
+  "claim_metrics": {
+    "source_identity": {
+      "supported": 10,
+      "contradicted": 0,
+      "inconclusive": 0,
+      "not_applicable": 0,
+      "unweighted_precision_95_ci": {
+        "estimate": 1.0,
+        "lower": 0.7224672001371107,
+        "upper": 0.9999999999999999,
+        "method": "Wilson score 95% interval"
+      },
+      "design_weighted_precision_95_ci": {
+        "estimate": 1.0,
+        "lower": 0.5349985730499092,
+        "upper": 1.0,
+        "method": "Approximate design-weighted Wilson 95% interval using Kish effective n"
+      },
+      "kish_effective_n": 4.419717593085855,
+      "by_stratum": {
+        "capital_project": {
+          "supported": 7,
+          "contradicted": 0,
+          "inconclusive": 0,
+          "not_applicable": 0,
+          "precision_95_ci": {
+            "estimate": 1.0,
+            "lower": 0.6456695649333126,
+            "upper": 1.0,
+            "method": "Wilson score 95% interval"
+          }
+        },
+        "permit": {
+          "supported": 3,
+          "contradicted": 0,
+          "inconclusive": 0,
+          "not_applicable": 0,
+          "precision_95_ci": {
+            "estimate": 1.0,
+            "lower": 0.4385029682449546,
+            "upper": 1.0,
+            "method": "Wilson score 95% interval"
+          }
+        }
+      }
+    },
+    "activity_classification": {
+      "supported": 10,
+      "contradicted": 0,
+      "inconclusive": 0,
+      "not_applicable": 0,
+      "unweighted_precision_95_ci": {
+        "estimate": 1.0,
+        "lower": 0.7224672001371107,
+        "upper": 0.9999999999999999,
+        "method": "Wilson score 95% interval"
+      },
+      "design_weighted_precision_95_ci": {
+        "estimate": 1.0,
+        "lower": 0.5349985730499092,
+        "upper": 1.0,
+        "method": "Approximate design-weighted Wilson 95% interval using Kish effective n"
+      },
+      "kish_effective_n": 4.419717593085855,
+      "by_stratum": {
+        "capital_project": {
+          "supported": 7,
+          "contradicted": 0,
+          "inconclusive": 0,
+          "not_applicable": 0,
+          "precision_95_ci": {
+            "estimate": 1.0,
+            "lower": 0.6456695649333126,
+            "upper": 1.0,
+            "method": "Wilson score 95% interval"
+          }
+        },
+        "permit": {
+          "supported": 3,
+          "contradicted": 0,
+          "inconclusive": 0,
+          "not_applicable": 0,
+          "precision_95_ci": {
+            "estimate": 1.0,
+            "lower": 0.4385029682449546,
+            "upper": 1.0,
+            "method": "Wilson score 95% interval"
+          }
+        }
+      }
+    },
+    "cross_source_linkage": {
+      "supported": 0,
+      "contradicted": 0,
+      "inconclusive": 0,
+      "not_applicable": 10,
+      "unweighted_precision_95_ci": null,
+      "design_weighted_precision_95_ci": null,
+      "kish_effective_n": 0.0,
+      "by_stratum": {
+        "capital_project": {
+          "supported": 0,
+          "contradicted": 0,
+          "inconclusive": 0,
+          "not_applicable": 7,
+          "precision_95_ci": null
+        },
+        "permit": {
+          "supported": 0,
+          "contradicted": 0,
+          "inconclusive": 0,
+          "not_applicable": 3,
+          "precision_95_ci": null
+        }
+      }
+    },
+    "status_interpretation": {
+      "supported": 10,
+      "contradicted": 0,
+      "inconclusive": 0,
+      "not_applicable": 0,
+      "unweighted_precision_95_ci": {
+        "estimate": 1.0,
+        "lower": 0.7224672001371107,
+        "upper": 0.9999999999999999,
+        "method": "Wilson score 95% interval"
+      },
+      "design_weighted_precision_95_ci": {
+        "estimate": 1.0,
+        "lower": 0.5349985730499092,
+        "upper": 1.0,
+        "method": "Approximate design-weighted Wilson 95% interval using Kish effective n"
+      },
+      "kish_effective_n": 4.419717593085855,
+      "by_stratum": {
+        "capital_project": {
+          "supported": 7,
+          "contradicted": 0,
+          "inconclusive": 0,
+          "not_applicable": 0,
+          "precision_95_ci": {
+            "estimate": 1.0,
+            "lower": 0.6456695649333126,
+            "upper": 1.0,
+            "method": "Wilson score 95% interval"
+          }
+        },
+        "permit": {
+          "supported": 3,
+          "contradicted": 0,
+          "inconclusive": 0,
+          "not_applicable": 0,
+          "precision_95_ci": {
+            "estimate": 1.0,
+            "lower": 0.4385029682449546,
+            "upper": 1.0,
+            "method": "Wilson score 95% interval"
+          }
+        }
+      }
+    },
+    "building_footprint_match": {
+      "supported": 0,
+      "contradicted": 0,
+      "inconclusive": 2,
+      "not_applicable": 8,
+      "unweighted_precision_95_ci": null,
+      "design_weighted_precision_95_ci": null,
+      "kish_effective_n": 0.0,
+      "by_stratum": {
+        "capital_project": {
+          "supported": 0,
+          "contradicted": 0,
+          "inconclusive": 0,
+          "not_applicable": 7,
+          "precision_95_ci": null
+        },
+        "permit": {
+          "supported": 0,
+          "contradicted": 0,
+          "inconclusive": 2,
+          "not_applicable": 1,
+          "precision_95_ci": null
+        }
+      },
+      "by_match_method": {
+        "nearest_footprint_within_35m": {
+          "supported": 0,
+          "contradicted": 0,
+          "precision_95_ci": null
+        },
+        "point_in_building_footprint": {
+          "supported": 0,
+          "contradicted": 0,
+          "precision_95_ci": null
+        }
+      }
+    }
+  },
+  "physical_work_evidence": {
+    "absent": {
+      "count": 0,
+      "proportion_95_ci": {
+        "estimate": 0.0,
+        "lower": 0.0,
+        "upper": 0.2775327998628892,
+        "method": "Wilson score 95% interval"
+      }
+    },
+    "not_applicable": {
+      "count": 0,
+      "proportion_95_ci": {
+        "estimate": 0.0,
+        "lower": 0.0,
+        "upper": 0.2775327998628892,
+        "method": "Wilson score 95% interval"
+      }
+    },
+    "present": {
+      "count": 0,
+      "proportion_95_ci": {
+        "estimate": 0.0,
+        "lower": 0.0,
+        "upper": 0.2775327998628892,
+        "method": "Wilson score 95% interval"
+      }
+    },
+    "unknown": {
+      "count": 10,
+      "proportion_95_ci": {
+        "estimate": 1.0,
+        "lower": 0.7224672001371107,
+        "upper": 0.9999999999999999,
+        "method": "Wilson score 95% interval"
+      }
+    }
+  },
+  "activity_class_confusion_matrix": {
+    "building_construction": {
+      "building_construction": 2
+    },
+    "demolition": {
+      "demolition": 1
+    },
+    "public_capital:parks_&_recreation": {
+      "public_capital:parks_&_recreation": 1
+    },
+    "public_capital:stormwater_engineering": {
+      "public_capital:stormwater_engineering": 1
+    },
+    "public_capital:transportation": {
+      "public_capital:transportation": 1
+    },
+    "public_capital:water": {
+      "public_capital:water": 4
+    }
+  },
+  "activity_stage_confusion_matrix": {
+    "completed_or_closeout": {
+      "completed_or_closeout": 1
+    },
+    "permit_or_funding_approved": {
+      "permit_or_funding_approved": 2
+    },
+    "preconstruction_or_unknown": {
+      "preconstruction_or_unknown": 7
+    }
+  },
+  "inter_reviewer_agreement": {
+    "source_identity_result": {
+      "n": 0,
+      "percent_agreement": null,
+      "cohens_kappa": null
+    },
+    "activity_classification_result": {
+      "n": 0,
+      "percent_agreement": null,
+      "cohens_kappa": null
+    },
+    "cross_source_linkage_result": {
+      "n": 0,
+      "percent_agreement": null,
+      "cohens_kappa": null
+    },
+    "status_interpretation_result": {
+      "n": 0,
+      "percent_agreement": null,
+      "cohens_kappa": null
+    },
+    "building_footprint_match_result": {
+      "n": 0,
+      "percent_agreement": null,
+      "cohens_kappa": null
+    },
+    "physical_work_evidence": {
+      "n": 0,
+      "percent_agreement": null,
+      "cohens_kappa": null
+    },
+    "reviewed_activity_class": {
+      "n": 0,
+      "percent_agreement": null,
+      "cohens_kappa": null
+    },
+    "reviewed_activity_stage": {
+      "n": 0,
+      "percent_agreement": null,
+      "cohens_kappa": null
+    }
+  }
+}

@@ -23,7 +23,17 @@
     "capital_project": 50,
     "cross_source_merge": 20
   },
-  "independent_second_reviews": 50,
+  "legacy_independent_second_review_candidates": 50,
+  "active_plan": {
+    "plan_version": "2.0.0",
+    "core_first_reviews": 150,
+    "core_reliability_reviews": 25,
+    "targeted_accela_reviews": 75,
+    "initial_longitudinal_reviews": 30,
+    "total_initial_human_judgments": 280,
+    "analysis": "pooled_core",
+    "plan_document": "docs/validation/LEAN_VALIDATION_PLAN.md"
+  },
   "claim_result_values": [
     "supported",
     "contradicted",
@@ -44,7 +54,7 @@
     "unknown",
     "not_applicable"
   ],
-  "final_analysis_phase": "holdout",
+  "final_analysis_phase": "pooled_core_under_plan_2.0.0",
   "human_confirmation_required": true,
   "ai_policy": "AI may locate candidate sources; every label requires a manually confirmed cited URL or stable document reference.",
   "protocol_document": "docs/validation/MANUAL_VALIDATION_PROTOCOL.md"

@@ -6,17 +6,17 @@ auditable release.
 
 ## 1. Finish the evidence work
 
-- Complete all 100 development-sample first reviews.
-- Complete the 34 blind development-phase second reviews.
-- Freeze any rule changes before opening the holdout sample.
-- Complete all 50 holdout first reviews.
-- Complete the 16 blind holdout-phase second reviews.
-- Generate development, holdout, and reviewer-agreement metrics.
+- Complete all 150 core first reviews across the preserved phase files.
+- Complete the active 25-row blinded reliability subset.
+- Complete the 75-case targeted Accela audit by component.
+- Complete the 30-case initial longitudinal audit.
+- Generate pooled core estimates, 95% confidence intervals, and reviewer-agreement metrics.
 - Update the README, manifest, verification report, and limitations with only
   the claims supported by those results.
 
-Follow the [manual-validation operator guide](MANUAL_VALIDATION_GUIDE.md) and
-the controlling [protocol](../validation/MANUAL_VALIDATION_PROTOCOL.md). Do not replace human
+Follow the [manual-validation operator guide](MANUAL_VALIDATION_GUIDE.md), the
+[lean plan](../validation/LEAN_VALIDATION_PLAN.md), and the controlling field
+[protocol](../validation/MANUAL_VALIDATION_PROTOCOL.md). Do not replace human
 review with AI-generated judgments.
 
 ## 2. Demonstrate the tracker

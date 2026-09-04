@@ -75,6 +75,13 @@ class ValidationStudyTests(unittest.TestCase):
         self.assertAlmostEqual(agreement["percent_agreement"], 2 / 3)
         self.assertIsNotNone(agreement["cohens_kappa"])
 
+    def test_pooled_core_weights_use_combined_stratum_counts(self) -> None:
+        rows = review_metrics.pooled_core_rows()
+        self.assertEqual(len(rows), 150)
+        permit = [row for row in rows if row["sampling_stratum"] == "permit"]
+        self.assertEqual(len(permit), 50)
+        self.assertAlmostEqual(float(permit[0]["selection_probability"]), 50 / int(permit[0]["stratum_population"]))
+
 
 if __name__ == "__main__":
     unittest.main()

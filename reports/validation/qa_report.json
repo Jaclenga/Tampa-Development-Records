@@ -35,21 +35,21 @@
   "external_pilot_physical_realization_yes": 1,
   "validation_study": {
     "protocol_version": "1.0.0",
+    "plan_version": "2.0.0",
     "random_seed": 20260823,
     "development": {
-      "first_reviews_complete": 0,
-      "first_reviews_required": 100,
-      "second_reviews_complete": 0,
-      "second_reviews_required": 34,
-      "ready_for_metrics": false
+      "first_reviews_complete": 10,
+      "first_reviews_required": 100
     },
     "holdout": {
       "first_reviews_complete": 0,
-      "first_reviews_required": 50,
-      "second_reviews_complete": 0,
-      "second_reviews_required": 16,
-      "ready_for_metrics": false
+      "first_reviews_required": 50
     },
+    "first_reviews_complete": 10,
+    "first_reviews_required": 150,
+    "independent_reviews_complete": 0,
+    "independent_reviews_required": 25,
+    "ready_for_metrics": false,
     "status": "pending_human_review"
   },
   "context_modules": {
@@ -80,7 +80,7 @@
     "CIP viewer data covers active projects for some City departments rather than the complete adopted capital program.",
     "Blank numeric fields mean unknown, not zero.",
     "The 12-row external verification pilot is purposive and is not a population accuracy estimate.",
-    "The frozen 150-row study reports no accuracy estimate until human review and the phase-specific completion gates are satisfied.",
+    "The frozen 150-row core study reports no accuracy estimate until all first reviews and the active 25-row reliability subset are complete.",
     "Budget Book and linked-parcel context sources are separately dated and excluded from the eight-layer bounded-census count.",
     "Budget Book amounts are reported levels, not a budget-amendment or expenditure history.",
     "Parcel links remain proposed analytical links pending human review and are not legal parcel determinations."
