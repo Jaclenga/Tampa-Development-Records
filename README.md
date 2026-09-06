@@ -3,6 +3,8 @@
 A reproducible archive of development-related records published by the City
 of Tampa, with tools for tracking changes in those records over time.
 
+[Kaggle Mirror](https://www.kaggle.com/datasets/jacklenga9/tampa-development-records)
+
 ## Status
 
 This is a strong baseline with an initial observed comparison, not yet a
