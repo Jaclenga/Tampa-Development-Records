@@ -2,15 +2,17 @@
 
 ## Current state
 
-The tracker contains two immutable core observations: the August 23, 2026
-baseline and a September 1, 2026 follow-up. Their comparison is a nine-day
-initial interval, not a monthly interval. A separate August 31 Accela day-freeze
-preserves that portal query without pretending that the core GIS retrieval,
-which occurred at 3:15 a.m. Tampa time, happened on August 31.
+The tracker contains three immutable core observations: the August 23, 2026
+baseline and September 1 and October 1 follow-ups. The August 23 to September 1
+comparison is a nine-day initial interval. The September 1 to October 1
+comparison is a manual interval after the September 30 scheduled collection
+was missed. Neither is a full month-end interval. A separate August 31 Accela
+day-freeze preserves that portal query without pretending that the core GIS
+retrieval, which occurred at 3:15 a.m. Tampa time, happened on August 31.
 
-Regular core month-end observations begin September 30, 2026. The first full
-month-end-to-month-end comparison will therefore be September 30 to October
-31. The separate source-date cohort view provides retrospective monthly
+October 31 is the next eligible core month-end observation. If both October 31
+and November 30 are collected, they form the first full month-end-to-month-end
+comparison. The separate source-date cohort view provides retrospective monthly
 organization without claiming earlier TDR observations.
 
 ## Archived core observations
@@ -19,13 +21,20 @@ organization without claiming earlier TDR observations.
 | --- | --- | ---: | --- | --- |
 | `2026-08-23` | `2026-08-23T02:06:02+00:00` | 4,469 | Original baseline | [Snapshot](../../data/snapshots/2026-08-23/) |
 | `2026-09-01` | `2026-09-01T07:15:12+00:00` | 4,408 | Reconciled first follow-up | [Snapshot](../../data/snapshots/2026-09-01/) |
+| `2026-10-01` | `2026-10-01T06:47:51+00:00` | 4,624 | Manual recovery observation | [Snapshot](../../data/snapshots/2026-10-01/) |
 
 The accepted September 1 observation was retrieved at 3:15 a.m. Tampa time. The
 [machine-readable comparison](../../data/monthly_changes/2026-09.json) and
 [September update](../../reports/changes/2026-09.md) compare it with the August 23
 baseline. The separate [August 31 Accela freeze](../../data/frozen/accela/2026-08-31/)
-contains records returned for that Accela query date and is not a third core
+contains records returned for that Accela query date and is not a core
 observation.
+
+The [October 1 comparison](../../data/monthly_changes/2026-10-01.json) and
+[manual update](../../reports/changes/2026-10-01.md) compare the September 1
+and October 1 core observations. They use a dated artifact ID to leave room for
+another comparison in October. The October 1 retrieval occurred at 2:47 a.m.
+Tampa time and cannot be relabeled as September 30.
 
 ## Two complementary temporal views
 
@@ -131,12 +140,13 @@ the analysis and static dashboard pipeline automatically after each successful
 comparison.
 
 The scheduled workflow in `.github/workflows/monthly-snapshot.yml` runs at
-22:17 UTC on candidate dates from the 28th through the 31st. A Tampa-time guard
-continues only on the last local calendar day and refuses a scheduled run if
-the UTC and Tampa dates differ. A second guard checks the archived date after
-collection and prevents a commit if collection crossed midnight. This keeps
-the UTC-derived snapshot date equal to the Tampa observation date instead of
-backdating a next-day retrieval.
+12:17 UTC on candidate dates from the 28th through the 31st, leaving at least
+15 hours before Tampa midnight for a delayed start. A Tampa-time guard continues
+only on the last local calendar day and skips collection if that observation
+date is already archived. A second guard checks the archived date after
+collection and prevents a commit if collection crossed Tampa midnight. The
+tracker derives new snapshot dates from the Tampa date of the actual UTC
+retrieval timestamp, including when the UTC date has already advanced.
 
 Manual runs are still supported and always preserve their actual observation
 date. The workflow collects, tests, and commits new tracker artifacts only when
@@ -148,20 +158,26 @@ changing population.
 - `2026-08-23` is the original core baseline.
 - `2026-08-31` is an Accela day-freeze, not a core GIS snapshot.
 - `2026-09-01` is the first core follow-up and retains its actual date.
-- `2026-09-30` starts the canonical core month-end series.
+- The scheduled `2026-09-30` core observation was missed.
+- `2026-10-01` is a manual recovery observation, not a month-end snapshot.
+- `2026-10-31` is the next eligible month-end observation.
 - Later scheduled observations use each month's final Tampa calendar date.
 
-Snapshot dates come from `retrieved_at_utc`; historical source dates and Accela
-query dates never substitute for the observation timestamp.
+New snapshot dates use the Tampa calendar date of `retrieved_at_utc`; the exact
+UTC timestamp remains in metadata. The earlier archived snapshot labels are
+preserved. Historical source dates and Accela query dates never substitute for
+the observation timestamp.
 
 ## Outputs
 
 ```text
 data/snapshots/YYYY-MM-DD/       immutable compact snapshot and metadata
 data/monthly_changes/index.json  snapshot and comparison inventory
-data/monthly_changes/YYYY-MM.csv record-level changes
-data/monthly_changes/YYYY-MM.json comparison summary
-reports/changes/YYYY-MM.md       readable monthly update
+data/monthly_changes/YYYY-MM.csv       monthly-named record-level changes
+data/monthly_changes/YYYY-MM.json      monthly-named comparison summary
+data/monthly_changes/YYYY-MM-DD.*      interim comparison artifacts
+reports/changes/YYYY-MM.md            monthly-named readable update
+reports/changes/YYYY-MM-DD.md         interim readable update
 data/monthly_changes/analysis/   deterministic analysis JSON and CSVs
 reports/dashboard/index.html     static comparison dashboard
 reports/dashboard/comparisons/   identity-safe comparison detail pages
@@ -171,3 +187,7 @@ data/monthly_events/index.json   non-future extract inventory
 data/planned_events/YYYY-MM.csv  forward-looking source plans
 data/planned_events/index.json   planned extract inventory
 ```
+
+`comparison_month` remains `YYYY-MM` in the data; `comparison_id` determines
+the filename. Month-end comparisons normally use `YYYY-MM`, while manual
+interim comparisons use their observation date (`YYYY-MM-DD`).

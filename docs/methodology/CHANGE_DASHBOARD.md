@@ -67,8 +67,7 @@ used to silently revise the archive.
 Supported interval kinds are:
 
 - `baseline_followup`: begins at the documented August 23, 2026 baseline;
-- `month_end_to_month_end`: adjacent final calendar days beginning with the
-  documented September 30 month-end series;
+- `month_end_to_month_end`: observed final calendar days of adjacent months;
 - `manual_interval`: valid observations outside those rules; and
 - `unknown`: invalid or unavailable date semantics.
 
@@ -76,10 +75,16 @@ The September 1 observation retains its actual date and is not reconstructed
 as August 31. The August 23 to September 1 interval is a nine-day
 `baseline_followup`, not an ordinary monthly trend point.
 
-The active September 1 snapshot is the reconciled 4,408-record retrieval. It
+The scheduled September 30 observation was missed. The 4,624-record October 1
+snapshot retains its actual Tampa date, and its comparison with September 1 is
+a `manual_interval`, not a canonical month-end trend point. October 31 is the
+next eligible month-end observation. The first possible canonical interval is
+October 31 to November 30, provided both snapshots are collected.
+
+The accepted September 1 snapshot is the reconciled 4,408-record retrieval. It
 contains 1,016 single-family permit records and passed the collector's
 count-only, ID-inventory, chunked-feature, and final-count checks. It supersedes
-an incomplete same-day capture that returned only 280 permits. The current
+an incomplete same-day capture that returned only 280 permits. The archived
 August 23 to September 1 comparison has no critical collection-integrity alert;
 its `review` status reflects systematic field refreshes and the noncanonical
 nine-day interval. Supersession provenance is retained in the
@@ -109,7 +114,10 @@ reported rather than silently merged or discarded.
 
 ## Outputs
 
-For comparison month `YYYY-MM`:
+Regular and legacy comparison artifacts use `YYYY-MM`; interim comparisons
+such as the September 1 to October 1 update use the later observation date as
+their `comparison_id` (`YYYY-MM-DD`). The `comparison_month` field remains
+`YYYY-MM`. The analysis, report, and dashboard detail use the same ID:
 
 ```text
 data/monthly_changes/analysis/YYYY-MM.json
@@ -120,6 +128,9 @@ reports/changes/YYYY-MM.md
 reports/dashboard/index.html
 reports/dashboard/comparisons/YYYY-MM.html
 ```
+
+Replace `YYYY-MM` with `YYYY-MM-DD` for an interim comparison. For example,
+the October 1 comparison uses `2026-10-01.json` and `2026-10-01.html`.
 
 The dashboard is self-contained and works from a local file or static host. It
 uses no CDN, package, server, or network request.

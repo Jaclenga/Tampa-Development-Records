@@ -75,25 +75,25 @@ class MonthlyCohortTests(unittest.TestCase):
                     "TASK_STATUS_DATE": 1744934400000,
                     "APPLICATION_TYPE": "Residential new construction",
                 },
-                "2026-08-23T00:00:00Z",
+                "2026-08-23T12:00:00Z",
             )
             disappeared = record(
                 "development_coordination",
                 "DEV-OLD",
                 {"APPSTATUS": "Open", "CREATEDDATE": 1643673600000},
-                "2026-08-23T00:00:00Z",
+                "2026-08-23T12:00:00Z",
                 object_id="2",
                 global_id="g-2",
             )
             snapshot_tracker.archive_rows([permit_august, disappeared], snapshots)
 
             permit_september = dict(permit_august)
-            permit_september["retrieved_at_utc"] = "2026-09-01T00:00:00Z"
+            permit_september["retrieved_at_utc"] = "2026-09-01T12:00:00Z"
             capital = record(
                 "capital_improvements",
                 "CIP-NEW",
                 {"status": "Planning", "projname": "Project", "planstart": 1790812800000},
-                "2026-09-01T00:00:00Z",
+                "2026-09-01T12:00:00Z",
                 object_id="3",
                 global_id="g-3",
             )

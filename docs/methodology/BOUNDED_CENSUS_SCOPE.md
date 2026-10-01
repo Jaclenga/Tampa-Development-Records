@@ -48,11 +48,13 @@ census feature count and completeness claim.
 ## Boundary of the dataset
 
 Each snapshot describes the contents of the eight layers at one point in time.
-The first archived observation is August 23, 2026, followed by an actual
-September 1 observation. Regular month-end observations begin September 30;
-the September 1 retrieval is not backdated to August 31. Repeated snapshots can
-show publication changes between observations, but they do not establish that
-the layers contain every record held by the City.
+The first archived observation is August 23, 2026, followed by actual
+September 1 and October 1 observations. The September 30 scheduled observation
+was missed, and the October 1 retrieval retains its actual Tampa date rather
+than being backdated. October 31 is the next eligible month-end observation;
+October 31 to November 30 is the first possible full month-end interval.
+Repeated snapshots can show publication changes between observations, but they
+do not establish that the layers contain every record held by the City.
 For example, a layer may show only active projects, selected permit types, or
 records that meet an unpublished display rule.
 

@@ -1,0 +1,9 @@
+source_id,before_count,after_count,absolute_delta,percentage_delta,new_records,disappeared_records,retained_records,union_size,retention_rate,disappearance_rate,publication_churn,unique_changed_identities,changed_identity_rate,field_change_row_count,alert_level,alert_reasons
+capital_improvements,190,394,204,1.073684,210,6,184,400,0.968421,0.031579,0.54,333,0.8325,177,review,"[""high_publication_churn"",""large_source_net_change""]"
+capital_locations_line,101,101,0,0.0,5,5,96,106,0.950495,0.049505,0.09434,33,0.311321,51,healthy,[]
+capital_locations_point,57,48,-9,-0.157895,2,11,46,59,0.807018,0.192982,0.220339,26,0.440678,29,healthy,"[""notable_source_net_change""]"
+capital_locations_polygon,34,36,2,0.058824,2,0,34,36,1.0,0.0,0.055556,20,0.555556,57,healthy,"[""notable_source_net_change""]"
+construction_inspections,2573,2594,21,0.008162,366,345,2228,2939,0.865915,0.134085,0.241919,821,0.279347,132,healthy,[]
+development_coordination,273,287,14,0.051282,76,62,211,349,0.772894,0.227106,0.395415,189,0.541547,55,review,"[""high_publication_churn""]"
+historic_preservation,164,143,-21,-0.128049,21,42,122,185,0.743902,0.256098,0.340541,185,1.0,133,review,"[""high_publication_churn"",""mass_field_refresh""]"
+single_family_permits,1016,1021,5,0.004921,89,84,932,1105,0.917323,0.082677,0.156561,1105,1.0,972,review,"[""mass_field_refresh""]"

@@ -22,8 +22,11 @@ review with AI-generated judgments.
 ## 2. Demonstrate the tracker
 
 - Preserve and inspect the August 23 to September 1 initial comparison.
-- Collect the September 30 canonical month-end snapshot; treat September 30 to
-  October 31 as the first full month-end-to-month-end interval.
+- Preserve and inspect the 4,624-record October 1 recovery and its dated
+  September 1 to October 1 comparison as a noncanonical manual interval.
+- Record the missed September 30 scheduled observation; do not backdate the
+  October 1 retrieval. Collect October 31 and November 30 month-end snapshots
+  for the first possible full month-end-to-month-end interval.
 - Inspect the generated change CSV, summary JSON, and Markdown report.
 - Confirm that apparent additions and disappearances are described as
   publication changes rather than real-world outcomes.

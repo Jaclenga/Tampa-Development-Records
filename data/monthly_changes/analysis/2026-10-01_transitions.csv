@@ -1,0 +1,35 @@
+transition_type,source_id,old_value,new_value,unique_record_count
+phase,capital_improvements,P2: Design,P3: Procurement,1
+phase,capital_improvements,P4: Construction,P5: Closeout,1
+phase,capital_locations_line,P2: Design,P4: Construction,1
+phase,capital_locations_line,P2: Design,P5: Closeout,1
+phase,capital_locations_line,P4: Construction,P5: Closeout,3
+phase,capital_locations_point,P3: Procurement,P4: Construction,2
+phase,capital_locations_point,P4: Construction,P5: Closeout,3
+phase,capital_locations_point,P5: Closeout,P3: Procurement,1
+status,capital_improvements,30% Design Completion,60% Design Completion,3
+status,capital_improvements,60% Design Completion,90% Design Completion,1
+status,capital_improvements,90% Design Completion,Consultant/Contractor Selection Process,1
+status,capital_improvements,Construction in Progress,Closeout,1
+status,capital_improvements,Permitting/Submittals Approval,Construction in Progress,2
+status,capital_locations_line,(blank),30% Design Completion,1
+status,capital_locations_line,(blank),90% Design Completion,1
+status,capital_locations_line,30% Design Completion,60% Design Completion,2
+status,capital_locations_line,60% Design Completion,90% Design Completion,1
+status,capital_locations_line,90% Design Completion,Construction in Progress,1
+status,capital_locations_line,Construction in Progress,Closeout,3
+status,capital_locations_line,Consultant/Contractor Selection Process,Closeout,1
+status,capital_locations_line,Permitting/Submittals Approval,Construction in Progress,2
+status,capital_locations_point,Cancelled,Consultant/Contractor Selection Process,1
+status,capital_locations_point,Construction in Progress,Closeout,3
+status,capital_locations_point,Design 30%,30% Design Completion,2
+status,capital_locations_point,Permitting/Submittals Approval,Construction in Progress,2
+status,construction_inspections,Issued,Revision,67
+status,construction_inspections,Revision,Issued,18
+status,development_coordination,Awaiting Client Reply,In Process,25
+status,development_coordination,In Process,Awaiting Client Reply,15
+status,development_coordination,Open,In Process,4
+status,historic_preservation,Awaiting Client Reply,In Process,4
+status,historic_preservation,In Process,Awaiting Client Reply,7
+status,single_family_permits,Issued | Issued,Revision | Issued,37
+status,single_family_permits,Revision | Issued,Issued | Issued,3

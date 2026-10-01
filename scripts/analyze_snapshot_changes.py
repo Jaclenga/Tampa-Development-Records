@@ -39,6 +39,7 @@ def valid_link(value: str) -> bool:
 
 def render_report(analysis: dict[str, object], changes: list[dict[str, str]]) -> str:
     comparison = analysis["comparison"]
+    artifact_id = comparison.get("comparison_id", comparison["comparison_month"])
     overall = analysis["overall"]
     trend = analysis["trend_eligibility"]
     integrity = analysis.get("collection_integrity", {})
@@ -176,9 +177,9 @@ def render_report(analysis: dict[str, object], changes: list[dict[str, str]]) ->
         "",
         "This report compares two observations of eight named City of Tampa public GIS layers. A newly observed record may have existed before the interval, and a record no longer returned is not necessarily deleted, cancelled, or complete. A phase change is a source-reported label change, not proof of completed construction. Permit issuance is authorization, planned dates are schedules, and estimated or reported actual costs are not a citywide investment total.",
         "",
-        f"- Raw changes: [`data/monthly_changes/{comparison['comparison_month']}.csv`](../../data/monthly_changes/{comparison['comparison_month']}.csv)",
-        f"- Analysis: [`data/monthly_changes/analysis/{comparison['comparison_month']}.json`](../../data/monthly_changes/analysis/{comparison['comparison_month']}.json)",
-        f"- Dashboard detail: [`reports/dashboard/comparisons/{comparison['comparison_month']}.html`](../dashboard/comparisons/{comparison['comparison_month']}.html)",
+        f"- Raw changes: [`data/monthly_changes/{artifact_id}.csv`](../../data/monthly_changes/{artifact_id}.csv)",
+        f"- Analysis: [`data/monthly_changes/analysis/{artifact_id}.json`](../../data/monthly_changes/analysis/{artifact_id}.json)",
+        f"- Dashboard detail: [`reports/dashboard/comparisons/{artifact_id}.html`](../dashboard/comparisons/{artifact_id}.html)",
         "",
     ])
     return "\n".join(lines)
@@ -187,7 +188,8 @@ def render_report(analysis: dict[str, object], changes: list[dict[str, str]]) ->
 def analyze_pair(before_date: str, after_date: str) -> dict[str, object]:
     analysis, changes = change_analysis.analyze_paths(before_date, after_date)
     paths = change_analysis.write_analysis_artifacts(analysis)
-    report = ROOT / "reports" / f"{analysis['comparison']['comparison_month']}.md"
+    artifact_id = analysis["comparison"].get("comparison_id", analysis["comparison"]["comparison_month"])
+    report = ROOT / "reports" / "changes" / f"{artifact_id}.md"
     change_analysis.atomic_text(report, render_report(analysis, changes))
     change_analysis.update_index()
     return {"analysis": analysis, "paths": paths, "report": report.relative_to(ROOT).as_posix()}
@@ -195,7 +197,8 @@ def analyze_pair(before_date: str, after_date: str) -> dict[str, object]:
 
 def comparison_pairs() -> list[tuple[str, str]]:
     pairs = []
-    for path in sorted(change_analysis.CHANGES.glob("????-??.json")):
+    paths = sorted([*change_analysis.CHANGES.glob("????-??.json"), *change_analysis.CHANGES.glob("????-??-??.json")])
+    for path in paths:
         value = json.loads(path.read_text(encoding="utf-8"))
         before = value.get("before_snapshot_date")
         after = value.get("after_snapshot_date")

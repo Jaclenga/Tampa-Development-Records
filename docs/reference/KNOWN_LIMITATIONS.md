@@ -49,8 +49,11 @@
     final-completion coverage remains unavailable until stronger official
     lifecycle data are obtained.
 20. The August 23 to September 1 core comparison is an observed nine-day
-    interval, not a month-to-month result. The canonical month-end series begins
-    September 30, and its first full monthly interval ends October 31.
+    interval, not a month-to-month result. The September 30 scheduled
+    observation was missed. The 4,624-record October 1 recovery retains its
+    actual Tampa date, so the September 1 to October 1 comparison is also
+    noncanonical. October 31 to November 30 is the first possible full
+    month-end interval, provided both observations are collected.
 21. Snapshot differences describe changes in public-layer publication. A new
     row can be an older record newly exposed by a layer, and a disappeared row
     can reflect a filter or service change rather than deletion or cancellation.

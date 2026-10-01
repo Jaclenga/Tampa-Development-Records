@@ -1,0 +1,22 @@
+{
+  "format_version": "1.0.0",
+  "snapshot_date": "2026-10-01",
+  "retrieved_at_utc": "2026-10-01T06:47:51+00:00",
+  "record_count": 4624,
+  "source_counts": {
+    "capital_improvements": 394,
+    "capital_locations_line": 101,
+    "capital_locations_point": 48,
+    "capital_locations_polygon": 36,
+    "construction_inspections": 2594,
+    "development_coordination": 287,
+    "historic_preservation": 143,
+    "single_family_permits": 1021
+  },
+  "source_count": 8,
+  "source_records_content_sha256": "97e34782edeedad2e870c81ea57b37c9ba8a4988d4b910238022cefb58cdc48d",
+  "source_state_sha256": "126003cb1f0eb09449482bddf655fbfad717f5173add7424df99ef682e23366c",
+  "identity_rule": "source plus native ID; duplicate native identities are disambiguated by GlobalID then OBJECTID",
+  "scope_note": "All records in this compact archive came from the eight configured City layers; geometry is retained in the release raw files, not duplicated here.",
+  "source_records_gzip_sha256": "3d283bc526a22d461ae2c8b4f60c4468fdcd069094688f91b936ae46609bc31a"
+}

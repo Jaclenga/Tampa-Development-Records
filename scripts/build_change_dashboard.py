@@ -167,12 +167,12 @@ def history_svg(analyses: list[dict[str, object]], *, include_all: bool, kind: s
         parts.append(f'<rect x="755" y="{legend_y-10}" width="14" height="4" fill="{color}"/><text x="775" y="{legend_y}" font-size="11">{esc(name)}</text>')
     for index, item in enumerate(selected):
         x = plot_left + index * x_step
-        parts.append(f'<text x="{x}" y="{plot_top+plot_height+22}" text-anchor="middle" font-size="11">{esc(item["comparison"]["comparison_month"])}</text>')
+        parts.append(f'<text x="{x}" y="{plot_top+plot_height+22}" text-anchor="middle" font-size="11">{esc(item["comparison"].get("comparison_id", item["comparison"]["comparison_month"]))}</text>')
     parts.append("</svg>")
     table_rows = "".join(
         f"<tr><th>{esc(name)}</th>{''.join(f'<td class=num>{value:,}</td>' for value in values[name])}</tr>" for name in series_names
     )
-    headers = "".join(f"<th class=num>{esc(item['comparison']['comparison_month'])}</th>" for item in selected)
+    headers = "".join(f"<th class=num>{esc(item['comparison'].get('comparison_id', item['comparison']['comparison_month']))}</th>" for item in selected)
     return f'<div class=chart>{"".join(parts)}</div><div class=table-wrap><table><caption>{esc(title)} exact values</caption><thead><tr><th>Series</th>{headers}</tr></thead><tbody>{table_rows}</tbody></table></div>'
 
 
@@ -187,7 +187,8 @@ def alerts_html(analysis: dict[str, object]) -> str:
 
 
 def load_analyses(analysis_dir: Path = change_analysis.ANALYSIS) -> list[dict[str, object]]:
-    return [json.loads(path.read_text(encoding="utf-8")) for path in sorted(analysis_dir.glob("????-??.json"))]
+    paths = sorted([*analysis_dir.glob("????-??.json"), *analysis_dir.glob("????-??-??.json")])
+    return [json.loads(path.read_text(encoding="utf-8")) for path in paths]
 
 
 def index_html(analyses: list[dict[str, object]]) -> str:
@@ -195,7 +196,7 @@ def index_html(analyses: list[dict[str, object]]) -> str:
     comparison = latest["comparison"]
     omitted = [item for item in analyses if not item["comparison"]["canonical_monthly_comparison"] or item["overall_status"] == "critical"]
     history_rows = "".join(
-        f'<tr><td><a href="comparisons/{esc(item["comparison"]["comparison_month"])}.html">{esc(item["comparison"]["comparison_month"])}</a></td>'
+        f'<tr><td><a href="comparisons/{esc(item["comparison"].get("comparison_id", item["comparison"]["comparison_month"]))}.html">{esc(item["comparison"].get("comparison_id", item["comparison"]["comparison_month"]))}</a></td>'
         f"<td>{esc(item['comparison']['snapshot_from'])} → {esc(item['comparison']['snapshot_to'])}</td><td>{esc(item['comparison']['comparison_kind'])}</td>"
         f"<td>{tag(item['overall_status'])}</td><td>{'yes' if item['comparison']['canonical_monthly_comparison'] else 'no'}</td>"
         f"<td>{'yes' if item['trend_eligibility']['usable_for_global_aggregate_trend'] else 'no'}</td></tr>" for item in analyses
@@ -211,7 +212,7 @@ def index_html(analyses: list[dict[str, object]]) -> str:
 <label><input id=show-all type=checkbox> Reveal noncanonical and critical intervals in historical charts</label>
 <div id=canonical-source>{history_svg(analyses, include_all=False, kind='sources')}</div><div id=all-source class=hidden>{history_svg(analyses, include_all=True, kind='sources')}</div>
 <h2>Historical change-type totals</h2><div id=canonical-change>{history_svg(analyses, include_all=False, kind='changes')}</div><div id=all-change class=hidden>{history_svg(analyses, include_all=True, kind='changes')}</div>
-<h2>Comparison history</h2><div class=table-wrap><table><caption>All analyzed comparisons</caption><thead><tr><th>Month</th><th>Observations</th><th>Kind</th><th>Status</th><th>Canonical</th><th>Global trend eligible</th></tr></thead><tbody>{history_rows}</tbody></table></div>
+<h2>Comparison history</h2><div class=table-wrap><table><caption>All analyzed comparisons</caption><thead><tr><th>Comparison</th><th>Observations</th><th>Kind</th><th>Status</th><th>Canonical</th><th>Global trend eligible</th></tr></thead><tbody>{history_rows}</tbody></table></div>
 <script>const toggle=document.getElementById('show-all');toggle.addEventListener('change',()=>{{for(const id of ['all-source','all-change'])document.getElementById(id).classList.toggle('hidden',!toggle.checked);for(const id of ['canonical-source','canonical-change'])document.getElementById(id).classList.toggle('hidden',toggle.checked);}});</script>
 """
     return page("Tampa snapshot-change dashboard", body)
@@ -312,9 +313,9 @@ def build_dashboard(
     detail_dir = output_dir / "comparisons"
     pages = []
     for analysis in analyses:
-        month = analysis["comparison"]["comparison_month"]
-        changes = change_analysis.read_csv(changes_dir / f"{month}.csv")
-        path = detail_dir / f"{month}.html"
+        artifact_id = analysis["comparison"].get("comparison_id", analysis["comparison"]["comparison_month"])
+        changes = change_analysis.read_csv(changes_dir / f"{artifact_id}.csv")
+        path = detail_dir / f"{artifact_id}.html"
         change_analysis.atomic_text(path, detail_html(analysis, changes))
         pages.append(path.relative_to(ROOT).as_posix() if path.is_relative_to(ROOT) else str(path))
     index_path = output_dir / "index.html"

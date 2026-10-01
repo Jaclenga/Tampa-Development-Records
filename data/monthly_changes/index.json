@@ -1,8 +1,8 @@
 {
   "format_version": "1.0.0",
   "status": "longitudinal",
-  "snapshot_count": 2,
-  "comparison_count": 1,
+  "snapshot_count": 3,
+  "comparison_count": 2,
   "snapshots": [
     {
       "snapshot_date": "2026-08-23",
@@ -37,11 +37,28 @@
       "path": "data/snapshots/2026-09-01",
       "audit_status": "collection_integrity_passed",
       "collection_integrity_passed": true
+    },
+    {
+      "snapshot_date": "2026-10-01",
+      "retrieved_at_utc": "2026-10-01T06:47:51+00:00",
+      "record_count": 4624,
+      "source_counts": {
+        "capital_improvements": 394,
+        "capital_locations_line": 101,
+        "capital_locations_point": 48,
+        "capital_locations_polygon": 36,
+        "construction_inspections": 2594,
+        "development_coordination": 287,
+        "historic_preservation": 143,
+        "single_family_permits": 1021
+      },
+      "path": "data/snapshots/2026-10-01"
     }
   ],
   "comparisons": [
     {
       "comparison_month": "2026-09",
+      "comparison_id": "2026-09",
       "before_snapshot_date": "2026-08-23",
       "after_snapshot_date": "2026-09-01",
       "records_with_any_published_change": 2103,
@@ -55,6 +72,23 @@
       "canonical_monthly_comparison": false,
       "usable_for_global_aggregate_trend": false,
       "dashboard_page": "reports/dashboard/comparisons/2026-09.html"
+    },
+    {
+      "comparison_month": "2026-10",
+      "comparison_id": "2026-10-01",
+      "before_snapshot_date": "2026-09-01",
+      "after_snapshot_date": "2026-10-01",
+      "records_with_any_published_change": 2712,
+      "csv": "data/monthly_changes/2026-10-01.csv",
+      "summary": "data/monthly_changes/2026-10-01.json",
+      "report": "reports/changes/2026-10-01.md",
+      "analysis_json": "data/monthly_changes/analysis/2026-10-01.json",
+      "analysis_status": "review",
+      "critical_alert_count": 0,
+      "warning_alert_count": 7,
+      "canonical_monthly_comparison": false,
+      "usable_for_global_aggregate_trend": false,
+      "dashboard_page": "reports/dashboard/comparisons/2026-10-01.html"
     }
   ],
   "scope_note": "Snapshots and comparisons cover the configured public source layers, not all Tampa development."

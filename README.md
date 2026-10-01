@@ -7,7 +7,7 @@ of Tampa, with tools for tracking changes in those records over time.
 
 ## Status
 
-This is a strong baseline with an initial observed comparison, not yet a
+This is a strong baseline with two observed comparisons, not yet a
 validated full-month longitudinal result.
 
 | Item | Current state |
@@ -17,11 +17,11 @@ validated full-month longitudinal result.
 | Normalized activities | 3,323 |
 | Accela records | 338,789 unique Building/Planning records; 334,808 retrospective and 3,981 prospective |
 | Expanded activities | 339,179; core bounded-census files remain unchanged |
-| Source-date cohort view | 4,549 canonical records; 4,464 non-future monthly events; 84 forward-looking plans |
-| Longitudinal snapshots | August 23 baseline; September 1 first follow-up |
-| Latest observed records | 4,408 records from eight City GIS layers |
-| Observed comparisons | 1; August 23 to September 1 (nine-day initial interval) |
-| Regular month-end series | Begins September 30, 2026 |
+| Source-date cohort view | 5,302 canonical records; 5,164 non-future monthly events; 137 forward-looking plans |
+| Longitudinal snapshots | August 23 baseline; September 1 and October 1 follow-ups |
+| Latest observed records | 4,624 records from eight City GIS layers on October 1 |
+| Observed comparisons | 2; August 23 to September 1 and September 1 to October 1 (both noncanonical) |
+| Regular month-end series | September 30 was missed; October 31 is the next eligible observation |
 | Manual validation | 10 of 150 first reviews completed (6.7%); development phase only |
 | Empirical accuracy | Not yet measured |
 | Release | Version 0.9.0 prepared; Git tag not yet published |
@@ -36,6 +36,7 @@ Tampa permits, developments, construction outcomes, or investment.
 | --- | --- | ---: | --- | --- |
 | [`2026-08-23`](data/snapshots/2026-08-23/) | 2026-08-23 02:06:02 | 4,469 | Original baseline | [Metadata](data/snapshots/2026-08-23/metadata.json) |
 | [`2026-09-01`](data/snapshots/2026-09-01/) | 2026-09-01 07:15:12 | 4,408 | Reconciled first follow-up | [Metadata](data/snapshots/2026-09-01/metadata.json) |
+| [`2026-10-01`](data/snapshots/2026-10-01/) | 2026-10-01 06:47:51 | 4,624 | Manual recovery observation | [Metadata](data/snapshots/2026-10-01/metadata.json) |
 
 The first observed comparison covers August 23 to September 1 and is a
 nine-day initial interval, not a full monthly interval. Its
@@ -44,6 +45,14 @@ nine-day initial interval, not a full monthly interval. Its
 [`change dashboard`](reports/dashboard/index.html) and
 [`analysis documentation`](docs/methodology/CHANGE_DASHBOARD.md) flag unusually large
 source shifts before they are interpreted substantively.
+
+The [October 1 comparison](data/monthly_changes/2026-10-01.json) covers the
+September 1 to October 1 observations. The September 30 scheduled collection
+was missed, so this is a manual interval, not a month-end trend point. October
+31 is the next eligible month-end observation; October 31 to November 30 is the
+first possible full month-end interval. Manual interim comparisons use their
+observation date in artifact filenames to keep multiple comparisons in one
+month distinct.
 
 The accepted September 1 observation passed repeated count-only, ID-only,
 chunked-feature, and final-count reconciliation for all eight sources. It
@@ -151,8 +160,8 @@ codes, and second-review status remain in the
 
 ## What the dataset supports
 
-- Reproducing the state of eight City GIS layers on August 23 and September 1,
-  2026.
+- Reproducing the state of eight City GIS layers on August 23, September 1,
+  and October 1, 2026.
 - Mapping and filtering the published records.
 - Studying overlap among permit, planning, preservation, and capital-project
   layers.
@@ -162,7 +171,7 @@ codes, and second-review status remain in the
 - Identifying records and source fields that changed between archived
   observations. The first comparison spans August 23 through September 1,
   2026 and is treated as a short baseline follow-up rather than a full monthly
-  interval. Regular month-end observations begin September 30, 2026.
+  interval. The September 1 to October 1 manual comparison is also noncanonical.
 
 Snapshot differences describe changes in public-layer publication. They do not
 by themselves prove that construction started, a project finished, a permit
@@ -266,16 +275,16 @@ one distribution gap:
 
 1. Complete the frozen manual-validation sample and publish the resulting
    claim-specific accuracy and reviewer-agreement metrics.
-2. Collect the September 30 snapshot to establish the first canonical
-   month-end observation; the first full month-end-to-month-end interval will
-   be September 30 to October 31.
+2. Collect the October 31 and November 30 month-end snapshots. The scheduled
+   September 30 observation was missed; the October 1 recovery keeps its actual
+   Tampa observation date and cannot replace it. October 31 to November 30 is
+   the first possible full month-end-to-month-end interval.
 3. Run the release checks and publish an annotated `v0.9.0` Git tag.
 
 The detailed sequence is in the
 [`release checklist`](docs/guides/RELEASE_CHECKLIST.md). Until the first item is
 complete, do not claim a measured error rate. Until the second is complete,
-describe August 23 to September 1 only as an initial short-interval comparison,
-not a full monthly result.
+describe both observed comparisons as noncanonical, not full monthly results.
 
 ## Repository layout
 

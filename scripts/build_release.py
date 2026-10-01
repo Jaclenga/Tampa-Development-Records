@@ -22,7 +22,9 @@ import re
 import struct
 import subprocess
 import sys
+import time
 import urllib.parse
+import urllib.error
 import urllib.request
 import zipfile
 from collections import Counter, defaultdict
@@ -138,6 +140,24 @@ def _raise_arcgis_error(payload: dict, query_method: str) -> None:
         raise RuntimeError(f"ArcGIS {query_method} query failed: {message}")
 
 
+def query_arcgis(url: str, params: dict[str, object], query_method: str) -> dict:
+    """Retry transient ArcGIS failures without relaxing inventory checks."""
+    for attempt in range(8):
+        try:
+            payload = get_json(url, params)
+        except urllib.error.URLError:
+            if attempt == 7:
+                raise
+        else:
+            error = payload.get("error")
+            message = error.get("message", "") if isinstance(error, dict) else str(error or "")
+            if message not in {"Unable to complete operation.", "Failed to execute query."} or attempt == 7:
+                _raise_arcgis_error(payload, query_method)
+                return payload
+        time.sleep(min(2 ** attempt, 8))
+    raise AssertionError("ArcGIS retry loop exhausted")
+
+
 def _object_id(properties: dict, field: str) -> str:
     value = properties.get(field)
     if value is None:
@@ -155,10 +175,8 @@ def fetch_arcgis_layer(url: str, *, return_geometry: bool = True) -> dict:
     fetched feature ID, and a final count query must agree.
     """
     count_params = {"where": "1=1", "returnCountOnly": "true", "f": "json"}
-    first_count_payload = get_json(f"{url}/query", count_params)
-    _raise_arcgis_error(first_count_payload, "count-only")
-    second_count_payload = get_json(f"{url}/query", count_params)
-    _raise_arcgis_error(second_count_payload, "repeated count-only")
+    first_count_payload = query_arcgis(f"{url}/query", count_params, "count-only")
+    second_count_payload = query_arcgis(f"{url}/query", count_params, "repeated count-only")
     first_count = int(first_count_payload.get("count", -1))
     second_count = int(second_count_payload.get("count", -1))
     if first_count < 0 or first_count != second_count:
@@ -166,10 +184,9 @@ def fetch_arcgis_layer(url: str, *, return_geometry: bool = True) -> dict:
             f"ArcGIS collection integrity failure: repeated counts disagree ({first_count} != {second_count})"
         )
 
-    inventory_payload = get_json(f"{url}/query", {
+    inventory_payload = query_arcgis(f"{url}/query", {
         "where": "1=1", "returnIdsOnly": "true", "f": "json",
-    })
-    _raise_arcgis_error(inventory_payload, "ID-only")
+    }, "ID-only")
     object_id_field = str(inventory_payload.get("objectIdFieldName") or "OBJECTID")
     object_ids = inventory_payload.get("objectIds") or []
     normalized_inventory = [str(value) for value in object_ids]
@@ -186,12 +203,11 @@ def fetch_arcgis_layer(url: str, *, return_geometry: bool = True) -> dict:
     ordered_ids = sorted(object_ids, key=lambda value: (str(type(value)), str(value)))
     for start in range(0, len(ordered_ids), page_size):
         requested_ids = ordered_ids[start:start + page_size]
-        page = get_json(f"{url}/query", {
+        page = query_arcgis(f"{url}/query", {
             "objectIds": ",".join(str(value) for value in requested_ids), "outFields": "*",
             "returnGeometry": "true" if return_geometry else "false", "outSR": 4326,
             "f": "geojson" if return_geometry else "json",
-        })
-        _raise_arcgis_error(page, "feature-page")
+        }, "feature-page")
         batch = page.get("features", [])
         if not return_geometry:
             batch = [
@@ -213,8 +229,7 @@ def fetch_arcgis_layer(url: str, *, return_geometry: bool = True) -> dict:
             f"(features={len(fetched_ids)}, IDs={len(normalized_inventory)})"
         )
 
-    final_count_payload = get_json(f"{url}/query", count_params)
-    _raise_arcgis_error(final_count_payload, "final count-only")
+    final_count_payload = query_arcgis(f"{url}/query", count_params, "final count-only")
     final_count = int(final_count_payload.get("count", -1))
     if final_count != first_count or len(features) != first_count:
         raise RuntimeError(

@@ -22,6 +22,7 @@ import tempfile
 import time
 from collections import Counter, defaultdict
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -191,7 +192,9 @@ def snapshot_date_from_rows(rows: list[dict[str, str]]) -> tuple[str, str]:
         parsed = dt.datetime.fromisoformat(observed[0].replace("Z", "+00:00"))
     except ValueError as exc:
         raise ValueError(f"Invalid retrieval timestamp: {observed[0]}") from exc
-    return parsed.date().isoformat(), observed[0]
+    if parsed.utcoffset() is None:
+        raise ValueError(f"Retrieval timestamp must include a UTC offset: {observed[0]}")
+    return parsed.astimezone(ZoneInfo("America/New_York")).date().isoformat(), observed[0]
 
 
 def canonical_snapshot_rows(rows: list[dict[str, str]]) -> list[dict[str, str]]:
@@ -254,6 +257,19 @@ def archive_rows(
                 f"Refusing to overwrite immutable snapshot {snapshot_date} with different records"
             )
         return existing_metadata
+    # Older snapshots used the UTC calendar date. Reuse one when the exact
+    # retrieval and content are already archived under that historical label.
+    for prior_path in sorted(snapshots_dir.glob("*/metadata.json")):
+        prior = json.loads(prior_path.read_text(encoding="utf-8"))
+        if prior.get("retrieved_at_utc") != retrieved_at:
+            continue
+        if (
+            not (prior_path.parent / "source_records.csv.gz").is_file()
+            or prior.get("source_records_content_sha256") != content_hash
+            or prior.get("source_state_sha256") != state_hash
+        ):
+            raise RuntimeError(f"Archived retrieval {retrieved_at} has different or incomplete records")
+        return prior
     destination.mkdir(parents=True, exist_ok=False)
     atomic_gzip_csv(records_path, rows)
     metadata["source_records_gzip_sha256"] = file_sha256(records_path)
@@ -663,6 +679,18 @@ def comparison_summary(
     }
 
 
+def comparison_id(before_date: str, after_date: str, changes_dir: Path) -> str:
+    """Use month filenames for month-ends and existing periods; date extra observations."""
+    month = after_date[:7]
+    monthly_summary = changes_dir / f"{month}.json"
+    if monthly_summary.is_file():
+        prior = json.loads(monthly_summary.read_text(encoding="utf-8"))
+        if (prior.get("before_snapshot_date"), prior.get("after_snapshot_date")) == (before_date, after_date):
+            return month
+    day = dt.date.fromisoformat(after_date)
+    return month if (day + dt.timedelta(days=1)).month != day.month else after_date
+
+
 def report_markdown(summary: dict[str, object], changes: list[dict[str, str]]) -> str:
     counts = summary["change_type_counts"]
     semantics = summary["semantic_type_counts"]
@@ -731,7 +759,7 @@ def report_markdown(summary: dict[str, object], changes: list[dict[str, str]]) -
         "A newly observed record may have existed before the interval, and a record that is no longer returned is not necessarily deleted, cancelled, or complete. "
         "Permit issuance is authorization, planned dates are schedules, and estimated costs are not actual spending.",
         "",
-        f"Full machine-readable changes: [`data/monthly_changes/{summary['comparison_month']}.csv`](../../data/monthly_changes/{summary['comparison_month']}.csv)",
+        f"Full machine-readable changes: [`data/monthly_changes/{summary['comparison_id']}.csv`](../../data/monthly_changes/{summary['comparison_id']}.csv)",
         "",
     ])
     return "\n".join(lines)
@@ -751,10 +779,11 @@ def compare_snapshots(
     after_meta, after_rows = load_snapshot(after_date, snapshots_dir)
     changes = compare_records(before_rows, after_rows, before_date, after_date)
     summary = comparison_summary(changes, before_meta, after_meta)
-    month = after_date[:7]
-    csv_path = changes_dir / f"{month}.csv"
-    json_path = changes_dir / f"{month}.json"
-    report_path = reports_dir / f"{month}.md"
+    artifact_id = comparison_id(before_date, after_date, changes_dir)
+    summary["comparison_id"] = artifact_id
+    csv_path = changes_dir / f"{artifact_id}.csv"
+    json_path = changes_dir / f"{artifact_id}.json"
+    report_path = reports_dir / f"{artifact_id}.md"
     for path in (csv_path, json_path, report_path):
         if path.exists():
             existing_dates = ""
@@ -762,7 +791,7 @@ def compare_snapshots(
                 prior = json.loads(json_path.read_text(encoding="utf-8"))
                 existing_dates = f"{prior.get('before_snapshot_date')} to {prior.get('after_snapshot_date')}"
             if existing_dates and existing_dates != f"{before_date} to {after_date}":
-                raise RuntimeError(f"Refusing to replace comparison month {month}: existing period is {existing_dates}")
+                raise RuntimeError(f"Refusing to replace comparison {artifact_id}: existing period is {existing_dates}")
     atomic_csv(csv_path, changes, CHANGE_FIELDS)
     atomic_json(json_path, summary)
     report_path.parent.mkdir(parents=True, exist_ok=True)
@@ -815,29 +844,32 @@ def tracker_index(
             snapshots.append(snapshot_entry)
     comparisons = []
     if changes_dir.exists():
-        for path in sorted(changes_dir.glob("????-??.json")):
+        comparison_paths = sorted([*changes_dir.glob("????-??.json"), *changes_dir.glob("????-??-??.json")])
+        for path in comparison_paths:
             summary = json.loads(path.read_text(encoding="utf-8"))
+            artifact_id = summary.get("comparison_id", path.stem)
             comparison = {
                 "comparison_month": summary["comparison_month"],
+                "comparison_id": artifact_id,
                 "before_snapshot_date": summary["before_snapshot_date"],
                 "after_snapshot_date": summary["after_snapshot_date"],
                 "records_with_any_published_change": summary["records_with_any_published_change"],
-                "csv": f"data/monthly_changes/{summary['comparison_month']}.csv",
-                "summary": f"data/monthly_changes/{summary['comparison_month']}.json",
-                "report": f"reports/changes/{summary['comparison_month']}.md",
+                "csv": f"data/monthly_changes/{artifact_id}.csv",
+                "summary": f"data/monthly_changes/{artifact_id}.json",
+                "report": f"reports/changes/{artifact_id}.md",
             }
-            analysis_path = changes_dir / "analysis" / f"{summary['comparison_month']}.json"
+            analysis_path = changes_dir / "analysis" / f"{artifact_id}.json"
             if analysis_path.exists():
                 analysis = json.loads(analysis_path.read_text(encoding="utf-8"))
                 severities = Counter(item["severity"] for item in analysis["alerts"])
                 comparison.update({
-                    "analysis_json": f"data/monthly_changes/analysis/{summary['comparison_month']}.json",
+                    "analysis_json": f"data/monthly_changes/analysis/{artifact_id}.json",
                     "analysis_status": analysis["overall_status"],
                     "critical_alert_count": severities["critical"],
                     "warning_alert_count": severities["warning"],
                     "canonical_monthly_comparison": analysis["comparison"]["canonical_monthly_comparison"],
                     "usable_for_global_aggregate_trend": analysis["trend_eligibility"]["usable_for_global_aggregate_trend"],
-                    "dashboard_page": f"reports/dashboard/comparisons/{summary['comparison_month']}.html",
+                    "dashboard_page": f"reports/dashboard/comparisons/{artifact_id}.html",
                 })
             comparisons.append(comparison)
     return {

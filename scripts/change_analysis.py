@@ -346,6 +346,7 @@ def analyze_comparison(
     before_date = str(before_meta["snapshot_date"])
     after_date = str(after_meta["snapshot_date"])
     month = str(raw_summary["comparison_month"])
+    artifact_id = str(raw_summary.get("comparison_id", month))
     kind, canonical_monthly = classify_comparison(before_date, after_date, thresholds)
     change_counts = Counter(row["change_type"] for row in changes)
     semantic_counts = Counter(row["semantic_type"] for row in changes if row.get("semantic_type"))
@@ -669,16 +670,17 @@ def analyze_comparison(
             "snapshot_to": after_date,
             "interval_days": (dt.date.fromisoformat(after_date) - dt.date.fromisoformat(before_date)).days,
             "comparison_month": month,
+            "comparison_id": artifact_id,
             "comparison_kind": kind,
             "canonical_monthly_comparison": canonical_monthly,
             "generated_from": [
                 f"data/snapshots/{before_date}/metadata.json",
                 f"data/snapshots/{after_date}/metadata.json",
-                f"data/monthly_changes/{month}.csv",
-                f"data/monthly_changes/{month}.json",
+                f"data/monthly_changes/{artifact_id}.csv",
+                f"data/monthly_changes/{artifact_id}.json",
             ],
-            "raw_change_csv": f"data/monthly_changes/{month}.csv",
-            "raw_summary_json": f"data/monthly_changes/{month}.json",
+            "raw_change_csv": f"data/monthly_changes/{artifact_id}.csv",
+            "raw_summary_json": f"data/monthly_changes/{artifact_id}.json",
         },
         "overall_status": comparison_status,
         "collection_integrity": {
@@ -716,14 +718,20 @@ def analyze_paths(
         raise ValueError("The before snapshot date must precede the after snapshot date")
     before_meta, before_rows = load_snapshot(before_date, snapshots_dir)
     after_meta, after_rows = load_snapshot(after_date, snapshots_dir)
-    month = after_date[:7]
-    raw_csv = changes_dir / f"{month}.csv"
-    raw_json = changes_dir / f"{month}.json"
-    if not raw_csv.is_file() or not raw_json.is_file():
-        raise FileNotFoundError(f"Comparison artifacts for {month} are missing")
-    summary = json.loads(raw_json.read_text(encoding="utf-8"))
-    if summary.get("before_snapshot_date") != before_date or summary.get("after_snapshot_date") != after_date:
-        raise ValueError(f"Comparison {month} covers different snapshots")
+    summary = None
+    raw_csv = raw_json = None
+    for artifact_id in (after_date, after_date[:7]):
+        candidate_csv = changes_dir / f"{artifact_id}.csv"
+        candidate_json = changes_dir / f"{artifact_id}.json"
+        if not candidate_csv.is_file() or not candidate_json.is_file():
+            continue
+        candidate_summary = json.loads(candidate_json.read_text(encoding="utf-8"))
+        if (candidate_summary.get("before_snapshot_date"), candidate_summary.get("after_snapshot_date")) == (before_date, after_date):
+            raw_csv, raw_json, summary = candidate_csv, candidate_json, candidate_summary
+            summary.setdefault("comparison_id", artifact_id)
+            break
+    if summary is None or raw_csv is None:
+        raise FileNotFoundError(f"Comparison artifacts for {before_date} to {after_date} are missing")
     changes = read_csv(raw_csv)
     return analyze_comparison(before_meta, after_meta, before_rows, after_rows, changes, summary, load_thresholds(thresholds_path)), changes
 
@@ -733,11 +741,11 @@ def write_analysis_artifacts(
     *,
     analysis_dir: Path = ANALYSIS,
 ) -> dict[str, str]:
-    month = analysis["comparison"]["comparison_month"]
-    json_path = analysis_dir / f"{month}.json"
-    sources_path = analysis_dir / f"{month}_sources.csv"
-    fields_path = analysis_dir / f"{month}_fields.csv"
-    transitions_path = analysis_dir / f"{month}_transitions.csv"
+    artifact_id = analysis["comparison"].get("comparison_id", analysis["comparison"]["comparison_month"])
+    json_path = analysis_dir / f"{artifact_id}.json"
+    sources_path = analysis_dir / f"{artifact_id}_sources.csv"
+    fields_path = analysis_dir / f"{artifact_id}_fields.csv"
+    transitions_path = analysis_dir / f"{artifact_id}_transitions.csv"
     atomic_json(json_path, analysis)
     source_rows = []
     for row in analysis["source_health"]:
@@ -774,19 +782,19 @@ def update_index(index_path: Path = CHANGES / "index.json", analysis_dir: Path =
         return
     index = json.loads(index_path.read_text(encoding="utf-8"))
     for item in index.get("comparisons", []):
-        month = item["comparison_month"]
-        path = analysis_dir / f"{month}.json"
+        artifact_id = item.get("comparison_id", item["comparison_month"])
+        path = analysis_dir / f"{artifact_id}.json"
         if not path.is_file():
             continue
         analysis = json.loads(path.read_text(encoding="utf-8"))
         severities = Counter(alert["severity"] for alert in analysis["alerts"])
         item.update({
-            "analysis_json": f"data/monthly_changes/analysis/{month}.json",
+            "analysis_json": f"data/monthly_changes/analysis/{artifact_id}.json",
             "analysis_status": analysis["overall_status"],
             "critical_alert_count": severities["critical"],
             "warning_alert_count": severities["warning"],
             "canonical_monthly_comparison": analysis["comparison"]["canonical_monthly_comparison"],
             "usable_for_global_aggregate_trend": analysis["trend_eligibility"]["usable_for_global_aggregate_trend"],
-            "dashboard_page": f"reports/dashboard/comparisons/{month}.html",
+            "dashboard_page": f"reports/dashboard/comparisons/{artifact_id}.html",
         })
     atomic_json(index_path, index)

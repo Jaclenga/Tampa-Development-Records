@@ -32,6 +32,16 @@ def record(
 
 
 class SnapshotTrackerTests(unittest.TestCase):
+    def test_snapshot_date_uses_tampa_calendar_day(self) -> None:
+        late_month_end = [record(
+            "construction_inspections", "BLD-1", {}, "2026-10-01T01:16:00+00:00",
+        )]
+        next_day = [record(
+            "construction_inspections", "BLD-1", {}, "2026-10-01T06:14:00+00:00",
+        )]
+        self.assertEqual(snapshot_tracker.snapshot_date_from_rows(late_month_end)[0], "2026-09-30")
+        self.assertEqual(snapshot_tracker.snapshot_date_from_rows(next_day)[0], "2026-10-01")
+
     def test_live_collection_uses_eight_layers_and_privacy_whitelist(self) -> None:
         core = {
             "construction_inspections": {"url": "https://example.test/construction"},
@@ -97,6 +107,39 @@ class SnapshotTrackerTests(unittest.TestCase):
         self.assertEqual(params["returnGeometry"], "false")
         self.assertEqual(params["f"], "json")
         self.assertEqual(collection["collection_integrity"]["count_only"], 1)
+
+    def test_arcgis_fetch_retries_transient_query_error(self) -> None:
+        responses = [
+            {"error": {"message": "Unable to complete operation."}},
+            {"error": {"message": "Failed to execute query."}},
+            {"count": 1},
+            {"count": 1},
+            {"objectIdFieldName": "OBJECTID", "objectIds": [1]},
+            {"features": [{"attributes": {"OBJECTID": 1}}]},
+            {"count": 1},
+        ]
+        with (
+            mock.patch("scripts.build_release.get_json", side_effect=responses) as get_json,
+            mock.patch("scripts.build_release.time.sleep") as sleep,
+        ):
+            collection = build_release.fetch_arcgis_layer(
+                "https://example.test/FeatureServer/0", return_geometry=False,
+            )
+        self.assertTrue(collection["collection_integrity"]["passed"])
+        self.assertEqual(get_json.call_count, 7)
+        self.assertEqual([call.args[0] for call in sleep.call_args_list], [1, 2])
+
+    def test_arcgis_fetch_does_not_retry_permanent_query_error(self) -> None:
+        with (
+            mock.patch("scripts.build_release.get_json", return_value={
+                "error": {"message": "Invalid query"},
+            }) as get_json,
+            mock.patch("scripts.build_release.time.sleep") as sleep,
+        ):
+            with self.assertRaisesRegex(RuntimeError, "Invalid query"):
+                build_release.fetch_arcgis_layer("https://example.test/FeatureServer/0")
+        get_json.assert_called_once()
+        sleep.assert_not_called()
 
     def test_arcgis_fetch_rejects_count_inventory_mismatch(self) -> None:
         responses = [
@@ -245,7 +288,7 @@ class SnapshotTrackerTests(unittest.TestCase):
                 "construction_inspections",
                 "BLD-1",
                 {"PROJECTSTATUS": "Issued"},
-                "2026-08-23T00:00:00Z",
+                "2026-08-23T12:00:00Z",
             )
 
             def write(value: dict[str, str]) -> None:
@@ -259,7 +302,7 @@ class SnapshotTrackerTests(unittest.TestCase):
             second = snapshot_tracker.archive_snapshot(source, snapshots)
             self.assertEqual(first["source_records_content_sha256"], second["source_records_content_sha256"])
             same_state_later = dict(row)
-            same_state_later["retrieved_at_utc"] = "2026-08-23T12:00:00Z"
+            same_state_later["retrieved_at_utc"] = "2026-08-23T14:00:00Z"
             write(same_state_later)
             third = snapshot_tracker.archive_snapshot(source, snapshots)
             self.assertEqual(first["retrieved_at_utc"], third["retrieved_at_utc"])
@@ -268,6 +311,25 @@ class SnapshotTrackerTests(unittest.TestCase):
             write(changed)
             with self.assertRaisesRegex(RuntimeError, "Refusing to overwrite immutable snapshot"):
                 snapshot_tracker.archive_snapshot(source, snapshots)
+
+    def test_archive_reuses_preexisting_utc_dated_snapshot(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            snapshots = Path(temporary) / "snapshots"
+            rows = [record(
+                "construction_inspections", "BLD-1", {}, "2026-08-23T02:06:02+00:00",
+            )]
+            snapshot_tracker.archive_rows(rows, snapshots)
+            old_path = snapshots / "2026-08-22"
+            legacy_path = snapshots / "2026-08-23"
+            old_path.rename(legacy_path)
+            metadata_path = legacy_path / "metadata.json"
+            metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
+            metadata["snapshot_date"] = "2026-08-23"
+            metadata_path.write_text(json.dumps(metadata), encoding="utf-8")
+
+            reused = snapshot_tracker.archive_rows(rows, snapshots)
+            self.assertEqual(reused["snapshot_date"], "2026-08-23")
+            self.assertFalse(old_path.exists())
 
     def test_update_creates_monthly_machine_and_human_outputs(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
@@ -289,7 +351,7 @@ class SnapshotTrackerTests(unittest.TestCase):
                     writer.writeheader()
                     writer.writerow(row)
 
-            write("2026-08-23T00:00:00Z", "Pending")
+            write("2026-08-23T12:00:00Z", "Pending")
             baseline = snapshot_tracker.update_tracker(
                 source,
                 snapshots_dir=snapshots,
@@ -297,7 +359,7 @@ class SnapshotTrackerTests(unittest.TestCase):
                 reports_dir=reports,
             )
             self.assertEqual(baseline["index"]["status"], "baseline_only")
-            write("2026-09-01T00:00:00Z", "Issued")
+            write("2026-09-01T12:00:00Z", "Issued")
             result = snapshot_tracker.update_tracker(
                 source,
                 snapshots_dir=snapshots,
@@ -305,10 +367,40 @@ class SnapshotTrackerTests(unittest.TestCase):
                 reports_dir=reports,
             )
             self.assertEqual(result["index"]["status"], "longitudinal")
-            self.assertTrue((changes / "2026-09.csv").exists())
-            self.assertTrue((changes / "2026-09.json").exists())
-            self.assertTrue((reports / "2026-09.md").exists())
+            self.assertTrue((changes / "2026-09-01.csv").exists())
+            self.assertTrue((changes / "2026-09-01.json").exists())
+            self.assertTrue((reports / "2026-09-01.md").exists())
             self.assertEqual(result["comparison"]["semantic_type_counts"]["permit_issued"], 1)
+
+    def test_interim_and_month_end_comparisons_share_a_month(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            snapshots = root / "snapshots"
+            changes = root / "changes"
+            reports = root / "reports" / "changes"
+            for day, status in (
+                ("2026-09-30", "Pending"),
+                ("2026-10-01", "Issued"),
+                ("2026-10-31", "Closed"),
+            ):
+                snapshot_tracker.archive_rows([
+                    record("construction_inspections", "BLD-1", {"PROJECTSTATUS": status}, f"{day}T12:00:00Z")
+                ], snapshots)
+            interim = snapshot_tracker.compare_snapshots(
+                "2026-09-30", "2026-10-01",
+                snapshots_dir=snapshots, changes_dir=changes, reports_dir=reports,
+            )
+            month_end = snapshot_tracker.compare_snapshots(
+                "2026-10-01", "2026-10-31",
+                snapshots_dir=snapshots, changes_dir=changes, reports_dir=reports,
+            )
+            self.assertEqual(interim["comparison_month"], "2026-10")
+            self.assertEqual(interim["comparison_id"], "2026-10-01")
+            self.assertEqual(month_end["comparison_id"], "2026-10")
+            index = snapshot_tracker.tracker_index(snapshots, changes)
+            self.assertEqual(index["comparison_count"], 2)
+            self.assertTrue((changes / "2026-10-01.json").is_file())
+            self.assertTrue((changes / "2026-10.json").is_file())
 
 
 if __name__ == "__main__":

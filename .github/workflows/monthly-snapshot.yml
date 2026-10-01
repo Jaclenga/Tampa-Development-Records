@@ -4,9 +4,9 @@ on:
   schedule:
     # GitHub cron has no "last day of month" expression. Run on candidate
     # dates, then let the first step continue only on Tampa's month-end.
-    # 22:17 UTC is 17:17 EST / 18:17 EDT and leaves the UTC and Tampa dates
-    # aligned for the tracker's UTC-derived snapshot date.
-    - cron: "17 22 28-31 * *"
+    # 12:17 UTC is 07:17 EST / 08:17 EDT. This leaves at least 15 hours
+    # before Tampa midnight if GitHub starts a scheduled job late.
+    - cron: "17 12 28-31 * *"
   workflow_dispatch:
 
 permissions:
@@ -34,13 +34,7 @@ jobs:
           tampa_today="$(TZ=America/New_York date +%F)"
           tampa_month="$(TZ=America/New_York date +%m)"
           tampa_tomorrow_month="$(TZ=America/New_York date -d tomorrow +%m)"
-          utc_today="$(date -u +%F)"
           echo "expected_date=$tampa_today" >> "$GITHUB_OUTPUT"
-
-          if [ "$tampa_today" != "$utc_today" ]; then
-            echo "::error::UTC date $utc_today and Tampa date $tampa_today differ; refusing to create a mislabeled snapshot."
-            exit 1
-          fi
 
           if [ "$tampa_month" = "$tampa_tomorrow_month" ]; then
             echo "should_run=false" >> "$GITHUB_OUTPUT"
@@ -56,24 +50,41 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Set up Python
+      - name: Skip an already archived scheduled observation
         if: steps.month_end.outputs.should_run == 'true'
+        id: existing_snapshot
+        shell: bash
+        env:
+          EXPECTED_DATE: ${{ steps.month_end.outputs.expected_date }}
+        run: |
+          if [ "$GITHUB_EVENT_NAME" = "schedule" ]; then
+            existing="$(python -c 'import json, os; index = json.load(open("data/monthly_changes/index.json", encoding="utf-8")); print(any(item["snapshot_date"] == os.environ["EXPECTED_DATE"] for item in index["snapshots"]))')"
+            if [ "$existing" = "True" ]; then
+              echo "should_collect=false" >> "$GITHUB_OUTPUT"
+              echo "$EXPECTED_DATE is already archived; no collection needed."
+              exit 0
+            fi
+          fi
+          echo "should_collect=true" >> "$GITHUB_OUTPUT"
+
+      - name: Set up Python
+        if: steps.existing_snapshot.outputs.should_collect == 'true'
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
       - name: Install test dependencies
-        if: steps.month_end.outputs.should_run == 'true'
+        if: steps.existing_snapshot.outputs.should_collect == 'true'
         run: |
           python -m pip install -r requirements.txt
           python -m pip install -r requirements-dev.txt
 
       - name: Collect and compare the bounded source snapshot
-        if: steps.month_end.outputs.should_run == 'true'
+        if: steps.existing_snapshot.outputs.should_collect == 'true'
         run: python scripts/snapshot_tracker.py collect-live
 
       - name: Verify the scheduled observation stayed on month-end
-        if: steps.month_end.outputs.should_run == 'true' && github.event_name == 'schedule'
+        if: steps.existing_snapshot.outputs.should_collect == 'true' && github.event_name == 'schedule'
         shell: bash
         env:
           EXPECTED_DATE: ${{ steps.month_end.outputs.expected_date }}
@@ -85,19 +96,19 @@ jobs:
           fi
 
       - name: Run the complete test suite
-        if: steps.month_end.outputs.should_run == 'true'
+        if: steps.existing_snapshot.outputs.should_collect == 'true'
         run: python -m pytest -q
 
       - name: Reject workstation paths and private author emails
-        if: steps.month_end.outputs.should_run == 'true'
+        if: steps.existing_snapshot.outputs.should_collect == 'true'
         run: python scripts/check_repository_privacy.py
 
       - name: Reject malformed diffs
-        if: steps.month_end.outputs.should_run == 'true'
+        if: steps.existing_snapshot.outputs.should_collect == 'true'
         run: git diff --check
 
       - name: Commit the new snapshot and comparison
-        if: steps.month_end.outputs.should_run == 'true'
+        if: steps.existing_snapshot.outputs.should_collect == 'true'
         shell: bash
         run: |
           if git diff --quiet && [ -z "$(git ls-files --others --exclude-standard)" ]; then
