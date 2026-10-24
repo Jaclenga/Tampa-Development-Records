@@ -7,9 +7,6 @@ of Tampa, with tools for tracking changes in those records over time.
 
 ## Status
 
-This is a strong baseline with two observed comparisons, not yet a
-validated full-month longitudinal result.
-
 | Item | Current state |
 | --- | --- |
 | Core release snapshot | August 23, 2026 |
