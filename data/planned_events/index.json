@@ -3,97 +3,96 @@
   "extract_type": "planned_events",
   "dataset_start_date": "2020-01-01",
   "records_excluded_before_dataset_start": 0,
-  "record_count": 137,
+  "record_count": 144,
   "first_event_month": "2026-11",
   "last_event_month": "2030-01",
   "month_count": 16,
   "months": [
     {
       "event_month": "2026-11",
-      "record_count": 12,
+      "record_count": 10,
       "source_counts": {
-        "capital_improvements": 8,
+        "capital_improvements": 7,
         "capital_locations_line": 1,
-        "capital_locations_polygon": 3
+        "capital_locations_polygon": 2
       },
       "event_date_type_counts": {
-        "capital_planned_start": 12
+        "capital_planned_start": 10
       },
       "path": "data/planned_events/2026-11.csv"
     },
     {
       "event_month": "2026-12",
-      "record_count": 15,
+      "record_count": 14,
       "source_counts": {
-        "capital_improvements": 10,
+        "capital_improvements": 9,
         "capital_locations_line": 4,
         "capital_locations_polygon": 1
       },
       "event_date_type_counts": {
-        "capital_planned_start": 15
+        "capital_planned_start": 14
       },
       "path": "data/planned_events/2026-12.csv"
     },
     {
       "event_month": "2027-01",
-      "record_count": 32,
+      "record_count": 25,
       "source_counts": {
-        "capital_improvements": 18,
-        "capital_locations_line": 12,
-        "capital_locations_point": 1,
+        "capital_improvements": 15,
+        "capital_locations_line": 7,
+        "capital_locations_point": 2,
         "capital_locations_polygon": 1
       },
       "event_date_type_counts": {
-        "capital_planned_start": 32
+        "capital_planned_start": 25
       },
       "path": "data/planned_events/2027-01.csv"
     },
     {
       "event_month": "2027-02",
-      "record_count": 8,
+      "record_count": 13,
       "source_counts": {
-        "capital_improvements": 6,
+        "capital_improvements": 11,
         "capital_locations_polygon": 2
       },
       "event_date_type_counts": {
-        "capital_planned_start": 8
+        "capital_planned_start": 13
       },
       "path": "data/planned_events/2027-02.csv"
     },
     {
       "event_month": "2027-03",
-      "record_count": 13,
+      "record_count": 22,
       "source_counts": {
-        "capital_improvements": 10,
-        "capital_locations_line": 2,
+        "capital_improvements": 15,
+        "capital_locations_line": 6,
         "capital_locations_polygon": 1
       },
       "event_date_type_counts": {
-        "capital_planned_start": 13
+        "capital_planned_start": 22
       },
       "path": "data/planned_events/2027-03.csv"
     },
     {
       "event_month": "2027-04",
-      "record_count": 3,
+      "record_count": 2,
       "source_counts": {
-        "capital_improvements": 2,
+        "capital_improvements": 1,
         "capital_locations_polygon": 1
       },
       "event_date_type_counts": {
-        "capital_planned_start": 3
+        "capital_planned_start": 2
       },
       "path": "data/planned_events/2027-04.csv"
     },
     {
       "event_month": "2027-06",
-      "record_count": 3,
+      "record_count": 2,
       "source_counts": {
-        "capital_improvements": 2,
-        "capital_locations_line": 1
+        "capital_improvements": 2
       },
       "event_date_type_counts": {
-        "capital_planned_start": 3
+        "capital_planned_start": 2
       },
       "path": "data/planned_events/2027-06.csv"
     },
@@ -124,51 +123,51 @@
     },
     {
       "event_month": "2027-10",
-      "record_count": 4,
+      "record_count": 8,
       "source_counts": {
-        "capital_improvements": 2,
-        "capital_locations_line": 1,
+        "capital_improvements": 4,
+        "capital_locations_line": 3,
         "capital_locations_point": 1
       },
       "event_date_type_counts": {
-        "capital_planned_start": 4
+        "capital_planned_start": 8
       },
       "path": "data/planned_events/2027-10.csv"
     },
     {
       "event_month": "2027-11",
-      "record_count": 7,
+      "record_count": 11,
       "source_counts": {
-        "capital_improvements": 6,
-        "capital_locations_point": 1
+        "capital_improvements": 8,
+        "capital_locations_point": 3
       },
       "event_date_type_counts": {
-        "capital_planned_start": 7
+        "capital_planned_start": 11
       },
       "path": "data/planned_events/2027-11.csv"
     },
     {
       "event_month": "2027-12",
-      "record_count": 7,
+      "record_count": 3,
       "source_counts": {
-        "capital_improvements": 4,
-        "capital_locations_point": 3
+        "capital_improvements": 2,
+        "capital_locations_point": 1
       },
       "event_date_type_counts": {
-        "capital_planned_start": 7
+        "capital_planned_start": 3
       },
       "path": "data/planned_events/2027-12.csv"
     },
     {
       "event_month": "2028-01",
-      "record_count": 14,
+      "record_count": 15,
       "source_counts": {
         "capital_improvements": 10,
-        "capital_locations_line": 3,
+        "capital_locations_line": 4,
         "capital_locations_point": 1
       },
       "event_date_type_counts": {
-        "capital_planned_start": 14
+        "capital_planned_start": 15
       },
       "path": "data/planned_events/2028-01.csv"
     },

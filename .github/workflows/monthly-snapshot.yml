@@ -80,8 +80,25 @@ jobs:
           python -m pip install -r requirements-dev.txt
 
       - name: Collect and compare the bounded source snapshot
+        id: collection
         if: steps.existing_snapshot.outputs.should_collect == 'true'
         run: python scripts/snapshot_tracker.py collect-live
+
+      - name: Preserve collected data for recovery
+        if: always() && steps.collection.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: tampa-snapshot-${{ github.run_id }}
+          retention-days: 90
+          path: |
+            data/snapshots/
+            data/monthly_changes/
+            data/monthly_events/
+            data/planned_events/
+            data/processed/activity_by_month.csv
+            reports/changes/
+            reports/dashboard/
+            manifest.json
 
       - name: Verify the scheduled observation stayed on month-end
         if: steps.existing_snapshot.outputs.should_collect == 'true' && github.event_name == 'schedule'

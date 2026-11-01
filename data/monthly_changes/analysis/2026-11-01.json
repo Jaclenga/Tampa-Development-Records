@@ -1,0 +1,3757 @@
+{
+  "alerts": [
+    {
+      "affected_count": 209,
+      "alert_code": "critical_disappearance_rate",
+      "explanation": "Most earlier records were no longer returned. This does not prove deletion or cancellation.",
+      "metric_name": "disappearance_rate",
+      "observed_value": 0.530457,
+      "prevents_aggregate_trend_interpretation": true,
+      "severity": "critical",
+      "source_id": "capital_improvements",
+      "threshold": 0.5
+    },
+    {
+      "affected_count": 199,
+      "alert_code": "source_count_collapse",
+      "explanation": "Published source count collapsed relative to the earlier observation; investigate source filters or availability.",
+      "metric_name": "source_drop_pct",
+      "observed_value": 0.505076,
+      "prevents_aggregate_trend_interpretation": true,
+      "severity": "critical",
+      "source_id": "capital_improvements",
+      "threshold": 0.5
+    },
+    {
+      "affected_count": 219,
+      "alert_code": "high_publication_churn",
+      "explanation": "A large share of the source union entered or left the published result.",
+      "metric_name": "publication_churn",
+      "observed_value": 0.542079,
+      "prevents_aggregate_trend_interpretation": false,
+      "severity": "warning",
+      "source_id": "capital_improvements",
+      "threshold": 0.3
+    },
+    {
+      "affected_count": 158,
+      "alert_code": "high_publication_churn",
+      "explanation": "A large share of the source union entered or left the published result.",
+      "metric_name": "publication_churn",
+      "observed_value": 0.434066,
+      "prevents_aggregate_trend_interpretation": false,
+      "severity": "warning",
+      "source_id": "development_coordination",
+      "threshold": 0.3
+    },
+    {
+      "affected_count": 56,
+      "alert_code": "high_publication_churn",
+      "explanation": "A large share of the source union entered or left the published result.",
+      "metric_name": "publication_churn",
+      "observed_value": 0.347826,
+      "prevents_aggregate_trend_interpretation": false,
+      "severity": "warning",
+      "source_id": "historic_preservation",
+      "threshold": 0.3
+    },
+    {
+      "affected_count": 105,
+      "alert_code": "mass_field_refresh",
+      "explanation": "Field CREATEDDATE changed across most retained records, suggesting a systematic refresh.",
+      "metric_name": "affected_retained_rate",
+      "observed_value": 1.0,
+      "prevents_aggregate_trend_interpretation": false,
+      "severity": "warning",
+      "source_id": "historic_preservation",
+      "threshold": 0.75
+    },
+    {
+      "affected_count": 931,
+      "alert_code": "mass_field_refresh",
+      "explanation": "Field CREATEDDATE changed across most retained records, suggesting a systematic refresh.",
+      "metric_name": "affected_retained_rate",
+      "observed_value": 1.0,
+      "prevents_aggregate_trend_interpretation": false,
+      "severity": "warning",
+      "source_id": "single_family_permits",
+      "threshold": 0.75
+    },
+    {
+      "affected_count": 31,
+      "alert_code": "noncanonical_interval",
+      "explanation": "This interval is a baseline follow-up or manual observation, not a canonical month-end trend point.",
+      "metric_name": "canonical_monthly_comparison",
+      "observed_value": false,
+      "prevents_aggregate_trend_interpretation": true,
+      "severity": "warning",
+      "source_id": null,
+      "threshold": true
+    },
+    {
+      "affected_count": 8,
+      "alert_code": "notable_source_net_change",
+      "explanation": "Source count moved beyond the informational threshold.",
+      "metric_name": "percentage_delta",
+      "observed_value": 0.166667,
+      "prevents_aggregate_trend_interpretation": false,
+      "severity": "informational",
+      "source_id": "capital_locations_point",
+      "threshold": 0.05
+    }
+  ],
+  "collection_integrity": {
+    "passed": null,
+    "source_status": {},
+    "status": "not_audited"
+  },
+  "comparison": {
+    "canonical_monthly_comparison": false,
+    "comparison_id": "2026-11-01",
+    "comparison_kind": "manual_interval",
+    "comparison_month": "2026-11",
+    "generated_from": [
+      "data/snapshots/2026-10-01/metadata.json",
+      "data/snapshots/2026-11-01/metadata.json",
+      "data/monthly_changes/2026-11-01.csv",
+      "data/monthly_changes/2026-11-01.json"
+    ],
+    "interval_days": 31,
+    "raw_change_csv": "data/monthly_changes/2026-11-01.csv",
+    "raw_summary_json": "data/monthly_changes/2026-11-01.json",
+    "snapshot_from": "2026-10-01",
+    "snapshot_to": "2026-11-01"
+  },
+  "cost_changes": {
+    "aggregation_warning": "Amounts are source-level changes. Overlapping sources must not be summed as total Tampa investment.",
+    "events": [
+      {
+        "amount_difference": 1500000.0,
+        "classification": "increase",
+        "cost_type": "estimated_cost",
+        "new_normalized": "2700000.0",
+        "new_raw": "2700000.0",
+        "old_normalized": "1200000.0",
+        "old_raw": "1200000.0",
+        "record_identity": "CAPITAL_IMPROVEMENTS|NATIVE|1001810.15|GLOBALID|{F570E580-479B-4E4D-A4AF-FA86BE65EBEE}",
+        "source_id": "capital_improvements"
+      },
+      {
+        "amount_difference": 400000.0,
+        "classification": "increase",
+        "cost_type": "estimated_cost",
+        "new_normalized": "1600000.0",
+        "new_raw": "1600000.0",
+        "old_normalized": "1200000.0",
+        "old_raw": "1200000.0",
+        "record_identity": "CAPITAL_IMPROVEMENTS|NATIVE|1001810.7|GLOBALID|{86F43698-F501-4D07-A6C1-FD6E3C1A497A}",
+        "source_id": "capital_improvements"
+      },
+      {
+        "amount_difference": -7400000.0,
+        "classification": "decrease",
+        "cost_type": "estimated_cost",
+        "new_normalized": "93000000.0",
+        "new_raw": "93000000.0",
+        "old_normalized": "100400000.0",
+        "old_raw": "100400000.0",
+        "record_identity": "CAPITAL_IMPROVEMENTS|NATIVE|1002179|GLOBALID|{3D6D0F3C-19B1-44BC-B16B-DDD0E92B1BE4}",
+        "source_id": "capital_improvements"
+      },
+      {
+        "amount_difference": 225000.0,
+        "classification": "increase",
+        "cost_type": "estimated_cost",
+        "new_normalized": "600000.0",
+        "new_raw": "600000.0",
+        "old_normalized": "375000.0",
+        "old_raw": "375000.0",
+        "record_identity": "CAPITAL_IMPROVEMENTS|NATIVE|1002588.2|GLOBALID|{64F2E115-E1A0-4BFA-9045-3B396C31F081}",
+        "source_id": "capital_improvements"
+      },
+      {
+        "amount_difference": 500000.0,
+        "classification": "increase",
+        "cost_type": "estimated_cost",
+        "new_normalized": "1000000.0",
+        "new_raw": "1000000.0",
+        "old_normalized": "500000.0",
+        "old_raw": "500000.0",
+        "record_identity": "CAPITAL_IMPROVEMENTS|NATIVE|1002588.2|GLOBALID|{F69CB0A3-8C50-4F2A-94CC-40E7EB4ECE2C}",
+        "source_id": "capital_improvements"
+      },
+      {
+        "amount_difference": 1300000.0,
+        "classification": "increase",
+        "cost_type": "estimated_cost",
+        "new_normalized": "3500000.0",
+        "new_raw": "3500000.0",
+        "old_normalized": "2200000.0",
+        "old_raw": "2200000.0",
+        "record_identity": "CAPITAL_IMPROVEMENTS|NATIVE|1002661|GLOBALID|{0F478CED-1EC1-4AB5-B69A-6225DA564E06}",
+        "source_id": "capital_improvements"
+      },
+      {
+        "amount_difference": 500000.0,
+        "classification": "increase",
+        "cost_type": "estimated_cost",
+        "new_normalized": "1000000.0",
+        "new_raw": "1000000.0",
+        "old_normalized": "500000.0",
+        "old_raw": "500000.0",
+        "record_identity": "CAPITAL_LOCATIONS_LINE|NATIVE|1002588.2|GLOBALID|{308BF890-FFF6-44DA-A94E-766C3D40F65A}",
+        "source_id": "capital_locations_line"
+      },
+      {
+        "amount_difference": 225000.0,
+        "classification": "increase",
+        "cost_type": "estimated_cost",
+        "new_normalized": "600000.0",
+        "new_raw": "600000.0",
+        "old_normalized": "375000.0",
+        "old_raw": "375000.0",
+        "record_identity": "CAPITAL_LOCATIONS_LINE|NATIVE|1002588.2|GLOBALID|{92D87469-8BD0-40EA-B757-C1CDF6512E9D}",
+        "source_id": "capital_locations_line"
+      },
+      {
+        "amount_difference": 1300000.0,
+        "classification": "increase",
+        "cost_type": "estimated_cost",
+        "new_normalized": "3500000.0",
+        "new_raw": "3500000.0",
+        "old_normalized": "2200000.0",
+        "old_raw": "2200000.0",
+        "record_identity": "CAPITAL_LOCATIONS_LINE|NATIVE|1002661",
+        "source_id": "capital_locations_line"
+      },
+      {
+        "amount_difference": -1500000.0,
+        "classification": "decrease",
+        "cost_type": "actual_cost",
+        "new_normalized": "0.0",
+        "new_raw": "0.0",
+        "old_normalized": "1500000.0",
+        "old_raw": "1500000.0",
+        "record_identity": "CAPITAL_LOCATIONS_POINT|NATIVE|TRANS10040",
+        "source_id": "capital_locations_point"
+      },
+      {
+        "amount_difference": 492508.0,
+        "classification": "increase",
+        "cost_type": "estimated_cost",
+        "new_normalized": "1692508.0",
+        "new_raw": "1692508.0",
+        "old_normalized": "1200000.0",
+        "old_raw": "1200000.0",
+        "record_identity": "CAPITAL_LOCATIONS_POINT|NATIVE|1001810",
+        "source_id": "capital_locations_point"
+      },
+      {
+        "amount_difference": 1500000.0,
+        "classification": "increase",
+        "cost_type": "estimated_cost",
+        "new_normalized": "2700000.0",
+        "new_raw": "2700000.0",
+        "old_normalized": "1200000.0",
+        "old_raw": "1200000.0",
+        "record_identity": "CAPITAL_LOCATIONS_POINT|NATIVE|1001810.15",
+        "source_id": "capital_locations_point"
+      },
+      {
+        "amount_difference": 400000.0,
+        "classification": "increase",
+        "cost_type": "estimated_cost",
+        "new_normalized": "1600000.0",
+        "new_raw": "1600000.0",
+        "old_normalized": "1200000.0",
+        "old_raw": "1200000.0",
+        "record_identity": "CAPITAL_LOCATIONS_POINT|NATIVE|1001810.7",
+        "source_id": "capital_locations_point"
+      }
+    ],
+    "summaries_by_source": [
+      {
+        "change_count": 6,
+        "classification_counts": {
+          "decrease": 1,
+          "increase": 5
+        },
+        "field": "estimated_cost",
+        "maximum_amount_difference": 1500000.0,
+        "median_amount_difference": 450000.0,
+        "minimum_amount_difference": -7400000.0,
+        "source_id": "capital_improvements"
+      },
+      {
+        "change_count": 3,
+        "classification_counts": {
+          "increase": 3
+        },
+        "field": "estimated_cost",
+        "maximum_amount_difference": 1300000.0,
+        "median_amount_difference": 500000.0,
+        "minimum_amount_difference": 225000.0,
+        "source_id": "capital_locations_line"
+      },
+      {
+        "change_count": 1,
+        "classification_counts": {
+          "decrease": 1
+        },
+        "field": "actual_cost",
+        "maximum_amount_difference": -1500000.0,
+        "median_amount_difference": -1500000.0,
+        "minimum_amount_difference": -1500000.0,
+        "source_id": "capital_locations_point"
+      },
+      {
+        "change_count": 3,
+        "classification_counts": {
+          "increase": 3
+        },
+        "field": "estimated_cost",
+        "maximum_amount_difference": 1500000.0,
+        "median_amount_difference": 492508.0,
+        "minimum_amount_difference": 400000.0,
+        "source_id": "capital_locations_point"
+      }
+    ]
+  },
+  "field_change_concentration": [
+    {
+      "affected_retained_rate": 0.016216,
+      "change_row_count": 3,
+      "changed_field": "ContractNumber",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "21-D-00048",
+          "old_value": "(blank)",
+          "record_count": 1
+        },
+        {
+          "new_value": "22-C-0038",
+          "old_value": "(blank)",
+          "record_count": 1
+        },
+        {
+          "new_value": "25-C-41",
+          "old_value": "(blank)",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 185,
+      "semantic_change_category": "other_field_changed",
+      "source_id": "capital_improvements",
+      "unique_retained_identities_affected": 3
+    },
+    {
+      "affected_retained_rate": 0.005405,
+      "change_row_count": 1,
+      "changed_field": "DepPrjNum",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "TRANS20176.2",
+          "old_value": "TRANS20176",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 185,
+      "semantic_change_category": "other_field_changed",
+      "source_id": "capital_improvements",
+      "unique_retained_identities_affected": 1
+    },
+    {
+      "affected_retained_rate": 0.005405,
+      "change_row_count": 1,
+      "changed_field": "MultiYear",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "Yes",
+          "old_value": "No",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 185,
+      "semantic_change_category": "other_field_changed",
+      "source_id": "capital_improvements",
+      "unique_retained_identities_affected": 1
+    },
+    {
+      "affected_retained_rate": 0.005405,
+      "change_row_count": 1,
+      "changed_field": "Neighborhood",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "Belmar Gardens",
+          "old_value": "FairOaks Manhattan",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 185,
+      "semantic_change_category": "other_field_changed",
+      "source_id": "capital_improvements",
+      "unique_retained_identities_affected": 1
+    },
+    {
+      "affected_retained_rate": 0.064865,
+      "change_row_count": 12,
+      "changed_field": "capital_phase",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "P4: Construction",
+          "old_value": "P2: Design",
+          "record_count": 3
+        },
+        {
+          "new_value": "P4: Construction",
+          "old_value": "P3: Procurement",
+          "record_count": 3
+        },
+        {
+          "new_value": "P3: Procurement",
+          "old_value": "P2: Design",
+          "record_count": 2
+        },
+        {
+          "new_value": "P5: Closeout",
+          "old_value": "P2: Design",
+          "record_count": 1
+        },
+        {
+          "new_value": "P3: Procurement",
+          "old_value": "P4: Construction",
+          "record_count": 1
+        },
+        {
+          "new_value": "P5: Closeout",
+          "old_value": "P4: Construction",
+          "record_count": 1
+        },
+        {
+          "new_value": "P2: Design",
+          "old_value": "P5: Closeout",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 185,
+      "semantic_change_category": "capital_project_phase_changed",
+      "source_id": "capital_improvements",
+      "unique_retained_identities_affected": 12
+    },
+    {
+      "affected_retained_rate": 0.037838,
+      "change_row_count": 7,
+      "changed_field": "description",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "This project includes design and replacement of traffic signals to improve safety and enhance access for the community. The project includes left turn signals, marked crosswalks, pedestrian signals, ADA-compliant ramps, and detectable warning mats.",
+          "old_value": "This project includes design and replacement of traffic signals to improve safety and enhance access for the community. The project includes curb extensions, marked crosswalks, pedestrian signals, ADA-compliant ramps, and detectable warning mats.",
+          "record_count": 4
+        },
+        {
+          "new_value": "This project includes design and replacement of traffic signals to improve safety and enhance access for the community. The project includes curb extensions, marked crosswalks, pedestrian signals, ADA-compliant ramps, and detectable warning mats.",
+          "old_value": "(blank)",
+          "record_count": 1
+        },
+        {
+          "new_value": "This project is for the design of 22nd St. and 26th St. as well as the construction of 22nd St./26th St./Bermuda Blvd roadway & seawall. This project will include the following: <ul><li>Design of 22nd St. and 26th St. Complete Streets. <li>Reconstructing/replacing and amenitizing the existing seawall on Bermuda Blvd. including an 8 ft. wide seawall trail*. <li>Installation of backflow preventers at the seawall outfall pipes. <li>Implementation of Complete Streets concept to support the mobility needs of all along Bermuda Blvd. <li>Roadway resurfacing and narrowing travel lanes. <li>Installation of tree wells and bioswales along the roadway shoulders. <li>Connects to the proposed Green ARTery Perimeter Trail. </ul>* The design of Bermuda Blvd roadway and seawall will be completed using a separate project: TRANS20141 - Bermuda Blvd Complete Streets and Seawall project. (https://www.tampa.gov/project/trans20141)",
+          "old_value": "This project is for the design of 22nd St. and 26th St. as well as the construction of 22nd St./26th St./Bermuda Blvd roadway & seawall. This project will include the following: <ul><li>Design of 22nd St. and 26th St. Complete Streets. <li>Reconstructing/replacing and amenitizing the existing seawall on Bermuda Blvd. including an 8 ft. wide seawall trail*. <li>Installation of backflow preventers at the seawall outfall pipes. <li>Implementation of Complete Streets concept to support the mobility needs of all along Bermuda Blvd. <li>Roadway resurfacing and narrowing travel lanes. <li>Installation of tree wells and bioswales along the roadway shoulders. <li>Connects to the proposed Green ARTery Perimeter Trail. </ul>* The design of Bermuda Blvd roadway and seawall will be completed using a separate project: TRANS20141 - Bermuda Blvd Complete Streets and Seawall project (https://www.tampa.gov/project/trans20141).",
+          "record_count": 1
+        },
+        {
+          "new_value": "This project provides for the replacement of the force main that serves the 122nd Ave Pump Station, located at E 122nd Ave, west of Bruce B Downs Blvd. Proposed 1,100 feet of 8” PVC force main north on Bruce B Downs Blvd and connecting to the 16” 30th St force main.",
+          "old_value": "This project provides for the replacement of the force main that serves The 122nd Ave Pump Station, located at E 122nd Ave, west of Bruce B Downs Blvd. Proposed 1,100 feet of 8” PVC force main north on Bruce B Downs Blvd and connecting to the 16” 30th St force main.",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 185,
+      "semantic_change_category": "description_changed",
+      "source_id": "capital_improvements",
+      "unique_retained_identities_affected": 7
+    },
+    {
+      "affected_retained_rate": 0.156757,
+      "change_row_count": 29,
+      "changed_field": "docpath",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "https://www.tampa.gov/project/trans10049",
+          "old_value": "(blank)",
+          "record_count": 1
+        },
+        {
+          "new_value": "https://www.tampa.gov/project/trans20176.2",
+          "old_value": "(blank)",
+          "record_count": 1
+        },
+        {
+          "new_value": "https://www.tampa.gov/project/ww1001809",
+          "old_value": "(blank)",
+          "record_count": 1
+        },
+        {
+          "new_value": "https://www.tampa.gov/project/ww100181015",
+          "old_value": "(blank)",
+          "record_count": 1
+        },
+        {
+          "new_value": "https://www.tampa.gov/project/ww100181023",
+          "old_value": "(blank)",
+          "record_count": 1
+        },
+        {
+          "new_value": "https://www.tampa.gov/project/ww100181025",
+          "old_value": "(blank)",
+          "record_count": 1
+        },
+        {
+          "new_value": "https://www.tampa.gov/project/ww10018106",
+          "old_value": "(blank)",
+          "record_count": 1
+        },
+        {
+          "new_value": "https://www.tampa.gov/project/ww10018107",
+          "old_value": "(blank)",
+          "record_count": 1
+        },
+        {
+          "new_value": "https://www.tampa.gov/project/ww10018652",
+          "old_value": "(blank)",
+          "record_count": 1
+        },
+        {
+          "new_value": "https://www.tampa.gov/project/ww10018654",
+          "old_value": "(blank)",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 185,
+      "semantic_change_category": "other_field_changed",
+      "source_id": "capital_improvements",
+      "unique_retained_identities_affected": 29
+    },
+    {
+      "affected_retained_rate": 0.037838,
+      "change_row_count": 7,
+      "changed_field": "efficient",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "Yes",
+          "old_value": "No",
+          "record_count": 7
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 185,
+      "semantic_change_category": "other_field_changed",
+      "source_id": "capital_improvements",
+      "unique_retained_identities_affected": 7
+    },
+    {
+      "affected_retained_rate": 0.032432,
+      "change_row_count": 6,
+      "changed_field": "estimated_cost",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "93000000.0",
+          "old_value": "100400000.0",
+          "record_count": 1
+        },
+        {
+          "new_value": "1600000.0",
+          "old_value": "1200000.0",
+          "record_count": 1
+        },
+        {
+          "new_value": "2700000.0",
+          "old_value": "1200000.0",
+          "record_count": 1
+        },
+        {
+          "new_value": "3500000.0",
+          "old_value": "2200000.0",
+          "record_count": 1
+        },
+        {
+          "new_value": "600000.0",
+          "old_value": "375000.0",
+          "record_count": 1
+        },
+        {
+          "new_value": "1000000.0",
+          "old_value": "500000.0",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 185,
+      "semantic_change_category": "estimated_cost_changed",
+      "source_id": "capital_improvements",
+      "unique_retained_identities_affected": 6
+    },
+    {
+      "affected_retained_rate": 0.027027,
+      "change_row_count": 5,
+      "changed_field": "fiscalyr",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "2028",
+          "old_value": "2027",
+          "record_count": 4
+        },
+        {
+          "new_value": "2026",
+          "old_value": "2028",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 185,
+      "semantic_change_category": "other_field_changed",
+      "source_id": "capital_improvements",
+      "unique_retained_identities_affected": 5
+    },
+    {
+      "affected_retained_rate": 0.086486,
+      "change_row_count": 16,
+      "changed_field": "planned_end",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "1798693200000",
+          "old_value": "1772168400000",
+          "record_count": 1
+        },
+        {
+          "new_value": "1801458000000",
+          "old_value": "1793505600000",
+          "record_count": 1
+        },
+        {
+          "new_value": "1803877200000",
+          "old_value": "1793505600000",
+          "record_count": 1
+        },
+        {
+          "new_value": "1785556800000",
+          "old_value": "1796101200000",
+          "record_count": 1
+        },
+        {
+          "new_value": "1819818837000",
+          "old_value": "1801505637000",
+          "record_count": 1
+        },
+        {
+          "new_value": "1827637200000",
+          "old_value": "1806552000000",
+          "record_count": 1
+        },
+        {
+          "new_value": "1827637200000",
+          "old_value": "1811822400000",
+          "record_count": 1
+        },
+        {
+          "new_value": "1830315600000",
+          "old_value": "1827637200000",
+          "record_count": 1
+        },
+        {
+          "new_value": "1802235600000",
+          "old_value": "1830315600000",
+          "record_count": 1
+        },
+        {
+          "new_value": "1814760000000",
+          "old_value": "1830488400000",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 185,
+      "semantic_change_category": "planned_date_changed",
+      "source_id": "capital_improvements",
+      "unique_retained_identities_affected": 16
+    },
+    {
+      "affected_retained_rate": 0.081081,
+      "change_row_count": 15,
+      "changed_field": "planned_start",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "1803877200000",
+          "old_value": "1798779600000",
+          "record_count": 2
+        },
+        {
+          "new_value": "1748750400000",
+          "old_value": "1756699200000",
+          "record_count": 1
+        },
+        {
+          "new_value": "1798827227000",
+          "old_value": "1788282827000",
+          "record_count": 1
+        },
+        {
+          "new_value": "1796044494000",
+          "old_value": "1790856894000",
+          "record_count": 1
+        },
+        {
+          "new_value": "1781409600000",
+          "old_value": "1793505600000",
+          "record_count": 1
+        },
+        {
+          "new_value": "1803272400000",
+          "old_value": "1798606800000",
+          "record_count": 1
+        },
+        {
+          "new_value": "1830315600000",
+          "old_value": "1798779600000",
+          "record_count": 1
+        },
+        {
+          "new_value": "1803922092000",
+          "old_value": "1798824492000",
+          "record_count": 1
+        },
+        {
+          "new_value": "1803922689000",
+          "old_value": "1798825089000",
+          "record_count": 1
+        },
+        {
+          "new_value": "1803909264000",
+          "old_value": "1806584064000",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 185,
+      "semantic_change_category": "planned_date_changed",
+      "source_id": "capital_improvements",
+      "unique_retained_identities_affected": 15
+    },
+    {
+      "affected_retained_rate": 0.010811,
+      "change_row_count": 2,
+      "changed_field": "project_name",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "Armenia Ave & Cypress St - Traffic Signal Upgrade",
+          "old_value": "Armenia Ave at Cypress St. Traffic Signal Upgrade",
+          "record_count": 1
+        },
+        {
+          "new_value": "MacDill Air Force Base Access Improvements (Interbay Blvd between West Shore Blvd and S. Bayshore Blvd) - Segment 2 (Between S Manhattan Ave and S Dale Mabry Hwy)",
+          "old_value": "MacDill Air Force Base Access Improvements (Interbay Blvd between West Shore Blvd and S. Bayshore Blvd)",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 185,
+      "semantic_change_category": "project_name_changed",
+      "source_id": "capital_improvements",
+      "unique_retained_identities_affected": 2
+    },
+    {
+      "affected_retained_rate": 0.037838,
+      "change_row_count": 7,
+      "changed_field": "rationale",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "Enhances safety to all modes of transportation at the intersection; Reduces the probability of right-angled crashes through the implementation of left turn signals and other improvements; Improves mobility and accessibility infrastructure for pedestrians and individuals with disabilities; Improves traffic flow at the intersection.",
+          "old_value": "This project includes design and replacement of traffic signals to improve safety and enhance access for the community. The project includes curb extensions, marked crosswalks, pedestrian signals, ADA-compliant ramps, and detectable warning mats.",
+          "record_count": 4
+        },
+        {
+          "new_value": "Enhances safety to all modes of transportation at the intersection; Reduces the probability of right-angled crashes through the implementation of left turn signals and other improvements; Improves mobility and accessibility infrastructure for pedestrians and individuals with disabilities; Improves traffic flow at the intersection.",
+          "old_value": "Enhances safety to all modes of transportation at the intersection;",
+          "record_count": 2
+        },
+        {
+          "new_value": "Enhances safety to all modes of transportation at the intersection; Reduces the probability of right-angled crashes through the implementation of left turn signals and other improvements; Improves mobility and accessibility infrastructure for pedestrians and individuals with disabilities; Improves traffic flow at the intersection.",
+          "old_value": "",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 185,
+      "semantic_change_category": "other_field_changed",
+      "source_id": "capital_improvements",
+      "unique_retained_identities_affected": 7
+    },
+    {
+      "affected_retained_rate": 0.005405,
+      "change_row_count": 1,
+      "changed_field": "record_type",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "Parks & Recreation",
+          "old_value": "Stormwater Engineering",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 185,
+      "semantic_change_category": "record_type_changed",
+      "source_id": "capital_improvements",
+      "unique_retained_identities_affected": 1
+    },
+    {
+      "affected_retained_rate": 0.021622,
+      "change_row_count": 4,
+      "changed_field": "repair",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "Yes",
+          "old_value": "No",
+          "record_count": 4
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 185,
+      "semantic_change_category": "other_field_changed",
+      "source_id": "capital_improvements",
+      "unique_retained_identities_affected": 4
+    },
+    {
+      "affected_retained_rate": 0.043243,
+      "change_row_count": 8,
+      "changed_field": "replace",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "Yes",
+          "old_value": "No",
+          "record_count": 8
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 185,
+      "semantic_change_category": "other_field_changed",
+      "source_id": "capital_improvements",
+      "unique_retained_identities_affected": 8
+    },
+    {
+      "affected_retained_rate": 0.091892,
+      "change_row_count": 17,
+      "changed_field": "status",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "Permitting/Submittals Approval",
+          "old_value": "30% Design Completion",
+          "record_count": 2
+        },
+        {
+          "new_value": "30% Design Completion",
+          "old_value": "60% Design Completion",
+          "record_count": 2
+        },
+        {
+          "new_value": "90% Design Completion",
+          "old_value": "60% Design Completion",
+          "record_count": 1
+        },
+        {
+          "new_value": "Construction in Progress",
+          "old_value": "60% Design Completion",
+          "record_count": 1
+        },
+        {
+          "new_value": "Permitting/Submittals Approval",
+          "old_value": "60% Design Completion",
+          "record_count": 1
+        },
+        {
+          "new_value": "Closeout",
+          "old_value": "90% Design Completion",
+          "record_count": 1
+        },
+        {
+          "new_value": "Construction in Progress",
+          "old_value": "90% Design Completion",
+          "record_count": 1
+        },
+        {
+          "new_value": "30% Design Completion",
+          "old_value": "Closeout",
+          "record_count": 1
+        },
+        {
+          "new_value": "Closeout",
+          "old_value": "Construction in Progress",
+          "record_count": 1
+        },
+        {
+          "new_value": "Final Contract Review & Approval",
+          "old_value": "Construction in Progress",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 185,
+      "semantic_change_category": "status_changed",
+      "source_id": "capital_improvements",
+      "unique_retained_identities_affected": 17
+    },
+    {
+      "affected_retained_rate": 0.010204,
+      "change_row_count": 1,
+      "changed_field": "Shape__Length",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "3053.197560255125",
+          "old_value": "3579.407171191314",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 98,
+      "semantic_change_category": "other_field_changed",
+      "source_id": "capital_locations_line",
+      "unique_retained_identities_affected": 1
+    },
+    {
+      "affected_retained_rate": 0.010204,
+      "change_row_count": 1,
+      "changed_field": "TRANSPORTATION",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "See TRANS30122 - Surtax project ID CT005",
+          "old_value": "Contractor Resurfacing WO46332 -Surtax project ID CT005",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 98,
+      "semantic_change_category": "other_field_changed",
+      "source_id": "capital_locations_line",
+      "unique_retained_identities_affected": 1
+    },
+    {
+      "affected_retained_rate": 0.010204,
+      "change_row_count": 1,
+      "changed_field": "capital_phase",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "P5: Closeout",
+          "old_value": "P4: Construction",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 98,
+      "semantic_change_category": "capital_project_phase_changed",
+      "source_id": "capital_locations_line",
+      "unique_retained_identities_affected": 1
+    },
+    {
+      "affected_retained_rate": 0.102041,
+      "change_row_count": 10,
+      "changed_field": "docpath",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "https://www.tampa.gov/project/ww10020162",
+          "old_value": "(blank)",
+          "record_count": 1
+        },
+        {
+          "new_value": "https://www.tampa.gov/project/ww1002477",
+          "old_value": "(blank)",
+          "record_count": 1
+        },
+        {
+          "new_value": "https://www.tampa.gov/project/ww10025881",
+          "old_value": "(blank)",
+          "record_count": 1
+        },
+        {
+          "new_value": "https://www.tampa.gov/project/ww10025882",
+          "old_value": "(blank)",
+          "record_count": 1
+        },
+        {
+          "new_value": "https://www.tampa.gov/project/ww10025882g",
+          "old_value": "(blank)",
+          "record_count": 1
+        },
+        {
+          "new_value": "https://www.tampa.gov/project/ww1002661",
+          "old_value": "(blank)",
+          "record_count": 1
+        },
+        {
+          "new_value": "https://www.tampa.gov/project/ww1002935",
+          "old_value": "(blank)",
+          "record_count": 1
+        },
+        {
+          "new_value": "https://www.tampa.gov/project/ww1002941",
+          "old_value": "(blank)",
+          "record_count": 1
+        },
+        {
+          "new_value": "https://www.tampa.gov/project/ww1002971",
+          "old_value": "(blank)",
+          "record_count": 1
+        },
+        {
+          "new_value": "https://www.tampa.gov/projects/trans20198",
+          "old_value": "(blank)",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 98,
+      "semantic_change_category": "other_field_changed",
+      "source_id": "capital_locations_line",
+      "unique_retained_identities_affected": 10
+    },
+    {
+      "affected_retained_rate": 0.010204,
+      "change_row_count": 1,
+      "changed_field": "efficient",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "Yes",
+          "old_value": "No",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 98,
+      "semantic_change_category": "other_field_changed",
+      "source_id": "capital_locations_line",
+      "unique_retained_identities_affected": 1
+    },
+    {
+      "affected_retained_rate": 0.030612,
+      "change_row_count": 3,
+      "changed_field": "estimated_cost",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "3500000.0",
+          "old_value": "2200000.0",
+          "record_count": 1
+        },
+        {
+          "new_value": "600000.0",
+          "old_value": "375000.0",
+          "record_count": 1
+        },
+        {
+          "new_value": "1000000.0",
+          "old_value": "500000.0",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 98,
+      "semantic_change_category": "estimated_cost_changed",
+      "source_id": "capital_locations_line",
+      "unique_retained_identities_affected": 3
+    },
+    {
+      "affected_retained_rate": 0.030612,
+      "change_row_count": 3,
+      "changed_field": "fiscalyr",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "2028",
+          "old_value": "2027",
+          "record_count": 2
+        },
+        {
+          "new_value": "2028",
+          "old_value": "(blank)",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 98,
+      "semantic_change_category": "other_field_changed",
+      "source_id": "capital_locations_line",
+      "unique_retained_identities_affected": 3
+    },
+    {
+      "affected_retained_rate": 0.040816,
+      "change_row_count": 4,
+      "changed_field": "planned_end",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "1780272000000",
+          "old_value": "1796083200000",
+          "record_count": 1
+        },
+        {
+          "new_value": "1827619200000",
+          "old_value": "1806537600000",
+          "record_count": 1
+        },
+        {
+          "new_value": "1827619200000",
+          "old_value": "1811808000000",
+          "record_count": 1
+        },
+        {
+          "new_value": "1893456000000",
+          "old_value": "1861920000000",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 98,
+      "semantic_change_category": "planned_date_changed",
+      "source_id": "capital_locations_line",
+      "unique_retained_identities_affected": 4
+    },
+    {
+      "affected_retained_rate": 0.071429,
+      "change_row_count": 7,
+      "changed_field": "planned_start",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "1803859200000",
+          "old_value": "1798761600000",
+          "record_count": 4
+        },
+        {
+          "new_value": "1822348800000",
+          "old_value": "(blank)",
+          "record_count": 1
+        },
+        {
+          "new_value": "1830297600000",
+          "old_value": "1798761600000",
+          "record_count": 1
+        },
+        {
+          "new_value": "1822348800000",
+          "old_value": "1811808000000",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 98,
+      "semantic_change_category": "planned_date_changed",
+      "source_id": "capital_locations_line",
+      "unique_retained_identities_affected": 7
+    },
+    {
+      "affected_retained_rate": 0.020408,
+      "change_row_count": 2,
+      "changed_field": "project_name",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "Himes and Idlewild FM Replacement",
+          "old_value": "Himes and Idlewild FM Replacment",
+          "record_count": 1
+        },
+        {
+          "new_value": "N Jefferson St - E Brorein St to E Cass St",
+          "old_value": "N Jefferson St - Channelside Dr to E Cass St",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 98,
+      "semantic_change_category": "project_name_changed",
+      "source_id": "capital_locations_line",
+      "unique_retained_identities_affected": 2
+    },
+    {
+      "affected_retained_rate": 0.010204,
+      "change_row_count": 1,
+      "changed_field": "replace",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "Yes",
+          "old_value": "No",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 98,
+      "semantic_change_category": "other_field_changed",
+      "source_id": "capital_locations_line",
+      "unique_retained_identities_affected": 1
+    },
+    {
+      "affected_retained_rate": 0.020408,
+      "change_row_count": 2,
+      "changed_field": "status",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "90% Design Completion",
+          "old_value": "60% Design Completion",
+          "record_count": 1
+        },
+        {
+          "new_value": "Closeout",
+          "old_value": "Construction in Progress",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 98,
+      "semantic_change_category": "status_changed",
+      "source_id": "capital_locations_line",
+      "unique_retained_identities_affected": 2
+    },
+    {
+      "affected_retained_rate": 0.0625,
+      "change_row_count": 3,
+      "changed_field": "CreationDate",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "1791298617000",
+          "old_value": "1774461777000",
+          "record_count": 1
+        },
+        {
+          "new_value": "1791298617000",
+          "old_value": "1774462084000",
+          "record_count": 1
+        },
+        {
+          "new_value": "1791298617000",
+          "old_value": "1774462272000",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 48,
+      "semantic_change_category": "other_field_changed",
+      "source_id": "capital_locations_point",
+      "unique_retained_identities_affected": 3
+    },
+    {
+      "affected_retained_rate": 0.0625,
+      "change_row_count": 3,
+      "changed_field": "FACILITYID",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "351691",
+          "old_value": "350618",
+          "record_count": 1
+        },
+        {
+          "new_value": "351689",
+          "old_value": "350620",
+          "record_count": 1
+        },
+        {
+          "new_value": "351688",
+          "old_value": "350621",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 48,
+      "semantic_change_category": "other_field_changed",
+      "source_id": "capital_locations_point",
+      "unique_retained_identities_affected": 3
+    },
+    {
+      "affected_retained_rate": 0.270833,
+      "change_row_count": 13,
+      "changed_field": "ProjectSiteURL",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "<a href=\"https://apps.tampagov.net/Directory_Lister/FileHandler.ashx?file=GIS%2fTRANS10040.pdf\">TRANS10040</a>",
+          "old_value": "(blank)",
+          "record_count": 1
+        },
+        {
+          "new_value": "<a href=\"https://apps.tampagov.net/Directory_Lister/FileHandler.ashx?file=GIS%2fTRANS10041.pdf\">TRANS10041</a>",
+          "old_value": "(blank)",
+          "record_count": 1
+        },
+        {
+          "new_value": "<a href=\"https://apps.tampagov.net/Directory_Lister/FileHandler.ashx?file=GIS%2fTRANS10042.pdf\">TRANS10042</a>",
+          "old_value": "(blank)",
+          "record_count": 1
+        },
+        {
+          "new_value": "https://www.tampa.gov/project/ww1001809",
+          "old_value": "(blank)",
+          "record_count": 1
+        },
+        {
+          "new_value": "https://www.tampa.gov/project/ww100181015",
+          "old_value": "(blank)",
+          "record_count": 1
+        },
+        {
+          "new_value": "https://www.tampa.gov/project/ww100181023",
+          "old_value": "(blank)",
+          "record_count": 1
+        },
+        {
+          "new_value": "https://www.tampa.gov/project/ww10018106",
+          "old_value": "(blank)",
+          "record_count": 1
+        },
+        {
+          "new_value": "https://www.tampa.gov/project/ww10018107",
+          "old_value": "(blank)",
+          "record_count": 1
+        },
+        {
+          "new_value": "https://www.tampa.gov/project/ww10018654a",
+          "old_value": "(blank)",
+          "record_count": 1
+        },
+        {
+          "new_value": "https://www.tampa.gov/project/ww1002466",
+          "old_value": "(blank)",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 48,
+      "semantic_change_category": "other_field_changed",
+      "source_id": "capital_locations_point",
+      "unique_retained_identities_affected": 13
+    },
+    {
+      "affected_retained_rate": 0.020833,
+      "change_row_count": 1,
+      "changed_field": "RelatedProject",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "(blank)",
+          "old_value": "No",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 48,
+      "semantic_change_category": "other_field_changed",
+      "source_id": "capital_locations_point",
+      "unique_retained_identities_affected": 1
+    },
+    {
+      "affected_retained_rate": 0.020833,
+      "change_row_count": 1,
+      "changed_field": "actual_cost",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "0.0",
+          "old_value": "1500000.0",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 48,
+      "semantic_change_category": "reported_actual_cost_changed",
+      "source_id": "capital_locations_point",
+      "unique_retained_identities_affected": 1
+    },
+    {
+      "affected_retained_rate": 0.083333,
+      "change_row_count": 4,
+      "changed_field": "capital_phase",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "P3: Procurement",
+          "old_value": "P2: Design",
+          "record_count": 2
+        },
+        {
+          "new_value": "P5: Closeout",
+          "old_value": "P2: Design",
+          "record_count": 1
+        },
+        {
+          "new_value": "P5: Closeout",
+          "old_value": "P4: Construction",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 48,
+      "semantic_change_category": "capital_project_phase_changed",
+      "source_id": "capital_locations_point",
+      "unique_retained_identities_affected": 4
+    },
+    {
+      "affected_retained_rate": 0.020833,
+      "change_row_count": 1,
+      "changed_field": "efficient",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "Yes",
+          "old_value": "No",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 48,
+      "semantic_change_category": "other_field_changed",
+      "source_id": "capital_locations_point",
+      "unique_retained_identities_affected": 1
+    },
+    {
+      "affected_retained_rate": 0.0625,
+      "change_row_count": 3,
+      "changed_field": "estimated_cost",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "1600000.0",
+          "old_value": "1200000.0",
+          "record_count": 1
+        },
+        {
+          "new_value": "1692508.0",
+          "old_value": "1200000.0",
+          "record_count": 1
+        },
+        {
+          "new_value": "2700000.0",
+          "old_value": "1200000.0",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 48,
+      "semantic_change_category": "estimated_cost_changed",
+      "source_id": "capital_locations_point",
+      "unique_retained_identities_affected": 3
+    },
+    {
+      "affected_retained_rate": 0.083333,
+      "change_row_count": 4,
+      "changed_field": "fiscalyr",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "202",
+          "old_value": "2026",
+          "record_count": 1
+        },
+        {
+          "new_value": "2027",
+          "old_value": "2026",
+          "record_count": 1
+        },
+        {
+          "new_value": "2026",
+          "old_value": "2027",
+          "record_count": 1
+        },
+        {
+          "new_value": "2028",
+          "old_value": "2027",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 48,
+      "semantic_change_category": "other_field_changed",
+      "source_id": "capital_locations_point",
+      "unique_retained_identities_affected": 4
+    },
+    {
+      "affected_retained_rate": 0.020833,
+      "change_row_count": 1,
+      "changed_field": "fundsource",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "Multiple Funding",
+          "old_value": "PIPES",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 48,
+      "semantic_change_category": "other_field_changed",
+      "source_id": "capital_locations_point",
+      "unique_retained_identities_affected": 1
+    },
+    {
+      "affected_retained_rate": 0.104167,
+      "change_row_count": 5,
+      "changed_field": "planned_end",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "1846022400000",
+          "old_value": "1840752000000",
+          "record_count": 2
+        },
+        {
+          "new_value": "1780272000000",
+          "old_value": "1782864000000",
+          "record_count": 1
+        },
+        {
+          "new_value": "1819756800000",
+          "old_value": "1801440000000",
+          "record_count": 1
+        },
+        {
+          "new_value": "1830297600000",
+          "old_value": "1827619200000",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 48,
+      "semantic_change_category": "planned_date_changed",
+      "source_id": "capital_locations_point",
+      "unique_retained_identities_affected": 5
+    },
+    {
+      "affected_retained_rate": 0.0625,
+      "change_row_count": 3,
+      "changed_field": "planned_start",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "1825027200000",
+          "old_value": "1827619200000",
+          "record_count": 2
+        },
+        {
+          "new_value": "1798761600000",
+          "old_value": "1788220800000",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 48,
+      "semantic_change_category": "planned_date_changed",
+      "source_id": "capital_locations_point",
+      "unique_retained_identities_affected": 3
+    },
+    {
+      "affected_retained_rate": 0.020833,
+      "change_row_count": 1,
+      "changed_field": "safety",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "Yes",
+          "old_value": "No",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 48,
+      "semantic_change_category": "other_field_changed",
+      "source_id": "capital_locations_point",
+      "unique_retained_identities_affected": 1
+    },
+    {
+      "affected_retained_rate": 0.125,
+      "change_row_count": 6,
+      "changed_field": "status",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "60% Design Completion",
+          "old_value": "30% Design Completion",
+          "record_count": 2
+        },
+        {
+          "new_value": "Closeout",
+          "old_value": "30% Design Completion",
+          "record_count": 1
+        },
+        {
+          "new_value": "Permitting/Submittals Approval",
+          "old_value": "30% Design Completion",
+          "record_count": 1
+        },
+        {
+          "new_value": "Closeout",
+          "old_value": "Construction",
+          "record_count": 1
+        },
+        {
+          "new_value": "Permitting/Submittals Approval",
+          "old_value": "Contract Negotiations",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 48,
+      "semantic_change_category": "status_changed",
+      "source_id": "capital_locations_point",
+      "unique_retained_identities_affected": 6
+    },
+    {
+      "affected_retained_rate": 0.000463,
+      "change_row_count": 1,
+      "changed_field": "ADDRESS",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "8435 N Albany Ave",
+          "old_value": "8437 N Albany Ave",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 2160,
+      "semantic_change_category": "other_field_changed",
+      "source_id": "construction_inspections",
+      "unique_retained_identities_affected": 1
+    },
+    {
+      "affected_retained_rate": 0.000926,
+      "change_row_count": 2,
+      "changed_field": "PRIVATEPROVIDER",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "Yes",
+          "old_value": "No",
+          "record_count": 2
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 2160,
+      "semantic_change_category": "other_field_changed",
+      "source_id": "construction_inspections",
+      "unique_retained_identities_affected": 2
+    },
+    {
+      "affected_retained_rate": 0.013426,
+      "change_row_count": 29,
+      "changed_field": "description",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "PP Plan Review & Inspections: *FEMA SFHA: LIMITED PRIVATE PROVIDER – PLAN REVIEW AND INSPECTIONS. CITY OF TAMPA WILL TAKE LEAD ON REVIEWS FOR ALL ITEMS UP TO THE REQUIRED DFE AND INSPECTIONS UP TO REQUIRED DFE AND UNTIL SUCH TIME APPROVAL FOR REQUIRED UNDER-CONSTRUCTION ELEVATION CERTIFICATE IS OBTA",
+          "old_value": "*FEMA SFHA: LIMITED PRIVATE PROVIDER – PLAN REVIEW AND INSPECTIONS. CITY OF TAMPA WILL TAKE LEAD ON REVIEWS FOR ALL ITEMS UP TO THE REQUIRED DFE AND INSPECTIONS UP TO REQUIRED DFE AND UNTIL SUCH TIME APPROVAL FOR REQUIRED UNDER-CONSTRUCTION ELEVATION CERTIFICATE IS OBTAINED. New single-family res",
+          "record_count": 2
+        },
+        {
+          "new_value": "\"*PRIVATE PROVIDER – INSPECTIONS ONLY* Master Site/Foundation/Shell/Complete - New Clubhouse Detailed description of work.\" The site and clubhouse is part of a new community (campus) comprising of five apartment buildings (the apartment buildings will be permitted separately) at 5709 North 47th S",
+          "old_value": "\"*PRIVATE PROVIDER – INSPECTIONS ONLY* Site & Foundation/Shell Detailed description of work.\" The site and clubhouse is part of a new community (campus) comprising of five apartment buildings (the apartment buildings will be permitted separately) at 5709 North 47th Street, Tampa Florida. New util",
+          "record_count": 1
+        },
+        {
+          "new_value": "PP Plan Review & Inspections: \"*PRIVATE PROVIDER – PLAN REVIEW AND INSPECTIONS* New Construction SFR 4 BR 3 BA: 2,774 Living: front porch, rear porch, attached garage, with accessory structure/gazebo.",
+          "old_value": "\"*PRIVATE PROVIDER – PLAN REVIEW AND INSPECTIONS* New Construction SFR 4 BR 3 BA: 2,774 Living: front porch, rear porch, attached garage, with accessory structure/gazebo.",
+          "record_count": 1
+        },
+        {
+          "new_value": "PP Plan Review & Inspections: *FEMA SFHA: LIMITED PRIVATE PROVIDER – PLAN REVIEW AND INSPECTIONS. CITY OF TAMPA WILL TAKE LEAD ON REVIEWS FOR ALL ITEMS UP TO THE REQUIRED DFE AND INSPECTIONS UP TO REQUIRED DFE AND UNTIL SUCH TIME APPROVAL FOR REQUIRED UNDER-CONSTRUCTION ELEVATION CERTIFICATE IS OBTA",
+          "old_value": "*FEMA SFHA: LIMITED PRIVATE PROVIDER – PLAN REVIEW AND INSPECTIONS. CITY OF TAMPA WILL TAKE LEAD ON REVIEWS FOR ALL ITEMS UP TO THE REQUIRED DFE AND INSPECTIONS UP TO REQUIRED DFE AND UNTIL SUCH TIME APPROVAL FOR REQUIRED UNDER-CONSTRUCTION ELEVATION CERTIFICATE IS OBTAINED. CITY OF TAMPA WILL PE",
+          "record_count": 1
+        },
+        {
+          "new_value": "PP Plan Review & Inspections: *FEMA SFHA: LIMITED PRIVATE PROVIDER – PLAN REVIEW AND INSPECTIONS. CITY OF TAMPA WILL TAKE LEAD ON REVIEWS FOR ALL ITEMS UP TO THE REQUIRED DFE AND INSPECTIONS UP TO REQUIRED DFE AND UNTIL SUCH TIME APPROVAL FOR REQUIRED UNDER-CONSTRUCTION ELEVATION CERTIFICATE IS OBTA",
+          "old_value": "*FEMA SFHA: LIMITED PRIVATE PROVIDER – PLAN REVIEW AND INSPECTIONS. CITY OF TAMPA WILL TAKE LEAD ON REVIEWS FOR ALL ITEMS UP TO THE REQUIRED DFE AND INSPECTIONS UP TO REQUIRED DFE AND UNTIL SUCH TIME APPROVAL FOR REQUIRED UNDER-CONSTRUCTION ELEVATION CERTIFICATE IS OBTAINED. CITY OF TAMPA WILL PERF",
+          "record_count": 1
+        },
+        {
+          "new_value": "PP Plan Review & Inspections: *FEMA SFHA: LIMITED PRIVATE PROVIDER – PLAN REVIEW AND INSPECTIONS. CITY OF TAMPA WILL TAKE LEAD ON REVIEWS FOR ALL ITEMS UP TO THE REQUIRED DFE AND INSPECTIONS UP TO REQUIRED DFE AND UNTIL SUCH TIME APPROVAL FOR REQUIRED UNDER-CONSTRUCTION ELEVATION CERTIFICATE IS OBTA",
+          "old_value": "*FEMA SFHA: LIMITED PRIVATE PROVIDER – PLAN REVIEW AND INSPECTIONS. CITY OF TAMPA WILL TAKE LEAD ON REVIEWS FOR ALL ITEMS UP TO THE REQUIRED DFE AND INSPECTIONS UP TO REQUIRED DFE AND UNTIL SUCH TIME APPROVAL FOR REQUIRED UNDER-CONSTRUCTION ELEVATION CERTIFICATE IS OBTAINED. FEMA New SFR",
+          "record_count": 1
+        },
+        {
+          "new_value": "PP Plan Review & Inspections: *FEMA SFHA: LIMITED PRIVATE PROVIDER – PLAN REVIEW AND INSPECTIONS. CITY OF TAMPA WILL TAKE LEAD ON REVIEWS FOR ALL ITEMS UP TO THE REQUIRED DFE AND INSPECTIONS UP TO REQUIRED DFE AND UNTIL SUCH TIME APPROVAL FOR REQUIRED UNDER-CONSTRUCTION ELEVATION CERTIFICATE IS OBTA",
+          "old_value": "*FEMA SFHA: LIMITED PRIVATE PROVIDER – PLAN REVIEW AND INSPECTIONS. CITY OF TAMPA WILL TAKE LEAD ON REVIEWS FOR ALL ITEMS UP TO THE REQUIRED DFE AND INSPECTIONS UP TO REQUIRED DFE AND UNTIL SUCH TIME APPROVAL FOR REQUIRED UNDER-CONSTRUCTION ELEVATION CERTIFICATE IS OBTAINED. FEMA New SFR 5 BD/4BA",
+          "record_count": 1
+        },
+        {
+          "new_value": "PP Plan Review & Inspections: *FEMA SFHA: LIMITED PRIVATE PROVIDER – PLAN REVIEW AND INSPECTIONS. CITY OF TAMPA WILL TAKE LEAD ON REVIEWS FOR ALL ITEMS UP TO THE REQUIRED DFE AND INSPECTIONS UP TO REQUIRED DFE AND UNTIL SUCH TIME APPROVAL FOR REQUIRED UNDER-CONSTRUCTION ELEVATION CERTIFICATE IS OBTA",
+          "old_value": "*FEMA SFHA: LIMITED PRIVATE PROVIDER – PLAN REVIEW AND INSPECTIONS. CITY OF TAMPA WILL TAKE LEAD ON REVIEWS FOR ALL ITEMS UP TO THE REQUIRED DFE AND INSPECTIONS UP TO REQUIRED DFE AND UNTIL SUCH TIME APPROVAL FOR REQUIRED UNDER-CONSTRUCTION ELEVATION CERTIFICATE IS OBTAINED. NEW 2 Story SFR- atta",
+          "record_count": 1
+        },
+        {
+          "new_value": "*PRIVATE PROVIDER – INSPECTIONS ONLY* This new 36-unit apartment building is part of a new community (campus) comprising of five apartment buildings (the other 4 apartment buildings will be permitted separately) at 5709 North 47th Street, Tampa Florida. Related Record(s): Clubhouse - BLD-24-051",
+          "old_value": "*PRIVATE PROVIDER – INSPECTIONS ONLY* Shell This new 36-unit apartment building is part of a new community (campus) comprising of five apartment buildings (the other 4 apartment buildings will be permitted separately) at 5709 North 47th Street, Tampa Florida. Related Record(s): BLD-24-0510",
+          "record_count": 1
+        },
+        {
+          "new_value": "PP Plan Review & Inspections: *PRIVATE PROVIDER – INSPECTIONS ONLY* new 4-unit town houses",
+          "old_value": "*PRIVATE PROVIDER – INSPECTIONS ONLY* new 4-unit town houses",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 2160,
+      "semantic_change_category": "description_changed",
+      "source_id": "construction_inspections",
+      "unique_retained_identities_affected": 29
+    },
+    {
+      "affected_retained_rate": 0.006481,
+      "change_row_count": 14,
+      "changed_field": "project_name",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "Facilitated Project | SEC: TIA PROJECT: New Hangar - Signature Aviation",
+          "old_value": "05-23-25 KPI Facilitated Project | SEC: TIA PROJECT: New Hangar - Signature Aviation",
+          "record_count": 1
+        },
+        {
+          "new_value": "CHANGE OF USE/OCCUPANCY: Interior/Exterior Alteration - J.C. Newman Cigar Co",
+          "old_value": "08-19-25 KPI | CHANGE OF USE/OCCUPANCY: Interior/Exterior Alteration - J.C. Newman Cigar Co",
+          "record_count": 1
+        },
+        {
+          "new_value": "PP: FEMA - Second Floor Addition At Main Residence & Garage Facade",
+          "old_value": "FEMA - Second Floor Addition At Main Residence & Garage Facade",
+          "record_count": 1
+        },
+        {
+          "new_value": "REISSUE - FEMA: New 2-Story SFR w/ attached garage, porch, and lanai",
+          "old_value": "FEMA: New 2-Story SFR w/ attached garage, porch, and lanai",
+          "record_count": 1
+        },
+        {
+          "new_value": "REISSUE - New 1sty SFR",
+          "old_value": "New 1sty SFR",
+          "record_count": 1
+        },
+        {
+          "new_value": "PP: New 2-Story SFR w/ 4bd/5bth, Lanai, Porch, Attached 2-Car Garage",
+          "old_value": "New 2-Story SFR w/ 4bd/5bth, Lanai, Porch, Attached 2-Car Garage",
+          "record_count": 1
+        },
+        {
+          "new_value": "New 1Sty SFR",
+          "old_value": "New SFR",
+          "record_count": 1
+        },
+        {
+          "new_value": "PP: Master Site/Foundation/Shell/Complete - New Clubhouse",
+          "old_value": "PP: Master Site/Foundation/Shell - New Clubhouse",
+          "record_count": 1
+        },
+        {
+          "new_value": "PP: Enclosed Carport",
+          "old_value": "PP: OWNER Enclosed Carport",
+          "record_count": 1
+        },
+        {
+          "new_value": "PP::New Apartment- Bldg.5",
+          "old_value": "PP:SHELL:New Apartment- Bldg.5",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 2160,
+      "semantic_change_category": "project_name_changed",
+      "source_id": "construction_inspections",
+      "unique_retained_identities_affected": 14
+    },
+    {
+      "affected_retained_rate": 0.046759,
+      "change_row_count": 101,
+      "changed_field": "status",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "Revision",
+          "old_value": "Issued",
+          "record_count": 81
+        },
+        {
+          "new_value": "Issued",
+          "old_value": "Revision",
+          "record_count": 20
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 2160,
+      "semantic_change_category": "status_changed",
+      "source_id": "construction_inspections",
+      "unique_retained_identities_affected": 101
+    },
+    {
+      "affected_retained_rate": 0.058252,
+      "change_row_count": 12,
+      "changed_field": "TENTATIVEHEARING",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "02/11/2027",
+          "old_value": "N/A",
+          "record_count": 7
+        },
+        {
+          "new_value": "01/14/2027",
+          "old_value": "N/A",
+          "record_count": 1
+        },
+        {
+          "new_value": "03/11/2027",
+          "old_value": "N/A",
+          "record_count": 1
+        },
+        {
+          "new_value": "10/22/2026",
+          "old_value": "N/A",
+          "record_count": 1
+        },
+        {
+          "new_value": "11/19/2026",
+          "old_value": "N/A",
+          "record_count": 1
+        },
+        {
+          "new_value": "12/3/2026",
+          "old_value": "N/A",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 206,
+      "semantic_change_category": "other_field_changed",
+      "source_id": "development_coordination",
+      "unique_retained_identities_affected": 12
+    },
+    {
+      "affected_retained_rate": 0.058252,
+      "change_row_count": 12,
+      "changed_field": "TENTATIVETIME",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "17:01",
+          "old_value": "(blank)",
+          "record_count": 10
+        },
+        {
+          "new_value": "10:30",
+          "old_value": "(blank)",
+          "record_count": 1
+        },
+        {
+          "new_value": "(blank)",
+          "old_value": "10:30",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 206,
+      "semantic_change_category": "other_field_changed",
+      "source_id": "development_coordination",
+      "unique_retained_identities_affected": 12
+    },
+    {
+      "affected_retained_rate": 0.18932,
+      "change_row_count": 39,
+      "changed_field": "status",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "In Process",
+          "old_value": "Awaiting Client Reply",
+          "record_count": 23
+        },
+        {
+          "new_value": "In Process",
+          "old_value": "Open",
+          "record_count": 9
+        },
+        {
+          "new_value": "Awaiting Client Reply",
+          "old_value": "In Process",
+          "record_count": 4
+        },
+        {
+          "new_value": "Awaiting Client Reply",
+          "old_value": "Open",
+          "record_count": 3
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 206,
+      "semantic_change_category": "status_changed",
+      "source_id": "development_coordination",
+      "unique_retained_identities_affected": 39
+    },
+    {
+      "affected_retained_rate": 1.0,
+      "change_row_count": 105,
+      "changed_field": "CREATEDDATE",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "1793456203000",
+          "old_value": "1790728304000",
+          "record_count": 104
+        },
+        {
+          "new_value": "1793456200000",
+          "old_value": "1790728302000",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": true,
+      "retained_record_denominator": 105,
+      "semantic_change_category": "other_field_changed",
+      "source_id": "historic_preservation",
+      "unique_retained_identities_affected": 105
+    },
+    {
+      "affected_retained_rate": 0.028571,
+      "change_row_count": 3,
+      "changed_field": "TEANTATIVEHEARING",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "12/09/2026",
+          "old_value": "08/03/2026",
+          "record_count": 1
+        },
+        {
+          "new_value": "12/07/2026",
+          "old_value": "10/05/2026",
+          "record_count": 1
+        },
+        {
+          "new_value": "12/07/2026",
+          "old_value": "11/02/2026",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 105,
+      "semantic_change_category": "other_field_changed",
+      "source_id": "historic_preservation",
+      "unique_retained_identities_affected": 3
+    },
+    {
+      "affected_retained_rate": 0.066667,
+      "change_row_count": 7,
+      "changed_field": "status",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "Awaiting Client Reply",
+          "old_value": "In Process",
+          "record_count": 4
+        },
+        {
+          "new_value": "In Process",
+          "old_value": "Awaiting Client Reply",
+          "record_count": 2
+        },
+        {
+          "new_value": "Open",
+          "old_value": "Awaiting Client Reply",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 105,
+      "semantic_change_category": "status_changed",
+      "source_id": "historic_preservation",
+      "unique_retained_identities_affected": 7
+    },
+    {
+      "affected_retained_rate": 0.001074,
+      "change_row_count": 1,
+      "changed_field": "ADDRESS",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "8435 N Albany Ave",
+          "old_value": "8437 N Albany Ave",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 931,
+      "semantic_change_category": "other_field_changed",
+      "source_id": "single_family_permits",
+      "unique_retained_identities_affected": 1
+    },
+    {
+      "affected_retained_rate": 1.0,
+      "change_row_count": 931,
+      "changed_field": "CREATEDDATE",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "1793450599000",
+          "old_value": "1790640288000",
+          "record_count": 471
+        },
+        {
+          "new_value": "1793450600000",
+          "old_value": "1790640288000",
+          "record_count": 404
+        },
+        {
+          "new_value": "1793450599000",
+          "old_value": "1790640289000",
+          "record_count": 43
+        },
+        {
+          "new_value": "1793450600000",
+          "old_value": "1790640289000",
+          "record_count": 11
+        },
+        {
+          "new_value": "1793450599000",
+          "old_value": "1790640285000",
+          "record_count": 1
+        },
+        {
+          "new_value": "1793450596000",
+          "old_value": "1790640288000",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": true,
+      "retained_record_denominator": 931,
+      "semantic_change_category": "other_field_changed",
+      "source_id": "single_family_permits",
+      "unique_retained_identities_affected": 931
+    },
+    {
+      "affected_retained_rate": 0.007519,
+      "change_row_count": 7,
+      "changed_field": "TASK_DUE_DATE",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "1792972800000",
+          "old_value": "1711411200000",
+          "record_count": 1
+        },
+        {
+          "new_value": "1793318400000",
+          "old_value": "1712102400000",
+          "record_count": 1
+        },
+        {
+          "new_value": "1792972800000",
+          "old_value": "1730246400000",
+          "record_count": 1
+        },
+        {
+          "new_value": "1792972800000",
+          "old_value": "1731456000000",
+          "record_count": 1
+        },
+        {
+          "new_value": "1792022400000",
+          "old_value": "1733961600000",
+          "record_count": 1
+        },
+        {
+          "new_value": "1791158400000",
+          "old_value": "1747094400000",
+          "record_count": 1
+        },
+        {
+          "new_value": "1790899200000",
+          "old_value": "1748217600000",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 931,
+      "semantic_change_category": "other_field_changed",
+      "source_id": "single_family_permits",
+      "unique_retained_identities_affected": 7
+    },
+    {
+      "affected_retained_rate": 0.003222,
+      "change_row_count": 3,
+      "changed_field": "TASK_STATUS_DATE",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "1790640000000",
+          "old_value": "1737331200000",
+          "record_count": 1
+        },
+        {
+          "new_value": "1792454400000",
+          "old_value": "1767657600000",
+          "record_count": 1
+        },
+        {
+          "new_value": "1791849600000",
+          "old_value": "1790380800000",
+          "record_count": 1
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 931,
+      "semantic_change_category": "other_field_changed",
+      "source_id": "single_family_permits",
+      "unique_retained_identities_affected": 3
+    },
+    {
+      "affected_retained_rate": 0.046187,
+      "change_row_count": 43,
+      "changed_field": "status",
+      "common_old_to_new_patterns": [
+        {
+          "new_value": "Revision | Issued",
+          "old_value": "Issued | Issued",
+          "record_count": 39
+        },
+        {
+          "new_value": "Issued | Issued",
+          "old_value": "Revision | Issued",
+          "record_count": 4
+        }
+      ],
+      "mass_refresh_warning": false,
+      "retained_record_denominator": 931,
+      "semantic_change_category": "status_changed",
+      "source_id": "single_family_permits",
+      "unique_retained_identities_affected": 43
+    }
+  ],
+  "identity_quality": {
+    "blank_native_ids_after": 14,
+    "blank_native_ids_before": 33,
+    "blank_source_links": 0,
+    "duplicate_canonical_identities_after": 0,
+    "duplicate_canonical_identities_before": 0,
+    "duplicate_native_id_groups_after": 55,
+    "duplicate_native_id_groups_before": 197,
+    "duplicate_native_id_records_after": 131,
+    "duplicate_native_id_records_before": 448,
+    "malformed_source_links": 0,
+    "missing_record_identities": 0,
+    "native_ids_with_multiple_canonical_identities": [
+      {
+        "canonical_identity_count": 3,
+        "source_id": "capital_improvements",
+        "source_record_id": "1000751"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "1001171"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "1001176"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "1001370"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "1001517"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "1001518"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "1001541"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "1001585"
+      },
+      {
+        "canonical_identity_count": 4,
+        "source_id": "capital_improvements",
+        "source_record_id": "1001809"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "1001810"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "1001810.15"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "1001810.23"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "1001810.6"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "1001810.7"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "1001842"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "1001865.2"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "1001865.4"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "1001865.4A"
+      },
+      {
+        "canonical_identity_count": 5,
+        "source_id": "capital_improvements",
+        "source_record_id": "1001955"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "1002016.2"
+      },
+      {
+        "canonical_identity_count": 4,
+        "source_id": "capital_improvements",
+        "source_record_id": "1002148"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "1002163"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "1002178"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "1002179"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "1002329"
+      },
+      {
+        "canonical_identity_count": 3,
+        "source_id": "capital_improvements",
+        "source_record_id": "1002401"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "1002466"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "1002467"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "1002477"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "1002495"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "1002569"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "1002588.1"
+      },
+      {
+        "canonical_identity_count": 15,
+        "source_id": "capital_improvements",
+        "source_record_id": "1002588.2"
+      },
+      {
+        "canonical_identity_count": 4,
+        "source_id": "capital_improvements",
+        "source_record_id": "1002630"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "1002651"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "1002661"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "1002695"
+      },
+      {
+        "canonical_identity_count": 4,
+        "source_id": "capital_improvements",
+        "source_record_id": "1002806"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "1002811"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "1002829"
+      },
+      {
+        "canonical_identity_count": 4,
+        "source_id": "capital_improvements",
+        "source_record_id": "1002836"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "1002935"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "1002941"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "1002971"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "496"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "SW50019"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "SW60001"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "WTR-19-0002.2"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "WTR-20-0002.3"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "WTR-20-0002.4"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "WTR-20-0005.3-12TH ST"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "WTR-20-0005.3-W RIVERSIDE HEIGHTS"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "WTR-20-0012"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "WTR-20-0017"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "WTR-25-0004"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "capital_improvements",
+        "source_record_id": "WUR-20-0035"
+      },
+      {
+        "canonical_identity_count": 3,
+        "source_id": "capital_locations_line",
+        "source_record_id": "1002588.2"
+      },
+      {
+        "canonical_identity_count": 6,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-07-0296593"
+      },
+      {
+        "canonical_identity_count": 4,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-21-0481073"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-22-0488684"
+      },
+      {
+        "canonical_identity_count": 4,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-22-0489693"
+      },
+      {
+        "canonical_identity_count": 4,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-22-0489694"
+      },
+      {
+        "canonical_identity_count": 4,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-22-0489695"
+      },
+      {
+        "canonical_identity_count": 4,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-22-0489696"
+      },
+      {
+        "canonical_identity_count": 4,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-22-0489697"
+      },
+      {
+        "canonical_identity_count": 4,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-22-0491715"
+      },
+      {
+        "canonical_identity_count": 4,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-22-0491779"
+      },
+      {
+        "canonical_identity_count": 4,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-23-0496943"
+      },
+      {
+        "canonical_identity_count": 8,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-23-0498793"
+      },
+      {
+        "canonical_identity_count": 6,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-23-0500451"
+      },
+      {
+        "canonical_identity_count": 4,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-24-0505542"
+      },
+      {
+        "canonical_identity_count": 4,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-24-0505948"
+      },
+      {
+        "canonical_identity_count": 4,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-25-0518096"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-26-0520202"
+      },
+      {
+        "canonical_identity_count": 3,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-26-0520691"
+      },
+      {
+        "canonical_identity_count": 4,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-26-0520904"
+      },
+      {
+        "canonical_identity_count": 4,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-26-0521692"
+      },
+      {
+        "canonical_identity_count": 3,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-26-0522026"
+      },
+      {
+        "canonical_identity_count": 4,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-26-0522346"
+      },
+      {
+        "canonical_identity_count": 6,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-26-0522410"
+      },
+      {
+        "canonical_identity_count": 4,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-26-0522411"
+      },
+      {
+        "canonical_identity_count": 4,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-26-0522412"
+      },
+      {
+        "canonical_identity_count": 4,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-26-0522413"
+      },
+      {
+        "canonical_identity_count": 4,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-26-0522414"
+      },
+      {
+        "canonical_identity_count": 4,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-26-0522415"
+      },
+      {
+        "canonical_identity_count": 4,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-26-0522416"
+      },
+      {
+        "canonical_identity_count": 4,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-26-0522417"
+      },
+      {
+        "canonical_identity_count": 4,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-26-0522418"
+      },
+      {
+        "canonical_identity_count": 4,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-26-0522419"
+      },
+      {
+        "canonical_identity_count": 4,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-26-0522420"
+      },
+      {
+        "canonical_identity_count": 4,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-26-0522422"
+      },
+      {
+        "canonical_identity_count": 4,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-26-0522424"
+      },
+      {
+        "canonical_identity_count": 4,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-26-0522425"
+      },
+      {
+        "canonical_identity_count": 4,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-26-0522426"
+      },
+      {
+        "canonical_identity_count": 4,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-26-0522427"
+      },
+      {
+        "canonical_identity_count": 4,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-26-0522428"
+      },
+      {
+        "canonical_identity_count": 2,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-26-0522677"
+      },
+      {
+        "canonical_identity_count": 4,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-26-0523439"
+      },
+      {
+        "canonical_identity_count": 4,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-26-0524089"
+      },
+      {
+        "canonical_identity_count": 4,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-26-0525558"
+      },
+      {
+        "canonical_identity_count": 4,
+        "source_id": "construction_inspections",
+        "source_record_id": "BLD-26-0525559"
+      }
+    ]
+  },
+  "interpretation": "This analysis measures source-publication behavior, not verified physical development outcomes.",
+  "overall": {
+    "absolute_net_change": -188,
+    "change_type_counts": {
+      "capital_project_phase_changed": 17,
+      "description_changed": 36,
+      "estimated_cost_changed": 12,
+      "new_record": 667,
+      "other_field_changed": 1118,
+      "planned_date_changed": 33,
+      "project_name_changed": 18,
+      "record_disappeared": 855,
+      "record_type_changed": 1,
+      "reported_actual_cost_changed": 1,
+      "status_changed": 215
+    },
+    "count_after": 4436,
+    "count_before": 4624,
+    "denominators": {
+      "disappearance_rate": "count_before",
+      "percentage_net_change": "count_before",
+      "publication_churn": "union_size",
+      "retention_rate": "count_before"
+    },
+    "disappearance_rate": 0.184905,
+    "disappeared_records": 855,
+    "excluding_critical_sources": {
+      "absolute_net_change": 11,
+      "count_after": 4241,
+      "count_before": 4230,
+      "diagnostic_note": "Diagnostic view only; it does not replace or alter the raw all-source result.",
+      "disappearance_rate": 0.152719,
+      "disappeared_records": 646,
+      "excluded_source_ids": [
+        "capital_improvements"
+      ],
+      "new_records": 657,
+      "percentage_net_change": 0.0026,
+      "publication_churn": 0.266626,
+      "retained_records": 3584,
+      "retention_rate": 0.847281,
+      "union_size": 4887
+    },
+    "new_records": 667,
+    "percentage_net_change": -0.040657,
+    "publication_churn": 0.287658,
+    "retained_records": 3769,
+    "retention_rate": 0.815095,
+    "semantic_change_category_counts": {
+      "expected_completion_changed": 25,
+      "permit_issued": 63,
+      "planning_application_added": 77
+    },
+    "total_change_rows": 2973,
+    "union_size": 5291,
+    "unique_changed_record_identities": 2818
+  },
+  "overall_status": "critical",
+  "phase_transitions": [
+    {
+      "new_value": "P3: Procurement",
+      "old_value": "P2: Design",
+      "source_id": "capital_improvements",
+      "unique_record_count": 2
+    },
+    {
+      "new_value": "P4: Construction",
+      "old_value": "P2: Design",
+      "source_id": "capital_improvements",
+      "unique_record_count": 3
+    },
+    {
+      "new_value": "P5: Closeout",
+      "old_value": "P2: Design",
+      "source_id": "capital_improvements",
+      "unique_record_count": 1
+    },
+    {
+      "new_value": "P4: Construction",
+      "old_value": "P3: Procurement",
+      "source_id": "capital_improvements",
+      "unique_record_count": 3
+    },
+    {
+      "new_value": "P3: Procurement",
+      "old_value": "P4: Construction",
+      "source_id": "capital_improvements",
+      "unique_record_count": 1
+    },
+    {
+      "new_value": "P5: Closeout",
+      "old_value": "P4: Construction",
+      "source_id": "capital_improvements",
+      "unique_record_count": 1
+    },
+    {
+      "new_value": "P2: Design",
+      "old_value": "P5: Closeout",
+      "source_id": "capital_improvements",
+      "unique_record_count": 1
+    },
+    {
+      "new_value": "P5: Closeout",
+      "old_value": "P4: Construction",
+      "source_id": "capital_locations_line",
+      "unique_record_count": 1
+    },
+    {
+      "new_value": "P3: Procurement",
+      "old_value": "P2: Design",
+      "source_id": "capital_locations_point",
+      "unique_record_count": 2
+    },
+    {
+      "new_value": "P5: Closeout",
+      "old_value": "P2: Design",
+      "source_id": "capital_locations_point",
+      "unique_record_count": 1
+    },
+    {
+      "new_value": "P5: Closeout",
+      "old_value": "P4: Construction",
+      "source_id": "capital_locations_point",
+      "unique_record_count": 1
+    }
+  ],
+  "planned_date_changes": {
+    "events": [
+      {
+        "classification": "moved_later",
+        "day_difference": 307,
+        "field": "planned_end",
+        "new_normalized": "2026-12-31",
+        "new_raw": "1798693200000",
+        "old_normalized": "2026-02-27",
+        "old_raw": "1772168400000",
+        "record_identity": "CAPITAL_IMPROVEMENTS|NATIVE|1001518|GLOBALID|{EA5DF846-DCD8-4DB6-B0D3-38EAFCF8CB76}",
+        "source_id": "capital_improvements"
+      },
+      {
+        "classification": "moved_later",
+        "day_difference": 61,
+        "field": "planned_end",
+        "new_normalized": "2028-07-01",
+        "new_raw": "1846036800000",
+        "old_normalized": "2028-05-01",
+        "old_raw": "1840766400000",
+        "record_identity": "CAPITAL_IMPROVEMENTS|NATIVE|1001810.15|GLOBALID|{F570E580-479B-4E4D-A4AF-FA86BE65EBEE}",
+        "source_id": "capital_improvements"
+      },
+      {
+        "classification": "moved_later",
+        "day_difference": 31,
+        "field": "planned_end",
+        "new_normalized": "2028-01-01",
+        "new_raw": "1830315600000",
+        "old_normalized": "2027-12-01",
+        "old_raw": "1827637200000",
+        "record_identity": "CAPITAL_IMPROVEMENTS|NATIVE|1001810.7|GLOBALID|{86F43698-F501-4D07-A6C1-FD6E3C1A497A}",
+        "source_id": "capital_improvements"
+      },
+      {
+        "classification": "moved_later",
+        "day_difference": 61,
+        "field": "planned_end",
+        "new_normalized": "2028-07-01",
+        "new_raw": "1846071279000",
+        "old_normalized": "2028-05-01",
+        "old_raw": "1840800879000",
+        "record_identity": "CAPITAL_IMPROVEMENTS|NATIVE|1001810|GLOBALID|{D5B80AD1-071D-4DC2-BB41-29B0AEDCDC76}",
+        "source_id": "capital_improvements"
+      },
+      {
+        "classification": "moved_earlier",
+        "day_difference": -280,
+        "field": "planned_end",
+        "new_normalized": "2027-05-24",
+        "new_raw": "1811131200000",
+        "old_normalized": "2028-02-28",
+        "old_raw": "1835326800000",
+        "record_identity": "CAPITAL_IMPROVEMENTS|NATIVE|1001955|GLOBALID|{9CD197F2-7D2B-4EFF-99E8-07372461319A}",
+        "source_id": "capital_improvements"
+      },
+      {
+        "classification": "moved_later",
+        "day_difference": 120,
+        "field": "planned_end",
+        "new_normalized": "2027-03-01",
+        "new_raw": "1803877200000",
+        "old_normalized": "2026-11-01",
+        "old_raw": "1793505600000",
+        "record_identity": "CAPITAL_IMPROVEMENTS|NATIVE|1002016.2|GLOBALID|{4426A7F0-AD61-436D-9A65-D802F1E5A3C8}",
+        "source_id": "capital_improvements"
+      },
+      {
+        "classification": "moved_later",
+        "day_difference": 92,
+        "field": "planned_end",
+        "new_normalized": "2030-12-01",
+        "new_raw": "1922363682000",
+        "old_normalized": "2030-08-31",
+        "old_raw": "1914411282000",
+        "record_identity": "CAPITAL_IMPROVEMENTS|NATIVE|1002179|GLOBALID|{3D6D0F3C-19B1-44BC-B16B-DDD0E92B1BE4}",
+        "source_id": "capital_improvements"
+      },
+      {
+        "classification": "moved_earlier",
+        "day_difference": -122,
+        "field": "planned_end",
+        "new_normalized": "2026-08-01",
+        "new_raw": "1785556800000",
+        "old_normalized": "2026-12-01",
+        "old_raw": "1796101200000",
+        "record_identity": "CAPITAL_IMPROVEMENTS|NATIVE|1002329|GLOBALID|{BA27C0B3-CE7B-4AD8-A20E-6D595E066718}",
+        "source_id": "capital_improvements"
+      },
+      {
+        "classification": "moved_later",
+        "day_difference": 365,
+        "field": "planned_end",
+        "new_normalized": "2030-01-01",
+        "new_raw": "1893474000000",
+        "old_normalized": "2029-01-01",
+        "old_raw": "1861938000000",
+        "record_identity": "CAPITAL_IMPROVEMENTS|NATIVE|1002477|GLOBALID|{0CFC107D-BB20-478B-808F-40B64A15F9B1}",
+        "source_id": "capital_improvements"
+      },
+      {
+        "classification": "moved_later",
+        "day_difference": 212,
+        "field": "planned_end",
+        "new_normalized": "2027-09-01",
+        "new_raw": "1819818837000",
+        "old_normalized": "2027-02-01",
+        "old_raw": "1801505637000",
+        "record_identity": "CAPITAL_IMPROVEMENTS|NATIVE|1002569|GLOBALID|{C109D1E2-4426-407D-B390-81F6867AA9D8}",
+        "source_id": "capital_improvements"
+      },
+      {
+        "classification": "moved_earlier",
+        "day_difference": -945,
+        "field": "planned_end",
+        "new_normalized": "2026-05-01",
+        "new_raw": "1777650303000",
+        "old_normalized": "2028-12-01",
+        "old_raw": "1859301903000",
+        "record_identity": "CAPITAL_IMPROVEMENTS|NATIVE|1002588.2|GLOBALID|{BBEC0055-562D-4756-88AD-9EF2668789FE}",
+        "source_id": "capital_improvements"
+      },
+      {
+        "classification": "moved_later",
+        "day_difference": 244,
+        "field": "planned_end",
+        "new_normalized": "2027-12-01",
+        "new_raw": "1827637200000",
+        "old_normalized": "2027-04-01",
+        "old_raw": "1806552000000",
+        "record_identity": "CAPITAL_IMPROVEMENTS|NATIVE|1002588.2|GLOBALID|{F69CB0A3-8C50-4F2A-94CC-40E7EB4ECE2C}",
+        "source_id": "capital_improvements"
+      },
+      {
+        "classification": "moved_later",
+        "day_difference": 183,
+        "field": "planned_end",
+        "new_normalized": "2027-12-01",
+        "new_raw": "1827637200000",
+        "old_normalized": "2027-06-01",
+        "old_raw": "1811822400000",
+        "record_identity": "CAPITAL_IMPROVEMENTS|NATIVE|1002661|GLOBALID|{0F478CED-1EC1-4AB5-B69A-6225DA564E06}",
+        "source_id": "capital_improvements"
+      },
+      {
+        "classification": "moved_later",
+        "day_difference": 92,
+        "field": "planned_end",
+        "new_normalized": "2027-02-01",
+        "new_raw": "1801458000000",
+        "old_normalized": "2026-11-01",
+        "old_raw": "1793505600000",
+        "record_identity": "CAPITAL_IMPROVEMENTS|NATIVE|1002695|GLOBALID|{C70573E7-19CD-4BB0-A169-77918EC57B59}",
+        "source_id": "capital_improvements"
+      },
+      {
+        "classification": "moved_earlier",
+        "day_difference": -182,
+        "field": "planned_end",
+        "new_normalized": "2027-07-05",
+        "new_raw": "1814760000000",
+        "old_normalized": "2028-01-03",
+        "old_raw": "1830488400000",
+        "record_identity": "CAPITAL_IMPROVEMENTS|NATIVE|SW50019|GLOBALID|{A747480A-2761-45CA-9DA0-49AA43CD59C1}",
+        "source_id": "capital_improvements"
+      },
+      {
+        "classification": "moved_earlier",
+        "day_difference": -325,
+        "field": "planned_end",
+        "new_normalized": "2027-02-10",
+        "new_raw": "1802235600000",
+        "old_normalized": "2028-01-01",
+        "old_raw": "1830315600000",
+        "record_identity": "CAPITAL_IMPROVEMENTS|NATIVE|SW60001|GLOBALID|{D2E6AD70-64A1-4213-A9E9-DE02203342AE}",
+        "source_id": "capital_improvements"
+      },
+      {
+        "classification": "moved_earlier",
+        "day_difference": -30,
+        "field": "planned_start",
+        "new_normalized": "2027-11-01",
+        "new_raw": "1825041600000",
+        "old_normalized": "2027-12-01",
+        "old_raw": "1827637200000",
+        "record_identity": "CAPITAL_IMPROVEMENTS|NATIVE|1001810.15|GLOBALID|{F570E580-479B-4E4D-A4AF-FA86BE65EBEE}",
+        "source_id": "capital_improvements"
+      },
+      {
+        "classification": "moved_earlier",
+        "day_difference": -30,
+        "field": "planned_start",
+        "new_normalized": "2027-11-01",
+        "new_raw": "1825076071000",
+        "old_normalized": "2027-12-01",
+        "old_raw": "1827671671000",
+        "record_identity": "CAPITAL_IMPROVEMENTS|NATIVE|1001810|GLOBALID|{D5B80AD1-071D-4DC2-BB41-29B0AEDCDC76}",
+        "source_id": "capital_improvements"
+      },
+      {
+        "classification": "moved_later",
+        "day_difference": 54,
+        "field": "planned_start",
+        "new_normalized": "2027-02-22",
+        "new_raw": "1803272400000",
+        "old_normalized": "2026-12-30",
+        "old_raw": "1798606800000",
+        "record_identity": "CAPITAL_IMPROVEMENTS|NATIVE|1001955|GLOBALID|{9CD197F2-7D2B-4EFF-99E8-07372461319A}",
+        "source_id": "capital_improvements"
+      },
+      {
+        "classification": "moved_earlier",
+        "day_difference": -31,
+        "field": "planned_start",
+        "new_normalized": "2027-03-01",
+        "new_raw": "1803909264000",
+        "old_normalized": "2027-04-01",
+        "old_raw": "1806584064000",
+        "record_identity": "CAPITAL_IMPROVEMENTS|NATIVE|1002179|GLOBALID|{3D6D0F3C-19B1-44BC-B16B-DDD0E92B1BE4}",
+        "source_id": "capital_improvements"
+      },
+      {
+        "classification": "moved_later",
+        "day_difference": 365,
+        "field": "planned_start",
+        "new_normalized": "2028-01-01",
+        "new_raw": "1830315600000",
+        "old_normalized": "2027-01-01",
+        "old_raw": "1798779600000",
+        "record_identity": "CAPITAL_IMPROVEMENTS|NATIVE|1002477|GLOBALID|{0CFC107D-BB20-478B-808F-40B64A15F9B1}",
+        "source_id": "capital_improvements"
+      },
+      {
+        "classification": "moved_later",
+        "day_difference": 122,
+        "field": "planned_start",
+        "new_normalized": "2027-01-01",
+        "new_raw": "1798827227000",
+        "old_normalized": "2026-09-01",
+        "old_raw": "1788282827000",
+        "record_identity": "CAPITAL_IMPROVEMENTS|NATIVE|1002569|GLOBALID|{C109D1E2-4426-407D-B390-81F6867AA9D8}",
+        "source_id": "capital_improvements"
+      },
+      {
+        "classification": "moved_later",
+        "day_difference": 59,
+        "field": "planned_start",
+        "new_normalized": "2027-03-01",
+        "new_raw": "1803922092000",
+        "old_normalized": "2027-01-01",
+        "old_raw": "1798824492000",
+        "record_identity": "CAPITAL_IMPROVEMENTS|NATIVE|1002588.2|GLOBALID|{64F2E115-E1A0-4BFA-9045-3B396C31F081}",
+        "source_id": "capital_improvements"
+      },
+      {
+        "classification": "moved_later",
+        "day_difference": 59,
+        "field": "planned_start",
+        "new_normalized": "2027-03-01",
+        "new_raw": "1803922689000",
+        "old_normalized": "2027-01-01",
+        "old_raw": "1798825089000",
+        "record_identity": "CAPITAL_IMPROVEMENTS|NATIVE|1002588.2|GLOBALID|{6E170C1A-AE66-49EF-89A6-E87F19015228}",
+        "source_id": "capital_improvements"
+      },
+      {
+        "classification": "moved_earlier",
+        "day_difference": -181,
+        "field": "planned_start",
+        "new_normalized": "2027-01-01",
+        "new_raw": "1798822056000",
+        "old_normalized": "2027-07-01",
+        "old_raw": "1814456856000",
+        "record_identity": "CAPITAL_IMPROVEMENTS|NATIVE|1002588.2|GLOBALID|{742B017E-EC5D-4541-84F5-F0BC8D949610}",
+        "source_id": "capital_improvements"
+      },
+      {
+        "classification": "moved_earlier",
+        "day_difference": -640,
+        "field": "planned_start",
+        "new_normalized": "2026-04-01",
+        "new_raw": "1775058297000",
+        "old_normalized": "2028-01-01",
+        "old_raw": "1830357897000",
+        "record_identity": "CAPITAL_IMPROVEMENTS|NATIVE|1002588.2|GLOBALID|{BBEC0055-562D-4756-88AD-9EF2668789FE}",
+        "source_id": "capital_improvements"
+      },
+      {
+        "classification": "moved_later",
+        "day_difference": 59,
+        "field": "planned_start",
+        "new_normalized": "2027-03-01",
+        "new_raw": "1803877200000",
+        "old_normalized": "2027-01-01",
+        "old_raw": "1798779600000",
+        "record_identity": "CAPITAL_IMPROVEMENTS|NATIVE|1002588.2|GLOBALID|{F69CB0A3-8C50-4F2A-94CC-40E7EB4ECE2C}",
+        "source_id": "capital_improvements"
+      },
+      {
+        "classification": "moved_later",
+        "day_difference": 60,
+        "field": "planned_start",
+        "new_normalized": "2026-11-30",
+        "new_raw": "1796044494000",
+        "old_normalized": "2026-10-01",
+        "old_raw": "1790856894000",
+        "record_identity": "CAPITAL_IMPROVEMENTS|NATIVE|1002651|GLOBALID|{B51B8FD7-FC6D-4A32-AEA5-11F7F95AF651}",
+        "source_id": "capital_improvements"
+      },
+      {
+        "classification": "moved_later",
+        "day_difference": 59,
+        "field": "planned_start",
+        "new_normalized": "2027-03-01",
+        "new_raw": "1803877200000",
+        "old_normalized": "2027-01-01",
+        "old_raw": "1798779600000",
+        "record_identity": "CAPITAL_IMPROVEMENTS|NATIVE|1002661|GLOBALID|{0F478CED-1EC1-4AB5-B69A-6225DA564E06}",
+        "source_id": "capital_improvements"
+      },
+      {
+        "classification": "moved_earlier",
+        "day_difference": -92,
+        "field": "planned_start",
+        "new_normalized": "2025-06-01",
+        "new_raw": "1748750400000",
+        "old_normalized": "2025-09-01",
+        "old_raw": "1756699200000",
+        "record_identity": "CAPITAL_IMPROVEMENTS|NATIVE|1002695|GLOBALID|{C70573E7-19CD-4BB0-A169-77918EC57B59}",
+        "source_id": "capital_improvements"
+      },
+      {
+        "classification": "moved_earlier",
+        "day_difference": -140,
+        "field": "planned_start",
+        "new_normalized": "2026-06-14",
+        "new_raw": "1781409600000",
+        "old_normalized": "2026-11-01",
+        "old_raw": "1793505600000",
+        "record_identity": "CAPITAL_IMPROVEMENTS|NATIVE|SW50019|GLOBALID|{A747480A-2761-45CA-9DA0-49AA43CD59C1}",
+        "source_id": "capital_improvements"
+      },
+      {
+        "classification": "moved_earlier",
+        "day_difference": -183,
+        "field": "planned_end",
+        "new_normalized": "2026-06-01",
+        "new_raw": "1780272000000",
+        "old_normalized": "2026-12-01",
+        "old_raw": "1796083200000",
+        "record_identity": "CAPITAL_LOCATIONS_LINE|NATIVE|1002329",
+        "source_id": "capital_locations_line"
+      },
+      {
+        "classification": "moved_later",
+        "day_difference": 365,
+        "field": "planned_end",
+        "new_normalized": "2030-01-01",
+        "new_raw": "1893456000000",
+        "old_normalized": "2029-01-01",
+        "old_raw": "1861920000000",
+        "record_identity": "CAPITAL_LOCATIONS_LINE|NATIVE|1002477",
+        "source_id": "capital_locations_line"
+      },
+      {
+        "classification": "moved_later",
+        "day_difference": 244,
+        "field": "planned_end",
+        "new_normalized": "2027-12-01",
+        "new_raw": "1827619200000",
+        "old_normalized": "2027-04-01",
+        "old_raw": "1806537600000",
+        "record_identity": "CAPITAL_LOCATIONS_LINE|NATIVE|1002588.2|GLOBALID|{308BF890-FFF6-44DA-A94E-766C3D40F65A}",
+        "source_id": "capital_locations_line"
+      },
+      {
+        "classification": "moved_later",
+        "day_difference": 183,
+        "field": "planned_end",
+        "new_normalized": "2027-12-01",
+        "new_raw": "1827619200000",
+        "old_normalized": "2027-06-01",
+        "old_raw": "1811808000000",
+        "record_identity": "CAPITAL_LOCATIONS_LINE|NATIVE|1002661",
+        "source_id": "capital_locations_line"
+      },
+      {
+        "classification": "moved_later",
+        "day_difference": 365,
+        "field": "planned_start",
+        "new_normalized": "2028-01-01",
+        "new_raw": "1830297600000",
+        "old_normalized": "2027-01-01",
+        "old_raw": "1798761600000",
+        "record_identity": "CAPITAL_LOCATIONS_LINE|NATIVE|1002477",
+        "source_id": "capital_locations_line"
+      },
+      {
+        "classification": "moved_later",
+        "day_difference": 59,
+        "field": "planned_start",
+        "new_normalized": "2027-03-01",
+        "new_raw": "1803859200000",
+        "old_normalized": "2027-01-01",
+        "old_raw": "1798761600000",
+        "record_identity": "CAPITAL_LOCATIONS_LINE|NATIVE|1002588.2F",
+        "source_id": "capital_locations_line"
+      },
+      {
+        "classification": "moved_later",
+        "day_difference": 59,
+        "field": "planned_start",
+        "new_normalized": "2027-03-01",
+        "new_raw": "1803859200000",
+        "old_normalized": "2027-01-01",
+        "old_raw": "1798761600000",
+        "record_identity": "CAPITAL_LOCATIONS_LINE|NATIVE|1002588.2|GLOBALID|{308BF890-FFF6-44DA-A94E-766C3D40F65A}",
+        "source_id": "capital_locations_line"
+      },
+      {
+        "classification": "moved_later",
+        "day_difference": 59,
+        "field": "planned_start",
+        "new_normalized": "2027-03-01",
+        "new_raw": "1803859200000",
+        "old_normalized": "2027-01-01",
+        "old_raw": "1798761600000",
+        "record_identity": "CAPITAL_LOCATIONS_LINE|NATIVE|1002588.2|GLOBALID|{92D87469-8BD0-40EA-B757-C1CDF6512E9D}",
+        "source_id": "capital_locations_line"
+      },
+      {
+        "classification": "moved_later",
+        "day_difference": 59,
+        "field": "planned_start",
+        "new_normalized": "2027-03-01",
+        "new_raw": "1803859200000",
+        "old_normalized": "2027-01-01",
+        "old_raw": "1798761600000",
+        "record_identity": "CAPITAL_LOCATIONS_LINE|NATIVE|1002661",
+        "source_id": "capital_locations_line"
+      },
+      {
+        "classification": "moved_later",
+        "day_difference": 122,
+        "field": "planned_start",
+        "new_normalized": "2027-10-01",
+        "new_raw": "1822348800000",
+        "old_normalized": "2027-06-01",
+        "old_raw": "1811808000000",
+        "record_identity": "CAPITAL_LOCATIONS_LINE|NATIVE|1002935",
+        "source_id": "capital_locations_line"
+      },
+      {
+        "classification": "value_added",
+        "day_difference": null,
+        "field": "planned_start",
+        "new_normalized": "2027-10-01",
+        "new_raw": "1822348800000",
+        "old_normalized": null,
+        "old_raw": "(blank)",
+        "record_identity": "CAPITAL_LOCATIONS_LINE|NATIVE|TRANS20198",
+        "source_id": "capital_locations_line"
+      },
+      {
+        "classification": "moved_later",
+        "day_difference": 61,
+        "field": "planned_end",
+        "new_normalized": "2028-07-01",
+        "new_raw": "1846022400000",
+        "old_normalized": "2028-05-01",
+        "old_raw": "1840752000000",
+        "record_identity": "CAPITAL_LOCATIONS_POINT|NATIVE|1001810",
+        "source_id": "capital_locations_point"
+      },
+      {
+        "classification": "moved_later",
+        "day_difference": 61,
+        "field": "planned_end",
+        "new_normalized": "2028-07-01",
+        "new_raw": "1846022400000",
+        "old_normalized": "2028-05-01",
+        "old_raw": "1840752000000",
+        "record_identity": "CAPITAL_LOCATIONS_POINT|NATIVE|1001810.15",
+        "source_id": "capital_locations_point"
+      },
+      {
+        "classification": "moved_later",
+        "day_difference": 31,
+        "field": "planned_end",
+        "new_normalized": "2028-01-01",
+        "new_raw": "1830297600000",
+        "old_normalized": "2027-12-01",
+        "old_raw": "1827619200000",
+        "record_identity": "CAPITAL_LOCATIONS_POINT|NATIVE|1001810.7",
+        "source_id": "capital_locations_point"
+      },
+      {
+        "classification": "moved_earlier",
+        "day_difference": -30,
+        "field": "planned_end",
+        "new_normalized": "2026-06-01",
+        "new_raw": "1780272000000",
+        "old_normalized": "2026-07-01",
+        "old_raw": "1782864000000",
+        "record_identity": "CAPITAL_LOCATIONS_POINT|NATIVE|1002495B",
+        "source_id": "capital_locations_point"
+      },
+      {
+        "classification": "moved_later",
+        "day_difference": 212,
+        "field": "planned_end",
+        "new_normalized": "2027-09-01",
+        "new_raw": "1819756800000",
+        "old_normalized": "2027-02-01",
+        "old_raw": "1801440000000",
+        "record_identity": "CAPITAL_LOCATIONS_POINT|NATIVE|1002569",
+        "source_id": "capital_locations_point"
+      },
+      {
+        "classification": "moved_earlier",
+        "day_difference": -30,
+        "field": "planned_start",
+        "new_normalized": "2027-11-01",
+        "new_raw": "1825027200000",
+        "old_normalized": "2027-12-01",
+        "old_raw": "1827619200000",
+        "record_identity": "CAPITAL_LOCATIONS_POINT|NATIVE|1001810",
+        "source_id": "capital_locations_point"
+      },
+      {
+        "classification": "moved_earlier",
+        "day_difference": -30,
+        "field": "planned_start",
+        "new_normalized": "2027-11-01",
+        "new_raw": "1825027200000",
+        "old_normalized": "2027-12-01",
+        "old_raw": "1827619200000",
+        "record_identity": "CAPITAL_LOCATIONS_POINT|NATIVE|1001810.15",
+        "source_id": "capital_locations_point"
+      },
+      {
+        "classification": "moved_later",
+        "day_difference": 122,
+        "field": "planned_start",
+        "new_normalized": "2027-01-01",
+        "new_raw": "1798761600000",
+        "old_normalized": "2026-09-01",
+        "old_raw": "1788220800000",
+        "record_identity": "CAPITAL_LOCATIONS_POINT|NATIVE|1002569",
+        "source_id": "capital_locations_point"
+      }
+    ],
+    "summaries_by_source": [
+      {
+        "change_count": 16,
+        "classification_counts": {
+          "moved_earlier": 5,
+          "moved_later": 11
+        },
+        "field": "planned_end",
+        "maximum_day_difference": 365.0,
+        "median_day_difference": 76.5,
+        "minimum_day_difference": -945.0,
+        "source_id": "capital_improvements"
+      },
+      {
+        "change_count": 15,
+        "classification_counts": {
+          "moved_earlier": 7,
+          "moved_later": 8
+        },
+        "field": "planned_start",
+        "maximum_day_difference": 365.0,
+        "median_day_difference": 54.0,
+        "minimum_day_difference": -640.0,
+        "source_id": "capital_improvements"
+      },
+      {
+        "change_count": 4,
+        "classification_counts": {
+          "moved_earlier": 1,
+          "moved_later": 3
+        },
+        "field": "planned_end",
+        "maximum_day_difference": 365.0,
+        "median_day_difference": 213.5,
+        "minimum_day_difference": -183.0,
+        "source_id": "capital_locations_line"
+      },
+      {
+        "change_count": 7,
+        "classification_counts": {
+          "moved_later": 6,
+          "value_added": 1
+        },
+        "field": "planned_start",
+        "maximum_day_difference": 365.0,
+        "median_day_difference": 59.0,
+        "minimum_day_difference": 59.0,
+        "source_id": "capital_locations_line"
+      },
+      {
+        "change_count": 5,
+        "classification_counts": {
+          "moved_earlier": 1,
+          "moved_later": 4
+        },
+        "field": "planned_end",
+        "maximum_day_difference": 212.0,
+        "median_day_difference": 61.0,
+        "minimum_day_difference": -30.0,
+        "source_id": "capital_locations_point"
+      },
+      {
+        "change_count": 3,
+        "classification_counts": {
+          "moved_earlier": 2,
+          "moved_later": 1
+        },
+        "field": "planned_start",
+        "maximum_day_difference": 122.0,
+        "median_day_difference": -30.0,
+        "minimum_day_difference": -30.0,
+        "source_id": "capital_locations_point"
+      }
+    ]
+  },
+  "schema_version": "1.0.0",
+  "source_health": [
+    {
+      "absolute_delta": -199,
+      "after_count": 195,
+      "alert_level": "critical",
+      "alert_reasons": [
+        "critical_disappearance_rate",
+        "high_publication_churn",
+        "source_count_collapse"
+      ],
+      "before_count": 394,
+      "changed_identity_rate": 0.670792,
+      "disappearance_rate": 0.530457,
+      "disappeared_records": 209,
+      "field_change_row_count": 104,
+      "new_records": 10,
+      "percentage_delta": -0.505076,
+      "publication_churn": 0.542079,
+      "retained_records": 185,
+      "retention_rate": 0.469543,
+      "source_id": "capital_improvements",
+      "union_size": 404,
+      "unique_changed_identities": 271
+    },
+    {
+      "absolute_delta": 0,
+      "after_count": 101,
+      "alert_level": "healthy",
+      "alert_reasons": [],
+      "before_count": 101,
+      "changed_identity_rate": 0.211538,
+      "disappearance_rate": 0.029703,
+      "disappeared_records": 3,
+      "field_change_row_count": 28,
+      "new_records": 3,
+      "percentage_delta": 0.0,
+      "publication_churn": 0.057692,
+      "retained_records": 98,
+      "retention_rate": 0.970297,
+      "source_id": "capital_locations_line",
+      "union_size": 104,
+      "unique_changed_identities": 22
+    },
+    {
+      "absolute_delta": 8,
+      "after_count": 56,
+      "alert_level": "healthy",
+      "alert_reasons": [
+        "notable_source_net_change"
+      ],
+      "before_count": 48,
+      "changed_identity_rate": 0.464286,
+      "disappearance_rate": 0.0,
+      "disappeared_records": 0,
+      "field_change_row_count": 34,
+      "new_records": 8,
+      "percentage_delta": 0.166667,
+      "publication_churn": 0.142857,
+      "retained_records": 48,
+      "retention_rate": 1.0,
+      "source_id": "capital_locations_point",
+      "union_size": 56,
+      "unique_changed_identities": 26
+    },
+    {
+      "absolute_delta": 0,
+      "after_count": 36,
+      "alert_level": "healthy",
+      "alert_reasons": [],
+      "before_count": 36,
+      "changed_identity_rate": 0.0,
+      "disappearance_rate": 0.0,
+      "disappeared_records": 0,
+      "field_change_row_count": 0,
+      "new_records": 0,
+      "percentage_delta": 0.0,
+      "publication_churn": 0.0,
+      "retained_records": 36,
+      "retention_rate": 1.0,
+      "source_id": "capital_locations_polygon",
+      "union_size": 36,
+      "unique_changed_identities": 0
+    },
+    {
+      "absolute_delta": 10,
+      "after_count": 2604,
+      "alert_level": "healthy",
+      "alert_reasons": [],
+      "before_count": 2594,
+      "changed_identity_rate": 0.33081,
+      "disappearance_rate": 0.167309,
+      "disappeared_records": 434,
+      "field_change_row_count": 147,
+      "new_records": 444,
+      "percentage_delta": 0.003855,
+      "publication_churn": 0.289006,
+      "retained_records": 2160,
+      "retention_rate": 0.832691,
+      "source_id": "construction_inspections",
+      "union_size": 3038,
+      "unique_changed_identities": 1005
+    },
+    {
+      "absolute_delta": -4,
+      "after_count": 283,
+      "alert_level": "review",
+      "alert_reasons": [
+        "high_publication_churn"
+      ],
+      "before_count": 287,
+      "changed_identity_rate": 0.563187,
+      "disappearance_rate": 0.28223,
+      "disappeared_records": 81,
+      "field_change_row_count": 52,
+      "new_records": 77,
+      "percentage_delta": -0.013937,
+      "publication_churn": 0.434066,
+      "retained_records": 206,
+      "retention_rate": 0.71777,
+      "source_id": "development_coordination",
+      "union_size": 364,
+      "unique_changed_identities": 205
+    },
+    {
+      "absolute_delta": -20,
+      "after_count": 123,
+      "alert_level": "review",
+      "alert_reasons": [
+        "high_publication_churn",
+        "mass_field_refresh"
+      ],
+      "before_count": 143,
+      "changed_identity_rate": 1.0,
+      "disappearance_rate": 0.265734,
+      "disappeared_records": 38,
+      "field_change_row_count": 112,
+      "new_records": 18,
+      "percentage_delta": -0.13986,
+      "publication_churn": 0.347826,
+      "retained_records": 105,
+      "retention_rate": 0.734266,
+      "source_id": "historic_preservation",
+      "union_size": 161,
+      "unique_changed_identities": 161
+    },
+    {
+      "absolute_delta": 17,
+      "after_count": 1038,
+      "alert_level": "review",
+      "alert_reasons": [
+        "mass_field_refresh"
+      ],
+      "before_count": 1021,
+      "changed_identity_rate": 1.0,
+      "disappearance_rate": 0.088149,
+      "disappeared_records": 90,
+      "field_change_row_count": 974,
+      "new_records": 107,
+      "percentage_delta": 0.01665,
+      "publication_churn": 0.174645,
+      "retained_records": 931,
+      "retention_rate": 0.911851,
+      "source_id": "single_family_permits",
+      "union_size": 1128,
+      "unique_changed_identities": 1128
+    }
+  ],
+  "status_transitions": [
+    {
+      "new_value": "Permitting/Submittals Approval",
+      "old_value": "30% Design Completion",
+      "source_id": "capital_improvements",
+      "unique_record_count": 2
+    },
+    {
+      "new_value": "30% Design Completion",
+      "old_value": "60% Design Completion",
+      "source_id": "capital_improvements",
+      "unique_record_count": 2
+    },
+    {
+      "new_value": "90% Design Completion",
+      "old_value": "60% Design Completion",
+      "source_id": "capital_improvements",
+      "unique_record_count": 1
+    },
+    {
+      "new_value": "Construction in Progress",
+      "old_value": "60% Design Completion",
+      "source_id": "capital_improvements",
+      "unique_record_count": 1
+    },
+    {
+      "new_value": "Permitting/Submittals Approval",
+      "old_value": "60% Design Completion",
+      "source_id": "capital_improvements",
+      "unique_record_count": 1
+    },
+    {
+      "new_value": "Closeout",
+      "old_value": "90% Design Completion",
+      "source_id": "capital_improvements",
+      "unique_record_count": 1
+    },
+    {
+      "new_value": "Construction in Progress",
+      "old_value": "90% Design Completion",
+      "source_id": "capital_improvements",
+      "unique_record_count": 1
+    },
+    {
+      "new_value": "30% Design Completion",
+      "old_value": "Closeout",
+      "source_id": "capital_improvements",
+      "unique_record_count": 1
+    },
+    {
+      "new_value": "Closeout",
+      "old_value": "Construction in Progress",
+      "source_id": "capital_improvements",
+      "unique_record_count": 1
+    },
+    {
+      "new_value": "Final Contract Review & Approval",
+      "old_value": "Construction in Progress",
+      "source_id": "capital_improvements",
+      "unique_record_count": 1
+    },
+    {
+      "new_value": "Final Contract Review & Approval",
+      "old_value": "Consultant/Contractor Selection Process",
+      "source_id": "capital_improvements",
+      "unique_record_count": 1
+    },
+    {
+      "new_value": "Construction in Progress",
+      "old_value": "Contract Negotiations",
+      "source_id": "capital_improvements",
+      "unique_record_count": 1
+    },
+    {
+      "new_value": "Permitting/Submittals Approval",
+      "old_value": "Contract Negotiations",
+      "source_id": "capital_improvements",
+      "unique_record_count": 1
+    },
+    {
+      "new_value": "Construction in Progress",
+      "old_value": "Permitting/Submittals Approval",
+      "source_id": "capital_improvements",
+      "unique_record_count": 1
+    },
+    {
+      "new_value": "Construction in Progress",
+      "old_value": "Project Startup",
+      "source_id": "capital_improvements",
+      "unique_record_count": 1
+    },
+    {
+      "new_value": "90% Design Completion",
+      "old_value": "60% Design Completion",
+      "source_id": "capital_locations_line",
+      "unique_record_count": 1
+    },
+    {
+      "new_value": "Closeout",
+      "old_value": "Construction in Progress",
+      "source_id": "capital_locations_line",
+      "unique_record_count": 1
+    },
+    {
+      "new_value": "60% Design Completion",
+      "old_value": "30% Design Completion",
+      "source_id": "capital_locations_point",
+      "unique_record_count": 2
+    },
+    {
+      "new_value": "Closeout",
+      "old_value": "30% Design Completion",
+      "source_id": "capital_locations_point",
+      "unique_record_count": 1
+    },
+    {
+      "new_value": "Permitting/Submittals Approval",
+      "old_value": "30% Design Completion",
+      "source_id": "capital_locations_point",
+      "unique_record_count": 1
+    },
+    {
+      "new_value": "Closeout",
+      "old_value": "Construction",
+      "source_id": "capital_locations_point",
+      "unique_record_count": 1
+    },
+    {
+      "new_value": "Permitting/Submittals Approval",
+      "old_value": "Contract Negotiations",
+      "source_id": "capital_locations_point",
+      "unique_record_count": 1
+    },
+    {
+      "new_value": "Revision",
+      "old_value": "Issued",
+      "source_id": "construction_inspections",
+      "unique_record_count": 81
+    },
+    {
+      "new_value": "Issued",
+      "old_value": "Revision",
+      "source_id": "construction_inspections",
+      "unique_record_count": 20
+    },
+    {
+      "new_value": "In Process",
+      "old_value": "Awaiting Client Reply",
+      "source_id": "development_coordination",
+      "unique_record_count": 23
+    },
+    {
+      "new_value": "Awaiting Client Reply",
+      "old_value": "In Process",
+      "source_id": "development_coordination",
+      "unique_record_count": 4
+    },
+    {
+      "new_value": "Awaiting Client Reply",
+      "old_value": "Open",
+      "source_id": "development_coordination",
+      "unique_record_count": 3
+    },
+    {
+      "new_value": "In Process",
+      "old_value": "Open",
+      "source_id": "development_coordination",
+      "unique_record_count": 9
+    },
+    {
+      "new_value": "In Process",
+      "old_value": "Awaiting Client Reply",
+      "source_id": "historic_preservation",
+      "unique_record_count": 2
+    },
+    {
+      "new_value": "Open",
+      "old_value": "Awaiting Client Reply",
+      "source_id": "historic_preservation",
+      "unique_record_count": 1
+    },
+    {
+      "new_value": "Awaiting Client Reply",
+      "old_value": "In Process",
+      "source_id": "historic_preservation",
+      "unique_record_count": 4
+    },
+    {
+      "new_value": "Revision | Issued",
+      "old_value": "Issued | Issued",
+      "source_id": "single_family_permits",
+      "unique_record_count": 39
+    },
+    {
+      "new_value": "Issued | Issued",
+      "old_value": "Revision | Issued",
+      "source_id": "single_family_permits",
+      "unique_record_count": 4
+    }
+  ],
+  "trend_eligibility": {
+    "critical_sources": [
+      "capital_improvements"
+    ],
+    "exclusion_reasons": [
+      "critical_disappearance_rate",
+      "source_count_collapse",
+      "noncanonical_interval"
+    ],
+    "usable_for_global_aggregate_trend": false,
+    "usable_for_raw_reporting": true,
+    "usable_for_unflagged_source_trends": true
+  }
+}

@@ -1,0 +1,45 @@
+transition_type,source_id,old_value,new_value,unique_record_count
+phase,capital_improvements,P2: Design,P3: Procurement,2
+phase,capital_improvements,P2: Design,P4: Construction,3
+phase,capital_improvements,P2: Design,P5: Closeout,1
+phase,capital_improvements,P3: Procurement,P4: Construction,3
+phase,capital_improvements,P4: Construction,P3: Procurement,1
+phase,capital_improvements,P4: Construction,P5: Closeout,1
+phase,capital_improvements,P5: Closeout,P2: Design,1
+phase,capital_locations_line,P4: Construction,P5: Closeout,1
+phase,capital_locations_point,P2: Design,P3: Procurement,2
+phase,capital_locations_point,P2: Design,P5: Closeout,1
+phase,capital_locations_point,P4: Construction,P5: Closeout,1
+status,capital_improvements,30% Design Completion,Permitting/Submittals Approval,2
+status,capital_improvements,60% Design Completion,30% Design Completion,2
+status,capital_improvements,60% Design Completion,90% Design Completion,1
+status,capital_improvements,60% Design Completion,Construction in Progress,1
+status,capital_improvements,60% Design Completion,Permitting/Submittals Approval,1
+status,capital_improvements,90% Design Completion,Closeout,1
+status,capital_improvements,90% Design Completion,Construction in Progress,1
+status,capital_improvements,Closeout,30% Design Completion,1
+status,capital_improvements,Construction in Progress,Closeout,1
+status,capital_improvements,Construction in Progress,Final Contract Review & Approval,1
+status,capital_improvements,Consultant/Contractor Selection Process,Final Contract Review & Approval,1
+status,capital_improvements,Contract Negotiations,Construction in Progress,1
+status,capital_improvements,Contract Negotiations,Permitting/Submittals Approval,1
+status,capital_improvements,Permitting/Submittals Approval,Construction in Progress,1
+status,capital_improvements,Project Startup,Construction in Progress,1
+status,capital_locations_line,60% Design Completion,90% Design Completion,1
+status,capital_locations_line,Construction in Progress,Closeout,1
+status,capital_locations_point,30% Design Completion,60% Design Completion,2
+status,capital_locations_point,30% Design Completion,Closeout,1
+status,capital_locations_point,30% Design Completion,Permitting/Submittals Approval,1
+status,capital_locations_point,Construction,Closeout,1
+status,capital_locations_point,Contract Negotiations,Permitting/Submittals Approval,1
+status,construction_inspections,Issued,Revision,81
+status,construction_inspections,Revision,Issued,20
+status,development_coordination,Awaiting Client Reply,In Process,23
+status,development_coordination,In Process,Awaiting Client Reply,4
+status,development_coordination,Open,Awaiting Client Reply,3
+status,development_coordination,Open,In Process,9
+status,historic_preservation,Awaiting Client Reply,In Process,2
+status,historic_preservation,Awaiting Client Reply,Open,1
+status,historic_preservation,In Process,Awaiting Client Reply,4
+status,single_family_permits,Issued | Issued,Revision | Issued,39
+status,single_family_permits,Revision | Issued,Issued | Issued,4

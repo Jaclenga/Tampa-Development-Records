@@ -1,0 +1,109 @@
+{
+  "investigated_at_utc": "2026-11-01T09:25:40.578920+00:00",
+  "source_endpoint": "https://arcgis.tampagov.net/arcgis/rest/services/CapitalProjects/CapitalProjects/FeatureServer/0",
+  "snapshot_counts": {
+    "2026-08-23": {
+      "rows": 192,
+      "diagnostic_project_keys": 191
+    },
+    "2026-09-01": {
+      "rows": 190,
+      "diagnostic_project_keys": 189
+    },
+    "2026-10-01": {
+      "rows": 394,
+      "diagnostic_project_keys": 200
+    },
+    "2026-11-01": {
+      "rows": 195,
+      "diagnostic_project_keys": 194
+    }
+  },
+  "live_reconciliation": {
+    "count_before": 195,
+    "id_count": 195,
+    "feature_count": 195,
+    "count_after": 195,
+    "global_ids_match_november_snapshot": true,
+    "query_filter": "1=1"
+  },
+  "october_key_multiplicities": {
+    "2": 191,
+    "1": 8,
+    "4": 1
+  },
+  "october_duplicate_group_differences": [
+    {
+      "fields": [],
+      "groups": 71
+    },
+    {
+      "fields": [
+        "docpath"
+      ],
+      "groups": 113
+    },
+    {
+      "fields": [
+        "docpath",
+        "Neighborhood"
+      ],
+      "groups": 2
+    },
+    {
+      "fields": [
+        "projid",
+        "rationale",
+        "status",
+        "docpath",
+        "ProjectSiteURL",
+        "last_edited_date"
+      ],
+      "groups": 1
+    },
+    {
+      "fields": [
+        "projid",
+        "docpath",
+        "ProjectSiteURL",
+        "last_edited_date"
+      ],
+      "groups": 2
+    },
+    {
+      "fields": [
+        "projid",
+        "fiscalyr",
+        "docpath",
+        "ProjectSiteURL",
+        "last_edited_date"
+      ],
+      "groups": 1
+    },
+    {
+      "fields": [
+        "status",
+        "docpath",
+        "last_edited_date"
+      ],
+      "groups": 1
+    },
+    {
+      "fields": [
+        "created_date",
+        "last_edited_date"
+      ],
+      "groups": 1
+    }
+  ],
+  "diagnostic_key_comparison": {
+    "retained": 183,
+    "absent": 17,
+    "new": 11,
+    "row_delta": -199,
+    "project_key_delta": -6,
+    "duplicate_surplus_delta": -193
+  },
+  "method_note": "Diagnostic key is stripped, case-folded department project number plus project name. It is not a verified unique project identifier or an instruction to deduplicate immutable snapshots.",
+  "conclusion": "The raw decline is dominated by disappearance of duplicate-like source representations in October. Publisher cleanup is inferred; the publisher has not confirmed its cause. Missing projects are not established cancellations."
+}

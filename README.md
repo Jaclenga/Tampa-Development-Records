@@ -14,11 +14,11 @@ of Tampa, with tools for tracking changes in those records over time.
 | Normalized activities | 3,323 |
 | Accela records | 338,789 unique Building/Planning records; 334,808 retrospective and 3,981 prospective |
 | Expanded activities | 339,179; core bounded-census files remain unchanged |
-| Source-date cohort view | 5,302 canonical records; 5,164 non-future monthly events; 137 forward-looking plans |
-| Longitudinal snapshots | August 23 baseline; September 1 and October 1 follow-ups |
-| Latest observed records | 4,624 records from eight City GIS layers on October 1 |
-| Observed comparisons | 2; August 23 to September 1 and September 1 to October 1 (both noncanonical) |
-| Regular month-end series | September 30 was missed; October 31 is the next eligible observation |
+| Source-date cohort view | 5,941 canonical records; 5,796 non-future monthly events; 144 forward-looking plans |
+| Longitudinal snapshots | August 23 baseline; September 1, October 1, and November 1 follow-ups |
+| Latest observed records | 4,436 records from eight City GIS layers on November 1 |
+| Observed comparisons | 3; all noncanonical intervals |
+| Regular month-end series | September 30 and October 31 were not archived; November 30 is the next eligible observation |
 | Manual validation | 10 of 150 first reviews completed (6.7%); development phase only |
 | Empirical accuracy | Not yet measured |
 | Release | Version 0.9.0 prepared; Git tag not yet published |
@@ -34,6 +34,7 @@ Tampa permits, developments, construction outcomes, or investment.
 | [`2026-08-23`](data/snapshots/2026-08-23/) | 2026-08-23 02:06:02 | 4,469 | Original baseline | [Metadata](data/snapshots/2026-08-23/metadata.json) |
 | [`2026-09-01`](data/snapshots/2026-09-01/) | 2026-09-01 07:15:12 | 4,408 | Reconciled first follow-up | [Metadata](data/snapshots/2026-09-01/metadata.json) |
 | [`2026-10-01`](data/snapshots/2026-10-01/) | 2026-10-01 06:47:51 | 4,624 | Manual recovery observation | [Metadata](data/snapshots/2026-10-01/metadata.json) |
+| [`2026-11-01`](data/snapshots/2026-11-01/) | 2026-11-01 09:18:36 | 4,436 | Manual recovery observation | [Metadata](data/snapshots/2026-11-01/metadata.json) |
 
 The first observed comparison covers August 23 to September 1 and is a
 nine-day initial interval, not a full monthly interval. Its
@@ -45,11 +46,24 @@ source shifts before they are interpreted substantively.
 
 The [October 1 comparison](data/monthly_changes/2026-10-01.json) covers the
 September 1 to October 1 observations. The September 30 scheduled collection
-was missed, so this is a manual interval, not a month-end trend point. October
-31 is the next eligible month-end observation; October 31 to November 30 is the
+was missed, so this is a manual interval, not a month-end trend point. November
+30 is the next eligible month-end observation; November 30 to December 31 is the
 first possible full month-end interval. Manual interim comparisons use their
 observation date in artifact filenames to keep multiple comparisons in one
 month distinct.
+
+The October 31 scheduled pull collected successfully, but publication was
+blocked by a benchmark freeze test: Git line-ending conversion changed the
+bytes of frozen files on Linux. No recovery artifact was retained. The
+[November 1 recovery report](reports/changes/2026-11-01.md) preserves the actual
+retrieval date; it does not reconstruct October 31. Frozen benchmark bytes are
+now exempt from Git text conversion, and the workflow saves collected artifacts
+before testing. The recovery comparison flags a capital-improvements source
+count drop from 394 to 195 and is not eligible for global aggregate trends.
+The [capital-source investigation](reports/changes/2026-11-01-capital-investigation.md)
+finds that October contained many duplicate-like project representations;
+independent live inventory checks confirm November's 195 rows. The raw decline
+does not establish a comparable decline in distinct projects.
 
 The accepted September 1 observation passed repeated count-only, ID-only,
 chunked-feature, and final-count reconciliation for all eight sources. It
@@ -272,16 +286,16 @@ one distribution gap:
 
 1. Complete the frozen manual-validation sample and publish the resulting
    claim-specific accuracy and reviewer-agreement metrics.
-2. Collect the October 31 and November 30 month-end snapshots. The scheduled
-   September 30 observation was missed; the October 1 recovery keeps its actual
-   Tampa observation date and cannot replace it. October 31 to November 30 is
+2. Collect the November 30 and December 31 month-end snapshots. The scheduled
+   September 30 and October 31 observations were not archived; the recovery
+   observations retain their actual dates. November 30 to December 31 is
    the first possible full month-end-to-month-end interval.
 3. Run the release checks and publish an annotated `v0.9.0` Git tag.
 
 The detailed sequence is in the
 [`release checklist`](docs/guides/RELEASE_CHECKLIST.md). Until the first item is
 complete, do not claim a measured error rate. Until the second is complete,
-describe both observed comparisons as noncanonical, not full monthly results.
+describe all three observed comparisons as noncanonical, not full monthly results.
 
 ## Repository layout
 
