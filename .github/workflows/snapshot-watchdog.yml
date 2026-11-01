@@ -1,0 +1,27 @@
+name: Tampa snapshot watchdog
+
+on:
+  schedule:
+    # Independent check catches a monthly workflow that never started.
+    - cron: "43 15 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-last-month-end:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify expected archive and checksum
+        run: python scripts/snapshot_pipeline.py watchdog
+      - name: Report missing or damaged observation
+        if: failure()
+        run: |
+          echo "::error::Expected month-end archive missing or invalid. Check the monthly workflow and its checkpoint branch. Never relabel a later live pull."
+          echo "Month-end archive missing or invalid. Check monthly runs and snapshot-captures branches. Enable repository Actions failure notifications." >> "$GITHUB_STEP_SUMMARY"

@@ -65,6 +65,11 @@ finds that October contained many duplicate-like project representations;
 independent live inventory checks confirm November's 195 rows. The raw decline
 does not establish a comparable decline in distinct projects.
 
+The [durable collection and recovery system](docs/guides/SNAPSHOT_RECOVERY.md)
+adds verified per-source Git checkpoints, fallback artifacts, separate capture
+and publication jobs, scheduled retries, and a daily archive watchdog. Required
+month-end monitoring begins November 30, 2026; earlier gaps remain documented.
+
 The accepted September 1 observation passed repeated count-only, ID-only,
 chunked-feature, and final-count reconciliation for all eight sources. It
 supersedes an incomplete same-day capture containing only 280 permit records;

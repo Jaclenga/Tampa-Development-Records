@@ -6,6 +6,10 @@ Python's standard library. The optional Accela collector uses `requests` from
 
 ## Build and acquisition
 
+- `snapshot_pipeline.py` checkpoints each reconciled source to a durable Git
+  archive before report generation, supports recovery without live recollection,
+  and checks required month-end observations. See the
+  [recovery guide](../docs/guides/SNAPSHOT_RECOVERY.md).
 - `build_release.py` orchestrates a complete dataset release.
 - `build_tampa_development.py` downloads and normalizes the core City layers.
 - `download_hcpa.py` downloads optional HCPA source archives.

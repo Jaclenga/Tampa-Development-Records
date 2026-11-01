@@ -2,139 +2,172 @@ name: Month-end Tampa snapshot
 
 on:
   schedule:
-    # GitHub cron has no "last day of month" expression. Run on candidate
-    # dates, then let the first step continue only on Tampa's month-end.
-    # 12:17 UTC is 07:17 EST / 08:17 EDT. This leaves at least 15 hours
-    # before Tampa midnight if GitHub starts a scheduled job late.
-    - cron: "17 12 28-31 * *"
+    # Retry on month-end; days 1-2 recover checkpoints without backdating.
+    - cron: "17 12,18,22 28-31,1-2 * *"
   workflow_dispatch:
+    inputs:
+      observation_date:
+        description: "Optional YYYY-MM-DD to recover; past dates require checkpoints"
+        type: string
+        default: ""
+      backup_run_id:
+        description: "Optional failed run whose fallback artifact should be imported"
+        type: string
+        default: ""
+      verify_only:
+        description: "Run recovery failure drills without collection or publication"
+        type: boolean
+        default: false
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: monthly-tampa-snapshot
   cancel-in-progress: false
 
 jobs:
-  collect-compare-publish:
+  recovery-drills:
+    if: inputs.verify_only == true
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 10
     steps:
-      - name: Confirm Tampa month-end
-        id: month_end
-        shell: bash
-        run: |
-          if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
-            echo "should_run=true" >> "$GITHUB_OUTPUT"
-            echo "Manual collection requested; preserving the actual observation date."
-            exit 0
-          fi
-
-          tampa_today="$(TZ=America/New_York date +%F)"
-          tampa_month="$(TZ=America/New_York date +%m)"
-          tampa_tomorrow_month="$(TZ=America/New_York date -d tomorrow +%m)"
-          echo "expected_date=$tampa_today" >> "$GITHUB_OUTPUT"
-
-          if [ "$tampa_month" = "$tampa_tomorrow_month" ]; then
-            echo "should_run=false" >> "$GITHUB_OUTPUT"
-            echo "$tampa_today is not Tampa's last calendar day; no collection needed."
-          else
-            echo "should_run=true" >> "$GITHUB_OUTPUT"
-            echo "$tampa_today is Tampa month-end; collection will run."
-          fi
-
-      - name: Check out the repository
-        if: steps.month_end.outputs.should_run == 'true'
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Skip an already archived scheduled observation
-        if: steps.month_end.outputs.should_run == 'true'
-        id: existing_snapshot
-        shell: bash
-        env:
-          EXPECTED_DATE: ${{ steps.month_end.outputs.expected_date }}
-        run: |
-          if [ "$GITHUB_EVENT_NAME" = "schedule" ]; then
-            existing="$(python -c 'import json, os; index = json.load(open("data/monthly_changes/index.json", encoding="utf-8")); print(any(item["snapshot_date"] == os.environ["EXPECTED_DATE"] for item in index["snapshots"]))')"
-            if [ "$existing" = "True" ]; then
-              echo "should_collect=false" >> "$GITHUB_OUTPUT"
-              echo "$EXPECTED_DATE is already archived; no collection needed."
-              exit 0
-            fi
-          fi
-          echo "should_collect=true" >> "$GITHUB_OUTPUT"
-
-      - name: Set up Python
-        if: steps.existing_snapshot.outputs.should_collect == 'true'
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - run: python -m pip install -r requirements-dev.txt
+      - run: python -m pytest -q tests/test_snapshot_pipeline.py
 
-      - name: Install test dependencies
-        if: steps.existing_snapshot.outputs.should_collect == 'true'
+  capture:
+    if: inputs.verify_only != true
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    permissions:
+      contents: write
+      actions: read
+    outputs:
+      date: ${{ steps.gate.outputs.target_date }}
+      ready: ${{ steps.acquire.outcome == 'success' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      # No dependencies, report builders, or unrelated tests before capture.
+      - name: Select observation or recovery date
+        id: gate
+        env:
+          REQUESTED_DATE: ${{ inputs.observation_date }}
+        run: python scripts/snapshot_pipeline.py plan --event "$GITHUB_EVENT_NAME" --date "$REQUESTED_DATE"
+      - name: Download optional fallback backup
+        if: steps.gate.outputs.should_run == 'true' && inputs.backup_run_id != ''
+        uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: ${{ inputs.backup_run_id }}
+          name: tampa-capture-${{ inputs.backup_run_id }}
+          path: .cache/import-backup
+      - name: Validate and import fallback checkpoints
+        if: steps.gate.outputs.should_run == 'true' && inputs.backup_run_id != ''
+        env:
+          TARGET_DATE: ${{ steps.gate.outputs.target_date }}
+        run: python scripts/snapshot_pipeline.py import-backup --date "$TARGET_DATE" --directory .cache/import-backup
+      - name: Acquire or resume durable source checkpoints
+        id: acquire
+        if: steps.gate.outputs.should_run == 'true'
+        continue-on-error: true
+        env:
+          TARGET_DATE: ${{ steps.gate.outputs.target_date }}
+          ALLOW_LIVE: ${{ steps.gate.outputs.allow_live }}
+        shell: bash
         run: |
-          python -m pip install -r requirements.txt
-          python -m pip install -r requirements-dev.txt
-
-      - name: Collect and compare the bounded source snapshot
-        id: collection
-        if: steps.existing_snapshot.outputs.should_collect == 'true'
-        run: python scripts/snapshot_tracker.py collect-live
-
-      - name: Preserve collected data for recovery
-        if: always() && steps.collection.outcome == 'success'
+          options=()
+          if [ "$ALLOW_LIVE" = "true" ]; then options+=(--allow-live); fi
+          python scripts/snapshot_pipeline.py capture --date "$TARGET_DATE" --directory .cache/capture-backup "${options[@]}"
+      - name: Save independent fallback, including partial captures
+        id: backup
+        if: always() && steps.acquire.outcome != 'skipped' && steps.gate.outputs.should_run == 'true'
+        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
-          name: tampa-snapshot-${{ github.run_id }}
+          name: tampa-capture-${{ github.run_id }}
+          path: .cache/capture-backup/
+          include-hidden-files: true
+          if-no-files-found: error
           retention-days: 90
-          path: |
-            data/snapshots/
-            data/monthly_changes/
-            data/monthly_events/
-            data/planned_events/
-            data/processed/activity_by_month.csv
-            reports/changes/
-            reports/dashboard/
-            manifest.json
-
-      - name: Verify the scheduled observation stayed on month-end
-        if: steps.existing_snapshot.outputs.should_collect == 'true' && github.event_name == 'schedule'
-        shell: bash
+      - name: Report capture durability
+        if: always() && steps.gate.outputs.should_run == 'true'
         env:
-          EXPECTED_DATE: ${{ steps.month_end.outputs.expected_date }}
+          TARGET_DATE: ${{ steps.gate.outputs.target_date }}
+          CAPTURE: ${{ steps.acquire.outcome }}
+          BACKUP: ${{ steps.backup.outcome }}
         run: |
-          actual_date="$(python -c 'import json; print(json.load(open("data/monthly_changes/index.json"))["snapshots"][-1]["snapshot_date"])')"
-          if [ "$actual_date" != "$EXPECTED_DATE" ]; then
-            echo "::error::Collection crossed the date boundary: expected $EXPECTED_DATE, got $actual_date. Nothing will be committed."
+          echo "## Tampa observation $TARGET_DATE" >> "$GITHUB_STEP_SUMMARY"
+          echo "Durable capture: $CAPTURE; fallback artifact: $BACKUP." >> "$GITHUB_STEP_SUMMARY"
+          echo "Recovery branch: snapshot-captures/$TARGET_DATE. Partial captures are not published snapshots." >> "$GITHUB_STEP_SUMMARY"
+          if [ "$BACKUP" != "success" ]; then echo "::warning::Fallback artifact unavailable; check durable branch."; fi
+          if [ "$CAPTURE" != "success" ]; then
+            echo "::error::Capture incomplete. Retry on the observation day, or recover saved checkpoints."
             exit 1
           fi
 
-      - name: Run the complete test suite
-        if: steps.existing_snapshot.outputs.should_collect == 'true'
-        run: python -m pytest -q
-
-      - name: Reject workstation paths and private author emails
-        if: steps.existing_snapshot.outputs.should_collect == 'true'
-        run: python scripts/check_repository_privacy.py
-
-      - name: Reject malformed diffs
-        if: steps.existing_snapshot.outputs.should_collect == 'true'
-        run: git diff --check
-
-      - name: Commit the new snapshot and comparison
-        if: steps.existing_snapshot.outputs.should_collect == 'true'
-        shell: bash
+  validate-and-publish:
+    needs: capture
+    if: needs.capture.outputs.ready == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Restore verified capture before installing test dependencies
+        env:
+          TARGET_DATE: ${{ needs.capture.outputs.date }}
+        run: python scripts/snapshot_pipeline.py restore --date "$TARGET_DATE" --directory data/snapshots
+      - name: Build derived outputs from saved data only
+        env:
+          TARGET_DATE: ${{ needs.capture.outputs.date }}
+        run: python scripts/snapshot_tracker.py update --source "data/snapshots/$TARGET_DATE/source_records.csv.gz"
+      - name: Install validation dependencies
         run: |
-          if git diff --quiet && [ -z "$(git ls-files --others --exclude-standard)" ]; then
-            echo "No published source changes to commit."
-            exit 0
-          fi
-          snapshot_date="$(python -c 'import json; print(json.load(open("data/monthly_changes/index.json"))["snapshots"][-1]["snapshot_date"])')"
+          python -m pip install -r requirements.txt
+          python -m pip install -r requirements-dev.txt
+      - name: Run the complete test suite
+        run: python -m pytest -q
+      - name: Check privacy and diff integrity
+        run: |
+          python scripts/check_repository_privacy.py
+          git diff --check
+      - name: Publish only validated generated outputs
+        env:
+          TARGET_DATE: ${{ needs.capture.outputs.date }}
+        run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A
-          git commit -m "data: add Tampa snapshot ${snapshot_date}"
-          git push
+          git add data/snapshots data/monthly_changes data/monthly_events data/planned_events data/processed/activity_by_month.csv reports/changes reports/dashboard manifest.json
+          if git diff --cached --quiet; then exit 0; fi
+          git diff --cached --check
+          git commit -m "data: add Tampa snapshot ${TARGET_DATE}"
+          # A concurrent main update is left for the next run to rebuild;
+          # never overwrite main or blindly rebase generated outputs.
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((attempt * 5))
+          done
+          exit 1
+      - name: Explain publication failure
+        if: failure()
+        env:
+          TARGET_DATE: ${{ needs.capture.outputs.date }}
+        run: |
+          echo "::error::Publication failed; capture retained on snapshot-captures/$TARGET_DATE."
+          echo "Recover without live queries: dispatch this workflow with observation_date=$TARGET_DATE." >> "$GITHUB_STEP_SUMMARY"
