@@ -1,0 +1,5 @@
+# Preserve the exact original bytes covered by the pre-human-audit freeze.
+# These files were frozen with CRLF endings; Git text conversion breaks hashes.
+data/agentic_validation/benchmark_v1.json -text whitespace=cr-at-eol
+reports/AGENTIC_VALIDATION_REPORT.md -text whitespace=cr-at-eol
+reports/agentic_runs/20260902T094712Z/*.json -text whitespace=cr-at-eol
