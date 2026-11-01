@@ -83,6 +83,8 @@ the prior month-end archive's compressed and content hashes, source-state hash,
 row count and eight-source counts. `config/snapshot_pipeline.json` starts required
 coverage at November 30, 2026. September and October gaps remain historical facts;
 the watchdog does not repeatedly alert about those already documented gaps.
+Scheduled recovery also skips dates before this rollout boundary; explicit
+manual recovery remains available for an older date with saved checkpoints.
 
 A missing or corrupt required archive makes the watchdog fail. Enable GitHub
 Actions failure notifications for this repository to receive those failures;

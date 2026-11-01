@@ -51,7 +51,8 @@ def date_value(value: str) -> str:
     return value
 
 
-def plan(event: str, requested: str = "", now: dt.datetime | None = None) -> dict:
+def plan(event: str, requested: str = "", now: dt.datetime | None = None,
+         first_required: str = "") -> dict:
     today = (now or utcnow()).astimezone(TAMPA).date()
     if requested:
         target = dt.date.fromisoformat(date_value(requested))
@@ -63,6 +64,8 @@ def plan(event: str, requested: str = "", now: dt.datetime | None = None) -> dic
         target = today.replace(day=1) - dt.timedelta(days=1)
     else:
         return {"should_run": "false", "target_date": "", "allow_live": "false"}
+    if event == "schedule" and first_required and target < dt.date.fromisoformat(first_required):
+        return {"should_run": "false", "target_date": target.isoformat(), "allow_live": "false"}
     return {
         "should_run": "true", "target_date": target.isoformat(),
         "allow_live": str(target == today).lower(),
@@ -384,7 +387,8 @@ def main() -> None:
     commands.add_parser("watchdog")
     args = parser.parse_args()
     if args.command == "plan":
-        decision = plan(args.event, args.date)
+        config = json.loads((ROOT / "config" / "snapshot_pipeline.json").read_text(encoding="utf-8"))
+        decision = plan(args.event, args.date, first_required=config["first_required_month_end"])
         if decision["should_run"] == "true":
             published = ROOT / "data" / "snapshots" / decision["target_date"] / "metadata.json"
             if published.is_file():

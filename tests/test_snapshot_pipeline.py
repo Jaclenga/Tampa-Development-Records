@@ -154,6 +154,12 @@ class SnapshotPipelineTests(unittest.TestCase):
         self.assertEqual(pipeline.plan("schedule", now=tampa_oct31)["target_date"], "2026-10-31")
         with self.assertRaises(ValueError):
             pipeline.plan("workflow_dispatch", "2026-12-01", now=NOW)
+        self.assertEqual(pipeline.plan(
+            "schedule", now=tampa_oct31, first_required=DATE,
+        )["should_run"], "false")
+        self.assertEqual(pipeline.plan(
+            "workflow_dispatch", "2026-10-31", now=NOW, first_required=DATE,
+        )["should_run"], "true")
 
     def test_watchdog_detects_missing_and_corrupt_publication(self):
         config = self.root / "config"
