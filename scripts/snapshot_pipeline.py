@@ -9,8 +9,11 @@ from __future__ import annotations
 import argparse
 import calendar
 from collections import Counter
+import csv
 import datetime as dt
+import gzip
 import hashlib
+import io
 import json
 import os
 from pathlib import Path
@@ -217,6 +220,16 @@ def validate_snapshot(files: dict[str, bytes], date: str) -> dict:
         raise RuntimeError("Invalid complete snapshot metadata")
     if hashlib.sha256(files["complete/source_records.csv.gz"]).hexdigest() != meta["source_records_gzip_sha256"]:
         raise RuntimeError("Complete snapshot checksum mismatch")
+    rows = tracker.canonical_snapshot_rows(list(csv.DictReader(io.StringIO(
+        gzip.decompress(files["complete/source_records.csv.gz"]).decode("utf-8"), newline="",
+    ))))
+    counts = dict(sorted(Counter(row["source_name"] for row in rows).items()))
+    if (len(rows) != meta["record_count"] or counts != meta["source_counts"]
+            or set(counts) != set(endpoints())
+            or tracker.snapshot_date_from_rows(rows)[0] != date
+            or tracker.rows_sha256(rows) != meta["source_records_content_sha256"]
+            or tracker.source_state_sha256(rows) != meta["source_state_sha256"]):
+        raise RuntimeError("Complete snapshot content does not match its metadata")
     return meta
 
 
@@ -262,6 +275,20 @@ def capture(date: str, store: GitArchive, backup: Path, *, allow_live: bool,
     # times remain in the receipts and checkpoint rows; all must share a day.
     completed = max(dt.datetime.fromisoformat(row["retrieved_at_utc"]) for row in rows).astimezone(dt.timezone.utc).isoformat()
     combined = [{**row, "retrieved_at_utc": completed} for row in rows]
+    expected_receipt = {"snapshot_date": date, "sources": receipts}
+    complete_names = ("complete/metadata.json", "complete/source_records.csv.gz", "complete/receipt.json")
+    saved = {name: store.read(name) for name in complete_names}
+    if any(content is not None for content in saved.values()):
+        if any(content is None for content in saved.values()):
+            raise RuntimeError("Incomplete immutable snapshot bundle")
+        metadata = validate_snapshot(saved, date)
+        if (metadata["source_records_content_sha256"] != tracker.rows_sha256(tracker.canonical_snapshot_rows(combined))
+                or json.loads(saved["complete/receipt.json"]) != expected_receipt):
+            raise RuntimeError("Complete snapshot differs from its source checkpoints")
+        # Restore the original bytes: future gzip/library changes must not
+        # require regeneration or rewriting a valid historical capture.
+        save_backup(backup, saved)
+        return metadata
     backup.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix="assemble-", dir=backup) as temp:
         archive = Path(temp)
@@ -279,7 +306,7 @@ def capture(date: str, store: GitArchive, backup: Path, *, allow_live: bool,
         files = {
             "complete/metadata.json": (directory / "metadata.json").read_bytes(),
             "complete/source_records.csv.gz": (directory / "source_records.csv.gz").read_bytes(),
-            "complete/receipt.json": encoded({"snapshot_date": date, "sources": receipts}),
+            "complete/receipt.json": encoded(expected_receipt),
         }
     validate_snapshot(files, date)
     save_backup(backup, files)

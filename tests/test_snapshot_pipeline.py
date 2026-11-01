@@ -86,7 +86,8 @@ class SnapshotPipelineTests(unittest.TestCase):
         recovered = self.capture(allow_live=False, fetch=network)
         self.assertEqual(recovered, original)
         network.assert_not_called()
-        restored = pipeline.restore(DATE, self.store, self.root / "snapshots")
+        with mock.patch.object(pipeline.tracker, "atomic_gzip_csv", side_effect=AssertionError("must restore original bytes")):
+            restored = pipeline.restore(DATE, self.store, self.root / "snapshots")
         self.assertEqual(restored, original)
         self.assertEqual(
             (self.root / "snapshots" / DATE / "source_records.csv.gz").read_bytes(),
@@ -117,7 +118,7 @@ class SnapshotPipelineTests(unittest.TestCase):
     def test_corrupt_complete_snapshot_is_not_replaced_or_published(self):
         self.capture()
         self.store.files["complete/source_records.csv.gz"] = b"damaged"
-        with self.assertRaisesRegex(RuntimeError, "immutable"):
+        with self.assertRaisesRegex(RuntimeError, "checksum mismatch"):
             pipeline.restore(DATE, self.store, self.root / "snapshots")
         self.assertFalse((self.root / "snapshots" / DATE).exists())
 

@@ -91,8 +91,8 @@ also identify the recovery date and branch. GitHub schedules can be delayed or
 dropped, so this watchdog is independent of the monthly workflow but is not an
 independent hosting provider.
 
-Dispatch with `verify_only=true` to run isolated recovery drills on GitHub's
-Linux runner. These use synthetic records and temporary local Git remotes;
+Dispatch with `verify_only=true` to run recovery drills and the complete offline
+test suite on GitHub's Linux runner. The drills use synthetic records and temporary local Git remotes;
 they do not query Tampa, create remote capture branches, or publish data.
 
 ```powershell
