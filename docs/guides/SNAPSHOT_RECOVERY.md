@@ -106,6 +106,17 @@ The tests cover interrupted acquisition, remote backup failure, later recovery,
 checksum corruption, immutable conflicts, midnight boundaries, watchdog
 detection, and restoring on a fresh runner without changing its working index.
 
+The separate **Tampa remote backup drill** dispatch verifies real GitHub token
+permissions, remote Git writes, artifact upload/download, and recovery on a
+second hosted runner. It uses a random synthetic probe under the isolated
+`snapshot-drills/<run-id>/2000-01-31` namespace, then deletes only that disposable
+branch. It never writes a production capture or published snapshot. Its small
+synthetic artifact expires after one day.
+
+```powershell
+gh workflow run snapshot-recovery-drill.yml
+```
+
 ## Remaining limits
 
 A runner can die between receiving a response and the first remote checkpoint.

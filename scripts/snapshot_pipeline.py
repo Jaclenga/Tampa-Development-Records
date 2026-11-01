@@ -79,9 +79,12 @@ class GitArchive:
     rejected or ambiguous push is reconciled before retrying; never force-push.
     """
 
-    def __init__(self, date: str, root: Path = ROOT, remote: str = "origin"):
+    def __init__(self, date: str, root: Path = ROOT, remote: str = "origin",
+                 namespace: str = "snapshot-captures"):
+        if namespace != "snapshot-captures" and not re.fullmatch(r"snapshot-drills/[0-9]+", namespace):
+            raise ValueError("Invalid archive namespace")
         self.root, self.remote = root, remote
-        self.branch = f"snapshot-captures/{date_value(date)}"
+        self.branch = f"{namespace}/{date_value(date)}"
         self.ref = f"refs/remotes/{remote}/{self.branch}"
         self.refresh()
 

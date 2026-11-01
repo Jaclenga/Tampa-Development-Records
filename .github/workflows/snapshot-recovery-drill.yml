@@ -1,0 +1,86 @@
+name: Tampa remote backup drill
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  write-backups:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Write synthetic probe to a disposable remote branch
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          import secrets
+          from scripts.snapshot_pipeline import GitArchive, encoded
+          run_id = os.environ['GITHUB_RUN_ID']
+          probe = encoded({'synthetic_recovery_probe': True, 'run_id': run_id, 'nonce': secrets.token_hex(16)})
+          path = Path('.cache/drill/probe.json')
+          path.parent.mkdir(parents=True, exist_ok=True)
+          path.write_bytes(probe)
+          store = GitArchive('2000-01-31', namespace=f'snapshot-drills/{run_id}')
+          store.put({'probe.json': probe})
+          assert store.read('probe.json') == probe
+          PY
+      - name: Save the separate artifact copy
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: recovery-probe-${{ github.run_id }}
+          path: .cache/drill/probe.json
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 1
+
+  restore-on-fresh-runner:
+    needs: write-backups
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/download-artifact@v4
+        with:
+          name: recovery-probe-${{ github.run_id }}
+          path: .cache/drill
+      - name: Verify real GitHub storage channels agree after runner replacement
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          from scripts.snapshot_pipeline import GitArchive
+          run_id = os.environ['GITHUB_RUN_ID']
+          store = GitArchive('2000-01-31', namespace=f'snapshot-drills/{run_id}')
+          probe = Path('.cache/drill/probe.json').read_bytes()
+          assert store.read('probe.json') == probe, 'Remote Git backup differs from artifact backup'
+          print('Verified Git checkpoint and artifact recovery on a fresh GitHub runner.')
+          PY
+
+  clean-up-probe:
+    needs: [write-backups, restore-on-fresh-runner]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Remove only this run's disposable probe branch
+        run: |
+          branch="snapshot-drills/${GITHUB_RUN_ID}/2000-01-31"
+          if [ -n "$(git ls-remote --heads origin "refs/heads/$branch")" ]; then
+            git push origin --delete "$branch"
+          fi
